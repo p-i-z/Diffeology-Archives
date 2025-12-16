@@ -1,0 +1,173 @@
+\documentclass[10pt]{amsart}
+
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx} % Kept for the diagrams if they are added later
+
+% --- Metadata ---
+\title{Exemple de Groupes Différentiels : Flots Irrationnels sur le Tore} % Exemple-de-Groupes-Differentiels-:-Flots-Irrationnels-sur-le-Tore
+
+\author{Paul Donato}
+\thanks{Université de Provence, Département de Mathématiques}
+
+\author{Patrick Iglesias}
+
+\address{Centre de Physique Théorique, CNRS - Luminy - Case 907, F-13288 MARSEILLE CEDEX 9 (FRANCE)}
+
+\date{July 1983}
+% --- End Metadata ---
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Using the J.M. Souriau's theory of "differential groups", we define a differential structure on the irrational torus $\mathcal T_{\alpha}$ which allows us to compute its universal covering, equal to $\mathbf{R}$, its first homotopy group, equal to $\mathbf{Z} \times \mathbf{Z}$. We prove that two such torus $\mathcal T_{\alpha}$ and $\mathcal T_{\beta}$ are diffeomorphic iff $\alpha \sim \beta$ modulo GL(2, Z), finally we compute Diff($\mathcal T_{\alpha}$). A significant difference appears between the quadratic irrational and the other cases.
+\end{abstract}
+
+\vspace{1cm}
+\begin{center}
+CPT-83/P. 1524
+\end{center}
+\vspace{1cm}
+
+
+\section*{Introduction}
+Nous considérons le tore standard $T^{2}=\mathbf{R}^{2} / \mathbf{Z}^{2}$ muni de sa structure différentielle $C^{\infty}$. La projection sur $T^{2}$ d'une droite $y=\alpha x$ de $\mathbf{R}$ définit un sous groupe à un paramètre de $T^{2}$ noté $[\alpha]$. Grâce aux techniques des espaces et groupes différentiels introduits par J.M. Souriau [2], le groupe quotient $\mathcal T_{\alpha}=T^{2} /[\alpha]$ peut être muni d'une structure différentielle qui coïncide avec la structure canonique si $\alpha$ est rationnel. Ici cette structure est caractérisée par la définition suivante [2]:
+$f \in D(\mathbf{R}^{n}, \mathcal T_{\alpha})$ si et seulement si $f$ est définie sur un ouvert $V \subset \mathbf{R}^n$ et s'il existe une application $\widehat{f}$ de $C^{\infty}(V, T^{2})$ relevant $f$, i.e. $p_{\alpha} \circ \widehat{f}=f$, sur $V$.
+$p_{\alpha}$ est l'épimorphisme canonique de $T^{2}$ sur $\mathcal T_{\alpha}$, $D(\mathbf{R}^{n}, \mathcal T_{\alpha})$ est par définition la famille des applications différentiables d'ouverts de $\mathbf{R}^{n}$ à $\mathcal T_{\alpha}$.
+
+Les applications différentiables de $\mathcal T_{\alpha}$ à valeurs dans un "espace différentiel" E, sont les applications $\varphi: \mathcal T_{\alpha} \longmapsto E$ telles que pour tout $f$ élément de $D(\mathbf{R}^{n}, \mathcal T_{\alpha})$, $\varphi \circ f$ est un élément de $D(\mathbf{R}^{n}, E)$. En particulier les difféomorphismes de $\mathcal T_{\alpha}$ à $E$ sont les bijections bi-différentiables.
+
+Pour tout groupe différentiel et pour tout espace homogène (quotient d'un groupe différentiel par un sous groupe quelconque) sont définies les notions de connexité puis de simple connexité. Dans le cas connexe sont aussi définis le revêtement universel et le groupe fondamental qui ne dépendent que de la structure différentielle [1, 2].
+
+Nous allons illustrer ces notions dans le cas précis des tores irrationnels, inaccessibles aux techniques usuelles de la géométrie différentielle.
+
+\section*{Revêtements et Groupe Fondamental}
+Rappelons la construction du revêtement universel d'un espace homogène différentiel (pour plus de précisions cf. [1] et [2]).
+
+Soit $G$ un groupe différentiel connexe, $\widehat{G}$ son revêtement universel, $p$ la projection de $\widehat{G}$ sur $G$. Soient $H$ un sous-groupe quelconque de $G, \widehat{H}=p^{-1}(H), \widehat{H}^{\circ}$ la composante neutre de $\widehat{H}$ alors on a le diagramme :
+%
+%% TODO: The diagram image was here. It should be recreated using amscd or tikz-cd.
+% \includegraphics[max width=\textwidth, center]{c026c2c0-4c12-499f-829e-a65474c03257-3}
+%
+$G / \widehat{H}^{\circ}$ est le revêtement universel de $G / H$ et $\widehat{H} / \widehat{H}^{\circ}$ son groupe fondamental.
+
+D'autre part, tous les autres revêtements de G/H sont donnés à une conjugaison près par les quotients $\widehat{G} / K$ où $K$ est un sousgroupe intermédiaire $\widehat{H}^{\circ} \subset K \subset H$.
+
+Dans le cas particulier du tore irrationnel $\mathcal T_{\alpha}$, en notant $D_{\alpha}$ la droite $y=\alpha x$ on a :
+$$
+G=T^{2} \quad \hat{G}=\mathbf{R}^{2} \quad H=[\alpha] \quad \hat{H}=D_{\alpha}+(\mathbf{Z}+\alpha \mathbf{Z})\begin{pmatrix} 0 \\ 1 \end{pmatrix}
+$$
+La connexité coïncidant avec la connexité par arc différentiable, il vient après un calcul élémentaire$^{(*)(**)}$ :
+\begin{equation}
+\widehat{G}_{\alpha}=\mathbf{R} \quad \Pi_{1}(\mathcal T_{\alpha})=\mathbf{Z} \times \mathbf{Z} \tag{3}
+\end{equation}
+
+\noindent $^{(*)}$ L'homotopie correspondante à la topologie quotient est évidemment triviale ! \\
+\noindent $^{(**)}$ L'action de $\Pi_{1}(\mathcal T_{\alpha})=\mathbf{Z} \times \mathbf{Z}$ sur $\mathbf{R}$ est donnée par:
+$(n, m): x \longmapsto x+n+\alpha m$. On notera $\mathbf{Z}+\alpha \mathbf{Z}$ le sous-groupe des réels de la forme $n+\alpha m, (n, m) \in \mathbf{Z} \times \mathbf{Z}$.
+
+Les autres revêtements connexes sont du type :
+\begin{equation}
+\mathbf{R} /[k \mathbf{Z}+\alpha l \mathbf{Z}] \quad (k, l) \in \mathbf{Z} \times \mathbf{Z} \tag{4}
+\end{equation}
+Le nombre de feuillets, quand $k \cdot \ell \neq 0$, est égal à $k \cdot \ell$.
+
+\section*{Classification des Tores Irrationnels}
+Soient $\mathcal T_{\alpha}$ et $\mathcal T_{\beta}$ deux tores irrationnels et $\bar{f} \in \operatorname{Diff}(\mathcal T_{\alpha}, \mathcal T_{\beta})$. Il existe un isomorphisme de revêtement universel $f$ qui relève $\bar{f}$ [1] :
+%
+%% TODO: The diagram image was here. It should be recreated using amscd or tikz-cd.
+% \includegraphics[max width=\textwidth, center]{c026c2c0-4c12-499f-829e-a65474c03257-4}
+%
+La propriété $\Pi_{\beta} \circ f = \bar{f} \circ \Pi_{\alpha}$ se traduit par :
+$$
+\forall x \in \mathbf{R}, \forall(n, m) \in \mathbf{Z} \times \mathbf{Z} \quad \exists(p, q) \in \mathbf{Z} \times \mathbf{Z}: f(x+n+\alpha m)=f(x)+p+\beta q
+$$
+où $(x, n, m) \longmapsto(p, q)$ est une application de $\mathbf{R} \times \mathbf{Z}^{2}$ à $\mathbf{Z}^{2}$ différentiable en $x$ et donc constante en $x$. De plus, $f$ étant un isomorphisme de revêtement universel, sa restriction à $\mathbf{Z}+\alpha \mathbf{Z}$ est un isomorphisme de $\mathbf{Z}+\alpha \mathbf{Z}$ à $\mathbf{Z}+\beta \mathbf{Z}$, il existe donc une matrice de $\operatorname{GL}(2, \mathbf{Z})$ telle que :
+$$
+\left\{\begin{array}{l}
+{\begin{pmatrix} q \\ p \end{pmatrix}=\begin{pmatrix} a & c \\ b & d \end{pmatrix}\begin{pmatrix} m \\ n \end{pmatrix}} \\
+{\begin{pmatrix} a & c \\ b & d \end{pmatrix} \in \operatorname{GL}(2, \mathbf{Z}) \quad \text{i.e. } a, b, c, d \text{ entiers et } ad-bc= \pm 1}
+\end{array}\right.
+$$
+Enfin la différentiabilité de $f$ implique $f'(n+\alpha m)=f'(0)$ $\forall(n, m) \in \mathbf{Z}$, la densité de $\mathbf{Z}+\alpha \mathbf{Z}$ dans $\mathbf{R}$ entraîne pour tout $x$ réel $f'(x)=f'(0)$ et donc $f$ est affine : $f(x)=\lambda x+r, \lambda \neq 0$. Appliqué à $x=n+\alpha m$ il vient $\lambda=\alpha c+d$ et $\alpha=\frac{\beta a+b}{\beta c+d}$ c'est-à-dire $\alpha$ et $\beta$ sont équivalents modulo $\operatorname{GL}(2, \mathbf{Z})$. L'action de $\operatorname{GL}(2, \mathbf{Z})$ étant donnée par :
+\begin{equation}
+\left(\begin{pmatrix} a & c \\ b & d \end{pmatrix}, x\right) \longmapsto \frac{a x+b}{c x+d} \tag{5}
+\end{equation}
+Réciproquement, on vérifie que si $\alpha \sim \beta$ modulo $\operatorname{GL}(2, \mathbf{Z})$, alors f définie plus haut se projette sur un difféomorphisme de $\mathcal T_{\alpha}$ à $\mathcal T_{\beta}$.
+
+\newtheorem*{theoreme}{Théorème}
+\begin{theoreme}
+Deux tores irrationnels $\mathcal T_{\alpha}$ et $\mathcal T_{\beta}$ sont difféomorphes si et seulement si $\alpha$ et $\beta$ sont équivalents modulo $\operatorname{GL}(2, \mathbf{Z})$.
+\end{theoreme}
+\textit{Remarque : le théorème est trivialement vérifié si $\alpha$ ou $\beta$ est rationnel.}
+
+\section*{Difféomorphismes de $\mathcal T_{\alpha}$}
+Les conclusions du paragraphe précédent, appliquées au cas $\alpha=\beta$ permettent de calculer $\operatorname{Diff}(\mathcal T_{\alpha})$.
+Tout difféomorphisme de $\mathcal T_{\alpha}$ est la projection d'une application affine :
+$$
+f(x)=(\alpha c+d) x+r \quad (c, d) \in \mathbf{Z}^{2} \text{ et } r \in \mathbf{R}
+$$
+telle que :
+\begin{equation}
+\exists(a, b) \in \mathbf{Z}^{2} \quad \text{et} \quad \begin{pmatrix} a & c \\ b & d \end{pmatrix} \in \operatorname{Stab}_{\operatorname{GL}(2, \mathbf{Z})}(\alpha) \tag{6}
+\end{equation}
+la condition (6) est la traduction pour $\alpha=\beta$ de $\alpha=\frac{\beta a+b}{\beta c+d}$.
+Ces applications constituent un sous-groupe du groupe affine de $\mathbf{R}$. Deux d'entre elles $f$ et $f'$ se projettent sur le même difféomorphisme de $\mathcal T_{\alpha}$ si et seulement si :
+\begin{equation}
+\left\{\begin{array}{l}
+(c, d)=\left(c^{\prime}, d^{\prime}\right) \\
+\Pi_{\alpha}(r)=\Pi_{\alpha}\left(r^{\prime}\right)
+\end{array}\right. \tag{7}
+\end{equation}
+Définissons sur $\operatorname{Stab}_{\operatorname{GL}(2, \mathbf{Z})}(\alpha) \times \mathcal T_{\alpha}$ la loi affine:
+\begin{equation}
+\left\{\begin{array}{l}
+(M, \rho) \cdot\left(M^{\prime}, \rho^{\prime}\right)=\left(M M^{\prime}, M \cdot \rho^{\prime}+\rho\right) \\
+M=\begin{pmatrix} a & c \\ b & d \end{pmatrix} \text{ et } M \cdot \rho=\Pi_{\alpha}((\alpha c+d) x) \text{ si } \Pi_{\alpha}(x)=\rho
+\end{array}\right. \tag{8}
+\end{equation}
+L'application définie sur $\operatorname{Stab}_{\operatorname{GL}(2, \mathbf{Z})}(\alpha) \times \mathcal T_{\alpha}$ dans $\operatorname{Diff}(\mathcal T_{\alpha})$ par :
+\begin{equation}
+(M, \rho) \longmapsto \left[\Pi_{\alpha}(x) \longmapsto \Pi_{\alpha}((\alpha c+d) x)+\rho\right] \tag{9}
+\end{equation}
+est un isomorphisme.
+Il est clair que si $\alpha$ est irrationnel non quadratique, son stabilisateur dans $\operatorname{GL}(2, \mathbf{Z})$ est réduit à $\mathbf{Z}_{2}=\left\{\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix}\right\}$. Si $\alpha$ est irrationnel quadratique, des théorèmes standards de la théorie des nombres [3], permettent d'établir que :
+\begin{equation}
+\operatorname{Stab}_{\operatorname{GL}(2, \mathbf{Z})}(\alpha)=\mathbf{Z}_{2} \times \mathbf{Z} \tag{10}
+\end{equation}
+On utilise pour cela la décomposition en fractions continues. D'où :
+
+\begin{theoreme}
+La composante neutre du groupe des difféomorphismes de $\mathcal T_{\alpha}$ est égale au groupe des translations de $\mathcal T_{\alpha}$. D'autre part le groupe de ses composantes est égal à :\\
+a) $\mathbf{Z}_{2}$ si $\alpha$ est irrationnel non quadratique \\
+b) $\mathbf{Z}_{2} \times \mathbf{Z}$ si $\alpha$ est irrationnel quadratique
+\end{theoreme}
+La loi de groupe est donnée par (8).
+
+\vspace{1cm}
+Les discussions que nous avons eues avec J. Bellissard et J.M. Souriau nous ont été précieuses ; nous les en remercions.
+
+\section*{Références}
+\begin{thebibliography}{9}
+
+\bibitem{Donato}
+P. Donato,
+\textit{Homotopie et revêtements des espaces homogènes différentiels} (à paraître).
+
+\bibitem{Souriau}
+J.M. Souriau,
+\textit{Groupes différentiels}, Lecture Notes in Mathematics, 836, p. 91, Springer Verlag 1981.
+
+\bibitem{Stark}
+H.M. Stark,
+\textit{An Introduction to Number Theory}, Markham Publish., Chicago 1970.
+
+\end{thebibliography}
+
+\end{document}
