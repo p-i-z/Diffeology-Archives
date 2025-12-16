@@ -12,7 +12,7 @@ The paper then uses this structure to compute fundamental geometric and topologi
 
 ## Historical Significance
 
-This 1983 preprint represents a pivotal moment in the development of diffeology. While Souriau's initial axiomatization focused on groups, this work was the first to apply these ideas to a truly "singular" space, demonstrating the theory's power beyond its original scope.
+This 1983 preprint represents a pivotal moment in the development of diffeology. While Souriau's initial axiomatization focused on diffeomorphisms groups, this work was the first to apply these ideas to a truly "singular" space, demonstrating the theory's power beyond its original scope.
 
 Its key contributions to the development of the theory are:
 
