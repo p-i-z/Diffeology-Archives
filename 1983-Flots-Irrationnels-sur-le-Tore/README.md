@@ -8,7 +8,7 @@
 
 This paper presents the first application of the theory of diffeology, recently introduced by J.M. Souriau, to a singular geometric object that has a rich diffeology but a trivial topology : the **irrational torus**. Using the framework of "groupes différentiels," the authors define a rigorous differential structure on the quotient space $\mathcal{T}_\alpha = T^2 / [\alpha]$, where $[\alpha]$ is the dense winding of a line with irrational slope $\alpha$ on the 2-torus.
 
-The paper then uses this structure to compute fundamental geometric and topological properties of this new object.
+The paper then uses this structure to compute fundamental geometric, as diffeological, properties of this new object.
 
 ## Historical Significance
 
