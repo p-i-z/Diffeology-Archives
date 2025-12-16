@@ -35,5 +35,11 @@ The paper establishes several fundamental results about the irrational torus $\m
 
 ## Files in this Directory
 
-*   `DIZ83.tex`: The modern LaTeX source file, transcribed from the original publication for archival and compilation purposes. The filename refers to the 1983 publication year for citation consistency.
-*   `DIZ83-scan.pdf`: A PDF scan of the original **1983 CPT preprint** (CPT-83/P. 1524).
+This directory contains the complete archival record for the paper on irrational tori, which originated as a 1983 preprint and was published in 1985.
+
+*   **`DIZ83.tex`**: The modern, living LaTeX source file. This version has been transcribed and formatted for modern compilation and serves as the basis for any future corrections or updates.
+    *   *Note:* The two commutative diagrams present in the original paper have not yet been recreated in this modern source file. For the visual representation of these diagrams, please refer to the scanned PDFs.
+
+*   **`DIZ83-preprint-1983.pdf`**: A PDF scan of the original **1983 CPT preprint** (CPT-83/P. 1524). This file serves as the historical reference for the work as it was first circulated.
+  
+*   **`DIZ83-published-1985.pdf`**: A PDF scan of the final, peer-reviewed article as it was published in the *Comptes Rendus de l'Académie des Sciences* in 1985. This is the official version of record.
