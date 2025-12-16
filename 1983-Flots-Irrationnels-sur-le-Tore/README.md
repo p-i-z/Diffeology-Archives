@@ -20,8 +20,8 @@ Its key contributions to the development of the theory are:
 
 2.  **The Birth of "Espaces Différentiels":** This paper marks the beginning of the generalization from "diffeological groups" to "diffeological spaces." A key moment is the introduction of smooth maps between these new kinds of spaces, which were not yet formally defined. The authors themselves signal the novelty of this concept by placing the term in quotes:
 
-> Les applications diﬀérentiables de $\mathcal{T}_\alpha$ à valeurs dans un "espace diﬀérentiel" $E$, sont les applications $\varphi : \mathcal{T}_\alpha \to E$ telles que pour tout $f$ élément de $D(\mathbf{R}^n,\mathcal{T}_\alpha)$ $\varphi \circ f$ est un élément de $D(\mathbf{R}^n,E)$. En particulier les diﬀéomorphismes de $\mathcal{T}_\alpha$ à $E$ sont les bijections bi-diﬀérentiables.
-    
+Les applications diﬀérentiables de $\mathcal{T}\alpha$ à valeurs dans un "espace diﬀérentiel" $E$, sont les applications $\varphi : \mathcal{T}\alpha \to E$ telles que pour tout $f$ élément de $D(\mathbf{R}^n,\mathcal{T}\alpha)$ $\varphi \circ f$ est un élément de $D(\mathbf{R}^n,E)$. En particulier les diﬀéomorphismes de $\mathcal{T}\alpha$ à $E$ sont les bijections bi-diﬀérentiables.
+
 This conceptual step was essential for building the broader theory of diffeology as it is known today.
 
 ## Key Mathematical Results
