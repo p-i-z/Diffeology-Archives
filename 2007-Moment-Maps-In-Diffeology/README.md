@@ -1,4 +1,3 @@
-
 # The Moment Maps in Diffeology
 
 > **Author:** Patrick Iglesias-Zemmour
@@ -28,9 +27,9 @@ The central innovation of this work is to free the theory from its reliance on "
 
 Building on this new foundation, the memoir develops a complete suite of tools for a generalized symplectic geometry.
 
-*   **Universal Moment Map:** The theory is applied to the action of the *entire group of automorphisms* $\operatorname{Diff}(\mathcal X, \omega)$, yielding a **universal moment map** ($\mu_\omega$) and universal obstructions ($\Gamma_\omega, \sigma_\omega$) that are intrinsic to the space itself.
+*   **Universal Moment Map:** The theory is applied to the action of the *entire group of automorphisms* $\mathop{\mathrm{Diff}}(\mathcal X, \omega)$, yielding a **universal moment map** ($\mu_\omega$) and universal obstructions ($\Gamma_\omega, \sigma_\omega$) that are intrinsic to the space itself.
 
-*   **Hamiltonian Diffeomorphisms:** This universal construction leads to a new, intrinsic definition of the group of **Hamiltonian diffeomorphisms**, $\operatorname{Ham}(\mathcal X, \omega)$, as the largest connected subgroup of $\operatorname{Diff}(\mathcal X, \omega)$ with a vanishing holonomy group.
+*   **Hamiltonian Diffeomorphisms:** This universal construction leads to a new, intrinsic definition of the group of **Hamiltonian diffeomorphisms**, $\mathop{\mathrm{Ham}}(\mathcal X, \omega)$, as the largest connected subgroup of $\mathop{\mathrm{Diff}}(\mathcal X, \omega)$ with a vanishing holonomy group.
 
 *   **Symplectic Manifolds as Coadjoint Orbits:** The theory provides a rigorous proof, free of functional analysis, for the principle that "every symplectic manifold is a coadjoint orbit." It shows that a universal moment map identifies a symplectic manifold with a coadjoint orbit of its group of symplectomorphisms.
 
