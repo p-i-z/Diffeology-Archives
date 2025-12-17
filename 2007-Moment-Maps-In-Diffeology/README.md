@@ -2,6 +2,7 @@
 
 > **Author:** Patrick Iglesias-Zemmour
 > **Publication:** A Memoir of the American Mathematical Society (AMS).
+>
 > **Official Version:** [Link to the publication on the AMS website](https://www.ams.org/books/memo/0972/)
 
 > **MSC2000:** 53C99, 53D30, 53D20
