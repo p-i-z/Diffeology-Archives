@@ -22,7 +22,7 @@ Each directory contains the necessary `.tex` files, figures, and style files to 
 
 Diffeology is an extension of classical differential geometry that provides a rigorous framework for doing calculus on spaces that are not necessarily manifolds. This includes quotients (such as orbifolds or irrational tori), function spaces, and spaces with singularities.
 
-More precisely, since the category of manifolds is just one full subcategory of the category of diffeological spaces among others (manifolds with corners, orbifolds, quasifolds etc.), Diffeology is better defined as an extension of the category of Euclidean domains which is the foundation, whose objects are open subsets of standard Euclidean spaces (of all dimensions, from 0 to infinity), and its morphisms are smooth maps.
+Diffeology is best defined by its true foundation: the category of Euclidean domains. Its objects are open sets in Euclidean spaces ($\mathbf{R}^n$) and its maps are smooth. Because it is built on this simple base, diffeology naturally treats manifolds, orbifolds, and other generalized spaces as just different types of diffeological spaces.
 
 The philosophy of this work is to provide geometers, physicists, and other scientists with a rigorous, simple, and flexible framework in which to develop their ideas and constructions, without the burden of the heavy machinery of functional analysis often required to solve geometric problems on non-manifold spaces.
 
