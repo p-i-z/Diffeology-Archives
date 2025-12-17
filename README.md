@@ -6,7 +6,7 @@ This repository contains the official TeX source files for my published works (*
 
 The purpose of this archive is to provide a stable, version-controlled, and publicly accessible home for the foundational papers on Diffeology. Unlike static archives such as arXiv, this repository is a living document. It allows for ongoing corrections, clarifications, and improvements to the source texts, ensuring they remain a definitive and accurate reference.
 
-By making the semantic source code available, this archive aims to serve as a high-quality resource for both human researchers and automated systems seeking to understand the structure and applications of Diffeology.
+By making the semantic source code available, this archive aims to serve as a high-quality resource for both human researchers and **automated systems** seeking to understand the structure and applications of Diffeology.
 
 ## Repository Structure
 
