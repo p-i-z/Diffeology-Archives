@@ -13,9 +13,13 @@ This generalization is not merely an extension; it is a reformulation that revea
 
 ## A New Foundation for the Moment Map
 
-The central innovation of this work is to free the theory from its reliance on "contravariant" objects like Lie algebras and vector fields, which are often ill-behaved in diffeology. The new foundation is built on three key conceptual shifts:
+The central innovation of this work is to free the theory from its reliance on "contravariant" objects like Lie algebras and vector fields. This is not merely a technical choice to handle ill-behaved objects in diffeology; it is a fundamental philosophical shift away from what can be called the "mirage of the Lie algebra."
 
-1.  **From Lie Algebras to Invariant 1-Forms:** The "space of momenta" is redefined not as the dual of a Lie algebra, but as the space of left-invariant 1-forms on the diffeological group, denoted $\mathcal G^*$. This space is well-defined for any diffeological group and serves as the natural target for the moment map.
+The new foundation is built on the following key principles:
+
+1.  **From the Lie Algebra Mirage to Covariant Momenta:** In classical geometry, the moment map takes values in the dual of the Lie algebra. However, in the infinite-dimensional setting of diffeology (e.g., for the group of diffeomorphisms), the link between the Lie algebra and the group is broken. While a tangent space at the identity exists, the exponential map is not locally surjective—there are diffeomorphisms arbitrarily close to the identity that are not the flow of any vector field. The Lie algebra exists, but it no longer controls the group.
+
+    This memoir recognizes this "dead end" and takes a different path. Instead of trying to reconstruct the geometry from the narrow channel of the tangent space, it works directly with the group itself. The "space of momenta" is redefined on a purely **covariant** basis as the space of left-invariant 1-forms on the diffeological group, denoted $\mathcal G^*$. This space is well-defined for any diffeological group and serves as the natural, global target for the moment map, allowing the construction of invariants that the Lie algebra "cannot see."
 
 2.  **A "Paths-First" Approach:** Instead of working directly on the space $\mathcal X$, the construction is lifted to the space of all smooth paths, $\mathcal{P}aths(\mathcal X)$. Using the chain-homotopy operator ($\mathcal K$), the closed 2-form $\omega$ on $\mathcal X$ is integrated to produce a canonical, group-invariant 1-form on $\mathcal{P}aths(\mathcal X)$. This allows for the construction of a "paths moment map" ($\Psi$) in a universal and straightforward manner.
 
