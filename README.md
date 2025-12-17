@@ -1,6 +1,6 @@
 # Diffeology Archives
 
-This repository contains the official TeX source files for the published works of **Patrick Iglesias-Zemmour** on the subject of Diffeology.
+This repository contains the official TeX source files for my published works **Patrick Iglesias-Zemmour** on Diffeology.
 
 ## Purpose
 
