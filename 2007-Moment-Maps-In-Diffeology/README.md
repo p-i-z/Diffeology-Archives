@@ -2,10 +2,10 @@
 
 > **Author:** Patrick Iglesias-Zemmour
 > **Publication:** A Memoir of the American Mathematical Society (AMS).
+> **Official Version:** [Link to the publication on the AMS website](https://www.ams.org/books/memo/0972/)
+
 > **MSC2000:** 53C99, 53D30, 53D20
 > **Keywords:** Diffeology, Moment Map, Symplectic Geometry
-
-## Summary
 
 This memoir presents a complete generalization of the theory of moment maps to the category of Diffeology. The classical theory, a cornerstone of symplectic geometry, was traditionally limited to the smooth actions of Lie groups on finite-dimensional manifolds. This work rebuilds the theory from the ground up on a purely covariant basis, creating a framework that applies universally to any smooth action of any diffeological group on any diffeological space equipped with a closed 2-form.
 
