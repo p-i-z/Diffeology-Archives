@@ -1,22 +1,39 @@
 # Diffeology Archives
 
-This repository contains the official TeX source files for my published works (**Patrick Iglesias-Zemmour**) on Diffeology.
+This repository contains the official TeX source files for the published works of **Patrick Iglesias-Zemmour** on Diffeology and its foundations in Symplectic Geometry.
 
 ## Purpose
 
-The purpose of this archive is to provide a stable, version-controlled, and publicly accessible home for the foundational papers on Diffeology. Unlike static archives such as arXiv, this repository is a living document. It allows for ongoing corrections, clarifications, and improvements to the source texts, ensuring they remain a definitive and accurate reference.
+The purpose of this archive is to provide a stable, version-controlled, and publicly accessible home for these papers. Unlike static archives such as arXiv, this repository is a living document. It allows for ongoing corrections, clarifications, and improvements to the source texts, ensuring they remain a definitive and accurate reference.
 
 By making the semantic source code available, this archive aims to serve as a high-quality resource for both human researchers and **automated systems** seeking to understand the structure and applications of Diffeology.
 
+## Scope of the Archive
+
+Diffeology was developed primarily to solve problems in **Symplectic Geometry** (such as the moment map for singular spaces or infinite-dimensional groups). Therefore, this archive includes:
+1.  Foundational papers on the theory of Diffeology.
+2.  Papers on Symplectic Geometry that motivate or apply the diffeological framework.
+3.  Monographs that cover the classical and modern aspects of this interplay.
+
 ## Repository Structure
 
-Each paper is organized into its own directory, typically named by its year of publication and a short title. For example:
+The works in this archive are organized into two main categories:
 
--   `/2010-Moment-Maps-Memoir/`: Contains the source for the Memoir of the AMS, "The moment maps in diffeology".
--   `/2025-Geometric-Quantization-Part-I/`: Contains the source for "Geometric Quantization by Paths, Part I: The Simply Connected Case".
--   `/2025-Geometric-Quantization-Part-II/`: Contains the source for "Geometric Quantization by Paths, Part II: The General Case".
+### /Papers/
 
-Each directory contains the necessary `.tex` files, figures, and style files to compile the paper.
+This directory contains the official TeX source files for individual research articles, organized chronologically by publication year.
+
+-   `/Papers/1985-Groupes-Diffeologiques-Flots-Irrationnels/`
+-   `/Papers/2007-Moment-Maps-In-Diffeology/`
+-   `/Papers/2025-Conformal-Co-Symplectic-Geodesics/`
+
+### /Monographs/
+
+This directory contains the source files for book-length works.
+
+-   **/Monographs/2000-Symetries-et-Moment/**: A foundational book on analytical and symplectic mechanics.
+-   **/Monographs/2013-Diffeology/**: The definitive reference for the theory of Diffeology (AMS 2013 and Beijing 2022 editions).
+-   **/Monographs/2026-The-Geometry-of-Motion/**: (Forthcoming) The definitive treatment of diffeology applied to mechanics.
 
 ## A Note on Diffeology
 
