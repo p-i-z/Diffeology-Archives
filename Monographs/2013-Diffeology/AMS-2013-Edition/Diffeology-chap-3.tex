@@ -1,0 +1,1008 @@
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% 
+  %% Diffeological Vector Spaces MARK: -
+  %% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \chapter{Diffeological Vector Spaces}
+  
+  \label{chap-Diffeological-vector-spaces}
+  \newcommand{\ChapterDVS}{Diffeological vector spaces}
+  
+  \begin{chaphead}
+    Some geometrical objects involve infinite vector spaces,
+    for example the construction of the infinite Hilbert
+    sphere \art{The-infinite-sphere} or the
+    associated infinite projective space
+    \art{The-infinite-complex-projective-space}. These
+    constructions are perfect examples of how diffeology handles
+    infinite dimensional objects. But, in order to describe
+    precisely these structures, we need to specialize the
+    notion of vector space according to the diffeological
+    framework. This chapter is however not devoted to exploring
+    all the connections between the notion of diffeological vector space
+    and the various kinds of vector spaces we find in the literature, this is 
+    still not done and may be a program for a future work. 
+    
+    In the following chapter, we shall consider the field
+    $\RR$ of real numbers equipped with the smooth diffeology
+    \art{Smooth-parametrizations-in-domains}. The field $\CC$
+    of complex numbers is identified, as real vector space,
+    with the product $\RR \times \RR$ by the real isomorphism
+    $\fold : (x,y)\mapsto z = x+iy$. A plot of
+    $\CC$ is just a parametrization $r\mapsto
+    \Z(r) = \P(r)+i\Q(r)$ where $\P$ and $\Q$ are some
+    real smooth parametrizations. The letter $\KK$
+    will denote $\RR$ or $\CC$.
+  \end{chaphead} 
+  
+  %************************************************
+  
+  \section*{Basic Constructions and Definitions}
+  \label{secBasic-constructions-and-definitions}
+  
+  \begin{article}\artlabel{Diffeological vector spaces}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Diffeological vector
+    spaces} 
+    \label{Diffeological-vector-spaces} 
+    Let $\E$ be a
+    vector space over $\KK$, we shall call {\em vector space
+    diffeology} on $\E$ any diffeology of $\E$ such that the
+    addition and the multiplication by a scalar
+    are smooth, that is,
+    $$
+    [(u,v)\mapsto u+v] \in \Cinfty(\E \times \E, \E)
+    \qmbox{and}  [(\lambda, u) \mapsto \lambda u] \in
+    \Cinfty(\KK \times \E, \E),
+    $$
+    where the spaces $\E \times
+    \E$ and $\KK \times \E$ are equipped with the product
+    diffeology \art{Building-products-with-spaces}. Every
+    vector space $\E$ over $\KK$, equipped with a vector space
+    diffeology, is called a {\em diffeological vector space}
+    over $\KK$, or a {\em diffeological $\KK$-vector space}.
+  \end{article} %% Diffeological-vector-spaces
+  
+  \begin{article}\artlabel{Standard vector spaces}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Standard vector spaces}
+    \label{Standard-vector-spaces}
+    Every vector space $\KK^n$, equipped with
+    the {\em standard diffeology}, is a diffeological vector
+    space. But note that every vector space, equipped with the
+    coarse diffeology, is also a diffeological vector space. 
+  \end{article} %% Standard-vector-spaces
+  
+  \begin{article}\artlabel{Smooth linear maps}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Smooth linear maps}
+    \label{Smooth-linear-maps}
+    Let $\E$ and $\F$ be two diffeological $\KK$-vector
+    spaces. We denote by $\DLin(\E,\F)$ the
+    space of {\em smooth linear maps} from $\E$ to
+    $\F$, $$\DLin(\E,\F) = \Lin(\E,\F)\cap
+    \Cinfty(\E,\F).$$ The space $\DLin(\E,\F)$ is a
+    $\KK$-vector subspace of $\Lin(\E,\F)$.   
+    Since the composite of linear maps is linear and the
+    composite of two smooth maps is smooth, diffeological
+    vector spaces, together with smooth linear maps, form
+    a category which we may denote by $\DLinear$. The isomorphisms of
+    this category are the linear isomorphisms, smooth as well as their inverses.
+  \end{article} %% Smooth-linear-maps
+  
+  \begin{proof}
+    Let $\A$ and $\B$ belong to $\DLin(\E,\F)$. For any
+    plot $\P : \U \to \E$, $(\A + \B) \circ \P = \A \circ \P
+    + \B \circ \P$, but $\P_\A = \A \circ \P$ and $\P_\B = \B
+    \circ \P$ are plots of $\F$. So, $[r \mapsto (\A + \B)
+    \circ \P(r) = \P_\A(r) + \P_\B(r)] = [r \mapsto
+    (\P_\A(r), \P_\B(r)) \mapsto \P_\A(r) + \P_\B(r)]$ is the
+    composite of two smooth maps. Therefore $\A + \B$ is
+    smooth. Let now $\lambda \in \KK$, the map
+    $(\lambda \A) \circ \P$ splits into $(\lambda \A)
+    \circ \P = [r \mapsto (\lambda, \P_\A(r)) \mapsto \lambda
+    \times \P_\A(r)]$. Thus, the addition of two smooth
+    linear maps, as well as the multiplication of a smooth
+    linear map by a scalar, are smooth linear maps.
+    Therefore, $\DLin(\E,\F)$ is a $\KK$-vector subspace of
+    $\Lin(\E,\F)$.  \end{proof}
+  
+  \begin{article}\artlabel{Products of diffeological vectors spaces} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Products of diffeological vectors spaces} 
+    \label{Products-of-diffeological-vectors-spaces}
+    Let $\{\E_i\}_{i \in \cI}$ be some family of
+    diffeological vector spaces. Let $\E = \prod_{i \in
+    \cI} \E_i$ be the product of the family. The
+    product $\E$ is naturally a vector space,
+    for all $v, v' \in \E$ , for all $\lambda \in \KK$,
+    $$ 
+    (v+v')(i) = v(i) +v'(i) \qmbox{and} (\lambda v)(i) = \lambda
+    \times v(i). 
+    $$ 
+    The space $\E$, equipped with the
+    product diffeology \art{Building-products-with-spaces},
+    is a diffeological vector space. 
+  \end{article} %% Products-of-diffeological-vectors-spaces
+  
+  \begin{proof}
+    Let us check that the addition and the multiplication by a
+    scalar are smooth. Let $\P : r \mapsto v_r$ and 
+    $\P' : r \mapsto v'_r$ be two plots of $\E$. So, for all
+    $i \in \cI$ the parametrizations $r \mapsto  v_r(i)$ and
+    $r \mapsto  v'_r(i)$ are two plots of $\E_i$. Then, $r
+    \mapsto (v_r + v'_r)(i) = v_r(i) + v'_r(i)$ is a plot of
+    $\E_i$, since the addition is smooth in $\E_i$.
+    As well, $(\lambda , r) \mapsto  (\lambda v_r)(i) =
+    \lambda \times v_r(i)$ is a plot of $\E_i$. Therefore,
+    $\E$ is a diffeological vector space. \end{proof}
+  
+  \begin{article}\artlabel{Diffeological vector subspaces} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Diffeological vector subspaces} 
+    \label{Diffeological-vector-subspaces}
+    Any vector subspace $\F$ of a diffeological vector space
+    $\E$, equipped with the subset diffeology, is a
+    diffeological vector space.
+  \end{article} %% Diffeological-vector-subspaces
+  
+  \begin{proof}
+    Let $r \mapsto v_r$ and $r \mapsto v'_r$ be two plots of
+    $\F$ for the subset diffeology, and defined on the same
+    domain, that is, two plots of $\E$ with values in $\F$.
+    So, the sum $r \mapsto v_r + v'_r$ is a plot of $\E$, and
+    since $\F$ is a vector subspace of $\E$, $v_r + v'_r$
+    belongs to $\F$ for all $r$. Thus, $r \mapsto v_r + v'_r$
+    is a plot of $\F$ for the subset diffeology. Thus, the sum
+    is smooth. For analogous reasons, $(\lambda, r) \mapsto
+    \lambda \times v_r$ is a plot of $\F$, and the
+    multiplication by a scalar is smooth. Therefore $\F$,
+    equipped with the subset diffeology, is a diffeological
+    vector space.
+  \end{proof}
+  
+  \begin{article}\artlabel{Quotient of diffeological vector spaces} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Quotient of diffeological vector spaces} 
+    \label{Quotient-of-diffeological-vector-spaces}
+    Let $\E$ be a diffeological vector space, let
+    $\F\subset \E$ be a vector subspace. The quotient vector
+    space $\E/\F$ is a diffeological vector space for the
+    quotient diffeology
+    \art{Quotient-and-quotient-diffeology}.
+  \end{article} %% Quotient-of-diffeological-vector-spaces
+  
+  \begin{proof}
+    Let $\E' = \E/\F$ and $r \mapsto v_r$ be a plot of
+    the quotient diffeology. So, locally, $v_r = [e_r]$,
+    where $r \mapsto e_r$ is a plot of $\E$, and $[e] \in \E'$ means
+    the class of $e \in \E$. Now,
+    let $r \mapsto v_r$ and $r \mapsto v'_r$ be two plots of
+    $\E'$ defined on the same domain $\U$. So, for any
+    $r_0 \in \U$ there exist an open neighborhood $\cO$ of $r_0$ and
+    two plots $r \mapsto e_r$ and $r \mapsto e'_r$
+    defined on $\cO$ such that $v_r = [e_r]$ and $e'_r =
+    [v'_r]$. Hence, $v_r + v'_r = [e_r] + [e'_r] = [e_r
+    + e'_r]$, and then  $r \mapsto e_r + e'_r$ is a local lift
+    of $r \mapsto v_r + v'_r$. Thus, by definition of the
+    quotient diffeology, the addition on $\E'$ is
+    smooth. As well, $(\lambda, r) \mapsto
+    \lambda \times e_r$ lifts $(\lambda , r) \mapsto
+    \lambda \times v_r$, where $\lambda \in \KK$. Therefore,
+    $\E'$ is a diffeological vector space for the quotient
+    diffeology. \end{proof}
+  
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %   Exercises  
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \Exercise
+  
+  \begin{exercise}[Vector space of maps into $\KK^n$]
+    \label{Vector-space-of-maps-into-Kn}
+    Let $\X$ be a diffeological space. Let $\E
+    = \Cinfty(\X,\KK^n)$ be the space of smooth maps from
+    $\X$ to $\KK^n$. The set $\E$ is a $\KK$-vector space
+    for the pointwise addition and multiplication by a
+    scalar. Precisely, for all $f$, $f'$ in $\E$ and $\lambda$
+    in $\RR$, $f+f' = [x \mapsto f(x) + f'(x)]$ and $\lambda
+    f = [x \mapsto \lambda \times f(x)]$. Check that $\E$,
+    equipped with the functional diffeology, is a
+    diffeological $\KK$-vector space.  
+  \end{exercise}
+  
+  %************************************************
+  
+  \section*{Fine Diffeology on Vector Spaces}
+  \label{secFine-diffeology-on-vector-spaces}
+  
+  \begin{sechead}
+    Every $\KK$-vector space equipped with the coarse
+    diffeology is obviously a diffeological vector space,
+    what is not really interesting. But every vector space
+    has a finest vector space diffeology, which we shall call
+    the {\em fine diffeology}. In this section we study
+    some aspects of this fine diffeology.
+  \end{sechead}
+  
+  \begin{article}\artlabel{The fine diffeology of vector spaces} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} The fine diffeology of vector spaces}
+    \label{The-fine-diffeology-of-vector-spaces} 
+    There exists, on every $\KK$-vector space $\E$, a
+    finest diffeology of vector space. We shall call it  
+    {\em the fine diffeology}. This diffeology is generated
+    \art{Generating-diffeology} by the family of
+    parametrizations defined by 
+    \renewcommand{\theequation}{$\heartsuit$}
+    \begin{equation} \P : r \mapsto \sum_{\alpha \in \A}
+      \lambda_\alpha(r) v^\alpha,  
+    \end{equation} 
+    where $\A$ is a finite set of indices, the $\lambda_\alpha$ are smooth
+    $\KK$-parametrizations defined on the domain of $\P$, and
+    $v^\alpha$ are vectors of $\E$. 
+    More precisely, the plots of the fine diffeology are the
+    parametrizations $\P : \U \to \E$ such that, for all 
+    $r_0 \in \U$ there exist an open neighborhood $\V$ of $r_0$, 
+    a family of smooth parametrizations $\lambda_\alpha : \V \to
+    \KK$ and a family of vectors $v^\alpha \in \E$, both
+    indexed by the same finite set of indices $\A$, such that 
+    \renewcommand{\theequation}{$\diamondsuit$}
+    \begin{equation}
+      (\P \restriction \V) : r \mapsto 
+      \sum_{\alpha \in \A}\lambda_\alpha(r) v^\alpha.
+    \end{equation}
+    A finite family
+    $(\lambda_\alpha,v^\alpha)_{\alpha \in \A}$, defined on
+    some domain $\V$, and satisfying $(\diamondsuit)$ with
+    $\lambda_\alpha \in \cC^{\infty}(\V,\KK)$ and $v^\alpha
+    \in \E$, will be called a {\em local family} for the plot
+    $\P$. We shall agree that plot properties satisfied only locally, 
+    over some non specified domains, 
+    will be denoted with the subscript ${}_{\rm loc}$, 
+    for example $=_{\rm loc}$ etc. 
+  \end{article} %% The-fine-diffeology-of-vector-spaces
+  
+  \begin{proof}
+  Let us prove that the set of parametrizations
+    described by $(\diamondsuit)$ is the finest vector
+    space diffeology.
+    
+    \alinea{1.~(Diffeology)} The condition $(\diamondsuit)$ is
+    clearly the specialization, for the family defined in
+    $(\heartsuit)$, of the criterion
+    \art{Criterion-of-generation} for generating families.
+    
+    \alinea{2.~(Diffeology of vector space)} Let $r\mapsto
+    (\P(r),\Q(r))$ be a plot of the product $\E\times \E$. Let
+    $(\lambda_\alpha,u^\alpha)_{\alpha \in \A}$ and
+    $(\mu_\beta,v^\beta)_{\beta \in \B}$ be two local families
+    such that 
+    $$
+    \P(r) =_{\rm loc} \sum_{\alpha \in \A}
+    \lambda_\alpha(r) u^\alpha \qmbox{and} \Q(r) =_{\rm loc}
+    \sum_{\beta \in \B} \mu_\beta(r) v^\beta.
+    $$ 
+    So, the addition $\P + \Q$ writes 
+    $$ 
+    \P + \Q \vert_{\rm
+    loc} : r\mapsto \sum_{\alpha \in \A} \lambda_{\alpha}(r)
+    u^{\alpha} + \sum_{\beta \in \B} \mu_{\beta}(r) v^{\beta} =
+    \sum_{\sigma \in \C} \nu_{\sigma}(r) w^{\sigma},
+    $$
+    where $\C$ is just the adjunction of the two sets of
+    indices $\A$ and $\B$, and the family
+    $(\nu_{\sigma},w^\sigma)_{\sigma \in \C}$ the adjunction
+    of the local families $(\lambda_\alpha,u^\alpha)_{\alpha
+    \in \A}$ and $(\mu_\beta,v^\beta)_{\beta \in \B}$. Hence,
+    the addition is smooth. On the other hand, since the
+    multiplication by a scalar is smooth in $\KK$,
+    the multiplication by a scalar in $\E$ also is
+    smooth. Therefore, this diffeology is a vector
+    space diffeology. 
+    
+    \alinea{3.~(Fineness)} Let us consider $\E$, equipped with
+    some other vector space diffeology $\cD$.   
+    Since the multiplication by a scalar is smooth, for
+    any smooth parametrization $\lambda$ of $\KK$ and any
+    vector $u \in \E$, the parametrization $r\mapsto
+    \lambda(r)u$ is smooth. Now, since
+    the addition is smooth, for any finite local family
+    $(\lambda_\alpha,u^\alpha)_{\alpha \in \A}$,  the
+    parametrization $r\mapsto \sum_{\alpha \in \A}
+    \lambda_{\alpha}(r) u^{\alpha}$ is smooth, that is,
+    a plot of the diffeology $\cD$. Thus, the diffeology $\cD$
+    is coarser than the fine diffeology defined above. Hence,
+    the fine diffeology is the finest vector
+    space diffeology of $\E$. 
+  \end{proof}
+  
+  \begin{article}\artlabel{Generating the fine diffeology}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Generating the fine diffeology} 
+    \label{Generating-the-fine-diffeology}
+    Let $\E$ be a vector space on $\KK$ and let $\Lin(\KK^n,\E)$
+    be the set  of all the linear maps from $\KK^n$ into $\E$.
+    Let $\Lin^\star(\KK^n,\E)$ be the set of all the injective
+    linear maps from $\KK^n$ into $\E$, 
+    $$ 
+    \Lin^\star(\KK^n,\E)
+    = \{ j \in \Lin(\KK^n, \E) \mid \ker(j) = \{0\} \}. 
+    $$ 
+    The following two families both generate the fine diffeology of $\E$.
+    $$
+    \cF = \bigcup_{n \in \NN} \Lin(\KK^n,\E) \qmbox{and}
+    \cF^\star = \bigcup_{n \in \NN} \Lin^\star(\KK^n,\E).
+    $$
+    
+    \Note~A parametrization $\P:\U\to \E$ is a plot
+    for the diffeology generated by $\cF$ if and only if, for
+    all $r_0 \in \U$ there exist an open neighborhood $\V$ of $r_0$
+    in $\U$, an integer $n$, a smooth parametrization
+    $\phi : \V \to \KK^n$, and a linear map $j : \KK^n \to \E$
+    such that $\P \restriction \V = j \circ \phi$. In other
+    words, locally, $\P$ takes its values in a constant
+    finite dimensional subspace $\F  \subset  \E$, such that
+    the coordinates of $\P$, for some basis of $\F$, are
+    smooth. For the plots generated by $\cF^\star$, $j$ is
+    injective.
+  \end{article} %% Generating-the-fine-diffeology
+  
+  \begin{proof}
+  Let us prove that $\cF$, as well as
+    $\cF^\star$, generates the fine diffeology. 
+    Let $\P : \U \to \E$ be a plot of the diffeology
+    generated by $\cF$, or by $\cF^\star$. Pick a point $r_0$
+    in $\U$. By definition, there exist an open neighborhood $\V$ of
+    $r_0$, an integer $n$, a smooth parametrization $\phi :
+    \V \to \KK^n$, and a linear map $j : \KK^n \to \E$ such
+    that $\P \restriction \V = j \circ \phi$. Thus, for all
+    $r$ in $\V$, $\phi(r) =  \sum_{k = 1}^n \phi_k(r)
+    \ee_k$, where $(\ee_1,\ldots,\ee_n)$ is the canonical
+    basis of $\KK^n$, and $\phi_k \in \cC^{\infty}(\V,\KK)$.
+    Now, $\P(r) = j(\sum_{k = 1}^n \phi_k(r) \ee_k) =
+    \sum_{k = 1}^n \phi_k(r) j(\ee_k) =  \sum_{k = 1}^n
+    \phi_k(r) \ff_k$, where $\ff_k = j(\ee_k)$. Therefore,
+    $\P$ is a plot of the fine diffeology of $\E$, and
+    $(\phi_k,\ff_k)_{k = 1}^n$ is a local family of the plot
+    $\P$. Note that $j$ can be chosen injective.
+    
+    Conversely, let $\P : \U \to \E$ be a plot of the fine
+    diffeology and let $r_0$ be a point of $\U$. There exist 
+    an open neighborhood $\V$ of $r_0$ in $\U$, an integer $\N$, 
+    a local family $(\lambda_\alpha,v^\alpha)_{\alpha = 1}^\N$,
+    with $\lambda_\alpha\in \cC^{\infty}(\V,\KK)$, $v^\alpha
+    \in \E$, and such that $\P\restriction \V = \sum_{\alpha
+    = 1}^\N \lambda_\alpha(r) v^\alpha$. Let $\F$ be the
+    vector space generated by the $v^\alpha$, and let $\ff =
+    (\ff_1,\ldots,\ff_n)$ be a basis of $\F$. 
+    Let us split the vectors $v^\alpha$ on the basis $\ff$,
+    $v^\alpha = \sum_{k = 1}^n v_k^\alpha \ff_k$. Now,
+    $\P\restriction \V = \sum_{\alpha = 1}^\N\sum_{k = 1}^n
+    \lambda_\alpha(r) v _k^\alpha \ff_k = \sum_{k = 1}^n
+    \phi_k(r) \ff_k$, where $\phi_k(r) = \sum_{\alpha = 1}^\N
+    \lambda_\alpha(r) v_k^\alpha$. The $\phi_k$ are smooth
+    maps defined on $\V$ with values in $\KK$. Now, let $j :
+    \KK^n \to \E$ be the linear map defined by $j(\ee_k) =
+    \ff_k$ and $\phi : \V \to \KK^n$ defined by $\phi = 
+    (\phi_1,\ldots,\phi_n)$. Hence, $\P \restriction \V = j
+    \circ \phi$, where $j$ is an injective linear map from
+    $\KK^n$ to $\E$ and $\phi$ belongs to
+    $\cC^{\infty}(\V,\KK^n)$. Therefore, $\P$ is a plot of
+    the diffeology generated by $\cF^\star$, {\em a fortiori\/} by
+    $\cF$. Hence, the fine diffeology of $\E$ is generated
+    by the set of linear maps, or injective linear maps,
+    from $\KK^n$ into $\E$, when $n$ runs over the integers.
+  \end{proof}
+  
+  \begin{article}\artlabel{Linear maps and fine diffeology}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Linear maps and fine diffeology} 
+    \label{Linear-maps-and-fine-diffeology} 
+    Let $\E$ and $\F$ be two diffeological vector spaces over
+    $\KK$. Let $\E$ be equipped with the fine diffeology. 
+    Every linear map from $\E$ to $\F$ is smooth. In other
+    words, if $\E$ is fine, $\DLin(\E,\F) =
+    \L(\E,\F)$.  In particular, if both $\E$ to $\F$ are fine vector spaces, 
+    every linear isomorphism from $\E$ to $\F$ is a smooth linear isomorphism. 
+  \end{article} %% Linear-maps-and-fine-diffeology
+  
+  \begin{proof}
+    Let $(\P \restriction \V)(r) = \sum_{\alpha = 1}^\N
+    \lambda_\alpha(r) v_\alpha$ be a local expression of some
+    plot $\P$ of $\E$. Let $\A\in \L(\E,\F)$, thus we have
+    $(\A\circ \P \restriction \V)(r) = \sum_{\alpha = 1}^\N
+    \lambda_\alpha(r) \A(v_\alpha)$. Since $\A(v_\alpha) \in
+    \F$ for each $\alpha$, $\P$ is a plot of the fine
+    diffeology of $\F$, thus a plot of any vector space
+    diffeology. Hence, the linear map $\A$ is smooth,
+    and $\L(\E,\F) \subset \DLin(\E,\F)$. The
+    converse inclusion is a part of the definition. 
+  \end{proof}
+  
+  \begin{article}\artlabel{The fine linear category} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} The fine linear category} 
+    \label{The-fine-linear-category}
+    Thanks to \art{Linear-maps-and-fine-diffeology} the fine
+    diffeological spaces define a subcategory of the linear
+    diffeological category
+    \art{Smooth-linear-maps}, let us denote it by $\FineLinear$.
+    The objects of this category are all vector spaces, for
+    the field $\KK$. According to the above
+    proposition \art{Linear-maps-and-fine-diffeology}, the
+    morphisms of this category are just the linear maps. Hence,
+    the {\em fine linear category} coincides with the usual
+    linear category over $\KK$. In other words,
+    the functor from  $\Linear$ to $\FineLinear$, which
+    associates with every vector space the same space equipped
+    with the fine diffeology, is a full faithful functor.  
+  \end{article} %% The-fine-linear-category
+  
+  \begin{article}\artlabel{Injections of fine diffeological vector spaces} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Injections of fine diffeological vector spaces}
+    \label{Injections-of-fine-diffeological-vector-spaces}
+    Let $\E$ and $\E'$ be two $\KK$-vector spaces
+    equipped with the fine diffeology. Every linear injection 
+    $f : \E \mapsto \E'$ is an induction. In particular, every
+    subspace $\F \subset \E$, where $\E$ is a fine
+    diffeological vector space, inherits from $\E$ the fine diffeology.
+  \end{article} %% Injections-of-fine-diffeological-vector-spaces
+  
+  \begin{proof}
+    The injection $ f : \E \to \E'$ is linear, thus
+    it is smooth 
+    \art{Linear-maps-and-fine-diffeology}. Let us check now
+    that if a parametrization $\P : \U \to \E$ is such that
+    $f \circ \P$ is a plot of $\E'$, then $\P$ is a plot of
+    $\E$ \art{What-is-an-induction}. Let $r_0 \in \U$ be some
+    point, there exist an open neighborhood $\V$ of $r_0$, an
+    injection $j:\KK^n\to \E'$, and a smooth parametrization
+    $\phi : \V \to \KK^n$ such that $f \circ \P \restriction
+    \V = j \circ \phi$ \art{Generating-the-fine-diffeology}.
+    Since $f \circ \P \restriction \V$ takes its values in
+    $f(\E)$, $j(\Val(\phi)) \subset f(\E)$. Let us denote by
+    $\H \subset \KK^n$ the vector space spanned by
+    $\Val(\phi)$, that is, the smallest vector subspace of
+    $\KK^n$ containing $\Val(\phi)$. Since $j$ is linear,
+    $j(\Val(\phi)) \subset f(\E)$ implies $j(\H) \subset
+    f(\E)$. Now, let $\cB : \KK^{m} \to \H$ be a linear
+    isomorphism (a basis of $\H$), let $\phi' = \cB^{-1}
+    \circ \phi$ and $j' = j \circ \cB$. Thus, $f \circ \P
+    \restriction \V = j' \circ \phi'$, where $\phi'$ is a
+    smooth parametrization in $\KK^{m}$ and $j'$ is a linear
+    injection from $\KK^{m}$ in $f(\E)$. Since $f$ is
+    injective and $\Val(j') \subset f(\E)$, $j'' = f^{-1}
+    \circ j'$ is an injection from $\KK^m$
+    into $\E$. Thus, $f \circ \P \restriction \V = j'
+    \circ \phi'$ implies $ \P \restriction \V = j''
+    \circ \phi'$. Hence, $\P$ is a plot of the fine
+    diffeology of $\E$. Therefore, $f$ is an induction.
+  \end{proof}
+  
+  \begin{article}\artlabel{Functional diffeology between fine spaces}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Functional diffeology between fine spaces}
+    \label{Functional-diffeology-between-fine-spaces}
+    Let $\E$ and $\E'$ be two fine vector spaces over
+    $\KK$. The functional diffeology
+    \art{Functional-diffeologies} of the space of linear maps
+    $\DLin(\E,\E')=\Lin(\E,\E')$ is characterized
+    as follows.
+    
+      \alinea{($\clubsuit$)} If $\E$ and $\F$ are finite
+      dimensional spaces, $\dim(\E) = n$ and $\dim(\F) = m$,
+      a parametrization $\P : \U \to \Lin(\E,\F)$ is a plot of
+      the functional diffeology if and only if the coefficients
+      $\P_{i,j}$ of the matrix associated with $\P$, for some
+      basis $\cE = \{\ee_i\}_{i=1}^n$ of $\E$ and $\cF =
+      \{\ff_j\}_{j = 1}^m$ of $\F$, are smooth parametrizations
+      of $\KK$. Briefly, $\P_{i,j} \in \Cinfty(\U,\KK)$, for all
+      $i=1\ldots n$ and $j = 1\ldots m$. 
+      
+      \alinea{($\spadesuit$)} More generally, for two spaces $\E$ and $\F$ 
+      of any dimensions, a parametrization $\P:\U \to \Lin(\E,\E')$
+      is a plot for the functional diffeology if and only if,
+      for all $r_0 \in \U$ and for all vector subspaces $\F \subset \E$ 
+      of finite dimension, 
+      there exist an open neighborhood $\V$ of $r_0$, 
+      and a vector subspace of finite
+      dimension $\F' \subset \E'$ such that the two following conditions are
+      satisfied.
+      
+      \begin{itemize}
+      \item[1.] For all $r \in \V$, the linear map $\P(r) \restriction \F$ 
+      belongs to $\Lin(\F,\F')$.
+      
+      \item[2.] The parametrization $r\mapsto \P(r)\restriction \F$,
+      restricted to $\V$, is a plot of $\Lin(\F,\F')$.
+      \end{itemize}
+
+    \Note~Thanks to ($\clubsuit$), considering the second condition of ($\spadesuit$), 
+    the parametrization $r \mapsto \P(r) \restriction \F$ is a
+    plot of $\Lin(\F,\F')$ if and only if each coefficient of
+    the associated matrix is a smooth parametrization in $\KK$,
+    for some bases of $\F$ and $\F'$.  
+  \end{article} %% Functional-diffeology-between-fine-spaces
+  
+  \begin{proof}
+    ($\clubsuit$) Every basis
+    of a finite dimensional fine vector space is a smooth
+    isomorphism, see \exref{Finite-dimensional-fine-spaces}.
+    Hence, the question is reduced to the functional diffeology
+    of $\Lin(\KK^n,\KK^m)$, where $\KK^n$ and $\KK^m$ are
+    equipped with the smooth diffeology. Let $\P : \U \to
+    \Lin(\KK^n,\KK^m)$ be a plot of the functional diffeology.
+    By definition, for any vector
+    $\ee_i$, $i = 1 \ldots n$, of the canonical basis of
+    $\KK^n$, the parametrization $r \mapsto \P(r)(\ee_i) =
+    \sum_{j = 1}^n \P_{i,j}(r) \ff_j$, where
+    $\ff_j$ is the $j$-th vector of the canonical basis of
+    $\KK^m$, is smooth. But the parametrization $\P_{i,j}$ is the
+    composite of $r \mapsto \P(r)(\ee_i)$ with the $j$-th
+    projection from $\KK^m$ to $\KK$, which is smooth, by
+    definition of the smooth diffeology of $\KK^m$. Hence, the
+    parametrizations $\P_{i,j}$ are smooth. 
+    
+    Conversely, let $\P : \U \to \Lin(\KK^n,\KK^m)$ be a
+    parametrization such that all the components $\P_{i,j}$
+    of $\P$, for the canonical basis of $\KK^n$ and $\KK^m$,
+    are smooth. Let $\Q : \V \to \KK^n$ be a plot of
+    $\KK^n$. By definition of the smooth diffeology, $\Q : s
+    \mapsto \sum_{i = 1}^n \phi_i(s) \ee_i$, where the
+    $\phi_i$ are smooth. Thus, for all $(r,s) \in \U \times
+    \V$:
+    $$ \renewcommand{\arraystretch}{1.5}
+    \begin{array}{lclcl}
+      \P(r)(\Q(s)) & = & \P(r) (\sum_{i = 1}^n
+      \phi_i(s) \ee_i) & = & \sum_{i = 1}^n \phi_i(s)
+      \P(r)(\ee_i) \\
+      & = &
+      \sum_{i = 1}^n \phi_i(s) \sum_{j = 1}^m \P_{i,j}(r) \ff_j
+      & = & \sum_{j = 1}^m \sum_{i = 1}^n \phi_i(s) \P_{i,j}(r) 
+      \ff_j \\
+      & = & \sum_{j = 1}^m \psi_j(r,s) \ff_j & \& &
+      \psi_j(r,s) = \sum_{i = 1}^n \phi_i(s) \P_{i,j}(r). 
+    \end{array} $$
+    Since the $\psi_j$ are smooth, the parametrization $(r,s)
+    \mapsto \P(r)(\Q(s))$ is a plot of $\KK^m$. Therefore
+    $\P$ is smooth.
+    Let us now consider ($\spadesuit$), let
+    $\P : \U \to \Lin(\E,\E')$ be a plot for the
+    functional diffeology. Let us show that it satisfies the
+    condition of the proposition. Let $\F \subset \E$ be a
+    vector subspace of finite dimension. Let
+    $(u_1,\ldots,u_m)$ be a basis of $\F$. Let $r_0 \in \U$,
+    by definition of the functional diffeology, for every integer $k =
+    1\ldots m$, the map $r\mapsto \P(r)(u_k)$ is a plot of
+    $\E'$. So, there exist an open neighborhood $\V_k$ of $r_0$, a
+    finite set of indices $\A_k$, a family
+    $(\lambda_{k,\alpha})_{\alpha \in \A_k}$ of smooth
+    parametrizations of $\KK$, a family
+    $(w_{k,\alpha})_{\alpha \in \A_k}$ of vectors of $\E$,
+    such that, for all $r \in \V_k$: 
+    $$ 
+    \P(r)(u_k) =
+    \sum_{\alpha \in \A_k} \lambda_{k,\alpha}(r)
+    w_{k,\alpha}. 
+    $$ 
+    Hence, for all $u = \sum_{k=1}^m c_k u_k$,
+    where $c_k \in \KK^m$, for all $r \in \V =
+    \cap_{k = 1}^m \V_k$, we have
+    $$
+    \P(r)(u) = \P(r)\bigg(\sum_{k = 1}^m c_k u_k\bigg) = 
+    \sum_{k = 1}^m c_k \P(r)(u_k)
+    = 
+    \sum_{k = 1}^m
+    \sum_{\alpha \in \A_k} c_k \lambda_{k,\alpha}(r)
+    w_{k,\alpha}.
+    $$
+    Let $\F'$ be the subspace of $\E'$ spanned by the vectors
+    $\cup_{k = 1}^m\{w_{k,\alpha}\}_{\alpha \in \A_k}$. Hence,
+    for every $u \in \F$, $\P(r)(u) \in \F'$, that is,
+    $\P(r)(\F) \subset \F'$, for all $r \in \V$. The first
+    condition of ($\spadesuit$) is checked. 
+    %
+    Now, let $(v_1,\ldots,v_n)$ be a basis of $\F'$, such
+    that for every integer $k=1 \ldots m$ and every $\alpha \in \A_k$,
+    $w_{k,\alpha} = \sum_{j=1}^n w_{k,\alpha}^j v_j$.
+    Replacing $w_{k,\alpha}$ by this expression we get
+  \begin{eqnarray*}
+    \P(r)\bigg(\sum_{k = 1}^m c_k u_k\bigg)  & = & \sum_{k = 1}^m
+    \sum_{\alpha \in \A_k} c_k \lambda_{k,\alpha}(r)
+    \sum_{j=1}^n w_{k,\alpha}^j v_j \\
+    & = & \sum_{j=1}^n
+    \bigg(\sum_{k = 1}^m \sum_{\alpha \in \A_k} c_k
+    \lambda_{k,\alpha}(r)
+    w_{k,\alpha}^j\bigg) v_j.
+  \end{eqnarray*}
+    Hence, defining
+    $$
+    \phi_j(r) = \sum_{k = 1}^m
+    \sum_{\alpha \in \A_k} c_k \lambda_{k,\alpha}(r)
+    w_{k,\alpha}^j\,, \qmbox{we get} \P(r)(u) = \sum_{j = 1}^n \phi_j(r) v_j,
+    $$
+    where the $(\phi_j)_{j=1}^n$ are a family of smooth parametrizations
+    of $\KK$ defined on $\V$.    
+    This expression of $\P(r)$ clearly shows that $r\mapsto
+    \P(r)\restriction \F$ is a plot of the functional
+    diffeology of $\Lin(\F,\F')$. Indeed, choosing
+    for $u$ successively each vector of a basis of $\F$, the
+    last expression shows that the components of
+    $\P(r)\restriction \F$ are smooth parametrizations of
+    $\KK$, which is the condition, for finite dimensional
+    fine spaces, to be a plot of the functional diffeology.
+    Hence, we proved the direct way of the proposition.
+    %
+    Conversely, let us assume that the parametrization $\P$
+    satisfies the conditions 1 and 2 of ($\spadesuit$), and
+    let us show that $\P$ is a plot for the functional
+    diffeology. Let us consider a plot $\Q:\V\to \E$. By
+    definition of the fine diffeology, for all $s_0 \in \V$
+    there exist an open neighborhood $\W$ of $s_0$, a finite set of
+    indices $\A$, a family $(\lambda_\alpha)_{\alpha \in \A}$
+    of smooth parametrizations of $\KK$ defined on $\V$, and a
+    family $(v_\alpha)_{\alpha \in \A}$ of vectors of $\E$,
+    such that for every $s \in \V$, $\Q(s) = \sum_{\alpha \in
+    \A} \lambda_\alpha(s) v_\alpha$. Let $\F \subset \E$ be
+    the vector subspace spanned by the vectors $v_\alpha$.
+    Hence, for all $r_0 \in \U$, there exist an open neighborhood
+    $\U'$ of $r_0$ and a vector subspace $\F' \subset \E'$ 
+    such that $\P(r)(\F) \subset \F'$, for all $r \in \U'$. 
+    Thus, for all $(r,s) \in \U'\times \W$,
+    $\P(r)(\Q(s)) = \P(r)(\sum_{\alpha \in 
+    \A}\lambda_\alpha(s) v_\alpha) = \sum_{\alpha \in 
+    \A}\lambda_\alpha(s) \P(r)(v_\alpha) \in \F'$. Then, since
+    the parametrization $r\mapsto \P(r)\restriction \F$ is a
+    plot of the functional diffeology, the parametrization
+    $\P \cdot \Q : (r,s)\mapsto \P(r)(\Q(s))$ is a smooth
+    parametrization in $\F' \subset \E'$. Thus, $\P \cdot \Q$
+    is a smooth parametrization in $\E'$, because any finite
+    subspace is embedded in $\E'$. Therefore, $\P$ is a plot
+    of the functional diffeology of $\Lin(\E,\E')$. This
+    completes the proof of the proposition. 
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %   Exercises  
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \Exercises
+  
+  \begin{exercise}[Smooth is fine diffeology]
+    \label{Smooth-is-fine-diffeology} 
+    Check that the smooth diffeology of $\KK^n$ is the fine
+    diffeology.  
+  \end{exercise} %% Smooth-is-fine-diffeology
+  
+  \begin{exercise}[Finite dimensional fine spaces]
+    \label{Finite-dimensional-fine-spaces} 
+    Let $\E$ be a $\KK$-vector space of dimension $n$,
+    equipped with the fine diffeology. Let $\cB =
+    \{\ee_i\}_{i=1}^n$ be any basis of $\E$. Show that any
+    plot $\P : \U \to \E$ writes $\P : r \mapsto \sum_{i=1}^n
+    \phi_i(r) \ee_i$, where $\phi_i \in
+    \Cinfty(\U, \KK)$. In other words, a basis $\cB$, regarded
+    as the isomorphism $\cB : (u_1,\ldots,u_n) \mapsto
+    \sum_{i=1}^n u_i \ee_i$, from $\KK^n$ to $\E$, where $\KK^n$ is equipped with the standard
+    smooth diffeology, is a smooth
+    isomorphism. Any
+    fine vector space of dimension $n$ is isomorphic to the
+    standard $\KK^n$. 
+  \end{exercise} %% Finite-dimensional-fine-spaces
+  
+  \begin{exercise}[The fine topology]
+    \label{The-fine-topology}
+    Let $\E$ be a fine diffeological vector space. Show that
+    a subset $\Omega \subset \E$ is D-open (open for the
+    D-topology) \art{The-D-Topology-of-diffeological-spaces}
+    if and only if its intersection with any finite
+    dimensional vector space $\F \subset \E$ is open in
+    $\F$. This topology is the so-called {\em finite
+    topology}, introduced in functional analysis by Andrei
+    Tychonoff \cite{Tyc35}. 
+  \end{exercise} %% The-fine-topology
+  
+  %************************************************
+  
+  \section*{Euclidean and Hermitian Diffeological Vector Spaces} 
+  \label{secEuclidean-and-Hermitian-diffeological-vector-spaces}
+  
+  \begin{sechead}
+    The notions of Euclidean or Hermitian structures on
+    diffeological vector spaces are natural extensions of the
+    standard definitions. They are used
+    in particular in the diffeological descriptions of the
+    infinite sphere \art{The-infinite-sphere} and the infinite
+    projective space
+    \art{The-infinite-complex-projective-space}.
+  \end{sechead}
+  
+  \begin{article}\artlabel{Euclidean diffeological vector spaces}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Euclidean diffeological vector spaces}
+    \label{Euclidean-diffeological-vector-spaces}
+    Let $\E$ be a real diffeological vector space,
+    and let $(\X,{\Y}) \mapsto \X \cdot {\Y}$ be an
+    {\em Euclidean product}, that is, a map from $\E \times
+    \E$ to $\RR$ which is:
+    $$
+    \begin{array}{rcl}
+      \mbox{Symmetric} &: & \X \cdot {\Y} = {\Y}\cdot \X, \\
+      \mbox{Bilinear} &: & \X \cdot (\alpha {\Y} + \alpha' {\Y}') =
+      \alpha  \X \cdot {\Y} + \alpha' \X \cdot {\Y}', \\ 
+      \mbox{Positive} &: & \X \cdot \X \geq 0, \\ 
+      \mbox{Nondegenerate} &: & \X \cdot \X = 0 \Leftrightarrow
+      \X = 0,
+    \end{array}
+    $$
+    where $\X$, ${\Y}$ and ${\Y}'$ are
+    vectors, and $\alpha$ and $\alpha'$ are real numbers. If
+    the Euclidean product is smooth, the pair $(\E,\cdot)$
+    is an {\em Euclidean diffeological vector space}. 
+  \end{article} %% Euclidean-diffeological-vector-spaces
+  
+  \begin{article}\artlabel{Hermitian diffeological vector spaces}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Hermitian diffeological vector spaces}
+    \label{Hermitian-diffeological-vector-spaces}
+    Let ${\H}$ be a complex diffeological vector
+    space, and let $(\X,{\Y}) \mapsto \X \cdot {\Y}$ be a
+    {\em Hermitian product}, that is, a map from ${\H} \times
+    {\H}$ to $\CC$ which is:
+    $$
+    \begin{array}{rcl}
+      \mbox{Sesquilinear} &: & \X \cdot {\Y} = ({\Y}\cdot \X)^*, \\
+      \mbox{Bilinear} &: & \X \cdot(\alpha {\Y} + \alpha' {\Y}') =
+      \alpha  \X \cdot {\Y} + \alpha' \X \cdot {\Y}', \\ 
+      \mbox{Positive} &: & \X \cdot \X \geq 0, \\ 
+      \mbox{Nondegenerate} &: & \X \cdot \X = 0 \Leftrightarrow
+      \X = 0, 
+    \end{array}
+    $$
+    where $\X$, $\Y$ and $\Y'$ are
+    vectors, $\alpha$, $\alpha'$ are complex numbers, and the
+    star $*$ denotes the complex conjugation. The Hermitian
+    product is also denoted sometimes by 
+    $\hermprod{\X}{\Y} =  \X \cdot \Y$. If the  Hermitian product is
+    smooth, then $(\H,\cdot)$ is a {\em Hermitian diffeological vector space}.
+  \end{article} %% Hermitian-diffeological-vector-spaces
+  
+  \begin{article}\artlabel{The fine standard Hilbert space}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} The fine standard
+    Hilbert space}
+    \label{The-fine-standard-Hilbert-space} 
+    The purpose of this paragraph is to introduce the
+    fine diffeology on the standard Hilbert space, and some
+    related constructions which will be used further for the
+    study of a few diffeological infinite dimensional
+    manifolds.
+    Let $\cH_\RR$ be the real vector space of square-summable
+    real sequences, 
+    $$ 
+    \cH_\RR = \bigg\{ \X = (\X_k)_{k=1}^\infty \ \bigg\vert\
+    \X_k \in \RR, \ k = 1, \ldots, \infty, \mbox{ and } \sum_{k =
+    1}^\infty \X_k^2 < \infty \bigg\}.
+    $$ 
+    The space of real numbers is naturally
+    equipped with the smooth diffeology, and the space
+    $\cH_\RR$ is equipped with the fine diffeology
+    \art{The-fine-diffeology-of-vector-spaces}. The usual
+    Euclidean product is defined on $\cH_\RR$ by
+    $$
+    \X \cdot \X' = \sum_{k = 1}^\infty \X_k \X'_k\,,
+    \qmbox{for all} \X, \X' \in \cH_\RR.
+    $$
+    Hence, the pair $(\cH_\RR, \cdot)$ is a fine
+    Euclidean diffeological vector space (see 
+    \exref{Fine-Hermitian-vector-spaces}). We shall
+    denote as usual, by $\Vert\cdot\Vert$, the norm
+    associated with the Euclidean product, that is,
+    $$
+    \Vert \X \Vert = \sqrt{\X \cdot \X},
+    \qmbox{for all} \X \in \cH_\RR. 
+    $$
+    We shall denote by $\pr_k$ the
+    $k$-th projection from $\cH_\RR$ to $\RR$,
+    $$ 
+    \pr_k(\X) = \X_k \in  \RR,\ k = 1, \ldots, \infty,
+    \qmbox{for all} \X = (\X_k)_{k = 1}^\infty \in \cH_\RR.
+    $$ 
+    Since $\RR$ and $\cH_\RR$ are  fine vector spaces and
+    $\pr_k$ is linear, $\pr_k$ is smooth
+    \art{Linear-maps-and-fine-diffeology}. We shall denote by
+    $\ee_k$ the only vector of $\cH_\RR$ defined by
+    $$
+    \pr_k(\ee_k) = 1 \quad\mbox{and}\quad \pr_j(\ee_k) = 0
+    \quad \mbox{if} \quad j\neq k. $$   We shall call the family
+    $\set{\ee_k}_{k=1}^\infty$ the {\em canonical basis} of
+    $\cH_\RR$. Also note that $\pr_k = \bar \ee_k : \X
+    \mapsto \ee_k \cdot \X$.
+    
+    Now, what has been said for $\RR$ can be transposed
+    to $\CC$. Let $\cH_\CC$ be the set of square-summable
+    complex sequences,
+    $$ 
+    \cH_\CC = \bigg\{ \Z = (\Z_k)_{k=1}^\infty \ \bigg\vert\
+    \Z_k \in \CC, k = 1, \ldots, \infty, \mbox{ and } \sum_{k =
+    1}^\infty \Z_k^* \Z_k < \infty \bigg\},
+    $$ 
+    where $z^*$ denotes the complex conjugate of the complex
+    number $z$. The space of complex numbers $\CC$ is
+    naturally equipped with the standard diffeology, and the
+    space $\cH_\CC$ is equipped with the fine diffeology
+    \art{The-fine-diffeology-of-vector-spaces}. The usual
+    sesqui-linear product is defined on $\cH_\CC$ by
+    $$
+    \Z \cdot \Z' = \sum_{k = 1}^\infty \Z^*_k \Z'_k,
+    \qmbox{for all} \Z, \Z' \in \cH_\CC. 
+    $$ 
+    The sesqui-linear map $(\Z,\Z') \mapsto \Z \cdot \Z'$ is a
+    Hermitian product. Thus, the pair $(\cH, \cdot)$ is a fine
+    Hermitian diffeological vector space over $\CC$ (see 
+    \exref{Fine-Hermitian-vector-spaces}). The norm
+    associated with the Hermitian product is defined by
+    $$
+    \Vert \Z \Vert = \sqrt{\Z \cdot \Z},
+    \qmbox{for all} \Z \in \cH. 
+    $$ 
+    We preserve the notation $\pr_k$ for the
+    $k$-th projection from $\cH_\CC$ to $\CC$,
+    $$ 
+    \pr_k(\Z) = \Z_k \in  \CC,\ k = 1, \ldots, \infty,
+    \qmbox{for all} \Z = (\Z_k)_{k = 1}^\infty \in \cH.
+    $$ 
+    We also preserve the notation 
+    $\ee_k$ for the only vector of $\cH_\CC$ defined by 
+    $\pr_k(\ee_k) = 1$ and $\pr_j(\ee_k) = 0$
+    if $j\neq k$. Note that $\pr_k(\Z) = \ee_k \cdot \Z$, 
+    but $\Z \cdot \ee_k = \Z_k^*$. These definitions and constructions 
+    satisfy the following.
+
+    \alinea{1.} The diffeological vector space $\cH_\CC$, regarded
+    as a $\RR$ vector space, is still a fine diffeological
+    vector space.
+    
+    \alinea{2.} The map $\fold$ from $\cH_\RR$ to $\cH_\CC$, defined
+    by
+    $$
+    \fold : (\X_k)_{k = 1}^\infty \mapsto (\Z_k)_{k =
+    1}^\infty, \ \mbox{with} \ \Z_k = \X_{2k-1} + i  \X_{2k}, \ k = 1, \ldots, \infty, 
+    $$
+    is a smooth $\RR$-isomorphism, where $\cH_\CC$ is regarded
+    as a $\RR$-vector space. Its inverse $\unfold$ is given by 
+    $$ \renewcommand{\arraystretch}{1.5} 
+    \unfold: (\Z_k)_{k = 1}^\infty \mapsto (\X_k)_{k = 1}^\infty\,, 
+    \quad \mbox{with} \quad
+    \left\{
+    \begin{array}{lll}
+      \X_{2k-1} &=& \Re(\Z_k) \\
+      \X_{2k} &= &\Im(\Z_k)
+    \end{array}\right.,
+    $$ 
+    where $\Re$ and $\Im$ denote the real and
+    imaginary parts. Moreover, the map $\fold$ is an isometry, that is,
+    $$ 
+    \norm{\fold(\X)}^2 = \norm{\X}^2, \qmbox{for all} \X \in \cH_\RR.
+    $$
+    
+    \alinea{3.} The natural injection $j : \cH_\RR
+    \to \cH_\CC$, defined by the inclusion  $\X_k \mapsto
+    \Z_k = \X_k + i \times 0$ of $\RR$ into $\CC$, is an
+    embedding.
+  \end{article} %% The-fine-standard-Hilbert-space
+  
+  \begin{proof}
+  1. Let $\P : \U \to \cH_\CC$ be a plot of the fine diffeology, that is,
+    $\P(r) =_{\rm loc} \sum_{\alpha \in \A} 
+    \lambda_\alpha(r) \Z^\alpha$,
+    where $\A$ is a finite set of indices, the $\Z^\alpha$
+    belong to $\cH_\CC$ and the $\lambda_\alpha$ are smooth
+    parametrizations in $\CC$. Defining $a_\alpha$ and
+    $b_\alpha$ by $\lambda_\alpha(r) = a_\alpha(r) +
+    i b_\alpha(r)$, we get $\P(r) =_{\rm loc} \sum_{\alpha \in \A} a_\alpha(r)
+    \Z^\alpha + \sum_{\alpha \in \A} b_\alpha(r) 
+    \times (i \Z^\alpha)$.
+    Since the $i\Z^\alpha$ are still in $\cH_\CC$, the plot
+    $\P$ writes locally $\P(r) =_{\rm loc} \sum_{\beta \in \B} 
+    \phi_\beta(r) \Z'^\beta$,
+    where $\B$ is a finite family of indices, the $\Z'^\beta$
+    belong to $\cH_\CC$ and the $\phi_\beta$ are smooth
+    parametrizations in $\RR$.  Therefore, as a real vector
+    space, $\cH_\CC$ is still a fine diffeological vector
+    space.
+    
+    \alinea{2.} Since $\cH_\CC$ is fine, regarded as a real vector
+    space, any linear isomorphism is a smooth isomorphism
+    \art{The-fine-linear-category}. Then, it is a simple
+    verification to check that $\fold$ and $\unfold$ are
+    inverse linear isomorphisms one of each other, and are
+    isometries.
+    
+    \alinea{3.} Let us check that the injection $j :
+    \cH_\RR \to \cH_\CC$ is an embedding. First of all, since 
+    $j$ is a linear injection it is an induction
+    \art{Injections-of-fine-diffeological-vector-spaces}.
+    Now, let $\Re : \cH_\CC \to \cH_\RR$ be the map $\Z
+    \mapsto \X = \Re(\Z)$ defined by $\Re(\Z)_k = \Re(\Z_k)$.
+    Note that the subspace $\cH_\RR$ is just the pointwise
+    $\Re$-fixed points set: $\cH_\RR = \set{\Z \in \cH_\CC
+    \mid \Re(\Z) = \Z}$. Now, $\Re$ is $\RR$-linear, thus
+    smooth \art{Linear-maps-and-fine-diffeology}, thus
+    D-continuous \art{Smooth-maps-are-D-continuous}.
+    Moreover, $\Re$ is surjective over $\cH_\RR$, so for any
+    D-open $\A \in \cH_\RR$, $\A' = \Re^{-1}(\A)$ is D-open
+    and since $\Z' \in \cH_\RR$ means $\Re(\Z') = \Z'$, $\A'
+    \cap \cH = \set{\Z' \in \cH_\RR \mid \Re(\Z') \in \A} = 
+    \A$.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %   Exercises  
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \Exercises
+  
+  \begin{exercise}[Fine Hermitian vector spaces]
+    \label{Fine-Hermitian-vector-spaces}
+    Show that every real (or complex) fine
+    diffeological vector space $\E$ 
+    \art{The-fine-diffeology-of-vector-spaces}, equipped with any
+    Euclidean (or Hermitian) product is an Euclidean
+    (or Hermitian) diffeological vector space.
+  \end{exercise} %% Fine-Hermitian-vector-spaces
+  
+  \begin{exercise}[Finite dimensional Hermitian spaces]
+    \label{Finite-dimensional-Hermitian-spaces} 
+    Show that there exists one and only one
+    structure of Euclidean (or Hermitian) diffeological
+    vector space of finite dimension, that is, the fine
+    structure. Compare with the remark of
+    \art{Standard-vector-spaces}.
+  \end{exercise} %% Finite-dimensional-Hermitian-spaces
+  
+  \begin{exercise}[Topology of the norm and D-topology]
+    \label{Topology-of-the-norm-and-D-topology}
+    The topology of the norm of a Hermitian diffeological
+    space $\E$ does not coincide necessarily with the
+    D-topology. Show that the topology of the norm is
+    finer than the D-topology. 
+  \end{exercise} %% Topology-of-the-norm-and-D-topology
+  
+  \begin{exercise}[Banach's diffeology]
+    \label{Banach-s-diffeology}
+    Let $\E$ be a Banach space, that is, a complete vector
+    space for a given norm $\norm{\cdot}$. Let us recall that
+    a continuous map $\phi: \Omega \to \E$, defined on 
+    an $n$-domain, is said to be of
+    {\em class $\cC^1$} if there exists a continuous linear
+    map, denoted by $\D(f): \Omega \to \Lin(\RR^n,\E)$, such
+    that,  
+    $$ 
+    \lim_{t \mathop{\rightarrow} 0} {f(x+tu) - f(x) \over t} =  \D(f)(x)(u),
+    \quad \mbox{for all } u \in \RR^n. 
+    $$ 
+    The map $f$ is said to be of class $\cC^k$, $k>1$, if $f$ is of
+    class $\cC^1$ and if $\D(f)$ is of class $\cC^{k-1}$.
+    The map $f$ is said to be of class $\Cinfty$ if it is of
+    class $\cC^k$ for all $k \in \NN$, see \cite{Die70a}. 
+    Check that the set of parametrizations in $\E$ which are
+    of class $\Cinfty$ for the norm is a diffeology. We shall
+    call it the {\em Banach diffeology} of $(\E, \norm{\cdot})$.
+
+    \Question{1)} Show that, for the Banach diffeology, $\E$ is a
+    diffeological vector space. 
+    
+    \Question{2)} Show that the category of Banach spaces is a 
+    full subcategory of diffeological vector spaces. 
+    Use the Boman theorem:
+    {\em for any two Banach spaces $\E$ and $\F$, a  map $f : \E \to \F$ 
+    is Banach-smooth if and only if it takes smooth curves in $\E$ 
+    to smooth curves in $\F$} \cite{Bom67}.
+  \end{exercise} %% Banach-s-diffeology
+  
+  \begin{exercise}[$\cH_\CC$ is isomorphic to $\cH_\RR \times \cH_\RR$] 
+    \label{HC-is-isomorphic-to-HR-X-HR} 
+    With the notations of
+    \art{The-fine-standard-Hilbert-space}, check that the map
+    $\psi : \cH_\RR \times \cH_\RR \mapsto \cH_\CC$ defined by
+    $\psi(\X,\Y) = \X +i\Y$ is a smooth isometry, that is, a
+    smooth isomorphism such that $\norm{\psi(\X,\Y)}^2 =
+    \norm{\X}^2 + \norm{\Y}^2$. 
+  \end{exercise} %% HC-is-isomorphic-to-HR-X-HR
+  

@@ -1,0 +1,1374 @@
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% 
+  %% Locality and Diffeologies MARK: -
+  %% 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \chapter{Locality and Diffeologies}
+  
+  \label{Chapter-Locality-and-diffeologies}
+  \newcommand{\ChapterLAD}{Locality and diffeologies}
+  
+  \begin{chaphead}
+    Diffeology is built on purpose on a dry set, without structure.   
+    This may appear unusual, when most of the traditional     
+    constructions in differential geometry are built on top of 
+    topological spaces.  
+    However, that does not mean that topology is completely 
+    absent from the theory, it appears actually as a byproduct 
+    of local smoothness. This is the way that I chose to 
+    introduce these notions, following the logic of diffeology. 
+    Indeed, a smooth map $f$ from $\X$ to $\X'$ transforms, 
+    by composition, the plots of $\X$ into plots of $\X'$. Thus, a local 
+    smooth map $f$ from $\X$ to $\X'$ will be a map, 
+    defined on a subset $\A \subset \X$, to $\X'$, 
+    which transforms every plot $\P$ of $\X$ into a plot of $\X'$. 
+    But that raises the question of the domain of definition. 
+    Naturally $f \circ \P$ is defined on $\P^{-1}(\A)$, 
+    which needs therefore to be a domain (maybe empty). 
+    Thus, a local smooth map is defined on a 
+    special kind of subsets $\A$, the ones for which $\P^{-1}(\A)$ is open 
+    for all plots $\P$ of $\X$, and these are the open sets of 
+    a special topology, the D-topology of X \art{The-D-Topology-of-diffeological-spaces}. 
+    I could have introduced first the D-topology of
+    the diffeological spaces and then the local smooth maps, but I think that it 
+    breaks the logic, or self-consistency, of the theory. Moreover, diffeology
+    applies on numerous spaces for which topology is helpless, 
+    irrational tori for example. Emphasizing D-topology
+    could have been misinterpreted.
+    However, the reader who is 
+    uncomfortable with my choice can begin by the section 
+    on D-topology 
+    and come back afterwards to local smoothness.
+    That said, locality in diffeology will allow us to
+    refine some diffeological concepts like
+    subduction or induction. 
+    It will suggest the notions of embeddings and embedded
+    subsets. It will give us the notion of local
+    diffeomorphisms which is associated with the definition
+    of manifolds, or more generally, with the concept of modeling
+    diffeological spaces.
+  \end{chaphead}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{To be Locally Smooth}
+  \label{To-be-locally-smooth}
+  
+  \begin{sechead}
+    If we can define local smoothness for diffeological spaces, 
+    we must  keep in mind that for many singular spaces, like irrational tori, 
+    this notion is helpless. For this kind of spaces, 
+    there are no local smooth maps but only global. Nevertheless, local smoothness 
+    will be essential to
+    include properly the category of manifolds in the category $\Diffeology$,
+    or the category of orbifolds, or some infinite dimensional spaces, 
+    and others.
+  \end{sechead}
+  
+  \begin{article}\artlabel{Local smooth maps} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Local smooth maps} 
+    \label{Local-smooth-maps}
+    Let $\X$ and $\X'$ be two diffeological spaces. Let
+    $\A \subset \X$ be some subset. We shall say that a map $f$ from 
+    $\A \subset \X$ to $\X'$ is a {\em local smooth map} 
+    if, for every plot $\P$ of
+    $\X$, the parametrization 
+    $f \circ \P$ defined on $\P^{-1}(\A)$ is a plot of $\X'$.
+    That implies in particular that $\P^{-1}(\A)$ is a domain.  
+    We shall say that a
+    map $f: \X \to \X'$ is {\em locally smooth} at the
+    point $x \in \X$ if there exists a
+    superset $\A$ of $x$ such that the map $f$, restricted 
+    to $\A$, is a local smooth map. 
+    We shall admit that the empty map is a local smooth map.
+    
+    \Note{1} Since $\P^{-1}(\A)$ must be open for each plot $\P$ of $\X$, 
+    the domain of definition $\A \subset \X$ of the local smooth map $f$ 
+    is not any subset, but an open subset for the D-topology of $\X$, see
+    \art{The-D-Topology-of-diffeological-spaces}.
+    
+    \Note{2} To clearly express that the property of 
+    {\em local smoothness} of $f$
+    involves the whole set of plots of $\X$, 
+    and not just the ones with values in $\A$,
+    we shall often use this notation  $f : \X \supset \A \to \X'$.
+        
+    \Note{3} When considering local properties we may use the subscript ${\star}_\loc$,
+    for instance to denote space of local smooth maps, or whatever else.
+  \end{article} %% Local-smooth-maps
+  
+  \begin{article}\artlabel{Composition of local smooth maps} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Composition of local
+    smooth maps} 
+    \label{Composition-of-local-smooth-maps}
+    The composite of two local smooth maps is
+    again a local smooth map. More precisely, let $\X$, $\Y$
+    and $\Z$ be three diffeological spaces. Let $f : \X
+    \supset \A \to \Y$ and $g : \Y \supset \B \to \Z$ be two
+    local smooth maps. The map $ g \circ f : \X
+    \supset f^{-1}(\B) \to \Z$ is a local smooth map.
+  \end{article} %% Composition-of-local-smooth-maps
+  
+  \begin{proof}
+    Let $\P : \U \to \X$ be a plot of $\X$, since $f$ is
+    locally smooth: $\P^{-1}(\A)$ is a domain, and 
+    $\Q = f \circ \P : \P^{-1}(\A) \to \X$ is a plot of $\Y$.
+    Now, since $g$ is a local smooth map and $\Q$
+    is a plot of $\Y$, $\Q^{-1}(\B) = (f \circ \P)^{-1}(\B)
+    = \P^{-1}(f^{-1}(\B))$ is a domain and $g \circ \Q = g
+    \circ (f \circ \P) = (g \circ f) \circ \P :
+    \P^{-1}(f^{-1}(\B)) \to \Z$ is a plot of $\Z$. Hence,
+    for every plot $\P$ of $\X$, the map $(g \circ f) \circ
+    \P$ is a plot of $\Z$. Therefore $g \circ f$ is a local
+    smooth map. \end{proof}
+  
+  \begin{article}\artlabel{To be smooth or locally smooth}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} To be smooth or locally smooth} 
+    \label{To-be-smooth-or-locally-smooth} 
+    Let $\X$ and $\X'$ be two diffeological spaces. A map 
+    $f: \X \to \X'$ is smooth if and only if $f$ is locally
+    smooth at every point $x$ of $\X$. 
+  \end{article} %% To-be-smooth-or-locally-smooth
+  
+  \begin{proof}
+    Obviously, if $f$ is smooth it is locally
+    smooth at every point $x$ of $\X$, just choose $\X$ as
+    a superset of $x$ \art{Local-smooth-maps}. 
+    Conversely, let us assume that $f$ is
+    locally smooth at every point $x$ of $\X$. Let 
+    $\P : \U \rightarrow \X$ be a plot of $\X$. For all
+    $r \in \U$ there exists, by assumption, a superset
+    $\A$ of $x = \P(r)$ such that 
+    $f \restriction \A : \X \supset \A \to \X'$ is a local smooth map
+    \art{Local-smooth-maps}. This implies in
+    particular that $(f \restriction \A) \circ \P$, defined
+    on $\V = \P^{-1}(\A)$, is a plot of $\X'$. Thus, $\V \subset \U$ 
+    is a domain and $(f \circ \P) \restriction \V$ 
+    is a plot of $\X'$. Hence, $f \circ {\P}$ is locally
+    a plot of $\X'$ at every point $r \in \U$, that is, by
+    axiom {\D}2 of diffeology
+    \art{Diffeologies-and-diffeological-spaces}, $f \circ \P$ 
+    is a plot of $\X'$. Therefore, for any plot $\P$
+    of $\X$, $f \circ \P$ is a plot of $\X'$, and $f$ is
+    smooth. 
+  \end{proof}
+  
+  \begin{article}\artlabel{Germs of local smooth maps} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Germs of local
+    smooth maps}
+    \label{Germs-of-local-smooth-maps} Let $\X$ and
+    $\Y$ be two diffeological spaces, and let $x$ be a point
+    of $\X$. We say that two local smooth maps $f:
+    \X \supset \A \to \Y$ and $f' : \X \supset \A' \to \Y$
+    {\em have the same germ at the point $x$} if and only if
+    there exists a superset $\A'' \subset \A \cap \A'$ of
+    $x$ such that: $f \restriction \A'' : \X \supset \A'' \to \Y$ and 
+    $f' \restriction \A'' : \X \supset \A'' \to \Y$ 
+    are still two local smooth maps,
+    and $f \restriction \A'' = f' \restriction \A''$.
+    
+    \Note{1} Having the same germ at the point $x$ is
+    an equivalence relation whose classes are called {\em
+    germs}. The germ of the local smooth map $f$ at
+    the point $x$ will be denoted by $\germ(f)(x)$.
+    If $\phi$ is the germ of $f$ at the point $x$, the
+    value $y = f(x)$ is well defined and is called the value
+    of the germ of $f$ at $x$, and we denote $\phi(x)
+    = y$. 
+    
+    \Note{2} Let $\Z$ be a third diffeological space,
+    let  $f : \X \supset \A \to \Y$ and $g : \Y \supset \B
+    \to \Z$ be two local smooth maps. Let $x \in \A$ and $y =
+    f(x) \in \B$. The germ of $g \circ f : \X \supset
+    f^{-1}(\B) \to \Z$ at $x$ depends only on the germ of $f$
+    at $x$ and on the germ of $g$ at $y$. We shall denote
+    $\germ(g)(y) \cdot \germ(f)(x) = \germ(g \circ f)(x)$.
+    This defines the {\em composition of germs}. Like
+    composition of functions, composition of germs is
+    associative.
+  \end{article} %% Germs-of-local-smooth-maps
+  
+  \begin{proof}
+  For the first point, having the same germ at some point is
+    obviously an equivalence relation. Now, for every local
+    smooth map $f' : \X \supset \A' \to \Y$, having
+    the same germ as $f$ at $x$ implies that the point $x$
+    belongs to $\A'$ and $f'(x) = f(x)$. Hence $y = f(x)$
+    depends only on the germ of $f$. 
+    For the second point,  let $f' : \X \supset \A' \to \Y$ be a local
+    smooth map such that $\germ(f')(x) =
+    \germ(f)(x)$. Then, let  $g' : \Y \supset \B' \to \Z$ be a
+    local smooth map such that $\germ(g')(y) =
+    \germ(g)(y)$. Thus, there exists a 
+    superset $\A'' \subset
+    \A \cap \A'$ of $x$ such that $f \restriction \A''$ and
+    $f' \restriction \A''$ are two equal local
+    smooth maps.  There exists, as well, a superset
+    $\B'' \subset \B \cap \B'$ of $y$ such that $g
+    \restriction \B''$ and $g' \restriction \B''$ are two
+    equal local smooth maps. Hence, $g \circ f
+    \restriction f^{-1}(\B'')  = g' \circ f' \restriction
+    f^{-1}(\B'')$, $x \in f^{-1}(\B'')$, $g \circ f$ and $g'
+    \circ f'$ are local smooth maps
+    \art{Composition-of-local-smooth-maps}. Hence,
+    $\germ(g' \circ f')(x) = \germ(g \circ f)(x)$ and
+    $\germ(g \circ f)(x)$ depends only on the germ of $f$ at
+    $x$ and the germ of $g$ at $y$. Associativity of 
+    composition of germs is a direct consequence of the
+    associativity of the composition of maps. 
+  \end{proof}
+  
+  \begin{article}\artlabel{Local diffeomorphisms and \'etale maps} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Local diffeomorphisms} 
+    \label{Local-diffeomorphisms}
+    Let $\X$ and $\X'$ be two diffeological spaces. We say that a map $f:
+    \X \supset \A
+    \to \X'$ is a {\em
+    local diffeomorphism} if and only if $f$ is injective and $f$ is a
+    local smooth map as well as its inverse $f^{-1} : \X'
+    \supset f(\A)
+    \to
+    \X$.  The set of local
+    diffeomorphisms from
+    $\X$ to
+    $\X'$ will be denoted by $\Diffloc(\X,\X')$ and $\Diffloc(\X)$ when 
+    $\X = \X'$.
+    
+    Let $x$ be a point of $\X$, we say that a map $f: \X \to
+    \X'$ is a {\em local diffeomorphism at $x$}, or is
+    {\em \'etale at $x$}, if there exists a superset $\A$ of $x$
+    such that $f\restriction \A : \X \supset \A \to \X'$ 
+    is a local diffeomorphism.
+    The map $f$ is said to be {\em \'etale} if it is \'etale
+    at each point. 
+  \end{article} %% Local-diffeomorphisms
+  
+  \begin{article}\artlabel{Etale maps and diffeomorphisms} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Etale maps and diffeomorphisms} 
+    \label{Etale-maps-and-diffeomorphisms}
+    An \'etale map $f: \X \to \X'$
+    \art{Local-diffeomorphisms}, where $\X$ and $\X'$ are two diffeological
+    spaces, is not necessarily a diffeomorphism, because $f$ is not
+    necessarily bijective. But, if $f$ is bijective and \'etale, then $f$
+    is a diffeomorphism. This is a direct consequence of
+    \art{To-be-smooth-or-locally-smooth}. 
+  \end{article} %% Etale-maps-and-diffeomorphisms
+  
+  \begin{article}\artlabel{Germs of local diffeomorphisms as groupoid} 
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Germs of local diffeomorphisms as
+    groupoid} 
+    \label{Germs-of-local-diffeomorphisms-as-groupoid}
+    The set $\Diffloc(\X)$ of local diffeomorphisms of $\X$ is
+    no longer a group, since the domains and the sets of values of local
+    diffeomorphisms do not coincide necessarily. But let
+    $\phi$ be the germ of a local diffeomorphism $f$ at a
+    point $x \in \X$, let $\gamma$ be the germ of a local
+    diffeomorphism $g$ at a point $y = f(x)$. Then, the germ
+    $\gamma \cdot \phi$ of  $g \circ f$ at the point $x$ is
+    well defined \art{Germs-of-local-smooth-maps} and maps
+    the point $x$ to the point $z = g(y)$. This construction
+    gives to the set of germs of local diffeomorphisms of
+    $\X$ the structure of a groupoid \cite{McL71}, see also
+    \art{Diffeological-groupoids}. The objects of this
+    groupoid are the points of $\X$ and the morphisms from
+    $x$ to $x'$ are the germs, at the point $x$, of the local
+    diffeomorphisms of $\X$ mapping $x$ to $x'$. This groupoid may 
+    be useful to explore the local structure of a diffeological space
+    and its singularities, in relation to
+    \art{Klein-structure-and-singularities-of-a-diffeological-space}.
+  \end{article} %% Germs-of-local-diffeomorphisms-as-groupoid
+  
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %   Exercises  
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \Exercise
+  
+  \begin{exercise}[To be a locally constant map]
+    \label{To-be-a-locally-constant-map}
+    Let $\X$ and $\X'$ be two diffeological spaces. Let $f:
+    \X \to \X'$ be a {\em locally constant map}, that is, for each
+    point $x_0 \in \X$ there exists a superset $\V$ of
+    $x_0$ such that $f\restriction \V$ is a local smooth map
+    and constant: $f \restriction \V : x \to f(x_0)$. Show
+    that $f$ is constant on the {\em connected components} of
+    $\X$ \art{Pathwise-connectedness}, that is, if $x_0$ and
+    $x_1$ are two points of $\X$ such that there exists a
+    $1$-plot $\gamma: \RR \to \X$ connecting $x_0$ to
+    $x_1$, \ie, $\gamma(0) = x_0$ and $\gamma(1) = x_1$, then
+    $f(x_0) = f(x_1)$. 
+  \end{exercise}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{D-topology and Local Smoothness}
+  \label{Section-D-topology-and-local-smoothness}
+  
+  \begin{sechead}
+    There are several topologies on a diffeological space,
+    compatible with the diffeology, that is, such that smooth
+    maps are continuous, for example, the coarse topology. But one of
+    them plays a particular role, it is the finest
+    topology such that plots are continuous. This topology is
+    called the {\em D-topology} of the space. In particular, local smooth maps 
+    are necessarily defined on {\em D-open} subsets, that is, open subsets for the D-topology.
+    The D-topology defines a faithful functor 
+    from the category
+    $\Diffeology$ of diffeological spaces to the category $\Topology$ of
+    topological spaces. 
+  \end{sechead}
+  
+  \begin{article}\artlabel{The D-Topology of diffeological spaces}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} The D-Topology of
+    diffeological spaces} 
+    \label{The-D-Topology-of-diffeological-spaces}
+    There exists, on every diffeological space $\X$, a finest topology such
+    that the plots are continuous. This topology is called the {\em D-topology}
+    of $\X$ \cite{Igl85}. 
+    The open sets for the D-topology are called {\em D-open sets}, they
+    are characterized by the following property.
+    \begin{itemize}
+    \item[($\clubsuit$)]
+    A subset $\A \subset \X$ is open for the D-topology 
+    if and only if, for every plot $\P$ of $\X$,
+    $\P^{-1}(\A)$ is open.
+    \end{itemize}
+  \end{article} %% The-D-Topology-of-diffeological-spaces
+  
+  \begin{proof}
+    Let us consider the set $\cT$ of all the subsets $\A$ of
+    $\X$ such that for any plot $\P$ of $\X$,
+    $\P^{-1}(\A)$ is open. This set is a topology of
+    $\X$, indeed: 
+
+      \alinea{1.} The empty set belongs to $\cT$, since
+      $\P^{-1}(\varnothing) = \varnothing$ is open.
+      
+      \alinea{2.} The set $\X$ belongs to
+      $\cT$, since $\P^{-1}(\X) = \Dom(\P)$ is open by
+      assumption. 
+      
+      \alinea{3.} Let $\{\A_i\}_{i \in \cI}$ be any finite
+      family, with $\A_i \in \cT$, and let $\A = \cap_i \A_i$. We have
+      $\P^{-1}(\A) = \P^{-1}(\cap_i \A_i) = \cap_i
+        \P^{-1}(\A_i)$. But every $\P^{-1}(\A_i)$ is open. 
+      Since the family is finite, the intersection $\cap_i
+        \P^{-1}(\A_i)$ is open. Hence, $\P^{-1}(\A)$ is open.
+      
+      \alinea{4.} Let $\{\A_i\}_{i \in \cI}$ be any
+      family, with $\A_i \in \cT$, and let
+      $\A = \cup_i \A_i$. We have $\P^{-1}(\A) =
+        \P^{-1}(\cup_i \A_i) = \cup_i \P^{-1}(\A_i)$. Since
+      every $\P^{-1}(\A_i)$ is open the union $\cup_i
+        \P^{-1}(\A_i)$ is open. Hence, $\P^{-1}(\A)$
+      is open. 
+
+    \alinea{}Now, let $\cT'$ be another topology for which the plots are continuous. 
+    Let us recall that $\cT$ is finer than $\cT'$ if $\cT$ contains $\cT'$,
+    that is, $\cT' \subset \cT$.
+    Let $\A \subset \X$ be open for the
+    topology $\cT'$, that is, $\A \in \cT'$. 
+    Because the plots are $\cT'$-continuous, $\P^{-1}(\A)$ is open for all plots
+    $\P$ of $\X$, thus $\A$ is
+    D-open, that is, $\A \in \cT$, and thus $\cT' \subset \cT$. 
+    Therefore, the D-topology is
+    finer than $\cT'$. Thus, the D-topology is the finest
+    topology such that the plots are continuous. 
+  \end{proof}
+  
+  \begin{article}\artlabel{Smooth maps are D-continuous}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Smooth maps are D-continuous} 
+    \label{Smooth-maps-are-D-continuous} Let $\X$
+    and $\X'$ be two diffeological spaces.  
+      \begin{itemize}
+      \item[1.]  Every smooth
+      map $f$ from $\X$ to $\X'$ is {\em D-continuous}, that is, continuous
+      for the D-topology.  
+      \item[2.] Every diffeomorphism $f$ from $\X$ to $\X'$ is a
+      {\em D-homeomorphism}, that is, a homeomorphism for the
+      D-topology.
+      \end{itemize}
+    Associating the underlying D-topological space with a diffeology
+    defines a faithful functor from
+    the category $\Diffeology$ to the category
+    $\Topology$. 
+  \end{article} %% Smooth-maps-are-D-continuous
+  
+  \begin{proof}
+    Let us denote by $\cD$ and $\cD'$ the diffeologies
+    of $\X$ and $\X'$. By the very definition of smooth maps
+    \art{Smooth-maps}, $f$ sends every plot
+    $\P \in \cD$ into a plot
+    $f \circ \P \in \cD'$. Let $\A' \subset \X'$ be
+    D-open, and $\A = f^{-1}(\A')$. For every plot
+    $\P \in \cD$, $\P^{-1}(\A) =
+    \P^{-1}(f^{-1}(\A')) = (f \circ \P)^{-1}(\A')$.
+    But $f \circ \P$ is a plot of $\cD'$ and $\A'$
+    is D-open, thus $(f \circ \P)^{-1}(\A')$ is open.
+    Hence, $\P^{-1}(\A)$ is open for every plot $\P \in
+    \cD$. Therefore $\A = f^{-1}(\A')$ is D-open and $f$
+    is continuous. 
+    Next, a diffeomorphism is a bijective map, smooth as well as its inverse.
+    Thus, a diffeomorphism is a bijective bi-continuous map, that is, 
+    a homeomorphism. 
+  \end{proof}
+  
+  \begin{article}\artlabel{Local smooth maps are defined on D-opens}  
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Local smooth maps are defined on D-opens} 
+    \label{Local-smooth-maps-are-defined-on-D-opens}
+    Let $f$ be a map defined on a subset $\A$ of a diffeological space $\X$ 
+    with values in another one $\X'$.
+    \begin{itemize}
+      \item[($\clubsuit$)]  The map $f : \X \supset \A
+      \to \X'$ is a local smooth map
+      \art{Local-smooth-maps} if and only if $\A$ is D-open and
+      $f$ is smooth as a map from $\A$ to $\X'$, where $\A$ is
+      equipped with the subset diffeology. 
+    \end{itemize}
+    In particular, if $f : \X \supset \A \to \X'$ is a local
+    diffeomorphism, then both $\A$ and $f(\A)$ are D-open,
+    $f$ is a local homeomorphism for the D-topology, and
+    $f \restriction \A$ is a diffeomorphism onto $f(\A)$. 
+  \end{article} %% Local-smooth-maps-are-defined-on-D-opens
+  
+  \begin{proof}
+    Let us assume first that $f$ is a local smooth map. By
+    definition, for every plot $\P : \U \to \X$, the parametrization $f
+    \circ \P : \P^{-1}(\A) \to \X'$ is a plot of $\X'$. Hence,
+    since plots are defined on domains,
+    $\P^{-1}(\A)$ is a domain.
+    Thus, since for any plot $\P$ of $\X$ the set 
+    $\P^{-1}(\A)$ is a domain, $\A$ is D-open. Now let us
+    consider $\A \subset \X$ equipped with the subset
+    diffeology \art{Subspaces-and-subset-diffeology} and 
+    $f : \A \to \X$. Let $\P : \U \to \A$ be a plot, since the injection 
+    $j_\A : \A \to  \X$ is smooth,
+    $\P$ also is a plot of $\X$. Now, since $f$ is a local smooth map, 
+    $f \circ \P$ is a plot of $\X'$. 
+    Therefore, $f : \A \to \X'$, where $\A$ is equipped
+    with the subset diffeology, is smooth. 
+    
+    Conversely, let us assume that $\A$ is D-open and that
+    $f : \A \to \X'$, where $\A$ is equipped with
+    the subset diffeology, is smooth. Let $\P : \U \to \X$ be a plot.
+    since $\A$ is D-open, $\V = \P^{-1}(\A)$ is a domain.
+    Since the inclusion map $j_\V : \V \to \U$ is a smooth
+    parametrization, $\P \restriction \V = \P \circ j_\V$ is
+    a plot of $\X$ with values  in $\A$, thus $\P
+    \restriction \V$ is a plot of $\A$ for the subset
+    diffeology. Now, since $f : \A \to \X$ is smooth, $f \circ
+    (\P \restriction \V)$ is a plot of $\X'$. Then,
+    since $f \circ \P = f \circ (\P \restriction \V)$, the
+    parametrization $f \circ \P$ is a plot of $\X'$.
+    Therefore, $f$ is a local smooth map from $\A \subset \X$
+    to $\X'$.
+    
+    Now, if $f$ is a local diffeomorphism, $f^{-1}$, defined
+    on $f(\A)$, is a local smooth map, thus both $\A$
+    and $f(\A)$ are D-open. The restrictions $f \restriction \A : \A \to f(\A)$
+    and $f^{-1} \restriction f(\A) : f(A) \to \A$, 
+    where $\A$ and $f(\A)$ are equipped with 
+    the subset diffeology, are smooth, thus $f \restriction \A$ a diffeomorphism onto $f(\A)$. 
+    Then, $f \restriction \A$ is a homeomorphism for the D-topology
+    \art{Smooth-maps-are-D-continuous}, that is, $f$
+    is a local homeomorphism.
+  \end{proof}
+  
+  \begin{article}\artlabel{D-topology on discrete and coarse spaces}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} {\D}-topology on discrete and coarse
+    diffeological spaces} 
+    \label{D-topology-on-discrete-and-coarse-diffeological-spaces}
+    The D-topology of discrete diffeological spaces is 
+    discrete. The D-topology of coarse diffeological spaces 
+    is coarse. But note that a non coarse diffeological space can
+    inherit the coarse D-topology 
+    (see \exref{D-topology-of-irrational-tori}). 
+  \end{article} %% D-topology-on-discrete-and-coarse-diffeological-spaces
+  
+  \begin{proof}
+    Let us consider a set $\X$ equipped with the
+    discrete diffeology. Let $x \in \X$, let ${\P}: \U \to
+    \X$ be a plot of the discrete diffeology, if $x\notin
+    {\P}(\U)$ then ${\P}^{-1}(x) = \varnothing$ is open.
+    If $x = {\P}(r)$, $r \in \U$, there exists an open neighborhood
+    $\V$ of $r$ such that ${\P}\restriction \V$ is
+    constant and equal to $x$. Then, since $\P^{-1}(x)$ is a union 
+    of open subsets of $\U$, it is open. Thus,
+    every point of $\X$ is D-open, and the D-topology of the
+    discrete diffeology is discrete. On the other hand, let
+    $\X$ be equipped with the coarse diffeology. Let us assume
+    that $\X$ is not reduced to a point. Let $\Omega\subset
+    \X$ such that $\Omega\neq\varnothing$ and $\Omega\neq
+    \X$. 
+    Then, there exist a point $x \in \X-\Omega$ and
+    a point $y \in \Omega$. Let us define ${\P}: \RR \to
+    \X$ by ${\P}(t) = x$ if $t \in \RR-\{0\}$ and ${\P}(0)
+    = y$. 
+    Since every parametrization in $\X$ is a plot,
+    ${\P}$ is a plot. But, ${\P}^{-1}(\Omega) = \{0\}$ is
+    closed in $\RR$, then $\Omega$ is not D-open. Therefore,
+    the only D-open subsets of $\X$ are the empty set and
+    $\X$, the D-topology associated with the coarse
+    diffeology is coarse. \end{proof}
+  
+  \begin{article}\artlabel{Quotients and D-topology}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Quotients and D-topology}
+    \label{Quotients-and-D-topology}
+    Let $\X$ and $\X'$ be two diffeological
+    spaces. Let $\pi : \X \to \X'$ be a subduction
+    \art{What-is-a-subduction}. Then, the D-topology of $\X'$ is the
+    quotient of the D-topology of $\X$ by $\pi$. In other
+    words, a subset $\A \subset \X'$ is D-open if and only if
+    $\pi^{-1}(\A)$ is D-open. This applies in particular to the quotient of
+    $\X$ by any equivalence relation
+    \art{Quotient-and-quotient-diffeology}.
+  \end{article} %% Quotients-and-D-topology
+  
+  \begin{proof}
+    Let $\A'$ be a subset of $\X'$. Let us assume that
+    $\pi^{-1}(\A')$ is D-open. Let
+    $\P': \U \to \X'$ be a plot. For all $r \in \U$,
+    there exist an open neighborhood $\V$ of $r$, and a plot 
+    $\P : \V \to \X$, such that
+    $\pi \circ \P = \P' \restriction \V$. Hence, there
+    exists an open covering
+    $\{\U_i\}_{i \in \cI}$ of $\U$, indexed by
+    some set
+    $\cI$ ($\cI$ can be $\U$ itself), and for each 
+    $i \in \cI$ there exists a plot $\P_i: \U_i \to \X$, such that
+    $\P' = \sup\{\pi \circ \P_i\}_{i \in \cI}$ (where $\sup$
+    denotes the smallest common extension). Then,
+    ${\P'}^{-1}(\A') = (\sup\{\pi \circ \P_i\}_{i \in \cI})^{-1}(\A') = 
+    \cup_{i \in \cI}(\pi \circ \P_i)^{-1}(\A') = 
+    \cup_{i \in \cI}\P_i^{-1}(\pi^{-1}(\A'))$. But $\pi^{-1}(\A')$
+    is assumed to be D-open, and the $\P_i$ are plots of $\X$. Thus, for all $i \in \cI$, 
+    $\P_i^{-1}(\pi^{-1}(\A'))$ are domains, and their union is a domain.
+    Hence, ${\P'}^{-1}(\A')$ is a domain for all plots $\P'$ of $\X'$. 
+    Therefore, $\A'$ is D-open. 
+    Conversely, let us assume that $\A'$ is D-open. Let $\P:
+    \U \to \X$ be a plot. Then, $\P^{-1}(\pi^{-1}(\A'))
+    = (\pi \circ \P)^{-1}(\A')$. Since $\pi$ is smooth,
+    $\pi \circ \P$ is a plot of
+    $\X'$,
+    and $(\pi \circ \P)^{-1}(\A')$ is a domain. Therefore
+    $\pi^{-1}(\A')$ is D-open.
+  \end{proof}
+  
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %   Exercises  
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \Exercises
+  
+  \begin{exercise}[Diffeomorphisms of the square]
+    \label{Diffeomorphisms-of-the-square} 
+    Let $\Sq$ be the square $[0,1] \times
+    \{0,1\} \cup \{0,1\} \times [0,1]$, equipped with the
+    subset diffeology  \art{Subspaces-and-subset-diffeology}
+    of the smooth diffeology of $\RR^2$. Justify that the
+    restriction of the diffeomorphisms of $\Sq$ to the four corners
+    defines a homomorphism $h$ from $\Diff(\Sq)$ to the
+    group of permutations $\Perms(4)$. Describe
+    the image of $h$. 
+  \end{exercise} %% Diffeomorphisms-of-the-square
+  
+  \begin{exercise}[Smooth D-topology] 
+  \label{Smooth-D-topology}
+    Show that the D-topology of a real domain,
+    equipped with the smooth diffeology
+    \art{Real-domains-as-diffeological-spaces}, coincides with its
+    standard topology.  
+  \end{exercise} %% Smooth-D-topology
+  
+  \begin{exercise}[D-topology of irrational tori]
+    \label{D-topology-of-irrational-tori}
+    Let $\T_\Gamma$ be the quotient of $\RR$ by a strict dense subgroup
+    (for example $\QQ$ or $\ZZ + \alpha \ZZ$ where $\alpha \notin \QQ$).
+    Show that the D-topology of $\T_\Gamma$ is coarse. Deduce that the
+    D-topology is not a full functor.
+  \end{exercise} %% D-topology-of-irrational-tori
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Embeddings and Embedded Subsets}
+  \label{Section-Embeddings-and-embedded-parts}
+  
+  \begin{sechead}
+    Combining smoothness and D-topology leads to a refinement of
+    the notion of induction and introduces the notion of diffeological
+    embedding. Moreover, since every subset of a
+    diffeological space has a natural subset diffeology,
+    the comparison between the D-topology induced by the
+    ambient space and the D-topology of the induced
+    diffeology distinguishes between embedded subsets of a
+    diffeological space and the others, without referring to
+    anything else than the ambient diffeology.
+  \end{sechead}
+  
+  \begin{article}\artlabel{Embeddings}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Embeddings}
+    \label{Embeddings}
+    Let $\X$ and $\X'$ be two diffeological spaces. Let 
+    $f: \X \to \X'$ be an induction \art{What-is-an-induction}. We
+    shall say that $f$ is an {\em embedding} if
+    the pullback by $f$ of the D-topology of $\X'$ coincides
+    with the D-topology of $\X$, that is, an induction $f$ is an
+    embedding if and only if, for every D-open subset $\A \subset \X$, 
+    there exists a D-open subset 
+    $\A' \subset \X'$ such that $f^{-1}(\A') = \A$. 
+  \end{article} %% Embeddings
+  
+  \begin{article}\artlabel{Embedded subsets of a diffeological space}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Embedded subsets of a diffeological space} 
+    \label{Embedded-subsets-of-a-diffeological-space}
+    Let $\X$ be a diffeological space and $\A \subset \X$
+    be some subset. We shall say that $\A$ is {\em embedded}
+    if the canonical induction $j_\A: \A \to \X$, 
+    where $\A$ is equipped with the
+    subset diffeology, is an embedding. 
+    Every subspace $\A$ of $\X$ carries two natural
+    topologies: the D-topology given by the induced diffeology of $\X$,
+    and the induced topology of the ambient D-topology of
+    $\X$. The set $\A$ is {\em embedded} if these
+    two topologies coincide. In other words, $\A \subset \X$
+    is embedded if every $\U \subset \A$, open for the
+    D-topology of the induced diffeology, is the imprint of some
+    D-Open $\V$ of $\X$, that is, $\U = \A \cap \V$. 
+    
+    \Note~For a subset of a diffeological space, to be embedded
+    depends only on the diffeology of the ambient space $\X$,
+    and does not involve any extra structure. 
+  \end{article} %% Embedded-subsets-of-a-diffeological-space
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %   Exercises  
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \Exercises
+  
+  \begin{exercise}[$\QQ$ is discrete but not embedded in
+    $\RR$] \label{Q-is-discrete-but-not-embedded-in-R} 
+    Show that $\QQ \subset \RR$, where $\RR$ is equipped
+    with the smooth diffeology, is not embedded.
+  \end{exercise} %% Q-is-discrete-but-not-embedded-in-R
+  
+  \begin{exercise}[Embedding $\GL(n,\RR)$ in $\Diff(\RR^n)$]
+    \label{Embedding-GL-n-R-in-Diff-R-n} 
+    Let us consider the linear group $\GL(n,\RR)$ as a group of matrices. The
+    components of a matrix $\M$ will be denoted by $\M_{ij}$, $i,j = 1
+    \cdots n$. The identification between an element of $\GL(n,\RR)$ and
+    the ordered set of its matrix elements (for any given definite ordering)
+    identifies $\GL(n,\RR)$ with a domain of $\RR^{n \times n}$. By this
+    identification $\GL(n,\RR)$ inherits the diffeology of  $\RR^{n \times
+    n}$. This diffeology will be called the {\em standard diffeology} of
+    $\GL(n,\RR)$ and will equip $\GL(n,\RR)$. On the other hand,
+    $\GL(n,\RR)$ can be regarded as a subgroup of $\Diff(\RR^n)$. We equip
+    $\Diff(\RR^n)$ with the functional diffeology
+    \art{Functional-diffeology-on-groups-of-diffeomorphisms}.
+    
+    \Question{1)} Show that the inclusion $\GL(n,\RR) \hookrightarrow \Diff(\RR^n)$ is
+    an induction.
+    
+    \Question{2)} Show that this induction is actually an embedding.
+    
+    \alinea{Hint:} Consider the following subsets of $\Diff(\RR^n)$
+    \begin{displaymath}
+      \Omega_{\varepsilon} = \{f\in \Diff(\RR^{n}) \mid \D (f)(0)\in \Ball({\bf
+      1}_{n}, \varepsilon) \},
+    \end{displaymath}
+    where $\D(f)(0)$ is the linear tangent map of $f$ at the point $0$, and
+    $\Ball({\bf 1}_{n},
+    \varepsilon)$ is the open ball in $\GL(n,\RR)$, 
+    centered at the identity ${\bf 1}_{n}$, with radius $\varepsilon$.
+  \end{exercise} %% Embedding-GL-n-R-in-Diff-R-n
+
+  \begin{exercise}[The irrational solenoid is not embedded]
+    \label{The-irrational-solenoid-is-not-embedded} 
+    Show that the irrational solenoid defined in the
+    \exref{The-irrational-solenoid} is not embedded.
+  \end{exercise} %% The-irrational-solenoid-is-not-embedded
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Local or Weak Inductions}
+  \label{Section-Local-or-weak-inductions}
+  
+  \begin{sechead}
+    Some smooth injections look like inductions but are not.
+    The example of the infinite symbol of the
+    \exref{The-infinite-symbol} is a good illustration of
+    this situation. This is why we need to weaken, or refine, the
+    definition of inductions and also consider maps which are
+    only locally inductive. This notion is close to the ordinary concept of
+    immersion, see \exref{Immersions-of-real-domains}, 
+    but it is still do not know if they coincide.
+  \end{sechead}
+
+  \begin{article}\artlabel{Local inductions}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Local inductions} 
+    \label{Local-inductions} 
+    Let $\X$ and $\X'$ be two diffeological spaces. 
+    Let $f: \X \rightarrow \X'$ be a smooth map. We shall say that $f$
+    is a {\em local induction at the point $x \in \X$} if there
+    exists an open neighborhood $\cO$ of $x$ such that $f \restriction \cO$ 
+    is injective and for every plot 
+    $\P : \U \to f(\cO)$ centered at $x' = f(x)$, $\P(0)=x'$, $f^{-1} \circ \P'$
+    is a plot of $\X$. Put differently, $f$ is an induction at the level of the 
+    germ of the diffeology of $\X$ at $x$
+    \art{Pointed-plots-of-a-diffeological-space}. Note that an induction is a local
+    induction everywhere, but a local induction everywhere is not necessarily
+    an induction, see \exref{The-infinite-symbol}. 
+    It is not enough for a local induction to be injective for being an induction.
+    
+    \Note~For a smooth injection $j$ from an $n$-domain $\U$ into
+    an $m$-domain $\V$, if $j$ is an immersion at a point $x$, that is, if its
+    tangent map $\D(j)(x)$ is injective, then $j$ is a local induction at $x$, see
+    \exref{Immersions-of-real-domains}. 
+    I am still not sure if the converse is true for $n=1$ and $m>1$. 
+    Actually, it could be weird if
+    local inductions between real domains were not immersions\footnote{When J.~M. 
+    Souriau wrote one of his first papers on diffeology he named immersion what is
+    called induction now, but after a remark from J. Pradines he changed his mind.
+    He named also submersions what is now subductions, but for that question things are 
+    different, see \art{Local-subductions}.}. For $n = m = 1$, $j$ is a local diffeomorphism,
+    thus these notions coincide.
+  \end{article} %% Local-inductions
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %   Exercises  
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \Exercise
+  
+  \begin{exercise}[The infinite symbol]
+    \label{The-infinite-symbol} 
+    Let $j$ be the smooth map described by the figure \ref{lehuit} and
+    defined by
+    $$ j : \ ]-\pi , \pi[\ \to \RR^2 \qquad j(t) = 
+    \vect{
+    \sin t
+    \vspace{1ex}
+    \\
+    \sin 2t
+    }.
+    $$
+    
+    %%###########
+    \begin{figure}[tb]
+      \centerline{\includegraphics{Figures-PDF/fig-J.pdf}}
+      \caption{The infinite symbol.}
+      \label{lehuit}
+    \end{figure}
+    %%###########
+    
+    \Question{1)} Check that $j$ is injective and that
+    $\lim_{t \mathop{\rightarrow} -\pi}j(t) = \lim_{t \mathop{\rightarrow} + \pi}j(t) = (0,0)$.
+    
+    \Question{2)} Let ${\P}$ be the following plot of $\RR^2$: 
+    $$ 
+    \P :\ ]-\pi , \pi[\ \to \RR^2 \qquad
+    \P(t) = 
+    \vect{
+    \sin t
+    \vspace{1ex}
+    \\
+    -\sin 2t
+    }.
+    $$ 
+    Check that $\P$ and $j$ have the same image. Draw the image of $\P$,
+    similar to the image of $j$ drawn in fig. \ref{lehuit}.
+    
+    \Question{3)} Show that $j^{-1}(\P(\,]-\pi/4,\pi/4[\,))$ is disconnected. Conclude that
+    the injection $j$ is not an induction.
+    
+    \Question{4)} Check that $j$ is everywhere a local induction.
+  \end{exercise} %% The-infinite-symbol
+      
+  %************************************************
+  
+  \section*{Local or Strong Subductions}
+  \label{Section-Local-or-strong-subductions}
+  
+  \begin{sechead}
+    Subductions \art{What-is-a-subduction} express a global behavior of some
+    surjections. As we localized the notion of induction, and obtained then
+    the notion of local induction \art{Local-inductions}, the
+    notion of subduction can be localized, or refined, as well and leads to
+    the notion of {\em local subduction}. The \exref{A-not-so-strong-subduction}
+    illustrates the case where a subduction is not everywhere a local subduction.
+  \end{sechead}
+  
+  \begin{article}\artlabel{Local subductions}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Local subductions}
+    \label{Local-subductions}
+    Let $\X$ and $\X'$ be two diffeological spaces.
+    We shall say that a smooth surjection $f: \X \to \X'$
+    is a {\em local subduction at the point $x \in \X$} 
+    if for every plot $\P : \U \to \X'$ pointed at $x' = f(x)$, $\P'(0) = x'$,
+    there exist an open neighborhood $\V$ of
+    $0$ and a plot $\Q : \V \to \X$ such that $\Q(0) = x$ and 
+    $f \circ \Q = \P \restriction \V$. 
+    Said differently, $f$ is a subduction \art{What-is-a-subduction} at the level of the germ of 
+    the diffeology of $X$ at the point $x$
+    \art{Pointed-plots-of-a-diffeological-space}. 
+    We simply shall say local subductions for: everywhere local subductions, 
+    they are {\em a fortiori} subductions.
+        
+    \Note~For a smooth surjection $\pi : \U \to \V$ between real domains, 
+    if $\pi$ is a {\em submersion} at a point $x \in \U$, that is, if its
+    tangent map $\D(\pi)(x)$ is surjective, then $\pi$ is a local subduction at $x$.
+    Conversely, if $\pi$ is a local subduction at $x$, then it is a submersion at this point
+    \footnote{It is why we could name local subductions, submersions. 
+    But for the balance between local immersion and local subduction,
+    we continue with this vocabulary. If we can prove that a local induction in real domains
+    is always an immersion, then it will be time to adapt the vocabulary.}. For real domains these 
+    notions are equivalent.
+  \end{article} %% Local-subductions
+
+  \begin{proof}
+    Let $\dim(\U)=n$ and $\dim(\V)=m$.
+    If $\pi : \U \to \V$ is a submersion at $x$, 
+    thanks to the rank theorem for domains \cite[10.3.1]{Die70a},
+    there exists a local diffeomorphism $\phi$ defined on a neighborhood $\cO$ of $x$
+    to $\RR^m \times \RR^{n-m}$ such that the projection $\pi$ is equivalent to 
+    the projection onto the first factor.
+    Therefore, every plot centered at $x'$ can be simply locally lifted at $x$ by 
+    choosing a constant in the second factor. Conversely, if $\pi$ is a local subduction
+    at $x$, for every vector $v \in \RR^m$, the path 
+    $t \mapsto x' + tv$ has a local lift $c : t \to x_t$, $\pi(x_t) = x' +tv$, centered at $x$. 
+    Thus, $\D(\pi)(x)(\dot c(0)) = v$, with $\dot c(t) = d c(t)/dt$.
+    Therefore, $\D(\pi)(x)$ is surjective.
+  \end{proof}  
+  
+  \begin{article}\artlabel{Compositions of local subductions}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Compositions of local
+    subductions}
+    \label{Compositions-of-local-subductions}
+    Let $\X$, $\X'$ and $\X''$ be three diffeological spaces.
+    Let $f: \X \to \X'$ and $f': \X' \to \X''$ be
+    two local subductions. The composite $f' \circ
+    f$ is still a local subduction. 
+  \end{article} %% Compositions-of-local-subductions
+  
+  \begin{proof}
+    First of all, the composition of two smooth surjections is
+    still a smooth surjection. Let $\P : \U \to \X''$ be a plot centered at $x''$.
+    Let $x \in \X$ such that $f' \circ f(x) = x''$. Let $x' = f(x)$,
+    since $f'$ is a local
+    subduction there exist an open neighborhood $\V'$
+    of $0$, and a plot $\Q' : \V' \to \X'$, 
+    such that $\Q'(0) = x'$ and 
+    $\P \restriction \V' = f' \circ \Q'$. 
+    Since $\Q'$ is a plot of $\X'$ and $f$ is a local subduction,
+    there exist an open neighborhood
+    $\V$ of $0$, and a plot $\Q : \V \to \X$, such that $\Q(0) = x$ and 
+    $\Q' \restriction \V = f \circ \Q$. Hence, the plot $\Q$ satisfies 
+    $\Q(0) = x$ and $(f' \circ f) \circ \Q = \P \restriction \V$.
+  \end{proof}
+    
+  \begin{article}\artlabel{Local subductions are D-open maps}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Local subductions are D-open maps}
+    \label{Local-subductions-are-D-open-maps} 
+    Let $\X$ and $\X'$ be two diffeological spaces. Let $f : \X
+    \to \X'$ be a local subduction. If $\A \subset \X$  is a D-open
+    set, then $f(\A)$ also is D-open. Local
+    subductions are D-open maps.
+  \end{article} %% Local-subductions-are-D-open-maps
+  
+  \begin{proof}
+    First of all, let us remark that, composing with a translation, 
+    we can replace $0$ by any $r$ such that $\P(r)=x$ in the definition of local subduction 
+    \art{Local-subductions}. Now, let $\A' = f(\A)$ and $\P : \U \to \X'$ be a
+    plot. We want to show that $\P^{-1}(\A')$ is a domain.
+    For every $r \in \P^{-1}(\A')$ let us choose $x \in \A$
+    such that $f(x) = \P(r)$. Now, since $f$ is a local
+    subduction, there exist an open neighborhood $\V$ of $r$ and a plot
+    $\Q : \V \to \X$ such that $\Q(r) = x$ and $f \circ \Q =
+    \P \restriction \V$. But since $\A$ is open,
+    $\Q^{-1}(\A)$ is a domain. Let us define $\W =
+    \Q^{-1}(\A) \cap \V$, $\W$ is still a domain, still
+    containing r. Then, let us define $\bar \Q = \Q \restriction \W$, 
+    $\bar \Q$ is still a plot of $\X$. But $\bar \Q (\W) = \Q(\W) \subset \A$, 
+    by construction, thus
+    $\P(\W) = f \circ \bar \Q (\W) \subset f(\A) = \A'$, that
+    is, $\W \subset \P^{-1}(\A')$. Thus, for every $r \in \U$ we
+    found a domain $\W$ such that $\W$ is an open neighborhood of $r$
+    and $\W \subset \P^{-1}(\A')$. Hence, since
+    $\P^{-1}(\A')$ is the union of all the domains $\W$, when
+    $r$ runs over $\P^{-1}(\A')$, $\P^{-1}(\A')$ is itself a
+    domain. Hence, $\P^{-1}(\A')$ is a domain for every plot $\P$
+    of $\X'$. Therefore $\A'$ is D-open.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %   Exercises  
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \Exercises
+  
+  \begin{exercise}[Quotient by a group of diffeomorphisms]
+    \label{Quotient-by-a-group-of-diffeomorphisms} 
+    Let $\X$ be a diffeological space and
+    $\G \subset \Diff(\X)$ be a group of diffeomorphisms,
+    equipped with the functional diffeology
+    \art{Functional-diffeology-on-groups-of-diffeomorphisms}. 
+    Choose a point $x \in \X$ and denote by $\cO$ the orbit 
+    $\G(x) = \{ g(x) \mid g \in \G \}$,
+    equipped with the subset diffeology. Let
+    $\cQ = \G/\pi$ denote the same orbit, but equipped with the
+    pushforward of the functional diffeology of $\G$ by the projection 
+    $\pi : g \mapsto g(x)$. Let $j : \cQ \to \cO$ be the identity map.
+    
+    \Question{1)} Check that $j$ is smooth, that is, the quotient diffeology of $\G$
+    by $\pi$ is finer than the subset diffeology of $\G(x)$.
+    
+    \Question{2)} Show that $\pi$ is a local subduction from $\G$ to $\cQ$. 
+        
+    \Question{3)}     Let us denote by $\cT$ the space $\RR^2$, equipped with the sub-diffeology of the wire
+    diffeology \art{The-wire-diffeology} generated by the vertical
+    and horizontal lines\footnote{We denote this space by $\cT$ for
+    {\em Tahar rug}, because it has been imagined by Guillaume 
+    Tahar during a private conversation.}, that is, the parametrizations $t \mapsto (c,t)$ and 
+    $t \mapsto (t,c)$, where $c$ runs over $\RR$. 
+    Check that for all $u \in \RR^2$ the translation 
+    $\T_u : \cT \to \cT$, $\T_u(\tau) = \tau + u$
+    is a diffeomorphism. Show that the subgroup $\G \subset \Diff(\cT)$ of 
+    these translations, equipped with the functional diffeology, is discrete.
+    For $x =(0,0)$, note that $\G(x) = \cT$, and that the quotient 
+    diffeology of $\G$ by $\pi$ from the first question (which coincides with $\G$), 
+    is strictly finer than the diffeology of the orbit $\cT$ of $x$. 
+    In other words, the translations, equipped with the functional diffeology, are transitive on $\cT$ but do not generate
+    its diffeology. 
+  \end{exercise} %% Quotient-by-a-group-of-diffeomorphisms
+  
+  \begin{exercise}[A not so strong subduction]
+    \label{A-not-so-strong-subduction} \
+    Let  $\X$ be the  diffeological sum
+    $\RR \coprod
+    \RR^2$ \art{Building-sums-with-spaces},
+    where the real spaces
+    $\RR$ and $\RR^2$ are equipped with the smooth diffeology. Let
+    $\norm{\cdot} : \X \to [0,\infty[$ be the modulus 
+    $\norm{x} =  \vert x \vert$ if $\ x \in \RR$, and the 
+    usual norm when $x \in \RR^2$.
+    Let $\cQ$ be the quotient $ \X/\norm{\cdot}$
+    \art{Quotient-and-quotient-diffeology}, that is, the quotient of $\X$ by
+    the equivalence relation $x \sim x'$ if $\norm{x} =
+    \norm{x'}$.
+    Consider the quotient $\cQ$ as the half-line $[0, \infty[$,
+    equipped with the pushforward of the diffeology of $\X$ by the map
+    $\norm{\cdot}^2$. Show that the plot $\P : \RR^2 \to
+    \cQ$, defined by $\P(r) = \norm{r}^2$, cannot be lifted locally at
+    $(0,0) \in \RR^2$ by a plot $\Q$ of $\X$, such that 
+    $\Q(0,0) = 0 \in \RR \subset \X$. 
+    Conclude that $\norm{\cdot}$, which is by construction a subduction, 
+    is not a local subduction at the point $0 \in \RR \subset \X$.
+  \end{exercise} %% A-not-so-strong-subduction
+  
+  \begin{exercise}[A powerset diffeology]
+    \label{A-powerset-diffeology}
+    Let $\X$ be a diffeological space, and $\cD$ be its
+    diffeology. Let $\Powerset(\X)$ be the powerset of $\X$, that is, 
+    $\Powerset(\X) = \{ \A \mid \A \subset \X \}$. We have seen in the 
+    \exref{A-minimal-powerset-diffeology} a diffeology on this set, which induces
+    on every quotient of $\X$ the quotient diffeology. 
+    But this diffeology is too weak to be a good diffeology. 
+    For example, consider the set of the affine lines in $\RR^2$,
+    and choose the parametrization which associates with each rational number the 
+    $x$-axis, and with each irrational number the $y$-axis. This parametrization is a 
+    plot for this weak diffeology, since we can lift it into the point $(0,0)$ which
+    belongs to each of these lines for any number. This is indeed not satisfactory, 
+    since the line jumps from the $x$-axis
+    to the $y$-axis, when the parameter crosses each number. 
+    This is not a behavior we  want to regard as smooth. 
+    The point that we miss with this diffeology is 
+    that we cannot follow smoothly the plots of the line, 
+    defined by a value of the parameter, 
+    when the parameter moves smoothly in its domain. 
+    It is why we shall try to fix this diffeology in the following way.
+    Let us recall, first of all, that the diffeology $\cD$ is itself a
+    diffeological space, and thus, we know what a 
+    {\em smooth family of plots of $\X$} is \art{Functional-diffeology-of-a-diffeology}. 
+   
+    \Question{1)} Show that the parametrizations $\P : \U \to \Powerset(\X)$ 
+    defined by the following condition 
+    form a diffeology. We shall call it the {\em powerset diffeology}. 
+    \begin{itemize}
+      \item[($\clubsuit$)] For every $r_0 \in \U$ and for
+      every $\Q_0 \in \cD$ such that 
+      $\Val(\Q_0) \subset \P(r_0)$, there exist an open neighborhood $\V$ of $r_0$ 
+      and a smooth family of plots $\Q : \V \to \cD$, such that 
+      $\Q(r_0) = \Q_0$ and $\Val(\Q(r)) \subset \P(r)$, for all $r \in \V$.
+    \end{itemize}
+    
+    \Question{2)} Give a more conceptual
+    definition involving local subductions. Compare with being a smooth map
+    between diffeological spaces.
+    
+   \Question{3)} Check that the map $j : x \mapsto \set{x}$, from $\X$
+    to $\Powerset(\X)$, is an induction. 
+    
+    \Question{4)} Show that the {\em Tzim-Tzum}, the parametrization $\cT$ 
+    defined by
+    $$
+    \cT(t) = \{ x \in \RR^2 \mid \norm{x} > t\},
+    \ \mbox{for all} \ t \in \RR,   
+    $$
+    is a plot of the powerset diffeology of $\Powerset(\RR^2)$. 
+    Notice how the topology of the subset $\cT(t)$ 
+    changes when $t$ passes through $0$.
+    
+    \Note~This powerset diffeology avoids 
+    the phenomenon described  at the beginning. 
+    The next exercise shows that it induces, on the set of lines
+    of an affine space, a diffeology of manifold, the one we are used to, 
+    which is satisfactory. 
+    Also note that this construction is presented as an exercise and
+    not as an independent section because, as it is an attempt to bring out the 
+    right concept of a diffeology on $\Powerset(\X)$, 
+    it may not be in its final shape.
+  \end{exercise} %% A-powerset-diffeology
+  
+  \begin{exercise}[The powerset diffeology of the set of lines]
+    \label{The-powerset-diffeology-of-the-set-of-lines}
+    Let us denote by $\Lines(\RR^n)$ the set of all the (affine) lines of $\RR^n$. 
+    Let us recall that an affine line $\DD$ is a part of $\RR^n$ for 
+    which there exists a non-zero vector $v \in \RR^n$ 
+    such that for any two points $r$ and $r'$
+    of $\DD$ there exists $t \in \RR$ such that $r' = r + t v$.
+    Let $\T\S^{n-1} \subset \RR^n \times \RR^n$ be the
+    {\em tangent space of the $(n-1)$-sphere\/} defined by
+    $$
+    \T\S^{n-1} = \{ (u,x) \in \RR^n \times \RR^n \mid \norm{u}
+    = 1 \mbox{ and } u \cdot x = 0 \},
+    $$
+    where the dot denotes the usual scalar product on $\RR^n$.
+    Let $\Powerset(\RR^n)$ be the powerset of $\RR^n$. Let
+    $$
+    j : \T\S^{n-1} \to \Lines(\RR^n) \subset \Powerset(\RR^n) 
+    \qmbox{with} j(u,x) = \{ x +tu \mid t \in \RR \}.
+    $$
+    Equip $\T\S^{n-1}$ with the subset diffeology of
+    $\RR^n\times \RR^n$ and $\Lines(\RR^n) \subset \Powerset(\RR^n)$
+    with the subset diffeology of the powerset diffeology defined 
+    in the \exref{A-powerset-diffeology}. Show that $j$ is a subduction onto its image. 
+    Check that the pullback of a line $\DD \in \Lines(\RR^n)$ by $j$ 
+    is just the pair $(\pm u, x)$, such that 
+    $\DD = \set{x + t u \mid t \in \RR}$. 
+    Deduce that the set $\Lines(\RR^n)$, equipped with the
+    powerset diffeology, is diffeomorphic to the quotient 
+    $\T\S^{n-1}/\set{\pm 1}$.
+  \end{exercise} %% The-powerset-diffeology-of-the-set-of-lines
+
+  %************************************************
+  
+  \section*{The Dimension Map of Diffeological Spaces}
+  \label{secThe-dimension-map-of-diffeological-spaces}
+  
+  \begin{sechead}
+    Because  diffeological spaces are neither necessarily homogeneous 
+    nor transitive \art{Transitive-and-locally-transitive-spaces}, it is
+    necessary to refine the notion of (global) dimension of a
+    diffeological space \art{Dimension-of-a-diffeological-space} by
+    the  {\em dimension map}  \art{The-dimension-map}, which gives the 
+    dimension of a diffeological space at each of its points.
+  \end{sechead}
+  
+  \begin{article}\artlabel{Pointed plots and germs of a diffeological space}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Pointed plots and germs
+    of a diffeological space}
+    \label{Pointed-plots-of-a-diffeological-space}
+    Let $\X$ be a diffeological space, $\cD$ be its diffeology, 
+    and let $x \in \X$. Let 
+    $\P : \U \to \X$ be a plot. We say that $\P$ is {\em centered
+    at $x$} if $0 \in \U$ and $\P(0) = x$. We shall agree that
+    the set of germs \art{Germs-of-local-smooth-maps} of the
+    centered plots of $\X$ at $x$ represents
+    the {\em germ of the diffeology} at this point, and we
+    shall denote it by $\cD_x$. 
+  \end{article} %% Pointed-plots-of-a-diffeological-space
+  
+  \begin{article}\artlabel{Local generating families}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Local generating
+    families}
+    \label{Local-generating-families}
+    Let $\X$ be a diffeological space and let $x$
+    be some point of $\X$. We shall call {\em local generating
+    family at $x$}  any family $\cF$ of plots of $\X$ such that the following
+    conditions are satisfied.
+    \begin{itemize}
+      \item[1.] Every element $\P$ of $\cF$ is centered at $x$,
+      that is, $0 \in \Dom(\P)$ and $\P(0) =x$.
+      \item[2.] For every plot $\P : \U \to \X$
+      centered at $x$, there exist an open neighborhood $\V$ of $0 \in
+      \U$, a parametrization $\F : \W \to \X$ belonging to
+      $\cF$ and  a smooth parametrization $\Q : \V \to \W$,
+      centered at $0\in \W$, such that $\F \circ \Q = \P
+      \restriction \V$. 
+    \end{itemize}
+    We shall also say that $\cF$ {\em generates the germ $\cD_x$ of the
+    diffeology $\cD$ of
+    $\X$ at the point $x$} \art{Pointed-plots-of-a-diffeological-space}. We 
+    denote, by analogy with
+    \art{Generating-diffeology}, $\cD_x = \langle \cF
+    \rangle$.
+    
+    Note that for all $x \in \X$, the set of local
+    generating families at $x$ is
+    not empty, since it contains the set of all the
+    plots centered at $x$, and this set contains the constant
+    parametrizations with value $x$
+    \art{Diffeologies-and-diffeological-spaces}.
+  \end{article} %% Local-generating-families
+  
+  \begin{article}\artlabel{Union of local generating families}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Union of local
+    generating families}
+    \label{Union-of-local-generating-families}
+    Let $\X$ be a diffeological space.
+    Let us choose, for every $x \in \X$, a local
+    generating family $\cF_x$ at $x$. The union
+    $\cF$ of all these local generating families, $$\cF =
+    \bigcup_{x \in \X}\cF_x,$$ is a generating family of
+    the diffeology of $\X$.
+  \end{article} %% Union-of-local-generating-families
+  
+  \begin{proof}
+    Let ${\P}: \U \to
+    \X$ be a plot, let $r \in \U$ and $x = {\P}(r)$. Let
+    $\T_r$ be the translation $\T_r(r')
+    = r' + r$. Let $\P'=\P \circ \T_r$ defined on $\U' =
+    \T_r^{-1}(\U)$.
+    Since the translations are smooth, the parametrization $\P'$ is a
+    plot of $\X$. Moreover, $\P'$ is centered at $x$, thus
+    $\P'(0) = \P \circ \T_r (0) = \P(r) = x$. 
+    By definition of a local generating family \art{Local-generating-families}, 
+    there exist an element $\F: \W \to \X$ of $\cF_x$, an open neighborhood
+    $\V'$ of $0 \in \U'$ and a smooth parametrization
+    $\Q' : \V' \to \W$, centered at $0$, such that 
+    $\P' \restriction \V' = \F \circ \Q'$. Thus, 
+    $\P \circ \T_r \restriction \V' = \F \circ \Q'$, that is, 
+    $\P \restriction \V = \F \circ \Q$, where $\V = \T_r(\V')$ and 
+    $\Q = \Q' \circ \T_r^{-1}$. Hence, $\P$ lifts locally, at
+    every point of its domain, along an element of $\cF$.
+    Thus, $\cF$ is a generating family
+    \art{Generating-diffeology} of the diffeology of $\X$.
+  \end{proof}
+  
+  \begin{article}\artlabel{The dimension map}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} The dimension map}
+    \label{The-dimension-map} 
+    Let $\X$ be a diffeological space and $x$ be a point of $\X$. 
+    By analogy with the global dimension of $\X$
+    \art{Dimension-of-a-diffeological-space}, we define the {\em
+    dimension of $\X$ at the point $x$} by 
+    $$ 
+    \dim_x(\X) = \inf \{ \dim(\cF) \mid  \langle \cF \rangle = \cD_x \},
+    $$ 
+    where the dimension of
+    a family of parametrizations has been defined in
+    \art{Dimension-of-a-family-of-parametrizations}. 
+    The map $x \mapsto \dim_x(\X)$, with values in 
+    $\NN \cup \{\infty\}$, will be called the {\em dimension map} of
+    the space $\X$.
+  \end{article} %% The-dimension-map
+  
+  \begin{article}\artlabel{Global dimension and dimension map}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Global dimension and dimension map}
+    \label{Global-dimension-and-dimension-map}
+    Let $\X$ be a diffeological space. The global
+    dimension of $\X$ \art{Dimension-of-a-diffeological-space} is the
+    supremum of the dimension map \art{The-dimension-map},
+    $$
+    \dim(\X) = \sup \set{\dim_x(\X)}_{x \in \X}.
+    $$
+  \end{article} %% Global-dimension-and-dimension-map
+  
+  \begin{proof}
+    Let $\cD$ be the diffeology of $\X$. 
+    Let us prove first that for every $x
+    \in \X$, $\dim_x(\X) \leq \dim(\X)$, which implies
+    $\sup \set{\dim_x(\X)}_{x \in \X} \leq \dim(\X)$. For that we
+    shall prove that for all $x \in \X$ and every generating
+    family $\cF$ of $\cD$, $\dim_x(\X) \leq \dim(\cF)$. Then,
+    since 
+    $\dim(\X) = \inf \{ \dim(\cF) \mid \cF \in \cD \mbox{ and } \langle \cF \rangle = \cD \}$, 
+    we shall get $\dim_x(\X) \leq \dim(\X)$. 
+    Consider a generating family $\cF$ of $\cD$. 
+    For every plot $\P : \U \to \X$, centered at
+    $x$, let us choose an element $\F$ of $\cF$ such that there
+    exist an open neighborhood $\V$ of $0 \in \U$ and a smooth
+    parametrization $\Q : \V \to \Dom(\F)$ such that $\F
+    \circ \Q = \P \restriction \V$. Then, let $r = \Q(0)$ and
+    $\T_r$ be the translation $\T_r(r') = r' + r$. Let 
+    $\F' = \F \circ \T_r$, defined on $\T_r^{-1}(\Dom(\F))$. Thus,
+    $\F'(0) = x$, and $\F'$ is a plot of $\X$, centered at
+    $x$, such that $\dim(\F') = \dim(\F)$.  Now, 
+    $\Q' = \T_r^{-1} \circ \Q$ is smooth and 
+    $\P \restriction \V = \F' \circ \Q'$. Hence, the set $\cF'_x$
+    of all these plots $\F'$, associated with the plots
+    centered at $x$, is a generating family of $\cD_x$, and
+    for each of them $\dim(\F') = \dim(\F) \leq \dim(\cF)$.
+    Therefore, $\dim(\cF'_x) \leq \dim(\cF)$. But 
+    $\dim_x(\X) \leq \dim(\cF'_x)$, thus $\dim_x(\X) \leq \dim(\cF)$.
+    We conclude then that $\dim_x(\X) \leq \dim(\X)$, for all
+    $x \in \X$, and thus $\sup \set{\dim_x(\X)}_{x \in \X} \leq \dim(\X)$.
+    Now, let us prove that $\dim(\X) \leq \sup \set{\dim_x(\X)}_{x \in \X}$. 
+    We shall assume that $\sup \set{\dim_x(\X)}_{x \in \X}$ 
+    is finite. Otherwise, according to the
+    previous part, we have $\sup \set{\dim_x(\X)}_{x \in \X} \leq \dim(\X)$, 
+    and then $\dim(\X)$ is
+    infinite and $\sup \set{\dim_x(\X)}_{x \in \X} = \dim(\X)$. 
+    So, since the sequence of the
+    dimensions of the generating families of the $\cD_x$ is lower
+    bounded, there exists for every $x$ a generating family
+    $\cF_x$ such that $\dim_x(\X) = \dim(\cF_x)$. Then, for every
+    $x$ in $\X$ let us choose one of these families. Now, let us define
+    $\cF_m$ as the union of all these families we have chosen. Thanks
+    to \art{Union-of-local-generating-families}, $\cF_m$ is
+    a generating family of $\cD$. Hence, $\dim(\X)
+    \leq \dim(\cF_m)$. But, $\dim(\cF_m) = \sup
+    \{\dim(\F)\}_{\F \in \cF_m} = \sup \{\sup \{\dim(\F)\}_{\F \in \cF_x}\}_{x \in \X} =
+    \sup \{\dim(\cF_x)\}_{x \in \X} = 
+    \sup \{\dim_x(\X)\}_{x \in \X}$. Therefore, 
+    $\dim(\X) \leq \sup \{\dim_x(\X)\}_{x \in \X}$. 
+    We can conclude, from the two parts above,
+    that $\dim(\X) = \sup \{\dim_x(\X)\}_{x \in \X}$.
+  \end{proof}
+  
+  \begin{article}\artlabel{The dimension map is a local invariant}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Global The dimension map is a local invariant}
+    \label{The-dimension-map-is-a-local-invariant} 
+    Let $\X$ and $\X'$ be two diffeological spaces. If $x \in
+    \X$ and $x' \in \X'$ are two points  related by a local
+    diffeomorphism
+    \art{Local-diffeomorphisms}, then 
+    $\dim_x(\X) = \dim_{x'}(\X')$. In other words, local diffeomorphisms 
+    ({\em a fortiori\/} global diffeomorphisms) can only exchange points where the spaces have the same
+    dimension. In particular, for $\X = \X'$, the  dimension map is
+    invariant under the local diffeomorphisms of $\X$, that is, constant on
+    the orbits of the germs of local diffeomorphisms
+    \art{Local-diffeomorphisms}.
+  \end{article} %% The-dimension-map-is-a-local-invariant
+  
+  \begin{proof}
+  This proposition is a slight adaptation of
+    \art{The-dimension-is-a-diffeological-invariant}.
+    Let $f: \X \supset \A \to \X'$ be a local
+    diffeomorphism mapping
+    $x$ to $x'$. Let
+    $\cF$ be a local generating family at $x \in \X$
+    \art{Local-generating-families}. Clearly,
+    $f
+    \circ
+    \cF = \set{ f
+    \circ \F \mid \F \in \cF}$ is a generating family at
+    $x' = f(x) \in \X'$. Conversely, let $\cF'$ be a
+    generating family at $x' \in \X'$, then $f^{-1} \circ
+    \cF'$ is a generating family at
+    $x \in \X$. There is a one-to-one correspondence between the
+    local  generating families at $x  \in \X$ and the
+    local  generating families at $x' \in \X'$,
+    therefore $\dim_x(\X) = \dim_{x'}(\X')$. 
+  \end{proof}
+  
+  \begin{article}\artlabel{Transitive and locally transitive spaces}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Transitive and locally transitive spaces}
+    \label{Transitive-and-locally-transitive-spaces} 
+    We shall say that a diffeological space $\X$ is 
+    {\em transitive} if for any two points $x$ and $x'$ there
+    exists a diffeomorphism $\F$ \art{Diffeomorphisms} such that
+    $\F(x) = x'$. We shall say that the space is 
+    {\em locally transitive} if for any two points
+    $x$ and $x'$ there exists a local diffeomorphism $f$
+    \art{Local-diffeomorphisms} defined on some superset of $x$ 
+    such that $f(x) = x'$. If the space $\X$ is transitive, 
+    it is {\em a fortiori\/} locally transitive.
+    As a direct consequence of
+    \art{The-dimension-map-is-a-local-invariant}, if a
+    diffeological space $\X$ is locally transitive, then the
+    dimension map \art{The-dimension-map} is constant, 
+    {\em a fortiori\/} if the space $\X$ is transitive.
+  \end{article} %% Transitive-and-locally-transitive-spaces
+  
+  \begin{article}\artlabel{Local subduction and dimension}
+    \addcontentsline{toc}{section}{\small\hspace{10pt} Local subduction and dimension}
+    \label{Local-subduction-and-dimension}
+    Let $\X$ and $\X'$ be two diffeological spaces, and let 
+    $\pi : \X \to \X'$ be a smooth surjection. Let $x$ be a point of
+    $\X$ and $x' = \pi(x)$. If $\pi$ is a local subduction at
+    the point $x \in \X$ \art{Local-subductions}, then
+    $\dim_{x'}(\X') \leq \dim_x(\X)$.
+  \end{article} %% Local-subduction-and-dimension
+  
+  \begin{proof}
+    Let $\cD_x$ and $\cD'_{x'}$ be the germs of the diffeologies of $\X$ at
+    the point $x$ and $\X'$ at the point $x' =\pi(x)$. Let
+    $\Gen(\cD_x)$ and $\Gen(\cD'_{x'})$ denote the sets of
+    all the generating families of $\cD_x$ and $\cD'_{x'}$. 
+    We know that for every generating family $\cF$ of $\cD_x$,
+    $\pi \circ \cF$ is a generating family of $\cD'_{x'}$,
+    that is, $\pi \circ \Gen(\cD_x) \subset \Gen(\cD'_{x'})$.
+    Now, for the same reasons as in
+    \art{Dimensions-of-quotients}, we get 
+    $\dim_{x'}(\X')\leq \dim_x(\X)$. 
+  \end{proof} 
+    
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %
+  %   Exercises  
+  %
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \Exercise
+
+  \begin{exercise}[The diffeomorphisms of the half line]
+    \label{The-diffeomorphisms-of-the-half-line}
+    This exercise illustrates how the  invariance of
+    the dimension map
+    \art{The-dimension-map}, under diffeomorphisms
+    \art{The-dimension-map-is-a-local-invariant}, can be used
+    to characterize the diffeomorphisms of the half
+    line $[0,\infty[ \subset \RR$.
+    Show that a
+    bijection $f :
+    \leftclosedinterval{0,\infty} \to \leftclosedinterval{0,\infty}$ is
+    a diffeomorphism, for the subset diffeology induced by
+    $\RR$, if and only if the three following conditions are fulfilled. 
+    
+    \begin{itemize}  
+      \item[1)] The origin is fixed, $f(0) = 0$.  
+      \item[2)] The restriction of $f$ to the open half line is an
+      increasing diffeomorphism of the open half-line, 
+      $f \restriction \left]0,\infty\right[ \in {\rm
+      Diff}^+(\left]0,\infty\right[)$.  
+      \item[3)] The map $f$ is
+      infinitely differentiable at the origin and
+      its first derivative $f'(0)$ does not vanish.
+    \end{itemize} 
+    
+    \alinea{Hint:} For the first question use the result of
+    \exref{Dimension-of-the-half-line} and the invariance of
+    the dimension map by diffeomorphisms
+    \art{The-dimension-map-is-a-local-invariant}. For the
+    second question use the fact that the open interval
+    $\openinterval{0,\infty}$ is an orbit of
+    $\Diff(\leftclosedinterval{0,\infty})$. For the third
+    question use the following Whitney theorem:
+    
+    \alinea{\sc Theorem} \cite{Whi43} {\em An even function $f(x)
+    = f(-x)$, defined on a neighborhood of the origin,  may be
+    written as $g(x^2)$. If $f$ is smooth, $g$ may be made smooth.}
+  \end{exercise} %% The-diffeomorphisms-of-the-half-line
