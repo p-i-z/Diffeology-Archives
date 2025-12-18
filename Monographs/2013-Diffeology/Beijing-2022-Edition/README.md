@@ -16,7 +16,7 @@ This edition incorporates significant improvements over the original 2013 AMS pu
 
 2.  **Significant Mathematical Correction:** A key mathematical error concerning the kernel of morphisms has been rectified. The original text was not sufficiently clear on this point. The revised text now specifies that the discussion applies to **strong morphisms** of groupoids, particularly those that are injective on the objects.
 
-    To support this correction and provide a rigorous foundation, the text now includes a precise independant reference to the foundational work on this topic:
+    To support this correction and provide a rigorous foundation, the text now includes a precise independant reference to this claim:
     > G. Ivan, *Strong morphisms of groupoids*, Balkan Journal of Geometry and its Applications, 4(1), pp. 91-102, 1999.
 
 ## Historical Context
