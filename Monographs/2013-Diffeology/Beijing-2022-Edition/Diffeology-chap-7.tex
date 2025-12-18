@@ -1,0 +1,1258 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Diffeological groups MARK: -
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Diffeological Groups}
+
+\label{Chapter-Diffeological-Groups}
+\newcommand{\ChapterDG}{Diffeological Groups}
+
+\begin{chaphead}
+  The notion of {\em diffeological group} is the natural adaptation of the classical notion of Lie group to diffeology.
+  Diffeological groups are groups equipped with a diffeology compatible with the group multiplication and the inversion \art{Diffeological-groups}.
+  This definition was originally introduced by J.-M. Souriau \cite{Sou80} as {\em groupes diff\'erentiels}.
+  In this foundation paper,
+  diffeologies appeared  as a structure on group only with five axioms,
+  and the main examples were the groups of diffeomorphisms of manifolds.
+  Later in 1983 they found their place in the general diffeological framework;
+  see \cite{Sou84}.
+  That said,
+  the groups of diffeomorphisms of diffeological spaces,
+  equipped with their functional diffeology  \art{Functional-diffeology-on-groups-of-diffeomorphisms},
+  are still the main examples of diffeological groups since  every diffeological group is a subgroup of its group of diffeomorphisms \art{Left-and-right-multiplications-are-embeddings}.
+  The introduction of diffeological groups leads naturally  to the notion of smooth actions on diffeological spaces as smooth homomorphisms \art{Smooth-action-of-a-diffeological-group}.
+  
+  After the basic definitions,
+  we focus our attention,
+  in this chapter,
+  on the momenta of diffeological groups,
+  that is,
+  the space of their left-invariant $1$-forms \art{Momenta-of-a-diffeological-group}.
+  The classical way for studying Lie groups uses the notion of Lie algebra.
+  But,
+  because diffeology is adapted better to covariant objects than to contravariant ones,
+  the usual point of view is skipped.
+  Lie algebra could be possibly defined afterwards,
+  by duality with the space of momenta,
+  or as the space of $1$-parameter subgroups,
+  or whatever else  if necessary.
+  
+  The notion of coadjoint orbits persists in the diffeological framework and plays an important role.
+  They are introduced directly as the orbits of the group acting,
+  by pushforward of the adjoint action,
+  on its space of momenta.
+  Because there is a natural equivalence between left-invariant and right-invariant $1$-forms of diffeological groups \art{Equivalence-between-right-and-left-momenta},
+  which intertwines the coadjoint action,
+  the choice of right- or left-invariant $1$-forms is not relevant.
+  The left momenta come naturally in the picture with the study of invariant differential forms,
+  especially in symplectic diffeology \art{Definition-of-the-moment-maps}.
+\end{chaphead}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Basics of Diffeological Groups}
+
+\begin{sechead}
+  After having been introduced by J.-M. Souriau in 1979 as {\em groupes diff\'erentiels} \cite{Sou80}\,,
+  diffeological groups,
+  and their relations with diffeological spaces,
+  began to be developed,
+  in particular in \cite{DI83}\,, \cite{Sou84}\,, \cite{Don84}\,, \cite{Igl85}\,,
+  but  overall they remain {\em terra incognita\/}.
+  For example,
+  what kind of finite-dimensional diffeological group exists except Lie groups and quotients of Lie groups?
+\end{sechead}
+
+\begin{article}\artlabel{Diffeological groups}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Diffeological groups}
+  \label{Diffeological-groups}
+  A {\em diffeological group}\index{Diffeological group} is a group $\G$ equipped with a compatible diffeology,
+  that is,
+  such that the multiplication and the inversion are smooth:
+  $$%
+  \left\{
+  \begin{aligned}
+    \mul & =  [(g,g') \mapsto gg'] \in \Cinfty(\G \times \G, \G), \\
+    \inv & = [g \mapsto g^{-1}] \in \Cinfty(\G,\G).
+  \end{aligned}
+  \right.
+  $$%
+  A diffeology $\cD$ on a group $\G$ which satisfies these two conditions will be called a {\em group diffeology}\index{Diffeology!group diffeology}.
+  Let $\G$ and $\G'$ be two diffeological groups,
+  $\DHom(\G,\G')$ will denote the space of smooth homomorphisms from $\G$ to $\G'$,
+  and by $\DIsom(\G,\G')$ the space of smooth isomorphisms from $\G$ to $\G'$.
+  $$ 
+  \left\{
+  \begin{aligned}
+    \DHom(\G,\G')  & = \Hom(\G,\G') \cap \Cinfty(\G,\G'), \\
+    \DIsom(\G,\G') & = \Isom(\G,\G') \cap \Diff(\G,\G').
+  \end{aligned}
+  \right.
+  $$%
+  Diffeological groups,
+  together with smooth homomorphisms is a category we denote by $\DGroups$.
+  There is a natural forgetful functor from $\DGroups$ to $\Diffeology$.
+  
+  Traditional {\em Lie groups} are diffeological groups $\G$ which are manifolds,
+  modeled on a finite-dimensional real vector spaces \art{Manifolds-as-diffeologies}.
+  A large literature exists on Lie groups,
+  which occupy a big part of modern mathematics.
+  A diffeological group which is a diffeological manifold modeled on a diffeological vector space can be regarded as {\em diffeological Lie group}\index{Diffeological Lie group}.
+  Very little has been written on diffeological Lie groups;
+  see \cite{Les03}.
+\end{article} %% Diffeological-groups
+
+\begin{article}\artlabel{Subgroups of diffeological groups}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Subgroups of diffeological groups}
+  \label{Subgroups-of-diffeological-groups}
+  Every subgroup $\H$ of a diffeological group $\G$ is canonically a diffeological group for the subset diffeology \art{Subspaces-and-subset-diffeology}.
+  When we refer in the following to a subgroup of a diffeological group,
+  it will be always as a subgroup equipped with the subset diffeology.
+\end{article} %% Subgroups-of-diffeological-groups
+
+\begin{proof}
+  Let $j: \H \to \G$ be the inclusion.
+  The inclusion $j$ is smooth,
+  it is even an induction.
+  Let $\mul_\H$ and $\inv_\H$ be the multiplication and the inversion of $\H$.
+  Since $\mul_\H = \mul \circ (j \times j)$ and $\inv_\H = \inv \circ\ j$ are composites of smooth maps,
+  they are smooth.
+\end{proof}
+
+\begin{article}\artlabel{Quotients and extensions of diffeological groups}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Quotients of diffeological groups}
+  \label{Quotients-and-extensions-of-diffeological-groups}
+  Let $\G$ be a diffeological group.
+  Let $\N \subset \G$ be a normal subgroup,
+  that is,
+  $g \N g^{-1} = \N$ for all $g \in \G$.
+  Considering indifferently the right or the left coset,
+  \begin{itemize}
+    \item[($\clubsuit$)] the quotient group $\H = \G/\N$ is canonically a diffeological group for the quotient diffeology \art{Quotient-and-quotient-diffeology}.
+  \end{itemize}
+  We represent this situation by the short exact sequence of  homomorphisms
+  $$%
+  %\id_\N \xrfl{}{15mm}  \N \xrfl{j}{15mm} \G \xrfl{\pi}{15mm} \H = \G/\N \xrfl{}{15mm} \id_\H,
+  \id_\N \rfl{} \N \rfl{j} \G \rfl{\pi} \H = \G/\N \rfl{} \id_\H,
+  $$%
+  where $j : \N \to \G$ is the inclusion and $\pi : \G \to \H$ is the projection.
+  By construction,
+  $j$ is an induction and $\pi$ is a subduction.
+  Actually,
+  $\pi$ is more than a subduction,
+  it is a principal fibration,
+  see \art{Fibrations-of-groups-by-subgroups}.
+  %
+  Conversely,
+  let $\H$ and $\N$ be just two groups.
+  An {\em extension} of $\H$ by $\N$ is any group $\G$ with two morphisms $j : \N \to \G$ and $\pi : \G \to \H$ satisfying the diagram above;
+  see for example \cite{Kir76} for a full discussion.
+  Now,
+  if $\N$ and $\H$ are diffeological groups,
+  a {\em diffeological} or {\em smooth extension}\index{Smooth extension} of $\H$ by $\N$ is an extension such that $j$ is an induction and $\pi$ is  a subduction.
+  %
+  As a special case of diffeological fibrations,
+  {\em diffeological group extensions} form a subcategory of the category of
+  principal fiber bundles \art{Category-of-principal-fiber-bundles}.
+  A morphism of this category is a morphism of the category of principal diffeological fiber bundles which is also a group morphism (or conversely).
+  %
+  The simplest case of such extensions is the direct product $\G = \H \times \N$,
+  with $(h,n)\cdot (h',n') = (hh',nn')$,
+  $j : n \mapsto (\id_\H,n)$ and $\pi=\pr_1 : (h,n) \mapsto h$.
+  %Such an extension is said to be the {\em trivial extension} of $\H$ by $\N$.
+  An extension which is equivalent to a direct product is said to be {\em trivial}.
+  When it comes to this question of trivial extension,
+  the following two different points must be inspected.
+  
+  (a) The projection $\pi : \G \to \H = \G/\N$,
+  as a principal diffeological fiber bundle,
+  must be trivial,
+  which is equivalent to the existence of a smooth section $\sigma : \H \to \G$ \xart{Category-of-principal-fiber-bundles}{Note 2}.
+  
+  (b) This equivalence must be an equivalence of extension,
+  that is,
+  $\sigma$ is a group homomorphism from $\H$ to $\G$, and $\sigma(\H)$ is a subgroup of the centralizer of $\N$,
+  that is,
+  $n \sigma(h) = \sigma(h) n$ for all $(h,n) \in \H \times \N$.
+  
+  \Note~There exist smooth extensions of $\H$ by $\N$,
+  on the product $\H \times \N$,
+  which  are not trivial as group extensions.
+  A famous example would be the Heisenberg group,
+  in the special case of central extensions.
+  These extensions are given by smooth cocycles,
+  the condition (a) is fulfilled but not the condition (b).
+  It is why it is worth insisting on these two aspects.
+\end{article} %% Quotients-and-extensions-of-diffeological-groups
+
+\begin{proof}
+  Let $\mul_{\G/\N}$ and $\inv_{\G/\N}$ be the multiplication and the inversion of $\G/\N$.
+  Since $\mul_{\G/\N} \circ (\pi \times \pi) = \pi \circ \mul$ and since $\inv_{\G/\N} \circ \pi = \pi \circ \inv$,
+  and $\pi$ and $(\pi \times \pi)$ are subductions,
+  $\mul_{\G/\N}$ and $\inv_{\G/\N}$ are smooth \art{Smooth-maps-from-quotients}.
+  The other parts of the proposition are simple adaptations of classical results.
+\end{proof}
+
+\begin{article}\artlabel{Smooth action of a diffeological group}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Smooth action of a diffeological group}
+  \label{Smooth-action-of-a-diffeological-group}
+  Let $\X$ be a diffeological space,
+  and let $\G$ be a diffeological group.
+  A {\em smooth action}\index{Smooth action} of $\G$ on $\X$ is any smooth homomorphism $\rho: \G \to \Diff(\X)$,
+  where $\Diff(\X)$ is equipped with its functional diffeology of group of diffeomorphisms \art{Functional-diffeology-on-groups-of-diffeomorphisms}.
+  To simplify the notations, and where there is no risk of confusion,
+  we shall sometimes denote $g_\X$ for $\rho(g)$.
+  
+  \Note{1} A homomorphism $\rho : \G \to \Diff(\X)$ is smooth if and only if the evaluation map $\ev_\rho : (x,g) \mapsto \rho(g)(x)$ defined on $\X \times \G$ into $\X$ is smooth.
+  
+  \Note{2} Let us recall that the kernel of a group action is always a normal subgroup,
+  and that the action is said to be {\em effective}\index{Effective action} if its kernel is trivial,
+  $\rho$ is then a monomorphism.
+  For every smooth action $\rho$ of $\G$ on $\X$,
+  there exists a natural effective smooth action of $\K = \G/\ker(\rho)$ on $\X$,
+  where $\ker(\rho)$ is equipped with the subset diffeology and $\K$ with the quotient diffeology.
+  
+  \Note{3} In the paper \cite{IZK12} we have shown that any effective smooth action $\rho : \G \to \Diff(\M)$,
+  where $\G$ is a Lie group and $\M$ is a manifold
+  ---~Hausdorff and second countable~---
+  is actually an induction,
+  that is,
+  a diffeomorphism onto its image.
+  In other words,
+  an effective smooth action,
+  in the category of Hausdorff and second countable finite-dimensional manifolds,
+  is equivalent to giving a subgroup of $\Diff(\M)$ which,
+  equipped with the induced functional diffeology,
+  is a manifold.
+\end{article} %% Smooth-action-of-a-diffeological-group
+
+\begin{proof}
+  The second note is a direct application of \art{Quotients-and-extensions-of-diffeological-groups}.
+  So,
+  let us prove
+  the first note.
+  Let us assume that $\rho$ is smooth.
+  The map $\ev_\rho$ splits into $(x,g) \mapsto (x,\rho(g)) \mapsto \rho(g)(x)$ from $\X \times \G$ to $\X \times \Diff(\G)$ to $\X$.
+  But,
+  since $\rho$ is smooth,
+  $\Ev_\rho : (x,g) \mapsto (x,\rho(g))$ is smooth,
+  and the second factor $(x, \phi) \mapsto \phi(x)$ from $\X \times \Diff(\G)$ to $\X$ is the evaluation map,
+  which is smooth by the very definition of the functional diffeology \art{Functional-diffeologies}.
+  Therefore,
+  the map $\ev_\rho$ is smooth.
+  Conversely, let us assume that the map $\ev_\rho$ is smooth.
+  Now,
+  $\rho$ is smooth if and only if for every plot $\P': \U' \to \G$ the parametrization $r \mapsto \rho(\P'(r'))$
+  is a plot of $\Diff(\X)$,
+  that is,
+  if and only if for every plot $\P'' : \U'' \to \X$ the parametrizations $(r',r'') \mapsto \rho(\P'(r'))(\P''(r''))$ and $(r',r'') \mapsto \rho(\P'(r'))^{-1}(\P''(r''))$ are plots of $\X$.
+  By hypothesis,
+  for every plot $\P : \U \to \X \times \G$,
+  the parametrization $r \mapsto \rho(\P(r))(\Q(r))$ is a plot of $\X$.
+  This,
+  applied to $\U = \U' \times \U''$ and to the plot $\P : r = (r',r'') \mapsto \P(r) = (\P'(r'),\P''(r''))$ gives exactly that $(r',r'') \mapsto \rho(\P'(r'))(\P''(r''))$ is a plot of $\X$.
+  Applied to the plot $\P : r = (r',r'') \mapsto \P(r) = (\P'(r')^{-1},\P''(r''))$  (because the inversion in $\G$ is smooth),
+  we get that $(r',r'') \mapsto \rho(\P'(r')^{-1})(\P''(r'')) = \rho(\P'(r'))^{-1}(\P''(r''))$ is a plot of $\X$.
+  Therefore,
+  $\rho$ is smooth.
+\end{proof}
+
+\begin{article}\artlabel{Orbit map}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Orbit map}
+  \label{Orbit-map}
+  Let $\X$ be a diffeological space.
+  Let $\G$ be a diffeological group,
+  and let $g \mapsto g_\X$ be a smooth action \art{Smooth-action-of-a-diffeological-group} of $\G$ on $\X$.
+  For all points $x \in \X$,
+  we denote by $\orb{x}$ the {\em orbit map}
+  $$%
+  \orb{x} : \G \to \X, \text{ with } \orb{x}(g) = g_\X(x).
+  $$%
+  As an immediate consequence of the definition of smooth actions,
+  the orbit maps are smooth maps from $\G$ to $\X$.
+  
+  \Note~Let $\M$ be a manifold and $\G$ be a Lie group,
+  both Hausdorff and second countable.
+  Let $\rho : \G \to \Diff(\M)$ be a smooth action and $m \in \M$.
+  Then,
+  the orbit map $\orb{m} : \G \to \M$ is a strict map \art{Strict-maps-between-quotients-and-subspaces} \cite{IZK12},
+  that is,
+  the projection of $\orb{m}$,
+  from $\G/\G_m$ to $\M$,
+  where $\G_m$ is the stabilizer of $m$,
+  is an induction.
+  Consequently,
+  every orbit of $\G$ in $\M$ is a submanifold,
+  that is,
+  for all $m \in \M$,
+  the orbit $\G \cdot m = \{\rho(g)(m) \mid g \in \G\}$,
+  equipped with the subset diffeology,
+  is a manifold \art{Submanifolds-of-a-diffeological-space}.
+\end{article} %% Orbit-map
+
+\begin{article}\artlabel{Left and right multiplications}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Left and right multiplications}
+  \label{Left-and-right-multiplications}
+  Let $\G$ be a diffeological group,
+  and let $g \in \G$.
+  We denote by $\eL(g)$ the left multiplication by $g$,
+  $$%
+  \eL(g) : k \mapsto gk, \  \eL(g) \in \Cinfty(\G).
+  $$%
+  The left multiplication is a smooth and effective action of $\G$ onto itself,
+  that is,
+  $\eL \in \DHom(\G, \Diff(\G))$.
+  Then,
+  we denote by $\eR(g)$,
+  the right multiplication by $g \in \G$,
+  $$%
+  \eR(g) : k \mapsto kg,  \ \eR(g) \in \Cinfty(\G).
+  $$%
+  The right multiplication is a smooth and effective {\em antiaction}\index{Antiaction} of $\G$ onto itself,
+  that is,
+  $\eR(gg') = \eR(g') \circ \eR(g)$.
+  The map $\eR$ is a smooth antihomomorphism from $\G$ to $\Diff(\G)$,
+  which can also be expressed as $\eR \circ \inv \in \DHom(\G, \Diff(\G))$.
+  We denote by $\Ad(g)$ the {\em adjoint action} of $\G$ onto itself,
+  $$%
+  \Ad(g) : k \mapsto gkg^{-1},\ \Ad(g) \in \Cinfty(\G).
+  $$%
+  The adjoint action is smooth,
+  $\Ad \in \DHom(\G,\Diff(\G))$.
+  Actually
+  $$%
+  \Ad(g) = \eL(g) \circ \eR(g^{-1}) = \eR(g^{-1}) \circ \eL(g).
+  $$%
+  Note that the adjoint action is not necessarily effective.
+  The kernel of the adjoint action is called the {\em center}\index{Group center} of $\G$,
+  denoted sometimes by $\eZ(\G)$.
+  It is the subgroup of $\G$ whose elements commute with every element of $\G$.
+\end{article} %% Left-and-right-multiplications
+
+\begin{article}\artlabel{Left and right multiplications are embeddings}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Left and right multiplications are inductions}
+  \label{Left-and-right-multiplications-are-embeddings}
+  Let $\G$ be a diffeological group.
+  Left and right multiplications \art{Left-and-right-multiplications} are embeddings from $\G$ to $\Diff(\G)$,
+  where $\Diff(\G)$ is equipped with the functional diffeology \art{Functional-diffeologies}.
+  Explicitly,
+  left and right multiplications are inductions such that the pullback of the D-topology of the functional diffeology of $\Diff(\G)$ coincides with the D-topology of $\G$ \art{Embedded-subsets-of-a-diffeological-space}.
+  
+  \Note~In particular,
+  this shows that every diffeological group is (equivalent to) a subgroup of a group of diffeomorphisms,
+  for the functional diffeology.
+\end{article} %% Left-and-right-multiplications-are-embeddings
+
+\begin{proof}
+  Let us prove this proposition for the left multiplication.
+  And first,
+  let us prove that $\eL$ is an induction.
+  We know already that $\eL : \G \to \Diff(\G)$ is injective and smooth \art{Left-and-right-multiplications}.
+  So,
+  let $\P : \U \to \G$ be a parametrization such that $\eL \circ \P$ is a plot of $\Diff(\G)$.
+  Thus, for every plot $\Q : \V \to \G$,
+  the parametrization $(r,s) \mapsto \L(\P(r))(\Q(s)) = \P(r) \Q(s)$ is a plot of $\G$.
+  But since the multiplication and the inversion are smooth,
+  the parametrization $(r,s) \mapsto (\P(r) \Q(s),
+  \Q(s)^{-1}) \mapsto [\P(r) \Q(s)]\Q(s)^{-1} = \P(r)$ is a plot of $\G$,
+  that is,
+  $\P$ is a plot of $\G$.
+  Therefore,
+  $\eL$ is an induction.
+  Next,
+  let $\cO$ be D-open in $\G$,
+  the subset
+  $$%
+  \Omega = \{ f \in \Diff(\G) \mid f(\id_\G) \in \cO \}
+  $$%
+  is D-open.
+  Indeed,
+  let $\P$ be a plot of $\Diff(\G)$,
+  $\P^{-1}(\Omega)$ is the subset of $r \in \Dom(\P)$ such that $\P(r)(\id_\G) \in \cO$,
+  but $\P(r)(\id_\G) = (\eR(\id_\G) \circ \P)(r)$,
+  where $\eR(\id_\G)$ is the orbit map of the point $\id_\G$ for the left multiplication \art{Orbit-map},
+  thus $\P^{-1}(\Omega) = (\eR(\id_\G) \circ \P)^{-1}(\cO)$.
+  Since $\eR(\id_\G)$ and $\P$ are smooth,
+  thus D-continuous,
+  and since $\cO$ is D-open,
+  $\P^{-1}(\Omega)$ is open and thus $\Omega$ is D-open in $\Diff(\G)$.
+  Now,
+  $\eL^{-1}(\Omega)$ is the set of $g \in \G$ such that $\eL(g)(\id_\G) \in \cO$,
+  that is,
+  $\eL^{-1}(\Omega) = \cO$.
+\end{proof}
+
+\begin{article}\artlabel{Transitivity and homogeneity}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Transitivity and homogeneity}
+  \label{Transitivity-and-homogeneity}
+  Let $\X$ be a diffeological space,
+  and let $\G$ be a diffeological group.
+  Let $\rho$ be smooth action of $\G$ on $\X$,
+  that is,
+  a homomorphism from $\G$ to $\Diff(\X)$.
+  The action of $\G$ is said to be {\em transitive}\index{Transitive} on $\X$ if the {\em evaluation map}
+  $$%
+  \Ev_\rho : \X \times \G \to \X \times \X, \text{ defined by } \Ev_\rho(x,g) = (x,\rho(g)(x)),
+  $$%
+  is surjective.
+  That is,
+  if for any $x, x' \in \X$ there exists $g \in \G$ such that $x' = \rho(g)(x)$.
+  We say that $\X$ is {\em homogeneous}\index{Homogeneous} for the action $\rho$ of $\G$ if the evaluation map $\Ev_\rho$ is a subduction.
+  Now,
+  the space $\X$ is a homogeneous space of $\G$ (for $\rho$) if and only if the action $\rho$ is smooth  and for some $\xo \in \X$ the {\em orbit map}
+  $$%
+  \orb{\xo} : \G \to \X, \text{ defined by } \orb{\xo}(g) = \rho(g)(\xo)
+  $$%
+  is a subduction (if it is true for some point,
+  then it will be true for every point).
+  Moreover,
+  the subduction $\orb{\xo}$ is a local subduction \art{Local-subductions}.
+  In this case we also say that $\G$ {\em generates} $\X$,
+  or is a {\em generating group}\index{Generating group} for $\X$.
+\end{article} %% Transitivity-and-homogeneity
+
+\begin{proof}
+  First of all,
+  if $\Ev_\rho$ is a subduction,
+  then $\rho$ is smooth,
+  since $\Ev_\rho$ is smooth and $\ev_\rho = \pr_2 \circ \Ev_\rho$ \xart{Smooth-action-of-a-diffeological-group}{Note 1}.
+  Then,
+  $\orb{\xo}$ is the restriction of $\Ev_\rho$ to $\set{\xo} \times \G$ with values $\set{\xo} \times \X$.
+  Thus,
+  every plot $r \mapsto (\xo, \Q(r))$ lifts locally into a plot $r \mapsto (\xo(r) = \xo,\gamma(r))$ such that $\rho(\gamma(r)(\xo)) = \Q(r)$.
+  Hence,
+  $\orb{\xo}$ is a subduction.
+  Now,
+  let us assume that $\rho$ is smooth and $\orb{\xo}$ is a subduction.
+  First of all,
+  if $\ev_\rho$ is smooth so is $\Ev_\rho$.
+  Next,
+  let $\P : r \mapsto (\P'(r),\P''(r))$ be a plot of $\X \times \X$,
+  defined on a domain $\U$.
+  By hypothesis,
+  for every $r_0$ in $\U$,
+  there exist two open neighborhoods $\V'$ and $\V''$ of $r_0$,
+  there exist two plots $\gamma' : \V' \to \G$ and $\gamma'' : \V'' \to \G$ such that $\P'(r) = \rho(\gamma'(r))(\xo)$ and $\P''(r) = \rho(\gamma''(r))(\xo)$.
+  Thus,
+  on $\V = \V' \cap \V''$,
+  we have $\P''(r) = \rho(\gamma''(r))[\rho(\gamma(r')^{-1})(\P'(r)]$,
+  that is,
+  $\P''(r) = \rho(\gamma(r))(\P'(r))$, with $\gamma(r) = \gamma''(r) \gamma'(r)^{-1}$.
+  Hence,
+  there exists a plot $\Q : r \mapsto (\P'(r),\gamma(r))$ of $\X \times \G$,
+  defined on $\V$,
+  such that $\P \restriction \V = \Ev_\rho \circ \Q$.
+  Therefore,
+  $\Ev_\rho$ is a subduction.
+  Then,
+  since $\G$ is transitive,
+  if this is true for one point $\xo$,
+  by composition with some element of $\G$,
+  it will be true for every point.
+  Finally,
+  pick a plot $\P : \U \to \X$,
+  let $r_0 \in \U$,
+  and let $g_0 \in \G$ such that $\orb{\xo}(g_0) = \P(r_0)$,
+  that is,
+  $\rho(g_0)(\xo) = \P(r_0)$.
+  The plot $\P$ lifts locally,
+  on an open neighborhood of $r_0$,
+  into a plot $\Q$ of $\G$, $\orb{\xo} \circ \Q =_\loc \P$.
+  Let $g'_0 = \Q(r_0)$,
+  the parametrization $r \mapsto g_0 (g'_0)^{-1} \Q(r)$ is a local lift of $\P$ passing through $g_0$ at $r_0$.
+  Therefore,
+  $\orb{\xo}$ is a local subduction. \end{proof}
+
+\begin{article}\artlabel{Connected homogeneous spaces}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Connected homogeneous spaces}
+  \label{Connected-homogeneous-spaces}
+  Let $\X$ be a connected diffeological space.
+  If $\X$ is homogeneous for an action $\rho$ of a diffeological group $\G$,
+  then it is homogeneous for the cation of its identity component $\G^\circ = \comp(\id_\G)$.
+\end{article} %% Connected-homogeneous-spaces
+
+\begin{proof}
+  Let $x_0,x_1 \in \X$ and $t \mapsto x_t$ be a smooth path connecting $x_0$ to $x_1$.
+  Since $\orb{x_0} : g \mapsto \rho(g)(x_0)$ is a subduction from $\G$ onto $\X$,
+  there exist a family of intervals $\{\,]a_i,b_i[\,\}_{i \in \eI}$ covering $[0,1]$ and a family of plots $t \mapsto g_i(t)$ in $\G$,
+  $t \in \eI$,
+  such that $\rho(g_i(t))(x_0) = x_t$.
+  Since $[0,1]$ is compact,
+  we can find a family $\{\,]a'_n,b'_n[\,\}_{n = 1}^\N$ such that each $]a'_n,b'_n[$ is contained in some $]a_i,b_i[$ (chosen once and for all),
+  and such that $]a'_n,b'_n[\ \cap\ ]a'_m,b'_m[\ \neq \varnothing$,
+  with $1 \leq n \leq \N-1$ and  $n > m$,
+  if and only if $m = n+1$.
+  We denote by $g_n$ the restriction of $g_i$  to  $]a'_n,b'_n[$.
+  Let $t_0 = 0$,
+  $t_\N = 1$,
+  and for each $n$ such that $1 \leq n \leq \N-1$,
+  we chose $t_n \in\ ]a'_n,b'_n[ \ \cap \ ]a'_{n+1},b'_{n+1}[$.
+  So,
+  we have $\rho(g_n(t_n))(x_0) = \rho(g_{n+1}(t_n))(x_0) = x_{t_n}$,
+  that is,
+  $g_{n+1}(t_n)^{-1} g_n(t_n) \in \Stab_\G(x_0)$.
+  Now,
+  let us define $ g'_n(t) = g_n(t) k_n$ with $k_n = g_n(t_{n-1})^{-1}g_{n-1}(t_{n-1}) k_{n-1}$,
+  for $2 \leq n \leq \N$ and $k_1 = g_1(t_0)^{-1}$.
+  So,
+  all the $k_n$ belong to $\Stab_\G(x_0)$,
+  and therefore $\rho(g'_n(t))(x_0) = \rho(g_n(t))(x_0) = x_t$.
+  Moreover,
+  $g'_n(t_{n-1}) = g_n(t_{n-1})k_n = g_n(t_{n-1}) g_n(t_{n-1})^{-1}g_{n-1}(t_{n-1}) k_{n-1} = g_{n-1}(t_{n-1}) k_{n-1} = g'_{n-1}(t_{n-1})$.
+  Thus,
+  the family $\{g'_i\}_{i=1}^\N$ connects $\id_\G = g'_1(0)$ to a diffeomorphism $g = g'_\N(1)$ which satisfies $\rho(g)(x_0) = x_1$.
+  Therefore,
+  the connected component $\G^\circ$ is transitive on $\X$,
+  and since the projection $\orb{x_0}$ is a local subduction,
+  its restriction to $\G^\circ$ is a local subduction too.
+\end{proof}
+
+\begin{article}\artlabel{Covering diffeological groups}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Covering diffeological groups}
+  \label{Covering-diffeological-groups}
+  Let $\pr : \hat \G \to \G$ be a subduction,
+  where $\hat \G$ and $\G$ are two diffeological groups.
+  We say that $\pr$  is a {\em group covering}\index{Group covering} if $\pr$ is a homomorphism and the kernel $\K = \pr^{-1}(\id_\G)$ is discrete.
+  Let us recall that discrete means that the plots
+  ---~here the plots for the subset diffeology~---
+  are locally constant \art{Discrete-diffeology}.
+  Let $\G$ be a connected diffeological group,
+  its universal covering $\tilde \G$ \art{The-universal-covering} has a natural structure of diffeological group such that the subduction $\pi : \tilde \G \to \G$ is a homomorphism.
+  The first homotopy group $\pi_1(\G) = \ker(\pi)$ \art{The-Poincare-groupoid-and-fundamental-group} is a discrete normal subgroup of $\tilde \G$,
+  and $\pi$ is a group covering.
+  Any connected covering $\pr : \hat \G \to \G$ \art{Fundamental-group-acting-on-coverings} is the quotient of the universal covering by a subgroup $\K$ of $\pi_1(\G)$.
+  If the subgroup $\K$ is normal then $\pr$ is also a group covering.
+\end{article} %% Covering-diffeological-groups
+
+\begin{proof}
+  This property has been established originally in \cite{Sou84},
+  \cite{Don84},
+  inside the strict framework of diffeological groups.
+  But let us show how the general construction given in \cite{Igl85} or in \art{Fundamental-group-acting-on-coverings} applies to the special case of diffeological groups.
+  Let $\X$ be a connected diffeological space,
+  let $x_0$ be a point of $\X$,
+  chosen as a basepoint.
+  Let $\Paths(\X,x_0,\star)$ be the space of paths starting at $x_0$.
+  First of all, the end map $\1 : p \mapsto p(1)$,
+  defined on $\Paths(\X,x_0,\star)$,
+  is a subduction \art{Pathwise-connectedness}.
+  The quotient of $\Paths(\X,x_0,\star)$ by the fixed ends homotopy equivalence relation is exactly the universal covering,
+  pointed by the constant map $\hat x_0 : t \mapsto x_0$,
+  over the pointed space $(\X, x_0)$ \art{The-universal-covering}.
+  The fiber over $x_0$ is the homotopy group $\pi_1(\X, x_0)$.
+  Now, if $\X = \G$ we choose the identity $\id_\G$ as base point.
+  Thus,
+  the multiplication of paths $(p,p') \mapsto [t \mapsto p(t) \cdot p'(t)]$ defines on $\tilde \G$ a group multiplication such that the projection $\pi : \tilde \G \to \G$,
+  defined by $\pi(\class(p)) = \1(p)$,
+  is a homomorphism.
+  The kernel of this morphism is clearly the fiber over $\id_\G$,
+  that is,
+  $\pi_1(\G)$.
+  The kernel of a homomorphism is always a normal subgroup.
+  Then,
+  since $\pi$ is a covering,
+  $\pi^{-1}(\id_\G)$ is discrete \art{Fundamental-group-acting-on-coverings}.
+\end{proof}
+
+\begin{article}\artlabel{Covering smooth actions}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Covering smooth actions}
+  \label{Covering-smooth-actions}
+  Let $\X$ be a connected diffeological space.
+  Let $\G$ be a connected diffeological group.
+  Let $\rho : \G \to \Diff(\X)$ be a smooth action of $\G$ on $\X$,
+  hence $\rho$ takes its values in the identity component of $\Diff(\X)$.
+  Then,
+  there exists a unique smooth action $\tilde \rho$,
+  of the universal covering $\tilde \G$ of $\G$ on the universal covering $\tilde \X$ of $\X$,
+  covering $\rho$.
+  Precisely,
+  let us denote briefly  by ${\bf D}_\X$ the group $\Diff(\X)$,
+  by ${\bf D}_\X^\circ$ the identity component and by $\tilde {\bf D}_\X^\circ$ its universal covering.
+  Let $\pi_\G : \tilde \G \to \G$ and $\pi_{\bf D} : \tilde {\bf D}_\X^\circ \to {\bf D}_\X^\circ$ be the projections,
+  $\tilde \rho : \tilde \G \to \tilde {\bf D}_\X^\circ$ is a smooth homomorphism such that the following diagram commutes.
+  
+  \begin{center}
+    \begin{tikzcd}[column sep=huge, row sep=large, every label/.append style = {font = \small}]
+      \tilde\G \arrow[d, swap, "\pi_\G"] \arrow[r,"\tilde\rho"] & \tilde{\bf D}_\X^\circ \arrow[d, "\pi_{\bf D}"]  \\
+      \G \arrow[r, swap, "\rho"] & {\bf D}_\X^\circ
+    \end{tikzcd}
+  \end{center}
+  
+\end{article} %% Covering-smooth-actions
+
+\begin{proof}
+  The map $\rho \circ \pi_\G$ is smooth and $\tilde \G$ is
+  simply connected. Thanks to the monodromy theorem
+  \art{Monodromy-theorem}, there exists a
+  unique lift $\tilde \rho$ of $\rho \circ \pi$ mapping
+  the identity of $\tilde \G$ to the identity of
+  $\tilde {\bf D}_\X^\circ$. This lift is a
+  homomorphism because its restriction to $\ker(\pi_\G)$
+  and its projection $\rho$ are both homomorphisms.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Exercises
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\Exercises
+
+\begin{exercise}[Subgroups of $\RR$]
+  \label{Subgroups-of-R}
+  Show that every strict subgroup $\K$ of $\RR$,
+  that is,
+  $\K \subset \RR$ and $\K \neq \RR$,
+  is diffeologically discrete and that the only embedded strict subgroups are the groups $a\ZZ \subset \RR$,
+  where $a \in \RR$.
+\end{exercise} %% Subgroups-of-R
+
+\begin{exercise}[Diagonal diffeomorphisms]
+  \label{Diagonal-diffeomorphisms}
+  Let $\X$ be a diffeological space.
+  Let $\N > 0$ be any integer.
+  Let $\Diff(\X)$ and $\Diff(\X^\N)$ be equipped with the functional diffeology \art{Functional-diffeology-on-groups-of-diffeomorphisms}.
+  Show that the diagonal injection $\Delta : \Diff(\X) \to \Diff(\X^\N)$,
+  defined by $\Delta(\varphi)(x_1, \ldots, x_\N) = (\varphi(x_1), \ldots, \varphi(x_\N))$,
+  is an induction.
+\end{exercise} %% Diagonal-diffeomorphisms
+
+\begin{exercise}[The Hilbert sphere is homogeneous]
+  \label{The-Hilbert-sphere-is-homogeneous}
+  Let $\cH_\CC$ be the standard Hilbert space,
+  described in \art{The-fine-standard-Hilbert-space}.
+  Let $\cS_\CC$ be the  Hilbert unit sphere \art{The-infinite-sphere} and $\cP_\CC$ be the Hilbert projective space;
+  see \art{The-infinite-complex-projective-space} and \exref{The-Hopf-S1-bundle}.
+  Let $\UU(\cH_\CC)$ be the unitary group of $\cH_\CC$,
+  equipped with the functional diffeology \art{Functional-diffeology-between-fine-spaces}.
+  Using the fact that a subspace $\E \subset \cH_\CC$  and its orthogonal $\E^\perp$ are supplementary \cite{Bou55},
+  show that $\cS_\CC$ is homogeneous under $\UU(\cH_\CC)$.
+  Deduce that $\cP_\CC$ also is homogeneous.
+\end{exercise} %% The-Hilbert-sphere-is-homogeneous
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: The Spaces of Momenta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{The Spaces of Momenta}
+
+\begin{sechead}
+  Diffeological groups are a huge category of groups,
+  still not very well known and with much still to be explored.
+  Their left (or right) invariant differential $1$-forms,
+  called {\em momenta},
+  and their orbits under the coadjoint action  are key concepts,
+  at a classical level  in symplectic mechanics,
+  but also for the development of {\em symplectic diffeology}.
+  In this section we introduce these objects and we give some of their properties.
+  They will be used further,
+  in Chapter \ref{Chapter-Symplectic-Diffeology}.
+  In particular,
+  the notion of coadjoint orbit,
+  more precisely $(\Gamma,\theta)$-coadjoint orbit,
+  plays a crucial role in the construction of the moment maps,
+  for an arbitrary action of a diffeological group preserving a closed $2$-form \art{Definition-of-the-moment-maps},
+  \art{The-Souriau-cocycle}.
+  It is in this sense,
+  for example,
+  that  ``every symplectic manifold is a coadjoint orbit'' \art{Symplectic-manifolds-are-coadjoint-orbits}.
+\end{sechead}
+
+\begin{article}\artlabel{Momenta of a diffeological group}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Momenta of a diffeological group}
+  \label{Momenta-of-a-diffeological-group}
+  We call {\em left momentum}\index{Momemtum, momenta}
+  ---~or simply {\em momentum}~---
+  of a diffeological group $\G$ any $1$-form on $\G$,
+  invariant by the left action of $\G$ onto itself.
+  We denote by $\cG^*$ the {\em space of momenta}\index{Space of momenta} of $\G$.
+  The space of momenta of a diffeological group is naturally a diffeological vector space,
+  equipped with the functional diffeology,
+  $$%
+  \cG^* = \{ \alpha \in \Omega^1(\G) \mid \text{for all } g \in \G, \ \eL(g)^*(\alpha) = \alpha \}.
+  $$%
+  Note that,
+  in spite of what the notation $\cG^*$ suggests,
+  the space of momenta of a diffeological group is not defined by some duality.
+  This notation is chosen here just to remind ourselves of the connection with the dual of the Lie algebra in the classical case of Lie groups.
+\end{article} %% Momenta-of-a-diffeological-group
+
+\begin{article}\artlabel{Momenta and connectedness}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Momenta and connectedness}
+  \label{Momenta-and-connectedness}
+  Let $\G$ be a diffeological group.
+  Let $\G^\circ$ be its identity component,
+  that is,
+  $\G^\circ = \comp(\id_\G) \subset \G$.
+  Then,
+  the pullback $j^* : \cG^* \to \cG^\circ{}^*$ of the injection $j : \G^\circ \to \G$ is an isomorphism.
+  This property is quite natural but deserves to be checked in the context of diffeological groups.
+  
+  \Note~Said differently,
+  the space of momenta of a connected diffeological group,
+  or any of its extensions by a discrete group, coincide.
+  In particular,
+  the only momentum of a discrete group is the momentum zero.
+\end{article} %% Momenta-and-connectedness
+
+\begin{proof}
+  Let us check first the injectivity.
+  Let $\alpha \in \cG^*$ such that $j^*(\alpha) = 0$,
+  and let $\P : \U \to \G$ be a plot.
+  Let $r_0 \in \U$,
+  and let $\B \subset \U$ be a small open ball centered at $r_0$,
+  and $g_0 = \P(r_0)$.
+  Since $\B$ is connected,
+  since $\eL(g_0^{-1}) \circ \P(r_0) = \id_\G$,
+  and thanks to the smoothness of group operations,
+  the parametrization $\Q = [\eL(g_0^{-1}) \circ \P] \restriction \B$ is a plot of $\G^\circ$.
+  Since $j^*(\alpha)\! =\! 0$,
+  $\alpha(\Q)\! =\! 0$.
+  But,
+  $\alpha(\Q)\! =\! \alpha(\eL(g_0^{-1}) \circ (\P \restriction \B))\! =\! \eL(g_0^{-1})^*(\alpha)(\P \restriction \B)$
+  \linebreak
+  $= \alpha(\P \restriction \B)$.
+  Thus,
+  $\alpha(\P \restriction \B) = 0$.
+  Since $\alpha$ vanishes locally at each point of $\U$,
+  $\alpha = 0$,
+  and $j^*$ is injective.
+  Now,
+  let us prove the surjectivity.
+  Let $\alpha \in \cG^\circ{}^*$.
+  For any component $\G_i$ of $\G$,
+  let us choose an element $g_i \in \G_i$,
+  and the identity for the identity component.
+  Let $\P : \U \to \G$ be a plot,
+  and let us assume that $\U$ is connected.
+  Thus,
+  $\P(\U)$ is contained in one connected component of $\G$,
+  let us say the component $\G_i$.
+  Let us define then,
+  $\bar \alpha(\P) = \alpha(\eR(g_i^{-1}) \circ \P)$.
+  Since $\eR(g_i^{-1}) \circ \P (r) \in \G^\circ$ for all $r \in \U$,
+  this is well defined.
+  Now,
+  since any plot is the sum of its restrictions on the components of its domain,
+  the map $\bar \alpha$ extends naturally to every plot of $\G$.
+  Now,
+  let $\P : \U \to \G$ be a plot,
+  let $\V$ be a domain,
+  and let $\F \in \Cinfty(\V,\U)$.
+  Let $s_0 \in \V$,
+  let $\V_0$ be the component of $s_0$ in $\V$,
+  let $r_0 = \F(s_0)$ and $\U_0$ be the component of $r_0$ in $\U$.
+  Let $\G_i$ be the component of $\P \circ \F(s_0) \!=\! \P(r_0)$ in $\G$.
+  We have $\bar \alpha((\P\! \circ\! \F) \!\restriction\! \V_0)$
+  \linebreak
+  $= \bar \alpha((\P \restriction \U_0) \circ (\F \restriction \V_0)) = \alpha(\eR(g_i^{-1}) \circ (\P \restriction \U_0) \circ (\F \restriction \V_0)) = \alpha([\eR(g_i^{-1})$
+  \linebreak
+  $\circ\ (\P \restriction \U_0)] \circ (\F \restriction \V_0)) = (\F \restriction \V_0)^*[\alpha(\eR(g_i^{-1}) \circ (\P \restriction \U_0)] = (\F \restriction \V_0)^*[\bar \alpha(\P \restriction \U_0)]$.
+  Hence,
+  $\bar \alpha (\F \circ \P) =_\loc \F^*(\bar \alpha(\P))$,
+  and if it is satisfied locally,
+  then it is satisfied globally,
+  thus $\bar \alpha (\F \circ \P) = \F^*(\bar \alpha(\P))$.
+  The map $\bar \alpha$ is a well defined differential $1$-form on $\G$.
+  Let us check now that $\bar \alpha$ is invariant by left multiplication.
+  Let $g \in \G$, let $\P : \U \to \G$ be a plot,
+  let $r_0 \in \U$,
+  let $\U_0$ be the component of $r_0$ in $\U$,
+  let $\G_i$ be the component of $\P(r_0)$ in $\G$, so $\P(\U_0) \subset \G_i$.
+  We have $\eL(g)^*(\bar \alpha(\P \restriction \U_0)) = \bar \alpha(\eL(g) \circ (\P \restriction \U_0)) = \alpha(\eR(g_i^{-1}) \circ \eL(g) \circ (\P \restriction \U_0)) = \alpha( \eL(g) \circ \eR(g_i^{-1}) \circ (\P \restriction \U_0)) = [\eL(g)^*(\alpha)] (\eR(g_i^{-1})\ \circ$
+  \linebreak
+  $(\P \restriction \U_0)) = \alpha (\eR(g_i^{-1}) \circ (\P \restriction \U_0)) = \bar \alpha (\P \restriction \U_0)$.
+  Thus, $\eL(g)^*(\bar \alpha)(\P) =_\loc \bar \alpha(\P)$,
+  and hence globally:
+  $\eL(g)^*(\bar \alpha) = \bar \alpha$.
+  Therefore,
+  $\bar \alpha$ is an element of $\cG^*$ which coincides with $\alpha$ on $\G^\circ$.
+  Since the pullback is a smooth operation,
+  $j^*$ is a smooth linear bijection;
+  on the other hand,
+  since the multiplication by the basepoints $g_i \in \G_i$ is smooth,
+  the process of extension $\alpha \mapsto \bar\alpha$ is smooth and $j^*$ is an  isomorphism of diffeological vector spaces.
+\end{proof}
+
+\begin{article}\artlabel{Momenta of coverings of diffeological groups}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Momenta of coverings of diffeological groups}
+  \label{Momenta-of-covering-of-diffeological-groups}
+  Let $\G$ be a diffeological group,
+  let $\pr : \widehat \G \to \G$ be some group covering,
+  see \art{Covering-diffeological-groups}.
+  Let $\cG^*$ and ${\widehat\cG}^*$ be the spaces of momenta of $\G$ and $\widehat \G$.
+  Then, the pullback $\pr^* : \cG^* \to {\widehat\cG}^*$  is an isomorphism.
+\end{article} %% Momenta-of-covering-of-diffeological-groups
+
+\begin{proof}
+  Thanks to \art{Momenta-and-connectedness},
+  we have just to assume that $\widehat \G$ and $\G$ are connected,
+  and thanks to \art{Covering-diffeological-groups},
+  we have just to check it for the universal covering $\pi : \tilde \G \to \G$.
+  Now,
+  $\pi^*$ is obviously linear,
+  let us show that $\pi^*$ is surjective.
+  Let $\tilde\alpha \in \tilde\cG^*$.
+  The group $\G$ is isomorphic to $\tilde \G/\pi_1(\G)$,
+  with respect to the left action of $\pi_1(\G)$,
+  that is,
+  $\tilde g \sim k \tilde g$,
+  for all $k \in \pi_1(\G)$.
+  Now,
+  let $\tilde \alpha \in \tilde\cG^*$,
+  $\tilde \alpha$ is left invariant by $\tilde \G$,
+  thus by $\pi_1(\G)$,
+  that is,
+  for all $k \in \pi_1(\G)$,
+  $\eL(k)^*(\tilde \alpha) = \tilde \alpha$.
+  But,
+  since $\pi_1(\G) = \ker(\pi)$ is discrete,
+  this is sufficient for the existence of a $1$-form $\alpha$ on $\G$ such that $\tilde \alpha = \pi^*(\alpha)$ \art{Pushing-forms-onto-quotients},
+  and the  map $\tilde \alpha = \alpha$ is smooth.
+  Now,
+  let $\tilde g \in \tilde \G$ and $g = \pi(\tilde g)$.
+  Since $\pi$ is a homomorphism,
+  $\pi \circ \eL(\tilde g) = \eL(g) \circ \pi$.
+  Thus,
+  on the one hand we have $\eL(\tilde g)^*(\tilde \alpha) = \eL(\tilde g)^*(\pi^*(\alpha)) = (\pi \circ \eL(\tilde g))^*(\alpha) = (\eL(g) \circ \pi)^*(\alpha) = \pi^*(\eL(g)^*(\alpha))$,
+  and on the other hand $\eL(\tilde g)^*(\tilde \alpha) = \tilde \alpha = \pi^*(\alpha)$.
+  Hence,
+  $\pi^*(\eL(g)^*(\alpha)) = \pi^*(\alpha)$.
+  But since $\pi$ is a subduction,
+  $\eL(g)^*(\alpha) = \alpha$,
+  $\alpha \in \cG^*$ and the map $\pi^*$ is surjective.
+  Next,
+  let $\tilde \alpha$ and $\tilde \beta$ be such that $\pi^*(\tilde \alpha) = \pi^*(\tilde \beta)$.
+  Since $\pi$ is a subduction,
+  $\tilde \alpha = \tilde \beta$,
+  $\pi^*$ is injective and thus bijective.
+  Finally,
+  $\pi^* : \cG^* \to \tilde \cG^*$ is a smooth linear bijection,
+  its inverse is smooth,
+  therefore it is an isomorphism of diffeological vector spaces.
+\end{proof}
+
+\begin{article}\artlabel{Linear coadjoint action and coadjoint orbits}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Linear coadjoint action and coadjoint orbits}
+  \label{Linear-coadjoint-action}
+  Let $\G$ be a diffeological group,
+  and let $\cG^*$ be the space of its momenta.
+  The pushforward $\Ad(g)_*(\alpha)$ of a momentum $\alpha \in \cG^*$,
+  by the adjoint action of any element $g$ of $\G$,
+  is again a momentum of $\G$,
+  that is,
+  again a left-invariant $1$-form.
+  This defines a linear smooth action of $\G$ on $\cG^*$ called  {\em coadjoint action},
+  and denoted by $\Ad_*$,
+  $$%
+  \Ad_* : (g,\alpha) \mapsto \Ad(g)_*(\alpha) = \Ad(g^{-1})^*(\alpha).
+  $$%
+  We check immediately that for all $g$,
+  $g'$ in $\G$,
+  $\Ad_*(gg') = \Ad_*(g) \circ \Ad_*(g')$,
+  and that $\Ad_*(g)$ is linear.
+  Note that,
+  since $\alpha$ is left-invariant,
+  $\Ad_*(g)(\alpha) =  \eR(g)^*(\alpha)$.
+  The orbit of $\alpha$ by $\G$ is by definition a {\em coadjoint orbit\/}\index{Coadjoint orbit} of $\G$,
+  it will be denoted by
+  $$%
+  \cO_\alpha \text{ or } \Ad_*(\G)(\alpha) = \{ \Ad_*(g)(\alpha) \mid g\in \G \}.
+  $$%
+  The orbit $\cO_\alpha$ can be regarded as a subset of $\cG^*$,
+  but also as the quotient of the group $\G$ by the stabilizer of the momentum $\alpha$,
+  $$%
+  \cO_\alpha \simeq \G/\Stab_\G(\alpha),
+  \text{ with }
+  \Stab_\G(\alpha) = \{ g \in \G \mid \Ad(g)_*(\alpha) = \alpha \}.
+  $$%
+  
+  \Note~The orbit $\cO_\alpha$ can be equipped with the subset diffeology of the functional diffeology of $\cG^*$ or with the quotient diffeology of $\G$.
+  For a Hausdorff second countable Lie group it has been proved that these diffeologies coincide \cite{IZK12},
+  but there is no reason {\em a priori\/} that these two diffeologies coincide in general.
+  It could be interesting,
+  however, to understand in which conditions they do,
+  or not.
+\end{article} %% Linear-coadjoint-action
+
+\begin{article}\artlabel{Affine coadjoint actions and $(\Gamma,\theta)$-coadjoint orbits}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Affine coadjoint actions and $(\Gamma,\theta)$-coadjoint orbits}
+  \label{Affine-coadjoint-actions-and-orbits}
+  Let $\G$ be a diffeological group,
+  and let $\cG^*$ be the space of its momenta.
+  Let $\Gamma \subset \cG^*$ be a subgroup of $(\cG^*,+)$,
+  invariant by the coadjoint action $\Ad_*$,
+  that is,
+  $$%
+  \Ad_*(g)(\Gamma) \subset \Gamma,
+  $$%
+  for all $g \in \G$.
+  Then,
+  the coadjoint action of $\G$ on $\cG^*$ projects to the quotient $\cG^*\!/\Gamma$,
+  regarded as an Abelian group,
+  as a smooth action denoted by $\Ad_*^\Gamma$,
+  $$%
+  \Ad_*^\Gamma(g)(\tau) = \class(\Ad_*(g)(\mu)), \text{ with } \tau = \class(\mu) \in \cG^*\!/\Gamma,
+  $$%
+  for all $g \in \G$ and all $\tau \in \cG^*\!/\Gamma$.
+  Now,
+  let $\theta$ be a smooth map,
+  from $\G$ to the space $\cG^*\!/\Gamma$,
+  such that
+  $$%
+  \theta(g g') = \Ad_*^\Gamma(g)(\theta(g')) + \theta(g),
+  $$%
+  for all  $g,g' \in \G$.
+  Such maps are formally known,
+  in the literature,
+  as twisted {\em $1$-cocycles}\index{Twisted cocycle} of $\G$ with values in $\cG^*\!/\Gamma$ \cite{Kir76}.
+  We shall call them cocycles of $\G$, with values in $\cG^*\!/\Gamma$,
+  or simply $(\cG^*\!/\Gamma)$-cocycles.
+  A cocycle $\theta$ is a {\em coboundary} if there exists a constant $c \in \cG^*\!/\Gamma$,
+  such that $\theta = \Delta c$,
+  with
+  $$%
+  \Delta c : g \mapsto \Ad_*^\Gamma(g)(c) -c.
+  $$%
+  Cocycles modulo coboundaries define a cohomology group denoted by $\H^1(\G,\cG^*\!/\Gamma)$.
+  Every such cocycle $\theta$ defines a new action of $\G$ on $\cG^*\!/\Gamma$ by
+  $$%
+  \Ad^{\Gamma,\theta}_* : (g, \tau) \mapsto \Ad_*^\Gamma(g)(\tau) + \theta(g).
+  $$%
+  The orbits for these actions will be called the {\em $(\Gamma,\theta)$-coadjoint orbits} of $\G$.
+  If $\Gamma = \{0\}$,
+  we shall call them simply $\theta$-coadjoint orbits.
+  If $\theta = 0$, we shall call them simply $\Gamma$-coadjoint orbits.
+  And,
+  if $\Gamma = \{0\}$ and $\theta = 0$,
+  we find again the ordinary coadjoint orbits defined in \art{Linear-coadjoint-action}.
+\end{article} %% Affine-coadjoint-actions-and-orbits
+
+\begin{article}\artlabel{Closed momenta of a diffeological group}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Closed momenta of a diffeological group}
+  \label{Closed-momenta-of-a-diffeological-group}
+  Let $\G$ be a diffeological group,
+  and let $\cG^*$ be its space of momenta.
+  Let us denote by $\ZG$ the subset of closed momenta of $\G$,
+  and by $\BG$ the subset of exact momenta of $\G$,
+  that is,
+  $$%
+  \ZG = \ZDR^1(\G) \cap \cG^*, \text{ and } \BG = \BDR^1(\G) \cap \cG^*.
+  $$%
+  1. Let us assume that $\G$ is connected,
+  and let $\tilde \G$ be its universal covering.
+  By factorization,
+  the Chain-Homotopy operator defines a canonical De Rham isomorphism $\ek$,
+  from the space of closed momenta $\ZG$ to the vector space $\DHom(\tilde \G,\RR)$,
+  that is,
+  for all $\zeta \in \ZG$,
+  $$%
+  \ek(\zeta) = [\tilde g \mapsto \CHK\zeta(p)], \text{ where } \CHK\zeta(p) = \int_{p} \zeta \text{ and } \tilde g = \class(p).
+  $$%
+  Here,
+  we have denoted by $\class(p)$ the fixed-ends homotopy class of the path $p \in \Paths(\G,\id_\G)$.
+  The subspace of exact momenta $\BG$ identifies,
+  through the isomorphism $\ek$,
+  with the subspace $\DHom(\G,\RR)$,
+  $$%
+  \ZG \simeq \DHom(\tilde \G,\RR), \text{ and } \BG \simeq \DHom(\G,\RR).
+  $$%
+  
+  2. Let $\G$ be a diffeological group,
+  connected or not.
+  Let $\zeta \in \cG^*$.
+  If $\zeta$ is closed,
+  then $\zeta$ is $\Ad_*$ invariant.
+  For all $\zeta \in \cG^*$,
+  $$%
+  d\zeta = 0, \text{ implies } \Ad_*(g)(\zeta) = \zeta, \text{ for all } g \in \G.
+  $$%
+  
+  \Note~Every homomorphism from a  group $\G$ to an Abelian group factorizes through the {\em Abelianized group}\index{Abelianized} $\Ab{\G} = \G/[\G,\G]$,
+  where $[\G,\G]$ is the normal subgroup of the commutators of $\G$.
+  Thus actually,
+  $\ZG \simeq \DHom(\Ab{\tilde\G},\RR)$ and $\BG \simeq \DHom(\Ab{\G},\RR)$.
+\end{article} %% Closed-momenta-of-a-diffeological-group
+
+\begin{proof}
+  1. Let $\pi : \tilde \G \to \G$ be the universal covering defined in  \art{Covering-diffeological-groups}.
+  Since $\tilde \G$ is simply connected,
+  every closed $1$-form is exact \art{Closed-1-forms-vanishing-on-loops}.
+  Thus, for every $\zeta \in \ZG$,
+  the pullback $\pi^*(\zeta)$ is exact.
+  Let $\F$ be a primitive of $\pi^*(\alpha)$,
+  that is,
+  $d\F = \pi^*(\alpha)$. We can even set $\F$ uniquely by choosing $\F(\id_{\tilde \G}) = 0$.
+  Actually $\F$ is defined by integrating the form $\zeta$ along the paths starting at the identity,
+  that is, $\F = \ek(\zeta)$.
+  Since $\alpha$ is left invariant and since the projection $\pi$ commutes with the left actions,
+  on $\G$ and $\tilde \G$, $\pi^*(\alpha)$ is left invariant.
+  Thus,
+  for every $\tilde g \in \tilde \G$, $d[\F \circ \eL(\tilde g)] = d\F$.
+  Since $\tilde \G$ is connected,
+  for every $\tilde g$,
+  $\tilde g'$ in $\tilde \G$,
+  $\F(\tilde g \tilde g') = \F(\tilde g') + f(\tilde g)$,
+  where $f$ is a smooth real function.
+  But since $\F(\id_\G) = 0$, $f(\tilde g) = \F(\tilde g)$,
+  and $\F$ is a smooth homomorphism from $\tilde \G$ to $\RR$.
+  Hence,
+  for every closed momentum $\zeta \in \ZG$,
+  there exists a unique homomorphism $\F \in \DHom(\tilde \G, \RR)$ such that $\zeta = \pi_*(d\F)$.
+  The homomorphism $\ek$ is thus injective,
+  and it is obviously surjective.
+  Now,
+  if $\zeta$ is exact,
+  that is,
+  if $\zeta = df$,
+  then $\F = \pi^*(f)$,
+  and,
+  $\ek(\BG) = \pi^*(\DHom(\G,\RR)) \simeq \DHom(\G,\RR)$.
+  
+  2. Thanks to \art{Momenta-and-connectedness} we can assume that $\G$ is connected.
+  Now, for every $\tilde g$,
+  $\tilde g'$ in $\tilde \G$, $\F(\tilde g \tilde g' \tilde g^{-1}) = \F(\tilde g')$,
+  that is,
+  $\F \circ \Ad(\tilde g) = \Ad(\tilde g)^*(\F) = \F$,
+  for all $\tilde g \in \tilde \G$.
+  Thus,
+  $d[\Ad(\tilde g)^*(\F)] = d\F$, or $\Ad^*(\tilde g)(\pi^*(\zeta)) = \pi^*(\zeta)$,
+  or $(\pi \circ \Ad(\tilde g))^*(\zeta) = \pi^*(\zeta)$.
+  But $\pi \circ \Ad(\tilde g) =  \Ad(g) \circ \pi$,
+  where $g = \pi(\tilde g)$.
+  Hence,
+  $\pi^*(\Ad(g)^*(\zeta)) = \pi^*(\zeta)$,
+  and since $\pi$ is a subduction,
+  $\Ad(g)^*(\zeta) = \zeta$,
+  that is,
+  $\Ad_*(g)(\zeta) = \zeta$.
+\end{proof}
+
+\begin{article}\artlabel{The value of a momentum}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} The value of a momentum}
+  \label{The-value-of-a-momentum}
+  Let $\G$ be a diffeological group.
+  Every momentum $\alpha$ of $\G$ is characterized by its value at the identity \art{The-values-of-a-differential-form}.
+  In other words,
+  if the value $\alpha_{\id_\G}$ of $\alpha$ at the identity $\id_\G \in \G$ vanishes,
+  then $\alpha$ is zero.
+  Equivalently,
+  $\alpha = 0$ if and only if for any 1-plot $\F$ of $\G$,
+  centered at the identity,
+  $\alpha(\F)(0) = 0$.
+  Equivalently,
+  two momenta of $\G$,
+  $\alpha$ and $\beta$,
+  coincide if and only if,
+  for any 1-plot $\F$ of $\G$ centered at the identity,
+  $\alpha(\F)(0) = \beta(\F)(0)$.
+  
+  \Note~It is tempting to reduce this proposition for $\F$ being a germ of a $1$-parameter subgroup of $\G$.
+  But,
+  if it is clear that this is possible for Lie groups,
+  it is not clear that it is still the case for any diffeological group.
+\end{article} %% The-value-of-a-momentum
+
+\begin{proof}
+  Let us consider an $n$-plot $\P: \U \to \G$ and $r \in \U$.
+  Let $\T_r$ be the translation $\T_r: s \mapsto  s+r$,
+  and let us denote $g = \P(r)$.
+  The parametrization  $\bar\P = \eL(g^{-1}) \circ \P \circ \T_r$,
+  defined on $\bar\U = \T_r^{-1}(\U)$,
+  is a plot of $\G$,
+  centered at the identity: $0 \in \bar\U$ and  $\bar\P(0) = \id_\G$.
+  So,
+  $\P = \eL(g) \circ \bar\P \circ \T_{-r}$,
+  and $\alpha(\P)_r = \alpha(\eL(g) \circ \bar\P \circ \T_{-r})_r =$
+  \linebreak
+  $(\eL(g) \circ \bar\P \circ \T_{-r})^*(\alpha)_r = \T_{-r}^* \circ \bar\P^* \circ \eL(g)^*(\alpha)_r$.
+  But $\eL(g)^*(\alpha) = \alpha$,
+  thus $\alpha(\P)_r = \T_{-r}^* \circ \bar\P^*(\alpha)_r =  \T_{-r}^*[\bar\P^*(\alpha)]_r = \bar\P^*(\alpha)_0 = 0$.
+  Hence,
+  if $\alpha(\F)(0) = 0$ for every 1-plot $\F$ centered at $\id_\G$,
+  then $\alpha(\P)(r) = 0$,
+  for every plot $\P$ and every $r \in \Dom(\P)$,
+  that is,
+  $\alpha = 0$.
+  Therefore,
+  the momenta of $\G$ are characterized by their values at the identity.
+  Now,
+  we know that every $1$-form is characterized by its values on the $1$-plot \art{The-k-forms-are-defined-by-the-k-plots},
+  which completes the proposition.
+\end{proof}
+
+\begin{article}\artlabel{Equivalence between right and left momenta}
+  \addcontentsline{toc}{section}{\small\hspace{10pt} Equivalence between right and left momenta}
+  \label{Equivalence-between-right-and-left-momenta}
+  Let $\G$ be a diffeological group,
+  and let $\cG^\star$ denote the space of {\em right momenta} of the group $\G$,
+  that is,
+  the space of $1$-forms of $\G$ invariant by the right multiplication,
+  $$%
+  \cG^\star = \{ \alpha \in \Omega^1(\G) \mid \text{for all } g \in \G, \ \eR(g)^*(\alpha) = \alpha \}.
+  $$%
+  There exists a natural linear isomorphism  $\flip : \cG^* \to \cG^\star$ equivariant with respect to the coadjoint action,
+  $\Ad_*(g) \circ \flip = \flip \circ\Ad_*(g)$,
+  for all $g \in \G$.
+  In other words,
+  there is no reason to prefer left or right momenta of a diffeological group.
+  The particular role of left momenta exists because we are dealing with actions of groups and not antiactions.
+  This situation is summarized by the following commutative diagram.
+  %
+  \begin{center}
+    \begin{tikzcd}[column sep=huge, row sep=large, every label/.append style = {font = \small}]
+      \cG^* \arrow[d, swap, "\Ad_*(g)"] \arrow[r,"\flip"] & \cG^\star \arrow[d, "\Ad_*(g)"]  \\
+      \cG^* \arrow[r, swap, "\flip"] & \cG^\star
+    \end{tikzcd}
+  \end{center}
+\end{article} %% Equivalence-between-right-and-left-momenta
+
+\begin{proof}
+  Let us denote by a dot the multiplication in $\G$.
+  Let $\alpha$ be any left $p$-momentum of $\G$.
+  Let $\P : \U \to \G$ be an $n$-plot.
+  Let $\bar \alpha(\P)$ be defined by
+  $$%
+  \bar \alpha(\P)_r = \alpha\left[s \mapsto \P(s) \cdot \P(r)^{-1}\right]_{s=r},
+  $$%
+  where $r$ belongs to $\U$.
+  Let us show that $\bar{\alpha}$ defines a $p$-form of $\G$.
+  First of all let us remark that $\bar \alpha(\P)$ is the restriction of the $1$-form $\alpha((s,r) \mapsto \P(s)\cdot \P(r)^{-1})$ to the diagonal $s=r$.
+  Thus,
+  $\bar \alpha(\P)$ is a smooth $1$-form of $\U$.
+  Now,
+  let us check that $\bar\alpha$ is a well defined differential $1$-form on $\G$.
+  let $\F : \V \to \U$ be a smooth $m$-parametrization,
+  $v$ be a point of $\V$ and $\delta v$ be a vector of $\RR^m$.
+  We have
+  \begin{eqnarray*}
+    \bar{\alpha}(\P \circ \F)_v(\delta v)
+    & = & \alpha\left[s \mapsto (\P \circ \F)(s) \cdot (\P \circ \F)(v)^{-1}\right]_v(\delta v) \\
+    & = & \alpha\left[s \mapsto \F(s) \mapsto (\P \circ \F)(s) \cdot (\P \circ \F)(v)^{-1}\right]_v(\delta v) \\
+    & = & \alpha\left[s \mapsto (r = \F(s)) \mapsto \P(r) \cdot \P(\F(v))^{-1}\right]_v(\delta v) \\
+    & = & \alpha\left(\left[r \mapsto \P(r) \cdot \P(\F(v))^{-1}\right] \circ \F\right)_v(\delta v) \\
+    & = & \F^*\left[\alpha\left(r \mapsto \P(r) \cdot \P(\F(v))^{-1}\right)\right]_v(\delta v) \\
+    & = & \alpha\left[r \mapsto \P(r) \cdot \P(\F(v))^{-1}\right]_{\F(v)} (\D(\F)(v)(\delta v)) \\
+    & = & \bar{\alpha}(\P)_{\F(v)}(\D(\F)(v)(\delta v))  \\
+    & = & \F^*\left[\bar \alpha(\P)\right]_v(\delta v).
+  \end{eqnarray*}
+  %
+  Next,
+  let us check that the $1$-form $\bar{\alpha}$ is right-invariant,
+  that is,
+  $\bar \alpha \in \cG^\star$.
+  For all $g \in \G$,
+  we have
+  \begin{eqnarray*}
+    \eR(g)^*(\bar\alpha)(\P)_r  & = & \bar\alpha(\eR(g) \circ \P)_r \\
+    & = & \alpha\left[s \mapsto (\eR(g) \circ \P)(s) \cdot (\eR(g) \circ \P)(r)^{-1}\right]_{s=r} \\
+    & = & \alpha\left[s \mapsto \P(s) \cdot g \cdot (\P(r) \cdot g)^{-1}\right]_{s=r} \\
+    & = & \alpha\left[s \mapsto \P(s) \cdot g \cdot g^{-1} \cdot \P(r)^{-1}\right]_{s=r} \\
+    & = & \alpha\left[s \mapsto \P(s) \cdot \P(r)^{-1}\right]_{s=r} \\
+    & = & \bar{\alpha}(\P)_r.
+  \end{eqnarray*}
+  Thus,
+  we just defined a map $\flip : \alpha \mapsto \bar \alpha$,
+  from $\cG^*$ to $\cG^\star$.
+  Let us check now that $\flip$ is bijective.
+  Let $\beta = \bar \alpha$.
+  Let $\P : \U \to \G$ be a plot,
+  and let us define $\bar \beta$ by $\bar \beta(\P)(r) = \beta [s \mapsto \P(r)^{-1} \cdot \P(s)](s=r)$,
+  for all $r \in \U$.
+  We have then,
+  \begin{eqnarray*}
+    \bar\beta(\P)_r & = & \beta \left[s \mapsto \P(r)^{-1} \cdot \P(s)\right]_{s=r} \\
+    & = & \bar \alpha \left[s \mapsto \P(r)^{-1} \cdot \P(s)\right]_{s=r} \\
+    & = & \alpha \left[s \mapsto \P(r)^{-1} \cdot \P(s) \cdot \P(r)^{-1} \cdot \P(r) \right]_{s=r} \\
+    & = & \alpha \left[s \mapsto \P(r)^{-1} \cdot \P(s) \right]_{s=r} \\
+    & = & \eL(\P(r)^{-1})^*(\alpha) \left[s \mapsto \P(s) \right]_{s=r} \\
+    & = & \alpha(\P)_r.
+  \end{eqnarray*}
+  Hence, $\bar \beta = \alpha$.
+  Thus,
+  $\flip$ is bijective and is clearly linear.
+  Therefore,
+  $\flip$ is a linear isomorphism from $\cG^*$ to $\cG^\star$.
+  It is easy
+  to check then that it is a smooth isomorphism.
+  Let us check now that $\flip$ is equivariant under the coadjoint action.
+  Let $\alpha \in \cG^*$,
+  let $\P: \U \to \G$ be a plot and $r \in \U$.
+  On the one hand we have
+  \begin{align*}
+    \flip[\Ad(g)^*(\alpha)](\P)_r
+    & =  \flip[\eR(g)^*(\alpha)](\P)_r  \\
+    & =  \eR(g)^*(\alpha)[s \mapsto \P(s) \cdot \P(r)^{-1}]_{s=r}\\
+    & =  \alpha[s \mapsto \P(s) \cdot \P(r)^{-1} \cdot g]_{s=r},
+    \intertext{and on the other hand,}
+    [\Ad(g)^*(\flip(\alpha))](\P)_r
+    & = [\eL(g)_*(\flip(\alpha))](\P)_r \\
+    & =  \flip(\alpha)(\eL(g^{-1}) \circ \P)_r \\
+    & =  \alpha[s \mapsto (\eL(g^{-1}) \circ \P)(s) \cdot  (\eL(g^{-1}) \circ \P)(r))^{-1}]_{s=r} \\
+    & =  \alpha[s \mapsto g^{-1} \cdot \P(s) \cdot \P(r)^{-1} \cdot g]_{s=r} \\
+    & =  \eL(g^{-1})^*(\alpha)[s \mapsto \P(s) \cdot \P(r)^{-1} \cdot g]_{s=r} \\
+    & =  \alpha[s \mapsto \P(s) \cdot \P(r)^{-1} \cdot g]_{s=r}.
+  \end{align*}
+  Therefore, $\flip \circ \Ad(g)^* = \Ad(g)^* \circ \flip$ for all $g \in \G$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   Exercises
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\Exercises
+
+\begin{exercise}[Pullback of 1-forms by multiplication]
+  \label{Pullback-of-1-forms-by-multiplication}
+  Let $\G$ be a diffeological group,
+  and let $\alpha \in \DForms^1(\G)$.
+  Let $\mul: \G \times \G \to \G$ be the multiplication map,
+  $\mul(a,b) = ab$. Let $\P : \U \to \G$ be an $n$-plot,
+  and  $\Q: \V \to \G$ be a $m$-plot.
+  Let $\P \times \Q$  be the $(n+m)$-plot of $\G \times \G$ defined by $(r,s) \mapsto (\P(r),\Q(s))$.
+  Let $r \in \U$ and $s \in \V$.
+  Let $\delta r \in \RR^n$,
+  and $\delta s \in \RR^m$.
+  Show that
+  $$%
+  \mul^*(\alpha)(\P \times \Q)_{r \choose s}\vect{\delta r \\ \delta s} = \eL(\P(r))^*(\alpha)(\Q)_s(\delta s) + \eR(\Q(s))^*(\alpha)(\P)_r(\delta r),
+  $$%
+  and, in particular,
+  $
+  \alpha[r \mapsto \P(r)\cdot \Q(r)]_r = \eL(\P(r))^*(\alpha)(\Q)_r + \eR(\Q(r))^*(\alpha)(\P)_r
+  $.
+\end{exercise} %% Pullback-of-1-forms-by-multiplication
+
+\begin{exercise}[Liouville form on groups]
+  \label{Liouville-form-on-groups}
+  Let $\G$ be a diffeological group,
+  and let $\cG^*$ be its space of momenta.
+  Let $\G \times \cG^*$ be the diffeological product where $\cG^*$ is equipped with its functional diffeology.
+  Let $\lambda$ be the map defined for every $n$-plot $\Q: \U \to \G \times \cG^*$ by
+  $$%
+  \lambda(\Q)_r(\delta r) = \A(r)(\P)_r(\delta r),
+  $$%
+  where $r\in\U$, $\Q(r) = (\P(r),\A(r))$ and
+  $\delta r \in \RR^n$.
+  %    Note that since $\A(r)$ is a $1$-form of $\G$, it can be evaluated on the plot $\P$
+  %    at the point $r$ and applied to the vector $\delta r$.
+  
+  \Question{1)}~Show that $\lambda$ is a be differential $1$-form on the product $\G\times\cG^*$.
+  
+  \Question{2)}~Let $\alpha \in \cG^*$,
+  and let $j_{\alpha} : \G \to \G \times \cG^*$  be defined by $j_{\alpha} : g \mapsto (g,\alpha)$.
+  Show that $j_{\alpha}^{*}(\lambda) = \alpha$.
+  
+  \Question{3)}~Show that the form $\lambda$ is invariant by the following action
+  of $\G$ on  $\G \times \cG^*$\,:
+  $$%
+  \text{For all } g' \in \G, \ g'_{{\G}\times\cG^*}:  (g,\alpha) \mapsto (\Ad(g')(g),\Ad_*(g')(\alpha)).
+  $$%
+  Note the similitude of this construction with the general construction of the Liouville form
+  for any diffeological space \art{The-Liouville-forms-on-the-spaces-of-p-forms}.
+\end{exercise} %% Liouville-form-on-groups
+

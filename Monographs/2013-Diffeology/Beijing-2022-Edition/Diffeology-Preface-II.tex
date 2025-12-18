@@ -1,0 +1,125 @@
+\chapter*{Preface to the revised print}
+%\addcontentsline{toc}{chapter}{Preface II}
+
+\begin{chaphead}
+  
+  This textbook was completed in 2011 and was published for the first time in 2013,
+  by the American Mathematical Society,
+  almost 10 years ago.
+  Now Beijing World Publishing Corporation has decided to reprint it for mainland China.
+  This is the perfect opportunity to correct the mistakes or misprints of the first print.
+  I would like to believe that there are no mistakes or misprints left, but I fear that zero-fault is only an asymptotic notion.%
+  \footnote{I will maintain an errata file on my page, if needed.\\
+  \texttt{http://math.huji.ac.il/\raisebox{-2pt}{\~{}}piz/documents/erratawpc.pdf}
+  }
+  %
+  That being said,
+  this revision has also been an opportunity to update a few things that were undecided or unfinished at that time.
+  In particular,
+  the question of whether any local induction was an immersion was settled,
+  see \exref{Induction-of-intervals-into-domains}.
+  In fact,
+  this question was solved by Henri Joris already in 1982 but I was unaware of it:
+  the semicubic $y^2 = x^3$ is a submanifold for the subset diffeology while the induction $t \mapsto(t^2, t^3)$ that describes it is not an immersion.
+  Thus,
+  there are indeed local inductions that are not immersions,
+  and the case is closed.
+  This example was the last brick to understand and situate the different subcategories relative to each other:
+  induction/subduction,
+  local-induction/local-subduction and immersion/submersion.
+  This example was an opportunity to refine the notion of submanifolds in a diffeological space by distinguishing between simply submanifolds,
+  embedded submanifolds and smoothly embedded submanifolds.
+  These last ones do not only put into play the D-topologies of the space and the subspace but also the germs of diffeomorphisms of the subspace that extend to the ambient space.
+  All this is described in \xart{Submanifolds-of-a-diffeological-space}{Note 2},
+  \xart{Embeddings}{Definition 2} and \art{Embedded-subsets-of-a-diffeological-space}.
+  
+  Another question has been solved in the meantime but is not included in details in the revision:
+  every symplectic manifold is a coadjoint orbit (maybe affine) of the group of Hamiltonian diffeomorphisms \art{Symplectic-manifolds-are-coadjoint-orbits}.
+  This result has been improved,
+  and every symplectic manifold is a coadjoint orbit for the linear action of the group of automorphisms of the integration bundle of the symplectic manifold,
+  which is a central extension of the group of Hamiltonian diffeomorphisms by the group of periods of the symplectic form \art{Integration-bundles-of-closed-2-forms}.%
+  \footnote{The construction of the integration bundle for a manifold has been published in \cite{Igl95}.}
+  This theorem which is only mentioned calls for several remarks;
+  among other things:
+  
+  1) Diffeology is not just a convenient language,
+  it is a rigorous formal framework for theorems which do not exist otherwise.
+  In this case the group is not a Lie group,
+  but above all:
+  the integration bundle is almost never a manifold.
+  The torus of periods,
+  is in general topologically trivial.
+  And yet,
+  diffeology offers a full generalization of the Kirillov-Kostant-Souriau theorem.
+  
+  2) Various attempts to obtain this theorem,
+  using infinitesimal approaches,
+  have failed because the torus of periods has the same ``Lie algebra'' as $\RR$ or $\S^1$ or any quotient $\RR/\Gamma$,
+  where $\Gamma$ is any strict subgroup of $\RR$.
+  The only way to solve this problem is to obtain directly the central extension by a finite method,
+  and in this degree of generality,
+  this is only possible by diffeology.
+
+  3) This is a new example where diffeology combines at the same time,
+  in a non trivial way,
+  singularity and infinite dimension.
+  A first example was the singular reduction in symplectic diffeology.%
+  \footnote{See \cite{PIZ15}.}
+  
+  On a different note,
+  since the publication of \emph{Diffeology} in 2013,
+  a way has been opened to a convergence with non-commutative geometry through two papers,
+  that I just mention in passing (the book has its limitations).
+  One can functorially associate a $\CC^*$-algebra with any orbifold,
+  the same thing with any quasifold \xart{Structure-group-of-orbifolds}{Note 2},
+  a (not so) newcomer in diffeology.%
+  \footnote{See \cite{IZL18} and \cite{IZP21}.}
+  This is a big program that has just been scratched, how far can we go on this path?
+  
+  The existence of Klein's stratification initiated a new thinking about the general notion of stratification \art{Klein-structure-and-singularities-of-a-diffeological-space}.
+  The fact that any subset of a diffeological space is by default equipped with the subset diffeology makes it possible to decompose the ordinary geometric properties of stratifications,
+  usually presented in block,
+  into distinct subclasses that simplify the reading of the many different situations of stratified spaces.
+  Basically,
+  and this is the minimal condition in diffeology:
+  any partition that satisfies the frontier condition
+  ---~the adherence of a stratum is a union of strata~---
+  is a diffeological stratification.
+  Then,
+  the strata are equipped with the subset diffeology.
+  It is not necessary anymore to require that the strata are submanifolds,
+  and there are now examples where they are not.%
+  \footnote{The space of geodesics of the $2$-torus in particular,
+  see \cite{PIZ22b}.}
+  The property of being locally-closed is characterized by the Alexandrov D-topology of the quotient:
+  defining or not a partial order,
+  and so on.
+  I mentioned this discussion but did not elaborate on it.%
+  \footnote{A recent paper on the Klein stratification of orbifolds was the opportunity to clarify all these aspects of stratifications in diffeology;
+  see \cite{GIZ22}.}
+  Here again there is a lot to do in this direction.
+  To conclude,
+  I hope that with this book cleaned up a bit,
+  the reader will benefit from a new look at differential geometry,
+  in a global and inclusive version.
+
+  \textsc{Last word.} As this is a reprint and not a new edition,
+  I have not added new paragraphs or exercises (but an index) in order to preserve references that have appeared in other publications since then.
+  This manual does not pretend to cover everything in diffeology.
+  I have written it to serve as a reference text to establish the basic constructs of diffeology,
+  and also to continue the reflection on symplectic diffeology as it is at the origin of this theory.
+  Since the first edition,
+  diffeology has developed in many directions,
+  one finds diffeology in category theory,
+  in differential homotopy,
+  and even in formal calculus and machine learning.
+  A growing number of mathematicians contribute to this development in the various fields where diffeology has branched out,
+  by publishing original papers,
+  by organizing summer schools,
+  conferences,
+  and recently a monthly world seminar has been instituted,
+  open to all who wish to participate.
+  All information is available at
+  
+  \hfill \verb|http://diffeology.net|
+\end{chaphead}

@@ -1,0 +1,197 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Diffeology Book
+%%
+%%  Patrick Iglesias-Zemmour //  2005-2012
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage[log,warning]{snapshot}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  MARK: Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[reqno]{surv-l}
+
+\input{Diffeology-macro.tex}
+
+\begin{document}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Front Cover
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{Diffeology-front-cover.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Front matter
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \frontmatter
+  
+  \thispagestyle{empty}
+  
+  \input{Diffeology-quote.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Table of Contents
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \setcounter{page}{3}
+  
+  \makeatletter
+  \def\@makechapterhead#1{%
+  %% change the value of \topskip from 7.5pc to the desired value
+  \global\topskip 2pc\relax
+  \begingroup
+  \fontsize{\@xivpt}{18}\bfseries\centering
+  \ifnum\c@secnumdepth>\m@ne
+  \leavevmode \hskip-\leftskip
+  \rlap{\vbox to\z@{\vss
+  \centerline{\normalsize\mdseries
+  \uppercase\@xp{\chaptername}\enspace\thechapter}
+  \vskip 3pc}}\hskip\leftskip\fi
+  #1\par \endgroup
+  \skip@34\p@ \advance\skip@-\normalbaselineskip
+  \vskip\skip@ }
+  \def\@makeschapterhead#1{%
+  %% change the value of \topskip from 7.5pc to the desired value
+  \global\topskip 2pc\relax
+  \begingroup
+  \fontsize{\@xivpt}{18}\bfseries\centering
+  #1\par \endgroup
+  \skip@34\p@ \advance\skip@-\normalbaselineskip
+  \vskip\skip@ }
+  \def\l@chapter{\@tocline{0}{5.8pt plus 1pt}{0pt}{}{}}
+  \makeatother
+  
+  \tableofcontents
+  
+  % Once compiled  Change in toc :  \contentsline {chapter} -> \vspace{-2.2pt}\contentsline {chapter}
+  %  \def\l@chapter{\@tocline{0}{5.8pt plus1pt}{0pt}{}{}} : 8pt -> 5.8pt -> 8pt
+  
+  \makeatletter
+  \def\@makechapterhead#1{%
+  %% change the value of \topskip from 7.5pc to the desired value
+  \global\topskip 7.5pc\relax
+  \begingroup
+  \fontsize{\@xivpt}{18}\bfseries\centering
+  \ifnum\c@secnumdepth>\m@ne
+  \leavevmode \hskip-\leftskip
+  \rlap{\vbox to\z@{\vss
+  \centerline{\normalsize\mdseries
+  \uppercase\@xp{\chaptername}\enspace\thechapter}
+  \vskip 3pc}}\hskip\leftskip\fi
+  #1\par \endgroup
+  \skip@34\p@ \advance\skip@-\normalbaselineskip
+  \vskip\skip@ }
+  \def\@makeschapterhead#1{%
+  %% change the value of \topskip from 7.5pc to the desired value
+  \global\topskip 7.5pc\relax
+  \begingroup
+  \fontsize{\@xivpt}{18}\bfseries\centering
+  #1\par \endgroup
+  \skip@34\p@ \advance\skip@-\normalbaselineskip
+  \vskip\skip@ }
+  \def\l@chapter{\@tocline{0}{8pt plus 1pt}{0pt}{}{}}
+  \makeatother
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: - Foreword, Thanks
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{Diffeology-Preface-II.tex}
+  \input{Diffeology-Preface-I.tex}
+  \input{Diffeology-thanks.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Main matter
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \mainmatter
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Chapters
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{Diffeology-chap-1.tex}
+  
+  \input{Diffeology-chap-2.tex}
+  
+  \input{Diffeology-chap-3.tex}
+  
+  \input{Diffeology-chap-4.tex}
+  
+  \input{Diffeology-chap-5.tex}
+  
+  \input{Diffeology-chap-6.tex}
+  
+  \input{Diffeology-chap-7.tex}
+  
+  \input{Diffeology-chap-8.tex}
+  
+  \input{Diffeology-chap-9.tex}
+  
+  \input{Diffeology-solutions.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Back matter
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \backmatter
+  
+  \input{Diffeology-Postface.tex}
+  
+  \input{Diffeology-notations.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Index
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \printindex
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Bibliography
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Back cover
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{Diffeology.bbl}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Back Cover
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \thispagestyle{empty}
+  
+  \input{Diffeology-back-cover.tex}
+  
+\end{document}

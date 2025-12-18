@@ -1,0 +1,417 @@
+\contentsline {chapter}{\tocchapter {Chapter}{}{Preface to the revised print}}{xv}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{}{Preface}}{xix}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{1}{Diffeology and Diffeological Spaces}}{1}{}%
+\contentsline {section}{\tocsection {}{}{Linguistic Preliminaries}}{2}{}%
+\contentsline {section}{\small \hspace {10pt} Euclidean spaces and domains}{2}{}%
+\contentsline {section}{\small \hspace {10pt} Sets, subsets, maps etc.}{2}{}%
+\contentsline {section}{\small \hspace {10pt} Parametrizations in sets}{2}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth parametrizations in domains}{3}{}%
+\contentsline {section}{\tocsection {}{}{Axioms of Diffeology}}{5}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeologies and diffeological spaces}{5}{}%
+\contentsline {section}{\small \hspace {10pt} Plots of a diffeological space}{5}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeology or diffeological space?}{5}{}%
+\contentsline {section}{\small \hspace {10pt} The set of diffeologies of a set}{6}{}%
+\contentsline {section}{\small \hspace {10pt} Real domains as diffeological spaces}{6}{}%
+\contentsline {section}{\small \hspace {10pt} The wire diffeology}{6}{}%
+\contentsline {section}{\small \hspace {10pt} A diffeology for the circle}{6}{}%
+\contentsline {section}{\small \hspace {10pt} A diffeology for the square}{7}{}%
+\contentsline {section}{\small \hspace {10pt} A diffeology for the sets of smooth maps}{7}{}%
+\contentsline {section}{\tocsection {}{}{Smooth Maps and the Category Diffeology}}{8}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth maps}{9}{}%
+\contentsline {section}{\small \hspace {10pt} Composition of smooth maps}{9}{}%
+\contentsline {section}{\small \hspace {10pt} Plots are smooth}{9}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeomorphisms}{10}{}%
+\contentsline {section}{\tocsection {}{}{Comparing Diffeologies}}{12}{}%
+\contentsline {section}{\small \hspace {10pt} Fineness of diffeologies}{12}{}%
+\contentsline {section}{\small \hspace {10pt} Fineness via the identity map}{12}{}%
+\contentsline {section}{\small \hspace {10pt} Discrete diffeology}{12}{}%
+\contentsline {section}{\small \hspace {10pt} Coarse diffeology}{13}{}%
+\contentsline {section}{\small \hspace {10pt} Intersecting diffeologies}{13}{}%
+\contentsline {section}{\small \hspace {10pt} Infimum of a family of diffeologies}{14}{}%
+\contentsline {section}{\small \hspace {10pt} Supremum of a family of diffeologies}{14}{}%
+\contentsline {section}{\small \hspace {10pt} Playing with bounds}{15}{}%
+\contentsline {section}{\tocsection {}{}{Pulling Back Diffeologies}}{17}{}%
+\contentsline {section}{\small \hspace {10pt} Pullbacks of diffeologies}{17}{}%
+\contentsline {section}{\small \hspace {10pt} Smoothness and pullbacks}{18}{}%
+\contentsline {section}{\small \hspace {10pt} Composition of pullbacks}{18}{}%
+\contentsline {section}{\tocsection {}{}{Inductions}}{19}{}%
+\contentsline {section}{\small \hspace {10pt} What is an induction?}{19}{}%
+\contentsline {section}{\small \hspace {10pt} Composition of inductions}{19}{}%
+\contentsline {section}{\small \hspace {10pt} Criterion for being an induction}{20}{}%
+\contentsline {section}{\small \hspace {10pt} Surjective inductions}{20}{}%
+\contentsline {section}{\tocsection {}{}{Subspaces of Diffeological Spaces}}{22}{}%
+\contentsline {section}{\small \hspace {10pt} Subspaces and subset diffeology}{22}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth maps to subspaces}{22}{}%
+\contentsline {section}{\small \hspace {10pt} Subspaces subsubspaces etc.}{23}{}%
+\contentsline {section}{\small \hspace {10pt} Inductions identify source and image}{23}{}%
+\contentsline {section}{\small \hspace {10pt} Restricting inductions to subspaces}{23}{}%
+\contentsline {section}{\small \hspace {10pt} Discrete subsets of a diffeological space}{24}{}%
+\contentsline {section}{\tocsection {}{}{Sums of Diffeological Spaces}}{25}{}%
+\contentsline {section}{\small \hspace {10pt} Building sums with spaces}{26}{}%
+\contentsline {section}{\small \hspace {10pt} Refining a sum}{27}{}%
+\contentsline {section}{\small \hspace {10pt} Foliated diffeology}{27}{}%
+\contentsline {section}{\small \hspace {10pt} Klein structure and singularities of a diffeological space}{27}{}%
+\contentsline {section}{\tocsection {}{}{Pushing Forward Diffeologies}}{29}{}%
+\contentsline {section}{\small \hspace {10pt} Pushforward of diffeologies}{29}{}%
+\contentsline {section}{\small \hspace {10pt} Smoothness and pushforwards}{30}{}%
+\contentsline {section}{\small \hspace {10pt} Composition of pushforwards}{31}{}%
+\contentsline {section}{\tocsection {}{}{Subductions}}{32}{}%
+\contentsline {section}{\small \hspace {10pt} What is a subduction?}{32}{}%
+\contentsline {section}{\small \hspace {10pt} Compositions of subductions}{32}{}%
+\contentsline {section}{\small \hspace {10pt} Criterion for being a subduction}{32}{}%
+\contentsline {section}{\small \hspace {10pt} Injective subductions}{32}{}%
+\contentsline {section}{\tocsection {}{}{Quotients of Diffeological Spaces}}{34}{}%
+\contentsline {section}{\small \hspace {10pt} Quotient and quotient diffeology}{34}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth maps from quotients}{35}{}%
+\contentsline {section}{\small \hspace {10pt} Uniqueness of quotient}{35}{}%
+\contentsline {section}{\small \hspace {10pt} Sections of a quotient}{36}{}%
+\contentsline {section}{\small \hspace {10pt} Strict maps, between quotients and subspaces}{37}{}%
+\contentsline {section}{\tocsection {}{}{Products of Diffeological Spaces}}{39}{}%
+\contentsline {section}{\small \hspace {10pt} Building products with spaces}{40}{}%
+\contentsline {section}{\small \hspace {10pt} Projections on factors are subductions}{41}{}%
+\contentsline {section}{\tocsection {}{}{Functional Diffeology}}{41}{}%
+\contentsline {section}{\small \hspace {10pt} Functional diffeologies}{42}{}%
+\contentsline {section}{\small \hspace {10pt} Restriction of the functional diffeology}{43}{}%
+\contentsline {section}{\small \hspace {10pt} The composition is smooth}{43}{}%
+\contentsline {section}{\small \hspace {10pt} Functional diffeology and products}{43}{}%
+\contentsline {section}{\small \hspace {10pt} Functional diffeology on groups of diffeomorphisms}{44}{}%
+\contentsline {section}{\small \hspace {10pt} Slipping $X$ into ${\mathcal {C}}^\infty ({\mathcal {C}}^\infty (X,X),X)$}{44}{}%
+\contentsline {section}{\small \hspace {10pt} Functional diffeology of a diffeology}{45}{}%
+\contentsline {section}{\small \hspace {10pt} Iterating paths}{46}{}%
+\contentsline {section}{\small \hspace {10pt} Compact controlled diffeology}{47}{}%
+\contentsline {section}{\tocsection {}{}{Generating Families}}{49}{}%
+\contentsline {section}{\small \hspace {10pt} Generating diffeology}{50}{}%
+\contentsline {section}{\small \hspace {10pt} Generated by the empty family}{50}{}%
+\contentsline {section}{\small \hspace {10pt} Criterion of generation}{50}{}%
+\contentsline {section}{\small \hspace {10pt} Generating diffeology as projector}{52}{}%
+\contentsline {section}{\small \hspace {10pt} Fineness and generating families}{52}{}%
+\contentsline {section}{\small \hspace {10pt} Adding and intersecting families}{53}{}%
+\contentsline {section}{\small \hspace {10pt} Adding constants to generating family}{53}{}%
+\contentsline {section}{\small \hspace {10pt} Lifting smooth maps along generating families}{53}{}%
+\contentsline {section}{\small \hspace {10pt} Pushing forward families}{54}{}%
+\contentsline {section}{\small \hspace {10pt} Pulling back families}{55}{}%
+\contentsline {section}{\small \hspace {10pt} Nebula of a generating family}{56}{}%
+\contentsline {section}{\tocsection {}{}{Dimension of Diffeological Spaces}}{58}{}%
+\contentsline {section}{\small \hspace {10pt} Dimension of a diffeological space}{58}{}%
+\contentsline {section}{\small \hspace {10pt} The dimension is a diffeological invariant}{59}{}%
+\contentsline {section}{\small \hspace {10pt} Dimension of real domains}{59}{}%
+\contentsline {section}{\small \hspace {10pt} Dimension zero spaces are discrete}{59}{}%
+\contentsline {section}{\small \hspace {10pt} Dimensions and quotients of diffeologies}{59}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{2}{Locality and Diffeologies}}{63}{}%
+\contentsline {section}{\tocsection {}{}{To Be Locally Smooth}}{63}{}%
+\contentsline {section}{\small \hspace {10pt} Local smooth maps}{64}{}%
+\contentsline {section}{\small \hspace {10pt} Composition of local smooth maps}{64}{}%
+\contentsline {section}{\small \hspace {10pt} To be smooth or locally smooth}{64}{}%
+\contentsline {section}{\small \hspace {10pt} Germs of local smooth maps}{65}{}%
+\contentsline {section}{\small \hspace {10pt} Local diffeomorphisms}{66}{}%
+\contentsline {section}{\small \hspace {10pt} \'Etale maps and diffeomorphisms}{66}{}%
+\contentsline {section}{\small \hspace {10pt} Germs of local diffeomorphisms as groupoid}{66}{}%
+\contentsline {section}{\tocsection {}{}{D-topology and Local Smoothness}}{66}{}%
+\contentsline {section}{\small \hspace {10pt} The D-Topology of diffeological spaces}{67}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth maps are D-continuous}{67}{}%
+\contentsline {section}{\small \hspace {10pt} Local smooth maps are defined on D-opens}{68}{}%
+\contentsline {section}{\small \hspace {10pt} {D}-topology on discrete and coarse diffeological spaces}{69}{}%
+\contentsline {section}{\small \hspace {10pt} Quotients and D-topology}{69}{}%
+\contentsline {section}{\tocsection {}{}{Embeddings and Embedded Subsets}}{70}{}%
+\contentsline {section}{\small \hspace {10pt} Embeddings}{70}{}%
+\contentsline {section}{\small \hspace {10pt} Embedded subsets of a diffeological space}{71}{}%
+\contentsline {section}{\tocsection {}{}{Local or Weak Inductions}}{72}{}%
+\contentsline {section}{\small \hspace {10pt} Local inductions}{72}{}%
+\contentsline {section}{\tocsection {}{}{Local or Strong Subductions}}{73}{}%
+\contentsline {section}{\small \hspace {10pt} Local subductions}{73}{}%
+\contentsline {section}{\small \hspace {10pt} Compositions of local subductions}{74}{}%
+\contentsline {section}{\small \hspace {10pt} Local subductions are D-open maps}{74}{}%
+\contentsline {section}{\tocsection {}{}{The Dimension Map of Diffeological Spaces}}{77}{}%
+\contentsline {section}{\small \hspace {10pt} Pointed plots and germs of a diffeological space}{77}{}%
+\contentsline {section}{\small \hspace {10pt} Local generating families}{77}{}%
+\contentsline {section}{\small \hspace {10pt} Union of local generating families}{77}{}%
+\contentsline {section}{\small \hspace {10pt} The dimension map}{78}{}%
+\contentsline {section}{\small \hspace {10pt} Global dimension and dimension map}{78}{}%
+\contentsline {section}{\small \hspace {10pt} The dimension map is a local invariant}{79}{}%
+\contentsline {section}{\small \hspace {10pt} Transitive and locally transitive spaces}{79}{}%
+\contentsline {section}{\small \hspace {10pt} Local subduction and dimension}{79}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{3}{Diffeological Vector Spaces}}{81}{}%
+\contentsline {section}{\tocsection {}{}{Basic Constructions and Definitions}}{81}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeological vector spaces}{81}{}%
+\contentsline {section}{\small \hspace {10pt} Standard vector spaces}{81}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth linear maps}{82}{}%
+\contentsline {section}{\small \hspace {10pt} Products of diffeological vector spaces}{82}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeological vector subspaces}{82}{}%
+\contentsline {section}{\small \hspace {10pt} Quotient of diffeological vector spaces}{83}{}%
+\contentsline {section}{\tocsection {}{}{Fine Diffeology on Vector Spaces}}{83}{}%
+\contentsline {section}{\small \hspace {10pt} The fine diffeology of vector spaces}{83}{}%
+\contentsline {section}{\small \hspace {10pt} Generating the fine diffeology}{84}{}%
+\contentsline {section}{\small \hspace {10pt} Linear maps and fine diffeology}{85}{}%
+\contentsline {section}{\small \hspace {10pt} The fine linear category}{86}{}%
+\contentsline {section}{\small \hspace {10pt} Injections of fine diffeological vector spaces}{86}{}%
+\contentsline {section}{\small \hspace {10pt} Functional diffeology between fine spaces}{86}{}%
+\contentsline {section}{\tocsection {}{}{Euclidean and Hermitian Diffeological Vector Spaces}}{89}{}%
+\contentsline {section}{\small \hspace {10pt} Euclidean diffeological vector spaces}{89}{}%
+\contentsline {section}{\small \hspace {10pt} Hermitian diffeological vector spaces}{89}{}%
+\contentsline {section}{\small \hspace {10pt} The fine standard Hilbert space}{90}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{4}{Modeling Spaces, Manifolds, etc.}}{95}{}%
+\contentsline {section}{\tocsection {}{}{Standard Manifolds, the Diffeological Way}}{96}{}%
+\contentsline {section}{\small \hspace {10pt} Manifolds as diffeologies}{96}{}%
+\contentsline {section}{\small \hspace {10pt} Local modeling of manifolds}{96}{}%
+\contentsline {section}{\small \hspace {10pt} Manifolds, the classical way}{97}{}%
+\contentsline {section}{\small \hspace {10pt} Submanifolds of a diffeological space}{101}{}%
+\contentsline {section}{\small \hspace {10pt} Immersed submanifolds are not submanifolds?}{102}{}%
+\contentsline {section}{\small \hspace {10pt} Quotients of manifolds}{103}{}%
+\contentsline {section}{\tocsection {}{}{Diffeological Manifolds}}{105}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeological Manifolds}{106}{}%
+\contentsline {section}{\small \hspace {10pt} Generating diffeological manifolds}{107}{}%
+\contentsline {section}{\small \hspace {10pt} The infinite sphere}{107}{}%
+\contentsline {section}{\small \hspace {10pt} The infinite sphere is contractible}{110}{}%
+\contentsline {section}{\small \hspace {10pt} The infinite complex projective space}{112}{}%
+\contentsline {section}{\tocsection {}{}{Modeling Diffeologies}}{116}{}%
+\contentsline {section}{\small \hspace {10pt} Half-spaces}{117}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth real maps from half-spaces}{117}{}%
+\contentsline {section}{\small \hspace {10pt} Local diffeomorphisms of half-spaces}{118}{}%
+\contentsline {section}{\small \hspace {10pt} Classical manifolds with boundary}{119}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeology of manifolds with boundary}{119}{}%
+\contentsline {section}{\small \hspace {10pt} Orbifolds as diffeologies}{121}{}%
+\contentsline {section}{\small \hspace {10pt} Structure groups of orbifolds}{121}{}%
+\contentsline {section}{\small \hspace {10pt} In conclusion on modeling}{122}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{5}{Homotopy of Diffeological Spaces}}{125}{}%
+\contentsline {section}{\tocsection {}{}{Connectedness and Homotopy Category}}{125}{}%
+\contentsline {section}{\small \hspace {10pt} The space of Paths of a diffeological space}{125}{}%
+\contentsline {section}{\small \hspace {10pt} Concatenation of paths}{126}{}%
+\contentsline {section}{\small \hspace {10pt} Reversing paths}{126}{}%
+\contentsline {section}{\small \hspace {10pt} Stationary paths}{127}{}%
+\contentsline {section}{\small \hspace {10pt} Homotopy of paths}{129}{}%
+\contentsline {section}{\small \hspace {10pt} Pathwise connectedness}{130}{}%
+\contentsline {section}{\small \hspace {10pt} Connected components}{131}{}%
+\contentsline {section}{\small \hspace {10pt} The sum of its components}{132}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth maps and connectedness}{133}{}%
+\contentsline {section}{\small \hspace {10pt} The homotopy category}{134}{}%
+\contentsline {section}{\small \hspace {10pt} Contractible diffeological spaces}{135}{}%
+\contentsline {section}{\small \hspace {10pt} Local contractibility}{136}{}%
+\contentsline {section}{\small \hspace {10pt} Retractions and deformation retracts}{137}{}%
+\contentsline {section}{\tocsection {}{}{Poincar\'e Groupoid and Homotopy Groups}}{138}{}%
+\contentsline {section}{\small \hspace {10pt} Pointed spaces and spaces of components}{138}{}%
+\contentsline {section}{\small \hspace {10pt} The Poincar\'e groupoid and fundamental group}{139}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeological H-spaces}{142}{}%
+\contentsline {section}{\small \hspace {10pt} Higher homotopy groups and functors $\Pi _n$}{142}{}%
+\contentsline {section}{\tocsection {}{}{Relative Homotopy}}{145}{}%
+\contentsline {section}{\small \hspace {10pt} The short homotopy sequence of a pair}{145}{}%
+\contentsline {section}{\small \hspace {10pt} The long homotopy sequence of a pair}{147}{}%
+\contentsline {section}{\small \hspace {10pt} Another look at relative homotopy}{149}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{6}{Cartan-De Rham Calculus}}{153}{}%
+\contentsline {section}{\tocsection {}{}{Multilinear Algebra}}{154}{}%
+\contentsline {section}{\small \hspace {10pt} Spaces of linear maps}{154}{}%
+\contentsline {section}{\small \hspace {10pt} Bases and linear groups}{154}{}%
+\contentsline {section}{\small \hspace {10pt} Dual of a vector space}{155}{}%
+\contentsline {section}{\small \hspace {10pt} Bilinear maps}{156}{}%
+\contentsline {section}{\small \hspace {10pt} Symmetric and antisymmetric bilinear maps}{157}{}%
+\contentsline {section}{\small \hspace {10pt} Multilinear operators}{157}{}%
+\contentsline {section}{\small \hspace {10pt} Symmetric and antisymmetric multilinear operators}{157}{}%
+\contentsline {section}{\small \hspace {10pt} Tensors}{158}{}%
+\contentsline {section}{\small \hspace {10pt} Vector space and bidual}{159}{}%
+\contentsline {section}{\small \hspace {10pt} Tensor products}{159}{}%
+\contentsline {section}{\small \hspace {10pt} Components of a tensor}{159}{}%
+\contentsline {section}{\small \hspace {10pt} Symmetrization and antisymmetrization of tensors}{160}{}%
+\contentsline {section}{\small \hspace {10pt} Linear $p$-forms}{161}{}%
+\contentsline {section}{\small \hspace {10pt} Inner product}{162}{}%
+\contentsline {section}{\small \hspace {10pt} Exterior product}{162}{}%
+\contentsline {section}{\small \hspace {10pt} Exterior monomials and basis of $\Lambda ^p(E)$}{165}{}%
+\contentsline {section}{\small \hspace {10pt} Pullbacks of tensors and forms}{167}{}%
+\contentsline {section}{\small \hspace {10pt} Coordinates of the pullback of forms}{168}{}%
+\contentsline {section}{\small \hspace {10pt} Volumes and determinants}{169}{}%
+\contentsline {section}{\tocsection {}{}{Smooth Forms on Real Domains}}{171}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth forms on numerical domains}{171}{}%
+\contentsline {section}{\small \hspace {10pt} Components of smooth forms}{171}{}%
+\contentsline {section}{\small \hspace {10pt} Pullbacks of smooth forms}{171}{}%
+\contentsline {section}{\small \hspace {10pt} The differential of a function as pullback}{172}{}%
+\contentsline {section}{\small \hspace {10pt} Exterior derivative of smooth forms}{173}{}%
+\contentsline {section}{\small \hspace {10pt} Exterior derivative commutes with pullback}{174}{}%
+\contentsline {section}{\small \hspace {10pt} Exterior product of smooth forms}{176}{}%
+\contentsline {section}{\small \hspace {10pt} Integration of smooth $p$-forms on $p$-cubes}{176}{}%
+\contentsline {section}{\tocsection {}{}{Differential Forms on Diffeological Spaces}}{178}{}%
+\contentsline {section}{\small \hspace {10pt} Differential forms on diffeological spaces}{178}{}%
+\contentsline {section}{\small \hspace {10pt} Functional diffeology of the space of forms}{179}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth forms and differential forms}{180}{}%
+\contentsline {section}{\small \hspace {10pt} Zero-forms are smooth functions}{180}{}%
+\contentsline {section}{\small \hspace {10pt} Pullbacks of differential forms}{181}{}%
+\contentsline {section}{\small \hspace {10pt} Pullbacks by the plots}{181}{}%
+\contentsline {section}{\small \hspace {10pt} Exterior derivative of forms}{181}{}%
+\contentsline {section}{\small \hspace {10pt} Exterior product of differential forms}{182}{}%
+\contentsline {section}{\small \hspace {10pt} Differential forms are local}{183}{}%
+\contentsline {section}{\small \hspace {10pt} The $\bf k$-forms are defined by the $\bf k$-plots}{184}{}%
+\contentsline {section}{\small \hspace {10pt} Pushing forms onto quotients}{184}{}%
+\contentsline {section}{\small \hspace {10pt} Vanishing forms on quotients}{186}{}%
+\contentsline {section}{\small \hspace {10pt} The values of a differential form}{186}{}%
+\contentsline {section}{\small \hspace {10pt} Differential forms through generating families}{187}{}%
+\contentsline {section}{\small \hspace {10pt} Differential forms on manifolds}{188}{}%
+\contentsline {section}{\small \hspace {10pt} Linear differential forms on diffeological vector spaces}{189}{}%
+\contentsline {section}{\small \hspace {10pt} Volumes on manifolds and diffeological spaces}{191}{}%
+\contentsline {section}{\tocsection {}{}{Forms Bundles on Diffeological Spaces}}{195}{}%
+\contentsline {section}{\small \hspace {10pt} The $p$-form bundle of diffeological spaces}{196}{}%
+\contentsline {section}{\small \hspace {10pt} Plots of the bundle ${\boldsymbol \Lambda }^p(X)$}{196}{}%
+\contentsline {section}{\small \hspace {10pt} The zero-forms bundle}{197}{}%
+\contentsline {section}{\small \hspace {10pt} The {\fontencoding {OT4}\fontfamily {cmr}\selectfont \symbol {174}}\nonbreakingspace \!cotangent\!\nonbreakingspace {\fontencoding {OT4}\fontfamily {cmr}\selectfont \symbol {175}} space}{198}{}%
+\contentsline {section}{\small \hspace {10pt} The Liouville forms on spaces of $p$-forms}{198}{}%
+\contentsline {section}{\small \hspace {10pt} Differential forms are sections of bundles}{199}{}%
+\contentsline {section}{\small \hspace {10pt} Pointwise pullback or pushforward of forms}{200}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeomorphisms invariance of the Liouville form}{201}{}%
+\contentsline {section}{\small \hspace {10pt} The $p$-vector bundles of diffeological spaces}{201}{}%
+\contentsline {section}{\tocsection {}{}{Lie Derivative of Differential Forms}}{207}{}%
+\contentsline {section}{\small \hspace {10pt} The Lie derivative of differential forms}{207}{}%
+\contentsline {section}{\small \hspace {10pt} Lie derivative along homomorphisms}{209}{}%
+\contentsline {section}{\small \hspace {10pt} Contraction of differential forms}{210}{}%
+\contentsline {section}{\small \hspace {10pt} Contracting differential forms on slidings}{211}{}%
+\contentsline {section}{\tocsection {}{}{Cubes and Homology of Diffeological Spaces}}{214}{}%
+\contentsline {section}{\small \hspace {10pt} Cubes and cubic chains on diffeological spaces}{214}{}%
+\contentsline {section}{\small \hspace {10pt} Boundary of cubes and chains}{216}{}%
+\contentsline {section}{\small \hspace {10pt} Degenerate cubes and chains}{221}{}%
+\contentsline {section}{\small \hspace {10pt} Cubic homology}{223}{}%
+\contentsline {section}{\small \hspace {10pt} Interpreting $\operatorname {\textbf {\textsf H}}_0$}{223}{}%
+\contentsline {section}{\small \hspace {10pt} Cubic cohomology}{224}{}%
+\contentsline {section}{\small \hspace {10pt} Interpreting $\operatorname {\textbf {\textsf H}}^0(X,{\mathbf R})$}{225}{}%
+\contentsline {section}{\tocsection {}{}{Integration of Differential Forms}}{226}{}%
+\contentsline {section}{\small \hspace {10pt} Integrating forms on chains}{226}{}%
+\contentsline {section}{\small \hspace {10pt} Pairing chains and forms}{227}{}%
+\contentsline {section}{\small \hspace {10pt} Pulling back and forth forms and chains}{229}{}%
+\contentsline {section}{\small \hspace {10pt} Changing the coordinates of a cube}{230}{}%
+\contentsline {section}{\tocsection {}{}{Variation of the Integrals of Forms on Chains}}{231}{}%
+\contentsline {section}{\small \hspace {10pt} The Stokes theorem}{231}{}%
+\contentsline {section}{\small \hspace {10pt} Variation of the integral of a form on a cube}{233}{}%
+\contentsline {section}{\small \hspace {10pt} Variation of the integral of forms on chains}{237}{}%
+\contentsline {section}{\small \hspace {10pt} The Cartan-Lie formula}{239}{}%
+\contentsline {section}{\tocsection {}{}{De Rham Cohomology}}{240}{}%
+\contentsline {section}{\small \hspace {10pt} The De Rham cohomology spaces}{241}{}%
+\contentsline {section}{\small \hspace {10pt} The De Rham homomorphism}{241}{}%
+\contentsline {section}{\small \hspace {10pt} The functions whose differential is zero}{242}{}%
+\contentsline {section}{\small \hspace {10pt} The Poincar\'e Lemma for diffeological spaces}{243}{}%
+\contentsline {section}{\small \hspace {10pt} Closed $1$-forms on locally simply connected spaces}{244}{}%
+\contentsline {section}{\tocsection {}{}{Chain-Homotopy Operator}}{245}{}%
+\contentsline {section}{\small \hspace {10pt} Integration operator of forms along paths}{246}{}%
+\contentsline {section}{\small \hspace {10pt} The operator $\Phi $ is a morphism of the De Rham complex}{247}{}%
+\contentsline {section}{\small \hspace {10pt} Variance of the integration operator $\Phi $}{247}{}%
+\contentsline {section}{\small \hspace {10pt} Derivation along time reparametrization}{248}{}%
+\contentsline {section}{\small \hspace {10pt} Variance of time reparametrization}{249}{}%
+\contentsline {section}{\small \hspace {10pt} The Chain-Homotopy operator $\mathscr {K}$}{250}{}%
+\contentsline {section}{\small \hspace {10pt} Variance of the Chain-Homotopy operator}{251}{}%
+\contentsline {section}{\small \hspace {10pt} Chain-Homotopy and paths concatenation}{252}{}%
+\contentsline {section}{\small \hspace {10pt} The Chain-Homotopy operator for $p = 1$}{253}{}%
+\contentsline {section}{\small \hspace {10pt} The Chain-Homotopy operator for manifolds}{254}{}%
+\contentsline {section}{\tocsection {}{}{Homotopy and Differential Forms, Poincar\'e's Lemma}}{254}{}%
+\contentsline {section}{\small \hspace {10pt} Homotopic invariance of the De Rham cohomology}{254}{}%
+\contentsline {section}{\small \hspace {10pt} Closed $1$-forms vanishing on loops}{255}{}%
+\contentsline {section}{\small \hspace {10pt} Closed forms on contractible spaces are exact}{257}{}%
+\contentsline {section}{\small \hspace {10pt} Closed forms on centered paths spaces}{257}{}%
+\contentsline {section}{\small \hspace {10pt} The Poincar\'e lemma}{257}{}%
+\contentsline {section}{\small \hspace {10pt} The Poincar\'e lemma for manifolds}{257}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{7}{Diffeological Groups}}{259}{}%
+\contentsline {section}{\tocsection {}{}{Basics of Diffeological Groups}}{260}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeological groups}{260}{}%
+\contentsline {section}{\small \hspace {10pt} Subgroups of diffeological groups}{260}{}%
+\contentsline {section}{\small \hspace {10pt} Quotients of diffeological groups}{261}{}%
+\contentsline {section}{\small \hspace {10pt} Smooth action of a diffeological group}{262}{}%
+\contentsline {section}{\small \hspace {10pt} Orbit map}{263}{}%
+\contentsline {section}{\small \hspace {10pt} Left and right multiplications}{263}{}%
+\contentsline {section}{\small \hspace {10pt} Left and right multiplications are inductions}{263}{}%
+\contentsline {section}{\small \hspace {10pt} Transitivity and homogeneity}{264}{}%
+\contentsline {section}{\small \hspace {10pt} Connected homogeneous spaces}{265}{}%
+\contentsline {section}{\small \hspace {10pt} Covering diffeological groups}{265}{}%
+\contentsline {section}{\small \hspace {10pt} Covering smooth actions}{266}{}%
+\contentsline {section}{\tocsection {}{}{The Spaces of Momenta}}{267}{}%
+\contentsline {section}{\small \hspace {10pt} Momenta of a diffeological group}{267}{}%
+\contentsline {section}{\small \hspace {10pt} Momenta and connectedness}{267}{}%
+\contentsline {section}{\small \hspace {10pt} Momenta of coverings of diffeological groups}{268}{}%
+\contentsline {section}{\small \hspace {10pt} Linear coadjoint action and coadjoint orbits}{269}{}%
+\contentsline {section}{\small \hspace {10pt} Affine coadjoint actions and $(\Gamma ,\theta )$-coadjoint orbits}{269}{}%
+\contentsline {section}{\small \hspace {10pt} Closed momenta of a diffeological group}{270}{}%
+\contentsline {section}{\small \hspace {10pt} The value of a momentum}{271}{}%
+\contentsline {section}{\small \hspace {10pt} Equivalence between right and left momenta}{272}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{8}{Diffeological Fiber Bundles}}{275}{}%
+\contentsline {section}{\tocsection {}{}{Building Bundles with Fibers}}{276}{}%
+\contentsline {section}{\small \hspace {10pt} The category of smooth surjections}{276}{}%
+\contentsline {section}{\small \hspace {10pt} The category of groupoids}{278}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeological groupoids}{281}{}%
+\contentsline {section}{\small \hspace {10pt} Fibrating groupoids}{282}{}%
+\contentsline {section}{\small \hspace {10pt} Trivial fibrating groupoid}{283}{}%
+\contentsline {section}{\small \hspace {10pt} A simple non-fibrating groupoid}{284}{}%
+\contentsline {section}{\small \hspace {10pt} Structure groupoid of a smooth surjection}{284}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeological fibrations}{288}{}%
+\contentsline {section}{\small \hspace {10pt} Fibrations and local triviality along the plots}{289}{}%
+\contentsline {section}{\small \hspace {10pt} Diffeological fiber bundles category}{290}{}%
+\contentsline {section}{\tocsection {}{}{Principal and Associated Fiber Bundles}}{291}{}%
+\contentsline {section}{\small \hspace {10pt} Principal diffeological fiber bundles}{292}{}%
+\contentsline {section}{\small \hspace {10pt} Category of principal fiber bundles}{295}{}%
+\contentsline {section}{\small \hspace {10pt} Equivariant plot trivializations}{296}{}%
+\contentsline {section}{\small \hspace {10pt} Principal bundle attached to a fibrating groupoid}{297}{}%
+\contentsline {section}{\small \hspace {10pt} Fibrations of groups by subgroups}{298}{}%
+\contentsline {section}{\small \hspace {10pt} Associated fiber bundles}{299}{}%
+\contentsline {section}{\small \hspace {10pt} Structures on fiber bundles}{301}{}%
+\contentsline {section}{\small \hspace {10pt} Space of structures of a diffeological fiber bundle}{302}{}%
+\contentsline {section}{\tocsection {}{}{Homotopy of Diffeological Fiber Bundles}}{305}{}%
+\contentsline {section}{\small \hspace {10pt} Triviality over global plots}{305}{}%
+\contentsline {section}{\small \hspace {10pt} Associated loops fiber bundles}{309}{}%
+\contentsline {section}{\small \hspace {10pt} Exact homotopy sequence of a diffeological fibration}{311}{}%
+\contentsline {section}{\tocsection {}{}{Coverings of Diffeological Spaces}}{314}{}%
+\contentsline {section}{\small \hspace {10pt} What is a covering}{314}{}%
+\contentsline {section}{\small \hspace {10pt} Lifting global plots on coverings}{315}{}%
+\contentsline {section}{\small \hspace {10pt} Fundamental group acting on coverings}{315}{}%
+\contentsline {section}{\small \hspace {10pt} Monodromy theorem}{317}{}%
+\contentsline {section}{\small \hspace {10pt} The universal covering}{317}{}%
+\contentsline {section}{\small \hspace {10pt} Coverings and differential forms}{319}{}%
+\contentsline {section}{\tocsection {}{}{Integration Bundles of Closed 1-Forms}}{320}{}%
+\contentsline {section}{\small \hspace {10pt} Periods of closed $1$-forms}{320}{}%
+\contentsline {section}{\small \hspace {10pt} Integrating closed 1-forms}{322}{}%
+\contentsline {section}{\small \hspace {10pt} The cokernel of the first De Rham homomorphism}{324}{}%
+\contentsline {section}{\small \hspace {10pt} The first De Rham homomorphism for manifolds}{327}{}%
+\contentsline {section}{\tocsection {}{}{Connections on Diffeological Fiber Bundles}}{327}{}%
+\contentsline {section}{\small \hspace {10pt} Connections on principal fiber bundles}{328}{}%
+\contentsline {section}{\small \hspace {10pt} Pullback of a connection}{331}{}%
+\contentsline {section}{\small \hspace {10pt} Connections and equivalence of pullbacks}{332}{}%
+\contentsline {section}{\small \hspace {10pt} The holonomy of a connection}{333}{}%
+\contentsline {section}{\small \hspace {10pt} The natural connection on a covering}{336}{}%
+\contentsline {section}{\small \hspace {10pt} Connections and connection 1-forms on torus bundles}{336}{}%
+\contentsline {section}{\small \hspace {10pt} The Kronecker flows as diffeological fibrations}{340}{}%
+\contentsline {section}{\small \hspace {10pt} ${\mathbf R}$-bundles over irrational tori and small divisors}{341}{}%
+\contentsline {section}{\tocsection {}{}{Integration Bundles of Closed 2-Forms}}{345}{}%
+\contentsline {section}{\small \hspace {10pt} Torus bundles over diffeological spaces}{345}{}%
+\contentsline {section}{\small \hspace {10pt} Integrating concatenations over homotopies}{348}{}%
+\contentsline {section}{\small \hspace {10pt} Integration bundles of closed $2$-forms}{349}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{9}{Symplectic Diffeology}}{359}{}%
+\contentsline {section}{\tocsection {}{}{The Paths Moment Map}}{363}{}%
+\contentsline {section}{\small \hspace {10pt} Definition of the paths moment map}{363}{}%
+\contentsline {section}{\small \hspace {10pt} Evaluation of the paths moment map}{364}{}%
+\contentsline {section}{\small \hspace {10pt} Variance of the paths moment map}{366}{}%
+\contentsline {section}{\small \hspace {10pt} Additivity of the paths moment map}{366}{}%
+\contentsline {section}{\small \hspace {10pt} Differential of the paths moment map}{366}{}%
+\contentsline {section}{\small \hspace {10pt} Homotopic invariance of the paths moment map}{367}{}%
+\contentsline {section}{\small \hspace {10pt} The holonomy group}{367}{}%
+\contentsline {section}{\tocsection {}{}{The 2-points Moment Map}}{369}{}%
+\contentsline {section}{\small \hspace {10pt} Definition of the $2$-points moment map}{369}{}%
+\contentsline {section}{\tocsection {}{}{The Moment Maps}}{370}{}%
+\contentsline {section}{\small \hspace {10pt} Definition of the moment maps}{370}{}%
+\contentsline {section}{\small \hspace {10pt} The Souriau cocycle}{371}{}%
+\contentsline {section}{\tocsection {}{}{The Moment Maps for Exact 2-Forms}}{373}{}%
+\contentsline {section}{\small \hspace {10pt} The exact case}{373}{}%
+\contentsline {section}{\tocsection {}{}{Functoriality of the Moment Maps}}{374}{}%
+\contentsline {section}{\small \hspace {10pt} Images of the moment maps by morphisms}{374}{}%
+\contentsline {section}{\small \hspace {10pt} Pushing forward moment maps}{376}{}%
+\contentsline {section}{\tocsection {}{}{The Universal Moment Maps}}{377}{}%
+\contentsline {section}{\small \hspace {10pt} Universal moment maps}{377}{}%
+\contentsline {section}{\small \hspace {10pt} The group of Hamiltonian diffeomorphisms}{378}{}%
+\contentsline {section}{\small \hspace {10pt} Time-dependent Hamiltonian}{379}{}%
+\contentsline {section}{\small \hspace {10pt} The characteristics of the moment maps}{381}{}%
+\contentsline {section}{\tocsection {}{}{The Homogeneous Case}}{382}{}%
+\contentsline {section}{\small \hspace {10pt} The homogeneous case}{382}{}%
+\contentsline {section}{\small \hspace {10pt} Symplectic homogeneous diffeological spaces}{384}{}%
+\contentsline {section}{\tocsection {}{}{About Symplectic Manifolds}}{385}{}%
+\contentsline {section}{\small \hspace {10pt} Value of the moment maps for manifolds}{385}{}%
+\contentsline {section}{\small \hspace {10pt} The paths moment map for symplectic manifolds}{387}{}%
+\contentsline {section}{\small \hspace {10pt} Hamiltonian diffeomorphisms of symplectic manifolds}{387}{}%
+\contentsline {section}{\small \hspace {10pt} Symplectic manifolds are coadjoint orbits}{388}{}%
+\contentsline {section}{\small \hspace {10pt} The classical homogeneous case}{391}{}%
+\contentsline {section}{\small \hspace {10pt} The Souriau-N\oe ther theorem}{391}{}%
+\contentsline {section}{\small \hspace {10pt} Presymplectic homogeneous manifolds}{392}{}%
+\contentsline {section}{\tocsection {}{}{Examples of Moment Maps in Diffeology}}{395}{}%
+\contentsline {section}{\small \hspace {10pt} Examples of moment maps in diffeology}{395}{}%
+\contentsline {section}{\tocsection {}{}{Discussion on Symplectic Diffeology}}{421}{}%
+\contentsline {chapter}{\tocchapter {Chapter}{}{Solutions to Exercises}}{427}{}%
+\contentsline {chapter}{\tocchapter {\chaptername }{}{Afterword}}{515}{}%
+\contentsline {chapter}{\tocchapter {\chaptername }{}{Notation and Vocabulary}}{519}{}%
+\contentsline {chapter}{\tocchapter {\chaptername }{}{Bibliography}}{523}{}%

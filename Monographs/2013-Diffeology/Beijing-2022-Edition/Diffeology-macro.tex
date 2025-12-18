@@ -1,0 +1,1103 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  D-macro.tex --- Macro File for the Diffeology Book
+%%
+%%  Patrick Iglesias-Zemmour 2005 — 2012
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%  MARK: Packages declarations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{amscd}
+\usepackage{graphicx}
+\usepackage{longtable}
+
+\usepackage{needspace}
+
+%\usepackage{verbatim}
+
+%\usepackage[mathcal,mathbf,text-hat-accent]{euler}
+\usepackage[mathscr]{eucal}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{pdfpages}
+
+\usepackage{tikz} 
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+
+% Pour figures et diagrammes
+% http://texdoc.net/texmf-dist/doc/latex/tikz-cd/tikz-cd-doc.pdf
+\usepackage{tikz-cd}
+%\usetikzlibrary{calc}
+\tikzcdset{
+arrow style=tikz,
+diagrams={>={Straight Barb[scale=0.8]}}
+}
+
+\usepackage{pifont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Theorem Environment Implementations
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\sfcode`?=3001
+
+\newtheoremstyle{article}% ⟨name⟩ 
+{7pt}%  ⟨Space above⟩ 
+{7pt}%  ⟨Space below⟩ 
+{}%      ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩ 
+{.}%    ⟨Punctuation after theorem head⟩ 
+{6pt}%  ⟨Space after theorem head⟩ 
+{}%      ⟨Theorem head spec (can be left empty, meaning
+  %      ‘normal’)⟩
+
+
+%\newtheoremstyle{article}% ⟨name⟩ 
+%{7pt}%  ⟨Space above⟩ 
+%{7pt}%  ⟨Space below⟩ 
+%{}%      ⟨Body font⟩
+%{0pt}%  ⟨Indent amount⟩
+%{\bf}%  ⟨Theorem head font⟩ 
+%{}%    ⟨Punctuation after theorem head⟩ 
+%{0pt}%  ⟨Space after theorem head⟩ 
+%{}%      ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+
+\newtheoremstyle{exercise}% ⟨name⟩ 
+{7pt}%  ⟨Space above⟩ 
+{7pt}%  ⟨Space below⟩ 
+{}%      ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{}%     ⟨Theorem head font⟩ 
+{.}%    ⟨Punctuation after theorem head⟩ 
+{6pt}%  ⟨Space after theorem head⟩ 
+{}%      ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{article}
+\newtheorem{article}{}[chapter]
+\newcommand{\artlabel}[1]{{\textbf{#1}\ifnum\spacefactor=3001\relax\else\textbf{.}\fi}}
+
+\theoremstyle{exercise}
+\newtheorem{exercise}{\mbox{\pencil} {\sc Exercise}}[]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Special characters
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\pencil{\raisebox{-.5pt}{\Large\ding{46}}}
+
+\def\nib{\raisebox{-2.5pt}{\huge\ding{49}}}
+
+\def\blacksnow{\raisebox{-.5pt}{\ding{81}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Exercices Environment Implementation
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\Exercises{\needspace{2\baselineskip}\vspace{\baselineskip}\hfill\textbf{Exercises}}
+
+\def\Exercise{\needspace{2\baselineskip}\vspace{\baselineskip}\hfill\textbf{Exercise}}
+
+\newcommand{\exref}[1]{Exercise \ref{#1}, p.~\pageref{#1}}
+
+\def \solexref #1 #2 {\vspace{.5\baselineskip plus 3pt minus 3pt} \noindent \mbox{\nib} \textbf{Exercise \ref{#1}, p.~\pageref{#1}} #2 \expandafter}
+\def \endsolexref{}
+
+\renewenvironment{proof}{\noindent \textsc{Proof}{\hspace{-0.3mm}.}} {\nolinebreak\hfill $\square$}
+
+%\newenvironment{reminder}{\ifnum\lastskip=0\vskip .25\baselineskip
+%\fi\noindent\textbf{Reminder}~}{}
+\newenvironment{reminder}{\ifnum\lastskip=0\vskip .25\baselineskip
+\fi\noindent\textbf{Reminder}.}{}
+
+\chardef\atcode=\catcode`\@  % save catcode of at sign
+\catcode `\@ = 11
+
+\let\bgroup={%
+\newcommand{\Note}{\@ifnextchar\bgroup\@numnote\@nonumnote}
+\def\@numnote#1{\ifnum\lastskip=0\vskip .15\baselineskip\fi\noindent\textsc{Note #1.}}
+\def\@nonumnote{\ifnum\lastskip=0\vskip .15\baselineskip\fi\noindent\textsc{Note. }}
+
+\let\bgroup={%
+\newcommand{\Definition}{\@ifnextchar\bgroup\@numdef\@nonumdef}
+\def\@numdef#1{\ifnum\lastskip=0\vskip .15\baselineskip\fi\noindent\textsc{Definition #1.}}
+\def\@nonumdef{\ifnum\lastskip=0\vskip .15\baselineskip\fi\noindent\textsc{Definition. }}
+
+
+\let\bgroup={%
+\newcommand{\Example}{\@ifnextchar\bgroup\@numexample\@nonumexample}
+\def\@numexample#1{\ifnum\lastskip=0\vskip .15\baselineskip \fi\noindent\textsc{Example #1.}}
+\def\@nonumexample{\ifnum\lastskip=0\vskip .15\baselineskip \fi\noindent\textsc{Example. }}
+
+\let\bgroup={%
+\newcommand{\Lemma}{\@ifnextchar\bgroup\@numlemma\@nonnumlemma}
+\def\@numlemma#1{\ifnum\lastskip=0\vskip .15\baselineskip \fi\noindent\textsc{Lemma #1.}}
+\def\@nonnumlemma{\ifnum\lastskip=0\vskip .15\baselineskip \fi\noindent\textsc{Lemma. }}
+
+\let\bgroup={%
+\newcommand{\Theorem}{\@ifnextchar\bgroup\@numthm\@nonnumthm}
+\def\@numthm#1{\ifnum\lastskip=0\vskip .15\baselineskip \fi\noindent\textsc{Theorem #1.}}
+\def\@nonnumthm{\ifnum\lastskip=0\vskip .15\baselineskip \fi\noindent\textsc{Theorem }}
+
+\catcode`\@=\atcode    % restore original catcode of at sign
+
+%\def \alinea #1{\ifnum \lastskip = 0 {\vskip .25\baselineskip plus 2pt minus 2pt} \fi \noindent {#1}}
+
+%\def \Definition {\ifnum \lastskip = 0 {\vskip .25\baselineskip plus 2pt minus 2pt} \fi\noindent\textbf{Definition}.~}
+%\def \Definition {\noindent\textbf{Definition}.~}
+%\def \Theorem {\noindent\textsc{Theorem}.~}
+
+\def \Question #1{\vskip-\lastskip\vspace{.25\baselineskip plus 2pt minus 2pt}\noindent{#1}}
+
+%\def \Proposition {\ifnum \lastskip = 0 {\vskip .25\baselineskip plus 2pt minus 2pt} \fi\noindent\textbf{Proposition}~}
+\def \Proposition {\ifnum \lastskip = 0 {\vskip .25\baselineskip plus 2pt minus 2pt} \fi\noindent\textsc{Proposition}.~}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Reference calls
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\art}[1]{{\upshape{(art.~\ref{#1})}}}
+\newcommand{\xart}[2]{{\upshape{(art.~\ref{#1}, #2)}}}
+
+%\newcommand{\xart}[2]{\n
+%\ifstrempty{#2}{(art.~\ref{#1})}{(art.~\ref{#1}, #2)}\n
+%}\n
+
+\newcommand{\chap}[1]{{(Chap.~\ref{#1})}}
+\newcommand{\mychap}[1]{{(Chapter~\ref{#1})}}
+\newcommand{\sect}[1]{{(Sec.~\ref{#1})}}
+%\newcommand{\fig}[1]{{\upshape{(fig.~\ref{#1})}}}
+\newcommand{\fig}[1]{{\upshape{(Figure~\ref{#1})}}}
+\newcommand{\xfigref}[2]{{\upshape{(fig.~\ref{#1}, #2)}}}
+%\newcommand{\eqnum}[1]{$#1$}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Other Environments
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{sechead}{\it}{}
+\newenvironment{chaphead}{}{}
+
+\newenvironment{Thanks}{\bigskip{\sc Thanks:\ }}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%%  MARK: Guillemot Package & Accents
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[pl]{aeguill}
+
+\newcommand{\guillemots}[1]{\guillemotleft~\!#1\!~\guillemotright}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Facilities
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\qtext#1{\quad\text{#1}\quad}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Hyphenation
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hyphenation{pa-ra-me-t-ri-za-tion}
+\hyphenation{pa-ra-me-t-ri-za-tions}
+\hyphenation{dif-feo-lo-gi-cal}
+\hyphenation{dif-feo-lo-gy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Shortcuts
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\cf}{{\em cf.\/}}
+\newcommand{\ie}{{\em i.e.\/}}
+\newcommand{\idem}{{\em idem\/}}
+\newcommand{\resp}{{\em resp.\/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Define Typography MARK: -
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Typography
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\over}{\above .2pt}
+
+\newcommand{\simx}{\mathrel{\displaystyle{\mathop{\simeq}_{x}}}}
+
+\newcommand{\undemi}
+{
+  {\raisebox{-2.5pt}{1} \over \raisebox{1pt}{2}}
+}
+\newcommand{\unsurdeuxi}
+{
+  {\raisebox{-2.5pt}{$1$} \over \raisebox{1pt}{$2i$}}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Define *** MARK: -
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Special math symbols
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\quotient}[2]{\hbox{$#1$}\hbox{$/$}\hbox{$#2$}}
+
+\newcommand{\Der}{\partial}
+
+\newcommand{\Llpar}{\mbox{\Large(}}
+\newcommand{\Lrpar}{\mbox{\Large)}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Various Arrows
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \longhookrightarrow{\lhook\joinrel\longrightarrow}
+
+%% Attention ne pas toucher la longueur, affecte les diagrames
+\newcommand{\rfl}[1]{{\buildrel{\displaystyle #1}\over{\hbox to 9mm{\ \rightarrowfill \ }}}}
+
+%% Utiliser celle-ci pour gérer la longueur des flèches
+\newcommand{\xrfl}[2]{{\buildrel{\displaystyle #1}\over{\hbox to #2{\ \rightarrowfill \ }}}}
+
+\newcommand{\Rfl}[2]{{\buildrel{\displaystyle #2}\over{\hbox to #1{\ \rightarrowfill \ }}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Define *** MARK: -
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Categories
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Diffeology}{\{\operatorname{Diffeology}\}}
+\newcommand{\Manifolds}{\{\operatorname{Manifolds}\}}
+\newcommand{\Topology}{\{\operatorname{Topology}\}}
+\newcommand{\Set}{\{\operatorname{Set}\}}
+\newcommand{\DHomotopy}{\{\operatorname{D-Homotopy}\}}
+
+\newcommand{\Obj}{{\operatorname{Obj}}}
+\newcommand{\Mor}{{\operatorname{Mor}}}
+
+\newcommand{\Diffeoset}{\operatorname{Diffeologies}}
+
+\newcommand{\Inductions}{\{\operatorname{Inductions}\}}
+\newcommand{\Subductions}{\{\operatorname{Subductions}\}}
+
+\newcommand{\Orbifolds}{\{\operatorname{Orbifolds}\}}
+
+\newcommand{\DLinear}{\{\operatorname{D-Linear}\}}
+\newcommand{\FineLinear}{\{\operatorname{Fine-Linear}\}}
+\newcommand{\Linear}{\{\operatorname{Linear}\}}
+
+\newcommand{\DGroups}{\{\operatorname{D-Groups}\}}
+\newcommand{\Groupoids}{\{\operatorname{Groupoids}\}}
+\newcommand{\DGroupoids}{\{\operatorname{D-Groupoids}\}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Combinatorics
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\newcommand{\Cnp}{{\mathsf C}^{\raisebox{.5pt}{\scriptsize p}}_{\raisebox{5pt}{\scriptsize n}}}
+\newcommand{\Cnp}{C^{\raisebox{.5pt}{\scriptsize p}}_{\raisebox{5pt}{\scriptsize n}}}
+
+\newcommand{\fact}[1]{\mathop{#1 !}\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Delimiters
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\biggvert}{{\, \bigg\vert\, }}
+
+\newcommand{\openinterval}[1]{\left] #1 \right[}
+\newcommand{\closedinterval}[1]{\left[ #1 \right]}
+\newcommand{\leftclosedinterval}[1]{\left[ #1 \right[}
+\newcommand{\rightclosedinterval}[1]{\left] #1 \right]}
+
+\newcommand{\limitbrackets}[3]{\bigg[ #1 \bigg]_{\raisebox{1pt}{\scriptsize #2}}^{\raisebox{-3pt}{\scriptsize #3}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Diffeologies
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Plots}{\operatorname{Plots}}
+
+\newcommand{\coarse}[1]{#1_\bullet}
+\newcommand{\discrete}[1]{#1_\circ}
+
+\newcommand{\coarsefunctor}{\mathop{\bullet}}
+\newcommand{\discretefunctor}{\mathop{\circ}}
+
+\newcommand{\Klein}{\mathrm{Klein}}
+
+\newcommand{\Nebula}{\mathrm{Nebula}}
+
+\newcommand{\loc}{\mathrm{loc}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Differential Forms
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Form}{\Lambda}
+\newcommand{\Forms}{{\boldsymbol \Lambda}}
+\newcommand{\DForms}{\Omega}
+\newcommand{\DSec}{\operatorname{Sec}}
+
+\newcommand{\Liouv}{{\operatorname{Liouv}}}
+\newcommand{\Taut}{{\operatorname{Taut}}}
+\newcommand{\Surf}{{\operatorname{Surf}}}
+
+\newcommand{\vol}{\operatorname{vol}}
+\newcommand{\Volumes}{\operatorname{Volumes}}
+
+\newcommand{\Chars}{\operatorname{Chars}}
+\newcommand{\chars}{\operatorname{char}}
+
+\newcommand{\CHK}{\mathscr{K}}
+\newcommand{\Komega}{\mathscr{K}\!\omega}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Fiber Bundles
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Triv}{\operatorname{Triv}}
+
+\newcommand{\Sec}{\operatorname{Sec}}
+
+\newcommand{\Eq}{\operatorname{Eq}}
+
+\newcommand{\Fb}{\operatorname{Fb}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Functions
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\module}[1]{\vert #1 \vert}
+\newcommand{\modulus}[1]{\vert #1 \vert}
+
+\newcommand{\norm}[1]{\Vert #1 \Vert}
+
+\newcommand{\acos}{\mathop\mathrm{acos}\nolimits}
+\newcommand{\asin}{\mathop\mathrm{asin}\nolimits}
+
+\newcommand{\const}{\mathrm{cst}}
+
+\newcommand{\pr}{\mathrm{pr}}
+
+\newcommand{\sgn}{\operatorname{sgn}}
+
+\renewcommand{\sup}{\operatorname{sup}}
+
+\newcommand{\Tr}{\mathrm{Tr}}
+\renewcommand{\det}{\mathrm{det}}
+
+\newcommand{\Value}{\operatorname{value}}
+
+\newcommand{\shift}{\operatorname{Shift}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Generating families
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Gen}{\operatorname{Gen}}
+\newcommand{\gen}[1]{\mathop\langle#1\mathop\rangle}
+
+\newcommand{\vecspan}[1]{{\rm span}(#1)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Groups - Pseudogroups
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Aff}{\mathrm{Aff}}
+\newcommand{\Aut}{\operatorname{Aut}}
+
+\newcommand{\coker}{\mathrm{coker}}
+
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\SkDiff}[1]{\mathrm{Diff}(#1)^\star}
+\newcommand{\CSDiff}{\mathrm{Diff}_\K}
+
+\newcommand{\Diffloc}{\mathrm{Diff}_{\mathrm{loc}}}
+
+\newcommand{\GL}{\mathrm{GL}}
+
+\newcommand{\Sp}{{\rm Sp}}
+
+\newcommand{\OG}{\mathrm{O}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\so}{\frak{so}}
+
+\newcommand{\SL}{\mathrm{SL}}
+
+\newcommand{\SU}{\mathrm{SU}}
+
+\newcommand{\orb}[1]{\mathrm{R}(#1)}
+
+\newcommand{\Ad}{\mathrm{Ad}}
+
+
+\newcommand{\mul}{\mathrm{mul}}
+\newcommand{\inv}{\operatorname{inv}}
+
+\newcommand{\Ab}[1]{#1^{\rm Ab}}
+
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\DHom}{\Hom^\infty}
+
+\newcommand{\Isom}{\mathrm{Isom}}
+\newcommand{\DIsom}{\Isom^\infty}
+
+\newcommand{\Stab}{\mathrm{St}}
+
+\newcommand{\Perm}{\mathrm{Perm}}
+\def\Perms(#1){\fS_{#1}}
+
+\newcommand{\StrGrp}{\mathrm{Str}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Groupoids 
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\source}{{\operatorname{src}}}
+\newcommand{\target}{{\operatorname{trg}}}
+
+\newcommand{\car}{\chi}
+\newcommand{\Units}[1]{{\operatorname{U}(#1)}}
+
+\newcommand{\CChars}{\textsf{\textbf{Chars}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Homology - Cohomology
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\DChains}[1]{\operatorname{C}_{#1}}
+\newcommand{\DCochains}[1]{\operatorname{C}^{#1}}
+
+\newcommand{\QDChains}[1]{\operatorname{\textbf{\textsf C}}_{#1}}
+\newcommand{\QDCochains}[1]{\operatorname{\textbf{\textsf C}}^{#1}}
+
+\newcommand{\QDZ}{\operatorname{\textbf{\textsf Z}}}
+\newcommand{\QDB}{\operatorname{\textbf{\textsf B}}}
+\newcommand{\QDH}{\operatorname{\textbf{\textsf H}}}
+
+\newcommand{\ZG}{\Z} % generic (co)Homology group
+\newcommand{\BG}{\B} % generic (co)Homology group
+\newcommand{\HG}{\H} % generic (co)Homology group
+
+\newcommand{\ZDR}{\Z_\mathrm{dR}}
+\newcommand{\BDR}{\B_\mathrm{dR}}
+\newcommand{\HDR}{\H_\mathrm{dR}}
+
+\newcommand{\hDR}{\mathrm{h}_\mathrm{dR}}
+
+\newcommand{\Poinc}[1]{\boldsymbol{#1}}
+
+\newcommand{\DLie}{\mbox{\pounds}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Homotopy
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \fPaths#1{#1_{\cP}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Initial values
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\xo}{{x_0}}
+\newcommand{\yo}{{y_0}}
+\newcommand{\vo}{{v_0}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Integration
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\dt}{\mathop{dt}\nolimits}
+\newcommand{\ds}{\mathop{ds}\nolimits}
+\newcommand{\du}{\mathop{du}\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Linear maps and vector spaces
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Lin}{\operatorname{L}}
+\newcommand{\DLin}{\Lin^\infty}
+
+\newcommand{\Bases}{\operatorname{Bases}}
+
+\newcommand{\fold}{\operatorname{fold}}
+\newcommand{\unfold}{\operatorname{unfold}}
+
+\newcommand{\Int}{\mathrm{Int}}
+\newcommand{\Ext}{\mathrm{Ext}}
+
+\newcommand{\hermprod}[2]{\mathop{\langle#1 \mid #2\rangle}\nolimits}
+
+\newcommand{\vect}[1]{\begin{pmatrix}#1\end{pmatrix}} % usage : \vect{a \\ b \\...}
+\newcommand{\sqvect}[1]{\left[\begin{matrix}#1\end{matrix} \right]} % usage : \vect{a \\ b \\...}
+
+\newcommand{\Span}{\operatorname{Span}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Graphs, Lines, Geodesics etc.
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Line}{\operatorname{Line}}
+\newcommand{\Lines}{\operatorname{Lines}}
+
+\newcommand{\Traj}{\operatorname{traj}}
+
+\newcommand{\graph}{\operatorname{Gr}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Logic
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \true {\operatorname{true}}
+\def \false {\operatorname{false}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Manifolds
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Paths, Cubes, Homotopy...
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Paths}{\operatorname{Paths}}
+\newcommand{\DPaths}[1]{{\operatorname{Paths}}_{#1}}
+\newcommand{\stPaths}{\operatorname{stPaths}}
+\newcommand{\tbPaths}{\operatorname{tbPaths}}
+
+\newcommand{\HorPaths}{\operatorname{HorPaths}}
+\newcommand{\hor}{\operatorname{hor}}
+
+
+\newcommand{\0}{\hat 0}
+\newcommand{\1}{\hat 1}
+
+\def\ends{\operatorname{ends}}
+
+\def\rev{\operatorname{rev}}
+
+\newcommand{\Loops}{\operatorname{Loops}}
+\newcommand{\PSLoops}{\operatorname{L}}
+\newcommand{\stLoops}{\operatorname{stLoops}}
+\newcommand{\relativeLoops}{\operatorname{L}}
+\newcommand{\comp}{\operatorname{comp}}
+
+\newcommand{\lift}{\operatorname{lift}}
+
+\newcommand{\cub}[1]{\operatorname{I}^{#1}}
+\newcommand{\Cub}{\operatorname{Cub}}
+\newcommand{\DCubes}[1]{\operatorname{Cub}_{#1}}
+
+\newcommand{\Supp}{\operatorname{Supp}}
+
+
+%% Special action for \tau because au base Lines
+
+\newcommand{\vartau}{\tau^{\phantom*}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Sets & Maps
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Ball}{\B}
+
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+
+\renewcommand{\dim}{\mathrm{dim}}
+
+\newcommand{\Dom}{\mathrm{def}}
+\newcommand{\Domains}{\mathrm{Domains}}
+
+\renewcommand{\ker}{\mathrm{ker}}
+
+\newcommand{\Param}{\mathrm{Param}}
+\newcommand{\Powerset}{\fP}
+\newcommand{\Powerplots}{\fD}
+
+\newcommand{\Pol}{\mathrm{Pol}}
+
+\newcommand{\Def}{\mathrm{def}}
+\newcommand{\Val}{\mathrm{val}}
+
+\newcommand{\Maps}{\mathrm{Maps}}
+
+\newcommand{\id}{{\bf 1}}
+
+\newcommand{\Ck}[1]{{\cC}^{#1}}
+\newcommand{\Cinfty}{{\cC}^\infty}
+
+\newcommand{\Sol}{\mathrm{Sol}}
+
+\newcommand{\Imm}{\mathrm{Imm}}
+
+\newcommand{\PL}{\mathrm{PL}}
+\newcommand{\UL}{\mathrm{UL}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Special maps and sets
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\emptymap}{{\id_\varnothing}}
+
+\newcommand{\Ev}{{\operatorname{Ev}}}
+\newcommand{\ev}{{\operatorname{ev}}}
+
+\newcommand{\flip}{{\operatorname{flip}}}
+
+\newcommand{\germ}{\operatorname{germ}}
+
+\newcommand{\rank}{\operatorname{rank}}
+
+\newcommand{\Sq}{{\operatorname{Sq}}}
+\newcommand{\sq}{{\operatorname{sq}}}
+
+\newcommand{\abs}{{\operatorname{abs}}}
+
+\newcommand{\semicubic}{{\operatorname{SC}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Symplectic Diffeology
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Ham}{\operatorname{Ham}}
+\newcommand{\grad}{\operatorname{grad}}
+
+\newcommand{\st}{\operatorname{st}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Tangents space
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Vgt}[3]{\operatorname{S}^{#1}_{#2}(#3)}
+
+\newcommand{\Tangent}[2]{\T_{#1}(#2)}
+\newcommand{\Tgt}[3]{\T^{#1}_{#2}(#3)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Tensors
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Alt}{\operatorname{Alt}}
+\newcommand{\Symm}{\operatorname{Sym}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Torus & Group of Periods
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Periods}{{\operatorname{\P}}}
+\newcommand{\PeriodsOf}{{\operatorname{Periods}}}
+\newcommand{\Torus}{\T}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Classes and equivalence relations
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\class}{\operatorname{class}}
+\newcommand{\cl}[1]{\left[ #1 \right]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Typography MARK: -
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Bold characters
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\AA}{{\mathbf A}}
+
+\newcommand{\BB}{{\mathbf B}}
+\newcommand{\CC}{{\mathbf C}}
+\newcommand{\DD}{{\mathbf D}}
+\newcommand{\EE}{{\mathbf E}}
+\newcommand{\FF}{{\mathbf F}}
+\newcommand{\GG}{{\mathbf G}}
+\newcommand{\HH}{{\mathbf H}}
+\newcommand{\II}{{\mathbf I}}
+\newcommand{\JJ}{{\mathbf J}}
+\newcommand{\KK}{{\mathbf K}}
+\newcommand{\LL}{{\mathbf L}}
+\newcommand{\MM}{{\mathbf M}}
+\newcommand{\NN}{{\mathbf N}}
+\newcommand{\OO}{{\mathbf O}}
+\newcommand{\PP}{{\mathbf P}}
+\newcommand{\QQ}{{\mathbf Q}}
+\newcommand{\RR}{{\mathbf R}}
+
+\renewcommand{\SS}{{\mathbf S}}
+
+\newcommand{\TT}{{\mathbf T}}
+\newcommand{\UU}{{\mathbf U}}
+\newcommand{\VV}{{\mathbf V}}
+\newcommand{\WW}{{\mathbf W}}
+\newcommand{\XX}{{\mathbf X}}
+\newcommand{\YY}{{\mathbf Y}}
+\newcommand{\ZZ}{{\mathbf Z}}
+
+\newcommand{\bmP}{\boldsymbol P}
+
+\renewcommand{\aa}{{\bf a}}
+\newcommand{\bb}{{\bf b}}
+\newcommand{\ff}{{\bf f}}
+\newcommand{\jj}{{\bf j}}
+\newcommand{\rr}{{\bf r}}
+\newcommand{\pp}{{\bf p}}
+\renewcommand{\ss}{{\bf s}}
+\newcommand{\uu}{{\bf u}}
+\newcommand{\vv}{{\bf v}}
+\newcommand{\xx}{{\bf x}}
+\newcommand{\yy}{{\bf y}}
+\newcommand{\ee}{{\bf e}}
+
+\newcommand{\balpha}{\boldsymbol \alpha}
+\newcommand{\bgamma}{\boldsymbol \gamma}
+\newcommand{\bvarphi}{\boldsymbol \varphi}
+%\newcommand{\bomega}{\boldsymbol \omega}
+\newcommand{\blambda}{\boldsymbol \lambda}
+\newcommand{\bsigma}{\boldsymbol \sigma}
+\newcommand{\bpi}{\boldsymbol \pi}
+%\newcommand{\bPhi}{\boldsymbol \Phi}
+\newcommand{\btau}{\boldsymbol \tau}
+
+%\newcommand{\bma}{{\mbox{\boldmath $a$}}} % avant
+\newcommand{\bma}{{\boldsymbol a}}
+\newcommand{\bmb}{{\boldsymbol b}}
+\newcommand{\bmc}{{\boldsymbol c}}
+\newcommand{\bmf}{{\boldsymbol f}}
+\newcommand{\bmg}{{\boldsymbol g}}
+\newcommand{\bmo}{{\boldsymbol o}}
+\newcommand{\bmp}{{\boldsymbol p}}
+\newcommand{\bmr}{{\boldsymbol r}}
+\newcommand{\bms}{{\boldsymbol s}}
+\newcommand{\bmv}{{\boldsymbol v}}
+\newcommand{\bmx}{{\boldsymbol x}}
+\newcommand{\bmy}{{\boldsymbol y}}
+\newcommand{\bmz}{{\boldsymbol z}}
+
+\newcommand{\bmZero}{\boldsymbol 0}
+
+\newcommand{\sbmx}{{\mbox{\boldmath $\scriptstyle x$}}}
+
+\newcommand{\sbgamma}{{\mbox{\boldmath $\scriptstyle \gamma$}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Math letters
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \A{A}
+\def \B{B}
+\def \C{C}
+\def \D{D}
+\def \E{E}
+\def \F{F}
+\def \G{G}
+%\def \H{H} Redefined below
+\def \I{I}
+\def \J{J}
+\def \K{K}
+%\def \L{{L}}
+\def \M{M}
+\def \N{N}
+%\def \O{O}
+\def \P{P}
+\def \Q{Q}
+\def \R{R}
+\def \S{S}
+\def \T{T}
+\def \U{U}
+\def \V{V}
+\def \W{W}
+\def \X{X}
+\def \Y{Y}
+\def \Z{Z}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Math calligraphy
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\let \mathcal \cal
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Math frak
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\fA}{{\mathfrak A}}
+\newcommand{\fB}{{\mathfrak B}}
+\newcommand{\fC}{{\mathfrak C}}
+\newcommand{\fD}{{\mathfrak D}}
+\newcommand{\fF}{{\mathfrak F}}
+\newcommand{\fG}{{\mathfrak G}}
+\newcommand{\fK}{{\mathfrak K}}
+\newcommand{\fI}{{\mathfrak I}}
+\newcommand{\fL}{{\mathfrak L}}
+\newcommand{\fP}{{\mathfrak P}}
+\newcommand{\fR}{{\mathfrak R}}
+\newcommand{\fS}{{\mathfrak S}}
+\newcommand{\fU}{{\mathfrak U}}
+\newcommand{\fX}{{\mathfrak X}}
+\newcommand{\fY}{{\mathfrak Y}}
+\newcommand{\fZ}{{\mathfrak Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: Math Euler
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\ek}{\mathrm{k}}
+\newcommand{\ef}{\mathrm{f}}
+%\newcommand{\eo}{\mathrm{o}}
+\newcommand{\eo}{o}
+\newcommand{\eq}{\mathrm{q}}
+\newcommand{\es}{\mathrm{s}}
+\newcommand{\et}{\mathrm{t}}
+
+\newcommand{\eB}{\mathrm{B}}
+\newcommand{\eC}{\mathrm{C}}
+\newcommand{\eD}{\mathrm{D}}
+\newcommand{\eE}{\mathrm{E}}
+\newcommand{\eF}{\mathrm{F}}
+\newcommand{\eH}{\mathrm{H}}
+\newcommand{\eI}{\mathrm{I}}
+\newcommand{\eJ}{\mathrm{J}}
+\newcommand{\eK}{\mathrm{K}}
+\newcommand{\eL}{\mathrm{L}}
+\newcommand{\eM}{\mathrm{M}}
+\newcommand{\eO}{\mathrm{O}}
+\newcommand{\eP}{\mathrm{P}}
+\newcommand{\eR}{\mathrm{R}}
+\newcommand{\eS}{\mathrm{S}}
+\newcommand{\eT}{\mathrm{T}}
+\newcommand{\eZ}{\mathrm{Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% MARK: General Display
+%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\renewcommand{\rmdefault}{pplx}
+
+\DeclareRobustCommand{\SkipTocEntry}[4]{}
+
+\numberwithin{figure}{chapter}
+
+\allowdisplaybreaks
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MARK: Added to change figure numbers---LTD
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \makeatletter\n
+% \newcommand{\ncaption}{%\n
+%   \@ifnextchar[{\@@ncaption}{\@ncaption}% ] to match\n
+% }\n
+% \newcommand{\@ncaption}[1]{{%\n
+%   \vskip\abovecaptionskip\n
+%   \centering\n
+%   \strut\@captionheadfont Figure \@captionfont #1.\n
+% \par\n
+% }}\n
+% \long\def\@@ncaption[#1]#2{{%\n
+%   \vskip\abovecaptionskip\n
+%   \centering\n
+%   \strut\@captionheadfont Figure \@captionfont #2. #1.\n
+%   \par\n
+% }}\n
+% \makeatother\n
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Layout and Crop marks
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paperheight 240mm
+\paperwidth 170mm
+\marginparwidth = 0pt
+
+\setlength{\textheight}{195mm}
+\setlength{\textwidth}{120mm}
+\calclayout
+
+%\usepackage[width=210mm, height=297mm, noinfo, center]{crop}
+\usepackage[width=170mm, height=240mm, cam, noinfo, center]{crop}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+
+\linespread{1.1}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Citation style
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\renewcommand*{\@cite@ofmt}{\mdseries\hbox}
+\makeatother
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Index
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{idxlayout}
+\makeindex
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Font Design
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[activate]{microtype}
+\usepackage[cal=scr,uppercase = upright,greekfamily = didot,greeklowercase = upright,charter]{mathdesign}
+\usepackage[supspaced=.04em]{superiors}
+
+\def \H{H}
+\def \O{O}   % it seems that the letter O is overloaded by the packages
+\def \L{{L}} % it seems that the letter L is overloaded by the packages
+
+\def \epsilon{\varepsilon}
+\def \phi{\varphiup}
+\def \varphi{\phiup}

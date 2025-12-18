@@ -1,0 +1,365 @@
+\indexentry{Domain}{2}
+\indexentry{Parametrization}{2}
+\indexentry{Tangent linear map}{3}
+\indexentry{Partial derivative}{3}
+\indexentry{Parametrization}{4}
+\indexentry{Diffeology}{5}
+\indexentry{Diffeological space}{5}
+\indexentry{Plot}{5}
+\indexentry{Global plot}{5}
+\indexentry{Diffeology!smooth diffeology}{6}
+\indexentry{Diffeology!wire diffeology}{6}
+\indexentry{Smooth map}{9}
+\indexentry{Diffeology}{9}
+\indexentry{Diffeomorphism}{10}
+\indexentry{Irrational torus}{10}
+\indexentry{Fineness}{12}
+\indexentry{Diffeology!discrete diffeology}{12}
+\indexentry{Diffeology!coarse diffeology}{13}
+\indexentry{Infimum}{14}
+\indexentry{Supremum}{14}
+\indexentry{Latice}{15}
+\indexentry{Minimum}{15}
+\indexentry{Maximum}{15}
+\indexentry{Diffeology!pullback diffeology}{17}
+\indexentry{Pullback}{17}
+\indexentry{Induction}{19}
+\indexentry{Induction}{21}
+\indexentry{Diffeology!subset diffeology}{22}
+\indexentry{Diffeological subspace}{22}
+\indexentry{Discrete subspace}{24}
+\indexentry{Diffeology!sum diffeology}{26}
+\indexentry{Diffeology!foliated diffeology}{27}
+\indexentry{Diffeology!Klein diffeology}{28}
+\indexentry{Klein space}{28}
+\indexentry{Klein stratum}{28}
+\indexentry{Frontier condition}{28}
+\indexentry{Diffeology!diffeology image}{29}
+\indexentry{Diffeology!pushforward diffeology}{29}
+\indexentry{Pushforward}{29}
+\indexentry{Local lift}{30}
+\indexentry{Subduction}{32}
+\indexentry{Natural, canonical projection}{34}
+\indexentry{Quotient diffeology}{35}
+\indexentry{Irrational torus}{35}
+\indexentry{Section}{36}
+\indexentry{Diffeology!diffeology product}{40}
+\indexentry{Evaluation map}{42}
+\indexentry{Functional diffeology}{42}
+\indexentry{Cartesian closed}{44}
+\indexentry{Diffeological group}{44}
+\indexentry{Diffeomorphism}{44}
+\indexentry{Evaluation map}{44}
+\indexentry{Iterated space of paths}{46}
+\indexentry{Space of paths}{46}
+\indexentry{k-paths@$k$-Path}{46}
+\indexentry{Generating family}{50}
+\indexentry{Nebula}{56}
+\indexentry{Nebula}{57}
+\indexentry{Dimension}{58}
+\indexentry{Local smooth map}{64}
+\indexentry{Germ}{65}
+\indexentry{Local diffeomorphism}{66}
+\indexentry{Etale@\'Etale map}{66}
+\indexentry{D-topology}{67}
+\indexentry{D-open}{67}
+\indexentry{D-continuity}{67}
+\indexentry{D-homeomorphism}{67}
+\indexentry{Embedding}{70}
+\indexentry{Semi-cubic}{70}
+\indexentry{Pullback}{70}
+\indexentry{Smooh embedding}{70}
+\indexentry{Germ}{70}
+\indexentry{Local subduction}{73}
+\indexentry{Powerset diffeology}{76}
+\indexentry{Centered plot}{77}
+\indexentry{Germ}{77}
+\indexentry{Generating family}{77}
+\indexentry{Dimension}{78}
+\indexentry{Diffeological vector space}{81}
+\indexentry{Dlinear category}{82}
+\indexentry{Diffeology!fine diffeology}{83}
+\indexentry{Coordinates}{85}
+\indexentry{Fine-Linear category}{86}
+\indexentry{Finite topology}{89}
+\indexentry{Tychonoff topology}{89}
+\indexentry{Euclidean diffeological vector space}{89}
+\indexentry{Hermitian diffeological vector space}{90}
+\indexentry{Manifold}{96}
+\indexentry{Chart}{96}
+\indexentry{Diffeology!manifold diffeology}{96}
+\indexentry{Atlas}{96}
+\indexentry{Transition map}{98}
+\indexentry{Atlas}{98}
+\indexentry{Chart}{98}
+\indexentry{Submanifold}{101}
+\indexentry{Semi-cubic}{102}
+\indexentry{Diffeological manifold}{106}
+\indexentry{Chart}{106}
+\indexentry{Atlas}{107}
+\indexentry{Chart}{107}
+\indexentry{Contractible}{110}
+\indexentry{Smooth retraction}{110}
+\indexentry{Half-space}{117}
+\indexentry{Manifold with boundary}{119}
+\indexentry{Chart}{119}
+\indexentry{Atlas}{119}
+\indexentry{Corner}{119}
+\indexentry{Manifold with coners}{120}
+\indexentry{Orbifold}{121}
+\indexentry{Structure group}{121}
+\indexentry{Structure groupoid}{121}
+\indexentry{Quasifold}{122}
+\indexentry{Fr\"olicher space}{124}
+\indexentry{Path}{125}
+\indexentry{Ends map}{125}
+\indexentry{Juxtaposable paths}{126}
+\indexentry{Concatenable paths}{126}
+\indexentry{Stationary path}{127}
+\indexentry{Free ends homotopy}{129}
+\indexentry{Fixed ends homotopy}{129}
+\indexentry{Homotopic paths}{130}
+\indexentry{Component}{131}
+\indexentry{Component}{131}
+\indexentry{Contractible}{135}
+\indexentry{Contractible}{136}
+\indexentry{Retraction}{137}
+\indexentry{Retraction retract}{137}
+\indexentry{Deformation retraction}{137}
+\indexentry{Poincar{\'e} groupoid}{139}
+\indexentry{Diffeological groupoid}{139}
+\indexentry{Homotopy group}{140}
+\indexentry{Fundamental group}{140}
+\indexentry{Simply connected}{140}
+\indexentry{Groupoid}{140}
+\indexentry{HSpace@$\H$-Space}{142}
+\indexentry{Higher homotopy group}{142}
+\indexentry{Relative homotopy group}{146}
+\indexentry{Higher relative homotopy group}{148}
+\indexentry{Linear map}{154}
+\indexentry{Basis}{154}
+\indexentry{Coordinates}{154}
+\indexentry{Dual vector space}{155}
+\indexentry{Bilinear map}{156}
+\indexentry{Symmetric}{157}
+\indexentry{Antisymmetric}{157}
+\indexentry{Multilinear operator}{157}
+\indexentry{Permutation}{158}
+\indexentry{Transposition}{158}
+\indexentry{Covariant tensor}{158}
+\indexentry{Contravariant tensor}{158}
+\indexentry{Mixed tensor}{159}
+\indexentry{Bidual}{159}
+\indexentry{Component}{160}
+\indexentry{Symmetrization}{160}
+\indexentry{Antisymmetrization}{160}
+\indexentry{Linear $p$-form}{161}
+\indexentry{Inner/interior product}{162}
+\indexentry{Exterior product}{162}
+\indexentry{Coordinates}{165}
+\indexentry{Coordinates}{167}
+\indexentry{Volume}{169}
+\indexentry{Smooth $p$-form}{171}
+\indexentry{Smooth tensor}{171}
+\indexentry{Coordinates}{173}
+\indexentry{Exterior derivative}{174}
+\indexentry{Cube}{176}
+\indexentry{Integral of a smooth form}{176}
+\indexentry{Differential form}{178}
+\indexentry{Pullback}{181}
+\indexentry{Exterior product}{182}
+\indexentry{Centered plot}{183}
+\indexentry{Basic differential form}{184}
+\indexentry{Centered plot}{186}
+\indexentry{Value of differential form}{186}
+\indexentry{Oriented manifold}{191}
+\indexentry{Volume}{192}
+\indexentry{Equi-affine arc length}{193}
+\indexentry{Torus}{194}
+\indexentry{Bundle}{196}
+\indexentry{Cotangent space}{198}
+\indexentry{Liouville form}{198}
+\indexentry{Pointwise pullback}{200}
+\indexentry{Pointwise pushforward}{200}
+\indexentry{pvector-bundle@$p$-vector bundle}{202}
+\indexentry{Tangent bundle}{202}
+\indexentry{Functional diffeology}{203}
+\indexentry{Lie derivative}{207}
+\indexentry{Ray}{209}
+\indexentry{Arc of plots}{210}
+\indexentry{Contraction differential form}{211}
+\indexentry{Sliding}{211}
+\indexentry{pcube@$p$-Cube}{214}
+\indexentry{pcube@$p$-Cube}{214}
+\indexentry{Cubic chain}{214}
+\indexentry{Cube}{216}
+\indexentry{Degenerate}{221}
+\indexentry{Reduced $p$-chain}{221}
+\indexentry{Cubic cycle}{223}
+\indexentry{Cubic boundary}{223}
+\indexentry{Cubic homology}{223}
+\indexentry{Cubic cochain}{224}
+\indexentry{Cubic cohomology}{225}
+\indexentry{Cubic cocycle}{225}
+\indexentry{Cubic coboundary}{225}
+\indexentry{Cubic cohomology}{225}
+\indexentry{Cubic cochain}{225}
+\indexentry{Integral}{226}
+\indexentry{Pushforward}{229}
+\indexentry{Arc of plots}{234}
+\indexentry{De Rham cocycle}{241}
+\indexentry{De Rham coboundary}{241}
+\indexentry{De Rham cohomology group}{241}
+\indexentry{De Rham homomorphism}{241}
+\indexentry{Group of periods}{241}
+\indexentry{Integration operator}{246}
+\indexentry{Chain-Homotopy operator}{250}
+\indexentry{Group of automorphisms}{251}
+\indexentry{Magma}{253}
+\indexentry{Deformation retraction}{257}
+\indexentry{Chain-Homotopy operator}{257}
+\indexentry{Diffeological group}{260}
+\indexentry{Diffeology!group diffeology}{260}
+\indexentry{Diffeological Lie group}{260}
+\indexentry{Smooth extension}{261}
+\indexentry{Smooth action}{262}
+\indexentry{Effective action}{262}
+\indexentry{Antiaction}{263}
+\indexentry{Group center}{263}
+\indexentry{Transitive}{264}
+\indexentry{Homogeneous}{264}
+\indexentry{Generating group}{264}
+\indexentry{Group covering}{265}
+\indexentry{Momemtum, momenta}{267}
+\indexentry{Space of momenta}{267}
+\indexentry{Coadjoint orbit}{269}
+\indexentry{Twisted cocycle}{270}
+\indexentry{Abelianized}{271}
+\indexentry{Smooth surjection}{276}
+\indexentry{Total space}{276}
+\indexentry{Base space}{276}
+\indexentry{Morphism}{276}
+\indexentry{Projection}{276}
+\indexentry{Fiber}{276}
+\indexentry{Pullback}{276}
+\indexentry{Fiber}{277}
+\indexentry{Reduction}{277}
+\indexentry{Section}{277}
+\indexentry{Locally trivial}{277}
+\indexentry{Groupoid}{278}
+\indexentry{Morphism}{278}
+\indexentry{Arrow}{278}
+\indexentry{Source}{278}
+\indexentry{Target}{278}
+\indexentry{Characteristic map}{278}
+\indexentry{Subgroupoid}{278}
+\indexentry{Isotropy}{278}
+\indexentry{Unit}{278}
+\indexentry{transitivity component}{279}
+\indexentry{Component}{279}
+\indexentry{Kernel}{279}
+\indexentry{Diffeology!groupoid diffeology}{281}
+\indexentry{Diffeological groupoid}{281}
+\indexentry{Fibrating groupoid}{282}
+\indexentry{Trivial groupoid}{283}
+\indexentry{Functional diffeology}{285}
+\indexentry{Diffeological fibration}{288}
+\indexentry{Total space}{288}
+\indexentry{Base space}{288}
+\indexentry{Projection}{288}
+\indexentry{Fiber bundle}{288}
+\indexentry{Fiber}{288}
+\indexentry{Pullback}{290}
+\indexentry{Product}{291}
+\indexentry{Fibered product}{291}
+\indexentry{Restriction}{291}
+\indexentry{Subbundle}{291}
+\indexentry{Principal action}{292}
+\indexentry{Principal fibration}{292}
+\indexentry{Principal fiber bundle}{292}
+\indexentry{Structure group}{292}
+\indexentry{Principal fiber bundle structure groupoid}{292}
+\indexentry{G-principal fiber bundle@$\G$-principal fiber bundle}{296}
+\indexentry{Irrational torus}{298}
+\indexentry{Structure of fiber bundle}{301}
+\indexentry{Structure group}{301}
+\indexentry{Structure groupoid}{301}
+\indexentry{Loops bundle}{310}
+\indexentry{Exact homotopy sequence}{312}
+\indexentry{Covering}{314}
+\indexentry{Galoisian covering}{314}
+\indexentry{Monodromy theorem}{317}
+\indexentry{Universal covering}{318}
+\indexentry{Basic differential form}{319}
+\indexentry{Abelianized}{321}
+\indexentry{Galoisian covering}{322}
+\indexentry{Integration function}{323}
+\indexentry{De Rham homomorphism}{324}
+\indexentry{De Rham homomorphism}{327}
+\indexentry{De Rham homomorphism}{327}
+\indexentry{Local path}{328}
+\indexentry{Tautological bundle}{328}
+\indexentry{Connection}{328}
+\indexentry{Horizontal path}{329}
+\indexentry{Horizontal lift}{329}
+\indexentry{Parallel transport}{330}
+\indexentry{Pullback}{332}
+\indexentry{Holonomy group}{333}
+\indexentry{Holonomy bundle}{333}
+\indexentry{Monodromy representation}{334}
+\indexentry{Reduced holonomy group}{334}
+\indexentry{Monodromy}{334}
+\indexentry{Universal covering}{336}
+\indexentry{Covering}{336}
+\indexentry{Diffeological $1$-torus}{336}
+\indexentry{Connection form}{337}
+\indexentry{Curvature}{337}
+\indexentry{Irrational torus}{340}
+\indexentry{Flow}{341}
+\indexentry{Paths $1$-cocycle}{347}
+\indexentry{Characteristic class}{347}
+\indexentry{Group of periods}{350}
+\indexentry{Torus of periods}{350}
+\indexentry{Paths moment map}{364}
+\indexentry{Chain-Homotopy operator}{364}
+\indexentry{Hamiltonian}{365}
+\indexentry{Holonomy}{367}
+\indexentry{Abelianized}{368}
+\indexentry{Hamiltonian}{368}
+\indexentry{two-points moment map@$2$-points moment map}{370}
+\indexentry{Exact moment map}{370}
+\indexentry{Souriau cocycle}{371}
+\indexentry{Coboundary}{372}
+\indexentry{Souriau cohomology class}{372}
+\indexentry{Universal paths moment map}{378}
+\indexentry{Universal $2$-points moment map}{378}
+\indexentry{Universal moment map}{378}
+\indexentry{Universal Souriau cocycle}{378}
+\indexentry{Universal Souriau class}{378}
+\indexentry{Hamiltonian space}{378}
+\indexentry{Hamiltonian diffeomorphism}{378}
+\indexentry{Group of flux}{378}
+\indexentry{Time-dependent Hamiltonian}{380}
+\indexentry{Characteristic}{381}
+\indexentry{Characteristic}{381}
+\indexentry{symplectic reduction}{381}
+\indexentry{Homogeneous symplectic space}{384}
+\indexentry{Symplectic diffeological space}{384}
+\indexentry{Characteristic}{391}
+\indexentry{Heisenberg group}{403}
+\indexentry{Intersection form}{403}
+\indexentry{Corner orbifold}{407}
+\indexentry{Cone orbifold}{409}
+\indexentry{Fine structure}{411}
+\indexentry{Local family}{412}
+\indexentry{Hopf fibration}{412}
+\indexentry{Projective space}{412}
+\indexentry{Coadjoint orbit}{412}
+\indexentry{Bott cocycle}{414}
+\indexentry{Central extension}{414}
+\indexentry{Souriau cocycle}{419}
+\indexentry{Imprimitivity}{421}
+\indexentry{Presymplectic}{422}
+\indexentry{Symplectic}{422}
+\indexentry{Characteristic}{424}
+\indexentry{Symplectic}{424}
