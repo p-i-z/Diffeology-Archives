@@ -1,0 +1,1840 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  La trilogie du moment (1995) - Modernized Version
+%%
+%%  Original Author: Patrick Iglesias-Zemmour
+%%  Transmuted for the Diffeology Archives: December 2025
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,reqno,letterpaper,twoside]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: - Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+
+% --- Math Packages (Must load these BEFORE mathdesign) ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% --- Fonts (Must load AFTER amssymb to avoid \circledS conflict) ---
+\usepackage[cal=scr,frenchmath,uppercase=upright,greekfamily=didot,greeklowercase=upright,utopia]{mathdesign}
+
+% --- Other Tools ---
+\usepackage{pifont} % For \pencil symbol
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{arrow style=tikz, diagrams={>={Straight Barb[scale=0.8]}}}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=endash]{caption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: - Layout & Styling
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\linespread{1.1}
+\textwidth 14cm
+\oddsidemargin 0.76cm
+\evensidemargin 0.76cm
+\topmargin -0.04cm
+\headheight 1cm
+\headsep 0.75cm
+\textheight 21cm
+\footskip 1.25cm
+\allowdisplaybreaks
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+
+% --- Theorem Styles ---
+\newtheoremstyle{piz-style}
+  {7pt}{7pt}{\itshape}{0pt}{\bfseries}{.}{6pt}{}
+
+\theoremstyle{piz-style}
+\newtheorem{theorem}{Théorème}[section]
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollaire}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{example}[theorem]{Exemple}
+\newtheorem{note}[theorem]{Remarque}
+
+% --- Custom Proof Environment ---
+\renewenvironment{proof}{\noindent\textsc{Démonstration.}}{\nolinebreak\hfill $\square$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: - Mathematical Macros (Extracted & Standardized)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --- Number Sets ---
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\TT}{\mathbf{T}}
+
+% --- Calligraphic letters ---
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cT}{\mathcal{T}}
+
+% --- Operators (Standard) ---
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Ham}{Ham}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\id}{\mathbf{1}}
+\DeclareMathOperator{\im}{Im}
+
+% --- Operators (Paper Specific) ---
+\DeclareMathOperator{\Arc}{Arc}
+\DeclareMathOperator{\cl}{cl}     % Class/Projection map
+\DeclareMathOperator{\Is}{Is}     % Isotopies
+\DeclareMathOperator{\Lac}{Lac}   % Loops (Lacets)
+\DeclareMathOperator{\Vect}{Vect} % Vector fields
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\source}{s}  % Source map (noted 's' in text)
+\DeclareMathOperator{\but}{b}     % But (Target) map (noted 'b' in text)
+
+% --- Geometry & Diffeology ---
+\newcommand{\Cinfty}{C^\infty}
+\newcommand{\DLie}{\pounds}       % Lie Derivative
+\newcommand{\cyl}{{\mathrm{cyl}}}
+
+% --- Helper Macros ---
+\newcommand{\xo}{x_\circ}
+\renewcommand{\d}{\,d}            % Thin space for differential 'd'
+\newcommand{\mor}[1]{\mathrel{\xrightarrow{#1}}}
+\newcommand{\scal}[2]{\langle #1,#2\rangle}
+\newcommand{\norm}[1]{\left\Vert #1 \right\Vert}
+\newcommand{\cf}{{\em cf.\/}}
+\newcommand{\ie}{{\em i.e.\/}}
+\newcommand{\Imm}{\operatorname{Imm}}
+\newcommand{\cad}{c'est-\`a-dire }
+\newcommand{\tq}{\mid}
+\newcommand{\cst}{{\mathrm{cst.}}}
+\newcommand{\vect}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: - Title Information
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{La trilogie du moment}
+\author{Patrick Iglesias-Zemmour}
+\date{1995}
+
+\begin{document}
+
+\begin{abstract}
+\noindent
+A toute deux-forme ferm\'ee,
+sur une vari\'et\'e connexe,
+on associe une famille d'extensions centrales du groupe de ses automorphismes par son tore des p\'eriodes.
+On discute quelques propri\'et\'es de cette construction.
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: - Content
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Introduction}
+
+\noindent
+On consid\`ere une deux-forme ferm\'ee $\omega$ sur vari\'et\'e diff\'erentiable connexe $X$.
+On appelle {\em tore des p\'eriodes} de la forme $\omega$,
+le quotient $T_\omega$ de $\RR$ par son {\em groupe des p\'eriodes} $P_\omega$.
+On appelle {\em fibr\'e d'int\'egration} de la forme $\omega$,
+tout fibr\'e principal de base $X$ et de groupe structural $T_\omega$,
+poss\'edant une connexion de courbure $\omega$.
+On montre que l'ensemble des fibr\'es d'int\'egration de la forme $\omega$ est class\'ee,
+\`a \'equivalence de fibr\'e principal pr\`es,
+par le premier groupe d'extension de $H_1(X,\ZZ)$ \`a coefficients dans $P_\omega$,
+c'est \`a dire $\Ext(H_1(X,\ZZ), P_\omega)$.
+En particulier,
+si le groupe $H_1(X,\ZZ)$ est sans torsion et si $X$ est compacte,
+il y a unicit\'e du fibr\'e d'int\'egration.
+
+D\`es que le tore des p\'eriodes $T_\omega$ n'est plus un groupe de Lie,
+c'est \`a dire d\`es que $\omega$ n'est plus enti\`ere\footnote{On dit qu'une forme ferm\'ee est enti\`ere si son groupe des p\'eriodes est soit nul soit isomorphe \`a $\ZZ$.},
+il est n\'ecessaire d'\'elargir la cat\'egorie des vari\'et\'es diff\'erentiables \`a celle des {\em espaces diff\'erentiables} (voir annexe \ref{AnnED}).
+Dans ces conditions,
+le fibr\'e d'int\'egration $Y$ n'est plus une vari\'et\'e,
+mais les notions d'applications diff\'erentiables,
+fibr\'es,
+connexions et autres objets g\'eom\'etriques sont bien d\'efinis dans cette cat\'egorie \cite{Iglesias2},
+et c'est dans ce sens qu'ils sont utilis\'es ici.
+
+Chaque fibr\'e d'int\'egration $\pi : Y\to X$ peut \^etre muni d'une famille de connexions in\'equivalentes de courbure $\omega$ index\'ee par $H^1(X,\RR)$.
+On appelle {\em structure d'int\'egration} de la forme $\omega$ tout couple $(Y,\lambda)$ o\`u $\pi : Y\to X$ est un fibr\'e d'int\'egration et $\lambda$ un forme de connexion de courbure $\omega$.
+L'ensemble des structures d'int\'egrations de la forme $\omega$ est donc class\'ee par $H^1(X,T_\omega)$.
+
+Soit $\Diff(Y,\lambda)$ le groupe des automorphismes de la structure d'int\'egration $(Y,\lambda)$,
+c'est \`a dire le groupe des diff\'eomorphismes de $Y$,
+\'equivariants sous l'action de $T_\omega$,
+et pr\'eservant la forme de connexion $\lambda$.
+Il s'envoie,
+par homomorphisme,
+dans le groupe $\Diff(X,\omega)$ des diff\'eomorphismes de $X$ qui pr\'eservent la forme $\omega$.
+Son image $\Ham(Y,\lambda)\subset \Diff(X,\omega)$ est appel\'e groupe des {\em diff\'eomorphismes hamiltoniens} de $\omega$,
+associ\'es \`a $(Y,\lambda)$.
+Son noyau est r\'eduit au tore des p\'eriodes $T_\omega$.
+Le groupe $\Diff(Y,\lambda)$ est une extension centrale de $\Ham(Y,\lambda)$ par $T_\omega$.
+
+Lorsque $H_1(X,\ZZ)=0$,
+on a \'egalit\'e des composantes connexes $\Ham^\circ(Y,\lambda) = \Diff^\circ(X,\omega)$.
+L'extension centrale de $\Diff^\circ(X,\omega)$ par $\Diff^\circ(Y,\lambda)$ est repr\'esent\'ee par un cocycle de groupe $K_\omega\in H^2(\Diff^\circ(X,\omega),T_\omega)$ dont on donne une interpr\'etation g\'eom\'etrique simple,
+en termes d'aire de triangle,
+qui justifie le nom qu'on lui a donn\'e de {\em cocycle triangulaire}.
+
+Le moment $J$ du groupe $\Ham(Y,\lambda)$ est une application de $X$ dans le dual $\Vect^*(X,\omega)$ de l'alg\`ebre de Lie $\Vect(X,\omega)$ des champs de vecteurs qui pr\'eservent la $2$-forme $\omega$.
+Son {\em d\'efaut d'\'equivariance},
+sous l'action de $\Ham(Y,\lambda)$,
+est un $1$-cocycle $\Theta$ de $\Ham(Y,\lambda)$ dans $\Vect^*(X,\omega)$.
+Il est reli\'e au cocycle triangulaire:
+c'est l'image de $K_\omega$ par un certain {\em morphisme d\'eriv\'ee}.
+
+L'aspect infinit\'esimal de cette construction fait intervenir un $2$-cocycle d'alg\`ebre de Lie $k_\omega\in H^2(\Vect(X,\omega),\RR)$ obtenu par d\'erivation du cocycle triangulaire $K_\omega$.
+Ces trois objets $K_\omega$,
+$\Theta$ et $k_\omega$ constituent ce qu'on a envie d'appeler la {\em trilogie du moment}.
+
+On illustre cette construction par quelques exemples.
+On montre en particulier comment on peut retrouver le cocycle de Bott-Thurston \cite{Bott1},
+qui d\'efinit la seule extension centrale non triviale de $\Diff^\circ (S^1)$ par $\RR$ \cite{GelfandFuchs},
+en consid\'erant l'espace des immersions du cercle $S^1$ dans $\RR^2$.
+Dans ce cas,
+le d\'efaut d'\'equivariance du moment est la d\'eriv\'ee Schwarzienne des diff\'eomorphismes du cercle \cite{Kirillov4},
+et le niveau infinit\'esimal fait naturellement appara\^{\i}tre le cocycle de Gelfand-Fuchs \cite{GelfandFuchs}.
+
+Tout cela g\'en\'eralise,
+au cas d'une $2$-forme ferm\'ee quelconque $\omega$,
+une construction relativement bien connue lorsque $\omega$ est enti\`ere.
+Cette construction,
+utilis\'ee notamment en quantification g\'eom\'etrique \cite{Souriau5} et dans la m\'ethode des orbites \cite{Kirillov1},
+est \`a l'origine de ce travail.
+Mais soulignons toutefois que le fibr\'e d'int\'egration est ici unique d\`es que $H^1(X,\ZZ)=0$,
+ce qui n'est pas le cas en quantification g\'eom\'etrique.
+C'est parce que nous utilisons ici le tore des p\'eriodes $T_\omega$,
+bien d\'efini comme le quotient $\RR/P_\omega$ et non un groupe donn\'e \`a l'avance (en l'occurence $S^1$) d\'efini \`a isomorphisme pr\`es.
+
+Il semble naturel que cette construction trouve sa place en cohomologie \'equivariante,
+nous n'avons pas d\'evelopp\'e cet aspect.
+
+Au moment d'envoyer la deuxi\`eme version de cet article \`a la revue,
+j'ai eu connaissance du livre de Jean-Luc Brylinski \cite{Brylinski2} dans lequel certaines constructions analogues sont pr\'esent\'ees.
+
+\section{Int\'egration d'une 2-forme ferm\'ee}
+
+\noindent
+Soit $\omega$ une $2$-forme ferm\'ee sur une vari\'et\'e diff\'erentiable connexe $X$.
+Rappelons que le {\em groupe des p\'eriodes} de la forme $\omega$ est le sous-groupe additif de $\RR$ d\'efini par:
+%
+\begin{equation}
+P_\omega = \left\{\int_\sigma \omega \mid \sigma \in H_2(X,\ZZ) \right\}.
+\end{equation}
+
+\begin{definition}
+On appellera {\em tore des p\'eriodes} de la forme $\omega$ le quotient $T_\omega$ de $\RR$ par son groupe des p\'eriodes $P_\omega$.
+On notera $\cl_\omega$ la projection de $\RR$ sur le tore $T_\omega$:
+%
+\begin{equation}
+0\longrightarrow P_\omega \longrightarrow \RR \mor{\cl_\omega} T_\omega \longrightarrow 1.
+\end{equation}
+\end{definition}
+
+Lorsque la forme $\omega$ est enti\`ere,
+$T_\omega$ est un groupe de Lie ($\RR$ ou $S^1$,
+suivant que $\omega$ est exacte ou non),
+sinon il sera muni de sa structure de groupe diff\'erentiable (voir annexe \ref{AnnED}).
+On notera additivement sa loi de groupe,
+m\^eme si lorsqu'il est \'egal \`a $S^1$,
+l'usage veut qu'elle soit not\'ee multiplicativement.
+Rappelons qu'une forme ferm\'ee est dite enti\`ere lorsque son groupe des p\'eriodes est discret,
+\ie trivial ou isomorphe \`a $\ZZ$.
+
+Soit $\theta$ la $1$-forme diff\'erentielle (de Maurer-Cartan) d\'efinie sur $T_\omega$ par:
+%
+\begin{equation}
+\cl_\omega ^*\theta = dt.
+\end{equation}
+%
+On notera $\Arc(X,\xo)$ l'espace des arcs diff\'erentiables de $X$ point\'es en $\xo\in X$,
+et $\Lac(X,\xo)$ le sous-espace de ses lacets.
+Ces espaces sont munis de leurs structures diff\'erentiables standards.
+
+Deux arcs $\gamma$ et $\gamma'$,
+sont {\em homologues} si leur diff\'erence borde une $2$-cha\^{\i}ne singuli\`ere,
+on notera :
+%
+\begin{equation}
+\gamma \sim \gamma' \quad \Leftrightarrow \quad \exists \sigma \quad \partial \sigma = \gamma' - \gamma.
+\end{equation}
+%
+Le quotient des arcs point\'es par la relation d'homologie sera not\'e $\hat X$,
+c'est le {\em rev\^etement d'homologie} de $X$.
+Son groupe structural,
+quotient de $\Lac(X,\xo)$ par la relation d'homologie,
+est isomorphe au groupe $H_1(X,\ZZ)$.
+
+\begin{proposition}\label{prop1}
+Soit $\omega$ une $2$-forme ferm\'ee sur une vari\'et\'e diff\'erentiable connexe $X$,
+telle que $H_1(X,\ZZ) =0$.
+Il existe un fibr\'e principal $\pi : Y \to X$,
+de base $X$,
+de groupe structural $T_\omega$,
+muni d'une forme de connexion $\lambda$ de courbure $\omega$.
+La structure $(Y,\lambda)$ est unique \`a \'equivalence pr\'es.
+\end{proposition}
+
+\begin{proof}
+D\'emontrons d'abord l'existence.
+Relevons la relation d'\'equivalence,
+d\'efinie plus haut sur les arcs,
+au produit $\Arc(X,\xo)\times T_\omega$:
+%
+\begin{equation}\label{defrelequiv}
+(\gamma,z) \sim (\gamma',z') \quad \Leftrightarrow \quad \gamma \sim \gamma' \mbox{ et } z' = z +  \cl_\omega \int_\sigma \omega \quad \mbox{o\`u} \quad \partial \sigma =\gamma'-\gamma.
+\end{equation}
+%
+Il est facile de v\'erifier que c'est bien une relation d'\'equivalence.
+Soit $Y$ le quotient de $\Arc(X,\xo)\times T_\omega$ par cette relation d'\'equivalence.
+Puisque $H_1(X,\ZZ)=0$,
+$\hat X=X$ et $Y$ est fibr\'e principalement sur $X$,
+de groupe structural $T_\omega$.
+Soit $K$ l'op\'erateur de cha\^{\i}ne-homotopie tel qu'il est d\'efini dans l'annexe \ref{AnnOCH},
+et $\alpha$ la $1$-forme d\'efinie sur le produit $\Arc(X,\xo)\times T_\omega$ par:
+%
+\begin{equation}\label{defalpha}
+\alpha = K\omega \oplus \theta.
+\end{equation}
+%
+C'est \'evidemment une forme de connexion pour l'action naturelle de $T_\omega$,
+de courbure $\but^*\omega$,
+puisque $K\omega$ est une primitive de $\but^*\omega$,
+o\`u $\but$ d\'esigne l'application {\em but} de $\Arc(X,\xo)$ sur $X$ qui \`a $\gamma$ associe $\gamma(1)$.
+En appliquant la proposition \ref{propformquot},
+le passage de la forme $\alpha$ au quotient $Y$ est assur\'e par le lemme suivant:
+
+\begin{lemma}
+Soit $p$ la projection de $\Arc(X,\xo)\times T_\omega$ sur son quotient $Y$.
+Si deux param\'etrages diff\'erentiables ({\em plaques}) $P$ et $P'$ de $\Arc(X,\xo)\times T_\omega$ v\'erifient $p\circ P=p\circ P'$,
+alors $P^*\alpha = P'^*\alpha$.
+\end{lemma}
+
+\begin{proof}
+Soit $U$ le domaine des plaques $P$ et $P'$ et $r\in U$,
+notons $P(r)=(P_X(r),P_T(r))$ o\`u $P_X$ est une plaque de $\Arc(X,\xo)$ et $P_T$ une plaque de $T_\omega$.
+On ne perd rien en g\'en\'eralit\'e en supposant que $P_T$ se rel\`eve globalement sur $\RR$ en une plaque $Q\in \Cinfty(U,\RR)$ (\ie $P_T=\cl_\omega\circ Q$).
+On a donc $P^*(K\omega \oplus \theta) = P_X^*(K\omega) + P_T^*\theta$,
+\cad $P_X^*(K\omega) + dQ$.
+Notons $\gamma =P(r)$ et $\delta \gamma = D(P)(r)(\delta r)$ o\`u $\delta r$ est un vecteur tangent \`a $r\in U$,
+par d\'efinition (\cf annexe \ref{AnnOCH}):
+$$P_X^*(K\omega)_r(\delta r)= \int_0^1\omega_{\gamma(t)}(\dot\gamma(t),\delta \gamma(t))\ dt.$$
+
+D'autre part,
+$p\circ P=p\circ P'$ implique l'existence,
+pour tout $r\in U$ d'une $2$-cha\^{\i}ne $\sigma_r$ telle que $\partial \sigma_r= P'(r)-P(r)$.
+On peut v\'erifier,
+en restreignant si n\'ecessaire le domaine $U$,
+que $\sigma_r$ peut \^etre choisie diff\'erentiablement.
+On a alors,
+$$\cl_\omega(Q'(r)) = \cl_\omega(Q(r)) + \cl_\omega \int_{\sigma_r}\omega,$$
+\cad $Q'(r)=Q(r) + \int_{\sigma_r}\omega +l(r)$,
+o\`u $l:U\to P_\omega$ est diff\'erentiable.
+Comme $P\omega$ est {\em diff\'erentiablement discret}:
+toute application diff\'erentiable de $U$ dans $\RR$ \`a valeur dans $P_\omega$ est localement constante,
+on d\'eduit que $l$ est constante et donc que :
+$$dQ'(r)=dQ(r)+d\left[\int_{\sigma_r} \omega\right].$$
+En utilisant le th\'eor\`eme de Stokes (voir annexe \ref{AnnStokes}),
+qui peut s'\'ecrire aussi
+$$d\left[\int_{\sigma} \omega\right] = \int_{\sigma} d\omega (\cdot) + \int_{\partial \sigma} \omega(\cdot),$$
+et l'expression pr\'ec\'edente de $P_X^*(K\omega)$ on d\'eduit finalement :
+$$dQ'-dQ= -P_X^*(K\omega) + {P'_X}^*(K\omega) \quad \Rightarrow \quad P^*[K\omega \oplus \theta] = {P'}^*[K\omega \oplus \theta].$$
+C'est ce qu'il fallait d\'emontrer.
+\end{proof}
+
+D\'emontrons l'unicit\'e de cette construction.
+Soit $(Y',\lambda')$ une autre structure r\'epondant aux hypoth\`eses.
+L'image r\'eciproque de $Y$ par $\but : \Arc(X,\xo) \to X$ est triviale,
+car $\Arc(X,\xo)$ est contractile et muni d'une connexion (cette propri\'et\'e remplace la paracompacit\'e dans le cas des vari\'et\'es).
+L'image de la section nulle au dessus de $\Arc(X,\xo)$ d\'efinit une application $\psi$ de $\Arc(X,\xo)$ dans $Y$.
+On v\'erifie alors que la projection $(\gamma, z)\mapsto z\psi(\gamma)$ r\'ealise le quotient de $\Arc(X,\xo)\times T_\omega$ par la relation d'\'equivalence d\'efinie plus haut et donc que $Y$ et $Y'$ sont \'equivalents en tant que fibr\'es principaux.
+Il est toujours possible,
+d'autre part,
+de choisir un isomorphisme entre $\but^*(Y')$ et le produit $\Arc(X,\xo)\times T_\omega$ de telle sorte que l'image r\'eciproque de $\lambda'$ co\"{\i}ncide avec la forme $\alpha$.
+\end{proof}
+
+\begin{note}
+Le relev\'e \`a $\Arc(X,\xo)$ de la relation d'\'equivalence sur les arcs d\'efinit un {\em cocycle} qu'on pourrait appeler le {\em cocycle d'arcs} associ\'e \`a $\omega$.
+C'est la fonction $f_\omega$ d\'efinie sur les couples d'arcs homologues par:
+%
+\begin{equation}\label{cocarc}
+f_\omega(\gamma,\gamma') = \cl_\omega \int_\sigma \omega \quad \mbox{o\`u} \quad \partial \sigma =\gamma'-\gamma.
+\end{equation}
+%
+L'int\'egrale d\'epend de la cha\^{\i}ne bordant $\gamma'-\gamma$,
+mais pas sa classe dans $T_\omega$.
+Le choix de cette terminologie r\'esulte de l'identit\'e suivante,
+v\'erifi\'ee pour tout triplet d'arcs homologues:
+%
+\begin{equation}
+f_\omega(\gamma,\gamma') +  f_\omega(\gamma',\gamma'') + f_\omega(\gamma'',\gamma) =0.
+\end{equation}
+%
+La fonction $f_\omega$ est un {\em cobord} s'il existe $\mu: \Arc(X,\xo) \to T_\omega$ diff\'erentiable,
+telle que $f_\omega(\gamma,\gamma') = \mu(\gamma')-\mu(\gamma)$.
+Ce qui se produit lorsque $\omega =d\alpha$,
+auquel cas:
+$\mu (\gamma) = \int_\gamma \alpha$.
+\end{note}
+
+Nous utiliserons le lemme pr\'ec\'edent pour d\'emontrer le th\'eor\`eme plus g\'en\'eral suivant:
+
+\begin{theorem}
+Pour toute $2$-forme ferm\'ee $\omega$ d\'efinie sur une vari\'et\'e diff\'erentiable connexe $X$,
+il existe un fibr\'e principal $\pi : Y \to X$ de groupe structural $T_\omega$ muni d'une forme de connexion $\lambda $ de courbure $\omega$.
+Un tel fibr\'e sera appel\'e {\em fibr\'e d'int\'egration} de la $2$-forme $\omega$.
+Les fibr\'es d'int\'egration de la $2$-forme $\omega$ sont class\'es,
+\`a \'equivalence de fibr\'e principal pr\`es,
+par le premier groupe d'extension $\Ext(H_1(X,\ZZ),P_\omega)$.
+\end{theorem}
+
+\begin{proof}
+Comme dans la d\'emonstration pr\'ec\'edente nous consid\'e\-rons la relation d'\'equivalence d\'efinie par (\ref{defrelequiv}),
+sur le produit $\Arc(X,\xo)\times T_\omega$,
+ainsi que la $1$-forme $\alpha$ (d\'efinition  \ref{defalpha}).
+L'espace quotient $\hat Y$ est alors fibr\'e sur le rev\^etement d'homologie $\hat X$ de $X$,
+de groupe $T_\omega$.
+Il est muni d'une connexion $\hat \lambda$ de courbure  $\hat \omega$,
+image r\'eciproque de $\omega$ par la projection naturelle $\hat X \to X$.
+En vertu de la proposition pr\'ec\'edente la structure $(\hat Y, \hat \lambda)$,
+qui int\`egre $\hat \omega$,
+est unique \`a \'equivalence pr\`es.
+
+Consid\'erons une section $s$ de $H_1(X,\ZZ)$ dans l'espace des lacets $\Lac(X,\xo)$.
+Soit $\phi$ le $2$-cocycle de groupe d\'efini sur $H_1(X,\ZZ)$,
+\`a valeurs dans $T_\omega$ :
+%
+\begin{equation}
+\phi (h,h') = f_\omega (s(h+ h'), s(h)+ s(h')).
+\end{equation}
+%
+Ce cocycle \'etant sym\'etrique,
+il d\'efinit une extension ab\'elienne $\Gamma$ de $H_1(X,\ZZ)$ par $T_\omega$.
+Cette extension agit naturellement sur $\Arc(X,\xo)\times T_\omega$ par :
+%
+\begin{equation}
+(h,\tau)[\gamma,z] = [s(h)+ \gamma, z+ \tau],
+\end{equation}
+%
+o\`u $l+ \gamma$ d\'esigne la juxtaposition du lacet $l$ avec l'arc $\gamma$,
+et les crochets:
+les classes d'\'equivalences.
+Mais le groupe $T_\omega$ \'etant divisible,
+l'extension est triviale (voir par exemple \cite{KargMerz}) et le groupe $\Gamma$ est isomorphe au produit direct de $H_1(X,\ZZ)$ par $T_\omega$.
+Tout isomorphisme permet de d\'efinir une action de $H_1(X,\ZZ)$ sur $\hat Y$,
+dont le quotient $Y = \hat Y/H_1(X,\ZZ)$ est un fibr\'e principal de groupe structural $T_\omega$ sur $X$.
+On v\'erifie alors que la forme de connexion $\hat \lambda$,
+\'etant invariante par ces actions de $H_1(X,\ZZ)$,
+passe sur $Y$ en une forme de connexion $\lambda$ de courbure $\omega$.
+Le fibr\'e $Y\to X$,
+muni de la forme de connexion $\lambda$ est construit par quotients successifs:
+\[
+\begin{tikzcd}
+\Arc(X,\xo)\times T_\omega \arrow[r] \arrow[d] & \hat Y \arrow[r] \arrow[d] & Y \arrow[d] \\
+\Arc(X,\xo) \arrow[r] & \hat X \arrow[r] & X
+\end{tikzcd}
+\]
+Deux tels isomorphismes entre $\Gamma$ et $H^1(X,\ZZ)$ ne diff\`erent que d'un \'el\'ement de $\Hom(H_1(X,\ZZ), T_\omega)$ c'est \`a dire d'un \'el\'ement de $H^1(X,T_\omega)$.
+Gr\^ace \`a l'unicit\'e de la structure $(\hat Y, \hat \lambda)$ nous avons trouv\'e de cette fa\c{c}on,
+toutes les structures qui int\`egrent $\omega$.
+
+Soit alors $\pi : Y \to X$ et $\pi' : Y' \to X$ deux de ces fibr\'es obtenus par quotient de $\hat Y$ \`a partir des actions $\rho$ et $\rho'$ de $H_1(X,\ZZ)$.
+Ces actions diff\`erent d'un \'el\'ement $r\in \Hom(H_1(X,\ZZ), T_\omega)$.
+Il y a donc une surjection naturelle $\sigma$ de l'espace des classes de fibr\'es d'int\'egration de $\omega$ sur $\Hom(H_1(X,\ZZ), T_\omega)$.
+On peut facilement v\'erifier,
+en prenant les images r\'eciproques de $Y$ et $Y'$ par la projection naturelle de $\hat X$ sur $X$,
+qu'ils sont \'equivalent si et seulement si il existe une application $\zeta : \hat X \to T_\omega$ telle que $r(k) = \zeta (k\hat x) - \zeta (\hat x)$,
+pour tout $k\in H_1(X,\ZZ)$.
+La fonction $\zeta$ d\'efinit alors une $1$-forme ferm\'ee $\varepsilon$ sur $X$,
+par $\zeta^*\theta = \pi^*\varepsilon$,
+qui d\'efinit \`a son tour (par int\'egration sur le rev\^etement d'homologie) une fonction $F$ de $\hat X$ dans $\RR$,
+telle que $\zeta^*\theta =dF$,
+on en d\'eduit $\zeta = \cl_\omega \circ F$.
+Autre\-ment dit:
+le noyau de la surjection $\sigma$ est le sous groupe des homomorphisme de $H_1(X,\ZZ)$ dans $T_\omega$ povenant d'un homomorphisme de $H_1(X,\ZZ)$ dans $\RR$.
+Comme $\RR$ est divisible,
+on conclut,
+en utilisant la suite exacte du foncteur $\Ext$ \cite{MacLane2},
+que le co-noyau de la fl\`eche naturelle $\Hom(H_1(X,\ZZ),\RR) \to \Hom(H_1(X,\ZZ),T_\omega)$ est exactement le premier groupe d'extension de $H_1(X,\ZZ)$ dans le groupe des p\'eriodes $P_\omega$,
+c'est \`a dire:
+$\Ext(H_1(X,\ZZ),P_\omega)$.
+\end{proof}
+
+\begin{note}\label{remsanstorsion}
+Si le groupe d'homologie $H_1(X,\ZZ)$ est sans torsion et si $X$ est compacte,
+Il y a unicit\'e du fibr\'e d'int\'egration de la $2$-forme $\omega$.
+En effet tout homomorphisme de $H_1(X,\ZZ)$ dans $T_\omega$ est alors la projection d'un homomorphisme \`a valeurs r\'eelles.
+\end{note}
+
+\begin{definition}
+On appellera {\em structure d'int\'egration} de la $2$-forme ferm\'ee $\omega$,
+tout couple $(Y,\lambda)$ o\`u $Y$ est un fibr\'e d'int\'egration de $\omega$ et $\lambda$ une connexion de courbure $\omega$.
+\end{definition}
+
+\begin{note}
+Etant donn\'e un fibr\'e d'int\'egration $\pi : Y \to X$,
+les formes de connexions in\'equivalentes sur $Y$ de courbure $\omega$ sont class\'es par $H^1(X,\RR)$.
+L'ensemble des structures d'int\'egrations est donc class\'ee par $H^1(X,T_\omega)$.
+Ce que nous dit le th\'eor\`eme pr\'ec\'edent est que cette classification se scinde gr\^ace \`a la suite exacte:
+%
+\begin{eqnarray}
+0 & \to & \Hom(H_1(X,\ZZ),P_\omega) \to \Hom(H_1(X,\ZZ),\RR) \to \nonumber \\
+    & \to &\Hom(H_1(X,\ZZ),T_\omega) \to \Ext(H_1(X,\ZZ),P_\omega) \to 0
+\end{eqnarray}
+%
+Le groupe $\Ext(H_1(X,\ZZ),P_\omega)$ classe les fibr\'es d'int\'egration,
+et le groupe dual $\Hom(H_1(X,\ZZ), \RR)$,
+c'est \`a dire $H^1(X,\RR)$,
+classe les formes de connexions.
+\end{note}
+
+\begin{note}
+Parce que les cocycles d'arcs de deux $2$-formes ferm\'ees cohomologues sont cohomologues,
+leurs fibr\'es d'int\'egration sont \'equivalents.
+Autre\-ment dit,
+la classe de cohomologie de la forme $\omega$ est,
+en un certain sens,
+la premi\`ere «classe de Chern» de ces fibr\'es d'int\'egration.
+\end{note}
+
+\begin{note}
+On peut \^etre surpris que des fibr\'es d'int\'egration existent pour toute forme ferm\'ee,
+m\^eme multiples les unes des autres par un r\'eel non entier.
+Mais,
+c'est un exercice de montrer que pour $\omega = s\omega_0$,
+o\`u $s\in \RR$,
+le fibr\'e d'int\'egration de $\omega_0$ est \'equivalent comme fibr\'e \`a celui de $\omega$,
+mais attention :
+les groupe $T_\omega$ et $T_{\omega _0}$ ne sont pas identiques,
+seulement isomorphes.
+La diff\'erence avec la situation classique des $2$-formes enti\`eres est qu'il n'y a pas d'identification possible,
+{\em a priori},
+des tores des p\'eriodes pour les $2$-formes ferm\'ees quelconques.
+Une telle identification,
+dans le cas entier,
+consiste \`a fixer \`a l'avance la longueur de la p\'eriode.
+\end{note}
+
+\section{Extensions centrales des diff\'eo\-morphis\-mes ha\-mil\-to\-niens}
+
+\noindent
+Soit $(Y,\lambda)$ une structure d'int\'egration de la $2$-forme ferm\'ee $\omega$ d\'efinie sur $X$.
+On note $\Diff(Y,\lambda)$ le groupe des automorphismes du couple $(Y,\lambda)$ :
+%
+\begin{equation}
+\Diff(Y,\lambda)  =  \{\psi \in \Diff(Y)\mid \psi^*\lambda =\lambda \mbox{ et } \forall z\in T_\omega : \psi\cdot z = z\cdot\psi \}.
+\end{equation}
+%
+Le groupe $\Diff(Y,\lambda)$ s'envoie par homomorphisme dans le groupe $\Diff(X,\omega)$ des diff\'eomorphismes de $X$ qui pr\'eservent la $2$-forme $\omega$.
+On notera $\Ham(Y,\lambda)$ son image,
+et ses \'el\'ements seront appel\'es {\em diff\'eomorphismes hamiltoniens} de la structure $(Y,\lambda)$.
+Le groupe $\Diff(Y,\lambda)$ contient \'evidemment le groupe $T_\omega$ comme sous groupe central,
+plus pr\'ecisemment:
+
+\begin{proposition}
+Le noyau de l'homomorphisme naturel de $\Diff(Y,\lambda)$ dans $\Diff(X,\omega)$ est r\'eduit au tore des p\'eriodes $T_\omega$.
+\end{proposition}
+%
+\begin{proof}
+Soit $\psi$ un automorphisme de $(Y,\lambda)$ se projetant sur l'identit\'e de $X$,
+il existe une application diff\'erentiable $\zeta :Y\to T_\omega$ telle que $\psi(y) = \zeta(y)\cdot y$.
+Par \'equivariance de $\psi$ on d\'eduit que $\zeta$ ne d\'epend que de $x=\pi(y)$ et la condition $\psi^*\lambda =\lambda$ implique $\zeta_X^*\theta = 0$ c'est \`a dire $\zeta_X = \cst$,
+o\`u $\zeta =\zeta _X\circ \pi$.
+\end{proof}
+
+Ainsi,
+chaque structure d'int\'egration $(Y,\lambda)$ donne lieu \`a une extension centrale,
+par le tore des p\'eriodes $T_\omega$,
+de son sous-groupe des diff\'eomorphismes hamiltoniens.
+%
+\begin{equation}
+0 \to T_\omega \to \Diff(Y,\lambda) \to \Ham(Y,\lambda) \to 1.
+\end{equation}
+%
+\begin{definition}
+Lorsque la structure d'int\'egration est unique,
+ce qui est le cas si $H_1(X,\ZZ)=0$,
+cette extension centrale sera appel\'ee {\em extension centrale r\'eguli\`ere} du groupe des automorphismes de la $2$-forme $\omega$.
+\end{definition}
+
+\section{Le cocycle triangulaire}
+
+\noindent
+A partir de ce paragraphe,
+nous supposerons pour simplifier que $H_1(X,\ZZ)=0$,
+nous avons vu que dans ce cas la structure d'int\'egration $(Y,\lambda)$ est unique.
+De plus,
+nous nous restreindrons aux composantes connexes des groupes $\Diff(Y,\lambda)$,
+$\Diff(X,\omega)$ et $\Ham(X,\omega)$.
+
+\begin{note}
+Notons d\'ej\`a que dans ce cas:
+$\Ham^\circ(X,\omega)= \Diff^\circ(X,\omega)$.
+En effet,
+soit $\phi \in \Diff^\circ(X,\omega)$ et $\Phi$ une isotopie de $\phi$,
+d\'esignons par $c_\Phi$ la trajectoire sous l'action de $\Phi$ du point $\xo$:
+%
+\begin{equation}
+c_\Phi : t \mapsto \Phi_t(\xo).
+\end{equation}
+%
+Alors $\phi$ se rel\`eve en un diff\'eomorphisme $\hat \phi$ de $Y$:
+%
+\begin{equation}
+\hat \phi[\gamma,z]= [c_\Phi + \phi \circ \gamma, z].
+\end{equation}
+%
+Il est facile de v\'erifier que c'est un automorphisme de $(Y,\lambda)$.
+\end{note}
+
+Nous allons,
+maintenant,
+d\'ecrire la construction g\'eom\'etrique d'un cocycle $K_\omega$ de l'extension centrale r\'eguli\`ere de $\Diff^\circ(X,\omega)$.
+Pour cela,
+nous commencerons par construire une certaine extension centrale du groupe des isotopies de $\Diff(X,\omega)$ qui donnera,
+par quotient,
+l'extension recherch\'ee.
+Soit:
+%
+\begin{equation}
+\Is(X,\omega) = \Arc(\Diff(X,\omega), \id_X),
+\end{equation}
+%
+nous noterons $*$ sa loi de groupe.
+Elle est d\'efinie,
+pour tout couple d'isotopies $(\Phi,\Psi)$ de $\Diff(X,\omega)$,
+par:
+%
+\begin{equation}
+\Phi *\Psi = [t\mapsto \Phi_t\circ \Psi_t],
+\end{equation}
+%
+A $\Phi$ et $\Psi$ associons le $2$-simplex $\sigma(\Phi,\Psi)$ de $X$ d\'efinie par :
+%
+\begin{equation}
+\sigma(\Phi,\Psi) : (t,s) \mapsto \Phi_t\circ \Psi_s(\xo) \quad \mbox{avec} \quad 0\leq s\leq t\leq 1,
+\end{equation}
+%
+dont le bord est donn\'e par :
+%
+\begin{equation}\label{bord1}
+\partial \sigma (\Phi ,\Psi ) = c_\Phi +\phi \circ c_\Psi -c_{\Phi *\Psi},
+\end{equation}
+%
+o\`u $\phi =\Phi _1$ (idem pour $\psi =\Psi _1$).
+
+\begin{proposition}\label{propcocycle}
+L'application $\tilde K_\omega$ de $\Is(X,\omega)\times \Is(X,\omega)$ dans $T_\omega$,
+d\'efinie par:
+%
+\begin{equation}
+\tilde K_\omega (\Phi ,\Psi ) = \cl_\omega \int_{\sigma (\Phi ,\Psi )}\omega,
+\end{equation}
+%
+est un $2$-cocycle de groupe.
+L'extension centrale de $\Is(X,\omega)$ par $T_\omega$ qui lui est associ\'ee par l'op\'eration:
+%
+\begin{equation}
+(\Phi,\tau)*(\Psi,\mu) = (\Phi *\Psi , \tau +\mu -\tilde K_\omega (\Phi ,\Psi))
+\end{equation}
+sera not\'ee $\Is(X,\omega)\times_{\tilde K_\omega }T_\omega$.
+\end{proposition}
+
+\begin{proof}
+Soit $\Phi$,
+$\Psi$ et $\Xi$ trois isotopies de $\Diff(X,\omega)$,
+il faut v\'erifier que :
+%
+$$
+\tilde K_\omega(\Phi*\Psi,\Xi) + \tilde K_\omega(\Phi,\Psi) = \tilde K_\omega(\Phi,\Psi*\Xi) + \tilde K_\omega(\Psi,\Xi).
+$$
+%
+Ce qui est \'equivalent,
+en posant $$\sigma(\Phi,\Psi,\Xi) = \sigma(\Phi*\Psi,\Xi) + \sigma(\Phi,\Psi)-\sigma(\Phi,\Psi*\Xi) - \sigma(\Psi,\Xi),$$ \`a:
+%
+$$
+\cl_\omega \int_{\sigma(\Phi,\Psi,\Xi)} = 0
+$$
+%
+Or,
+on peut v\'erifier facilement que $\sigma(\Phi,\Psi,\Xi)$ et $\phi \circ \sigma (\Psi,\Xi)-\sigma(\Psi,\Xi)$ sont homologues,
+il suffit donc de remarquer que:
+%
+$$
+\int_{\phi \circ \sigma(\Psi,\Xi)}\omega = \int_{\sigma (\Psi,\Xi)}\omega,
+$$
+%
+ce qui est imm\'ediat puisque $\phi^*\omega =\omega$.
+\end{proof}
+
+Le groupe $\Is(X,\omega)$ agit sur $\Arc(X)$ de fa\c{c}on naturelle,
+pour toute isotopie $\Phi$ et tout arc $\gamma$ on notera:
+ %
+\begin{equation}
+\Phi *\gamma  : t\mapsto \Phi_t(\gamma(t)).
+\end{equation}
+%
+Evidemment,
+si $\gamma \in \Arc(X,\xo)$ alors $\Phi*\gamma\in \Arc(X,\xo)$.
+Soit $\sigma(\Phi,\gamma)$ le $2$-simplex de $X$ d\'efinie par:
+%
+\begin{equation}
+\sigma(\Phi,\gamma) : (t,s) \mapsto \Phi_t(\gamma(s)) \quad \mbox{avec} \quad 0\leq s\leq t\leq 1,
+\end{equation}
+%
+dont le bord est donn\'e par:
+%
+\begin{equation}
+\partial \sigma(\Phi,\gamma) =  c_\Phi + \phi\circ\gamma - \Phi*\gamma.
+\end{equation}
+%
+L'action de $\Is(X,\omega)$ sur $\Arc(X,\xo)$ s'\'etend en une action de $\Is(X,\omega)\times_{\tilde K_\omega }T_\omega$ sur le produit $\Arc(X,\xo)\times T_\omega$:
+
+\begin{proposition}
+L'application qui \`a tout couple $(\Phi,\tau)\in \Is(X,\omega)\times_{\tilde K_\omega} T_\omega$ et \`a tout couple $(\gamma,z)\in \Arc(X,\xo)\times T_\omega$ associe :
+%
+\begin{equation}
+(\Phi,\tau)(\gamma,z)=\Big(\Phi*\gamma,z+\tau-\cl_\omega\int_{\sigma(\Phi,\gamma)}\omega\Big),
+\end{equation}
+%
+est une action de groupe qui pr\'eserve la forme $\alpha = K\omega \oplus \theta$.
+\end{proposition}
+
+\begin{proof}
+Soit $(\Phi,\tau)$ et $(\Psi,\mu)$ deux \'el\'ements de $\Is(X,\omega)\times_{\tilde K_\omega} T_\omega$.
+Soit $(\gamma,z)$ un \'el\'ement de $\Arc(X,\xo)\times T_\omega$.
+On a:
+%
+\begin{eqnarray*}
+(\Phi,\tau)[(\Psi,\mu)(\gamma,z)] & = & (\Phi,\tau)(\Psi*\gamma, z+\mu - \scal(\Psi,\gamma)\\
+ & = & \Big((\Phi *\Psi)*\gamma , z + \tau +\mu -\scal(\Phi,\Psi *\gamma) - \scal(\Psi,\gamma)\Big),
+\end{eqnarray*}
+%
+o\`u on a not\'e pour simplifier $\scal(\Psi,\gamma)$ \`a la place de $\cl_\omega\int_{\sigma(\Psi,\gamma)}\omega$;
+d'autre part:
+%
+\begin{eqnarray*}
+[(\Phi,\tau)*(\Psi,\mu)](\gamma,z) & = & \Big(\Phi *\Psi, \tau +\mu - \tilde K_\omega(\Phi ,\Psi )\Big)(\gamma,z)\\
+& = &  \Big((\Phi *\Psi)*\gamma ,  z + \tau +\mu - \tilde K_\omega(\Phi,\Psi) - \scal(\Phi*\Psi,\gamma)\Big).
+\end{eqnarray*}
+%
+Il faut donc montrer que :
+%
+\begin{equation}\label{cidessus}
+\tilde K_\omega(\Phi,\Psi) = \cl_\omega\int_{\sigma(\Phi,\Psi*\gamma)}\omega - \cl_\omega\int_{\sigma(\Phi*\Psi,\gamma)}\omega  + \cl_\omega\int_{\sigma(\Psi,\gamma)}\omega.
+\end{equation}
+%
+Ce qui revient \`a v\'erifier que le deuxi\`eme membre de cette \'egalit\'e est ind\'ependant de $\gamma$,
+puisque  $\sigma(\Phi,\Psi) = \sigma(\Phi,\Psi*\hat\xo)$,
+o\`u $\hat\xo$ est l'arc constant $[t\mapsto \xo]$.
+Or,
+un calcul simple montre que les simplexes $\sigma(\Phi,\Psi*\gamma) + \sigma(\Psi,\gamma) - \sigma(\Phi*\Psi,\gamma)$ et  $\sigma(\Phi,\Psi)$ sont homologues,
+donc l'\'egalit\'e a lieu.
+
+Montrons maintenant que la forme $\alpha$ est pr\'eserv\'ee,
+\cad  pour tout $(\Phi,\tau)\in \Is(X,\omega)\times_{\tilde K_\omega} T_\omega$:
+$(\Phi,\tau)^*\alpha =\alpha$.
+Soit $(\gamma,z)\in \Arc(X,\xo)$,
+nous noterons $(\gamma^*,z^*)=(\Phi,\tau)(\gamma,z)$,
+soit $(\delta \gamma, \delta z)$ un vecteur tangent\footnote{Une justification pr\'ecise de cette terminologie et du calcul qui suit est possible mais prendrait trop de place dans cet expos\'e sans \'eclairer davantage les id\'ees.} au point $(\gamma,z)$ et $(\delta \gamma^*,\delta z^*)$ son image par  $(\Phi,\tau)$.
+Il faut montrer que $\alpha_{(\gamma,z)}(\delta \gamma,\delta z)= \alpha_{(\gamma^*,z^*)}(\delta \gamma^*,\delta z^*)$,
+or
+%
+\begin{eqnarray*}
+\alpha_{(\gamma^*,z^*)}(\delta\gamma^*,\delta z^*) & = & K\omega(\delta \gamma^*) + \theta(\delta z^*) \\
+& = & \int_0^1\omega_{\gamma^*(t)}(\dot\gamma^*(t),\delta \gamma^*(t))\ dt + \theta(\delta z) - \delta \int_{\sigma(\Phi,\gamma)}\omega.
+\end{eqnarray*}
+%
+En introduisant la famille de champs de vecteurs $\xi_t$ d\'efinie sur $X$ par:
+%
+$$
+\xi_t (x) = [D(\Phi_t)(x)]^{-1}\bigg({\partial \Phi_t(x) \over \partial t}\bigg),
+$$
+%
+on peut \'ecrire:
+%
+$$
+K\omega(\delta \gamma^*) = K\omega (\delta \gamma) + \int_0^1\omega (\xi_t(\gamma (t)),\delta \gamma (t))\ dt.
+$$
+%
+D'autre part,
+en utilisant la formule de Stokes,
+telle qu'elle est exprim\'ee par (\ref{varint}) dans l'annexe \ref{AnnStokes},
+on peut v\'erifier que:
+%
+$$
+\delta \int_{\sigma(\Phi,\gamma)}\omega = \int_0^1\omega (\xi_t(\gamma (t)),\delta \gamma (t))\ dt,
+$$
+%
+d'o\`u on d\'eduit le r\'esultat.
+\end{proof}
+
+\begin{proposition}
+L'action de $\Is(X,\omega)\times_{\tilde K_\omega} T_\omega$ sur $\Arc(X,\xo)\times T_\omega$ se projette en une action sur $Y$ dont le noyau est le sous-groupe :
+%
+\begin{equation}\label{defGamma}
+\Gamma = \left\{(\Phi,\tau)\in \Is(X,\omega)\times_{\tilde K_\omega} T_\omega \tq \phi = \id_X \mbox{ et } \tau  = \cl_\omega \int_{\sigma_\Phi}\omega \right\},
+\end{equation}
+%
+o\`u $\phi = \Phi_1$ et $\sigma_\Phi$ est une $2$-cha\^{\i}ne quelconque bordant $c_\Phi$ \ie $\partial \sigma_\Phi = c_\Phi$.
+\end{proposition}
+
+\begin{proof}
+Il faut montrer que si $(\gamma,z)\sim (\gamma',z')$ au sens de la relation (\ref{defrelequiv}) alors $(\Phi,\tau)(\gamma',z')\sim (\Phi,\tau)(\gamma,z)$.
+Puisque $\gamma(1)=\gamma'(1)$ il existe une $2$-cha\^{\i}ne $\sigma_{\gamma,\gamma'}$ bordant $\gamma'-\gamma$ telle que $z'=z+\cl_\omega \int_{\sigma_{\gamma,\gamma'}}\omega$.
+Il faut donc v\'erifier que:
+%
+$$
+\left(\Phi *\gamma' ,z+ \cl_\omega \int_{\sigma_{\gamma,\gamma'}}\omega + \tau -\cl_\omega \int_{\sigma(\Phi,\gamma')}\omega \right) \sim \left(\Phi *\gamma ,z+\tau -\cl_\omega \int_{\sigma(\Phi,\gamma)}\omega \right).
+$$
+%
+Autrement dit,
+il faut montrer que pour toute cha\^{\i}ne $\sigma_{\Phi*\gamma,\Phi*\gamma'}$ bordant $\Phi*\gamma'-\Phi*\gamma$ on a :
+%
+$$
+\cl_\omega \int_{\sigma_{\Phi*\gamma,\Phi*\gamma'}}\omega = \cl_\omega \int_{\sigma_{\gamma,\gamma'}}\omega -\cl_\omega \int_{\sigma(\Phi,\gamma')}\omega + \cl_\omega \int_{\sigma(\Phi,\gamma)}.
+$$
+%
+Puisque $\phi^*\omega =\omega$ ($\phi = \Phi_1$),
+il existe une cha\^{\i}ne $\sigma_{\phi\circ \gamma,\phi \circ \gamma'}$ bordant  $\phi\circ \gamma'-\phi \circ \gamma$ telle que
+%
+$$\cl_\omega \int_{\sigma_{\phi\circ \gamma,\phi \circ \gamma'}} \omega = \cl_\omega \int_{\sigma_{\gamma,\gamma'}}\omega.$$
+%
+Un calcul \'el\'ementaire permet alors de v\'erifier que les cha\^{\i}nes $\sigma_{\Phi*\gamma,\Phi*\gamma'}$ et $\sigma(\Phi,\gamma') -  \sigma(\Phi,\gamma') + \sigma(\Phi,\gamma)$ sont homologues,
+ce qui \'etablit le r\'esultat.
+L'action de $\Is(X,\omega)\times_{\tilde K_\omega} T_\omega$ sur $\Arc(X,\xo)\times T_\omega$ passe donc au quotient $Y= [\Arc(X,\xo)\times T_\omega]/\sim$.
+Le calcul du noyau est une formalit\'e.
+\end{proof}
+
+\begin{corollary}
+L'extension centrale de $\Is(X,\omega)$ par $T_\omega$ d\'efinie par le cocycle $\tilde K_\omega$ se factorise sur l'extension centrale r\'eguli\`ere de $\Diff(X,\omega)$ :
+%
+\begin{equation}
+\begin{tikzcd}
+0 \arrow[r] & T_\omega \arrow[r] \arrow[d, equal] & \Is(X,\omega)\times_{\tilde K_\omega}T_\omega \arrow[r] \arrow[d, "\Gamma"] & \Is(X,\omega) \arrow[r] \arrow[d, "\but"] & 1 \\
+0 \arrow[r] & T_\omega \arrow[r] & \Aut(Y,\lambda) \arrow[r] & \Diff^\circ(X,\omega) \arrow[r] & 1
+\end{tikzcd}
+\end{equation}
+%
+Le groupe $\Aut(Y,\lambda)$ est isomorphe au quotient de $\Is(X,\omega)\times_{\tilde K_\omega} T_\omega$ par son sous-groupe $\Gamma$ (d\'efinition \ref{defGamma}).
+\end{corollary}
+
+\begin{proof}
+Il suffit de v\'erifier que la projection de $\Is(X,\omega)\times_{\tilde K_\omega} T_\omega$ sur $\Aut(Y,\lambda)$ est surjective,
+ce qui est imm\'ediat.
+\end{proof}
+
+La construction du cocycle $\tilde K_\omega$ nous donne ainsi la possibilit\'e de d\'efinir un nouveau cocycle $K_\omega$ caract\'eristique de l'extension centrale r\'eguli\`ere de $\Diff^\circ (X,\omega)$.
+Il suffit de choisir une section du morphisme $\but: \Is(X,\omega)\to \Diff^\circ(X,\omega)$,
+c'est \`a dire d'associer \`a tout diff\'eomorphisme $\phi\in \Diff^\circ(X,\omega)$ une isotopie $\Phi$ telle que $\Phi_1=\phi$.
+Tout autre choix d'isotopie conduit \`a un cocycle $K'_\omega$ cohomologue \`a $K_\omega$.
+On peut le v\'erifier directement en consid\'erant l'application qui \`a $\phi\in \Diff^\circ(X,\omega)$ associe la classe de l'aire d'un cycle bordant le cycle $c'_\phi - c_\phi$.
+Ces cocycles que nous appellerons {\em cocycles triangulaires} sont illustr\'es par la figure \ref{fig1}.
+
+\begin{note}
+Il n'y a aucune raison {\em a priori} pour qu'un des cocycle $K_\omega$ soit diff\'erentiable cela signifierait que la fibration principale $\Aut^\circ(\xi)\to \Diff^\circ(X,\omega)$ est diff\'erentiablement triviale.
+\end{note}
+
+\begin{note}\label{nulcoc}
+Si le groupe $\Diff^\circ(X,\omega)$ a un point fixe,
+que l'on peut toujours choisir comme point base,
+l'extension centrale r\'eguli\`ere est triviale.
+En effet,
+le cocycle $K_\omega$ est le cobord de l'application $\phi\mapsto \cl_\omega \int_\sigma \omega$,
+o\`u $\sigma$ est une une cha\^{\i}ne bordant $c_\phi$.
+\end{note}
+%
+Nous verrons plus loin des exemples d'extensions r\'eguli\`eres non triviales.
+
+\section{Cocycle triangulaire et moment}
+
+\noindent
+Le cocycle triangulaire de l'extension r\'eguli\`ere de $\Diff^\circ(X,\omega)$ est \'etroitement li\'e au moment de l'action de ce groupe sur $X$ et de son d\'efaut d'\'equivariance.
+Soit $\Vect(X,\omega)$ l'espace des champs de vecteurs sur $X$ qui pr\'eservent $\omega$:
+%
+\begin{equation}
+\Vect(X,\omega) =\{ \xi \in \Vect(X) \mid  \ \DLie_\xi \omega =0\}.
+\end{equation}
+%
+D'apr\`es la formule de Cartan,
+la $1$-forme $i_\xi \circ \omega$ est ferm\'ee,
+puisque par hypoth\`ese $H_1(X,\ZZ)=0$,
+cette forme est exacte.
+Il existe donc une fonction diff\'erentiable r\'eelle $J_\xi$ telle que :
+%
+\begin{equation}
+i_\xi \circ \omega = - dJ_\xi.
+\end{equation}
+%
+La fonction $J_\xi$ n'est d\'efinie qu'\`a une constante pr\`es,
+nous la fixerons en exigeant que $J_\xi (\xo)=0$.
+Il existe alors une application $J$ de $X$ dans le dual $\Vect^*(X,\omega)$,
+appel\'ee {\em application moment},
+telle que $J_\xi (x)=J(x)(\xi)$,
+d\'efinie par:
+%
+\begin{equation}
+J  :   X\to \Vect^*(X,\omega)\quad \mbox{ et } \quad
+J(x) = [\xi \mapsto - \int_{\xo}^x i_\xi \circ \omega],
+\end{equation}
+%
+o\`u l'int\'egrale est calcul\'ee sur un arc quelconque de $\xo$ \`a $x$.
+Le groupe $\Diff^\circ (X,\omega)$ agit naturellement sur $X$,
+et par son action coadjointe,
+sur $\Vect^*(X,\omega)$.
+Soit $\phi\in \Diff^\circ (X,\omega)$,
+nous noterons respectivement:
+%
+\begin{equation}
+\ad(\phi): \xi \mapsto \phi_*\xi \quad \mbox{et} \quad \ad^*(\phi) : \mu \mapsto \mu \circ \ad(\phi ^{-1}),
+ \end{equation}
+%
+son action adjointe sur $\Vect(X,\omega)$,
+et son action coadjointe sur $\Vect^*(X,\omega)$.
+La variance de $J$,
+sous l'action de $\phi$,
+est alors donn\'ee par:
+%
+\begin{equation}\label{defmom}
+J\circ \phi = \ad^*(\phi)\circ J + \Theta (\phi ) \quad \mbox{avec} \quad   \Theta (\phi ) : \xi \mapsto - \int_{\xo}^{\phi (\xo)}i_\xi \circ \omega.
+\end{equation}
+
+\begin{definition}
+L'application $\Theta$ est un $1$-cocycle du groupe $\Diff^\circ(X,\omega)$ dans $\Vect^*(X,\omega)$ pour l'action coadjointe,
+il sera appel\'e le {\em d\'efaut d'\'equivariance\footnote{C'est \`a J.-M. Souriau que l'on doit les notions de moment et de d\'efaut d'\'equivariance que nous venons d'introduire. La pr\'esentation que nous en donnons est l\'eg\`erement diff\'erente pour satisfaire les besoins de cet article.}} du moment $J$:
+%
+\begin{equation}
+\Theta : \Diff^\circ(X,\omega) \to \Vect^*(X,\omega), \quad   \Theta(\phi \circ \psi) = \ad^*(\phi)\Big(\Theta(\psi)\Big) + \Theta(\phi ).
+\end{equation}
+\end{definition}
+
+Le d\'efaut d\'equivariance $\Theta$ et le cocycle triangulaire $K_\omega$ sont reli\'es par la construction suivante.
+Soit $\xi\in \Vect(X,\omega)$ un champ de vecteurs com\-plet,
+nous noterons $t\mapsto \exp(t\xi)\in \Diff(X,\omega)$ le groupe \`a un param\`etre de $\Diff(X,\omega)$ associ\'e.
+Soit $E(t\xi)$ l'isotopie de $\exp(t\xi)$ d\'efinie par:
+%
+\begin{equation}
+E(t\xi) : s \mapsto \exp(st\xi).
+\end{equation}
+
+\begin{proposition}
+Soit $\phi \in \Diff^\circ(X,\omega)$ et $\xi \in \Vect(X,\omega)$ un champ de vec\-teurs complet,
+alors:
+%
+\begin{equation}\label{valcocThetatilde}
+\Theta(\phi )(\xi) = {\partial \over \partial t}\left\{\tilde K_\omega (\Phi,E(t\phi^{-1}_*\xi)) - \tilde K_\omega(E(t\xi),\Phi) \right\}_{t=0},
+\end{equation}
+%
+o\`u $\Phi$ est une isotopie quelconque de $\phi$.
+\end{proposition}
+
+\begin{proof}
+Soit $\Phi$ une isotopie de $\phi$,
+consid\'erons la famille de $2$-cha\^{\i}nes rectangulaires suivante:
+%
+\begin{equation}
+\sigma_t : (s,s') \mapsto \exp(st\xi)\Big(\Phi_{s'}(\xo)\Big).
+\end{equation}
+%
+Un calcul \'el\'ementaire permet de v\'erifier que :
+%
+\begin{equation}
+{\partial \over \partial t}\left\{\int_{\sigma_t}\omega\right\}_{t=0} = -\Theta(\phi)(\xi).
+\end{equation}
+%
+Le bord de $\sigma_t$ est donn\'e par:
+%
+$$
+\partial \sigma_t = c_\Phi + \phi \circ c_{E(t\phi^{-1}_*\xi)} - \exp(t\xi)\circ c_\Phi - c_{E(t\xi)}.
+$$
+%
+En divisant ce rectangle en deux triangles le long de la diagonale $s=s'$ ce qui conduit \`a ajouter et retrancher $c_{\Phi*E(t\phi^{-1}_*\xi)}$ du bord (voir figure \ref{fig3}),
+on obtient:
+%
+\begin{equation}
+\cl_\omega \int_{\sigma_t}\omega = \tilde K_\omega(E(t\xi),\Phi) - \tilde K_\omega (\Phi,E(t\phi^{-1}_*\xi)),
+\end{equation}
+%
+d'o\`u le r\'esultat.
+\end{proof}
+
+\begin{note}
+Le groupe $\Is(X,\omega)$ agit par l'interm\'ediaire de $\Diff^\circ(X,\omega)$.
+La formule ci-dessus est en r\'ealit\'e l'expression du d\'efaut d'\'equivariance du moment de $\Is(X,\omega)$ qui ne d\'epend de l'isotopie $\Phi$ que par son extr\'emit\'e,
+et se projette donc sur le d\'efaut $\Theta$.
+Soit $\phi \in \Diff^\circ(X,\omega)$ et $\xi \in \Vect(X,\omega)$ un champ complet,
+il est possible de choisir une section de la projection $\but : \Is(X,\omega)\to \Diff^\circ(X,\omega)$ de telle sorte que l'application $t\mapsto K_\omega(\phi,\exp(t\xi))$ soit diff\'erentiable.
+Il suffit de choisir une isotopie quelconque $\Phi$ de $\phi$ et d'\'etendre \`a $\Diff^\circ(X,\omega)$ tout entier la section d\'efinie sur $\{\phi\}\times \{\exp(t\xi)\}_{t\in \RR}$ par $(\phi, \exp(t\xi))\mapsto (\Phi, E(t\xi))$.
+Dans ce cas le d\'efaut d'\'equivariance $\Theta$ est donn\'e par la formule:
+%
+\begin{equation}\label{valcocTheta}
+\Theta(\phi)(\xi) = {\partial \over \partial t}\left\{K_\omega(\phi,\exp(t\phi^{-1}_*\xi)) - K_\omega(\exp(t\xi),\Phi) \right\}_{t=0},
+\end{equation}
+%
+c'est comme \c{c}a qu'il faut interpr\'eter la formule (\ref{valcocThetatilde}).
+\end{note}
+
+Soit $k_\omega$ le $2$-cocycle d\'eriv\'e de $\Theta$ (annexe \ref{morder}),
+c'est un cocycle de l'alg\`ebre de Lie $\Vect_\omega(X)$ \`a valeurs r\'eelles.
+Par un calcul analogue \`a celui de $\Theta$,
+on peut montrer que:
+%
+\begin{eqnarray*}
+k_\omega(\xi,\xi') & = & {\partial^2 \over \partial t\partial s}\Big\{\tilde K_\omega (E(t\xi), E(s\xi')) - \tilde K_\omega (E(t\xi'), E(s\xi)) \Big\}_{s=t=0} \\ \nonumber
+ & = & {\partial^2 \over \partial t\partial s}\Big\{K_\omega (\exp(t\xi), \exp(s\xi')) - K_\omega (\exp(t\xi'), \exp(s\xi)) \Big\}_{s=t=0},
+\end{eqnarray*}
+%
+o\`u $\xi$ et $\xi'$ sont deux champs de vecteurs complets dans $\Vect(X,\omega)$,
+et $K_\omega$ est choisi de telle sorte que $(t,s)\mapsto K_\omega (\exp(t\xi'), \exp(s\xi))$ soit diff\'erentiable.
+Le $2$-cocycle $k_\omega$ d\'efinit une extension centrale de $\Vect(X,\omega)$ par $\RR$,
+isomorphe \`a l'alg\`ebre de Lie de l'extension r\'eguli\`ere,
+nous l'appellerons {\em extension centrale r\'eguli\`ere infinit\'esimale}.
+Un calcul direct montre que :
+%
+\begin{equation}
+k_\omega (\xi ,\xi') = \omega (\xi(\xo),\xi'(\xo)).
+\end{equation}
+
+\begin{note}
+Si un groupe de Lie $G$ agit par automorphismes sur la forme $\omega$,
+$\Vect^*(X,\omega)$ se projette sur le dual $\cG^*$ de l'alg\`ebre de Lie $\cG$ de $G$,
+le moment de $G$ est alors l'image de $J$ par cette projection,
+de m\^eme en ce qui concerne son d\'efaut d'\'equivariance.
+\end{note}
+
+\begin{note}
+Le moment $J$ est constant sur le feuilletage caract\'eristique de la forme $\omega$.
+C'est un invariant int\'egral de $\omega$ (th\'eor\`eme de N\oe ther).
+\end{note}
+
+\begin{note}
+Le groupe $\Diff(Y,\lambda)$ agit aussi sur $X$ simplement par projection sur $\Diff^\circ(X, \omega)$.
+Le moment $\tilde J$ de cette action:
+$\tilde J(\xi,\epsilon) = J(\xi)$,
+o\`u $(\xi,\epsilon)\in \Vect(X,\omega)\times_k \RR$,
+est alors \'equivariant sous l'action de $\Diff^\circ(Y,\lambda)$.
+\end{note}
+
+\begin{note}
+La classe de cohomologie de $\Theta$ ne d\'epend que de $\omega$:
+si le moment est translat\'e d'une constante,
+$\Theta$ est translat\'e d'un cobord.
+C'est pour cette raison que seule la classe de cohomologie $\Theta$ n'a de sens intrins\`eque (il en va de m\^eme pour $K_\omega)$.
+Cette classe de cohomologie qui traduit la non \'equivariance du moment sous l'action de $\Diff^\circ(\omega,X)$ peut s'annuler dans de nombreux cas.
+Par exemple si $\Diff^\circ(\omega,X)$ a un point fixe,
+ou encore si $\omega$ est symplectique et $X$ compacte,
+dans ce cas on consid\`ere la moyenne du moment $J$ pour le volume d\'efini par la forme $\omega$.
+\end{note}
+
+\begin{note}
+Si $H_1(X,\ZZ)\neq 0$ les alg\`ebres de Lie de $\Ham_\lambda(X,\omega)$ sont identiques et \'egales \`a $\Vect(X,\omega)$.
+Il est vraisemblable que les diff\'erents cocycles d'alg\`ebres de Lie $k_\omega$,
+associ\'es \`a chaque choix de structure d'int\'egration (index\'ees par $H^1(X,T_\omega)$),
+conduisent \`a des extensions centrales in\'equivalentes de $\Vect(X,\omega)$ par $\RR$.
+Par exemple,
+pour une $2$-forme sur $\TT^2$,
+on obtiendrait une famille d'extensions in\'equivalentes index\'ee par $\Hom(\ZZ^2,S^1) \simeq S^1\times S^1$,
+le fibr\'e d'int\'egration \'etant unique puisque $T^2$ et compacte et $H^1(T^2,\ZZ)=\ZZ^2$ est sans torsion) (voir remarque \ref{remsanstorsion}).
+\end{note}
+
+\section{Exemples}
+
+\noindent
+Commen\c{c}ons par quelques pr\'eliminaires dans le cas d'une forme exacte:
+$\omega = d\alpha$.
+Le fibr\'e $Y$ est le produit direct $X\times \RR$ et $\lambda =\alpha + dt$.
+Tout diff\'eomorphisme $\phi$ qui preserve $\omega$ v\'erifie $d[\phi^*\alpha - \alpha]=0$.
+S'il existe une application $F:\Diff(X,\omega) \to \Cinfty(X,\RR)$ telle que :
+%
+\begin{equation}\label{eqF}
+\phi^*\alpha  = \alpha + dF(\phi),
+\end{equation}
+%
+alors elle v\'erifie:
+%
+\begin{equation}
+d[F(\phi \circ \psi) - F(\phi)\circ \psi - F(\psi)]=0,
+\end{equation}
+et le cocycle de l'extension centrale r\'eguli\`ere est donn\'e par:
+%
+\begin{equation}
+K_\omega(\phi,\psi) = F(\phi\circ \psi) - F(\phi)\circ \psi - F(\psi).
+\end{equation}
+%
+On peut toujours normaliser $F$ en exigeant $F(\phi)(\xo)=0$ pour tout $\phi$,
+auquel cas :
+%
+\begin{equation}\label{simpcoc}
+K_\omega(\phi,\psi) = F(\phi)(\psi(\xo)).
+\end{equation}
+%
+Formule que l'on obtient,
+\`a un cobord pr\`es,
+en appliquant la d\'efinition du cocycle triangulaire.
+En d\'efinissant $j: X\to\Vect^*(X,\omega)$,
+par:
+%
+\begin{equation}\label{defj}
+j(x) : \eta \mapsto {\partial \over \partial t}\Big\{F(e^t\eta)(x)\Big\}_{t=0},
+\end{equation}
+%
+on obtient l'expression suivante du moment:
+%
+\begin{equation}\label{formmomj}
+J = i_\eta \circ \alpha -j\cdot \eta.
+\end{equation}
+%
+Nous appliquerons ce petit formulaire dans le deux exemples suivants.
+
+\begin{example}
+On consid\`ere $X=\RR^2$,
+muni de sa structure symplectique ordinaire $\omega =d\alpha$.
+Son extension centrale r\'eguli\`ere n'est pas triviale.
+En effet supposons que $K_\omega$ soit un cobord,
+on peut trouver $F$ tel que $F(\phi \circ \psi') = F(\phi)\circ \psi'+F(\psi')$.
+Ceci doit \^etre vrai,
+en particulier,
+pour les translations  $T_u : x \mapsto x+u$.
+En utilisant l'identit\'e $\alpha_x(u) = \omega(x,u)$,
+pour tout $x$ et $u$ dans $\RR^2$,
+on d\'eduit $d[F(T_u)-i_u\circ \omega]=0$,
+c'est \`a dire $F(T_u)(x) = \omega(u,x) + c(u)$,
+o\`u $c:\RR^2\to \RR$.
+Et par cons\'equent:
+$\omega(u,u') = c(u+u') - c(u) - c(u')$,
+ce qui est absurde puisque $\omega$ est antisym\'etrique.
+De fa\c{c}on g\'en\'erale si on trouve un sous-groupe de $\Diff^\circ(X,\omega )$ pour lequel la restriction de l'extension r\'eguli\`ere n'est pas triviale,
+l'extension elle-m\^eme n'est pas triviale.
+
+On d\'efinit,
+pour $X=\RR^2$,
+un autre repr\'esentant de la classe de l'extension r\'eguli\`ere.
+Soit $\mu :\Diff^\circ(\RR^2,\omega) \to \RR$,
+l'application d\'efinie par:
+%
+\begin{equation}
+\mu : \phi \mapsto \int_{c_\phi}^{t_x} K \omega,
+\end{equation}
+%
+o\`u $x=\phi(0)$ et $t_x$ est le segment qui joint $0$ \`a $x$,
+soit $\Delta \mu$ son cobord.
+Le cocycle $H$,
+d\'efini par:
+%
+\begin{equation}
+H = K_\omega -\Delta \mu  = f_\omega(t_x+\phi \circ t_y,t_z),
+\end{equation}
+%
+illustr\'e par la figure \ref{fig4},
+repr\'esente encore la classe de l'extension r\'eguli\`ere,
+c'est l'aire du simplex bord\'e par le segment $t_x$,
+$\phi\circ t_y$ et le segment $t_z$ :
+
+\begin{proposition}
+Le cocycle $H$ prolonge \`a $\Diff^\circ(X,\omega)$ le {\em cocycle de Heisenberg} d\'efini sur le sous-groupe des translation de $\RR^2$.
+\end{proposition}
+
+Remarquons encore que la diff\'erence de $H$ avec le triangle lin\'eaire de sommets $(o,x,z)$ mesure en quelque sorte,
+le d\'efaut de lin\'earit\'e du symplectomorphisme $\phi$.
+\end{example}
+
+\begin{example}
+Consid\'erons l'espace $\Imm(S^1,\RR^2)$ des immersions du cercle $S^1$ dans $\RR^2$.
+Il est point\'e par le plongement ordinaire $\iota : S^1 \hookrightarrow \RR^2$.
+Nous le munissons de la $1$-forme suivante:
+%
+\begin{equation}
+\alpha = \int {1 \over \norm{\gamma'}^2} \scal(\gamma'',\, d \gamma'),
+\end{equation}
+%
+o\`u $\gamma'$ d\'esigne la d\'eriv\'ee par rapport au param\`etre de l'immersion,
+et l'int\'egration se fait sur le cercle $S^1$.
+Soit $\omega = d\alpha$.
+On v\'erifie que $d[\phi^*\alpha -\alpha] = dF(\phi)$,
+pour tout diff\'eomorphisme $\phi \in \Diff^\circ(S^1)$,
+avec:
+%
+\begin{equation}
+F(\phi) : \gamma  \mapsto \int \log\norm{(\gamma \circ \phi)'}\  d\log\phi'.
+\end{equation}
+%
+La $2$-forme $\omega$ est donc invariante par $\Diff^\circ(S^1)$,
+en voici une expression:
+%
+\begin{equation}
+\omega = \int {1\over \norm{\gamma'}^2} \langle d\gamma'' - d[\log\norm{\gamma'}^2] \gamma'' \wedge d\gamma' \rangle,
+\end{equation}
+%
+o\`u la notation $\langle \cdot \wedge \cdot\rangle$ d\'esigne l'op\'eration $(u,v)\mapsto \scal(u,v) -\scal(v,u)$.
+En remarquant que $F(\phi)(\iota)=0$,
+l'expression du cocycle $K_\omega$ se d\'eduit imm\'ediatement de la formule \ref{simpcoc}:
+%
+\begin{equation}
+K_\omega (\phi,\psi) =\int \log(\phi \circ \psi )' \ d\log\psi'
+\end{equation}
+%
+On reconnait la formule de Bott-Thurston \cite{Bott1} du cocycle de groupe qui d\'ecrit la seule extension centrale non triviale du groupe $\Diff^\circ(S^1)$ par $\RR$.
+En utilisant l'application $j$,
+d\'efinie par la formule \ref{defj},
+qui a pour valeur dans cet exemple:
+%
+\begin{equation}
+j(\gamma) : \eta \mapsto \int (\log\norm{\gamma'})''\ \eta,
+\end{equation}
+%
+on obtient imm\'ediatement l'expression du moment:
+%
+\begin{equation}
+J(\gamma) : \eta  \mapsto \int \left[ {\norm{\gamma''}^2  \over \norm{\gamma'}^2} - \Big(\log\norm{\gamma'}^2\Big)'' \right] \eta.
+\end{equation}
+%
+Pour calculer $\Theta$,
+il suffit d'appliquer la formule \ref{defmom} \`a l'immersion $\iota$ pour lesquels la vitesse et l'acc\'el\'eration sont de modules constants \'egaux \`a $1$.
+En remarquant que $\int \phi_*\eta  = \int \eta (\phi')^2$,
+il vient imm\'ediatement:
+%
+\begin{equation}
+\Theta (\phi) : \eta \mapsto \int {3\phi''^2 - 2\phi'''\phi' \over \phi'^2}\ \eta
+\end{equation}
+%
+On reconnait l'expression de la d\'eriv\'ee Schwarzienne dont la classe de cohomologie repr\'esente le d\'efaut d'\'equivariance du moment $J$ de cette $2$-forme $\omega$.
+Il est facile ensuite de calculer le cocycle infinit\'esimal,
+que l'on reconnait \'evidemment comme le cocycle de Gelfand-Fuchs \cite{GelfandFuchs}:
+%
+\begin{equation}
+k_\omega(\xi,\eta) = \int \xi''\eta'-\eta''\xi'.
+\end{equation}
+%
+Ainsi ces trois objets:
+{\em cocycle de Bott-Thurston---d\'eriv\'ee Schwarzienne---co\-cycle de Gelfand-Fuchs},
+se trouvent reli\'es \`a travers cet exemple,
+dans cette trilogie des $2$-formes ferm\'ees:
+{\em extension centrale r\'eguli\`ere---d\'efaut d'\'equiva\-rian\-ce du moment---extension centrale infinit\'esimale}.
+\end{example}
+
+\begin{note}
+La construction pr\'ec\'edente doit pouvoir s'\'etendre sans difficult\'e \`a l'espace des lacets d'une vari\'et\'e riemannienne quelconque,
+en rempla\c{c}ant l'acc\'el\'eration par l'acc\'el\'eration g\'eod\'esique et les d\'eriv\'ees par les d\'eriv\'ees covariantes.
+\end{note}
+
+\begin{example}
+Consid\'erons l'espace $L(S^3)$ des lacets non point\'es de $S^3$ et soit $\source$ l'application qui \`a tout lacet $\gamma$ associe son point base:
+$\source(\gamma) = \gamma(1)$.
+Soit $K$ l'op\'erateur cha\^{\i}ne-homotopie et $\vol$ la forme volume sur $S^3$ normalis\'ee,
+\cad $\int_{S^3}\vol=1$.
+La $2$-forme $\omega = K\vol\mid L(S^3)$ est ferm\'ee puisque $K\vol= \but^*\vol-\source^*\vol$ sur $\Arc(S^3)$,
+et $\but=\source$ sur $L(S^3)$.
+En vertu de l'expression (\ref{formuleK}),
+on a:
+%
+\begin{equation}
+\omega(\delta_1\gamma,\delta_2\gamma) = \int_\gamma \vol(\dot \gamma,\delta_1\gamma,\delta_2\gamma),
+\end{equation}
+%
+pour tout couple $(\delta_1 \gamma,\delta_2\gamma)$ de vecteurs tangents au point $\gamma \in L(S^3)$.
+La forme $\omega$ est enti\`ere,
+plus pr\'ecisemment $P_\omega =\ZZ$.
+En effet,
+en utilisant la suite exacte d'homotopie de la fibration $\source: L(S^3)\to S^3$ il est possible de montrer que $\pi_0(\Omega (S^3),N) = \pi_1(\Omega (S^3),N) = 0$ et $\pi_2(\Omega (S^3),N)= H_2(L(S^3),\ZZ) = \ZZ$,
+o\`u $N$ est le p\^ole nord de $S^3$.
+On peut choisir comme g\'en\'erateur $\epsilon$ du $H_2$ le lacet obtenu dans $\Cinfty(S^2,S^3)$ par l'intersection de $S^3$ avec un hyperplan (dans $\RR^4$) situ\'e au p\^ole nord et pivotant autour d'un plan fixe.
+On a bien $\int_\epsilon \omega = \int_{S^3}\vol = 1$.
+En appliquant la proposition \ref{prop1} on en d\'eduit l'existence d'un fibr\'e principal $Y$ au dessus de $L(S^3)$,
+de groupe $S^1= \RR/\ZZ$,
+muni d'une connexion $\lambda$ de courbure $\omega$.
+
+Tout arc de $L(S^3)$ point\'e en l'arc constant $\hat N : t \mapsto N$ est identifi\'e \`a une application du cylindre $\cyl=[0,1]\times S^1$ dans $S^3$ dont l'image de la base $\{0\}\times S^1$ est le p\^ole nord.
+La forme $\alpha =K\omega \oplus \theta$ qui d\'efinit $\lambda$ par passage au quotient est alors donn\'ee par:
+%
+\begin{equation}
+\alpha(\delta \gamma,\delta z) = \int_\cyl\gamma^*[\vol(\delta \gamma)] + {\delta z\over iz}.
+\end{equation}
+%
+Ce fibr\'e (ou plut\^ot le fibr\'e en droite complexe $\CC$ qui lui est associ\'e) a \'et\'e introduit par J.-L. Brylinski \cite{Brylinski1}.
+La construction que nous venons de pr\'esenter fait l'\'economie de la th\'eorie des gerbes.
+C'est Serge Tabashnikov qui a sugg\'er\'e cette application.
+\end{example}
+
+\appendix
+
+\section{Espaces diff\'erentiables}\label{AnnED}
+
+\noindent
+Nous utilisons dans cet article une terminologie emprunt\'ee \`a la th\'eorie des espaces diff\'erentiables dont on trouvera diff\'erentes variantes dans \cite{Chen1} \cite{Haefliger1} \cite{Souriau3} \cite{Iglesias2}.
+Nous en rappelons quelques \'el\'ements:
+
+Un param\'etrage d'un ensemble $X$ est une application $P$ d'un ouvert $U$ d'un espace num\'erique quelconque $\RR^n$ dans $X$.
+Un {\em espace diff\'erentiable} est un ensemble $X$ pour lequel on a choisi un ensemble de param\'etrages dits diff\'erentiables,
+qui seront appel\'ees {\em plaques},
+et qui v\'erifient les propri\'et\'es suivantes:
+
+\begin{enumerate}
+\item Les param\'etrages constants sont des plaques,
+\item le plus petit prolongement commun d'une famille compatible de plaques est encore une plaque,
+\item le compos\'e d'une plaque par un param\'etrage $\Cinfty$ de sa source est encore une plaque.
+\end{enumerate}
+
+Les vari\'et\'es sont \'evidemment des espaces diff\'erentiables.
+Mais les quotients de vari\'et\'es sont aussi des espaces diff\'erentiables:
+une plaque du quotient est un param\'etrage qui admet un relev\'e diff\'erentiable local au voisinage de tout point.
+C'est muni de cette structure quotient que le tore des p\'eriodes $T_\omega$ est consid\'er\'e.
+
+Une application $F$ d'un espace diff\'erentiable $X$ dans un autre $Y$ est dite {\em diff\'erentiable} si le compos\'e d'une plaque de $X$ par $F$ est une plaque de $Y$.
+Les diff\'eomorphismes de $X$ \`a $Y$ sont \'evidemment les applications diff\'erentiables bijectives dont l'inverse est aussi diff\'erentiables.
+
+L'espace $\Cinfty(X,Y)$ des applications diff\'erentiables de $X$ dans $Y$ est muni naturellement d'une structure diff\'erentiable appel\'ee {\em structure fonctionnelle}.
+Les plaques de cette structure sont les param\'etrages $r\mapsto f$ telles que l'application $(r,x)\mapsto f(x)$ soit diff\'erentiable.
+C'est de cette structure diff\'erentiable dont est muni l'espace $\Arc(X)$.
+
+On sait d\'efinir sur ces espaces la notion de fibr\'es diff\'erentiables et la th\'eorie de l'homotopie qui l'accompagne \cite{Iglesias2}.
+La relation d'homotopie est d\'efinie \`a partir des familles \`a un param\`etre d'arcs diff\'erentiables,
+ind\'ependamment du choix d'une topologie {\em a priori\/}\footnote{Il existe toutefois, sur les espaces diff\'erentiables, une topologie remarquable (appel\'ee {\em D-topologie}), la plus fine telle que les plaques soient continues.}.
+Une projection d'espaces diff\'erentiables $\pi  : Y\to X$ est une {\em fibration} si,
+pour toute plaque $P: U \to X$,
+l'image r\'eciproque $P^*(Y)\to U$ de la projection $P$ est localement triviale.
+On montre que tout espace diff\'erentiable $X$ poss\`ede un rev\^etement universel,
+simplement connexe,
+unique \`a \'equivalence pr\`es,
+de groupe structural $\pi_1(X)$.
+Par exemple,
+la projection $\cl_\omega: \RR\to T_\omega$ r\'ealise le rev\^etement universel de $T_\omega$.
+
+La notion de groupe diff\'erentiable est imm\'ediate:
+un groupe diff\'erentiable est un groupe $G$ muni d'une structure diff\'erentiable compatible avec la multiplication et l'inversion.
+L'{\em alg\`ebre de Lie}  $\cG$ de $G$ est d\'efini comme l'espace des homomorphismes diff\'erentiables de $\RR$ dans $G$:
+$\cG = \Hom^\infty(\RR,G)$.
+Dans le cas du tore $T_\omega$ les homomorphismes diff\'erentiables de $\RR$ dans $G$ se rel\`event au rev\^etement universel $\cl_\omega : \RR\to T_\omega$ (th\'eor\`eme de monodromie des espaces diff\'erentiables \cite{Iglesias2}) en des homomorphismes de $\RR$ dans $\RR$ et donc $\cT_\omega \simeq \RR$.
+
+Une $p$-forme diff\'erentielle $\omega$ sur un espace diff\'erentiable $X$ est un proc\'ed\'e,
+qui \`a toute plaque $P$ de $X$ associe une $p$-forme not\'ee $\omega(P)$ ou encore  $P^*\omega$,
+d\'efinie sur le domaine $U$ de $P$,
+telle que pour tout param\'etrage $\Cinfty$,
+$F$ de $U$:
+$$(P\circ F)^*\omega = F^*(P^*\omega).$$
+La d\'eriv\'ee ext\'erieure de $\omega$ est alors d\'efinie par $$P^*[d\omega] = d[P^*\omega].$$
+Cette d\'efinition donne lieu \`a un calcul diff\'erentiel ext\'erieur sur $X$ qui co\"{\i}ncide avec le calcul ext\'erieur ordinaire lorsque $X$ est une vari\'et\'e.
+L'image r\'eciproque $f^*\omega$ d'une $p$-forme $\omega$ sur $X$ par une application diff\'erentiable $f:Y\to X$ est d\'efinie par:
+$P^*[f^*\omega] = [f\circ P]^*\omega$,
+o\`u $P$ est une plaque de $Y$.
+
+\begin{proposition}\label{propformquot}
+Soit $X$ un espace diff\'erentiable et $\pi :X\to Y$ une surjection,
+$Y$ est muni de sa structure quotient.
+Pour qu'une forme diff\'erentielle $\alpha$ d\'efinie sur $X$ passe au quotient,
+\cad pour qu'il existe une forme $\beta$ sur $Y$ telle que $\alpha =\pi^*\beta$,
+il faut et il suffit que pour tout couple de plaques $(P,P')$ de $X$ telles que $\pi \circ P=\pi \circ P'$ on ait:
+$\alpha(P)=\alpha(P')$.
+\end{proposition}
+
+\begin{proof}
+Par d\'efinition de la structure quotient,
+toute plaque $Q$ de $Y$ s'\'ecrit:
+$Q= \sup \pi \circ P_i$,
+o\`u les $P_i$ sont des plaques de $X$ et $\sup$ d\'esigne le plus petit prolongement commun.
+La forme $\beta$ est d\'efinie par:
+$\beta(Q) = \sup \alpha(P_i)$.
+En effet,
+soit $U_i$ le domaine de d\'efinition de $P_i$,
+restreintes \`a $U_{ij}=U_i\cap U_j$ les plaques $P_i$ et $P_j$ v\'erifient $\pi \circ P_i=\pi \circ P_j$,
+et donc:
+$\alpha(P_i\mid U_{ij})=\alpha(P_j\mid U_{ij})$.
+Les formes $\alpha(P_i)$ sont compatibles,
+elles ont donc un plus petit prolongement commun $\sup \alpha(P_i)$.
+Par un raisonnement analogue on montre que $\beta(Q)$ ne d\'epend pas du choix des relev\'es $P_i$ de $Q$.
+Les autres v\'erifications sont imm\'ediates.
+\end{proof}
+
+Il existe sur les espaces diff\'erentiable une formule de Cartan pour la d\'eriv\'ee de Lie des formes diff\'erentielles.
+Soit $h$ un groupe \`a un param\`etre de diff\'eomorphismes de $X$:
+$h\in \Hom^\infty(\RR,\Diff(X))$,
+la d\'eriv\'ee de Lie d'une $p$-forme $\omega$ par $h$ est d\'efinie par:
+%
+\begin{equation}
+\DLie_h\omega  = {\partial \over \partial t} \Big\{h(t)^*\omega\Big\}_{t=0}.
+\end{equation}
+%
+Le contract\'e $i_h(\omega)$ de la $p$-forme $\omega$,
+par le groupe \`a un param\`etre $h$,
+est donn\'e par la construction suivante,
+soit $P:U \to X$ une plaque de $X$ et $h\cdot P$ la plaque d\'efinie sur $\RR\times U$ par:
+%
+\begin{equation}\label{defhP}
+h\cdot P: (t,r) \to h(t)\circ P(r).
+\end{equation}
+%
+La $(p-1)$-forme $i_h(\omega),$ \'evalu\'ee sur la plaque $P$,
+est donn\'ee par la formule :
+%
+\begin{equation}
+P^*[i_h(\omega)] = i_{\partial /\partial t}[(h\cdot P)^*\omega]_{\{0\}\times U}
+\end{equation}
+%
+Cette formule \'etend la construction ordinaire sur les vari\'et\'es,
+elle pr\'eserve la formule de Cartan:
+
+\begin{proposition}
+Soit $X$ un espace diff\'erentiable,
+$\omega$ une $p$-forme sur $X$ et $h$ un groupe \`a un param\`etre de diff\'eomorphismes de $X$.
+On a l'identit\'e:
+%
+\begin{equation}\label{formCartan}
+\DLie_h\omega = d[i_h(\omega)] + i_h[d\omega].
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Soit $P$ une plaque de $X$ d\'efinie sur un domaine $U$,
+par d\'efinition :
+$$[\DLie_h\omega](P) = {\partial \over \partial t}\bigg\{[h(t)^*\omega](P)\bigg\}_{t=0} = {\partial \over \partial t}\bigg\{[h(t)\circ P]^*\omega\bigg\}_{t=0}.$$
+Soit $j : U \mapsto \{0\}\times U$ d\'efinie par $j(r)=(0,r)$,
+on a:
+$$[i_h(\omega)](P)=i_{\partial/\partial t}[\omega(h\cdot P)]_{\{0\}\times U},$$
+o\`u $h\cdot P$ est d\'efinie par (\ref{defhP}),
+\cad $[i_h(\omega)](P)=j^*[i_{\partial /\partial t}(\omega(h\cdot P))]$.
+On peut donc \'ecrire:
+%
+\begin{eqnarray*}
+[d(i_h\omega )](P) + [i_h(d\omega)](P) & = & d\{j^*(i_{\partial /\partial t}[\omega(h\cdot P)])\} + j^*\{i_{\partial /\partial t}(d[\omega(h\cdot P)])\} \\
+& = & j^*\{ d\circ i_{\partial /\partial t}[\omega(h\cdot P)] + i_{\partial /\partial t}\circ d[\omega(h\cdot P)]\} \\
+& = & j^* \{ \DLie_{\partial /\partial t}[\omega(h\cdot P)]\} \\
+& = & j^* \left\{ {\partial \over \partial t} \big[h(t)^*\omega(h\cdot P)\big]_{t=0} \right\} \\
+& = & {\partial \over \partial t}\Big\{[h(t)\circ h\cdot P \circ j]^*\omega\Big\}_{t=0},
+\end{eqnarray*}
+%
+or $h(t)\circ h\cdot P\circ j(r) = h(t)(P(r))$ c'est-\`a-dire $h(t)\circ h\cdot P\circ j = h(t)\circ P$,
+on en d\'eduit donc:
+%
+\begin{eqnarray*}
+[d(i_h\omega )](P) + [i_h(d\omega)](P) & = &  {\partial \over \partial t}\Big\{[h(t)\circ P]^*\omega\Big\}_{t=0} \\
+& = & {\partial \over \partial t}\Big\{h(t) ^*[\omega(P)]\Big\}_{t=0},
+\end{eqnarray*}
+%
+\cad $$ [d(i_h\omega )](P) + [i_h(d\omega)] = {\partial \over \partial t}\Big\{h(t) ^*\omega \Big\}_{t=0},$$
+c'est ce qu'il fallait d\'emontrer.
+\end{proof}
+
+\section{Op\'erateur de cha\^{\i}ne-homotopie}\label{AnnOCH}
+
+\noindent
+Soit $X$ une vari\'et\'e diff\'erentiable connexe,
+on d\'esigne par $\Arc(X)$ son espace des arcs,
+c'est \`a dire l'espace des applications diff\'erentiables de $\RR$ \`a valeurs dans $X$:
+%
+\begin{equation}
+\Arc(X) = \Cinfty(\RR,X),
+\end{equation}
+%
+Les applications {\em source} et {\em but},
+not\'ees $\source$ et $\but$,
+associent respectivement \`a tout arc $\gamma$ les points $\gamma(0)$ et $\gamma(1)$.
+Le choix de $\RR$ plut\^ot que l'intervalle $[0,1]$ est technique,
+pour assurer la diff\'erentiabilit\'e de la juxtaposition des arcs et l'action du groupe des translations.
+
+L'espace des arcs de $X$ est muni de sa structure fonctionnelle d'espace diff\'erentiable (voir annexe \ref{AnnED}).
+
+A toute $p$-forme $\omega$ de $X$ on associe la $p$-forme sur $\Arc(X)$ d\'efinie par int\'egration de $\omega$ le long des arcs,
+ce que nous noterons:
+%
+\begin{equation}\label{formomtild}
+\tilde \omega_\gamma  = \int_\gamma  \omega,
+\end{equation}
+%
+L'expression de $\tilde \omega$ dans toute plaque (param\'etrage diff\'erentiable) $P$  de l'espace $\Arc(X)$,
+est donn\'ee par:
+%
+\begin{equation}
+P^*\tilde \omega  = \int_0^1P_t^*\omega \d t,
+\end{equation}
+%
+o\`u $P_t$ est la plaque de $X$ d\'efinie par $P_t(r)=P(r)(t)$.
+L'application lin\'eaire $\Phi : \omega \mapsto \tilde \omega$ ainsi d\'efinie,
+est un morphisme du complexe diff\'erentiel de De Rham de $X$ dans celui de $\Arc(X)$:
+%
+\begin{equation}
+\Phi : \Omega^*(X)  \rightarrow \Omega^*(\Arc(X)) \quad \mbox{et} \quad  d\circ \Phi  = \Phi \circ d.
+\end{equation}
+%
+Les translations de $\RR$ agissent comme un groupe \`a un param\`etre $\eta$ de diff\'eo\-morphismes de $\Arc(X)$,
+pour tout $\gamma \in \Arc(X)$ et tout $a\in \RR$:
+%
+\begin{equation}
+\eta(a): \gamma \mapsto \gamma \circ T_a \quad \mbox{o\`u} \quad T_a : t\mapsto t+a.
+\end{equation}
+
+\begin{proposition}
+La d\'eriv\'ee de Lie de la $p$-forme $\tilde\omega$ par $\eta$ v\'erifie:
+%
+\begin{equation}
+\DLie_\eta \tilde\omega = \but^*\omega -\source^*\omega.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+En effet,
+pour toute plaque $P$ de $\Arc(X)$:
+%
+$$[\DLie_\eta\tilde\omega](P) = {\partial \over \partial t}\bigg\{[\eta(t)^*\tilde\omega](P)\bigg\}_{t=0} = {\partial \over \partial t}\bigg\{(\eta(t)^*\circ P)^*\tilde\omega\bigg\}_{t=0}.$$
+%
+Mais $\eta(t)\circ P : r\mapsto P(r)\circ T_t$ et donc:
+%
+$$(\eta(t)\circ P)^*\tilde \omega = \int_0^1(\eta(t)\circ P)_s^*\omega\ ds = \int_0^1[r\mapsto P(r)(t+s)]^*\omega\ ds.$$
+%
+En posant $u=t+s$ on obtient
+%
+$$(\eta(t)\circ P)^*\tilde \omega = \int_t^{1+t}[r\mapsto P(r)(u)]^*\omega\ du,$$
+%
+ce qui donne en d\'erivant:
+%
+$$[\DLie_\eta\tilde\omega](P) = [r\mapsto P(r)(1)]^*\omega - [r\mapsto P(r)(0)]^*\omega = [\but^*\omega-\source^*\omega](P).$$
+%
+C'est ce qu'il fallait d\'emontrer.
+\end{proof}
+
+En appliquant alors la formule de Cartan (\ref{formCartan}) on a:
+$$d[i_\eta\Phi (\omega)]+i_\eta \circ d[\Phi (\omega)] = \but^*\omega - \source^*\omega.$$
+En posant alors:
+%
+\begin{equation}\label{defOH}
+K = i_\eta \circ \Phi , \quad K:\Omega ^*(X) \to \Omega ^{*-1}(\Arc(X,\xo)),
+\end{equation}
+%
+on obtient l'identit\'e:
+%
+\begin{equation}\label{ophom}
+K\circ d+d\circ K = \but^*-\source^*.
+\end{equation}
+
+\begin{definition}
+Le morphisme $K$ ci-dessus est appel\'e {\em op\'erateur de cha\^{\i}ne-homoto\-pie}.
+\end{definition}
+
+Lorsque $X$ est une vari\'et\'e,
+on peut donner une expression de l'op\'erateur $K$,
+en termes d'int\'egrales de chemins.
+Soit $P$ une plaque de $\Arc(X)$ d\'efinie sur un domaine $U$,
+soit $r\in U$ et $\delta r$ un vecteur tangent en $r$.
+Notons $$\gamma =P(r) \quad \mbox{et} \quad \delta \gamma : t\mapsto D[\gamma(t)](r)(\delta r),$$
+alors $K\omega$,
+calcul\'ee au point $\gamma$ et appliqu\'ee \`a $p-1$ {\em variations} $\gamma_i$ associ\'ees \`a des vecteurs $\delta r_i$ est donn\'ee par:
+%
+\begin{equation}\label{formuleK}
+K\omega_\gamma(\delta \gamma_1,\ldots,\delta \gamma_{p-1}) = \int_0^1\omega_{\gamma(t)}(\dot\gamma(t),\delta \gamma_1,\ldots,\delta \gamma_{p-1})\ dt.
+\end{equation}
+
+\section{La formule de Stokes pour les espaces dif\-f\'e\-rentiables}\label{AnnStokes}
+
+\noindent
+Nous allons montrer,
+dans cette annexe,
+comment on peut g\'en\'eraliser  la formule de Stokes aux espace diff\'erentiables.
+Nous choisirons pour cela d'utiliser l'homologie cubique.
+
+Soit $X$ un espace diff\'erentiable,
+nous appellerons {\em $p$-cube} de $X$ toute applications diff\'erentiable $c$ d\'efinie sur un voisinage $U$ de $I^p$ \`a valeurs dans $X$,
+avec $I=[0,1]$ (c'est en particulier une $p$-plaque de $X$).
+L'homologie cubique est d\'efinie de fa\c{c}on ordinaire,
+en consid\'erant les diff\'erents groupes ab\'elien libres $C_p(X)$ engendr\'es par les $p$-cubes,
+$p\in \NN$.
+Les \'el\'ements de $C_p(X)$ sont les {\em $p$-cha\^{\i}nes cubiques} de $X$.
+
+Soit $\epsilon\in \{0,1\}$,
+on notera $j_i^\epsilon$ l'applications de $\RR^{p-1}$ dans $\RR^p$ d\'efinies par:
+ %
+\begin{equation}
+j_i^\epsilon : (t_1,\ldots,t_{p-1}) \to (t_1,\ldots,t_{i-1},\epsilon,t_{i+1},\ldots,t_{p-1}).
+\end{equation}
+%
+A chaque indice $i=1,\ldots p$ correspond les deux faces du cube $c$ :
+%
+\begin{equation}
+c_i^\epsilon = c\circ j_i^\epsilon , \quad i=0,1.
+\end{equation}
+%
+Ce qui permet de d\'efinir le bord $\partial c$ d'un $p$-cube $c$ par:
+%
+\begin{equation}
+\partial c =\sum_{\epsilon =0}^1(-1)^\epsilon \sum_{i=1}^p (-1)^p c_i^\epsilon.
+\end{equation}
+%
+L'op\'erateur $\partial$ est ensuite prolong\'e par lin\'earit\'e sur $C_p(X)$ tout entier,
+il est \`a valeurs dans $C_{p-1}$ ($p\geq 1$).
+
+L'int\'egrale d'une $p$-forme $\omega\in \Omega^p(X)$ sur une $p$-cha\^{\i}ne $\sigma\in C_p(X)$ est obtenue en prolongeant par lin\'earit\'e l'int\'egrale de $\omega$ sur les $p$-cubes:
+%
+\begin{equation}
+\sigma = \sum_{c\in C_p(X)} n_{c_p} c \quad \Rightarrow \quad \int_\sigma \omega = \sum_{c\in C_p(X)} n_{c_p} \int_c\omega,
+\end{equation}
+%
+o\`u les entiers $n_c$ sont tous nuls sauf un nombre fini d'entre eux,
+avec:
+%
+\begin{equation}
+\int_c \omega = \int_{I^p} c^*\omega.
+\end{equation}
+%
+Consid\'erons maintenant une famille diff\'erentiable de $p$-cubes $c_\alpha$,
+\cad une application diff\'erentiable d\'efinie sur $]-\epsilon,\epsilon[\times I^p$ \`a valeurs dans $X$.
+L'application $\alpha\mapsto \int_{c_\alpha}\omega_\alpha$ est alors diff\'erentiable,
+nous noterons :
+%
+\begin{equation}
+\delta \int_c\omega = {\partial \over \partial \alpha} \left\{ \int_{c_\alpha}\omega\right\}_{\alpha =0}
+\end{equation}
+%
+la variation premi\`ere de l'int\'egrale de $\omega$ sur $c$ associ\'ee \`a la famille $c_\alpha$.
+
+Soit $\bar c : ]-\epsilon,\epsilon[\times U \to X $ et $\bar\omega$,
+les $(p+1)$-plaque et $p$-forme d\'efinies  respectivement par:
+%
+\begin{equation}
+\bar c = (\alpha,t) \mapsto c_\alpha(t) \quad \mbox{et} \quad \bar \omega = \omega(\bar c).
+\end{equation}
+%
+Soit $t_0=\alpha$ et $e_0$ le vecteur de base $\partial/\partial \alpha = (1,0,\ldots,0)$ de $\RR\times \RR^p$,
+nous introduiraons pour la comodit\'e des expressions finales les quantit\'es suivantes:
+%
+\begin{equation}
+\int_c d\omega(\delta c) = \int_{\{0\}\times I^p}[d\bar\omega](e_0) \quad \mbox{et}\quad \int_{\partial c}\omega (\delta c) = \sum_{\epsilon =0}^1 (-1)^{\epsilon}\sum_{i=0}^p\int_{I^{p-1}} {j_i^\epsilon}^*\bar \omega(e_0),
+\end{equation}
+%
+o\`u la notation $\bar \omega(e_0)$ d\'esigne le contract\'e de $\bar\omega$ par le vecteur $e_0$ (idem pour $d\bar\omega$).
+Il serait posible de d\'efinir formellement $\delta c$,
+disons simplement que cela repr\'esente la variation infinit\'esimale du cube $c$ associ\'ee \`a la famille $c_\alpha$.
+
+Le lecteur pourra v\'erifier que,
+compte tenu de ces d\'efinitions,
+la d\'emonstration de la proposition suivante se ram\`ene \`a un calcul diff\'erentiel ordinaire sur $\RR^p$.
+
+\begin{proposition}
+Soit $X$ un espace diff\'erentiable,
+$\omega$ une $p$-forme sur $X$ et $c$ un $p$-cube de $X$.
+Soit $c_\alpha$ une famille diff\'erentiable de $p$-cubes telle que $c_0=c$.
+La variation premi\`ere de l'int\'egrale de $\omega$ sur $c$ associ\'ee \`a la famille $c_\alpha$ est donn\'ee par la formule:
+%
+\begin{equation}\label{varint1}
+\delta \int_c\omega = \int_c d\omega(\delta c) + \int_{\partial c}\omega (\delta c).
+\end{equation}
+\end{proposition}
+
+On obtient en particulier comme corollaire la formule de Stokes \'etendue aux espaces diff\'erentiables.
+
+\begin{corollary}
+Soit $\omega$ une $(p-1)$-forme d\'efinie sur un espace diff\'erentiable $X$,
+et $\sigma$ une $p$-cha\^{\i}ne de $X$,
+on a:
+%
+\begin{equation}
+\int_\sigma d\omega = \int_{\partial \sigma} \omega.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+En effet,
+il suffit de le d\'emontrer pour un $p$-cube $c$.
+On a $\delta \int_c d\omega = \int_{\partial c}d\omega (\delta c)$ et aussi $\delta \int_{\partial c} \omega = \int_{\partial c}d\omega (\delta c)$,
+car $dd\omega =0$ et $\partial \partial c=0$.
+On d\'eduit que $\delta[\int_c d\omega - \int_{\partial c}\omega]= 0$,
+et donc que  $\int_c d\omega - \int_{\partial c}\omega$ est constante sur l'espace des $p$-cubes,
+comme l'espace des $p$-cubes est contractile il suffit d'\'evaluer cette diff\'erence sur le $p$-cube constant,
+ce qui donne le r\'esultat.
+\end{proof}
+
+On peut \'etendre \'evidemment cette proposition par lin\'earit\'e \`a toute $p$-cha\^{\i}ne cubique $\sigma$,
+en d\'efinissant correctement les familles diff\'erentiables de $p$-cha\^{\i}nes.
+On peut l'\'etendre aussi sans difficult\'e \`a des domaines poly\'edraux ou encore plus g\'en\'eraux.
+
+La formule (\ref{varint1}) ci-dessus peut se g\'en\'eraliser imm\'ediatement au cas o\`u la forme $\omega$ est aussi variable.
+Soit $\omega_\alpha$ une famille diff\'erentiable de $p$-formes telle $\omega_0=\omega$.
+On dira que la famille de $p$-formes $\omega_\alpha$ est diff\'erentiable si pour toute plaque $P$ de $X$ l'application $(\alpha,r)\mapsto [\omega_\alpha(P)]_r$ est diff\'erentiable,
+autrement dit,
+si pour toute famille de $p$-vecteurs $(u_1,\ldots,u_p)$ dans $\RR^p$ l'application $(\alpha,r)\mapsto[\omega_\alpha(P)]_r(u_1,\ldots,u_p)$ est diff\'erentiable.
+En notant $\delta \omega$ la $p$-forme d\'efinie par:
+%
+\begin{equation}
+\delta \omega : P \mapsto {\partial \over \partial \alpha}\{\omega_\alpha (P)\}_{\alpha =0},
+\end{equation}
+%
+on peut \'ecrire:
+%
+\begin{equation}\label{varint}
+\delta \int_c\omega = \int_c d\omega(\delta c) + \int_{\partial c}\omega (\delta c) + \int_c \delta \omega.
+\end{equation}
+%
+
+\begin{note}
+La formule de Stokes permet de montrer en particulier com\-me dans le cas des vari\'et\'es,
+l'invariance par homotopie de la cohomologie de De Rham.
+Elle permet aussi,
+sous sa forme \'etendue (\ref{varint}),
+de donner une autre d\'emonstration de la formule de Cartan (annexe \ref{AnnED}).
+Soit $h$ un groupe \`a un param\`etre de diff\'eomorphismes de $X$,
+$\omega$ une $p$-forme sur $X$ et $c$ un $p$-cube.
+Notons $c_t=h(t)\circ c$ et $\omega_t = h(t)_*\omega = h(-t)^*\omega$.
+En appliquant (\ref{varint}) \`a ces familles \`a un param\`etre et en notant que $\int_{c_t}\omega_t= \int_c\omega$,
+on obtient:
+%
+\begin{equation}
+\int_c\DLie_h\omega = \int_c i_h[d\omega] + \int_c d[i_h\omega].
+\end{equation}
+%
+Cette \'egalit\'e \'etant v\'erifi\'ee pour tout $p$-cube $c$ de $X$,
+on en d\'eduit la formule de Cartan :
+$\DLie_h\omega = i_h[d\omega] + d[i_h\omega]$.
+\end{note}
+
+\section{Les morphismes d\'eriv\'es}\label{morder}
+
+\noindent
+Consid\'erons un groupe de Lie $G$,
+$\cG$ son alg\`ebre de Lie,
+et $\cG^*$ le dual de $\cG$.
+Nous noterons $\ad$ et $\ad^*$ les action adjointes et coadjointes de $G$,
+d\'efinies respectivement sur $\cG$ et $\cG^*$.
+
+Soit $K$ un deux cocycle de $G$ \`a valeur dans un tore diff\'erentiable $T_A$,
+c'est \`a dire le quotient de $\RR$ par un sous-groupe ab\'elien $A$:
+%
+\begin{equation}
+K(g,g'g'') +K(g',g'') = K(gg',g'') + K(g',g'').
+\end{equation}
+%
+Soit $Z\mapsto g_*Z$,
+l'action adjointe de $G$ sur $\cG$,
+$g\in G$ et $Z\in \cG$.
+Si $K$ est normalis\'e,
+c'est \`a dire $K(\id_G,\phi)=K(\phi,\id_G) =0$,
+une v\'erification \'el\'ementaire montre que l'application $\Theta$ d\'efinie sur $G$,
+\`a valeur dans $\cG^*$,
+par:
+%
+\begin{equation}
+\Theta(g) : Z \mapsto {\partial \over \partial t}\Big\{ K(g,e^{tg^*Z}) -K(e^{tZ},g) \Big \}_{t=0},
+\end{equation}
+%
+est un $1$-cocycle de $G$ dans $\cG^*$ pour l'action coadjointe,
+c'est \`a dire :
+%
+\begin{equation}
+\forall (g,g')\in G\times G : \quad \Theta(gg') = \ad^*(g)\circ \Theta(g') +\Theta(g).
+\end{equation}
+%
+De plus,
+l'application bilin\'eaire $k$ d\'efinie sur $\cG\times \cG$ par :
+%
+\begin{eqnarray*}
+k (Z,Z') & = & D\Theta_{\id_G} (Z)(Z') \\ \nonumber
+              & = & {\partial^2 \over \partial t\partial s}\Big\{ K(e^{tZ}, e^{sZ'}) - K(e^{tZ'}, e^{sZ}) \Big\}_{s=t=0},
+\end{eqnarray*}
+%
+est un $2$-cocycle de la cohomologie altern\'ee de $\cG$ dans $\RR$.
+Le couple d'application $K\mapsto \Theta \mapsto k$ d\'efinit une suite de morphismes en cohomologie :
+%
+\begin{equation}
+H^2(G,A)\to H^1(G,\cG^*) \to H^2(\cG,\RR)
+\end{equation}
+%
+que nous appellons {\em morphismes d\'eriv\'es}.
+
+\begin{note}
+Cette construction peut s'\'etendre \`a certain grou\-pes diff\'erentiables,
+notamment aux groupes de diff\'eo\-morphismes de vari\'et\'es.
+\end{note}
+
+\clearpage % Force a page break and flush all pending figures
+
+\clearpage % Force a new page
+
+\clearpage
+
+% --- Page 1 (Figures 1 & 2) ---
+\begin{figure}[p]
+  \centering
+  % We create a box that takes up the WHOLE page height
+  \begin{minipage}[c][\textheight][c]{\textwidth}
+    \centering
+        
+    \includegraphics[width=0.5\textwidth]{figures/trilogiefig1.png}
+    \caption{Le cocycle $K_\omega$}
+    \label{fig1}
+
+    \vspace{3cm}
+    
+    \includegraphics[width=0.5\textwidth]{figures/trilogiefig2.png}
+    \caption{La condition de cocycle pour $K_\omega$}
+    \label{fig2}
+
+    \vfill % Space at the bottom
+    
+  \end{minipage}
+\end{figure}
+
+\clearpage
+
+% --- Page 2 (Figures 3 & 4) ---
+\begin{figure}[p]
+  \centering
+  \begin{minipage}[c][\textheight][c]{\textwidth}
+    \centering
+        
+    \includegraphics[width=0.5\textwidth]{figures/trilogiefig3.png}
+    \caption{Le d\'efaut d'\'equivariance $\Theta$}
+    \label{fig3}
+
+    \vspace{3cm}
+    
+    \includegraphics[width=0.5\textwidth]{figures/trilogiefig4.png}
+    \caption{Le cocycle $H$}
+    \label{fig4}
+
+    \vfill
+    
+  \end{minipage}
+\end{figure}
+
+\clearpage
+
+%•••• bibliographie
+
+% Content from trilogie.bbl.txt is pasted here.
+\begin{thebibliography}{McL71}
+\newcommand{\noopsort}[1]{} \newcommand{\printfirst}[2]{#1}  \newcommand{\singleletter}[1]{#1} \newcommand{\switchargs}[2]{#2#1}  \newcommand {\CRAS}{C. R. Acad. Sc.} \newcommand{\JFA}{J. of Func. An.}  \newcommand{\adrCPT}{CPT-CNRS, Luminy, F.~Marseille}
+\bibitem[Bot78]{Bott1}R.~Bott.\newblock On some formulas for the characteristic classes of group actions,  differential topology, foliations and gelfand-fuchs cohomology.\newblock In {\em Proceed. Rio de Janeiro, 1976}, volume 652 of {\em Springer  Lectures Notes}. Springer Verlag, 1978.
+\bibitem[Bry90]{Brylinski1}J.-L. Brylinski.\newblock The kaehler geometry of the space of knots in a smooth threefold.\newblock preprint, Pensylvania State University, 1990.
+\bibitem[Bry93]{Brylinski2}J.-L. Brylinski.\newblock {\em Loop spaces, characteristic classes and geometric quantization}.\newblock Birk\"auser, 1993.
+\bibitem[Che77]{Chen1}K.~T. Chen.\newblock Iterated path integral.\newblock {\em Bull. of Am. Math. Soc.}, 83(5):831--879, 1977.
+\bibitem[GF68]{GelfandFuchs}I.~Gelfand et D.~Fuchs.\newblock Cohomology of the lie algebra of vector fields on the circle.\newblock {\em Functional Analysis and Applications}, 2:342--343, 1968.
+\bibitem[Hae72]{Haefliger1}A.~Haef{l}iger.\newblock Sur les classes caract\'eristiques des feuilletages.\newblock Publications s\'eminaires, S\'eminaire Bourbaki, juin 1972.
+\bibitem[Igl85]{Iglesias2}P.~Iglesias.\newblock Fibr\'es diff\'eologiques et homotopie.\newblock Th\`ese de doctorat d'\'etat, Universit\'e de Provence, F.~Marseille,  1985.
+\bibitem[Kir74]{Kirillov1}A.~A. Kirillov.\newblock {\em Elements de la th\'eorie des repr\'esentations}.\newblock MIR, Moscou, 1974.
+\bibitem[Kir82]{Kirillov4}A.~A Kirillov.\newblock {\em Infinite dimensional Lie groups: their orbits, invariants and  representations.}, volume 970.\newblock Springer-Verlag, 1982.
+\bibitem[KM85]{KargMerz}M.~Kargapalov et Iou. Merzliakov.\newblock {\em Elements de la th\'eorie des groupes}.\newblock MIR, Moscou, 1985.
+\bibitem[McL71]{MacLane2}S.~McLane.\newblock {\em Homology}.\newblock Springer Verlag, New-York Heidelberg Berlin, 1967.
+\bibitem[Sou70]{Souriau5}J.-M. Souriau.\newblock {\em Structure des syst\`emes dynamiques}.\newblock Dunod, Paris, 1970.
+\bibitem[Sou84]{Souriau3}J.-M. Souriau.\newblock Groupes diff\'erentiels et physique math\'e\-ma\-tique.\newblock {\em Collection travaux en cours}, pages 75--79, 1984.
+\end{thebibliography}
+
+\end{document}
