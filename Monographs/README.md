@@ -1,17 +1,17 @@
-# Diffeology (AMS 2013 Edition)
+# Diffeology (The Monograph)
 
-> **Publication:** *Diffeology* (Mathematical Surveys and Monographs, Vol. 185, American Mathematical Society, 2013).
+> **Author:** Patrick Iglesias-Zemmour
+> **Original Publication:** *Diffeology* (Mathematical Surveys and Monographs, Vol. 185, AMS, 2013)
+> **Revised Publication:** Beijing World Publishing Corp. (2022)
 
-## About This Version
+This directory contains the source code for the definitive reference monograph on the theory of Diffeology. This book provides the complete axiomatic foundation for the subject, develops its core tools (such as differential forms and homotopy), and explores its applications to various geometric objects.
 
-This directory contains the original LaTeX source code for the first edition of the "Diffeology" monograph, as published by the AMS.
+## Two Archived Editions
 
-This version is archived to serve as the historical "version of record." It is primarily intended for researchers who need to verify citations made against the original 2013 publication.
+This archive contains two distinct versions of the text, each serving a specific purpose.
 
-**Please be aware that this version contains known misprints and a mathematical error that have been corrected in a later edition.**
+*   **/AMS-2013-Edition/**: This subdirectory holds the source for the original version as it was published by the American Mathematical Society in 2013. This version is provided for historical reference and to allow researchers to verify citations made against the original publication.
 
-## Recommended Version for Study
+*   **/Beijing-2022-Edition/**: This subdirectory holds the source for the revised and corrected version published by Beijing World Publishing Corp. in 2022. It contains fixes for known misprints and a correction to a mathematical mistake present in the original text. **This is the recommended version for all new readers and for general study.**
 
-For general study, for the most accurate text, and for all new readers, it is strongly recommended to use the revised and corrected Beijing 2022 Edition.
-
-[The revised version is available in the parent directory.](../Beijing-2022-Edition/)
+The goal of this archive is to provide both the historical version of record and the most accurate, living version of the theory's foundational text.
