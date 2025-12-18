@@ -1,0 +1,1690 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%      Prequantum Groupoid in Diffeology
+%%      Part II: The General Case
+%%
+%%      Patrick Iglesias-Zemmour
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno,letterpaper,twoside]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: - Macro file
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+\usepackage{amsmath}
+\usepackage{amsbsy}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{arrow style=tikz, diagrams={>={Straight Barb[scale=0.8]}}}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=10pt,font=small,labelfont=bf, labelformat=empty, labelsep=endash]{caption}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{article}[theorem]{}
+\newtheorem{remark}[theorem]{Remark}
+
+\def\artlabel[#1]{\textbf{#1.}}
+\newcommand{\widetext}[1]{\ \text{ #1 } \ }
+\newcommand{\qtext}[1]{\quad\text{#1}\quad}
+
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\TT}{\mathbf{T}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\HH}{\mathbf{H}}
+
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cI}{{\mathcal I}}
+\newcommand{\cY}{{\mathcal Y}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\blambda}{{\pmb{\lambda}}}
+
+\DeclareMathOperator{\PeriodsOf}{Periods}
+\DeclareMathOperator{\comp}{comp}
+\DeclareMathOperator{\Paths}{Paths}
+\DeclareMathOperator{\Loops}{Loops}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\src}{src}
+\DeclareMathOperator{\trg}{trg}
+\DeclareMathOperator{\eends}{ends}
+\DeclareMathOperator{\Ham}{Ham}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\class}{class}
+\DeclareMathOperator{\supp}{supp}
+
+\DeclareMathOperator{\CHO}{\boldsymbol{\mathsf{K}}}
+\newcommand{\Komega}{\CHO\!\omega}
+\DeclareMathOperator{\Mid}{\big|}
+
+\newcommand{\0}{\hat{0}}
+\newcommand{\1}{\hat{1}}
+\newcommand{\id}{\mathbf 1}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\dt}{d\!t}
+\newcommand{\ds}{d\!s}
+\newcommand{\df}{d\!f}
+
+\newcommand{\Pomega}{\mathrm{P}_\omega}
+\newcommand{\Tomega}{\mathrm{T}_\omega}
+\newcommand{\Psph}{\mathrm{P}_{\mathrm{sph}}}
+\newcommand{\Phol}{\mathrm{P}_{\mathrm{hol}}}
+\newcommand{\paths}{\mathrm{paths}}
+\newcommand{\quant}{\mathrm{quant}}
+\newcommand{\tor}{\mathrm{tor}}
+\newcommand{\sph}{\mathrm{sph}}
+\newcommand{\surf}{\mathrm{surf}}
+\newcommand{\loc}{\mathrm{loc}}
+
+\newcommand{\vect}[1]{\begin{pmatrix}#1\end{pmatrix}} % usage : \vect{a \\ b \\...}
+
+\usepackage{cfr-lm}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[cal=scr,frenchmath,uppercase = upright, greekfamily = didot, greeklowercase = upright, utopia]{mathdesign}
+
+\linespread{1.1}
+
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Begin Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Draft Watermark
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  {
+  \tikz[overlay,remember picture]{\node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \pdfcreationdate}}}
+  }
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Title and Data
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \title[Geometric Quantization by Paths II]{Geometric Quantization by Paths \\ {\scriptsize Part II: The General Case}}
+  
+  \author{Patrick Iglesias-Zemmour}
+  
+  \address{Einstein Institute of Mathematics,
+  The Hebrew University of Jerusalem,
+  Campus Givat Ram,
+  9190401 Israel.}
+  \email{piz@math.huji.ac.il}
+  \urladdr{http://math.huji.ac.il/~piz}
+  
+  \date{\today}
+  
+  \thanks{Thanks to the Hebrew University of Jerusalem, Israel, for its continuous academic support.
+  I am also grateful for the stimulating discussions and assistance provided by the AI assistant Gemini (Google).}
+  
+  \dedicatory{To the memory of Jean-Marie Souriau,\\ who once asked me: «Quoi de neuf en Diffeolog'y?»}
+  
+  \subjclass[2020]{Primary 53D50, 58A05; Secondary 22A22, 55R65, 58A10}
+  \keywords{Diffeology, Geometric Quantization, Prequantum Groupoid, Closed 2-forms, Parasymplectic Spaces, Paths, Loops, Singular Spaces}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Abstract
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    \noindent In Part I,
+    we established the construction of the prequantum groupoid for simply connected spaces.
+    This second part extends the theory to \emph{arbitrary connected parasymplectic diffeological spaces} $(X, \omega)$.
+    We identify the obstruction to the existence of the prequantum groupoid as the non-additivity of the integration of the prequantum form $\Komega$ on the space of loops.
+    By defining a \emph{Total Group of Periods} $\Pomega$ directly on the space of paths,
+    which absorbs the periods arising from the relations in homotopy of free loops,
+    we construct a prequantum groupoid $\TT_\omega$ with connected isotropy isomorphic to the torus of periods $T_\omega = \RR/\Pomega$.
+    
+    \noindent Furthermore,
+    we propose that this groupoid $\TT_\omega$ constitutes the \emph{Quantum System} itself.
+    The classical space $X$ is embedded as the \emph{skeleton} of units,
+    surrounded by a \emph{quantum fog} of morphisms.
+    We prove that the group of automorphisms of the Quantum System is isomorphic to the group of symmetries of the Dynamical System,
+    $\Diff(X, \omega)$.
+    Finally, we revisit the theory of moment maps in diffeology.
+    We show that the "paths moment map" defined in previous work is the intrinsic moment map of the quantum groupoid.
+    The holonomy group $\Gamma$,
+    previously viewed as an obstruction to the existence of a classical moment map,
+    is reinterpreted here as a signature of strictly quantum geometrical features,
+    such as the Aharonov-Bohm effect.
+  \end{abstract}
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{\textsc{\textbf{Introduction}}}
+  
+  In Part I of this work \cite{PIZ25a},
+  we established the construction of the prequantum groupoid $\TT_\omega$ for connected and simply connected parasymplectic spaces.%
+  \footnote{A parasymplectic space is a diffeological space $X$ equipped with a closed $2$-form $\omega$.
+  That is,
+  the pair $(X,\omega)$.
+  No other condition on $\omega$ is required.}
+  We showed that this object,
+  defined as a quotient of the space of paths,
+  encodes the prequantum geometry more naturally than the traditional principal bundle approach.
+  In particular,
+  the quantum phase emerged intrinsically as the isotropy group of the groupoid,
+  isomorphic to the torus of periods.
+  
+  However,
+  the assumption of simple connectedness is restrictive.
+  Many physically relevant systems,
+  such as the torus or surfaces of higher genus,
+  are not simply connected.
+  In these cases,
+  the geometry of the space $X$ introduces new periods---surfacic periods---that are not captured by the spherical or toric cycles alone.%
+  \footnote{Following the tradition of Lagrange and Souriau,
+  we distinguish the \emph{Space of Motions} $X$ (the space of all solutions to the dynamical equations) from the \emph{Phase Space} (a slice of $X$ at a given time).
+  The Space of Motions is the intrinsic, covariant geometric object,
+  whereas the phase space depends on a choice of frame or time. In this paper,
+  $X$ is supposed to refer to a Space of Motions.}
+  A naive application of the previous construction would fail to produce a connected isotropy group,
+  leading to a disconnected phase structure that contradicts physical intuition.
+  
+  In this Part II,
+  we extend the construction to arbitrary connected diffeological spaces.
+  Our strategy relies on a direct \emph{Path Approach}:
+  we identify the obstruction to the Chasles relation directly within the space of loops of $X$.
+  This obstruction is measured by a cocycle defined on the monoid of indices of the connected components of the loop space.
+  By incorporating these periods into the definition of the total group of periods $\Pomega$,
+  we ensure that the Chasles cocycle closes on the quotient \emph{torus of periods} $\Tomega = \RR/\Pomega$.
+  
+  This generalization leads us to a broader conceptual proposal.
+  We suggest that the prequantum groupoid $\TT_\omega$ constitutes the \emph{Quantum System}.
+  The classical space $X$ sits inside it as the \emph{skeleton} of units,
+  surrounded by a \emph{quantum fog} of non-unit morphisms.
+  We show that the symmetries of the classical system lift fully and faithfully to this structure,
+  satisfying the Dirac axioms for quantization naturally.
+  
+  Finally,
+  this perspective resolves a long-standing ambiguity regarding the status of conserved quantities in geometrically non-trivial systems.
+  We show that the "paths moment map,"
+  introduced in our previous work on the moment map in diffeology \cite{PIZ10},
+  is precisely the intrinsic moment map of the quantum groupoid.
+  The holonomy group $\Gamma$,
+  classically viewed as an obstruction to the existence of single-valued observables on the space of motions (violating Souriau's principle of the moment map),
+  is reinterpreted here as a signature of strictly quantum geometrical features.
+  The groupoid framework thus accommodates systems like the Aharonov-Bohm effect without pathology,
+  treating multi-valued classical quantities as single-valued quantum morphisms.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - Section I: The Groups of Periods
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textsc{\textbf{The Group and the Torus of Periods}}}
+  \label{sec:GroupAndTorusOfPeriods}
+  
+  The torus of periods,
+  quotient of the real line $\RR$ by the group of periods $P_\omega$,
+  which plays a fundamental role in geometric quantization,
+  appears in quantization by paths as a quotient involving three kinds of periods:
+  The \emph{spherical periods} $P_\sph$,
+  the \emph{toric periods} $P_\tor$ and the \emph{surfacic periods} $P_\surf$.
+  They appear in the construction in two different phases that we will describe now.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: The Spherical and Toric Periods
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{article}\artlabel[The Spherical and Toric Periods]
+    
+    Let $(X,\omega)$ be a connected parasymplectic diffeological space.
+    The first step in the construction of the prequantum groupoid relies on the integration of the 1-form $\Komega \in \Paths(X)$ on the subspace of loops.
+    Indeed,
+    the fundamental property of $\CHO$,
+    $d \circ \CHO + \CHO \circ d = \1^* - \0^*$,
+    applied to a closed form implies that $d[\Komega \restriction \Loops(X)] = 0$.
+    We decompose the space of loops into the sum of its connected components,
+    this is a general feature on diffeological space \cite[\textsection 5.8]{PIZ13}.
+    Let
+    $$
+      \Loops(X) = \coprod_{i \in \pi_0(\Loops(X))} L_i.
+      $$
+    On each component $L_i$ the restriction $\Komega_i = \Komega \restriction L_i$ is closed and its group of periods is well defined by
+    $$
+      P_{\tor,i} = \left\{ \int_\sigma \Komega_i \Mid \sigma \in \Loops(L_i) \right\}.
+      $$
+    Each period group does not depend on the origin $\ell_i \in L_i$ one chooses to compute the integral.
+    We shall call these groups the groups of \emph{toric periods} of $\omega$,
+    since for each component the integration of $\Komega$ represents the integration of $\omega$ on a loop of loops,
+    that is,
+    the image of a torus.
+    Only on the subspace of loops homotopic to zero these periods are called \emph{spherical}.
+    
+    We shall then define for any diffeological space the group of toric periods as the group generated by all the individual toric periods,
+    denoted by:
+    $$
+      P_\tor = \langle P_{\tor,i} \mid i \in \pi_0(L_i) \rangle.
+      $$
+    This definition leads to the \emph{Torus of toric periods} and its canonical volume $1$-form
+    $$
+      \T_\tor = \RR/P_\tor
+      \qtext{and}
+      \theta_\tor \in \Omega^1(\T_\tor)
+      \qtext{such that} \pi_\tor^*(\theta_\tor) = \dt,
+      $$
+    with $\pi_\tor: \RR \to \T_\tor$.
+    We assume that the group $P_\tor$ is discrete,%
+    \footnote{We recall that "discrete" in diffeology means equipped with the discrete diffeology (generated by constant plots).
+    Every strict subgroup $P \subset \RR$ with $P¨\neq \RR$,
+    equipped with the subset diffeology,
+    is discrete.}
+    that is,
+    $P_\tor \subsetneq \RR$.
+    
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: The example of the 2-torus
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{article}\artlabel[The example of the $2$-torus]
+    \label{The-example-of-the-2-torus}
+    Let us apply this construction on the flat $2$-torus $\T^2= \RR^2/\ZZ^2$,
+    equipped with the surface form $\omega = [dx \wedge dy]$.%
+    \footnote{See also \cite[Exercise 141]{PIZ13}.}
+    
+    Since $\T^2$ is a group its $\pi_1$ is Abelian and $\pi_1(\T^2) \simeq \pi_0(\Loops(\T^2))$.
+    We simply denote $\class(x)$ by $[x]$,%
+    \footnote{We generically denote by $\class$ the projection of a set onto its quotient by an equivalence relation.}
+    where $x \in \RR$ and $[x] \in \T$ and $([x],[y]) \in \T^2$.
+    We begin with $\pi_1(\T) \simeq \ZZ$,
+    each class is represented by a loop $t \mapsto [nt]$,
+    with $n \in \ZZ$.
+    Therefore,
+    each class of loop in $\T^2$ is represented by a loop $\ell_{n,m} : t \mapsto ([nt],[mt])$.
+    
+    Now,
+    let $s \mapsto \sigma_s$ be a loop in $\Loops(\T^2)$ based in $\ell_{n,m}$.
+    The map $(t,s) \mapsto \sigma_s(t)$,
+    from $\RR^2$ to $\T^2$,
+    has a unique lift $t \mapsto (x_s(t),y_s(t))$ in $\RR^2$:
+    $\sigma_s(t) = ([x_s(t)],[y_s(t)])$,
+    such that $(x_0(0), y_0(0)) = (0,0)$,
+    \cite[\textsection 8.25]{PIZ13}.
+    
+    Since $\sigma_0 = \ell_{n,m}$,
+    we have $x_0(t) = nt$ and $y_0(t) = mt$.
+    Since each $\sigma_s$ is a loop in $\T^2$,
+    we must have $x_s(1) - x_s(0) \in \ZZ$ and $y_s(1) - y_s(0) \in \ZZ$.
+    By continuity with respect to $s$,
+    these integers are constant and equal to those of $\sigma_0$.
+    Thus,
+    for all $s$:
+    $$
+      x_s(1) - x_s(0) = n
+      \widetext{and}
+      y_s(1) - y_s(0) = m.
+      $$
+    Next,
+    since $s \mapsto \sigma_s$ is a loop in the space of loops,
+    $\sigma_1 = \sigma_0 = \ell_{n,m}$.
+    This implies that the lift at $s=1$ differs from the lift at $s=0$ by integer constants (the winding numbers of the homotopy in the $s$ direction).
+    Thus,
+    there exist $k, k' \in \ZZ$ such that:
+    $$
+      x_1(t) = x_0(t) + k
+      \widetext{and}
+      y_1(t) = y_0(t) + k'.
+      $$
+    Summarized,
+    the boundary conditions for the lift $(x,y)$ on the square $[0,1]^2$ are:
+    $$
+      \begin{cases}
+      x_s(1) - x_s(0) = n, \\
+      y_s(1) - y_s(0) = m,
+      \end{cases}
+      \widetext{and}
+      \begin{cases}
+      x_1(t) - x_0(t) = k, \\
+      y_1(t) - y_0(t) = k'.
+      \end{cases}
+      $$
+    Now,
+    let us define the explicit homotopy:
+    $$%
+      \xi(u)_s(t) = \left(
+      \begin{array}{ll}
+      {[u(nt + sk) + (1-u)x_s(t)]} \\
+      {[u(mt + sk') + (1-u)y_s(t)]}
+      \end{array}
+      \right).
+      $$%
+    We can check that $\xi$ is a fixed-ends homotopy of loops connecting $\xi(0) = [s \mapsto \sigma_s]$ to $\xi(1) = [s \mapsto \sigma'_s]$,
+    where $\sigma'_s(t) = ([nt + sk], [mt + sk'])$.
+    Next,
+    since $\Komega \restriction \comp(\ell_{n,m})$ is closed,
+    the integrals of $\Komega$ on the loops $[s \mapsto \sigma_s]$ and $[s \mapsto \sigma'_s]$ coincide.
+    Hence,
+    \begin{eqnarray*}
+      \int_{[s \mapsto \sigma_s]} \Komega & = &\int_0^1 \dt \int_0^1 \ds \, \det \left[\D \left( \vect{t \\ s} \mapsto \vect{nt + sk \\ mt + sk'}\right)_{t \choose s}\right] \\
+      & = &  \int_0^1 \dt \int_0^1 \ds \, \det \vect{n & k \\ m & k'} \\
+      & = & nk' - mk.
+    \end{eqnarray*}
+    Let $P_{n,m} = \PeriodsOf\left(\Komega \restriction \comp(\ell_{n,m})\right)$,
+    then:
+    $$%
+      P_{n,m} = \{nk'-mk \mid k,k' \in \ZZ\} = \gcd(n,m) \, \ZZ.
+      $$%
+    Therefore,
+    $$
+      P_\tor = \bigg\langle \bigcup_{n,m} \gcd(n,m) \, \ZZ \bigg\rangle = \ZZ.
+      $$%
+    \textbf{Note 1.} On the component of the constant loop $\ell_{0,0}$,
+    the periods of $\Komega$ are zero,
+    which means that $\Komega\restriction \comp(\ell_{0,0})$ is exact,
+    and precisely:
+    $$
+      \Komega \restriction L_{0,0} = \df \ \text{ with } \ f(\ell) = \int_\ell x\,d\!y.
+      $$%
+    \textbf{Note 2.} For $(n,m) \neq (0,0)$,
+    $\gcd(n,m) \neq 0$ and $\PeriodsOf(\Komega \restriction \comp(\ell_{n,m})) \neq 0$ shows that $\Komega \restriction \comp(\ell_{n,m})$ is not exact.
+    
+    \textbf{Note 3.} Since $\T^2$ is a group,
+    the space $\Loops(\T^2)$ is a group for the pointwise addition.
+    For all $(n,m) \in \ZZ^2$,
+    the map $\mu_{n,m} : \ell \mapsto \ell + \ell_{n,m}$,
+    defined on the connected component of the constant loop $\ell_{0,0}$,
+    is a diffeomorphism to $\comp(\ell_{n,m})$,
+    mapping $\ell_{0,0}$ to $\ell_{n,m}$.
+    The computation of the periods shows that $\mu_{n,m}$ is not an automorphism of $\Komega$,
+    that is do not belong to $\Diff_\loc(\Loops(X), \Komega)$.
+  \end{article}
+  
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: - The Surfacic Cocycle
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{article}\artlabel[The Surfacic Cocycle]
+    \label{sec:SurfacicCocycle}
+    
+    We follow the general construction of part I \cite{PIZ25a}.
+    Let us begin by recalling the definition of a main actor $\Paths_2(X) = \eends^*(\Paths(X))$,
+    the self-pullback of the projection $\eends$:
+    $$
+      \Paths_2(X) = \{ (\gamma,\gamma') \in \Paths(X)^2 \mid \eends(\gamma) = \eends(\gamma' \}.
+      $$
+    We have defined a homotopy equivalence between $\Paths_2(X)$ and $\Loops(X)$,%
+    \footnote{Precisely its homotopic retraction on the subspace $\Loops_{1/2}(X)$,
+    of stationary paths at time $1/2$,
+    that is,
+    constant on an open interval $]1/2 -\varepsilon,1/2+\varepsilon[$.}
+    $$
+      \Phi: \Paths_2(X) \to \Loops(X),
+      \qtext{with}
+      \Phi(\gamma,\gamma') = \gamma \vee \bar\gamma',
+      $$
+    where $\bar\gamma'$ is the reverse path $\bar\gamma'(t) = \gamma'(1-t)$.
+    
+    The second main actor is the integration function $\phi : \Loops(X) \to \T_\tor$ that satisfies:
+    $$
+      \phi^*(\theta_\tor) = \Komega \restriction \Loops(X).
+      $$
+    Since $\Loops(X)$ is made of many components $\{L_i\}_{i \in \cI}$,
+    where $\cI$ indexes the set of components $\pi_0(\Loops(X))$,
+    the integration function $\phi$ is built explicitly by choosing a base of loops $\cB = \{ \ell_i \}_{i \in \cI}$ with the $\ell_i \in L_i$.
+    We choose the elements $\ell_i$ of the base $\cB$ to have the same origin:
+    for all $i,j \in \cI$,
+    $\ell_i(0)=\ell_j(0)$.
+    That makes the concatenation between the $\ell_i$ possible.
+    The concatenation defines an internal operation on the set of indices of $\Loops(X)$:
+    
+    \begin{proposition}[The Monoid $(\cI,*)$]
+      We define the internal law on the set of indices $\cI$ by
+      $$
+        \text{For all $i,j \in \cI$}, \quad i*j =k \qtext{if and only if} \ell_i \vee \ell_j \in L_k,
+        $$
+      This law is associative:
+      $$
+        (i*j)*k = i*(j*k), \qtext{for all $i,j,k \in \cI$},
+        $$
+      and defines a monoid multiplication on the set of indices $\cI$.
+    \end{proposition}
+    
+    This proposition is a consequence of a fundamentl property of concatenation: $(\ell_i \vee \ell_j) \vee \ell_k$ is homotopic to $\ell_i \vee (\ell_j \vee \ell_k)$.
+    
+    Let us define then the integration function $\phi$ by:
+    $$
+      \phi(\ell) = \pi_\tor \left(\int_{\ell_i}^\ell \Komega \right),
+      \qtext{for all} \ell \in L_i.
+      $$
+    Of course this solution $\phi$ of $\phi^*(\theta_\tor) = \Komega \restriction \Loops(X)$ is defined up to a locally real constant map $c : i \mapsto c_i$ defined on $\Loops(X)$.
+    And changing the base point adds indeed a constant to each component.
+    
+    Let us consider two loops $\ell$ and $\ell'$ based on the same point in $X$.
+    In the simply connected case the function $\phi$ was additive in the sense that $\phi(\ell \vee \ell') = \phi(\ell) + \phi(\ell')$,
+    where the addition is the operation on the torus of periods.
+    That was because $\Loops(X)$ had only one component and we could choose the constant path $\hat x$ as the base point.
+    But, this is no more the case in the non simply connected case.
+    
+    Consider $\ell \in L_i$ and $\ell' \in L_j$,
+    based at a same point.
+    Then:
+    the concatenation $\ell \vee \ell'$ belong the component $L_{i*j}$.
+    Then:
+    $$
+      \phi(\ell \vee \ell') = \pi_\tor \left( \int_{\ell_{i*j}}^{\ell \vee \ell'} \Komega \right)
+      = \pi_\tor \left( \int_{\ell_{i*j}}^{\ell_i \vee \ell_j} \Komega \right)
+      + \pi_\tor \left( \int_{\ell_i \vee \ell_j}^{\ell \vee \ell'} \Komega \right)
+      $$
+    But,
+    according to "Integrating concatenations over homotopies" in \cite{PIZ25a}:
+    
+    \begin{proposition}[Separation of Variables]
+      Let $\ell \in L_i$ and $\ell' \in L_j$,
+      based at the same point,
+      then:
+      $$
+        \pi_\tor \left( \int_{\ell_i \vee \ell_j}^{\ell \vee \ell'} \Komega \right) =
+        \pi_\tor \left( \int_{\ell_i}^{\ell} \Komega \right)
+        +  \pi_\tor \left( \int_{\ell_j}^{\ell'} \Komega \right).
+        $$
+    \end{proposition}
+    
+    Next,
+    let us define
+    $$
+      \tau(i,j) = \pi_\tor \left( \int_{\ell_{i*j}}^{\ell_i \vee \ell_j} \Komega \right).
+      $$
+    Then:
+    
+    \begin{proposition}[The Surfacic Cocycle]
+      The map $\tau$ defines a $2$-cocycle of the monoid of indices $(\cI,*)$ with values in the Abelian torus of toric periods $T_\tor$.
+      Pecisely,
+      $$
+        \tau(i,j) + \tau(i * j,k)  =  \tau(i,j * k) + \tau(j,k).
+        $$%
+    \end{proposition}
+    
+    Wich gives the value:
+    $$
+      \phi(\ell \vee \ell')  = \phi(\ell) + \phi(\ell') + \tau(i,j),
+      \qtext{with}
+      \ell \in L_i \text{ and }  \ell' \in L_j.
+      $$
+    
+    \textbf{Remark 1} \textbf{(Changing the Basis)}. Note that changing the basis $\cB = \{\ell_i\}_{i \in \cI}$ to another basis $\cB' = \{\ell'_i\}_{i \in \cI}$ (where all loops share the same origin) modifies the cocycle $\tau$ by a coboundary.
+    Specifically, if we define the difference $c_i = \pi_\tor(\int_{\ell_i}^{\ell'_i} \Komega)$, the new cocycle satisfies:
+    $$
+      \tau'(i,j) = \tau(i,j) + c_i + c_j - c_{i*j}.
+      $$
+    Consequently, the cohomology class $[\tau] \in H^2(\cI, \T_\tor)$ is intrinsic to the system $(X, \omega)$ and independent of the choice of reference loops.
+    
+\textbf{Remark 2}\textbf{(Commutative vs. Non-Commutative Obstructions)}.
+      It is useful to understand the distinction between toric and surfacic periods in algebraic terms.
+      The toric periods,
+      $P_\tor$,
+      arise from loops of loops,
+      which are geometrically maps of a torus $T^2$ into $X$.
+      Since the fundamental group of the torus is abelian,
+      these periods capture the \emph{commutative} part of the system's homotopy.
+      
+      In contrast,
+      the surfacic cocycle $\tau$ is defined on the monoid of loop components,
+      which is a shadow of the fundamental group $\pi_1(X)$.
+      It particularly captures the non-commutative contributions to the group of periods—such as those arising from the product of commutators for a higher-genus surface—that are not included in the toric periods.
+      The group $H$ thus measures the \emph{non-commutative homotopic obstruction}.
+      
+  \end{article}
+  
+  \begin{figure}[t]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Figures/fig-lij.pdf}
+    \caption{\small\textbf{The Construction of the Surfacic Cocycle in Loop Space.}
+    The cocycle $\tau(i,j)$ measures the failure of the integration map $\phi$ to be a homomorphism.}
+    \label{fig:cocycle}
+  \end{figure}
+  
+  \begin{proof}
+    On the one hand,
+    \begin{align*}
+      \tau(i,j*k) + \tau(j,k)  &= \pi_\tor\bigg(\int_{\ell_{i*j*k}}^{\ell_i\vee\ell_{j*k}}\Komega \bigg) + \pi_\tor\bigg(\int_{\ell_{j*k}}^{\ell_j\vee\ell_k}\Komega \bigg)\\
+      &= \pi_\tor\bigg(\int_{\ell_{i*j*k}}^{\ell_i\vee\ell_{j*k}}\Komega \bigg) + \pi_\tor\bigg(\int_{\ell_i \vee \ell_{j*k}}^{\ell_i \vee(\ell_j\vee\ell_k)}\Komega \bigg),
+    \end{align*}
+    because
+    \begin{align*}
+      \pi_\tor\bigg(\int_{\ell_i \vee \ell_{j*k}}^{\ell_i \vee(\ell_j\vee\ell_k)}\Komega \bigg) &=
+      \underbrace{\pi_\tor\bigg(\int_{\ell_i}^{\ell_i}\Komega \bigg)}_{0} + \pi_\tor\bigg(\int_{\ell_{j*k}}^{\ell_j\vee\ell_k}\Komega \bigg),
+    \end{align*}
+    thanks to Article "Integrating concatenations over homotopies" in  \cite{PIZ25a}.
+    Now,
+    because $\ell_i\vee(\ell_j\vee\ell_k)$ is homotopic to $(\ell_i\vee\ell_j)\vee\ell_k$ by a homotopy sweeping no area,
+    we can write
+    $$
+      \tau(i,j*k) + \tau(j,k) = \pi_\tor\bigg(\int_{\ell_{i*j*k}}^{\ell_i\vee\ell_{j*k}}\Komega \bigg) + \pi_\tor\bigg(\int_{\ell_i \vee \ell_{j*k}}^{\ell_i \vee \ell_j \vee \ell_k}\Komega \bigg).
+      $$
+    On the other hand,
+    we have similarly:
+    $$
+      \tau(i*j,k) + \tau(i,j) = \pi_\tor\bigg(\int_{\ell_{i*j*k}}^{\ell_{i*j}\vee\ell_k}\Komega \bigg) + \pi_\tor\bigg(\int_{\ell_{i*j} \vee \ell_k}^{\ell_i \vee \ell_j \vee\ell_k}\Komega \bigg).
+      $$%
+    We consider now the difference between these two identities.
+    We have,
+    for the two first terms $\tau(i,j*k) - \tau(i*j,k)$
+    $$
+      \pi_\tor\bigg(\int_{\ell_{i*j*k}}^{\ell_i \vee \ell_{j*k}}\Komega \bigg) - \pi_\tor\bigg(\int_{\ell_{i*j*k}}^{\ell_{i*j} \vee \ell_k}\Komega \bigg)
+      = \pi_\tor\bigg(\int_{\ell_{i*j}\vee\ell_k}^{\ell_i\vee\ell_{j*k}}\Komega\bigg),
+      $$%
+    and for the two second terms $\tau(j,k) -\tau(i,j)$\,:
+    $$
+      \pi_\tor\bigg(\int_{\ell_i \vee \ell_{j*k}}^{\ell_i \vee \ell_j \vee \ell_k}\Komega\bigg) - \pi_\tor\bigg(\int_{\ell_{i*j} \vee \ell_k}^{\ell_i \vee \ell_j \vee \ell_k}\Komega \bigg)
+      = \pi_\tor\bigg(\int_{\ell_i \vee \ell_{j*k}}^{\ell_{i*j} \vee \ell_k} \Komega \bigg).
+      $$%
+    Thus,
+    the sum of these two last two terms vanishes,
+    that is,
+    $$
+      \tau(i,j) + \tau(i*j,k)  =  \tau(i,j*k) + \tau(j,k).
+      $$%
+    This is the definition of a $2$-cocycle of monoid of indices $(\cI,*)$ with values in the Abelian group of toric periods $\T_\tor$.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: - The Total Group and Torus of Periods
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{article}\artlabel[The Total Group and Torus of Periods]
+    \label{art:GroupOfPeriods}
+    
+    The cocycle $\tau$ takes its values in the torus of toric periods $\T_\tor$.
+    Let us denote by $H$ the subgroup of $\T_\tor$ generated by the image of $\tau$:
+    $$
+      H = \langle \text{Im}(\tau) \rangle = \bigg\{ \sum_{k} n_{k}\tau(i_k,j_k) \mid n_k \in \ZZ, \, i_k, j_k \in \cI \bigg\}.
+      $$
+    We call $H$ the \emph{group of surfacic periods} (modulo toric periods).
+    It represents the integration of the form $\omega$ on the relations defining the fundamental group.
+    
+    We can now define the \emph{total group of periods} $\Pomega$ as the preimage of the surfacic group $H$ in $\RR$ under the projection $\pi_\tor : \RR \to \T_\tor$.
+    
+    \begin{definition}[Total Group of Periods]
+      The total group of periods is defined as the preimage:
+      $$
+        \Pomega = \pi_\tor^{-1}(H) = \{ r \in \RR \mid \pi_\tor(r) \in H \}.
+        $$
+    \end{definition}
+    
+    By construction, $P_\tor \subset \Pomega$.
+    This definition unifies three distinct geometric sources of periods into a single group:
+    the \emph{Spherical Periods}, arising from the component of null-homotopic loops (related to $\pi_2(X)$);
+    the \emph{Toric Periods}, which contain the spherical ones and arise from the geometry of all components of the loop space;
+    and the \emph{Surfacic Periods}, which correspond to the extension from $P_\tor$ to $\Pomega$ and are captured by the cocycle measuring the algebraic relations of the space.
+    
+    Finally, we define the \emph{total torus of periods} $\Tomega$ as:
+    $$
+      \Tomega = \RR/\Pomega \simeq \T_\tor/H.
+      $$
+    We assume that $\Pomega$ is a \emph{discrete subgroup of\/ $\RR$} (i.e., $\Pomega \neq \RR$),
+    which ensures $\Tomega$ is a diffeological torus equipped with a canonical volume form $\theta_\omega$.
+    We denote by $\pi_\omega: \RR \to T_\omega$ the quotient map.
+    
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - Section IV: The Chasles Cocycle and The Prequantum Groupoid
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textsc{\textbf{The Chasles Cocycle and The Prequantum Groupoid}}}
+  \label{sec:ChasleCocyclePrequantumGroupoid}
+  
+  With $\Tomega = \RR/\Pomega$ established,
+  we can now define the global integration function $\psi$ on the entire space of loops $\Loops(X)$.
+  For any loop $\ell \in \Loops(X)$ with $L_i$ its connected component in $\Loops(X)$,
+  we define $\psi: \Loops(X) \to \Tomega$ by:
+  $$
+    \psi(\ell) = \pi_\omega \left( \int_{\ell_i}^\ell \Komega \right).
+    $$
+  The integral is taken over any path in $\Loops(X)$ connecting the reference loop $\ell_i$ to the loop $\ell$.
+  Changing the path adds a period from $P_\tor \subset \Pomega$,
+  so the value in $\Tomega$ is well-defined.
+  
+  Crucially,
+  this function is additive.
+  For any two loops $\ell, \ell'$ based at the same point:
+  $$
+    \psi(\ell \vee \ell') = \psi(\ell) + \psi(\ell').
+    $$
+  The obstruction to additivity is given by the cocycle $\tau$,
+  which by definition takes values in $\Pomega$ and thus vanishes in the quotient $\Tomega$.
+  
+  \begin{article}\artlabel[The Chasles Cocycle]
+    \label{The-Chasles-Cocycle}
+    Let $(\gamma, \gamma') \in \Paths_2(X)$,
+    that is,
+    two paths with the same endpoints $\eends(\gamma) = \eends(\gamma'))$.
+    The concatenation $\gamma \vee \bar\gamma'$ is a loop.
+    We define the \emph{Chasles function} $\Phi$ with values in $\Tomega$:
+    $$
+      \Phi(\gamma, \gamma') = \psi(\gamma \vee \bar\gamma').
+      $$
+    This value is well-defined because $\psi$ is defined globally on $\Loops(X)$.
+    Crucially,
+    thanks to the additivity of $\psi$,
+    it satisfies the Chasles relation for any triple of paths with matching endpoints:
+    $$
+      \Phi(\gamma, \gamma') + \Phi(\gamma', \gamma") + \Phi(\gamma", \gamma) = 0.
+      $$
+  \end{article}
+  
+  \begin{article}\artlabel[The Groupoid $\TT_\omega$]
+    \label{The-Groupoid-Tw}
+    We define the equivalence relation $\sim_\omega$ on $\Paths(X)$:
+    $$
+      \gamma \sim_\omega \gamma'
+      \qtext{if and only if\,:}
+      \eends(\gamma) = \eends(\gamma') \qtext{and} \Phi(\gamma, \gamma') = 0.
+      $$
+    We define the \emph{Prequantum Groupoid} $\TT_\omega$ as the quotient of the space of paths by this relation:
+    $$
+      \Obj(\TT_\omega) = X, \quad \Mor(\TT_\omega) = \cY = \Paths(X) / \sim_\omega.
+      $$
+    The composition is induced by the concatenation of paths.
+    
+    \begin{theorem}
+      The following properties summarize the structural behavior of this object, establishing it as a bona fide diffeological groupoid equipped with a connection.
+      \begin{enumerate}
+        \item $\TT_\omega$ is a fibrating diffeological groupoid over $X$.
+        \item The isotropy group at any point $x$, $\TT_{\omega, x}$, is isomorphic to the torus of periods $\Tomega$.
+        \item There exists a unique left-right invariant 1-form $\blambda$ on $\cY$ such that
+        $$
+          \class_\omega^*(\blambda) = \Komega.
+          $$
+        \item The curvature satisfies $d\blambda = \trg^*(\omega) - \src^*(\omega)$.
+      \end{enumerate}
+    \end{theorem}
+  \end{article}
+  
+  \begin{figure}[th]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Figures/Quantum-Groupoid-construct.pdf}
+    \caption{\small\textbf{The Prequantum Reduction.}
+    The diagram illustrates the construction of the prequantum groupoid $\TT_\omega$ as a quotient of the space of paths.
+    The projection $\class_\omega$ descends the path-space 1-form $\Komega$ to the unique prequantum 1-form $\blambda$ on the groupoid.
+    The curvature of $\blambda$ projects further to the difference of symplectic forms $\omega \ominus \omega$ on the space of endpoints $X \times X$.
+    This structure identifies $\TT_\omega$ as the geometric object capturing the quantum phase information distilled from the paths.}
+    \label{fig:reduction}
+  \end{figure}
+  
+  \begin{article}\artlabel[Uniqueness and Classification]
+    \label{art: Classification}
+    
+    The construction described in the previous articles yields a specific,
+    canonical prequantum groupoid $\TT_\omega$ associated with the form $\omega$.
+    Since the construction relies on the canonical 1-form $\Komega$,
+    this groupoid is unique up to a canonical isomorphism (a change of base loops corresponds to a gauge transformation).
+    
+    However,
+    one may ask if there exist \emph{other} prequantum groupoids over $X$ with the same curvature $\omega$ that are \emph{not} isomorphic to $\TT_\omega$.
+    A prequantum groupoid is generally defined as a fibrating groupoid over $X$ with fiber $\Tomega$ equipped with a connection 1-form $\blambda'$ satisfying $d\blambda' = \trg^*\omega - \src^*\omega$.
+    
+    Following the classification established in \cite{PIZ95} for generalized prequantum fiber bundles,
+    the set of isomorphism classes of such structures is not trivial.
+    Any two prequantum groupoids $\TT$ and $\TT'$ with the same curvature differ by a "flat" structure,
+    which corresponds to a character of the fundamental group $\chi \in \Hom(\pi_1(X), \Tomega)$.
+    
+    Specifically, the groupoid $\TT_\omega$ constructed here corresponds to the trivial character.
+    Other non-isomorphic groupoids can be obtained by "twisting" $\TT_\omega$ with a character $\chi$ that cannot be lifted to $\RR$ (i.e., it is not the period of a closed 1-form).
+    
+    This leads to the general classification theorem, generalizing the result on fiber bundles to the groupoid context:
+    
+    \begin{theorem}{ (Classification)}
+      The set of isomorphism classes of prequantum groupoids with curvature $\omega$ is an affine space modeled on the group of characters $H^1(X, \Tomega)$.
+      Modulo the gauge transformations induced by Hamiltonian automorphisms (exact 1-forms),
+      the moduli space of prequantum structures is canonically identified with the extension group:
+      $$
+        \mathcal{M}(X, \omega) \simeq \Ext(\pi_1(X)^{\mathrm{ab}}, \Pomega).
+        $$
+    \end{theorem}
+    
+    Our path-based construction $\TT_\omega$ provides the canonical origin (the zero element) of this moduli space.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: - Section III: Symmetries
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textsc{\textbf{Symmetries of the Quantum System}}}
+  \label{sec:Symmetries}
+  
+  We now address the symmetries of this structure.
+  The result is identical to the simply connected case,
+  proving the robustness of the construction.
+  
+  \begin{article}\artlabel[The Automorphism Group]
+    \label{The-Automorphism-Group}
+    Let $\Aut(\TT_\omega, \blambda)$ be the group of automorphisms of the groupoid $\TT_\omega$ that preserve the prequantum form $\blambda$.
+    Let $\Diff(X, \omega)$ be the group of symplectic diffeomorphisms of $X$.
+    
+    \begin{theorem}
+      The projection $\pi: \Aut(\TT_\omega, \blambda) \to \Diff(X, \omega)$ defined by restricting the automorphism to the space of objects is an isomorphism of diffeological groups.
+      $$
+        \Aut(\TT_\omega, \blambda) \simeq \Diff(X, \omega).
+        $$
+    \end{theorem}
+  \end{article}
+  
+  \begin{proof}
+    \textbf{Surjectivity:} Let $g \in \Diff(X, \omega)$.
+    The map $g$ acts on $\Paths(X)$ by composition: $\gamma \mapsto g \circ \gamma$.
+    Since $g^*\omega = \omega$,
+    the chain-homotopy operator satisfies $g^*(\Komega) = \Komega$.
+    Consequently,
+    integrals of $\Komega$ are preserved.
+    This implies that $g$ preserves the set of periods $\Pomega$ (all spherical, toric and surfacic periods are geometric invariants of $\omega$).
+    Thus,
+    if $\gamma \sim_\omega \gamma'$,
+    then $g \circ \gamma \sim_\omega g \circ \gamma'$.
+    The map descends to a well-defined automorphism $h$ on $\cY$.
+    Since $\class_\omega^*(h^*\blambda) = (\class_\omega \circ g)_*(\blambda) = g_*(\class_\omega^*(\blambda)) = g_*(\Komega) = \Komega = \class_\omega^*(\blambda)$,
+    and $\class_\omega$ is a subduction,
+    $h^*\blambda = \blambda$.
+    
+    \textbf{Injectivity:} Let $h$ be an automorphism of $\TT_\omega$ covering the identity on $X$.
+    Then for any morphism $y \in \cY$,
+    $h(y)$ can be written as $h(y) = \sigma(\src(y)) \cdot y$ for some section $\sigma: X \to \TT_\omega$,
+    where $\sigma(x) \in \TT_{\omega,x}$ for each $x$.
+    The condition that $h$ preserves the prequantum form,
+    $h^*\blambda = \blambda$,
+    implies that the section $\sigma$ is locally constant.
+    Since $X$ is connected,
+    $\sigma$ must be a constant section.
+    
+    Furthermore,
+    as an automorphism,
+    $h$ must preserve the identity morphisms.
+    Let $\id_x = \class_\omega(\hat{x}) \in \cY$ be the identity morphism at $x$.
+    Then $h(\id_x) = \id_x$.
+    Applying our formula,
+    we get:
+    $$
+      h(\id_x) = \sigma(\src(\id_x)) \cdot \id_x = \sigma(x) \cdot \id_x = \sigma(x).
+      $$
+    Therefore,
+    we must have $\sigma(x) = \id_x$ for all $x \in X$.
+    
+    This means the section $\sigma$ is the identity section.
+    It follows that for any $y \in \cY$:
+    $$
+      h(y) = \sigma(\src(y)) \cdot y = \id_{\src(y)} \cdot y = y.
+      $$
+    Thus,
+    $h$ is the identity automorphism on $\cY$,
+    and the projection is injective.
+  \end{proof}
+  
+  \begin{article}\artlabel[The Quantum Moment Map]
+    The existence of the invariant form $\blambda$ allows for the definition of an equivariant moment map $\Psi$ on the prequantum groupoid $\TT_\omega$,
+    for the action of the symmetry group $G_\omega = \Aut(\TT_\omega, \blambda) \simeq \Diff(X, \omega)$.
+    Explicitly $\Psi : \cY \to \cG_\omega^*$,
+    where $\cY = \Mor(\TT_\omega)$,
+    is given by:
+    $$
+      \Psi(y) = \hat y^*(\blambda),
+      $$
+    where $\hat y: G_\omega \to \cY$ is the orbit map $\hat y(g) = g(y)$ \cite{PIZ10}.
+    
+    This map is the descent to the quotient of the "paths moment map" $\Psi_{\paths}$ defined in \cite{PIZ10}.
+    In the simply connected case (Part I),
+    this map descends further to $X \times X$.
+    In the general case,
+    the restriction of $\Psi$ to the isotropy groups $\TT_{\omega, x} \simeq T_\omega$ captures the \emph{holonomy} of the system.
+    The prequantum groupoid thus provides the natural domain where the moment map is always defined and equivariant,
+    regardless of the topology of $X$.
+  \end{article}
+  
+  \begin{article}\artlabel[The Holonomy and Souriau's Principle]
+    This construction sheds new light on the theory of moment maps in diffeology.
+    In \cite{PIZ10},
+    we identified the \emph{holonomy group} $\Gamma = \Psi_{\text{paths}}(\Loops(X))$ as the obstruction for the moment map to descend to the space of motions $X$.
+    
+    We can now identify $\Psi_{\text{paths}}$ as the intrinsic moment map of the \emph{Quantum System} (the groupoid $\TT_\omega$).
+    The condition $\Gamma = \{0\}$ corresponds to the principle of the existence of the moment map,
+    which Souriau posited as essential for a system to constitute a "Dynamical System" in the strict sense (see \cite[p.161]{Sou70}).
+    
+    \begin{figure}[ht]
+      \newcommand{\TL}{\Paths(X) \arrow[rr,"\Psi_\paths"] \arrow[dr, "\class_\omega"] \arrow[ddr, swap, "\eends"]}
+      \newcommand{\TR}{\cG_\omega^* \arrow[dd,"\pr_\Gamma"]}
+      \newcommand{\DM}{\cY \arrow[d,"\eends"] \arrow[ur,"\Psi_\omega"]}
+      \newcommand{\BM}{X \times X \arrow[r, swap, "\psi_X"]}
+      \newcommand{\BR}{\cG_\omega^*/\Gamma_\omega}
+      \begin{center}
+        \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+          \TL  &  {}  & \TR   \\
+          {}   & \DM  & {}     \\
+          {}   & \BM  & \BR
+        \end{tikzcd}
+      \end{center}
+      \caption{\small\textbf{The Factorization of the Moment Map.}
+      The diagram illustrates how the moment map $\Psi_{\text{paths}}$,
+      defined on the space of paths,
+      descends to the prequantum groupoid $\cY$.
+      The map $\Psi_\omega$ represents the intrinsic moment map of the Quantum System.
+      The further descent to the classical space of motions $X \times X$ is obstructed by the holonomy group $\Gamma_\omega$.
+      The projection $\pr_\Gamma$ indicates that on the classical skeleton,
+      the moment map is only defined modulo the quantum holonomy $\Gamma_\omega$,
+      recovering Souriau's multivaluedness for "non-true" physical systems.}
+    \end{figure}
+    
+    
+    Systems with $\Gamma \neq \{0\}$,
+    such as the Aharonov-Bohm effect,
+    violate this classical principle:
+    their dynamical quantities (momenta) are well-defined only on the prequantum groupoid $\TT_\omega$,
+    not on the classical skeleton $X$.
+    The groupoid framework thus unifies both cases,
+    treating these "purely quantum" systems on equal footing with classical ones,
+    provided one accepts that the moment map takes its values in the space of momenta of the symmetry group (the space of left-invariant 1-forms).
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: - Section IV: The Dirac Program
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textsc{\textbf{A Reconstruction of the Dirac Program}}}
+  \label{sec:DiracProgram}
+  
+  The structural rigidity of the prequantum groupoid suggests a significant reorientation of the geometric quantization program.
+  Classically,
+  the quantization of symmetries is viewed as a reconstruction problem:
+  given a group $G$ acting on $(X, \omega)$,
+  one seeks to construct a unitary representation of $G$ on a Hilbert space.
+  This process is often plagued by obstructions,
+  requiring central extensions or metaplectic corrections at the very outset.
+  
+  Our framework offers a different paradigm.
+  Since the group of automorphisms of the prequantum groupoid coincides with $\Diff(X, \omega)$,
+  we possess \emph{ab initio} a canonical,
+  linear,
+  and faithful representation of the entire symmetry group.
+  
+  \begin{article}\artlabel[The Quantum System]
+    We propose to define the \emph{Quantum System} as the pair $(\TT_\omega, \blambda)$,
+    unique as the quotient of $(\Paths(X),\Komega)$.
+    The space $X$ is embedded as the \emph{skeleton} of units $\Obj(\TT_\omega) \subset \Mor(\TT_\omega)$.
+    The non-unit morphisms appearing as a \emph{quantum fog} surrounding the skeleton of classical motions,
+    if we regard $X$ as the space of motions of a dynamical system.
+    A remarkable benefit of this path-based construction is that the symmetries of the classical system become,
+    exactly and without modification,
+    the symmetries of the Quantum System:
+    we have only one system.
+    
+    In this view,
+    quantization is not a process of \emph{synthesis} (building a representation),
+    but a process of \emph{selection} (polarization).
+    We select a subspace of multiplicative functions on $\TT_\omega$ (the waves functions) determined by a polarization.
+    The "quantum anomalies" arise solely because the symmetry group does not preserve this selection.
+    They are not defects of the prequantum geometry,
+    but the necessary geometric cost of projecting the universal symmetry onto a specific observational framework.
+  \end{article}
+  
+  \begin{article}\artlabel[Derivation of the Dirac Axioms]
+    We can verify that this construction satisfies the historical Dirac axioms for quantization when $(X,\omega)$ is a symplectic manifold.
+    
+    \textbf{1. The Identity:}
+    The constant function $u = \mathbf{1}$ generates the zero vector field $\xi_{\mathbf{1}} = 0$.
+    The corresponding flow is the identity $\id_X$.
+    The unique lift to the groupoid is $\id_{\TT_\omega}$.
+    Thus,
+    the operator associated with the constant function is strictly the identity operator.
+    
+    \textbf{2. The Commutator:}
+    Let $u, v \in C^\infty(X)$.
+    Their Hamiltonian vector fields $\xi_u, \xi_v$ lift uniquely to vector fields $\tilde\xi_u, \tilde\xi_v$ on $\TT_\omega$ preserving $\blambda$.
+    The quantum operator is defined as $\hat{u} = i\hbar \tilde\xi_u$.
+    A direct computation of the Lie bracket on the groupoid yields:
+    $$
+      [\hat{u}, \hat{v}] = [i\hbar \tilde\xi_u, i\hbar \tilde\xi_v] = -\hbar^2 [\tilde\xi_u, \tilde\xi_v] = -\hbar^2 (-\tilde\xi_{\{u,v\}}) = -i\hbar \widehat{\{u,v\}}.
+      $$
+    Thus,
+    the Dirac commutator relation is derived directly from the geometry of the groupoid,
+    where $-i\hbar$ appears as the Jacobian of the change of variables from geometric units to physical units.
+  \end{article}
+  
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: - Section V: Examples
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textsc{\textbf{Examples}}}
+  \label{sec:Examples}
+  
+  We illustrate the construction of the prequantum groupoid through a series of examples ranging from exact symplectic structures to those with irrational periods and flat connections.
+  These examples demonstrate how the groupoid framework unifies cases that are treated disparately in standard geometric quantization.
+  
+  \subsection*{A. The Exact Cases (Trivial Groupoid, Non-Trivial Holonomy)}
+  
+  When the parasymplectic form $\omega$ is exact,
+  the group of periods is trivial,
+  yet the topology of the space is preserved in the holonomy of the groupoid.
+  
+  \begin{article}\artlabel[The Punctured Plane]
+    Let $X = \RR^2 - \{0\}$ equipped with the form $\omega = \frac{dx \wedge dy}{x^2 + y^2}$.
+    In polar coordinates,
+    $\omega = d(\log(r) d\theta)$.
+    Despite the non-trivial fundamental group $\pi_1(X) \simeq \ZZ$,
+    the form is exact globally.
+    Consequently,
+    the group of periods is trivial:
+    $$
+      P_\omega = \{0\} \qtext{and} \T_\omega = \RR.
+      $$
+    The prequantum groupoid is the trivial additive groupoid $\TT_\omega \simeq X \times \RR \times X$.
+    However,
+    the holonomy is non-trivial:
+    a loop $\gamma$ at radius $r$ accumulates an action $A(\gamma) = \int_\gamma \log(r) d\theta$.
+    Two loops at different radii correspond to distinct morphisms in the groupoid,
+    distinguishing the "magnetic" geometry even in the absence of quantized periods.
+  \end{article}
+  
+  \begin{article}\artlabel[The Plane with Two Holes]
+    Let $X = \RR^2 - \{p_1, p_2\}$.
+    The fundamental group is the free group on two generators,
+    $\pi_1(X) \simeq \langle a, b \rangle$.
+    Since $X$ is an open surface,
+    $H^2(X, \RR) = 0$,
+    and any closed 2-form $\omega$ is exact.
+    Thus,
+    $P_\omega = \{0\}$.
+    
+    This example confirms that a complex topology (non-abelian $\pi_1$) does not force a non-trivial isotropy group.
+    The prequantum bundle is trivial ($\RR$-fibers).
+    The geometrical complexity is entirely encoded in the values of the action (the holonomy) on the free group,
+    not in the curvature of the bundle.
+  \end{article}
+  
+  \subsection*{B. The Compact Cases (Discrete Periods)}
+  
+  These are the standard cases of geometric quantization where the topology forces the quantization of periods.
+  
+  \begin{article}\artlabel[The Torus $T^2$]
+    Let $X = \RR^2/\ZZ^2$ equipped with the standard symplectic form $\omega = dx \wedge dy$.
+    As calculated in Section \ref{sec:GroupAndTorusOfPeriods},
+    the group of toric periods is $P_\tor = \ZZ$.
+    The torus of toric periods is $\T_\tor = \RR/\ZZ$.
+    
+    The fundamental group is $\pi_1(X) \simeq \ZZ^2$,
+    which is abelian.
+    Consequently,
+    the surfacic cocycle $\tau: \ZZ^2 \times \ZZ^2 \to \T_\tor$ is symmetric.
+    According to the cohomology of abelian groups,
+    any symmetric 2-cocycle with values in a divisible group is a coboundary (trivial in $H^2$) \cite{KM85}.
+    This implies that the subgroup $H$ generated by the image of $\tau$ is trivial in $\T_\tor$.
+    Therefore,
+    the total group of periods coincides with the toric periods:
+    $$
+      P_\omega = P_\tor = \ZZ.
+      $$
+    The prequantum isotropy is $\RR/\ZZ$,
+    recovering the standard prequantization of the torus.
+  \end{article}
+  
+  \begin{article}\artlabel[Surface of Genus $g>1$]
+    Let $\Sigma_g$ be a compact surface of genus $g > 1$ with area form $\omega$.
+    Since $\pi_2(\Sigma_g) = 0$,
+    $P_\sph = \{0\}$.
+    Also,
+    since there are no non-contractible tori in $\Sigma_g$ for $g>1$,
+    $P_\tor = \{0\}$ and $\T_\tor = \RR$.
+    
+    The total periods must therefore come entirely from the surfacic cocycle $\tau$.
+    Let us determine the value of the cocycle on the fundamental relation of the group.
+    Consider the loop $\gamma_R$ representing the commutator product $R = \prod [a_k, b_k]$.
+    Geometrically,
+    this loop traces the boundary of the fundamental polygon $D$ of the surface in the Poincaré disk.
+    
+    We evaluate the integration function $\phi(\gamma_R)$ in two ways:
+    
+    \textbf{1. Algebraic Expansion (Sum of Cocycles):}
+    Using the relation $\phi(\ell \vee \ell') = \phi(\ell) + \phi(\ell') + \tau(\dots)$ repeatedly,
+    we can expand $\phi(\gamma_R)$.
+    Crucially,
+    for every generator $a_k$,
+    the term $\phi(a_k)$ appears once with a positive sign and once with a negative sign (from $a_k^{-1}$).
+    Since $\phi(a_k) + \phi(a_k^{-1}) = -\tau(a_k, a_k^{-1})$,
+    the linear terms cancel out modulo the subgroup generated by $\tau$.
+    Thus,
+    $\phi(\gamma_R)$ is strictly a sum of values of the cocycle $\tau$:
+    $$
+      \phi(\gamma_R) \in \langle \text{Im}(\tau) \rangle.
+      $$
+    
+    \textbf{2. Geometric Evaluation (Area):}
+    By definition,
+    $\phi(\gamma_R) = \int_{\hat{x}}^{\gamma_R} \Komega$.
+    This integral represents the symplectic flux swept by a homotopy connecting the constant loop $\hat{x}$ to $\gamma_R$.
+    Since $\gamma_R$ is the boundary of the fundamental polygon $D$,
+    and the homotopy sweeps $D$ exactly once,
+    this integral is the total area:
+    $$
+      \phi(\gamma_R) = \int_D \omega = \text{Area}(\Sigma_g).
+      $$
+    
+    \textbf{Conclusion:}
+    Comparing the two results,
+    we find that the Area is generated by the cocycle:
+    $$
+      \text{Area}(\Sigma_g) \in \langle \text{Im}(\tau) \rangle = P_\omega.
+      $$
+    Furthermore,
+    since the fundamental group $\pi_1(\Sigma_g)$ is defined by this single relation $R$,
+    any other relation is a consequence of $R$ (a product of conjugates of $R^{\pm 1}$).
+    Geometrically,
+    this implies that any contractible loop bounds a domain that covers the fundamental polygon an integer number of times.
+    Therefore,
+    all surfacic periods are integer multiples of the Area.
+    The total group of periods is exactly:
+    $$
+      P_\omega = \text{Area}(\Sigma_g) \cdot \ZZ.
+      $$
+    Thus,
+    the prequantum isotropy group is $\TT_{\omega,x} \simeq \RR / (\text{Area}(\Sigma_g)\cdot\ZZ)$.
+    
+    \textbf{Remark (Redundancy vs. Necessity).}
+    One might wonder why the general definition involves the cocycle $\tau$ when,
+    for the torus,
+    the period group was fully determined by $P_\tor$.
+    The distinction lies in the relationship between the symplectic area and the geometry of the loop space.
+    
+    1) For the torus ($g=1$),
+    the symplectic area of the fundamental domain (the "surfacic" period) coincides with the period of a torus of loops (a "toric" period).
+    Algebraically,
+    this means the value of the cocycle falls into $P_\tor$,
+    so its class in $\T_\tor = \RR/P_\tor$ is zero.
+    The cocycle is trivial because the area is already accounted for by the toric geometry.
+    
+    2) For surfaces of genus $g>1$,
+    there are no non-trivial tori of loops ($P_\tor = \{0\}$).
+    The symplectic area of the fundamental domain is \emph{not} detected by the geometry of $\Loops(\Sigma_g)$.
+    It appears solely through the algebraic relation in $\pi_1(\Sigma_g)$,
+    captured by the non-triviality of the cocycle $\tau$ in $\T_\tor = \RR$.
+    
+    The definition $P_\omega = \pi_\tor^{-1}(\langle \text{Im}(\tau) \rangle)$ covers both cases:
+    it absorbs the area into the period group whether it was already present (redundant) or new (necessary).
+  \end{article}
+  
+  \subsection*{C. The General Cases (Irrational and Flat)}
+  
+  These examples highlight the unique power of the diffeological framework.
+  
+  \begin{article}\artlabel[Composite Systems and Irrational Periods]
+    Let us consider a composite system formed by two independent elementary systems.
+    For instance,
+    let $X = S^2 \times S^2$,
+    equipped with the product symplectic form:
+    $$
+      \omega = s_1\omega_1 \oplus s_2 \omega_2 = \pr_1^*(s_1\surf_{S^2}) + s_2 \pr_2^*(\surf_{S^2}),
+      $$
+    where $\surf_{S^2}$ is the standard area form on the sphere normalized such that $\int_{S^2} \surf_{S^2} = 1$,
+    and $s_1, s_2\in \RR$ are the coupling constants.
+    
+    The space $X$ is simply connected.
+    The group of periods is generated by the spherical periods of the two factors (elements of $\pi_2(X) \simeq \ZZ \oplus \ZZ$).
+    Thus:
+    $$
+      P_\omega = \left\{ n \int_{S^2} s_1 \omega_1 + m \int_{S^2} s_2 \omega_2 \mid n,m \in \ZZ \right\} = s_1 \ZZ + s_2\ZZ.
+      $$
+    The nature of the prequantum isotropy depends crucially on the rationality of $\alpha = s_2/s_1$ the ratio of scales.
+    
+    \textbf{1. The Rational Case (Resonance).}
+    If $\alpha \in \QQ$,
+    say $\alpha = p/q$,
+    then $P_\omega = \frac{1}{q}\ZZ$.
+    The group of periods is discrete and isomorphic to $\ZZ$.
+    The torus of periods $\T_\omega \simeq \RR/\frac{1}{q}\ZZ$ is a circle.
+    This recovers the standard case where the system admits a prequantum line bundle.
+    
+    \textbf{2. The Irrational Case (Dissonance).}
+    If $\alpha \notin \QQ$,
+    the group $P_\omega$ is a dense subgroup of $\RR$.
+    In the classical framework of geometric quantization,
+    this system is considered "non-quantizable" because no principal bundle with structure group $\U(1)$ exists with curvature $\omega$.
+    However,
+    in our diffeological framework,
+    the prequantum groupoid $\TT_\omega$ is perfectly well-defined.
+    The isotropy group is the \emph{irrational torus}:
+    $$
+      \T_\omega = \RR / (\ZZ + \alpha\ZZ).
+      $$
+    This space is a "bad" quotient in topology (non-Hausdorff),
+    but a standard and well-behaved object in diffeology (the model of the irrational flow on the torus).
+    
+    \textbf{Conclusion.}
+    This example demonstrates that the "integrality condition" of Kostant-Souriau is not a condition for the \emph{existence} of the prequantum geometry,
+    but rather a condition for the quantum phase $\T_\omega$ to be a smooth manifold.
+    The diffeological prequantum groupoid captures the geometry of systems with incommensurable periods without obstruction,
+    suggesting a generalized quantum mechanics where the phase factor lives in a generalized torus.
+  \end{article}
+  
+  \begin{article}\artlabel[The Aharonov-Bohm Effect]
+    Let $X = \RR^2 - \{0\}$ with $\omega = 0$.
+    The canonical groupoid is trivial.
+    However,
+    the moduli space of prequantum structures is $H^1(X, \T_\omega) \simeq \T_\omega$.
+    The Aharonov-Bohm system corresponds to a "flat" groupoid $\TT_{AB}$ with non-trivial holonomy determined by the flux $\Phi$:
+    $$
+      [\gamma]_{AB} = (\gamma(0), n\Phi, \gamma(0)).
+      $$
+    \textbf{Remark (The Souriau Perspective).}
+    Jean-Marie Souriau noted that describing this effect with functions on the space of motions leads to multi-valued Hamiltonians or apparent conservation violations.
+    Our framework resolves this:
+    the Hamiltonian is well-defined and conserved,
+    but it generates a flow on the non-trivial groupoid $\TT_{AB}$.
+    The energy is preserved,
+    but the geometric structure carrying it is twisted.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - Section VI: Discussion
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textsc{\textbf{Discussion}}}
+  \label{sec:Discussion}
+  
+  The construction of the prequantum groupoid $\TT_\omega$ presented here is valid for any connected parasymplectic space,
+  regardless of the rationality of its periods or the categorical nature of the underlying diffeological space:
+  it can be a manifold,
+  but also an orbifold or an "orthofold": the type of quotient of manifolds by compact Lie groups.
+  It can be also the space of geodesics of the $2$-torus which is a quasifold,
+  a mix of ordinary circles and irrational tori.
+  It can be also infinite dimensional as the space of $1$-forms on a surface (the Atiyah-Donaldson example),
+  or the space of immersions of the circle in the plane (a model for the Virasoro extension).
+  The construction of the prequantum groupoid in diffeology covers a large,
+  unique,
+  category of spaces from the infinitely small and intricate products of irrational tori to the infinite spaces of connections in Yang-Mill theory.
+  
+  This generality invites a re-evaluation of several standard concepts in geometric quantization.
+  By revealing that the group of automorphisms of the prequantum structure is isomorphic to the group of classical symmetries,
+  $\Aut(\TT_\omega,\blambda) \simeq \Diff(X,\omega)$,
+  this framework suggests a revision of the Dirac program where the quantum phase emerges naturally from the geometry of paths.
+  
+  % ---------- The Universality of the Quantum Unit ----------
+  
+  \subsection*{The Universality of the Quantum Unit}
+  This perspective extends naturally to the interaction between distinct systems.
+  If we accept as a fundamental principle that any two quantum systems can interact to form a composite system,
+  then their respective period groups must be commensurable to allow for the existence of non-trivial joint states.
+  This requirement imposes that all physical systems share a common quantum unit of action.
+  
+  Let us denote this universal constant by $h$ (Planck's constant).
+  The condition for a system $(X, \omega)$ to be physically realizable is that its global period group $P_\omega$ must be a subgroup of the lattice generated by $h$:
+  \[
+  P_\omega \subseteq h\ZZ.
+  \]
+  In this view,
+  the "Universal Quantum Torus" is the quotient of the action line by this constant:
+  \[
+  \TT_{\quant} = \RR / h\ZZ.
+  \]
+  The isomorphism between the geometric isotropy group $T_\omega = \RR/P_\omega$ and the group of phases $\U(1)$ is then provided naturally by the exponential map scaled by $\hbar = h/2\pi$:
+  \[
+  \tau \in T_\omega \longmapsto \exp\left( i \frac{\tau}{\hbar} \right) \in \U(1).
+  \]
+  It is here that the Planck constant reveals itself,
+  not merely as a scaling factor that can be set to unity,
+  but as the universal common measure required for the coherence of the physical world,
+  linking the intrinsic geometry of motions to the possibility of representation.
+  
+  % ---------- The Fine Structure and Global Synchronization ----------
+  
+  \begin{article}\artlabel[The Fine Structure and Global Synchronization]
+    A subtle feature of the path-space construction is the internal heterogeneity of the space of loops.
+    As demonstrated in the Torus example (Article \ref{The-example-of-the-2-torus}),
+    the groups of periods $P_i$ associated with the different connected components of $\Loops(X)$ are not necessarily identical (e.g., $P_{n,m} = \gcd(n,m)\ZZ$).
+    
+    One could theoretically define a "fine structure" of prequantization:
+    a collection of local groupoids over the components of the path space,
+    where each homotopic sector possesses its own specific phase group $T_i=\RR/P_i$.
+    This would describe a physics where interference is strictly confined to homotopic paths.
+    
+    However,
+    the phenomenology of quantum mechanics (such as the Aharonov-Bohm effect or double-slit interference) relies on the interference of paths belonging to \emph{distinct} homotopy classes.
+    To enable this global comparison of phases,
+    the local sectors must be "synchronized."
+    The definition of the total group of periods $\Pomega$ as the group generated by all local $P_i$ (and the surfacic cocycle) represents this necessary unification.
+    The prequantum groupoid $\TT_\omega$ is thus the result of embedding the heterogeneous fine structure of the path space into a single,
+    universal phase geometry.
+  \end{article}
+  
+% ---------- Intrinsic Quantization of Reduced Spaces ----------
+
+  \subsection*{Intrinsic Quantization of Reduced Spaces}
+  The diffeological framework offers a decisive resolution to the long-standing debate regarding whether "quantization commutes with reduction."
+  In the standard approach,
+  one compares the reduction of the quantum Hilbert space of the original manifold with the quantization of the singular reduced space.
+  This comparison is fraught with technical difficulties regarding the definition of structures on the singular quotient.
+  
+  Our approach bypasses this ambiguity by granting the reduced space an autonomous status.
+  Once the reduction is performed,
+  the quotient space $Q$ is not merely a shadow of the original manifold;
+  it is a fully defined diffeological space.
+  Provided that the presymplectic form descends to a closed 2-form $\omega$ on $Q$
+  (the sole hypothesis),
+  the reduced space becomes a parasymplectic system in its own right.
+  We can then apply our construction directly to $Q$,
+  building the prequantum groupoid $\TT_\omega$ from the paths in $Q$.
+  The reduced system is thus immediately "clothed" in its own prequantum structure,
+  defined intrinsically by its geometry,
+  without reference to its ancestor.
+  In this view,
+  quantization does not need to commute with reduction;
+  rather,
+  \emph{reduction defines the physical system,
+  and quantization renders it quantum}.
+  
+  This "clothing" is not merely metaphorical.
+  Mathematically,
+  the unit map $x \mapsto \id_x$ is a diffeological induction,
+  embedding the classical space $X$ strictly into the space of morphisms of $\TT_\omega$.
+  The classical space thus sits inside the prequantum groupoid like a sharp skeleton,
+  enveloped by the "quantum fog" of non-identity morphisms that encode the phase structure.
+  This "fog" possesses a precise algebraic structure:
+  the space of morphisms between any two states forms a \emph{torsor} over the isotropy group $T_\omega$.
+  This reflects the fundamental physical principle that the quantum freedom in any transition is exactly the freedom to add a quantum loop (a self-signal) to the trajectory.
+  
+  \textbf{Remark.}
+  It is worth noting that any multiplicative function $\psi$ is necessarily trivial on the classical skeleton $X \subset \Mor(\TT_\omega)$.
+  Since $\id_x \cdot \id_x = \id_x$, we must have $\psi(\id_x) = 1$.
+  This aligns with the physical intuition that the classical state (represented by a null path) carries zero action and thus unit phase.
+  The non-trivial quantum information resides entirely in the "fog" of morphisms connecting distinct points or wrapping around non-trivial cycles.
+
+  % ---------- Singularities and the Constancy of the Phase ----------
+  
+  \subsection*{Singularities and the Constancy of the Phase}
+  This intrinsic construction clarifies the treatment of singularities.
+  Alternative approaches,
+  such as those based on stratified pseudobundles,
+  often model the prequantum structure by allowing the fiber to change dimension (collapse) over singular strata.
+  This implies that the "quantum nature" of the particle disappears or degenerates at a singularity.
+  
+  In our framework,
+  because the groupoid is constructed from the global period group $P_\omega$,
+  the isotropy group $T_\omega$ remains constant everywhere,
+  even at points that are singular in the stratified sense.
+  This respects the physical intuition derived from the Dirac program:
+  the wave function always takes values in $\CC$,
+  and the phase degree of freedom is a universal constant of the theory,
+  not a local variable that can be turned off.
+  The singularity of the reduced space is encoded in the rich structure of the groupoid morphisms (the paths),
+  not in the degeneration of the fiber.
+  
+  Following the program of Dirac \cite{Dir30} and Souriau \cite{Sou70},
+  we regard the space of motions as the primary physical reality.
+  While Marsden and Weinstein \cite{MW74} provided a powerful tool for analyzing symmetries,
+  the process of reduction can obscure the global geometry of the system,
+  particularly in the presence of singularities \cite{SL91}.
+  As demonstrated by the author's work on the geometry of geodesics \cite{PIZ19,PIZ25b},
+  and in the spirit of the optical analogy in symplectic mechanics \cite{GS84},
+  the space of motions often possesses a unified structure
+  (such as the conformal co-symplectic structure)
+  that is fragmented by reduction.
+  Our diffeological construction preserves this unity,
+  ensuring that the quantum phase---the "extra floor" required by Groenewold and Van Hove---remains a universal constant of the theory,
+  rather than a variable dependent on the stratification.
+  
+  % ---------- The Source and the Screen ----------
+  
+  \subsection*{The Source and the Screen}
+  Standard geometric quantization views the construction of the Hilbert space as the creation of the quantum system.
+  We propose the opposite view.
+  The groupoid $\TT_\omega$ is not a step \emph{towards} the quantum system;
+  it \emph{is} the Quantum System in its objective state,
+  independent of observation.
+  
+  In this framework,
+  the process of polarization
+  ---~selecting a subspace of multiplicative functions~---
+  is analogous to placing a \emph{screen} or a \emph{measuring device} in front of a light source,%
+  \footnote{That defines a plorization by Lagrangian submanifolds: the subspaces of rays intercepting the screen at the same point.}.
+  The groupoid acts as the \emph{Quantum Source},
+  containing the totality of phase information and interference potential.
+  The Hilbert space is merely the \emph{image} captured on a specific screen (the polarization).
+  
+  The "quantum anomalies" (such as the inability to lift the full symmetry group to a single Hilbert space) are not defects of the source.
+  They are artifacts of the screen.
+  Just as a 2D screen cannot capture the full symmetry of a 3D object without distortion,
+  a specific polarization cannot support the full symmetry of the Quantum Source.
+  The groupoid $\TT_\omega$,
+  however,
+  supports the full symmetry group $\Diff(X, \omega)$ faithfully.
+  
+  This relationship is perfectly captured by the analogy of \emph{caustics} in geometric optics.
+  The Quantum System corresponds to the Lagrangian submanifold of light rays (which is smooth and anomaly-free),
+  while the Hilbert space corresponds to the screen.
+  Quantum anomalies,
+  such as the Maslov index or the metaplectic sign,
+  are not intrinsic properties of the system;
+  they are the \emph{caustics}---singularities of projection---that arise inevitably when forcing the fully covariant geometry onto a specific,
+  non-covariant observational framework.
+  
+  
+  % ---------- The Canonical Embedding vs. The Section Problem ----------
+  
+  \subsection*{The Canonical Embedding vs. The Section Problem}
+  A fundamental distinction arises regarding the relationship between the classical space and the prequantum structure.
+  In the standard approach using a principal $\U(1)$-bundle $Y \to X$,
+  the classical manifold $X$ cannot be naturally embedded into $Y$.
+  An embedding requires a global section,
+  which exists if and only if the bundle is trivial (i.e., the cohomology class of $\omega$ vanishes).
+  Thus,
+  for any non-trivial quantized system,
+  the classical space is geometrically estranged from the prequantum space.
+  
+  In contrast,
+  the prequantum groupoid $\TT_\omega$ always admits a canonical embedding of the classical space $X$,
+  realized by the unit map $x \mapsto \id_x$ (the class of constant paths).
+  This embedding is a diffeological induction regardless of the geometry of $X$ or the non-triviality of $\omega$.
+  The classical system is therefore not a projection of the quantum structure,
+  but a submanifold of it:
+  the subspace of motions with zero action.
+  This suggests that the prequantum groupoid is not an external structure added to the system,
+  but an intrinsic extension of the classical geometry that was always present in the space of paths.
+  
+  \subsection*{Symmetries as Natural Extensions}
+  This structural embedding of the classical space $X$ into the prequantum groupoid $\TT_\omega$ also clarifies the status of symmetries.
+  In the bundle framework,
+  lifting a symplectic diffeomorphism $\phi \in \Diff(X, \omega)$ to the prequantum bundle is a problem of existence and uniqueness,
+  often leading to central extensions of the symmetry group.
+  
+  In the groupoid framework,
+  the situation is radically different.
+  Since the groupoid is constructed functorially from the space of paths,
+  any diffeomorphism $\phi$ of $X$ induces a natural action on $\Paths(X)$ defined by $\gamma \mapsto \phi \circ \gamma$.
+  This action respects the prequantum equivalence relation.
+  Consequently,
+  the action of the symmetry group on the prequantum groupoid is not a lift that must be solved for;
+  it is the direct, natural extension of the action on the units (the classical space) to the morphisms (the paths).
+  The group $\Diff(X, \omega)$ acts faithfully and strictly on $\TT_\omega$,
+  confirming that the prequantum geometry is fully covariant.
+  
+  \textbf{Remark.}
+  This construction implies a profound rigidity result established in Part I:
+  the group of automorphisms of the prequantum structure $(\TT_\omega, \blambda)$ coincides exactly with the group of symplectic diffeomorphisms $\Diff(X, \omega)$.
+  Unlike the bundle framework,
+  where the group of automorphisms is a central extension (allowing for vertical gauge transformations) of the subgroup of Hamiltonian diffeomorphisms,
+  the groupoid structure leaves no extra degrees of freedom but absorbs all symmetries.
+  A "quantum symmetry" is simply a classical symmetry of the skeleton $X$,
+  extended naturally and uniquely to the surrounding "quantum fog" of morphisms.
+  
+  % ---------- The Primacy of the Quantum System ----------
+  
+  \subsection*{The Primacy of the Quantum System}
+  This perspective suggests a fundamental redefinition of the physical object.
+  Classically,
+  a system is defined by a symplectic manifold $(X, \omega)$,
+  to which a prequantum bundle is added as an auxiliary structure.
+  Our construction proposes that the true fundamental object is the \emph{Quantum System} $(\TT_\omega, \blambda)$ itself.
+  
+  This object is not a juxtaposition of a base and a fiber;
+  it is a single, coherent diffeological space derived intrinsically from the motions through its space of paths.
+  The classical \emph{Dynamical System} $(X, \omega)$ is merely the subspace of units (the skeleton),
+  while the quantum phase structure is the intrinsic geometry of the morphisms (the fog).
+  The rigidity of the path space structure ensures that the fog is inseparable from the skeleton.
+  Consequently,
+  any geometric structure imposed on $X$ (such as a polarization) is automatically propagated to the full quantum geometry.
+  
+  This view is supported by a foundational result in diffeology:
+  every connected symplectic manifold is a coadjoint orbit of the group of automorphisms of its prequantum structure \cite{DIZ22}.
+  In our context,
+  this implies that the skeleton $X$ is not merely a passive support;
+  it is realized as a coadjoint orbit of the group $\Aut(\TT_\omega, \blambda)$.
+  The classical space of motions is thus generated by the symmetries of the Quantum System,
+  reversing the traditional ontological order where the quantum is constructed from the classical.
+  
+  \begin{article}\artlabel[Mutual Relativity and the Groupoid]
+    The construction of the prequantum groupoid over the product space $X \times X$ reflects a principle of \emph{mutual relativity}.
+    In physics,
+    quantities like action or phase are not absolute attributes of a single state $x$,
+    but relational attributes connecting two states $x$ and $x'$.
+    
+    The traditional approach of constructing a prequantum bundle over $X$ amounts to arbitrarily fixing a reference state $x_0$ (the "vacuum" or origin) and measuring everything relative to it.
+    This choice breaks the natural covariance of the system.
+    As Souriau famously remarked,
+    "Groups are the theory of addition, cohomology is the theory of subtraction."
+    The appearance of cocycles (such as the symplectic cocycle in the moment map) is the mathematical price paid for "subtracting" the reference state to force a relative quantity into an absolute frame.
+    
+    The groupoid $\TT_\omega$ avoids this "subtraction" entirely.
+    It encodes the physics in the additive composition of morphisms,
+    preserving the full symmetry group $\Diff(X, \omega)$ without the need for central extensions or cohomological corrections.
+    It is the geometry of pure relation.
+  \end{article}
+  
+  % ---------- The Geometric Alternative to Path Integration ----------
+  
+  \subsection*{The Geometric Alternative to Path Integration}
+  The path-based nature of our construction suggests a deep connection to Feynman's path integral formulation,
+  but with a radical shift in perspective.
+  In the Feynman approach,
+  one sums amplitudes over all paths,
+  relying on the principle that paths with action differences in $h\ZZ$ interfere constructively.
+  
+  In our diffeological framework,
+  we replace this analytic summation with a geometric quotient.
+  Feynman's method extracts the quantum signal by \emph{averaging over the noise} of infinite path fluctuations,
+  relying on constructive interference to cancel out the variations.
+  Our method adopts the inverse strategy:
+  we \emph{quotient out the noise}.
+  The projection $\class_\omega: \Paths(X) \to \TT_\omega$ acts as a geometric filter,
+  identifying all paths that carry the same phase information.
+  
+  The groupoid $\TT_\omega$ is thus the space of pure \emph{signals}.
+  This suggests a geometric factorization of the path integral (a "Feynman-Fubini" decomposition),
+  separating the universal geometric phase (captured by the finite-dimensional groupoid) from the dynamical amplitude (the measure on the infinite-dimensional fibers).
+  In this sense,
+  the prequantum groupoid constitutes the missing link that unifies the path-integral intuition of Feynman with the geometric rigor of Kostant, Souriau, and Kirillov.
+  
+  \textbf{Remark (The Primordial Quantum System).}
+  One could even argue that the true,
+  primordial quantum system is the pair $(\Paths(X), \Komega)$ itself.
+  In this view,
+  our prequantum groupoid $\TT_\omega$ is the \emph{effective} or \emph{geometric} quantum system: the structure that remains once the "noise" of indistinguishable paths has been quotiented out,
+  leaving only the pure "signal" of the quantum phase.
+  The historical term "prequantum" is thus attached not to the primordial source,
+  but to its first geometric crystallization.
+  
+  % ---------- Relation to Other Frameworks (Corrected) ----------
+  \subsection*{Relation to Other Frameworks}
+  The use of groupoids and path spaces in quantization has a rich history,
+  and it is useful to situate our construction within this landscape.
+  Weinstein and Karasev introduced symplectic groupoids to integrate Poisson manifolds \cite{Wei87, Kar87},
+  where prequantization typically involves constructing a bundle over the groupoid.
+  Brylinski and others explored the geometry of the loop space and the transgression of the 3-form to define prequantum structures in infinite dimensions \cite{Bry93}.
+  More recently,
+  the language of gerbes and stacks has been employed to address topological obstructions and non-integrality \cite{Mur96}.
+  
+  Our approach differs by remaining strictly within the framework of diffeology.
+  Instead of moving to higher categorical structures (stacks) or remaining in the unreduced space of loops,
+  we construct a prequantum object directly over the base space,
+  reducing the path space to the intrinsic degrees of freedom of the system.
+  Diffeology allows us to treat the resulting quotients (whether singular, irrational, or infinite-dimensional) as valid geometric spaces,
+  incorporating non-integral periods as intrinsic features of the geometry rather than obstructions requiring a change of category.
+  
+  % ---------- Quantization as Transmutation (New Conclusion) ----------
+  
+  \subsection*{Quantization as the Geometry of Transmutation}
+  Ultimately, this framework suggests that geometric quantization is not an arbitrary construction imposed upon a classical system,
+  but the revelation of its intrinsic relational geometry.
+  
+  The classical space of motions $X$ presents a static view of the universe,
+  where states are isolated points.
+  The prequantum groupoid $\TT_\omega$ reveals the dynamic reality:
+  it is the geometry of a system where motions are allowed to \emph{transmute} into one another.
+  The morphisms of the groupoid are the \emph{channels} of these transmutations,
+  operated through the "one-dimensional nerves" of the paths.
+  
+  In this view,
+  the quantum phase is not an external variable;
+  it is the measure of the symplectic area swept by these nerves during the transmutation.
+  The "Quantum System" is simply the Dynamical System fully realized,
+  including not just its states,
+  but the geometry of the transitions between them.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - Bibliography
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{thebibliography}{99}
+    
+    \bibitem[Bry93]{Bry93}
+    Jean-Luc Brylinski.
+    \newblock {\em Loop Spaces, Characteristic Classes and Geometric Quantization}.
+    \newblock Progress in Mathematics, Vol. 107. Birkhäuser Boston, 1993.
+    
+    \bibitem[Dir30]{Dir30}
+    P. A. M. Dirac.
+    \newblock {\em The Principles of Quantum Mechanics}.
+    \newblock Oxford University Press, Oxford, 1st edition, 1930.
+    \newblock (4th edition, 1958).
+    
+    \bibitem[DIZ22]{DIZ22}
+    Paul Donato and Patrick Iglesias-Zemmour.
+    \newblock Every symplectic manifold is a (linear) coadjoint orbit.
+    \newblock {\em Canadian Mathematical Bulletin}, 65(2):345--360, 2022.
+    \newblock doi:10.4153/S000843952100031X.
+    
+    \bibitem[GS84]{GS84}
+    Victor Guillemin and Shlomo Sternberg.
+    \newblock {\em Symplectic Techniques in Physics}.
+    \newblock Cambridge University Press, Cambridge, 1984.
+    
+    \bibitem[Kar87]{Kar87}
+    Mikhail V. Karasev.
+    \newblock Analogues of objects of the theory of Lie groups for nonlinear Poisson brackets.
+    \newblock {\em Math. USSR Izvestija}, 28:497--527, 1987.
+    
+    \bibitem[KM85]{KM85}
+    M. I. Kargapolov and Ju. I. Merzljakov,
+    \emph{Fundamentals of the theory of groups}, 3rd ed.,
+    Graduate Texts in Mathematics, vol. 62, Springer-Verlag, New York-Berlin, 1979. (Russian original: MIR, Moscow, 1985).
+    
+    \bibitem[Mur96]{Mur96}
+    Michael K. Murray.
+    \newblock Bundle gerbes.
+    \newblock {\em Journal of the London Mathematical Society}, 54(2):403--416, 1996.
+    
+    \bibitem[PIZ10]{PIZ10}
+    Patrick Iglesias-Zemmour,
+    \emph{The moment maps in diffeology},
+    Mem. Amer. Math. Soc. \textbf{204} (2010), no. 962, viii+101 pp.
+    
+    \bibitem[PIZ13]{PIZ13}
+    Patrick Iglesias-Zemmour.
+    {\em Diffeology}.
+    Mathematical Surveys and Monographs, 185, Am. Math. Soc., 2013.
+    
+    \bibitem[PIZ19]{PIZ19}
+    Patrick Iglesias-Zemmour,
+    \emph{Refraction and reflexion according to the principle of general covariance},
+    Journal of Geometry and Physics,
+    Volume 142,
+    2019,
+    Pages 1-8,
+    ISSN 0393-0440,
+    {\scriptsize\url{https://doi.org/10.1016/j.geomphys.2019.03.013}}.
+    
+    \bibitem[PIZ25]{PIZ25}
+    \bysame,
+    \emph{Lectures on Diffeology},
+    Beijing World Publishing Corp., Beijing, 2025. ISBN: 978-7-5232-1841-9.
+    
+    \bibitem[PIZ25a]{PIZ25a}
+    Patrick Iglesias-Zemmour.
+    \emph{Geometric Quantization by Paths, Part I: The Simply Connected Case},
+    (Preprint, 2025).
+    
+    \bibitem[PIZ25b]{PIZ25b}
+    Patrick Iglesias-Zemmour.
+    \emph{A Conformal Co-symplectic Structure on the Space of Pseudo-Riemannian Geodesics},
+    (Preprint, 2025).
+    {\scriptsize\url{https://math.huji.ac.il/~piz/documents/ACCSSOSOPRG.pdf}}.
+    
+    \bibitem[PIZ95]{PIZ95}
+    Patrick Iglesias.
+    {\em La trilogie du moment}.
+    Ann. Inst. Fourier, 45(3):825--857, 1995.
+    
+    \bibitem[MW74]{MW74}
+    Jerrold E. Marsden and Alan Weinstein,
+    \emph{Reduction of symplectic manifolds with symmetry},
+    Rep. Mathematical Phys. \textbf{5} (1974), no. 1, 121--130.
+    
+    \bibitem[SL91]{SL91}
+    Reyer Sjamaar and Eugene Lerman.
+    \newblock {\em Stratified symplectic spaces and reduction}.
+    \newblock Annals of Mathematics, 134(2):375--422, 1991.
+    
+    \bibitem[Sou70]{Sou70}
+    Jean-Marie Souriau.
+    {\em Structure des syst\`emes dynamiques}.
+    Dunod, Paris, 1970.
+    
+    \bibitem[Ste06]{Ste06}
+    Shlomo Sternberg.
+    \newblock {\em General Covariance and the Passive Equations of Physics}.
+    \newblock Albert Einstein Memorial Lectures. The Israel Academy of Sciences and Humanities, Jerusalem, 2006.
+    \newblock ISBN 965-208-173-6.
+    
+    \bibitem[Wei87]{Wei87}
+    Alan Weinstein.
+    \newblock Symplectic groupoids and Poisson manifolds.
+    \newblock {\em Bulletin of the American Mathematical Society}, 16:101--104, 1987.
+    
+  \end{thebibliography}
+  
+  
+
+  
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: - Note for future improvement
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

@@ -1,0 +1,3506 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%      Prequantum Groupoid in Diffeology
+%%
+%%      Patrick Iglesias-Zemmour   piz@math.huji.ac.il
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,reqno,letterpaper,twoside]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: - Macro file
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+% Pour figures et diagrammes
+% http://texdoc.net/texmf-dist/doc/latex/tikz-cd/tikz-cd-doc.pdf
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{
+arrow style=tikz,
+diagrams={>={Straight Barb[scale=0.8]}}
+}
+
+\tikzset{
+symbol/.style={
+draw=none,
+every to/.append style={
+edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+}
+}
+
+\usepackage{amssymb}
+\usepackage{amscd}
+
+\usepackage{url}
+
+\newtheoremstyle{article}%⟨name⟩
+{7pt}%  ⟨Space above⟩
+{7pt}%  ⟨Space below⟩
+{}%     ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩
+{.\ }%  ⟨Punctuation after theorem head⟩
+{0pt}%  ⟨Space after theorem head⟩
+{}%     ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{article}
+\newtheorem{article}{}
+%\newtheorem{theorem}{}
+
+\def\artlabel[#1]{\textbf{#1.}}
+
+\newcommand{\art}[1]{(\textsection~\ref{#1})}
+\newcommand{\xart}[2]{{\upshape{(art.~\ref{#1}, #2)}}}
+\newcommand{\exref}[1]{Exercise \ref{#1}, p.~\pageref{#1}}
+
+\newcommand{\See}[1]{(See \textsection~\ref{#1})}
+
+\def\qtext#1{\quad\text{#1}\quad}
+
+\newenvironment{definition}[1]%
+{\noindent\textbf{Definition#1.} \it}%
+{}
+
+\newenvironment{proposition}[1]%
+{\noindent\textbf{Proposition#1.} \it}%
+{}
+
+\newenvironment{corollary}[1]%
+{\noindent\textbf{Corollary#1.} \it}%
+{}
+
+\newenvironment{lemma}[1]%
+{\noindent\textbf{Lemma#1.} \it}%
+{}
+
+\newenvironment{theorem}[1]%
+{\noindent\textbf{Theorem#1.} \it}%
+{}
+
+\renewenvironment{proof}%
+{\noindent\textit{Proof.}}%
+{\nolinebreak\hfill $\square$}
+
+%\newcommand{\remend}{\nolinebreak\hfill $\blacktriangleright$}
+
+\newcommand{\FF}{\mathbf{F}}
+\newcommand{\GG}{\mathbf{G}}
+\newcommand{\KK}{\mathbf{K}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\TT}{\mathbf{T}}
+\newcommand{\ZZ}{\mathbf{Z}}
+
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cF}{{\mathcal F}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cH}{{\mathcal H}}
+\newcommand{\cI}{{\mathcal I}}
+\newcommand{\cJ}{{\mathcal J}}
+\newcommand{\cK}{{\mathcal K}}
+\newcommand{\cO}{{\mathcal O}}
+\newcommand{\cP}{{\mathcal P}}
+\newcommand{\cQ}{{\mathcal Q}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cT}{{\mathcal T}}
+\newcommand{\cU}{{\mathcal U}}
+\newcommand{\cY}{{\mathcal Y}}
+
+\newcommand{\fS}{{\frak S}}
+
+\def \A{\mathrm A}
+\def \B{\mathrm B}
+\def \C{\mathrm C}
+\def \D{\mathrm D}
+\def \E{\mathrm E}
+\def \F{\mathrm F}
+\def \G{\mathrm G}
+\def \H{\mathrm H}
+\def \I{\mathrm I}
+\def \J{\mathrm J}
+\def \K{\mathrm K}
+\def \L{\mathrm L}
+\def \M{\mathrm M}
+\def \N{\mathrm N}
+\def \O{\mathrm O}
+\def \P{\mathrm P}
+\def \Q{\mathrm Q}
+\def \R{\mathrm R}
+\def \S{\mathrm S}
+\def \T{\mathrm T}
+\def \U{\mathrm U}
+\def \V{\mathrm V}
+\def \W{\mathrm W}
+\def \X{\mathrm X}
+\def \Y{\mathrm Y}
+\def \Z{\mathrm Z}
+
+\newcommand{\blambda}{{\pmb{\lambda}}}
+\newcommand{\btau}{{\pmb{\tau}}}
+\newcommand{\bmx}{{\hat{x}}}
+\newcommand{\bpi}{{\pmb{\pi}}}
+
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Cinfty}{C^\infty}
+\DeclareMathOperator{\Cinftyloc}{\mathrm{C}^\infty_\loc}
+\DeclareMathOperator{\Clos}{Clos}
+\DeclareMathOperator{\Cone}{Cone}
+\DeclareMathOperator{\class}{class}
+\DeclareMathOperator{\clos}{clos}
+\DeclareMathOperator{\comp}{comp}
+\DeclareMathOperator{\Const}{Const}
+\DeclareMathOperator{\domain}{dom}
+\DeclareMathOperator{\der}{d}
+\DeclareMathOperator{\src}{src}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\Geod}{Geod}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\hor}{Hor}
+\newcommand{\HDR}{{\boldsymbol{\mathsf H}}}
+\DeclareMathOperator{\HorPaths}{HorPaths}
+\DeclareMathOperator{\Loops}{Loops}
+%\renewcommand{\mod}{\mathrm{mod\ }}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\Paths}{Paths}
+\DeclareMathOperator{\paths}{\mathrm{paths}}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\sq}{sq}
+\DeclareMathOperator{\Stab}{Stab} %%% MR: Changed from \Stab to \Stab for consistency with text usage. \St was also defined.
+\DeclareMathOperator{\Str}{Str}
+\DeclareMathOperator{\Torus}{\T}
+\DeclareMathOperator{\trg}{trg}
+\DeclareMathOperator{\val}{val}
+\DeclareMathOperator{\Val}{val}
+\DeclareMathOperator{\vol}{vol}
+%\DeclareMathOperator{\St}{St} %%% MR: This was also defined, using \Stab consistently.
+
+\DeclareMathOperator{\ZDR}{{\boldsymbol{\mathsf{Z}}}_{\mathrm{dR}}}
+\DeclareMathOperator{\CHO}{\boldsymbol{\mathsf{K}}}
+\DeclareMathOperator{\Ktilde}{\tilde{\CHO}}
+
+
+\DeclareMathOperator{\Kalpha}{\CHO\alpha}
+\DeclareMathOperator{\Komega}{\CHO\!\omega}
+
+\DeclareMathOperator{\eF}{\mathsf{F}}
+\DeclareMathOperator{\eL}{\mathsf{L}}
+\DeclareMathOperator{\eR}{\mathsf{R}}
+
+\newcommand{\0}{\hat{0}}
+\newcommand{\1}{\hat{1}}
+\def\ends{\operatorname{ends}}
+
+\newcommand{\openinterval}[1]{\left] #1 \right[}
+\newcommand{\closedinterval}[1]{\left[ #1 \right]}
+\newcommand{\leftclosedinterval}[1]{\left[ #1 \right[}
+\newcommand{\rightclosedinterval}[1]{\left] #1 \right]}
+
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\ds}{d\!s}
+\newcommand{\dt}{d\!t}
+\newcommand{\id}{\mathbf 1}
+\newcommand{\loc}{\mathrm{loc}}
+
+\newcommand{\norm}[1]{\Vert{#1}\Vert}
+\newcommand{\OT}{\mathrm{OT}}
+\newcommand{\orbit}{{\mathrm{orbit}}}
+
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\Sq}{\mathrm{Sq}}
+\newcommand{\simh}{\sim_{\text{ht}}}
+\newcommand{\sing}{\mathrm{sing}}
+\newcommand{\vect}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\newcommand{\scal}[2]{\langle #1,#2\rangle}
+\newcommand{\widetext}[1]{\ \text{ #1 } \ }
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} %%% MR: utf8x is generally not recommended over utf8. Changed to utf8. If utf8x is specifically needed, can revert.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%<<< Begin - Utopia style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{microtype}
+\usepackage[cal=scr,frenchmath,uppercase = upright, greekfamily = didot, greeklowercase = upright, utopia]{mathdesign}
+
+\linespread{1.1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%>>> End - Garamond style or Charter style ?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \H{\mathrm H} %%% MR: These were redefined after the mathdesign package. Usually, such redefinitions are for specific reasons. Kept them.
+\def \L{\mathrm L}
+\def \O{\mathrm O}
+
+\def \epsilon{\varepsilon}
+
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%>>> Sectionning
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand \thesection{\Roman{section}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Begin Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Draft Watermark
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  {
+  \tikz[overlay,remember picture]{\node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \pdfcreationdate}}}
+  }
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - Title & Data
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \title[Geometric Quantization by Paths]{Geometric Quantization by Paths \\ {\scriptsize Part I: The Simply Connected Case}}
+  
+  \author{Patrick Iglesias-Zemmour}
+  
+  \address{Einstein Institute of Mathematics,
+  The Hebrew University of Jerusalem,
+  Campus Givat Ram,
+  9190401 Israel.}
+  \email{piz@math.huji.ac.il}
+  \urladdr{http://math.huji.ac.il/~piz}
+  
+  \date{\today}
+  
+  \thanks{Thanks to the Hebrew University of Jerusalem, Israel, for its continuous academic support.
+  I am also grateful for the stimulating discussions and assistance provided by the AI assistant Gemini (Google).}
+  
+  \subjclass[2020]{Primary 53D50, 58A05; Secondary 22A22, 55R65, 58A10}
+  \keywords{Diffeology, Geometric Quantization, Prequantum Groupoid, Closed 2-forms, Parasymplectic Spaces, Paths, Loops, Singular Spaces}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - sect: Abstract
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    For any connected and simply connected parasymplectic space $(\X,\omega)$ with group of periods $\P_\omega \subsetneq \RR$,
+    we construct a prequantum groupoid $\TT_\omega$ as a diffeological quotient of the space of paths in $\X$.
+    This object,
+    built from the geometry of the classical system,
+    serves as a unified structure for prequantization.
+    The groupoid $\TT_\omega$ has $\X$ as its objects,
+    and its space of morphisms $\cY$ carries a canonical left-right invariant $1$-form $\blambda$ whose curvature encodes $\omega$.
+    A key property is that the isotropy group at any point $x$,
+    naturally arising as a quotient of the space of loops,
+    is isomorphic to the torus of periods $\T_\omega = \RR/\P_\omega$.
+    Furthermore, the entire symmetry group $\Diff(\X, \omega)$ acts as faithful automorphisms of $(\TT_\omega, \blambda)$ without central extensions at this level.
+    Built within the framework of diffeology,
+    this construction generalizes classical prequantization by applying to broad classes of spaces,
+    including those with singularities or infinite-dimensional aspects,
+    and by accommodating generalized (e.g., irrational) tori of periods.
+    This paper focuses on the simply connected case;
+    the construction will be extended to general diffeological spaces in a subsequent publication.
+  \end{abstract}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - sect: Make Title
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - sect: Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{\textsc{\textbf{Introduction}}}
+  
+  Geometric quantization provides a powerful framework for quantizing classical mechanical systems described by symplectic manifolds.
+  A fundamental step,
+  known as prequantization,
+  involves constructing a principal $\U(1)$-bundle over the classical space of motions%
+  \footnote{Following Souriau \cite{Sou70}, we use the term 'space of motions' for the base space
+  describing the space of solutions of the classical dynamical system.}
+  $\X$ equipped with a connection whose curvature is the symplectic form $\omega$.
+  This is classically possible if and only if the de Rham class $[\omega]$ satisfies an integrality condition.
+  
+  However,
+  applying geometric quantization to more general spaces,
+  particularly those arising from symplectic reduction which often possess singularities or are infinite-dimensional (such as loop spaces),
+  presents significant challenges.
+  Traditional bundle theory and differential geometry tools are heavily reliant on local Euclidean structure,
+  which is absent in these generalized settings.
+  
+  This paper presents a novel approach to prequantization by working within the framework of \textbf{diffeology},
+  a robust mathematical theory that provides tools for differential geometry on arbitrary sets,
+  including spaces with singularities and infinite-dimensional spaces,
+  without requiring local Euclidean charts.
+  
+  Our core contribution is the construction of a \textbf{prequantum groupoid} $\TT_\omega$ directly from the geometry of the classical system $(\X, \omega)$.
+  Unlike traditional approaches that build structures over the base space $\X$ (like principal bundles),
+  our method is fundamentally \textbf{path-based}.
+  For any connected and simply connected diffeological space $\X$ equipped with a closed $2$-form $\omega$ having discrete periods,%
+  \footnote{In diffeology,
+  any strict subgroup $\P_\omega \subsetneq \RR$ is a discrete diffeological space.
+  This condition $\P_\omega \neq \RR$ is necessary and sufficient for our construction and generalizes the classical integrality condition for manifolds.}
+  we define $\TT_\omega$ as a diffeological quotient of the space of paths in $\X$.
+  
+  This construction,
+  rooted in the space of paths,
+  inherently connects to Feynman's perspective on quantization,
+  where paths are central.
+  
+  The prequantum groupoid $\TT_\omega$ serves as a \textbf{single, unified structure} for prequantization,
+  replacing the classical principal bundle picture.
+  It has $\X$ as its space of objects,
+  and its space of morphisms $\cY$ carries a canonical left-right invariant $1$-form $\blambda$,
+  the "prequantum potential,"
+  whose curvature encodes $\omega$.
+  
+  Crucially,
+  this path-based construction offers two key conceptual shifts and advantages:
+  
+  \begin{itemize}
+    \item[$\ast$] The quantum phase information,
+    classically represented by the $\U(1)$ fiber,
+    is not introduced externally but emerges naturally as the \textbf{isotropy group} at any point $x \in \X$.
+    This isotropy group,
+    arising as a quotient of the space of loops based at $x$, is isomorphic to the \textbf{torus of periods} $\T_\omega = \RR/\P_\omega$.
+    This reveals the quantum phase as an intrinsic property tied to the path geometry and the periods of $\omega$.
+    \item[$\ast$] The entire symmetry group of the classical system,
+    $\Diff(\X, \omega)$ (the group of $\omega$-preserving diffeomorphisms),
+    acts as \textbf{faithful automorphisms} of the \emph{entire prequantum groupoid} $(\TT_\omega, \blambda)$,
+    without involving central extensions at this level.
+    This provides a new perspective on the classical emergence of central extensions in geometric quantization,
+    suggesting that they arise when descending from this fundamental groupoid structure to structures (like bundles or section spaces) defined over the base space $\X$.
+  \end{itemize}
+  
+  By constructing the prequantum groupoid within the framework of diffeology,
+  this approach generalizes classical prequantization to broad classes of spaces previously inaccessible to rigorous geometric methods,
+  including those with singularities or infinite-dimensional aspects,
+  and accommodates generalized (e.g., irrational) tori of periods.
+  This also naturally recovers the classical prequantization scenario for manifolds where the period group $\P_\omega$ is of the form $h\ZZ$ for Planck's constant $h$,
+  which is the standard integrality condition.
+  
+  This paper focuses on the connected and simply connected case,
+  which allows for a clear development of the core construction and its fundamental properties.
+  The construction will be extended to general diffeological spaces in a subsequent publication (Part II).
+  
+  The paper is structured as follows:
+  Section \ref{sec:Preliminaries} reviews necessary concepts from diffeology.
+  Section \ref{sec:Main Theorem: The Prequantum Groupoid} states the main theorem,
+  presenting the construction of the prequantum groupoid $\TT_\omega$ and the prequantum $1$-form $\blambda$.
+  Section \ref{sec:Proof of the Main Theorem} provides the detailed proof.
+  Section \ref{sec:Symmetries of the Prequantum Structure} discusses the symmetries of the prequantum structure.
+  Finally,
+  Section \ref{sec:Remarks and Applications} offers remarks and applications,
+  including interpretation,
+  concrete examples (such as the exact case, the sphere, symplectic reduction, and loop spaces),
+  and outlines directions for future research,
+  particularly the connection to Feynman integrals and the generalization to non-simply connected spaces.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% -
+%% MARK: - sect: Preliminaries
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\textsc{\textbf{Preliminaries}}}
+\label{sec:Preliminaries}
+
+In this paper, we work within the framework of diffeological spaces,
+which provides a flexible setting for spaces potentially more general than smooth manifolds,
+finite or infinite dimensional,
+such as function spaces,
+quotient spaces,
+subspaces,
+spaces with singularities%
+\footnote{The study of singular spaces by diffeology methods began with the article on the irrational torus $\T_\alpha$,
+defined as the quotient of the $2$-torus by an irrational flow of slope $\alpha \in \RR - \QQ$ \cite{DI83}.}
+etc.
+
+We assume that the reader is familiar with the basics of diffeology:
+parametrizations,
+plots,
+diffeological spaces,
+smooth maps,
+inductions,
+subductions,
+diffeomorphisms,
+differential forms,
+etc.
+A comprehensive reference for diffeology is the book \cite{PIZ13},
+or more precisely,
+the revised reprint recently published by the Beijing WPC \cite{PIZ22},
+where misprints and some minor errors,
+as well as formatting flaws of the original version,
+have been corrected.
+
+We will briefly recall some of the definitions that are not part of the basic framework and will be used in the following.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Paths and Stationary Paths
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[Paths and Stationary Paths]
+  \label{art: Paths and Stationary Paths}
+  
+  Let $\X$ be a diffeological space,
+  we denote by
+  $$
+    \Paths(\X) = \Cinfty(\RR,\X)
+    $$
+  the space of smooth paths in $\X$,
+  equipped with the functionnal diffeology.
+  For all $t \in \RR$,
+  we define $\hat t$ by:
+  $$
+    \hat t \in \Cinfty(\Paths(\X), \X),
+    \
+    \hat t(\gamma) = \gamma(t).
+    $$
+  We denote by $\0$ and $\1$ the source and target maps.
+  We denote by $\ends$ the \emph{ends} map $\0 \times \1$ from $\Paths(\X)$ to $\X \times \X$:
+  $$
+    \ends  \in \Cinfty(\Paths(\X), \X \times \X),
+    \
+    \ends : \gamma \mapsto (\gamma(0),\gamma(1)).
+    $$
+  We denote by $\Paths(\X,x,\ast)$, $\Paths(\X,\ast,x)$ and $\Paths(\X,x,x')$ the subspaces
+  \begin{align*}
+    \Paths(\X,x,\ast) &= \{ \gamma \in \Paths(\X) \mid \0(\gamma) = x \},\\
+    \Paths(\X,\ast,x) &= \{ \gamma \in \Paths(\X) \mid \1(\gamma) = x \},\\
+    \Paths(\X,x,x') &= \{ \gamma \in \Paths(\X) \mid \ends(\gamma) = (x,x'). \}
+  \end{align*}
+  We denote by $\Loops(\X)$ the space of free loops of $\X$,
+  $$
+    \Loops(\X) = \{ \ell \in \Paths(\X) \mid \1(\ell)=\0(\ell) \},
+    $$
+  and we denote by $\Loops(\X,x)$ the set of Loops based at $x$,
+  $$
+    \Loops(\X,x) = \Paths(\X,x,x) = \{ \ell \in \Loops(\X) \mid \0(\ell) = x \}.
+    $$
+  We denote by $\comp$ the projection
+  $$
+    \comp: \Loops(\X) \to \pi_0(\Loops(\X)),
+    $$
+  and also the projection from
+  $$
+    \comp \restriction \Loops(\X,x) : \Loops(\X,x) \to \pi_0(\Loops(\X,x)) =  \pi_1(\X,x).
+    $$
+  
+  %%###########
+  \begin{figure}[tb]\renewcommand{\thefigure}{$1$}
+    \centerline{\includegraphics[width=.25\textwidth]{Figures/fig-smashing-function}}
+    \vspace{-.5ex}
+    \caption{The smashing function $\lambda$.}
+    \label{fig-smashing-function}
+  \end{figure}
+  %%###########
+  
+  Many constructions in homotopy involve concatenating paths,
+  for $\gamma$ and $\gamma'$ when $\1(\gamma) = \0(\gamma')$,
+  but the concatenation $\gamma \vee \gamma'$ is not necessarily smooth.
+  $$
+    \gamma \vee \gamma': t \mapsto
+    \begin{cases}
+    \gamma(2t) \widetext{if} t \leq 1/2, \\
+    \gamma'(2t-1) \widetext{if} t \geq 1/2,
+    \end{cases}
+    $$
+  This is why we consider the concatenation on the subspace of \emph{stationary paths} \cite[\textsection 5.4]{PIZ13}.
+  A path $\gamma \in \Paths(\X)$ is (strongly) stationary if there an $\epsilon > 0$ such that:
+  $$
+    \gamma \restriction \left]-\infty, +\epsilon\right[ = \gamma(0)
+    \widetext{and}
+    \gamma \restriction \left]1 -\epsilon, + \infty \right[ = \gamma(1).
+    $$
+  Every path is fixed-ends homotopic to a stationary path by composing with the smashing function $\lambda$,
+  $\gamma \mapsto \gamma^* = \gamma \circ \lambda$,
+  see Figure \ref{fig-smashing-function}.
+  This is sufficient to ensure that many operations in diffeology involving the concatenation of paths,
+  and depending only on their homotopy class,
+  are justified.
+  
+  \textbf{Convention.}~To avoid unnecessary complications in the following,
+  we shall consider only stationary paths without explicitly mentioning them.
+  We will not change the notations so as not to make the text more cumbersome.
+  That is,
+  $\Paths(\X)$ will denote the set of stationary paths,
+  $\Loops(\X)$ the space of stationary loops etc.
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Differential Forms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[Differential Forms]
+  \label{art: Differential Forms}
+  
+  A differential $k$-form $\epsilon$ on a diffeological space $\X$,
+  with $k \geq 0$,
+  is a map $\epsilon$ that associates to each $n$-plot $\P : \U \to \X$ a smooth $k$-form $\epsilon(\P) \in \Cinfty(\U, \Lambda^k(\RR^n))$,
+  on $\U = \domain(\P)$,
+  where $\Lambda^k(\RR^n)$ is the vector space of k-linear forms on $\RR^n$,
+  such that the following chain-rule is satisfied:
+  $$
+    \epsilon (\P \circ \F) = \F^*\big(\epsilon(\P)\big),
+    $$
+  for any $\F \in \Cinfty(\V,\U)$,
+  where $\V$ is any Cartesian domain.%
+  \footnote{~A Cartesian domain is any open subset of some Cartesian space $\RR^m$,
+  for some $m$.}
+  The space of differential $k$-forms on $\X$ is denoted by $\Omega^k(\X)$.
+  The space $\Omega^0(\X)$ coincides with $\Cinfty(\X,\RR)$.
+  Then,
+  the exterior derivative is a linear operator defined by:
+  $$
+    \der : \Omega^k(\X) \to \Omega^{k+1}(\X),
+    \widetext{with}
+    [\der\epsilon](\P) = \der[\epsilon(\P)].
+    $$
+  The exterior derivative satisfies $\der \circ \der = 0$ and leads to the De Rham complex of closed and exact differential forms.
+  The de Rham $k$-cohomology group is denoted by $\HDR^k_{\mathrm{dR}}(\X)$.
+  
+  \smallskip
+  \textbf{Note on Terminology.} In this paper,
+  a \emph{parasymplectic form} on a diffeological space $\X$ is defined as a closed $2$-form,
+  $\omega \in \Omega^2(\X)$ and $d\omega = 0$.
+  The pair $(\X,\omega)$ is called a \emph{parasymplectic space}.
+  No condition of non-degeneracy is assumed.
+\end{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: The Chain-Homotopy Operator
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[The Chain-Homotopy Operator]
+  \label{art: The Chain-Homotopy Operator}
+  
+  Let $\X$ be a diffeological space and $\Paths(\X)$ be equipped with the functional diffeology.
+  Since $\X$ and $\Paths(\X)$ are diffeological space,
+  they have their own de Rham complex of differential forms denoted by $\Omega^k(\X)$ or $\Omega^k(\Paths(\X))$,
+  for the differential $k$-forms \cite[\textsection 6.28]{PIZ13}.
+  There exists a smooth linear operator,
+  called the \emph{chain-homotopy operator},
+  defined in \cite[\textsection 6.83]{PIZ13}:
+  $$
+    \CHO : \Omega^k(\X) \to \Omega^{k-1}(\Paths(\X)),
+    $$
+  satisfying the identity
+  $$
+    \CHO \circ \der + \der \circ \CHO = \1^* - \0^*.
+    $$
+  For $\alpha$ a $k$-form,
+  it is explicitly given by this expression:
+  $$
+    (\Kalpha)(\P)_r(v_2) \cdots (v_{k}) = \int_0^1 \alpha \left( \vect{t \\ r} \mapsto \P(r)(t) \right)_{t \choose r} \vect{1 \\ 0} \vect{0 \\ v_2} \cdots \vect{0 \\ v_{k}} \dt,
+    $$
+  where $\P$ is a plot in $\Paths(\X)$,
+  $r \in \dom(\P)$ and $v_2 \cdots v_k$ are $(k-1)$ vectors at the point $r$.
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Groupoids
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[Groupoids]
+  \label{art: Groupoids}
+  
+  A diffeological groupoid $\GG$ is defined by its space of objects $\Obj(\GG)$,
+  which is a diffeological space,
+  and a space of morphisms,
+  or arrows,
+  $\Mor(\GG)$,
+  which is also a diffeological space,
+  such that:    %
+  \begin{enumerate}
+    \item The source and target maps $\src,\trg : \Mor(\GG) \to \Obj(\GG)$ are smooth.
+    \item The composition $(g,g') \mapsto g \cdot g'$,
+    defined on the subset $\{(g,g') \in \Mor(\GG)^2  \mid \trg(g) = \src(g') \}$ of composable pairs,
+    is smooth,
+    where this subset is equipped with the subset diffeology of the product diffeology.
+    \item The injection $x \mapsto \id_x$ from $\Obj(\GG)$ to $\Mor(\GG)$,
+    that associates to each object $x \in \Obj(\GG)$ the identity $\id_x \in \Mor_\GG(x,x)$,
+    is an induction.
+  \end{enumerate}
+  %
+  The latter condition ensures that the identity of $\GG$ identifies diffeologically with the objects of $\GG$.
+  An important definition follows.
+  Let $\ends(g) = (\src(g),\trg(g))$ denote the source/target map:
+  
+  \begin{definition}{~(Groupoid Automorphism)}
+    A \emph{groupoid automorphism} $\Phi$ of $\GG$,
+    in diffeology,
+    is a groupoid morphism from $\GG$ to itself that is also a diffeomorphism on both the object and morphism spaces,
+    generally denoted by $(\Phi_{\Mor},\Phi_{\Obj})$,
+    but most often in this paper as a pair $(\Phi,\phi)$.
+    then:
+    %
+    \begin{itemize}
+      \item[$\ast$] $\Phi \in \Diff(\Mor(\GG))$, $\phi \in \Diff(\Obj(\GG))$.
+      \item[$\ast$] $\ends \circ \Phi = (\phi \times \phi) \circ \ends$,
+      with $(\phi \times \phi)(x,x') = (\phi(x),\phi(x'))$.
+      \item[$\ast$] $\Phi(g \cdot g') = \Phi(g) \cdot \Phi(g')$.
+    \end{itemize}
+    %
+    The group of automorphisms of $\GG$ is denoted by $\Aut(\GG)$.
+  \end{definition}
+  
+  The following definition \cite[\textsection 8.4]{PIZ13} is used to define the fiber bundles in diffeology.
+  
+  \begin{definition}{~(Fibrating Groupoid)}
+    A diffeological groupoid $\GG$ is \emph{fibrating} if the source/target map,
+    $\ends: \Mor(\GG) \to \Obj(\GG) \times \Obj(\GG)$,
+    is a subduction.
+  \end{definition}
+  
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Fiber Bundles and Principal fiber bundles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[Fiber Bundles and Principal fiber bundles]
+  \label{art: Fiber Bundles and Principal fiber bundles}
+  
+  Let $\pi : \Y \to \X$ be a map between two diffeological spaces.
+  We build the characteristic groupoid $\pmb{\pi}$,
+  with objects $\X$ and morphisms
+  $$
+    \Mor(\pmb{\pi}) = \{ \phi \in \Diff(\Y_x,\Y_{x'}) \mid (x,x') \in \X \times \X \},
+    $$
+  with $\Y_x = \pi^{-1}(x)$ equipped with the subset diffeology.
+  This groupoid is equipped with a functional diffeology described in \cite{PIZ85},
+  and included in \cite[\textsection 8.8]{PIZ13}.
+  
+  \begin{definition}{~(Fiber Bundle)}
+    The projection $\pi$ is a diffeological fibration if the characteristic groupoid $\pmb{\pi}$ is fibrating,
+    that is,
+    if the ends-map $\phi \mapsto (x,x')$ is a subduction.
+  \end{definition}
+  
+  Principal fiber bundles are an important class of diffeological fiber bundles,
+  because every fiber bundle in diffeology is associated with a principal bundle \cite[\textsection 8.16]{PIZ13}.
+  We have the following theorem-definition \cite[\textsection 8.11]{PIZ13}:
+  
+  \begin{definition}{~(Principal Fiber Bundle)}
+    Let $\G$ be a diffeological group acting smoothly on a diffeological space $\Y$.%
+    \footnote{Meaning the action map $\rho$ is smooth.}
+    Let $\rho$ be the graph of the action:
+    $$
+      \rho : \Y \times \G \to \Y \times \Y
+      \widetext{defined by}
+      \rho : (y,g) \mapsto (y, g(y)).
+      $$
+    If $\rho$ is an induction then the projection $\pi : \Y \to \X = \Y/\G$ is a fiber bundle with fiber $\G$,
+    we call it a \emph{principal fiber bundle} or a \emph{principal fibration}.
+  \end{definition}
+  
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: 1-Dimensional Tori and Subgroups
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[One-Dimensional Tori and Subgroups]
+  \label{art: 1-Dimensional Tori and Subgroups}
+  
+  We call $1$-dimensional torus any quotient $\T = \RR/\Gamma$,
+  where $\Gamma \subsetneq \RR$ is any strict subgroup of $\RR$.
+  Then,
+  
+  \begin{proposition}{}
+    Let $\H \subset \T$ be a subgroup,
+    then,
+    either $\H = \T$ or $\H$ is discrete.
+  \end{proposition}
+  
+\end{article}
+
+\begin{proof}
+  Let $\pi : \RR \to \T$ be the projection.
+  Since $\pi$ is a homomorphism,
+  the pre-image $\pi^{-1}(\H) \subset \RR$ is a subgroup containing $\Gamma$.
+  If $\pi^{-1}(\H)$ contains an interval,
+  then it coincides with $\RR$ and $\H =\T$;
+  this is a classic theorem.
+  Otherwise,
+  $\pi^{-1}(\H)$ is a strict subgroup of $\RR$,
+  and according to \cite[Ex. 124]{PIZ13},
+  it is discrete as a diffeological subgroup of $\RR$.
+  That means that its plots are locally constant.
+  Now,
+  let $\P : \U \to \H$ be a plot.
+  As a plot in $\T$,
+  it locally has a smooth lifting in $\RR$ everywhere;
+  let us say $\Q : \Y \to \RR$ such that $\pi \circ \Q = \P \restriction {\V}$.
+  Thus,
+  $\Q$ takes its values in $\pi^{-1}(\H)$ which is discrete,
+  then $\Q$ is locally constant,
+  and so is $\P$.
+  Therefore,
+  $\H$ is discrete.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Connections
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[Connections $\pmb{1}$-form on Torus Principal Bundles]
+  \label{art: Connections}
+  
+  Let us consider a $\T$-principal bundle $\pi : \Y \to \X$,
+  where $\T = \RR/\Gamma$ is a diffeological torus.
+  For all $y \in \Y$ and $\tau \in \T$,
+  let $\hat y : \T \to \Y$ be the orbit map $\hat y(\tau) = \tau(y)$.
+  
+  \begin{definition}{~(Connection $\pmb{1}$-Form)}
+    A \emph{connection form} on a $\T$-principal bundle $\pi : \Y \to \X$ is any differential $1$-form $\lambda \in \Omega^1(\Y)$,
+    such that:
+    \begin{enumerate}
+      \item The form $\lambda$ is \emph{invariant}:
+      for all $\tau \in \T$,
+      $\tau_\Y^*(\lambda) = \lambda$.
+      \item The form $\lambda$ is {\em calibrated}:
+      for all $y \in \Y$, $\hat y^*(\lambda) = \theta$.
+    \end{enumerate}
+  \end{definition}
+  
+  For details on general connections in diffeology see \cite[\textsection 8.32]{PIZ13},
+  and specifically on $\T$-principal bundles see \cite[\textsection 8.37]{PIZ13}.
+  
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% -
+%% MARK: - sect: Main Theorem
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{\textsc{\textbf{Main Theorem: The Prequantum Groupoid}}}
+\label{sec:Main Theorem: The Prequantum Groupoid}
+
+In this section,
+we present the construction of the prequantum groupoid associated with a closed $2$-form on a simply connected diffeological space,
+as a pure diffeological quotient of the space of paths,
+without introducing external constructs.
+The assumption of simple connectedness simplifies key aspects,
+related to the triviality of fundamental groups,
+allowing for a focused development of the core groupoid structure and setting the stage for future generalization.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: prequantum Groupoid
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[The Prequantum Groupoid]
+  \label{art: The Prequantum Groupoid}
+  
+  Let $\X$ be a connected and simply connected diffeological space, and let $\omega$ be a closed $2$-form on $\X$:
+  $$
+    \omega \in \Omega^2(\X)
+    \widetext{and}
+    \der\omega = 0.
+    $$
+  For the remainder of this section,
+  we assume $\omega \neq 0$.%
+  \footnote{The case $\omega=0$ is a degenerate situation resulting in the trivial pair groupoid $\TT_0 = \X \times \X$ with the zero prequantum form $\blambda = 0$,
+  a case not relevant for the purpose of non-trivial prequantization.}
+  
+  We use the chain-homotopy operator
+  (see Article \ref{art: The Chain-Homotopy Operator}),
+  $\CHO: \Omega^k(\X) \to \Omega^{k-1}(\Paths(\X))$,
+  and consider $\Komega \in \Omega^1(\Paths(\X))$.
+  
+  Since $\der\omega = 0$ and $\1 \restriction \Loops(\X) = \0 \restriction \Loops(\X)$,
+  the restriction of $\Komega$ on $\Loops(\X)$ is closed,
+  $$
+    \der [\Komega \restriction \Loops(\X)] = 0.
+    $$
+  Thus,
+  
+  \begin{definition}{~(Group of Periods)}~For $\omega$ a closed $2$-form on a simply connected space $\X$,
+    we define its \emph{group of periods} $\P_\omega$ as the group of periods of the closed $1$-form $\Komega \restriction \Loops(\X)$.%
+    \footnote{For a closed $2$-form on a general diffeological space,
+    the group of periods will be the group generated by the periods of all the restrictions of $\Komega$ on the connected components of $\Loops(\X)$.}
+    That is,
+    it is the subgroup of $(\RR,+)$,
+    $$
+      \P_\omega = \left\{ \int_\sigma \Komega \mid \sigma \in \Loops(\Loops(\X)) \right\},
+      $$
+  \end{definition}
+  
+  Next,
+  we consider the quotient group
+  $$
+    \T_\omega = \RR/\P_\omega
+    \widetext{and let} \pi_\omega : \RR \to \T_\omega.
+    $$
+  Following the definition of Article \ref{art: 1-Dimensional Tori and Subgroups},
+  $\T_\omega$ is a $1$-dimensional diffeological group if $\P_\omega \neq \RR$.
+  It can be $\RR$ if $\P_\omega = \{0\}$,
+  or a circle $\S^1 \simeq \RR/a\ZZ$ of perimeter $a$,
+  if $\P_\omega$ has only one generator $a \in \RR$,
+  or an irrational torus otherwise.
+  The fact that the quotient $\T_\omega$ is a $1$-dimensional diffeological group is a property of the parasymplectic form $\omega$,
+  or the space itself.
+  This is why we introduce this definition:
+  
+  \begin{definition}{~(Torus of Periods)}~We shall say that the parasymplectic form $\omega$ is \emph{discrete} if its group of periods $\P_\omega$ is a discrete subgroup of $\RR$,
+    or,
+    which is equivalent,
+    if $\P_\omega \neq \RR$.
+    In this case the quotient $\T_\omega$ is a $1$-dimensional diffeological torus,
+    we call it the \emph{torus of periods}.
+  \end{definition}
+  
+  We call it the torus of periods even if it is equal to $\RR$ (a circle of inifinite perimeter).
+  We say also that $\omega$ is \emph{integral} when $\P_\omega = a\ZZ$,
+  for some number $a$,
+  then $\T_\omega \simeq \S^1$.
+  In geometric quantization,
+  Souriau defined a quantizable symplectic manifold $(\M,\omega)$ specifically when $\P_\omega = h \ZZ$,
+  where $h$ is Planck's constant \cite{Sou70}.
+  
+  The construction of the \emph{prequantum groupoid} that follows applies only for discrete parasymplectic forms $\omega$.
+  
+  \textbf{Remark.} Notice that this requirement for $\omega$ to be discrete ($\P_\omega \neq \RR$) is the necessary and sufficient condition for the existence of the prequantum groupoid $\TT_\omega$ as constructed here.
+  This condition holds regardless of whether $\X$ is finite or infinite dimensional,
+  or has singularities.
+  It generalizes the classical integrality condition ($\P_\omega = a\ZZ$) typically required for the existence of a principal $\U(1)$-bundle over a manifold.
+  For second-countable Hausdorff manifolds,
+  the period group $\P_\omega$ is always a discrete subgroup of $\RR$ in the diffeological sense,
+  meaning the diffeological discreteness condition $\P_\omega \neq \RR$ is always fulfilled for such spaces.
+  
+  Assume,
+  then,
+  that $\omega$ is discrete and $\X$ is simply connected.
+  
+  The following relation defined on $\Paths(\X)$ is the key to the construction of the prequantum bundle.
+  Let $\gamma$ and $\gamma'$ be two paths in $\X$,
+  we say that
+  $$
+    \gamma \sim_\omega \gamma' \widetext{iff}
+    \left\{
+    \begin{array}{l}
+    \ends(\gamma) = \ends(\gamma') =(x,x'), \\[1em]
+    \exists \, [s \mapsto \gamma_s] \in \Paths(\X,x,x') : \gamma_0 = \gamma, \gamma_1 = \gamma', \\[.5ex]
+    \displaystyle{\int_{[s \mapsto \gamma_s]}\Komega = \int_0^1 \Komega(s \mapsto \gamma_s)_s(1)\, \ds \in \P_\omega}.
+    \end{array}
+    \right.
+    $$
+  We have,
+  then:
+  
+  \begin{proposition}{~1}
+    The relation $\sim_\omega$ is an equivalence relation on $\Paths(\X)$.
+  \end{proposition}
+  
+  We denote the quotient space by
+  $$
+    \cY = \Paths(\X) /\!\sim_\omega,
+    \widetext{and}
+    \class_\omega: \Paths(\X) \to \cY.
+    $$
+  The map $\ends: \Paths(\X) \to \X \times \X$ factors through $\cY$,
+  defining the source and target maps for elements in $\cY$: $\ends([\gamma]_\omega) = \ends(\gamma)$.
+  \begin{center}
+    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \Paths(\X) \arrow[dr, swap, "\ends"] \arrow[rr, "\class_\omega"] &  & \cY \arrow[dl,"\ends"] \\
+      {} & \X \times \X & {}
+    \end{tikzcd}
+  \end{center}
+  We have then the main theorem of this construction:
+  
+  \begin{theorem}{~2}
+    Let $\X$ be a connected and simply connected diffeological space, and let $\omega$ be a closed $2$-form on $\X$.
+    %
+    \begin{enumerate}
+      %
+      \item The space $\cY$ is the space of morphisms of a fibrating diffeological groupoid $\TT_\omega$,
+      which has $\X$ as its objects,
+      i.e.,
+      $$
+        \Obj(\TT_\omega) = \X,
+        \quad \text{and} \quad
+        \Mor(\TT_\omega) = \cY.
+        $$
+      The source and target maps are given by $\ends: \cY \to \X \times \X$.
+      The groupoid composition is defined by the concatenation of paths:
+      $$
+        [\gamma]_\omega \cdot [\gamma']_\omega = [\gamma \vee \gamma']_\omega,
+        $$
+      for composable paths $\gamma, \gamma'$,
+      and the inverse is
+      $$
+        [\gamma]_\omega^{-1} = [\bar\gamma]_\omega,
+        \widetext{with} \bar\gamma(t) = \gamma(1-t).
+        $$
+      %
+      \item The isotropy group at any point $x \in \X$ is isomorphic to the torus of periods:
+      $$
+        \TT_{\omega,x} = \Loops(\X,x)/\!\sim_\omega \; \simeq \T_\omega.
+        $$
+      \item There exists a unique differential $1$-form
+      $$
+        \blambda \in \Omega^1(\cY)
+        \widetext{such that}
+        \class_\omega^*(\blambda) = \Komega.
+        $$
+      We call it the \emph{prequantum $1$-form} or \emph{prequantum potential} of $(\X,\omega)$.
+      %
+      \item The \emph{curvature} of $\blambda$ is related to $\omega$ by
+      $$
+        \der\blambda + \ends^*(\omega \ominus \omega) = 0,
+        $$
+      where $\omega \ominus \omega$ is the $2$-form $\src^*(\omega) - \trg^*(\omega)$ on $\X \times \X$,
+      $\src$ and $\trg$ being the source and target projections.
+      %
+      \item The form $\blambda$ is invariant by left and right composition,%
+      \footnote{Also called precomposition and postcomposition.}
+      for any pair of composable arrows:
+      $$
+        \eL(y)(y') = y \cdot y', \text{ and } \eR(y)(y') = y' \cdot y.
+        $$
+      Meaning:
+      $$
+        \renewcommand{\arraystretch}{1.3}
+        \left\{
+        \begin{array}{lll}
+        \eL(y)^*(\blambda \restriction \cY_{\src(y),\ast}) & = & \blambda \restriction \cY_{\trg(y),\ast}, \\
+        \eR(y)^*(\blambda \restriction \cY_{\ast,\trg(y)}) & = & \blambda \restriction \cY_{\ast,\src(y)},
+        \end{array}
+        \right.
+        \renewcommand{\arraystretch}{1}
+        $$
+    \end{enumerate}
+  \end{theorem}
+  
+  \begin{definition}{~(Prequantum Groupoid)}
+    The groupoid $\TT_\omega$ is called the \emph{prequantum groupoid} associated with $\omega$.
+    The left-right invariant $1$-form $\blambda$ is called the \emph{prequantum $1$-form}.
+  \end{definition}
+  
+  Also,
+  since the prequantum groupoid is fibrating,
+  see \cite[\textsection 8.4]{PIZ13},
+  we have:
+  
+  \begin{definition}{~(Prequantum Bundles)}
+    For all $x \in \X$,
+    let
+    $$
+      \1_x : \cY_x \to \X,
+      \widetext{defined by}
+      \1_x: [\gamma]_\omega \mapsto \1(\gamma).
+      $$
+    These projections are all equivalent and are called \emph{prequantum bundles} associated with $\omega$.
+    The restriction of the prequantum $1$-form $\lambda = \blambda \restriction {\cY_x}$ becomes a connection $1$-form for the action of $\TT_{\omega,x} \simeq \T_\omega$,
+    also called the \emph{prequantum $1$-form}.
+  \end{definition}
+  
+  \smallskip
+  \textbf{Note~1.} When $\X$ is a manifold and $\P_\omega = a\ZZ$ for some $a>0$, $\T_\omega \simeq \RR/a\ZZ \simeq \S^1$,
+  and the prequantum bundles built here are manifolds and are isomorphic to the principal $\S^1$-bundle of the classical prequantization construction \cite{Sou70}.
+  
+  This construction,
+  while restricted here to simply connected diffeological spaces,
+  generalizes the classical construction in two directions:
+  1) It applies to any (simply connected) diffeological space,
+  finite or infinite dimensional,
+  with or without singularities.
+  And 2) It extends the construction of a principal bundle to a groupoid,
+  as the quotient of the space of paths,
+  which includes,
+  in particular,
+  a natural source/target symmetry that has been broken in the prequantum bundle.
+  
+  \textbf{Note~2.} A critical philosophical distinction of this construction lies in the emergent nature of the isotropy group $\TT_{\omega,x} \simeq \T_\omega$,
+  and this is probably the most remarkable aspect of this construct.
+  Unlike classical geometric quantization,
+  where the introduction of a $\U(1)$-bundle (the "circle") often serves as a necessary mathematical device to overcome the "no-go theorem" (by ensuring the identity operator corresponds to multiplication by one),
+  here the circle (or torus of periods) arises naturally as an intrinsic component of the path-space quotient itself,
+  as the quotient of the space of loops.
+  This suggests that the "quantum phase" is not a property added for technical consistency,
+  but an inherent characteristic revealed through the reduction of paths.
+  Precisely,
+  the group of periods is a homomorphic representation of the $\pi_1$ of the space of loops.
+  
+  \textbf{Note~3.} Let us anticipate a remark that is bound to come up when applying this construction to singular spaces.
+  In the simply connected case,
+  the space of loops is connected and its homotopy groups are conjugate.
+  Consequently,
+  there is no intrinsic reason within this framework for the quantum phase (isotropy),
+  which is a quotient of the space of loops,
+  to degenerate or vary across the dynamical parasymplectic simply connected space,%
+  \footnote{On a non-simply connected space,
+  the homotopy of the space of loops is more complex but it seems that this is the aggregation of the groups of periods of $\Komega$ on all the connected components $\Loops_i(\Loops(\X))$ that will come into play for $\P_\omega$.
+  So,
+  that will not change the situation:
+  on a dynamical system the quantum phase is constant on connected components.}
+  even at singular points.
+  Its nature is fixed by the periods of $\omega$,
+  consistent throughout the space.
+  If quantum phenomena are related to such singularities,
+  it would rather be through the representations of the group of automorphisms
+  (which reveal the singular structure via the Klein stratification \cite[\textsection 1.42]{PIZ13})
+  than through the local isotropy itself.
+  
+\textbf{Remark.}
+  Our construction of the prequantum groupoid provides a fundamental object,
+  from which other prequantum structures can be derived.
+  It generalizes the setting of prequantum bundles over manifolds presented in \cite{PIZ95}.
+  In the general case of a non-simply connected space,
+  we expect the prequantum groupoid itself to be unique up to isomorphisms.
+  The classification by the group $\Ext(\pi_1(X)^{\text{ab}}, P_\omega)$,
+  which was central to the bundle construction,
+  is then expected to classify the different,
+  non-isomorphic prequantum bundles that can be extracted from this single,
+  universal groupoid structure.
+  This will be investigated in Part II.
+
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% -
+%% MARK: - sect: Proof of the Main Theorem
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Proof of the Main Theorem}
+\section{\textsc{\textbf{Proof of the Main Theorem}}}
+\label{sec:Proof of the Main Theorem}
+
+In this section, we will prove the theorem stated in Section~\ref{sec:Main Theorem: The Prequantum Groupoid}.
+The proof will be developed step-by-step,
+with each element established in successive articles.
+For technical convenience,
+the paths we consider are assumed to be stationary,
+allowing their concatenation to be a smooth path.
+This is a technical simplification without affecting the result,
+as the space of stationary paths is a deformation retract of the space of all smooth paths.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Integration of Closed $1$-forms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[Integration of Closed $1$-forms]
+  \label{art: Integration of Closed 1-forms}
+  
+  Let $\X$ be any connected diffeological space and $\alpha$ be a closed $1$-form:
+  $$
+    \alpha \in \Omega^1(\X)
+    \widetext{and} \der\alpha = 0.
+    $$
+  We define the \emph{group of periods} of $\alpha$ by:
+  $$
+    \P_\alpha = \left\{\int_\ell \alpha \mid \ell \in \Loops(\X) \right\}.
+    $$
+  The group of periods is a subgroup of $\RR$.
+  We say that $\alpha$ is \emph{discrete} if $\P_\alpha$ is a strict subgroup of $\RR$,
+  which is equivalent to $\P_\alpha \neq \RR$.
+  Then,
+  in this case,
+  the \emph{torus of periods}
+  $$
+    \T_\alpha = \RR/\P_\alpha
+    $$
+  is a $1$-dimensional diffeological group.
+  The proposition \cite[\textsection 8.28]{PIZ13} asserts that:
+  
+  \begin{proposition}{}
+    Let $\X$ be a connected diffeological space and $\alpha$ be a discrete closed $1$-form.
+    Then,
+    there exists a smooth map $f : \X \to \T_\alpha$,
+    unique up to a constant,
+    such that
+    $$
+      \alpha = f^*(\theta),
+      $$
+    where $\theta \in \Omega^1(\T_\alpha)$ is the canonical $1$-form,
+    projection of $\dt \in \Omega^1(\RR)$ by the projection $\pi_\alpha : \RR \to \T_\alpha$.
+    That is,
+    defined uniquely by $\pi_\alpha^*(\theta) = \dt$.
+  \end{proposition}
+  
+  We call this function the \emph{integration function} of $\alpha$.
+  
+  In the following,
+  this construction will be applied to the subspace $\Loops(\X) \subset \Paths(\X)$ and the restriction of the $1$-form $\Komega \restriction \Loops(\X)$.
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Integrating concatenations over homotopies
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[Integrating concatenations over homotopies]
+  \label{art: Integrating-concatenations-over-homotopies}
+  
+  Let $\X$ be a connected diffeological space,
+  and let $\omega$ be a closed $2$-form on $\X$.
+  All paths in the following are assumed to be stationary.
+  Let $\gamma_0$ and $\gamma'_0$ be two paths such that $\gamma_0(1) = \gamma'_0(0)$.
+  Then let
+  $$
+    \sigma : s \mapsto \gamma_s, \
+    \sigma' : s \mapsto \gamma'_s,
+    \text{ and } \sigma*\sigma' : s \mapsto \gamma_s \vee \gamma'_s,
+    $$
+  where $\sigma$ is a homotopy from $\gamma_0$ to $\gamma_1$ and $\sigma'$ a homotopy from $\gamma'_0$ to $\gamma'_1$,
+  such that $\gamma_s(1) = \gamma'_s(0)$ for all $s$.
+  The homotopy $\sigma*\sigma'$ is the resulting homotopy from $\gamma_0 \vee \gamma'_0$ to $\gamma_1 \vee \gamma'_1$.
+  Now,
+  let $\CHO$ be the chain-homotopy operator,
+  then:
+  $$
+    \Komega(\sigma * \sigma') = \Komega(\sigma) + \Komega(\sigma'),
+    \widetext{and}
+    \int_{\sigma * \sigma'} \Komega = \int_\sigma \Komega + \int_{\sigma'} \Komega.
+    $$
+\end{article} %% Integrating-concatenations-over-homotopies
+
+\begin{proof}
+  By definition,
+  $\int_{\sigma * \sigma'} \Komega = \int_0^1 \Komega(\sigma * \sigma')_t(1) \ dt$.
+  Let us show the additivity
+  $$
+    \Komega(\sigma * \sigma')_t(1) = \Komega(\sigma)_t(1) + \Komega(\sigma')_t(1),
+    $$
+  which will give,
+  by integration,
+  the identity we are looking for.
+  From the definition of the chain-homotopy operator \cite[\textsection 6.83]{PIZ13},
+  we have
+  \begin{eqnarray*}
+    \Komega(\sigma * \sigma')_t(1)
+    & =& \int_0^1 \omega \left(\vect{s \\ t} \mapsto (\sigma * \sigma')(t) (s) \right)_{{s \choose t}}\vect{1 \\ 0} \vect{0 \\ 1} \ ds \\
+    & =& \int_0^1 \omega \left(\vect{s \\ t} \mapsto [\gamma_t \vee \gamma'_t] (s) \right)_{{s \choose t}}\vect{1 \\ 0} \vect{0 \\ 1} \ ds \\
+    & =& \int_0^{1/2} \omega \left(\vect{s \\ t} \mapsto \gamma_t(2s) \right)_{{s \choose t}}\vect{1 \\ 0} \vect{0 \\ 1} \ ds \\
+    & + & \int_{1/2}^1 \omega \left(\vect{s \\ t} \mapsto \gamma'_t(2s-1) \right)_{{s \choose t}}\vect{1 \\ 0} \vect{0 \\ 1} \ ds,
+  \end{eqnarray*}
+  and after a change of parameters $s' = 2s$ and $s'' = 2s-1$, we get
+  \begin{eqnarray*}
+    \Komega(\sigma * \sigma')_t(1)
+    & =& \int_0^1 \omega \left(\vect{s' \\ t} \mapsto \gamma_t(s') \right)_{{s' \choose t}}\vect{1 \\ 0} \vect{0 \\ 1} \ ds' \\
+    & + & \int_0^1 \omega \left(\vect{s'' \\ t} \mapsto \gamma'_t(s'') \right)_{{s'' \choose t}}\vect{1 \\ 0} \vect{0 \\ 1} \ ds'' \\
+    & = & \Komega(\sigma)_t(1) + \Komega(\sigma')_t(1).
+  \end{eqnarray*}
+  This is the first identity and we get the second by integration on both sides.
+\end{proof}
+
+\begin{figure}[t]\renewcommand{\thefigure}{$2$}
+  \vspace{.5\baselineskip}
+  \includegraphics[width=.75\textwidth]{Figures/fig-concatenation-homotopy.pdf}
+  \caption{Integrating concatenations over homotopies.}
+  \label{fig:Integrating concatenations over homotopies}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: The Cocycle phi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[The Cocycle $\pmb{\phi}$]
+  \label{art: The Cocycle phi}
+  
+  We consider the tautological pullback of $\ends: \Paths(\X) \to \X \times \X$,
+  that is,
+  the space of pairs of paths in $\X$ with common endpoints:
+  $$
+    \ends^*(\Paths(\X)) = \{ (\gamma,\gamma') \in \Paths(\X)^2 \mid \ends(\gamma) = \ends(\gamma') \},
+    $$
+  equipped with the subset diffeology of the product diffeology.
+  
+  \begin{enumerate}
+    \item The map $\Phi : \ends^*(\Paths(\X)) \to \Loops(\X)$,
+    defined by
+    $$
+      \Phi(\gamma,\gamma') = \gamma \vee \bar\gamma',
+      $$
+    is a smooth homotopy equivalence.
+    Then,
+    since,
+    by hypothesis,
+    $\pi_1(\X) =  \{0\}$,
+    the space $\Loops(\X)$ is connected
+    and also the space $\ends^*(\Paths(\X))$.
+    %
+    \item The pullback of $\Komega$ by $\Phi$ satisfies
+    $$
+      \Phi^*(\Komega) = \pr_1^*(\Komega) - \pr_2^*(\Komega).
+      $$
+    It is also denoted by $\Komega \ominus \Komega$.
+    This is a closed $1$-form with the same periods as $\Komega$ and an integration function given by
+    $$
+      \phi = \Phi^*(f) = f \circ \Phi,
+      $$
+    where $f$ is the integration function of $\Komega \restriction \Loops(\X)$,
+    that is,
+    $$
+      \phi^*(\theta) = \Phi^*(\Komega) = \Komega \ominus \Komega,
+      $$
+    with $\theta$ the canonical $1$-form on $\T_\omega$,
+    defined uniquely by $\pi_\omega^*(\theta) = \dt$,
+    where $\pi_\omega$ is the canonical projection from $\RR$ to $\T_\omega = \RR/\P_\omega$.
+    %
+    \item The smooth map $\phi$ is a (Chasles) cocycle,
+    it can be chosen as
+    \begin{equation}\tag{$\heartsuit$}
+      \phi(\gamma,\gamma') = \int_\gamma^{\gamma'} \Komega_{x,x'} \mod \P_\omega,
+    \end{equation}
+    where $\Komega_{x,x'} = \Komega \restriction \Paths(\X,x,x')$ and $(x,x') = \ends(\gamma) = \ends(\gamma')$.
+    The integral is computed along a path in this subspace of $\Paths(\X)$.
+    For any pairs $(\gamma,\gamma')$ and $(\gamma',\gamma'')$ of elements of $\ends^*(\Paths(\X)$,
+    one has:
+    $$
+      \phi(\gamma,\gamma') + \phi(\gamma',\gamma'') = \phi(\gamma,\gamma'').
+      $$
+  \end{enumerate}
+  
+\end{article}
+
+\begin{proof}
+  Let us recall that $\Paths(\X)$ and $\Loops(\X)$ are homotopy equivalent to stationary paths and loops,
+  see \cite[\textsection 5.5]{PIZ13}.
+  Then,
+  we work with stationary paths and loops without recalling each time.
+  
+  \textbf{Homotopy equivalence.}~Let us begin with proving that $\ends^*(\Paths(\X))$ is homotopy equivalent to $\Loops(\X)$.
+  We consider the subspace $\Loops_{1/2}(\X)$ of stationary loops that are stationary at $t = 1/2$,
+  that is,
+  constant on an open interval $\openinterval{1/2 -\varepsilon,1/2+\varepsilon}$.
+  The proof of \cite[Ex. 84]{PIZ13} can be adapted to show that $\Loops(\X)$ and $\Loops_{1/2}(\X)$ are homotopy equivalent.
+  Now,
+  let
+  $$
+    \Phi: \ends^*(\Paths(\X)) \to \Loops_{1/2}(\X),
+    \widetext{defined by}
+    \Phi(\gamma,\gamma') = \gamma \vee \bar\gamma',
+    $$
+  where $\bar\gamma'$ is the reverse path $\bar\gamma'(t) = \gamma'(1-t)$.
+  Next,
+  let
+  $$
+    \bar\Phi : \Loops_{1/2}(\X) \to \ends^*(\Paths(\X)),
+    \widetext{defined by}
+    \bar\Phi(\ell) = (\gamma,\gamma')
+    $$
+  with
+  $$
+    \begin{cases}
+    \gamma(t) =\ell(t/2),     \widetext{if $0 \leq t \leq 1$, $\gamma(t) = \gamma(0)$ if $t\leq 0$ and $\gamma(t) = \ell(1/2)$ if $t\geq 1$.}   \\
+    \gamma'(t) = \ell(1-t/2), \widetext{if $0 \leq t \leq 1$, $\gamma'(t) = \ell(1)$ if $t\leq 0$ and $\gamma'(t) = \ell(1/2)$ if $t\geq 1$.}
+    \end{cases}
+    $$
+  These two maps,
+  $\Phi$ and $\bar\Phi$,
+  are homotopic inverse to each other.
+  Therefore,
+  $\ends^*(\Paths(\X))$ is homotopy equivalent to $\Loops(\X)$.
+  
+  \textbf{Pullback $\Komega$ by $\Phi$.}~Now,
+  since $\pi_1(\X,x) = \pi_0(\Loops(\X,x)) = \{0\}$,
+  and $\pi_0(\Loops(\X))$ is a quotient of $\pi_0(\Loops(\X,x))$ \cite[Ex. 87]{PIZ13},
+  it follows that $\Loops(\X)$ is connected and so is $\ends^*(\Paths(\X))$.
+  %
+  Moreover,
+  the map $\Phi$ defined above satisfies the identity
+  $$
+    \Phi^*(\Komega) = \pr_1^*(\Komega) - \pr_2^*(\Komega).
+    $$
+  Indeed,
+  let $(\P,\P')$ be a plot of $\ends^*(\Paths(\X))$.
+  Then $\phi^*(\Komega)(\P,\P') = \Komega(f\circ(\P,\P')) = \Komega(\P * \bar\P')$,
+  where the operation $*$ has been defined in Article~\ref{art: Integrating-concatenations-over-homotopies},
+  and $\bar\P'(r)(t) = \P'(r)(1-t)$.
+  Then,
+  $\Komega(\P * \bar\P') = \Komega(\P) + \Komega(\bar\P') = \Komega(\P) - \Komega(\P')$;
+  that is,
+  $\Phi^*(\Komega) = \pr_1^*(\Komega) - \pr_2^*(\Komega)$.
+  Therefore,
+  $\Komega \ominus \Komega$ is closed and has the same periods as $\Komega \restriction \Loops(\X)$,
+  as a consequence of the homotopic invariance of the de Rham cohomology \cite[\textsection 6.88]{PIZ13}.
+  
+  \textbf{Function $\pmb{\phi}$.}~Next,
+  we assumed that the periods $\P_\omega$ of the $1$-form $\Komega \restriction \Loops(\X)$ are discrete.%
+  \footnote{Recall that in diffeology,
+  `discrete' means equipped with the discrete diffeology.
+  In particular,
+  any strict subgroup of $\RR$ is discrete,
+  even when it is dense.}
+  Then,
+  since $\Loops(\X)$ is connected,
+  let $f \in \Cinfty(\Loops(\X),\T_\omega)$ be an integration function (Art. \ref{art: Integration of Closed 1-forms}),
+  $$
+    f \in \Cinfty(\Loops(\X),\T_\omega)
+    \widetext{and}
+    f^*(\theta) = \Komega \restriction \Loops(\X),
+    $$
+  with $\theta$ the standard $1$-form on $\T_\omega$.
+  The function
+  $$
+    \phi = f \circ \Phi \in \Cinfty(\ends^*(\Paths(\X)), \T_\omega)
+    $$
+  is an integration function on $\ends^*(\Paths(\X))$,
+  i.e.:
+  $$
+    \left[\pr_1^*(\Komega) - \pr_2^*(\Komega)\right] = \phi^*(\theta).
+    $$
+  This function is explicitly given by
+  %
+  \begin{equation}\tag{$\diamondsuit$}
+    %\phi(\gamma,\gamma') = \pi_\omega\bigg(\int_{\gamma'}^{\gamma} \Komega \restriction \Paths(\X,x,x') \bigg) \in \T_\omega,
+    \phi(\gamma,\gamma') = \int_{\gamma'}^{\gamma} \Komega \restriction \Paths(\X,x,x') \mod \P_\omega,
+  \end{equation}
+  %
+  where the integral is computed along a path $\sigma$ in $\Paths(\X,x,x')$,
+  connecting $\gamma'$ to $\gamma$,
+  where $(x,x') = \ends(\gamma) = \ends(\gamma')$.
+  Indeed,
+  by choice ot integration function $\phi = f \circ \Phi$,
+  we have:
+  $$
+    %\phi(\gamma,\gamma') = \pi_\omega\bigg(\int_\bmx^{\gamma \vee \bar\gamma'} \Komega \restriction \Loops(\X,x) \bigg),
+    \phi(\gamma,\gamma') = \int_\bmx^{\gamma \vee \bar\gamma'} \Komega \restriction \Loops(\X,x) \mod \P_\omega,
+    $$
+  where the integral is computed along a path in $\Loops(\X,x)$,
+  connecting $\bmx$ to $\gamma \vee \bar\gamma'$.
+  Now,
+  let us consider the map
+  $$
+    \nu : \Paths(\X,x,x') \to \Loops(\X,x),
+    \widetext{with}
+    \nu(\gamma') = \gamma \vee \bar\gamma'.
+    $$
+  \textbf{Lemma.}~ One has: $\nu^*(\Komega) = - \Komega$.
+  
+  \textit{Proof of Lemma.}~Remember that all paths are assumed to be stationary,
+  then the concatenation is a smooth map \cite[\textsection 5.4]{PIZ13},
+  and so $\nu$ is smooth.
+  Now,
+  since $\Komega$ and $\nu^*(\Komega)$ are $1$-forms,
+  we can compare $\nu^*(\Komega)$ and $-\Komega$ only on $1$-plots \cite[\textsection 6.37]{PIZ13}.
+  Let $s \mapsto \gamma'_s$ be a path in $\Paths(\X,x,x')$.
+  Then,
+  $\nu^*(\Komega)(s \mapsto \gamma'_s) = \Komega(s \mapsto \gamma \vee \bar\gamma'_s)$.
+  We have seen in Article~\ref{art: Integrating-concatenations-over-homotopies} that $\Komega([s \mapsto \gamma_s] \vee [s \mapsto \bar\gamma'_s]) = \Komega(s \mapsto \gamma_s) + \Komega(s \mapsto \bar\gamma'_s)$.
+  Apply this identity to the constant plot $\gamma_s = \gamma$.
+  The first term is then zero,
+  and then:
+  $\Komega(s \mapsto \gamma \vee \bar\gamma'_s) = \Komega(s \mapsto \bar\gamma'_s) = - \Komega(s \mapsto \gamma'_s)$,
+  from the change of integration parameter $t \mapsto 1-t$.
+  Thus,
+  $\nu^*(\Komega)(s \mapsto \gamma'_s) = - \Komega(s \mapsto \gamma'_s)$;
+  that is,
+  $\nu^*(\Komega) = - \Komega$. \hfill$\square$
+  
+  Now,
+  we use the variance of integration forms on chain \cite[\textsection 6.67]{PIZ13},
+  that states,
+  for $\sigma: s \mapsto \gamma'_s$,
+  with $\ends(\gamma'_s) = \ends(\gamma)$ for all $s$ and $\gamma'_0 = \gamma$.
+  $$
+    \int_{\nu_*(\sigma)} \Komega = \int_\sigma \nu^*(\Komega),
+    \quad \text{which implies} \quad
+    \int_{\nu_*(\sigma)} \Komega = - \int_\sigma \Komega.
+    $$
+  But
+  $$
+    \int_{\nu_*(\sigma)} \Komega
+    \ = \int_{s \mapsto \gamma \vee \bar\gamma'_s} \Komega
+    \ = \int_{\gamma \vee \bar\gamma}^{\gamma \vee \bar\gamma'} \Komega
+    \ = \underbrace{\int_{\gamma \vee \bar\gamma}^{\bmx} \Komega}_{= 0}
+    + \int_{\bmx}^{\gamma \vee \bar\gamma'} \Komega,
+    $$
+  and,
+  on the other hand
+  $$
+    - \int_\sigma \Komega \ = \ -\int_{s \mapsto \gamma'_s} \Komega \ = \ - \int_{\gamma}^{\gamma'}\Komega \ = \int_{\gamma'}^{\gamma}\Komega.
+    $$
+  Thus
+  $$
+    \int_\bmx^{\gamma \vee \bar\gamma'} \Komega \ = \int_{\gamma'}^{\gamma} \Komega,
+    $$
+  and this confirms the expression ($\diamondsuit$) for $\phi$ above.
+  
+  \textbf{Cocycle $\pmb{\phi}$.}~The map $\phi$ defined by $(\heartsuit)$ is clearly additive:
+  \begin{multline*}
+    \phi(\gamma,\gamma') + \phi(\gamma',\gamma'') = \int_{\gamma}^{\gamma'} \Komega_{x,x'} \mod \P_\omega
+    + \int_{\gamma'}^{\gamma''} \Komega_{x,x'} \mod \P_\omega \\
+    = \int_{\gamma}^{\gamma''} \Komega_{x,x'} \mod \P_\omega
+    = \phi(\gamma,\gamma'')
+  \end{multline*}
+  for any triple of paths $\gamma$, $\gamma'$ and $\gamma''$ such that $\ends(\gamma) = \ends(\gamma') = \ends(\gamma'') = (x,x')$.
+  This completes the proof regarding the cocycle $\phi$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: The Equivalence Relation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[The Equivalence Relation $\pmb{\gamma \sim_\omega \gamma'}$]
+  \label{art: The Equivalence Relation}
+  
+  The Chasles cocycle $\phi$ defined in the previous article leads to the definition of this equivalence relation:
+  for any pair of paths $\gamma$ and $\gamma'$ in $\X$:
+  $$
+    \gamma \sim_\omega \gamma' \quad \text{iff} \quad
+    \begin{cases}
+    \ends(\gamma) = \ends(\gamma'), \\
+    \phi(\gamma,\gamma') = 0.
+    \end{cases}
+    $$
+  Let us make explicit the condition $\phi(\gamma,\gamma') = 0$:
+  There exists a fixed-ends homotopy from $\gamma$ to $\gamma'$,
+  inside $\Paths(\X,x,x')$,
+  with $(x,x') = \ends(\gamma) = \ends(\gamma')$,
+  and:
+  $$
+    \gamma \sim_\omega \gamma' \widetext{iff} \ends(\gamma) = \ends(\gamma')  \widetext{and} \int_\gamma^{\gamma'}\Komega_{x,x'} \in \P_\omega.
+    $$
+\end{article}
+
+\begin{proof}
+  The fact that $\phi$ is a Chasles cocycle fulfills the requirements for $\sim_\omega$ to be an equivalence relation.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: The Groupoid
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[The Groupoid $\pmb{\TT_\omega}$]
+  \label{art: The Groupoid}
+  
+  The groupoid $\TT_\omega$ defined by
+  $$
+    \Obj(\TT_\omega) =\X
+    \widetext{and}
+    \Mor(\TT_\omega) = \Paths(\X)/\!\sim_\omega,
+    $$
+  also denoted by $\cY$,
+  is a diffeological fibrating groupoid:
+  \begin{enumerate}
+    \item The composition $[\gamma]_\omega \cdot [\gamma']_\omega = [\gamma \vee \gamma']_\omega$ is well-defined and is associative.
+    \item The inverse $[\gamma]_\omega^{-1} = [\bar\gamma]_\omega$ is well-defined.
+    \item The identity $\id_x$ is $[\bmx : t \mapsto x]_\omega$,
+    and the injection $j : x \mapsto \id_x$ from $\X$ to $\cY$ is an induction.
+    \item The projection $\ends: \Mor(\TT_\omega) \to \X \times \X$,
+    defined by $\ends([\gamma]_\omega) = \ends(\gamma)$ is a subduction.
+  \end{enumerate}
+\end{article}
+
+\begin{proof}
+  Let us prove that the groupoid operations are well defined
+  
+  \textbf{Concatenation.} Let $\gamma_0$ and $\gamma'_0$ be two stationary paths such that $\gamma_0(1) = \gamma'_0(0)$.
+  Then,
+  let $\gamma_1$ and $\gamma'_1$ be two other paths such that $[\gamma_0]_\omega = [\gamma_1]_\omega$ and $[\gamma'_0]_\omega = [\gamma'_1]_\omega$.
+  Because $\X$ is simply connected,
+  there exists a fixed-ends homotopy $\sigma$ connecting $\gamma_0$ to $\gamma_1$,
+  and another one $\sigma'$ connecting $\gamma'_0$ to $\gamma'_1$,
+  that is,
+  $\int_\sigma \Komega \in \P_\omega$ and $\int_{\sigma'} \Komega \in \P_\omega$.
+  Thanks to Article~\ref{art: Integrating-concatenations-over-homotopies},
+  $\int_{\sigma*\sigma'} \Komega = \int_{\sigma} \Komega + \int_{\sigma'} \Komega$,
+  then $\int_{\sigma*\sigma'} \Komega \in \P_\omega$,
+  where $\sigma*\sigma'$ is a homotopy from $\gamma_0 \vee \gamma'_0$ to $\gamma_1 \vee \gamma'_1$.
+  Thus $[\gamma_0 \vee \gamma'_0]_\omega = [\gamma_1 \vee \gamma'_1]_\omega$,
+  and hence the composition $[\gamma]_\omega \cdot [\gamma']_\omega$ is well defined on $\cY$.
+  
+  \textbf{Associativity, identities, and inverses.}  The associativity of the concatenation,
+  the fact that $\id_x = [\bmx]_\omega$ and $[\gamma]_\omega^{-1} = [\bar\gamma]_\omega$,
+  where $\bar\gamma$ is the reverse of $\gamma$,
+  are all based on the homotopies described in \cite[\textsection 5.15 (Proof)]{PIZ13},
+  connecting $(\gamma_1 \vee \gamma_2) \vee \gamma_3$ to $\gamma_1 \vee (\gamma_2 \vee \gamma_3)$,
+  $\gamma$ to $\bmx \vee \gamma$ and $\gamma \vee \bar\gamma$ to $\bmx$.
+  The integral of $\Komega$ over these homotopies vanishes.
+  Indeed,
+  let $\sigma : t \mapsto \gamma_t$ a path in $\Paths(\X)$.
+  The integrand of
+  $$%
+    \Komega(\sigma)_t(1) = \int_0^1 \omega\left(\vect{s \\ t} \mapsto \gamma_t(s)\right)_{s \choose t} \vect{1 \\ 0}\vect{0 \\ 1} \ ds,
+    $$%
+  itself vanishes,
+  because the homotopy $\sigma$ factorizes through a path (i.e., $\gamma_t(s) = \gamma'(\varphi(t,s))$ for some path $\gamma'$ and some real function $\varphi$),
+  and the pullback of a $2$-form on $\RR$ vanishes.
+  
+  \textbf{Groupoid $\TT_\omega$.}
+  Thus,
+  $\TT_\omega$ is a groupoid.
+  Then,
+  since the concatenation is smooth,
+  as well as the inversion \cite[\textsection 5.4 (2)]{PIZ13},
+  and since $x \mapsto [\bmx]_\omega$,
+  where $\bmx$ is the constant path at $x$,
+  is clearly an induction,
+  $\TT_\omega$ is a diffeological groupoid.
+  
+  \textbf{$\TT_\omega$ fibrating.}
+  Since $\ends : \Paths(\X) \to \X \times \X$ is a subduction \cite[\textsection 5.6]{PIZ13} and $\class_\omega : \Paths(\X) \to \cY$ is smooth,
+  the factorization $\ends : \cY \to \X \times \X$ is a subduction \cite[\textsection 1.51]{PIZ13}.
+  Therefore,
+  $\TT_\omega$ is a fibrating groupoid \cite[\textsection 8.4]{PIZ13},
+  and the $\cY_x$ are $\TT_{\omega,x}$-principal fiber bundles attached to the points $x \in \X$ \emph{loc. cit.}.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: The Invariant 1-Form
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[The Prequantum $\pmb{1}$-Form $\pmb{\blambda}$ and its Curvature]
+  \label{art: The Invariant 1-Form}
+  
+  By definition,
+  the space of morphisms $\cY$ of the groupoid $\TT_\omega$ is the quotient of $\Paths(\X)$ by the equivalence relation $\sim_\omega$:
+  $$
+    \gamma \sim_\omega \gamma' \quad \text{iff} \quad
+    \begin{cases}
+    \ends(\gamma) = \ends(\gamma'), \\
+    \phi(\gamma,\gamma') = 0,
+    \end{cases}
+    $$
+  where $\phi : \ends^*(\Paths(\X)) \to \T_\omega$ is the cocycle defined in Article \ref{art: The Cocycle phi}.
+  The condition $\phi(\gamma,\gamma') = 0$ is equivalent to
+  $$
+    \gamma \sim_\omega \gamma' \widetext{iff} \int_{\gamma'}^{\gamma} \Komega_{x,x'} \in \P_\omega.
+    $$
+  where $(x,x') = \ends(\gamma) = \ends(\gamma')$.
+  
+  \begin{theorem}{}
+    There exists a unique differential $1$-form $\blambda$ on the space of morphisms $\cY = \Mor(\TT_\omega)$ such that $\class_\omega^*(\blambda) = \Komega$.
+    We call $\blambda$ the \emph{prequantum $1$-form} on the groupoid $\TT_\omega$.
+    Furthermore, $\blambda$ is invariant under left and right composition in $\TT_\omega$,
+    and its curvature is given by $\der\blambda = \1^*\omega - \0^*\omega$,
+    where $\1, \0 : \cY \to \X$ are the target and source maps.
+  \end{theorem}
+  
+\end{article}
+
+\begin{proof}
+  \textbf{Existence and Uniqueness of $\blambda$.}~
+  We use the criterion for a differential form on a space $\W$ to be the pullback of a differential form on a quotient space $\Z = \W/\!\sim$ via the projection $p : \W \to \Z$.
+  A differential form $\alpha \in \Omega^k(\W)$ is the pullback of a unique differential form $\beta \in \Omega^k(\Z)$ (i.e., $\alpha = p^*(\beta)$) if and only if $\pr_1^*(\alpha) - \pr_2^*(\alpha)$ vanishes on the total space of the tautological pullback $p^*(\W) = \{ (w_1, w_2) \in \W \times \W \mid p(w_1) = p(w_2) \}$,
+  where $\pr_1, \pr_2 : p^*(\W) \to \W$ are the projection maps \cite[\textsection 6.38 (Note 2)]{PIZ13}.
+  
+  In our case,
+  $\W = \Paths(\X)$, $\Z = \cY$,
+  $p = \class_\omega$,
+  and $\alpha = \Komega \in \Omega^1(\Paths(\X))$.
+  The total space of the tautological pullback is $\class_\omega^*(\Paths(\X)) = \{ (\gamma, \gamma') \in \Paths(\X)^2 \mid \class_\omega(\gamma) = \class_\omega(\gamma') \}$.
+  By definition of $\sim_\omega$, $\class_\omega(\gamma) = \class_\omega(\gamma')$ if and only if $\gamma \sim_\omega \gamma'$,
+  which means $\ends(\gamma) = \ends(\gamma')$ and $\phi(\gamma,\gamma') = 0$.
+  Thus,
+  $\class_\omega^*(\Paths(\X)) = \{ (\gamma, \gamma') \in \ends^*(\Paths(\X)) \mid \phi(\gamma,\gamma') = 0 \}$.
+  
+  We need to check if $\pr_1^*(\Komega) - \pr_2^*(\Komega)$ vanishes on this subspace.
+  From Article \ref{art: The Cocycle phi},
+  we know that $\pr_1^*(\Komega) - \pr_2^*(\Komega) = \phi^*(\theta)$ on $\ends^*(\Paths(\X))$,
+  where $\theta$ is the canonical $1$-form on $\T_\omega$.
+  Thus:
+  $$
+    (\pr_1^*(\Komega) - \pr_2^*(\Komega)) \restriction \class_\omega^*(\Paths(\X)) = (\phi^*(\theta)) \restriction \phi^{-1}(0).
+    $$
+  Since $\theta$ is a differential form on $\T_\omega$,
+  its pullback $\phi^*(\theta)$ restricted to the inverse image of a point,
+  that is,
+  $(\phi^*(\theta)) \restriction \phi^{-1}(0)$,
+  is zero because differential forms vanish on constant plots \cite[Ex. 96]{PIZ13}.
+  Indeed,
+  let $\P$ be a plot in $\phi^{-1}(0)$,
+  that is $\phi \circ \P = 0$.
+  Then,
+  $\phi^*(\theta)(\P) = \theta(\phi \circ \P)$,
+  but $\phi \circ \P(r) = 0$,
+  thus $\phi^*(\theta)(\P) = 0$ for all $\P$ in $\phi^{-1}(0)$.
+  The criterion is satisfied,
+  which guarantees the existence and uniqueness of a differential $1$-form $\blambda \in \Omega^1(\cY)$ such that $\class_\omega^*(\blambda) = \Komega$.
+  
+  \textbf{Invariance of $\blambda$.}~
+  We need to show that for any $y_0 \in \cY$,
+  the pullback of $\blambda$ by left and right composition with $y_0$ is related to $\blambda$.
+  Let $y_0 = [\gamma_0]_\omega \in \cY$.
+  The left composition map $\eL(y_0) : \cY_{\trg(y_0), \ast} \to \cY_{\src(y_0), \ast}$ is given by $\eL(y_0)(y) = y_0 \cdot y$.
+  Similarly,
+  the right composition map $\eR(y_0) : \cY_{\ast, \src(y_0)} \to \cY_{\ast, \trg(y_0)}$ is given by $\eR(y_0)(y) = y \cdot y_0$.
+  
+  The invariance of $\Komega$ under pre-concatenation and post-concatenation in $\Paths(\X)$ is a known property \cite[\textsection 6.85]{PIZ13}.
+  For any path $\gamma_0 \in \Paths(\X)$,
+  the map $\eL(\gamma_0) : \Paths(\X)_{\trg(\gamma_0), \ast} \to \Paths(\X)_{\src(\gamma_0), \ast}$ given by $\eL(\gamma_0)(\gamma) = \gamma_0 \vee \gamma$ satisfies $\eL(\gamma_0)^*(\Komega) = \Komega$.
+  Similarly, $\eR(\gamma_0)^*(\Komega) = \Komega$.
+  
+  The composition maps in $\cY$ are defined by factorization of path concatenation: $\eL([\gamma_0]_\omega)([\gamma]_\omega) = [\gamma_0 \vee \gamma]_\omega = \class_\omega(\eL(\gamma_0)(\gamma))$.
+  This gives the commutative diagram:
+  \begin{center}
+    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \Paths(\X)_{\trg(\gamma_0), \ast} \arrow[d, swap, "\class_\omega"] \arrow[r, "\eL(\gamma_0)"]  & \Paths(\X)_{\src(\gamma_0), \ast} \arrow[d,"\class_\omega"] \\
+      \cY_{\trg(y_0), \ast} \arrow[r,swap, "\eL(y_0)"] & \cY_{\src(y_0), \ast}
+    \end{tikzcd}
+  \end{center}
+  Taking the pullback by $\eL(y_0)$ and using $\class_\omega^*(\blambda) = \Komega$:
+  \begin{multline*}
+    \eL(y_0)^*(\blambda) = \eL(y_0)^*(\class_\omega^*)^{-1}(\Komega) = (\class_\omega \circ \eL(\gamma_0))^*(\blambda) \\
+    = \eL(\gamma_0)^*(\class_\omega^*(\blambda)) = \eL(\gamma_0)^*(\Komega).
+  \end{multline*}
+  By the invariance of $\Komega$ under $\eL(\gamma_0)$, $\eL(\gamma_0)^*(\Komega) = \Komega$.
+  Thus,
+  $\eL(y_0)^*(\blambda) = \Komega$.
+  Since $\class_\omega^*(\blambda) = \Komega$,
+  we have $\eL(y_0)^*(\blambda) = \class_\omega^*(\blambda)$.
+  Restricting to the domain $\cY_{\src(y_0), \ast}$ and using the fact that $\class_\omega$ is a subduction from $\Paths(\X)_{\src(\gamma_0), \ast}$ to $\cY_{\src(y_0), \ast}$,
+  we can push the equality down to $\cY$:
+  $$
+    \eL(y_0)^*(\blambda) \restriction {\cY_{\src(y_0), \ast}} = \blambda \restriction {\cY_{\trg(y_0), \ast}}.
+    $$
+  This shows left invariance.
+  The proof for right invariance is analogous,
+  using the postcomposition map $\eR$.
+  
+  \textbf{Curvature Formula.}
+  With obvious notations:
+  $\ends_{\cY} \circ \class_\omega = \ends_{\Paths}$.
+  Then,
+  Then,
+  taking the pullback of $\pr_2^*(\omega) - \pr_1^*(\omega)$ by both sides of this equality,
+  we get $\class_\omega^*(\ends_{\cY}^*(\pr_2^*(\omega) - \pr_1^*(\omega)))
+  = \ends_{\Paths}^*(\pr_2^*(\omega) - \pr_1^*(\omega))
+  = \1_{\paths}^*(\omega) - \0_{\paths}^*(\omega)
+  = \der[\Komega] = \der[\class_\omega^*(\blambda)]
+  = \class_\omega^*(\der\blambda)$.
+  Since $\class_\omega$ is a subduction,
+  we get $d\blambda = \ends_{\cY}^*(\pr_2^*\omega) - \ends_{\cY}^*(\pr_1^*\omega) = (\pr_2 \circ \ends_{\cY})^*\omega - (\pr_1 \circ \ends_{\cY})^*\omega = \1_{\cY}^*\omega - \0_{\cY}^*\omega$.
+  which can also be written as $d\blambda + \ends_{\cY}^*(\omega \ominus \omega) = 0$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: The Isotropy
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[The Isotropy $\pmb{\TT_{\omega,x}}$]
+  \label{art: The Isotropy}
+  
+  By construction of the groupoid $\TT_\omega$,
+  the isotropy at a point $x \in \X$ is the subspace
+  $$
+    \TT_{\omega,x} := \Mor_{\TT_\omega}(x,x) = \big\{ [\ell]_\omega \mid \ell \in \Loops(\X,x) \big\}.
+    $$
+  Two loops $\ell$ and $\ell'$ based at $x$ are equivalent if and only if $\phi(\ell,\ell') = 0$.
+  Define
+  $$
+    \eF: \Loops(\X,x) \to \T_\omega \widetext{by} \eF(\ell) = \pi_\omega \left(\int_{\bmx}^\ell \Komega \right),
+    $$
+  with $\bmx$ the constant loop $[t \mapsto x]$.
+  
+  \begin{theorem}{}
+    Two loops $\ell,\ell' \in \Loops(\X,x)$ are equivalent if and only if $\eF(\ell) = \eF(\ell')$,
+    and the map $\eF$ is a subduction.
+    The projection $\overline\eF : \TT_{\omega,x} \to \T_\omega$,
+    defined by $\overline\eF([\ell]_\omega) = \eF(\ell)$ is an isomorphism of diffeological groups.
+    \begin{center}
+      \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+        \Loops(\X,x) \arrow[dr, "\eF"] \arrow[d, swap, "\class_\omega"] & {} \\
+        \TT_{\omega,x} = \Loops(\X,x)/\!\sim_\omega \arrow[r, swap, "\overline\eF"] & \T_\omega
+      \end{tikzcd}
+    \end{center}
+  \end{theorem}
+\end{article}
+
+\begin{proof}
+  The notation $\TT_{\omega,x}$ refers to the isotropy group of the groupoid $\TT_\omega$ at the point $x \in \X$.
+  That is,
+  by definition:
+  $$
+    \TT_{\omega,x} = \{ [\ell]_\omega \mid \ell \in \Loops(\X,x) \}.
+    $$
+  Thus,
+  $$
+    \TT_{\omega,x} = \Loops(\X,x)/\!\sim_\omega,
+    \widetext{with} \ell \sim_\omega \ell' \widetext{iff} \int_\ell^{\ell'} \Komega_{x,x} \in \P_\omega.
+    $$
+  Since $\pi_1(\X) = \{0\}$,
+  $\ell$ and $\ell'$ are homotopic to the constant path $\bmx : t \mapsto x$.
+  Moreover,
+  by definition of $\P_\omega$,
+  $$
+    \int_{\bmx}^{\ell} \Komega_{x,x} + \int_{\ell}^{\ell'} \Komega_{x,x} + \int_{\ell'}^{\bmx} \Komega_{x,x} \in \P_\omega,
+    $$
+  since this sum of integrals corresponds to the integral of $\Komega_{x,x}$ on a loop in $\Loops(\X)$.
+  Hence
+  \begin{multline*}
+    \int_{\ell}^{\ell'} \Komega_{x,x} \in \P_\omega
+    \ \Leftrightarrow \
+    \int_{\bmx}^{\ell'} \Komega_{x,x} - \int_{\bmx}^{\ell} \Komega_{x,x} \in \P_\omega \\
+    \ \Leftrightarrow \
+    \pi_\omega\left(\int_{\bmx}^{\ell'} \Komega_{x,x}\right) = \pi_\omega\left(\int_{\bmx}^{\ell} \Komega_{x,x}\right).
+  \end{multline*}
+  Remember that $\pi_\omega : \RR \to \T_\omega = \RR/\P_\omega$.
+  Hence
+  $$
+    \ell \sim_\omega \ell' \ \Leftrightarrow \ \eF(\ell) = \eF(\ell')
+    \widetext{with}
+    \eF(\ell) = \pi_\omega\left(\int_{\bmx}^{\ell} \Komega_{x,x}\right).
+    $$
+  Hence,
+  set theoretically,
+  $\eF : \Loops(\X,x) \to \T_\omega$ identifies $\Val(\eF)$ with $\TT_{\omega,x}$:
+  $$
+    \TT_{\omega,x} \equiv \Val(\eF).
+    $$
+  \begin{lemma}{}
+    The subset $\Val(\eF)$ is a subgroup of $\T_\omega$.
+    It can only be $\{0\}$ or $\T_\omega$,
+    but if $\omega \neq 0$,
+    then $\Val(\eF) = \T_\omega$.
+  \end{lemma}
+  
+  \textit{Proof of Lemma.}\hspace{1ex}
+  Let $\Paths(\Loops(\X,x),\bmx,\ast)$ be the subspace of $\Paths(\Loops(\X))$ of homotopies connecting the constant loop $\bmx$ to any loop $\ell \in \Loops(\X,x)$.
+  Define
+  $$
+    \FF : \Paths(\Loops(\X,x),\bmx,\ast) \to \RR, \text{ by } \FF(\sigma) = \int_\sigma \Komega,
+    $$
+  where $\sigma : s \mapsto \ell_s$ is a path in $\Loops(\X,x)$ connecting $\bmx$ to some loop $\ell$.
+  Explicitly,
+  $$
+    \FF(\sigma) =  \int_0^1 \Komega(\sigma)_s(1) \ds = \int_0^1 \ds \int_0^1 \omega\left(\vect{t \\ s} \mapsto \ell_s(t)\right)_{t \choose s} \vect{1 \\ 0}\vect{0 \\ 1} \ dt
+    $$
+  Let $\sigma$ and $\sigma'$ be two elements of $\Paths(\Loops(\X,x),\bmx,\ast)$,
+  connecting $\bmx$ to $\ell$ and $\bmx$ to $\ell'$.
+  Let $\bar\sigma: s \mapsto \bar\ell_s = [t \mapsto \ell_s(1-t)]$,
+  hence $\bar\sigma$ is a path in $\Loops(\X,x)$ connecting $\bmx$ to the reverse $\bar\ell$.
+  By a change of variable $t \mapsto 1-t$ in the expression of $\FF(\sigma)$ above we have $\Komega(\bar\sigma) = - \Komega(\sigma)$.
+  Also,
+  since for all $s$ we have $\sigma(s)(1) = \sigma'(s)(0) = x$,
+  we can consider the concatenation of homotopies $\sigma * \sigma'$.
+  Then,
+  thanks to Article~\ref{art: Integrating-concatenations-over-homotopies},
+  and to the property of $\bar\sigma$,
+  we have:
+  \begin{equation}
+    \renewcommand{\theequation}{$\ast$}
+    \FF(\sigma*\sigma') = \FF(\sigma) + \FF(\sigma')
+    \text{ and }
+    \FF(\bar\sigma) = - \FF(\sigma).
+  \end{equation}
+  Thus,
+  if $t = \FF(\sigma)$ and $t' = \FF(\sigma')$,
+  then $t+t' = \FF(\sigma*\sigma') \in \Val(\FF)$,
+  and $-t = \FF(\bar\sigma) \in \Val(\FF)$.
+  Therefore,
+  $\Val(\FF)$ is a subgroup of $\RR$.
+  But,
+  $\Val(\FF)$ is connected because the space of paths in $\Loops(\X)$ based at $\bmx$,
+  i.e.,
+  $\Paths(\Loops(\X,x),\bmx,\ast)$,
+  is connected (actually contractible) and $\FF$ is smooth.
+  Thus,
+  either $\Val(\FF) = \{0\}$ or $\Val(\FF) = \RR$.
+  Since $\Val(\eF) = \pi_\omega(\Val(\FF))$,
+  then $\Val(\eF) = \{0\}$ or $\Val(\eF) = \T_\omega$.\hfill$\square$
+  
+  Let us examine the two different cases.
+  
+  \textbf{The zero case.}~If $\Val(\eF) = \{0\}$,
+  then the isotropy $\TT_{\omega,x}$ is reduced to the identity $\{1_x\}$,
+  and $\cY = \X \times \X$.
+  Thus,
+  $\der \blambda = \1^*(\omega) - \0^*(\omega)$.
+  Restricted to $\cY_x = \{x\} \times \X$ we get $\omega = d\lambda$,
+  and $\lambda = \blambda \restriction \{x\} \times \X$,
+  that is,
+  a $1$-form on $\X$.
+  But returning to $\Komega$,
+  we have $\Komega = \CHO(d \lambda) = \1^*(\lambda) -\0^*(\lambda) - d(\CHO\lambda)$,
+  then  $\Komega \restriction \Loops(\X,x) = d(\CHO\lambda)$ and the condition $\eF = 0$ writes,
+  for all $\ell \in \Loops(\X,x)$,
+  that is:
+  $$
+    0 = \int_\bmx^\ell \Komega = \int_\bmx^\ell d[\CHO\lambda] = (\CHO\lambda)(\ell) - (\CHO\lambda)(\bmx) = \int_\ell \lambda - 0 = \int_\ell \lambda.
+    $$
+  Indeed,
+  by definition of the chain-homotopy operator $\CHO$,
+  for a $1$-form $\lambda$,
+  $\CHO\lambda$ is the function from $\Paths(\X)$ to $\RR$:
+  $$
+    (\CHO\lambda)(\gamma) = \int_0^1 \lambda(\gamma)_t(1)\, dt = \int_\gamma \lambda.
+    $$
+  Therefore,
+  $\lambda$ is a $1$-form vanishing on every loop,
+  thus $\lambda$ is closed and $\omega = 0$;
+  see \cite[Ex. 118]{PIZ13},
+  a case we excluded.
+  
+  \textbf{The full case.}~If $\Val(\eF) = \T_\omega$.
+  Then,
+  $\omega \neq 0$ and $\eF : \Loops(\X,x) \to \T_\omega$ is a subduction projecting to a smooth isomorphism $\overline\eF : \TT_{\omega,x} \to \T_\omega$.
+  
+  This is what we will prove now.
+  The map $\eF$ is already a smooth surjection,
+  let us check that $\FF$ is a subduction,
+  which will imply that $\eF$ itself is a subduction,
+  and therefore that its projection $\overline{\eF} : \TT_{\omega,x} \to \T_\omega$ is a smooth isomorphism.
+  
+  Let us choose a path
+  $$
+    \sigma \in \Paths(\Loops(\X,x),\bmx,\ast)
+    \widetext{such that} \FF(\sigma) \neq 0.
+    $$
+  Such path exists since $\FF: \Paths(\Loops(\X,x),\bmx,\ast) \to \RR$ is surjective.
+  Let
+  $$
+    \sigma_s(t) = \sigma(st)
+    \widetext{and} \varphi(s) = \FF(\sigma_s).
+    $$
+  So,
+  $\varphi$ is a smooth real function such that
+  $$
+    \varphi(0) = 0
+    \widetext{and}
+    \varphi(1) = \FF(\sigma) \neq 0,
+    $$
+  since $\varphi(0) = \FF(\sigma_0)$ and $\sigma_0 = [t \mapsto \sigma(0)=\bmx]$.
+  Thus,
+  there exists
+  $$
+    s_0 \in \left]0,1\right[
+    \widetext{such that}
+    \varphi'(s_0) \neq 0,
+    $$
+  where $\varphi'$ denotes the derivative of $\varphi$.
+  Otherwise $\varphi$ would be constant and then equal to $0$.
+  Let
+  $$
+    \fS(s) = \bar\sigma_{s_0} * \sigma_{s+s_0},
+    \widetext{where}
+    \bar\sigma_{s_0}(t) = [ t' \mapsto \sigma_{s_0}(t)(1-t')].
+    $$
+  Define
+  $$
+    \psi = \FF \circ \fS.
+    $$
+  That is,
+  $\psi \in \Cinfty(\RR,\RR)$ with:
+  
+  \begin{center}
+    \begin{tikzcd}[column sep=small, row sep=large, every label/.append style = {font = \small}]
+      {} & \Paths(\Loops(\X,x),\bmx,\ast) \arrow[dr, "\FF"] & {}\\
+      % {} & \Paths(\Loops(\X,x),\bmx,\ast) \arrow[dr, start anchor = south east, "\FF"] & {}\\
+      %\RR \arrow[ur,  end anchor=south west, "\fS"] \arrow[rr, swap, "\psi"] & {} & \RR
+      \RR \arrow[ur, "\fS"] \arrow[rr, swap, "\psi"] & {} & \RR
+    \end{tikzcd}
+  \end{center}
+  
+  By Article \ref{art: Integrating-concatenations-over-homotopies}, we have:
+  $$
+    \FF(\bar\sigma_{s_0} * \sigma_{s+s_0}) = \FF(\sigma_{s+s_0}) - \FF(\sigma_{s_0}),
+    $$
+  and then
+  $$
+    \psi(s) = \FF(\fS(s)) = \FF(\bar\sigma_{s_0} * \sigma_{s+s_0}) = \FF(\sigma_{s+s_0}) - \FF(\sigma_{s_0}) = \varphi(s + s_0) - \varphi(s_0).
+    $$
+  Thus,
+  $$
+    \psi(0) = 0
+    \widetext{and}
+    \psi'(0) = \varphi'(s_0) \neq 0.
+    $$
+  Therefore,
+  by the inverse function theorem on $\RR$,
+  there exists $\varepsilon > 0$ such that $\psi \restriction \left]- \varepsilon,+ \varepsilon \right[$ is a local diffeomorphism mapping $\left]- \varepsilon,+ \varepsilon \right[$ to some open interval $\left]-a,+ b \right[$ with $a,b>0$ and $\psi^{-1}(0) = 0$.
+  Hence,
+  $$
+    \psi \restriction  \left]- \varepsilon,+ \varepsilon \right[ = \FF \circ \fS \restriction  \left]- \varepsilon,+ \varepsilon \right[
+    \widetext{implies}
+    \psi \circ \psi^{-1} = \id_{\left]- \varepsilon,+ \varepsilon \right[} = \FF \circ (\fS \circ \psi^{-1}).
+    $$
+  Therefore,
+  $$
+    \FF \circ (\fS \circ \psi^{-1}) =\id_{\left]- \varepsilon,+ \varepsilon \right[}.
+    $$
+  Let us define:
+  $$
+    \Sigma = \fS \circ \psi^{-1},
+    $$
+  Hence,
+  $$
+    \begin{cases}
+    \Sigma  : \left]-a,+ b \right[ \to \Paths(\Loops(\X,x),\bmx,\ast), \\
+    \widetext{with}
+    \Sigma(0) = \fS(0) = \bar\sigma_{s_0} \vee \sigma_{s_0}.
+    \end{cases}
+    $$
+  is a local smooth section of $\FF : \Paths(\Loops(\X,x),\bmx,\ast) \to \RR$.
+  $$
+    \FF \circ \Sigma = \id_{\left]- \varepsilon,+ \varepsilon \right[},
+    $$
+  defined on an open interval around $0 \in \RR$ and mapping $0$ to $\fS(0) = \bar\sigma_{s_0} \vee \sigma_{s_0}$,
+  and for any plot $\P$ in $\RR$ mapping $r_0$ to $0$,
+  $\Q = \Sigma \circ \P$ is a lift in $\Paths(\Loops(\X,x),\bmx,\ast)$:
+  \begin{center}
+    \begin{tikzcd}[column sep=normal, row sep=large, every label/.append style = {font = \small}]
+      \Paths(\Loops(\X,x),\bmx,\ast) \arrow[d, "\FF"] \\
+      \left]-\epsilon,+ \epsilon \right[ \subset \RR  \arrow[u, bend left=30,"\Sigma = \fS \circ \psi^{-1}"]
+    \end{tikzcd}
+    \quad \text{implies} \quad
+    \begin{tikzcd}[column sep=small, row sep=large, every label/.append style = {font = \small}]
+      {} & \Paths(\Loops(\X,x),\bmx,\ast) \arrow[d, "\FF"] \\
+      \U \arrow[r, swap, "\P"] \arrow[ur, "\Q"] & \left]-\epsilon,+ \epsilon \right[ \subset \RR  \arrow[u, bend left=30,"\Sigma"]
+    \end{tikzcd}
+  \end{center}
+  Now,
+  thanks to the additivity of function $\FF$,
+  we can translate this local section everywhere on $\RR$.
+  Let $t_0 \in \RR$,
+  and recall that $\FF$ is surjective.
+  Thus,
+  there exists $\sigma' \in \Paths(\Loops(\X,x),\bmx,\ast)$ such that $\FF(\sigma') = t_0$.
+  Let us then consider
+  $$
+    \fS'(s) = \sigma' \ast \fS(s),
+    $$
+  and let,
+  $$
+    \Psi(s) = \FF(\fS'(s)),
+    \widetext{that is,}
+    \FF(\sigma' \ast \fS(s)) = \FF(\sigma') + \FF(\fS(s)) = t_0 + \psi(s).
+    $$
+  So,
+  $$
+    \Psi(0) = t_0
+    \widetext{and}
+    \Psi'(0) = \psi'(0) \neq 0.
+    $$
+  Thus,
+  $\Psi$ is a local diffeomorphism of $\RR$ mapping $0$ to $t_0$,
+  its inverse $\Psi^{-1}$ maps $t_0$ to $0$.
+  We define then:
+  $$
+    \Sigma' = \fS' \circ \Psi^{-1}
+    $$
+  Then,
+  $\Sigma'$ is a local smooth section of $\FF$ over the interval $\left]t_0 - \epsilon, t_0 + \epsilon \right[$,
+  $$
+    \FF \circ \Sigma' = \id_{\left]t_0 - \epsilon, t_0 + \epsilon \right[},
+    \widetext{such that}
+    \Sigma'(t_0) = \sigma' \ast \fS(0) = \sigma' \ast (\bar\sigma_{s_0} \vee \sigma_{s_0}).
+    $$
+  Hence,
+  we can lift locally $\FF$ around every point $t_0 \in \RR$.
+  Therefore $\FF$ is a subduction.
+  Then,
+  by projection,
+  $\eF = \pi_\omega \circ \FF$ is itself a subduction,
+  and the mapd $\overline\eF : \TT_{\omega,x} \to \T_\omega$,
+  which is injective by construction,
+  is a diffeomorphism and therefore a smooth isomorphism from $\TT_{\omega,x}$ to $\T_\omega$.
+  In conclusion,
+  $\TT_\omega$ is a fibrating groupoid with isotropy $\T_\omega$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: - sect: Symmetries of the Prequantum Groupoid
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Remarks and Applications}
+\section{\textsc{\textbf{Symmetries of the Prequantum Structure}}}
+\label{sec:Symmetries of the Prequantum Structure}
+
+In this section,
+we investigate the symmetries of the prequantum groupoid $(\TT_\omega, \blambda)$ constructed in the Main Theorem.
+We show that the group of automorphisms of this prequantum structure is naturally isomorphic to the group of $\omega$-preserving diffeomorphisms of the base space $\X$,
+demonstrating a faithful representation of the classical symmetries at the prequantum level.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Automorphisms Induced by Symmetries
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[Automorphisms Induced by Symmetries]
+  \label{art:Automorphisms Induced by Symmetries}
+  
+  This article discusses the action of symmetries.
+  The group of diffeomorphisms of $\X$ that preserve the closed $2$-form $\omega$,
+  denoted by $\Diff(\X, \omega)$,
+  plays a crucial role in the symmetry analysis of the system $(\X, \omega)$.
+  In this framework,
+  these symmetries lift naturally to automorphisms of the prequantum groupoid $(\TT_\omega, \blambda)$.
+  Let us denote
+  $$
+    \Aut(\TT_\omega, \blambda) = \{ (\Phi,\phi) \in \Aut(\TT_\omega) \mid \Phi^*(\blambda) = \blambda \}.
+    $$
+  On the other hand,
+  the group of automorphisms of $(\X,\omega)$ is denoted by
+  $$
+    \Diff(\X,\omega) = \{ \phi \in \Diff(\X) \mid \phi^*(\omega) = \omega \}.
+    $$
+  Note first that:
+  
+  \begin{proposition}{~1}
+    If $(\Phi,\phi) \in \Aut(\TT_\omega,\blambda)$ then $\phi \in \Diff(\X,\omega)$.
+  \end{proposition}
+  
+  And then,
+  the construction of automorphisms of the prequantum groupoid:
+  
+  \begin{proposition}{~2.}
+    Let $\TT_\omega$ be the associated prequantum groupoid and $\blambda$ its prequantum $1$-form,
+    associated with the system $(\X,\omega)$,
+    where $\X$ is connected and simply connected.
+    
+    For any $\phi \in \Diff(\X, \omega)$,
+    that is,
+    $\phi \in \Diff(\X)$ and $\phi^*(\omega) = \omega$,
+    define the map
+    $$
+      \Phi: \cY \to \cY
+      \quad \text{with} \quad
+      \Phi([\gamma]_\omega) = [\phi \circ \gamma]_\omega.
+      $$
+    Then,
+    this automorphism preserves the prequantum $1$-form $\blambda$,
+    $\Phi^* \blambda = \blambda$,
+    and
+    $$
+      (\Phi, \phi) \in \Aut(\TT_\omega,\blambda).
+      $$
+  \end{proposition}
+  
+  Note that this proposition shows that the map $(\Phi,\phi) \mapsto \phi$ from $\Aut(\TT_\omega,\blambda)$ to $\Diff(\X,\omega)$ is surjective.
+  
+\end{article}
+
+\begin{proof}
+  We first show that $\Phi$ is well-defined.
+  Suppose $\gamma \sim_\omega \gamma'$.
+  By definition,
+  let $(x,x') = \ends(\gamma) = \ends(\gamma')$.
+  Then,
+  for any fixed-ends homotopy $\sigma : s \mapsto \gamma_s$ in $\ends^{-1}(x,x')$,
+  from $\gamma = \gamma_0$ to $\gamma' = \gamma_1$,
+  $$
+    \int_\sigma \Komega \in \P_\omega.
+    $$
+  Consider the path $\phi \circ \sigma: \RR \to \Paths(\X)$ defined by $s \mapsto \phi \circ \gamma_s$.
+  This is a fixed-ends homotopy from $\phi \circ \gamma$ to $\phi \circ \gamma'$,
+  with $\phi\circ\gamma_s(0) = \phi(x)$ and $\phi\circ\gamma_s(1) = \phi(x')$.
+  That is,
+  $\phi \circ \sigma$ is a path in $\ends^{-1}(\phi(x),\phi(x'))$.
+  Therefore,
+  $$
+    \int_{\phi \circ \sigma} \Komega = \int_\sigma \phi^*(\Komega) = \int_\sigma \Komega \in \P_\omega,
+    $$
+  thanks to the variance of the chain-homotopy operator \cite[\textsection 6.84]{PIZ13}.
+  Thus,
+  $\Phi$ is well-defined.
+  
+  Next,
+  $\Phi$ is a smooth map from $\cY$ to $\cY$.
+  Indeed,
+  the map $\Psi: \Paths(\X) \to \Paths(\X)$ defined by $\Psi(\gamma) = \phi \circ \gamma$ is smooth,
+  as it is the composition operator in the functional diffeology.
+  Since $\class_\omega: \Paths(\X) \to \cY$ is a subduction and $\Phi \circ \class_\omega = \class_\omega \circ \Psi$,
+  $\Phi$ is smooth because $\Psi$ is smooth.
+  
+  The map $\Phi$ is bijective because $\phi$ is a diffeomorphism.
+  Its inverse is given by $\Phi^{-1}([\gamma']_\omega) = [\phi^{-1} \circ \gamma']_\omega$.
+  
+  Finally,
+  we verify the functor properties:
+  
+  \textbf{(a)} Preservation of Source and Target:
+  For $[\gamma]_\omega \in \cY$,
+  \begin{multline*}
+    \ends \circ \Phi([\gamma]_\omega)
+    = \ends([\phi \circ \gamma]_\omega)
+    = \ends(\phi \circ \gamma) \\
+    = (\phi(\gamma(0)), \phi(\gamma(1)))
+    = (\phi \times \phi)(\ends[\gamma]_\omega).
+  \end{multline*}
+  
+  \textbf{(b)} Preservation of Composition:
+  For composable $[\gamma]_\omega, [\gamma']_\omega \in \cY$,
+  \begin{multline*}
+    \Phi([\gamma]_\omega \cdot [\gamma']_\omega)
+    = \Phi([\gamma \vee \gamma']_\omega)
+    = [\phi \circ (\gamma \vee \gamma')]_\omega \\
+    = [(\phi \circ \gamma) \vee (\phi \circ \gamma')]_\omega
+    = [\phi \circ \gamma]_\omega \cdot [\phi \circ \gamma']_\omega
+    = \Phi([\gamma]_\omega) \cdot \Phi([\gamma']_\omega).
+  \end{multline*}
+  
+  \textbf{(c)} Preservation of Identity:
+  For $x \in \X$,
+  with $\bmx = [t \mapsto x]$,
+  $$
+    \Phi(\id_x) = \Phi([\bmx]_\omega) = [\phi \circ \bmx]_\omega = [\widehat{\phi(x)}]_\omega = \id_{\phi(x)}.
+    $$
+  
+  Since $(\phi, \Phi)$ is a groupoid morphism and both $\phi$ and $\Phi$ are diffeomorphisms,
+  $(\phi, \Phi)$ is a diffeological groupoid automorphism of $\TT_\omega$. This proves part (1).
+  
+  For part (2),
+  we show that $\Phi^* \blambda = \blambda$.
+  Let $\phi_* : \Paths(\X) \to \Paths(\X)$ defined by $\phi_*(\gamma) = \phi \circ \gamma$.
+  The map $\Phi$ is defined by the commutative diagram:
+  \begin{center}
+    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \Paths(\X) \arrow[d, swap, "\class_\omega"] \arrow[r, "\phi_*"]  & \Paths(\X) \arrow[d,"\class_\omega"] \\
+      \cY \arrow[r,swap, "\Phi"] & \cY
+    \end{tikzcd}
+  \end{center}
+  Then,
+  $(\Phi \circ \class_\omega)^*(\blambda) = (\class_\omega \circ \phi_*)^*(\blambda)$.
+  That is,
+  $\class_\omega^*(\Phi^*(\blambda)) = (\phi_*)^*(\class_\omega^*(\blambda))$.
+  Thus,
+  $\class_\omega^*(\Phi^*(\blambda)) = (\phi_*)^*(\Komega)$.
+  But,
+  since $\phi^*(\omega) = \omega$,
+  thanks to the variance of the chain-homotopy operator $\CHO$,
+  see \cite[\textsection 6.84]{PIZ13},
+  $(\phi_*)^*(\Komega) = \Komega$,
+  hence:
+  $\class_\omega^*(\Phi^*(\blambda)) = \Komega = \class_\omega(\blambda)$.
+  Thus,
+  since $\class_\omega$ is a subduction,
+  thanks to \cite[\textsection 6.39]{PIZ13},
+  $\Phi^*(\blambda) = \blambda$.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: The Automorphism Group
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[The Automorphism Group of\ $\pmb{(\TT_\omega,\lambda)}$]
+  \label{art: The Automorphism Group}
+  
+  In this article,
+  we discuss the automorphism group of the structure $(\TT_\omega,\blambda)$ and show that its group of automorphisms is isomorphic to the group of symmetries of the structure $(\X,\omega)$,
+  i.e.,
+  $\Diff(\X,\omega)$.
+  
+  The group of automorphisms of the groupoid $\TT_\omega$ preserving the prequantum $1$-form $\blambda$ is denoted by $\Aut(\TT_\omega,\blambda)$.
+  An element $(\Phi,\phi) \in \Aut(\TT_\omega,\blambda)$ is an element $(\Phi,\phi) \in \Aut(\TT_\omega)$ such that $\Phi^*(\blambda) = \blambda$.
+  That is:
+  %
+  \begin{enumerate}
+    \item $\Phi \in \Diff(\cY)$,
+    with $\cY = \Mor(\TT_\omega)$.
+    \item There exists $\phi \in \Diff(\X)$ such that: $\ends \circ\; \Phi = (\phi \times \phi) \circ \ends$,
+    
+    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \cY \arrow[d, swap, "\ends"] \arrow[r, "\Phi"]  & \cY \arrow[d,"\ends"] \\
+      \X \times \X \arrow[r,swap, "\phi \times \phi"] & \X \times \X
+    \end{tikzcd}
+    \quad
+    $\begin{array}{c}
+    \text{with} \\
+    (\phi \times \phi)(x,x') = (\phi(x),\phi(x')).
+    \end{array}$
+    
+    \item $\Phi(y \cdot y') = \Phi(y) \cdot \Phi(y')$,
+    for all juxtaposable pairs.
+    \item $\Phi^*(\blambda) = \blambda$.
+  \end{enumerate}
+  
+  \begin{proposition}{}
+    Let $(\Phi,\phi)$ be a pair in $\Aut(\TT_\omega)$.
+    If $\Phi^*(\blambda) = \blambda$,
+    then $\phi \in \Diff(\X,\omega)$.
+  \end{proposition}
+  
+  We finally establish the most important result on the group of automorphisms of the prequantum groupoid:
+  
+  \begin{theorem}{}
+    The projection $(\Phi,\phi) \mapsto \phi$ from the group of automorphisms of the prequantum groupoid $\Aut(\TT_\omega,\blambda)$ to the group of symmetries of the parasymplectic form $\omega$ on $\X$,
+    $\Diff(\X,\omega)$,
+    is an isomorphism of diffeological groups:
+    $$
+      \Aut(\TT_\omega, \blambda) \simeq \Diff(\X,\omega).
+      $$
+  \end{theorem}
+  
+  \textbf{Note.} This theorem reveals a particularly interesting situation:
+  the group of $\omega$-preserving diffeomorphisms of the base space $(\X, \omega)$ has a full and faithful representation as automorphisms of the prequantum groupoid $(\TT_\omega, \blambda)$.
+  This is a significant feature,
+  as it implies that every symmetry of the classical system $(\X, \omega)$ lifts to a unique automorphism of the prequantum structure,
+  and the entire group $\Diff(\X, \omega)$ is represented at the prequantum level without any loss of information or the need for a central extension.
+  The prequantum property of the system $(\X,\omega)$ is captured in the isotropy groups $\TT_{\omega,x}$ of the groupoid $\TT_\omega$.
+  This is achieved without abandoning any symmetries of the structure.
+  
+\end{article}
+
+\begin{proof}
+  Let us begin by proving the first assertion.
+  Let us apply $\ends \circ \Phi = (\phi \times \phi) \circ \ends$ to the pullback of $\omega \ominus \omega$\,:
+  \begin{align*}
+    (\ends \circ\; \Phi)^*(\omega \ominus \omega) & = ((\phi \times \phi) \circ \ends)^*(\omega \ominus \omega) \\
+    \Phi^*(\ends^*(\omega \ominus \omega)) & = \ends^*((\phi \times \phi)^*(\omega \ominus \omega)) \\
+    \Phi^*(\der\blambda) & = \ends^*(\phi^*(\omega) \ominus \phi^*(\omega)) \\
+    \der[\Phi^*\blambda] & = \ends^*(\phi^*(\omega) \ominus \phi^*(\omega)) \\
+    \der\blambda & = \ends^*(\phi^*(\omega) \ominus \phi^*(\omega)) \\
+    \ends^*(\omega \ominus \omega) & = \ends^*(\phi^*(\omega) \ominus \phi^*(\omega))
+  \end{align*}
+  Since $\ends$ is a subduction,
+  this implies $\phi^*(\omega) \ominus \phi^*(\omega) = \omega \ominus \omega$,
+  see \cite[\textsection 6.39]{PIZ13}.
+  Now apply that to a plot $\P \times \Const$,
+  where $\Const$ is any constant plot.
+  Then we get $\phi^*(\omega)(\P) = \omega(\P)$ for all plots in $\X$,
+  i.e.,
+  $\phi^*(\omega) = \omega$.
+  
+  Now,
+  let us consider the projection $\pr_2 (\Phi,\phi) \mapsto \phi$ from $\Aut(\TT_\omega,\blambda)$ to $\Diff(\X,\omega)$.
+  We know already by Article \ref{art:Automorphisms Induced by Symmetries} that this is a surjection.
+  Let us consider the kernel $\ker(\pr_2)$ of this projection,
+  that is the subgroup of $(\Phi,\id_\X) \in \Aut(\TT_\omega,\blambda)$.
+  Since $\Phi$ projects onto the identity of $\X$,
+  one has:
+  $$
+    \ends \circ\ \Phi = \ends.
+    $$
+  That is,
+  for all $y \in \cY$,
+  $\ends(\Phi(y)) = \ends(y)$.
+  Thus,
+  $\Phi(y)$ is composable with $y^{-1}$,
+  and $\tau(y) = \Phi(y) \cdot y^{-1}$ belongs to the isotropy group $\TT_{\omega,x}$,
+  with $x = \src(y)$.
+  By construction,
+  the map $\tau$ is smooth.
+  Therefore the map $\Phi \in \ker(\pr_2)$ writes $\Phi(y) = \tau(y) \cdot y$,
+  and satisfies $\Phi^*(\blambda) = \blambda$.
+  
+  Now choose $x \in \X$,
+  and let $\1_x : \Y_x \to \X$,
+  where $\Y_x = \Mor_{\TT_\omega}(x,\ast)$ and $\1_x = \1$.
+  Let $\lambda_x = \blambda \restriction \Y_x$.
+  The projection $\1_x$ is a principal fibration with group $\T_x = \TT_{\omega,x}$,
+  and the $1$-form $\lambda_x$ is actually a diffeological connection form satisfying the conditions \cite[\textsection 8.37]{PIZ13}:
+  \begin{itemize}
+    \item[$\ast$] The form is \emph{invariant} by $\T_x$, $\tau^*(\lambda_x) = \lambda_x$,
+    for all $\tau \in \T_x$.
+    \item[$\ast$] The form is \emph{calibrated}:
+    $\hat y^*(\lambda_x) = \theta$,
+    where $\hat y : \tau \mapsto \tau(y)$ is the \emph{orbit map},
+    and $\theta$ is the canonical $1$-form on $\T_x \simeq \RR/\P_\omega$.
+  \end{itemize}
+  Now, the restriction $\Phi_x$ of $\Phi$ on $\Y_x$ writes the same way,
+  that is,
+  $\Phi_x(y) = \tau(y) \cdot y$.
+  
+  \begin{lemma}{}
+    The automorphism $\Phi_x : y \mapsto \tau(y) \cdot y$ preserves $\lambda_x$,
+    i.e.,
+    $\Phi_x^*(\lambda_x) = \lambda_x$,
+    if and only if $\tau(y) = \tau_x$ is constant on $\Y_x$.
+  \end{lemma}
+  
+  \smallskip
+  \textit{Proof of the lemma.}\hspace{1ex}
+  Let us compute $\Phi_x^*(\lambda_x)$ on a plot $r \mapsto y_r$.
+  That is,
+  $$
+    \Phi_x^*(\lambda_x)(r \mapsto y_r)_r(\delta r) = \lambda_x(r \mapsto \tau(y_r) \cdot y_r)_r(\delta r),
+    $$
+  for all $r$ in the domain of the plot and $\delta r$ a tangent vector at the point $r$.
+  For that,
+  we will separate the variables:
+  for any integers $n$ and $m$,
+  any $n$-plot $\btau : \U \to \T_x$ and any $m$-plot $\P : \V \to \Y_x$,
+  let $\btau \cdot \P$ be the plot of $\Y_x$ defined by
+  $$
+    \btau \cdot \P : \U \times \V \to \Y_x,  \text{ with }  \btau \cdot \P : (r,s) \mapsto \btau(r) \cdot \P(s).
+    $$
+  Let $(r,s) \in \U \times \V$ and two vectors $\delta r \in \RR^n$ and  $\delta s \in \RR^m$.
+  The value of $\lambda_x$ on $\btau \cdot \P$ is given by
+  $$
+    \lambda_x(\btau \cdot \P)_{r \choose s} \vect{\delta r \\ \delta s} = \btau^*(\theta)_r(\delta r) + \lambda_x(\P)_s(\delta s).
+    $$
+  Indeed,
+  let us develop the $1$-form $\lambda_x(\btau \cdot \P)$ defined on $\U \times \V$,
+  \begin{eqnarray*}
+    \lambda_x(\btau \cdot \P)_{r \choose s} \vect{\delta r \\ \delta s} & = & \lambda_x[(r,s) \mapsto (\btau(r),\P(s)) \mapsto \tau(r) \cdot \P(s)]_{r \choose s}\vect{\delta r \\ \delta s} \\
+    & = & [\lambda_x^{\U,s}(r) \quad \lambda_x^{\V,r}(s)] \vect{\delta r \\ \delta s},
+  \end{eqnarray*}
+  because every $1$-form on $\U \times \V$ at a point $(r,s) \in \U \times \V$ writes $[\lambda_x^{\U,s}(r) \ \lambda_x^{\V,r}(s)]$,
+  where $\lambda_x^{\U,s}$ is a $1$-form on $\U$ depending on $s$,
+  and $\lambda_x^{\V,r}$ is a $1$-form on $\V$ depending on $r$.
+  Let us use indifferently $\tau_r = \btau(r)$,
+  and $y_s = \P(s)$.
+  We have
+  \begin{eqnarray*}
+    \lambda_x(\btau \cdot \P)_{r \choose s} \vect{ \delta r \\ \delta s} & = & \lambda_x^{\U,s}(r) (\delta r) + \lambda_x^{\V,r}(s)(\delta s) \\
+    & = & \lambda_x[r \mapsto \btau(r) \cdot y_s]_r(\delta r) + \lambda_x[s \mapsto \tau_r \cdot \P(s)]_s(\delta s) \\
+    & = & \lambda_x(\hat y_s \circ \btau)_r(\delta r) + \tau_r^*(\lambda)(\P)_s(\delta s) \\
+    & = & \btau^*[{\hat y}_s^*(\lambda)]_r(\delta r) + \lambda(\P)_s(\delta s) \\
+    & = & \btau^*(\theta)_r(\delta r) + \lambda(\P)_s(\delta s).
+  \end{eqnarray*}
+  Therefore,
+  $$
+    \Phi_x^*(\lambda_x)(r \mapsto y_r)_r(\delta r) = \btau^*(\theta)_r(\delta r) + \lambda(r \mapsto y_r)_r(\delta r),
+    $$
+  where $\btau(r) = \tau(y_r)$.
+  Now,
+  having $\Phi_x^*(\lambda_x) = \lambda_x$ means that $\Phi_x^*(\lambda_x)(r \mapsto y_r)_r(\delta r) = \lambda_x(r \mapsto y_r)_r(\delta r)$,
+  for all plots $r \mapsto y_r$.
+  That is,
+  $\btau^*(\theta)_r(\delta r) = 0$ for all plots $r \mapsto y_r$.
+  Locally,
+  the plot $r \mapsto \btau(r) = \tau(y_r)$ lifts to $\RR$ into a plot $r \mapsto t(y_r)$,
+  such that $\tau(y_r) = \class(t(y_r))$,
+  where $\class : \RR \to \T_x = \RR/\P_\omega$.
+  Then,
+  $\btau^*(\theta)_r = [r \mapsto t(y_r)]^*(\dt) = \der[r \mapsto(t(y_r))]$.
+  And this must be zero.
+  Thus $r \mapsto t(y_r)$ is locally constant,
+  and so is $r \mapsto \tau(y_r)$,
+  for all plots $r \mapsto y_r$.
+  Hence,
+  $y \mapsto \tau(y)$ is locally constant,
+  and since $\Y_x$ is connected,
+  $y \mapsto \tau(y)$ is constant,
+  equal to some $\tau_x$.\hfill $\square$
+  
+  Now,
+  the morphism $\Phi$ writes $\Phi(y) = \tau_x \cdot y$,
+  with $x = \src(y)$.
+  Applying the groupoid morphism rule $\Phi(y \cdot y') = \Phi(y) \cdot \Phi(y')$,
+  we get,
+  with $x = \src(y)$ and $x' = \trg(y) = \src(y')$,
+  $$
+    \tau_x \cdot y \cdot y' = \tau_x \cdot y \cdot \tau_{x'} \cdot y' \quad \Rightarrow \quad \tau_{x'} = \id_{x'}.
+    $$
+  Therefore,
+  for all $y$ and $x = \src(y)$,
+  $\Phi(y) = y$.
+  The only automorphism of the structure $(\TT_\omega,\blambda)$ projecting onto the identity of $\X$ is the identity of $\cY$,
+  and thus the projection $\pr_2: \Aut(\TT_\omega,\blambda) \to \Diff(\X,\omega)$ is an isomorphism.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: - sect: Remarks and Applications
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Remarks and Applications}
+\section{\textsc{\textbf{Remarks and Applications}}}
+\label{sec:Remarks and Applications}
+This section discusses the significance and implications of the main theorem,
+structured into several articles.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: On the System $TT_\omega$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[On the System: The Prequantum Groupoid as the Central Object]
+  \label{art: On the System}
+  
+  The construction presented in this paper introduces a shift in the geometric quantization program by positioning the prequantum groupoid $(\TT_\omega, \blambda)$ as the central object,
+  in place of the traditional prequantum principal bundle.
+  
+  This groupoid object is an intrinsic construction,
+  derived solely from the parasymplectic space $(\X, \omega)$,
+  as a diffeological quotient of the space of paths,
+  a feature that incidentally resonates with Feynman's path integral approach to quantization.
+  This single object serves as a unified geometric container possessing several key virtues:
+  
+  $\ast$~\textbf{It contains the original classical system $(\X, \omega)$}:
+  The space of objects $\Obj(\TT_\omega)$ is $\X$,
+  and the fundamental relationship defined by the $2$-form $\omega$ is encoded in the curvature of the prequantum $1$-form $\blambda$ on the space of morphisms $\Mor(\TT_\omega)$.
+  
+  $\ast$~\textbf{It embodies the prequantum total space}:
+  The space of morphisms $\cY = \Mor(\TT_\omega)$ carries the fundamental prequantum $1$-form $\blambda$,
+  which serves as the potential for $\omega$ according to the formula $d\blambda + \ends^*(\omega \oplus \omega) = 0$.
+  
+  $\ast$~\textbf{It faithfully represents the full symmetry group $\pmb{\Diff(\X, \omega)}$}:
+  As shown in Article \ref{art: The Automorphism Group},
+  the group of $\omega$-preserving diffeomorphisms of $\X$ acts as the full group of automorphisms of the entire $(\TT_\omega, \blambda)$ structure in a faithful manner,
+  without involving central extensions at this level.
+  
+  $\ast$~\textbf{It geometrically captures the quantum phase information}:
+  The periodicity associated with $\omega$ is intrinsically represented by the structure of the isotropy groups $\TT_{\omega,x}$ at each point $x \in \X$
+  ---~the ``vertical'' structure of the groupoid which is isomorphic to the torus of periods $\T_\omega$~---
+  as the quotient of the space of loops.
+  
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Structure of the Space of Morphisms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[Structure of the Space of Morphisms $\pmb{\cY}$]
+  \label{art: Structure of the Space of Morphisms}
+  
+  The space of morphisms $\cY = \Mor(\TT_\omega)$ possesses a rich internal structure related to the principal bundle slices $\cY_x = \Mor_{\TT_\omega}(x, \ast)$,
+  where $x \in \X$ is a fixed base point.
+  Recall from the main theorem (Theorem \ref{sec:Main Theorem: The Prequantum Groupoid}, part 1) that $\1_x: \cY_x \to \X$ is a principal $\TT_{\omega,x}$-bundle with structure group $\TT_{\omega,x} \simeq \T_\omega$.
+  
+  Now,
+  consider the square of the projection $\1_x : \cY_x \to \X$,
+  that is,
+  $$
+    \1_x \times \1_x : \cY_x \times \cY_x \to \X \times \X,
+    \widetext{with}
+    \1_x \times \1_x  : (y,y') \mapsto (\1(y),\1(y')).
+    $$
+  Since $\1_x : \cY_x \to \X$ is itself a $\TT_{\omega,x}$-principal fiber bundle,
+  this is a $\TT_{\omega,x}^2$-principal fiber bunlde,
+  for the action $(\tau,\tau') \cdot (y,y') = (\tau \cdot y, \tau' \cdot y')$.
+  According to the reduction of principal bundle described in \cite[\textsection 8.18]{PIZ13},
+  the quotient of $\cY_x \times \cY_x$ by the diagonal subgroup $\TT_{\omega,x} \simeq \{(\tau,\tau) \mid \tau \in \TT_{\omega,x} \}$ is itself a fiber bundle over the same base space $\X \times \X$,
+  by the projection $\class: (y,y') \mapsto \cY \times_{\TT_{\omega,x}} \cY = (\cY \times \cY)/{\TT_{\omega,x}}$,
+  with fiber ${\TT_{\omega,x}}^2/{\TT_{\omega,x}} \simeq {\TT_{\omega,x}}$ (as homogeneous space).
+  
+  Now,
+  the quotient $\cY_x \times_{\TT_{\omega,x}} \cY_x$ is naturally realized by the projection
+  $$
+    \class:  \cY_x \times \cY_x \to \cY
+    \widetext{with}
+    \class(y,y') = y^{-1} \cdot y'.
+    $$
+  Therefore,
+  the projection $\ends: \cY \to \X \times \X$ is itself a fiber bundle with homogeneous fiber $\T_\omega$,
+  which is summarized by the diagram:
+  
+  \begin{center}
+    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \cY_x \times \cY_x \arrow[dr, swap, "\1_x \times \1_x"] \arrow[rr, "\class"]  & {} & \cY \arrow[dl,"\ends"] \\
+      {} & \X \times \X & {}
+    \end{tikzcd}
+  \end{center}
+  
+  \smallskip
+  \textbf{Note.}
+  As a consequence of the groupoid structure,
+  for any fixed path $\gamma_0 \in \Paths(\X,x,x')$,
+  the map $\tau \mapsto \tau \cdot [\gamma_0]_\omega$ establishes a diffeomorphism from the isotropy group $\TT_{\omega,x}$ to the fiber $\Mor_{\TT_\omega}(x,x')$.
+  This means that $\Mor_{\TT_\omega}(x,x')$ is a principal homogeneous space for the isotropy group $\TT_{\omega,x} \simeq \T_\omega$.
+  
+  Thus,
+  the fibers of the bundle $\ends: \cY \to \X \times \X$ are all diffeomorphic to the torus of periods $\T_\omega$.
+  This holds for any pair of points $(x,x')$.
+  
+  When the torus of periods $\T_\omega = \RR/\P_\omega$ is a strict diffeological space (i.e., not diffeomorphic to $\S^1$ or $\RR$),
+  the total space of the groupoid $\cY$ will also be a strict diffeological space,
+  even if the base space $\X$ is a smooth manifold.
+  This highlights how the diffeological framework naturally accommodates these structures that arise from the geometry of $\omega$ and may not fit into the traditional manifold setting.
+  
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Exact Case: A Unique Prequantum Structure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[The Exact Case]
+  \label{art: Exact Case}
+  
+  When the closed $2$-form $\omega$ is exact,
+  i.e., $\omega = d\alpha$ for some $1$-form $\alpha \in \Omega^1(\X)$,
+  the unique prequantum groupoid construction simplifies significantly,
+  revealing a particularly direct relationship to the primitive $\alpha$.
+  
+  In this case,
+  the group of periods $\P_\omega$ is trivial,
+  $\P_\omega = \{0\}$.
+  Indeed,
+  $\Komega = \CHO(d\alpha) = \1^*(\alpha) - \0^*(\alpha) - d[\Kalpha]$.
+  Note that $f_\omega := \Kalpha \in \Omega^0(\Paths(\X))$ is a smooth map,
+  explicitly:
+  $$
+    f_\omega : \Paths(\X) \to \RR
+    \widetext{is defined by}
+    f_\omega(\gamma) = \int_\gamma \alpha.
+    $$
+  Now,
+  restricted to $\Loops(\X)$,
+  we get $\Komega \restriction \Loops(\X) = df_\omega \restriction \Loops(\X)$,
+  and the periods are the integrals
+  $\int_\sigma df_\omega = f_\omega(\sigma(1)) - f_\omega(\sigma(0))$.
+  However,
+  when $\sigma \in \Loops(\Loops(\X))$,
+  $f_\omega(\sigma(1)) = f_\omega(\sigma(0))$,
+  which implies $\P_\omega = \{0\}$ and $\T_\omega = \RR/\P_\omega = \RR$.
+  
+  Next,
+  the equivalence relation $\gamma \sim_\omega \gamma'$ means:
+  $\ends(\gamma) = \ends(\gamma') = (x,x')$ and $\int_\sigma \Komega = 0$ for any fixed-ends homotopy $\sigma : s \mapsto \gamma_s$ from $\gamma$ to $\gamma'$.
+  But:
+  \begin{multline*}
+    \int_\sigma \Komega = \int_\sigma (\1^*(\alpha) - \0^*(\alpha) - d[f_\omega])
+    = \int_{\1 \circ \sigma} \alpha -  \int_{\0 \circ \sigma} \alpha - \int_\sigma df_\omega \\
+    = \int_{s \mapsto \gamma_s(1)} \alpha -  \int_{s \mapsto \gamma_s(0)} \alpha - (f_\omega(\gamma) - f_\omega(\gamma'))
+    = \underbrace{\int_{s \mapsto x'} \alpha}_{=0} - \underbrace{\int_{s \mapsto x} \alpha}_{=0}  - f_\omega(\gamma) + f_\omega(\gamma')\\
+    = f_\omega(\gamma') - f_\omega(\gamma)
+  \end{multline*}
+  Then,
+  $$
+    \gamma \sim_\omega \gamma'
+    \widetext{iff}
+    \ends(\gamma) = \ends(\gamma')
+    \widetext{and}
+    \int_\gamma \alpha = \int_{\gamma'} \alpha.
+    $$
+  
+  The space of morphisms $\cY = \Paths(\X)/\!\sim_\omega$ can be identified diffeomorphically with $\X \times \RR \times \X$,
+  by the subduction
+  $$
+    \cY \simeq \X \times \RR \times \X
+    \widetext{with}
+    \class_\omega : \gamma \mapsto \left(x = \gamma(0), t = \int_\gamma \alpha,x' = \gamma(1) \right)
+    $$
+  By additivity of the integral of $\alpha$ on paths,
+  the groupoid composition becomes
+  $$
+    (x,t,x') \cdot (x',t',x'') = (x, t + t', x")
+    $$
+  This groupoid is an \emph{additive groupoid} over $\X$.
+  Note that,
+  the identity of the object $x \in \X$ in the groupoid is the arrow $(x,0,x)$.
+  The map $x \mapsto (x,0,x)$ from $\X$ to $\cY$ is the identity induction.
+  
+  The prequantum $1$-form $\blambda$ on $\cY$,
+  uniquely determined by $\class_\omega^*(\blambda) = \Komega$,
+  can be expressed on a $1$-plot $s \mapsto \gamma_s$ as:
+  $\class_\omega^*(\blambda)(s \mapsto \gamma_s) = \blambda(s \mapsto \class_\omega(\gamma_s))  = \Komega(s \mapsto \gamma_s)$.
+  That is,
+  $\blambda(s \mapsto (x_s, t_s, x'_s))  = \Komega(s \mapsto \gamma_s)$,
+  with $x_s = \gamma_s(0)$,
+  $t_s = f_\omega(\gamma_s)$ and $x'_s = \gamma_s(1)$.
+  But,
+  \begin{align*}
+    \Komega(s \mapsto \gamma_s)&  = \1^*(\alpha)(s \mapsto \gamma_s) - \0^*(\alpha)(s \mapsto \gamma_s) - [df_\omega](s \mapsto \gamma_s), \\
+    & = \alpha(s \mapsto \gamma_s(1))) - \alpha(s \mapsto \gamma_s(0))) - d[s \mapsto f_\omega(\gamma_s)],\\
+    & = \alpha(s \mapsto x'_s) - \alpha(s \mapsto x_s) - d[s \mapsto t_s]
+  \end{align*}
+  Therefore,
+  $$
+    \blambda(s \mapsto (x_s, t_s, x'_s)) = \alpha(s \mapsto x'_s) - \alpha(s \mapsto x_s) - d[s \mapsto t_s]
+    $$
+  That is,
+  with reordering terms:
+  $$
+    \blambda = \pr_3^*(\alpha) - \pr_2^*(dt) - \pr_1^*(\alpha),
+    $$
+  where the $\pr_i$,
+  $i = 1,2,3$,
+  are the projections of $\cY \simeq \X \times \RR \times \X$ on its three factors.
+  
+  Since we are in a very simple case,
+  we can easily check that the main properties for $(\TT_\omega, \blambda)$ are satisfied:
+  
+  $\ast$~\textbf{Invariance of $\blambda$ under Groupoid Composition}:
+  We verify the left and right invariance of $\blambda$ using its coordinate expression:
+  $y = (x, t, x') \in \cY \simeq \X \times \RR \times \X$.
+  
+  Let us check the left invariance.
+  Let $y_0 = (x_0, t_0, x'_0) \in \cY$ and $y = (x,t,x')$.
+  Then,
+  $\eL(y_0)(y) = (x_0, t_0, x'_0) \cdot (x,t,x')$,
+  which composes only when $x = x'_0$.
+  Then $\eL(y_0)(y) = (x_0, t_0, x'_0) \cdot (x'_0,t,x') = (x_0,t_0 + t, x')$,
+  that is,
+  $\eL(y_0)(x'_0,t,x')= (x_0, t_0 + t, x')$.
+  Now
+  $\blambda \restriction {\cY_{x'_0,\ast}} = \pr_3^*(\alpha) - \pr_2^*(dt)$.
+  Thus $[(x'_0,t,x') \mapsto (x_0,t_0 + t, x']^*((\pr_3^*(\alpha) - \pr_2^*(dt))) = \pr_3^*(\alpha) - \pr_2^*(dt) = \blambda \restriction {\cY_{x_0,\ast}}$.
+  The same applies to right invariance.
+  
+  $\ast$~\textbf{Curvature of $\blambda$}:
+  The differential of $\blambda$ gives $d[\pr_3^*(\alpha)] - d[\pr_2^*(dt)] - d[\pr_1^*(\alpha)] = \pr_3^*(d\alpha) - 0 - \pr_1^*(d\alpha)$,
+  that is,
+  $d\blambda = \pr_3^*(\omega) - \pr_1^*(\omega)$,
+  which was announced by the theory.
+  
+  $\ast$~\textbf{Action of $\pmb{\Diff(\X, \omega)}$}:
+  Let $\phi \in \Diff(\X, \omega)$,
+  then $\phi^*(d\alpha) = d\alpha$ implies $d[\phi^*(\alpha)] = d\alpha$,
+  and then $d[\phi^*(\alpha)-\alpha] = 0$.
+  That is $\phi^*(\alpha)-\alpha$ is closed,
+  but since $\X$ is simply connected $\phi^*(\alpha)-\alpha$ is exact and there exists a function $f_\phi \in \Cinfty(\X,\RR)$ such that $\phi^*(\alpha) = \alpha + df_\phi$.
+  So,
+  let
+  $$
+    \Phi[\gamma]_\omega = [\phi \circ \gamma]_\omega = \left(\phi(\gamma(0)), \int_{\phi \circ \gamma} \alpha, \phi(\gamma(1))\right).
+    $$
+  But $\int_{\phi \circ \gamma} \alpha = \int_\gamma \phi^*(\alpha) = \int_\gamma \alpha + df_\phi = \int_\gamma \alpha + \int_\gamma f_\phi = \int_\gamma \alpha + f_\phi(\gamma(1)) - f_\phi(\gamma(0))$.
+  Therefore,
+  $$
+    \Phi(x,t,x') = (\phi(x), t + f_\phi(x') - f_\phi(1), \phi(x')).
+    $$
+  Hence,
+  \begin{align*}
+    \Phi^*(\blambda) &= \Phi^*(\pr_3^*(\alpha) - \pr_2^*(dt) - \pr_1^*(\alpha) \\
+    & =  \Phi^*(\pr_3^*(\alpha)) - \Phi^*(\pr_2^*(dt)) - \Phi^*(\pr_1^*(\alpha)) \\
+    & = (\pr_3 \circ \Phi)^*(\alpha) - (\pr_2 \circ \Phi)^*(dt) - (\pr_1 \circ \Phi)^*(\alpha)\\
+    & = (\phi \circ \pr_3)^*(\alpha) - [t + f_\phi(x') - f_\phi(x)]^*(dt) -(\phi \circ \pr_1)^*(\alpha) \\
+    & = \pr_3^*(\phi^*(\alpha)) - d[t + f_\phi(x') - f_\phi(x)] - \pr_1^*(\phi^*(\alpha))\\
+    & = \pr_3^*(\alpha + df_\phi) - dt - d[f_\phi \circ \pr_3] + d[f_\phi \circ \pr_1] - \pr_1^*(\alpha + df_\phi) \\
+    & = \pr_3^*(\alpha) -dt - \pr_1^*(\alpha) + \pr_3^*(df_\phi) - d[\pr_3^*(f_\phi)] + d[\pr_1^*(f_\phi)] - \pr_1^*(df_\phi) \\
+    & = \pr_3^*(\alpha) -dt - \pr_1^*(\alpha) + \pr_3^*(df_\phi) - \pr_3^*(df_\phi) + \pr_1^*(df_\phi) - \pr_1^*(df_\phi) \\
+    & = \pr_3^*(\alpha) -dt - \pr_1^*(\alpha) \\
+    & = \blambda.
+  \end{align*}
+  This tedious computation,
+  confirming that $\Diff(\X, \omega)$ acts on $\cY$ while preserving $\blambda$,
+  is not without purpose.
+  It shows how the function cocycle $f_\phi$ of $\Diff(\X, \omega)$,
+  related to the lack of invariance of the primitive $\alpha$,
+  is compensated by the variance of the isotropy such that $\Diff(\X, \omega)$ acts on $\TT_\omega$ as an automorphism of $(\TT_\omega,\blambda)$.
+  
+  \smallskip
+  \textbf{Note.} In this exact case,
+  the prequantum bundles $\cY_x$ are trivial $\RR$-bundles,
+  mirroring the classical situation for exact symplectic forms on manifolds.
+  This recovery of the classical structure in the simplest case demonstrates the consistency and generality of the path-space construction.
+  
+  The connection form $\lambda = \blambda \restriction \cY_x$ corresponds to a connection on the trivial $\RR$-bundle $\X \times \RR \to \X$ whose curvature is $\omega$.
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Example S2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[Example: The Prequantum Groupoid for $(\S^2, \omega_{S^2})$]
+  \label{art: Example S2}
+  
+  The $2$-sphere $\S^2$,
+  equipped with its standard symplectic form $\omega_{S^2}$,
+  is a fundamental example in geometric quantization.
+  It is a connected and simply connected manifold,
+  and $\omega_{S^2}$ is a closed $2$-form.
+  The periods of $\omega_{S^2}$ are related to $\pi_2(\S^2) \simeq \ZZ$.
+  For a suitable normalization (e.g., such that $\int_{\S^2} \omega_{S^2} = 2\pi$),
+  the group of periods $\P_{\omega_{S^2}}$ is $2\pi\ZZ$.
+  This is a discrete subgroup of $\RR$.
+  Thus, $(\S^2, \omega_{S^2})$ satisfies the conditions of the main theorem.
+  
+  The torus of periods is $\T_{\omega_{S^2}} = \RR/\P_{\omega_{S^2}} = \RR/2\pi\ZZ \simeq \S^1$.
+  
+  According to the main theorem,
+  the prequantum groupoid $\TT_{\omega_{S^2}}$ for $(\S^2, \omega_{S^2})$ has $\S^2$ as its objects.
+  The space of morphisms is $\cY = \Paths(\S^2) / \sim_{\omega_{S^2}}$,
+  where the equivalence relation $\sim_{\omega_{S^2}}$ is determined by $\omega_{S^2}$ and its periods $2\pi\ZZ$.
+  The isotropy group at any point $x \in \S^2$ is isomorphic to the torus of periods: $\TT_{\omega_{S^2}, x} \simeq \T_{\omega_{S^2}} \simeq \S^1$.
+  
+  The space of morphisms $\cY$ has a rich structure over the product space $\S^2 \times \S^2$ via the source/target map $\ends: \cY \to \S^2 \times \S^2$.
+  As discussed in Article \ref{art: Structure of the Space of Morphisms},
+  this map is a diffeological fiber bundle with fiber $\T_{\omega_{S^2}} \simeq \S^1$.
+  
+  In this specific case,
+  the prequantum line bundle over $\S^2$ (corresponding to the prequantization condition $[\omega_{S^2}] \in \HDR^2_{\mathrm{dR}}(\S^2)$ being integral) is the well-known Hopf bundle $\pi: \S^3 \to \S^2$,
+  which is a principal $\S^1$-bundle.
+  The space of morphisms $\cY$ of the prequantum groupoid $\TT_{\omega_{S^2}}$ can be identified with the space of isomorphisms between fibers of this principal bundle.
+  This space is diffeomorphic to $(\S^3 \times \S^3) / \S^1_{\text{diag}}$,
+  where $\S^1_{\text{diag}}$ is the diagonally embedded subgroup in $\S^1 \times \S^1$.
+  
+  The map $\ends: \cY \to \S^2 \times \S^2$ is a $\S^1$-bundle over $\S^2 \times \S^2$.
+  The base space $\S^2 \times \S^2$ is a $4$-dimensional manifold,
+  the fiber is $\S^1$ (a $1$-dimensional manifold),
+  and the total space $\cY \simeq (\S^3 \times \S^3) / \S^1_{\text{diag}}$ is a $5$-dimensional manifold.
+  The prequantum $1$-form $\blambda$ on $\cY$ is a $1$-form on this $5$-manifold whose curvature $d\blambda$ is related to $\omega_{S^2} \ominus \omega_{S^2}$ on the base $\S^2 \times \S^2$.
+  
+  This example provides a concrete illustration of the prequantum groupoid construction for a classical symplectic manifold,
+  showing how the space of morphisms $\cY$ forms a principal $\S^1$-homogeneous-bundle over the product of the base space with itself,
+  with the expected dimensions and structure related to the classical prequantum bundle.
+  
+  \smallskip
+  \textbf{Note.} For any pair of non-antipodal points $(x,x') \in \S^2 \times \S^2$,
+  the space of morphisms $\Mor_{\TT_{\omega_{S^2}}}(x,x')$,
+  diffeomorphic to $\S^1$,
+  can be trivialized.
+  The trivialization is explicitly realized by mapping a class $[\gamma]_{\omega_{S^2}}$ (where $\gamma$ is a path from $x$ to $x'$) as follows
+  $$
+    [\gamma]_{\omega_{S^2}} = \bigg(x, \mathrm{e}^{i {\displaystyle \int_{\gamma_{x,x'}}^\gamma \hspace{-1em}\Komega_{S^2}}},x'\bigg),
+    $$
+  where $\gamma_{x,x'}$ is the unique shortest geodesic from $x$ to $x'$,
+  and the integral is taken over any fixed-ends homotopy between $\gamma_{x,x'}$ and $\gamma$ in $\Paths(\S^2,x,x')$.
+  This corresponds to the integral of $\omega_{S^2}$ on any surface sweeped by the homotopy.
+  This identification is a local trivialization of $\cY_{\S^2}$ over the subset of non-antipodal points of the sphere.
+  It connects with the physical intuition often found in the literature,
+  between the abstract path-space quotient and a concrete phase value associated with paths between points.
+  
+\end{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Application to Symplectic Reduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[Application to Symplectic Reduction]
+  \label{art: Application to Symplectic Reduction}
+  
+  A central and often problematic question in geometric quantization is whether the process of quantization commutes with symplectic reduction.%
+  \footnote{Reflecting on the history of this subject,
+  I recall giving my first talk at Souriau's seminar more than 40 years ago, specifically on Alan Weinstein's seminal paper on symplectic reduction.
+  I still vividly remember it was a Tuesday afternoon.}
+  Classically,
+  quantizing a symplectic manifold and then performing a reduction (Quantize then Reduce, QTR) frequently does not yield the same result as first reducing the classical system and then quantizing the reduced space (Reduce then Quantize, RTQ).
+  This discrepancy is particularly acute when the reduced space is singular,
+  lacking a smooth manifold structure.
+  Traditional geometric quantization methods,
+  heavily reliant on local Euclidean charts,
+  face significant obstacles when applied directly to such singular reduced spaces.
+  
+  The diffeological framework,
+  by providing a robust setting for differential geometry on arbitrary spaces including those with singularities,
+  allows us to construct the prequantum groupoid $(\TT_\omega, \blambda)$ even for singular parasymplectic spaces arising from reduction.
+  This holistic approach,
+  which places the prequantum groupoid as a unified object encoding both classical and prequantum information along with the full symmetry group,
+  offers a novel perspective on the reduction problem.
+  This perspective resonates with the general philosophy of diffeology regarding quotient spaces,
+  as discussed in \cite{GIZ25}.
+  
+  When considering a quotient procedure $\X/\!\sim$,
+  diffeology encourages focusing on the resulting quotient space itself,
+  equipped with the quotient diffeology, rather than being tied to the specific procedure that generated it.
+  For instance,
+  the Hopf reduction $\S^3/\S^1$ is naturally viewed as the smooth $2$-sphere $\S^2$ with its standard manifold structure (which is a particular diffeology).
+  While the Hopf fibration can be retrieved by considering the set of $\S^1$ principal bundles over $\S^2$ (classified by Chern classes),
+  the primary object of interest is the resulting space $\S^2$.
+  
+  The challenge arises when the quotient space possesses singularities and cannot be naturally equipped with a compatible manifold structure.
+  In such cases,
+  the resulting space might,
+  at best,
+  be considered a topological space, as exemplified by the quotient $\cQ_m = \CC/\ZZ_m$.
+  Topologically,
+  this space is homeomorphic to $\CC$.
+  However,
+  this topological perspective fails to capture the richer differential structure that is intuitively present,
+  particularly at the singularity.
+  
+  This is precisely the motivation behind notions like V-manifolds (Thurston's orbifolds),
+  introduced by Ichiro Satake \cite{Sat56} and shown to be equivalent to the specific class of diffeological orbifolds \cite{IKZ10}.
+  Diffeology provides a framework where,
+  when constructing a quotient,
+  one can indeed focus on the resulting quotient diffeological space,
+  regardless of the specific process.
+  This applies to quotients of manifolds by compact groups,
+  as shown in \cite{GIZ25},
+  and is relevant to problems of symplectic reduction,
+  generally denoted $\J^{-1}(0)/\G$.%
+  \footnote{The map $\J$ is the moment map of a Hamiltonian equivariant action of a Lie group $\G$.
+  The group $\G$ acts on the level set $\J^{-1}(0)$,
+  where the restriction of the symplectic form $\omega$ is coisotropic.
+  If $\J^{-1}(0)$ is a manifold such that the canonical projection to the quotient is a submersion,
+  then the form $\omega \restriction \J^{-1}(0)$ descends to the quotient as a symplectic form.
+  This is the Marsden-Weinstein construction \cite{MW74}.}
+  
+  \smallskip
+  \textbf{Diffeology Principle:} A quotient $\cQ = \X/\!\sim$ is always regarded as a quotient diffeological space,
+  irrespective of its construction.
+  \smallskip
+  
+  Applying this principle to the symplectic reduction $\CC/\ZZ_m$,
+  the resulting space is the cone-orbifold $\cQ_m$.
+  It has been proved that $\cQ_m$ is \emph{symplectically generated} in the diffeological sense;%
+  \footnote{A parasymplectic space $(\X,\omega)$ is symplectically generated if there is a generating family \cite[\textsection 1.66]{PIZ13} of plots where the pullback of $\omega$ is symplectic.}
+  that is,
+  there exists a closed $2$-form $\omega$ (a parasymplectic form) on $\cQ_m$ such that its pullback on $\CC$ by the projection $\pi_m : z \mapsto [z]$ is the standard symplectic form $dx \wedge dy$ \cite[\textsection 9.32]{PIZ13}.%
+  \footnote{One can choose a projection $\pi_m(z) = z^m$,
+  in which case $\cQ_m$ is diffeomorphic to $\CC$ equipped with the pushforward of the standard smooth diffeology on $\CC$ by this map $\pi_m$.}
+  Actually,
+  every parasymplectic form on $\cQ_m$ is proportional to this $\omega$ by a smooth function on $\cQ_m$.
+  
+  This parasymplectic diffeological space $(\cQ_m,\omega)$ is connected and simply connected;
+  it is,
+  in fact,
+  contractible.
+  The map $\rho_s: [z] \mapsto [sz]$,
+  where $s \in \RR$ and $[z] \in \cQ_m$,
+  is well-defined and provides a deformation retraction from $\cQ_m$ (for $s=1$) to the origin $\{[0]\}$ (for $s=0$).
+  Since $\cQ_m$ is contractible,
+  the parasymplectic form $\omega$ is exact \cite[\textsection 6.90]{PIZ13}.
+  Let $\alpha \in \Omega^1(\cQ_m)$ be a primitive such that $\omega = d\alpha$.
+  We are thus in the case previously discussed in Article~\ref{art: Exact Case}.
+  The result applies directly:
+  
+  \begin{proposition}{}%
+    ~The prequantum groupoid ${\pmb{\cQ_{m,\omega}}}$ is isomorphic to the additive groupoid
+    $$
+      {\pmb{\cQ_{m,\omega}}} \simeq \{(q,t,q') \in \cQ_m \times \RR \times \cQ_m \}
+      \widetext{with}
+      (q,t,q') \cdot (q',t',q'') = (q,t+t',q'').
+      $$
+    The prequantum form $\blambda$ is given by $\blambda = \pr_3^*(\alpha) - \pr_1^*(\alpha) - \pr_2^*(dt)$.
+  \end{proposition}
+  
+  % Proposed addition after Proposition 3 in Article \ref{art: Application to Symplectic Reduction}
+  This completely addresses the prequantization of the parasymplectic cone-orbifold $(\cQ_m,\omega)$ within the diffeological framework,
+  thereby obviating the need to directly address the commutation of quantization and reduction procedures at the level of the base space.
+  
+  \textbf{Note.} A critical insight from this explicit construction is that the singular origin $0 \in \cQ_m$ does not lead to a degeneration or alteration of the isotropy group.
+  For this exact case, the isotropy group $\TT_{\omega,q}$ is isomorphic to $\RR$ for all points $q \in \cQ_m$.
+  This uniformity of the quantum phase information arises naturally from the inherent structure of the path-space quotient,
+  as discussed in the Introduction (Note 2 of Article \ref{art: The Prequantum Groupoid}),
+  demonstrating that singularities in the base space do not intrinsically affect the nature of the isotropy group itself.
+  If quantum phenomena are related to such singularities, it would rather be through the representations of the group of automorphisms
+  (which reveal the singular structure via the Klein stratification)
+  than through the local isotropy itself.
+  
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Example Loops S3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[Example: The Prequantum Groupoid for $\pmb{\Loops(\S^3)}$]
+  \label{art: Example Loops S3}
+  
+  The construction of the prequantum groupoid $(\TT_\omega, \blambda)$ is applicable not only to singular spaces but also to infinite-dimensional diffeological spaces,
+  provided they satisfy the conditions of the main theorem (connected, simply connected, with a closed $2$-form having discrete periods).
+  A relevant example is the loop space of the three-sphere,
+  $\X = \Loops(\S^3)$.
+  
+  The space $\X = \Loops(\S^3)$ is an infinite-dimensional diffeological space.
+  Its path-connectedness is given by $\pi_0(\Loops(\S^3)) \simeq \pi_1(\S^3) = \{0\}$;
+  thus $\X$ is connected.
+  Its simple connectedness is given by $\pi_1(\Loops(\S^3)) \simeq \pi_2(\S^3) = \{0\}$;
+  thus $\X$ is simply connected.
+  
+  Consider the volume $3$-form $\vol$ on $\S^3$.
+  Let $\omega = \CHO\vol \in \Omega^2(\X)$ be the $2$-form on $\X$ obtained by applying the chain-homotopy operator.
+  The $2$-form $\omega$ is closed,
+  which follows from $d\vol = 0$ and the properties of the chain-homotopy operator.
+  The group of periods $\P_\omega$ of the form $\omega$ is the group of periods of the $1$-form $\Komega \restriction \Loops(\Loops(\X))$.
+  This group is a homomorphic image of $\pi_1(\Loops(\X)) \simeq \pi_2(\X) \simeq \pi_3(\S^3) = \ZZ$.
+  The periods of $\omega$ are related to integrals of $\vol$ over cycles in $\pi_3(\S^3)$.
+  For a suitable normalization of the volume form $\vol$ on $\S^3$ (e.g., such that $\int_{\S^3} \vol = 1$),
+  the group of periods $\P_\omega$ is isomorphic to $\ZZ$.
+  
+  The torus of periods is $\T_\omega = \RR/\P_\omega = \RR/\ZZ \simeq \S^1$.
+  
+  According to the main theorem,
+  the prequantum groupoid $\TT_\omega$ for $(\X, \omega)$ has $\X = \Loops(\S^3)$ as its objects.
+  The space of morphisms is $\cY = \Paths(\X) / \sim_\omega = \Paths(\Loops(\S^3)) / \sim_\omega$,
+  where the equivalence relation $\sim_\omega$ is determined by the $2$-form $\omega$ and its periods $\P_\omega = \ZZ$.
+  
+  The isotropy group at any object $\ell \in \X$ (i.e., at any loop $\ell \in \Loops(\S^3)$) is isomorphic to the torus of periods:
+  $\TT_{\omega, \ell} \simeq \T_\omega \simeq \S^1$.
+  This means that at each point in the infinite-dimensional space $\Loops(\S^3)$,
+  the quantum phase information is captured by an $\S^1$ group.
+  
+  The prequantum $1$-form $\blambda$ on $\cY$ is the unique form such that $\class_\omega^*(\blambda) = \Komega$.
+  
+  Explicitly representing the space of morphisms $\cY = \Paths(\Loops(\S^3)) / \sim_\omega$ in a simpler form (like a product space) is generally not possible due to the infinite-dimensional nature of $\X$ and the non-exactness of $\omega$ (since $\P_\omega = \ZZ \neq \{0\}$).
+  The space $\cY$ is genuinely the quotient space defined by the equivalence relation.
+  
+  This example illustrates how the prequantum groupoid construction extends to infinite-dimensional settings.
+  The situation shares some analogy with the prequantization of the $2$-sphere $(\S^2, \omega_{S^2})$,
+  where $\S^2$ is connected and simply connected,
+  and the periods of the standard symplectic form are related to $\pi_2(\S^2) \simeq \ZZ$,
+  leading to an $\S^1$ isotropy group.
+  The key difference here is the infinite dimensionality of the base space $\X = \Loops(\S^3)$.
+  
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: The Moment Map on the Prequantum Groupoid
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[The Moment Map on the Prequantum Groupoid]
+  \label{art:Momentum Map}
+  
+  Now that we have this symmetry group $\Aut(\TT_\omega, \blambda)$,
+  we can define a moment map using its action,
+  and here are its properties and what it tells us.
+  
+  The prequantum groupoid $(\TT_\omega, \blambda)$ provides a geometric framework to study the system $(\X, \omega)$.
+  As established in Article \ref{art:Automorphisms Induced by Symmetries},
+  its group of automorphisms $\G_\omega = \Aut(\TT_\omega, \blambda)$ is diffeologically isomorphic to the group of $\omega$-preserving diffeomorphisms of $\X$, $\Diff(\X, \omega)$.
+  This group $\G_\omega$ acts smoothly on the space of morphisms $\cY = \Mor(\TT_\omega)$,
+  preserving the prequantum $1$-form $\blambda$.
+  
+  According to the general theory of moment maps in diffeology developed in \cite{PIZ10} (see also \cite[Chap.\ 9]{PIZ13}),
+  the existence of a $\G_\omega$-invariant $1$-form $\blambda$ on $\cY$ ensures the existence of a moment map $\Psi_\omega : \cY \to \cG_\omega^*$,
+  where $\cG_\omega^*$ is the space of left-invariant $1$-forms on the diffeological group $\G_\omega$ (the space of momenta \cite[Art.~2.6]{PIZ10}).
+  This map is defined for $y \in \cY$ by $\Psi_\omega(y) = \hat y^*(\blambda)$,
+  where $\hat y : \G_\omega \to \cY$ is the orbit map $\hat y(\Phi) = \Phi(y)$.
+  
+  This moment map on the space of morphisms $\cY$ is directly related to the paths moment map defined in \cite[Art.~3.1]{PIZ10} for the action of $\G_\omega$ on $\X$.
+  Let $\Psi_{\text{paths}} : \Paths(\X) \to \cG_\omega^*$ be the paths moment map given by $\Psi_{\text{paths}}(\gamma) = \hat\gamma^*(\Komega)$,
+  where $\hat\gamma(\phi) = \phi \circ \gamma$.
+  The map $\Psi_\omega$ is precisely the projection of $\Psi_{\text{paths}}$ onto the quotient $\cY$:
+  
+  \begin{proposition}{}
+    The moment map $\Psi_\omega : \cY \to \cG_\omega^*$ satisfies $\Psi_\omega \circ \class_\omega = \Psi_{\text{paths}}$.
+  \end{proposition}
+  
+  \begin{proof}
+    Let $\gamma \in \Paths(\X)$,
+    and let $y = \class_\omega(\gamma) \in \cY$.
+    By definition of $\Psi_\omega$, $\Psi_\omega(y) = \hat y^*(\blambda)$,
+    where $\hat y : \G_\omega \to \cY$ is the orbit map $\hat y(\Phi) = \Phi(y)$ for $\Phi \in \G_\omega$.
+    Recalling that $\G_\omega = \Aut(\TT_\omega, \blambda)$ is isomorphic to $\Diff(\X,\omega)$ via $\Phi \mapsto \phi$ such that $\Phi([\gamma']_\omega) = [\phi \circ \gamma']_\omega$,
+    the orbit map $\hat y$ is given by $\hat y(\Phi) = [\phi \circ \gamma]_\omega = \class_\omega(\phi \circ \gamma)$.
+    Thus,
+    $\hat y = \class_\omega \circ \hat\gamma$,
+    where $\hat\gamma : \G_\omega \to \Paths(\X)$ is the orbit map $\hat\gamma(\phi) = \phi \circ \gamma$ as defined for $\Psi_{\text{paths}}$.
+    Now we compute the pullback:
+    $$
+      \Psi_\omega(\class_\omega(\gamma)) = \hat y^*(\blambda) = (\class_\omega \circ \hat\gamma)^*(\blambda) = \hat\gamma^*(\class_\omega^*(\blambda)).
+      $$
+    By definition of $\blambda$ (Theorem \ref{sec:Main Theorem: The Prequantum Groupoid}, part 3),
+    $\class_\omega^*(\blambda) = \Komega$.
+    Substituting this gives:
+    $$
+      \Psi_\omega(\class_\omega(\gamma)) = \hat\gamma^*(\Komega).
+      $$
+    The right side is precisely $\Psi_{\text{paths}}(\gamma)$.
+    Therefore, $\Psi_\omega \circ \class_\omega = \Psi_{\text{paths}}$.
+  \end{proof}
+  \smallskip
+  
+  The paths moment map $\Psi_{\text{paths}}$ is an additive homomorphism from the path concatenation to $(\cG_\omega^*, +)$ \cite[Art.~4.3]{PIZ10}.
+  Since $\Psi_\omega$ factors through $\class_\omega$ and $\class_\omega$ preserves concatenation,
+  $\Psi_\omega$ is an additive homomorphism from the groupoid $\TT_\omega$ to $(\cG_\omega^*, +)$:
+  $$
+    \Psi_\omega(y \cdot y') = \Psi_\omega(y) + \Psi_\omega(y')
+    $$
+  for any composable $y, y' \in \cY$.
+  
+  The additive property $\Psi_\omega(y \cdot y') = \Psi_\omega(y) + \Psi_\omega(y')$ implies that the value of $\Psi_\omega(y)$ for $y \in \cY$ depends only on the endpoints of $y$.
+  This means $\Psi_\omega$ descends to a map $\psi_\omega : \X \times \X \to \cG_\omega^*$.
+  This descent occurs if and only if $\Psi_\omega$ is constant on the equivalence classes $[\gamma]_\omega$ corresponding to loops,
+  which is equivalent to $\Psi_\omega(\ell)=0$ for all loops $\ell \in \Loops(\X)$ (viewed as elements of $\cY$ via $\class_\omega$).
+  The set of values $\Psi_{\text{paths}}(\ell) = \Psi_\omega(\class_\omega(\ell))$ for $\ell \in \Loops(\X)$ is the universal holonomy group $\Gamma_\omega = \Psi_{\text{paths}}(\Loops(\X))$ for the action of $\G_\omega$ on $\X$ \cite[Art.~3.7]{PIZ10}.
+  
+  Since $\X$ is connected and simply connected,
+  its fundamental group $\pi_1(\X)$ is trivial.
+  The universal holonomy group $\Gamma_\omega$ is an additive subgroup of $\cG_\omega^*$ which is a homomorphic image of $\pi_0(\Loops(\X))$ \cite[Art.~3.7]{PIZ10}.
+  Since $\X$ is simply connected and connected,
+  $\pi_0(\Loops(\X))$ is trivial.
+  Therefore,
+  for a simply connected $\X$,
+  the universal holonomy $\Gamma_\omega$ is trivial,
+  $\Gamma_\omega = \{0\}$.
+  This property will not be preserved in the general case of $\pi_1(\X) \neq \{0\}$.
+  In the general case,
+  the universal holonomy $\Gamma_\omega$ will typically be non-trivial.
+  
+  The fact that $\Gamma_\omega=\{0\}$ for simply connected $\X$ implies that $\Psi_\omega(\ell)=0$ for all loops $\ell \in \Loops(\X)$,
+  and thus $\Psi_\omega : \cY \to \cG_\omega^*$ descends to a well-defined map on $\X \times \X$.
+  This descended map is the \emph{two-points moment map}:
+  $$
+    \psi_\omega : \X \times \X \to \cG_\omega^*
+    \quad \text{defined by} \quad
+    \psi_\omega(x,x') = \Psi_\omega(y),
+    $$
+  for any $y \in \cY$ with $\ends(y) = (x,x')$.
+  This $\psi_\omega$ is the universal two-points moment map associated with $\omega$ (compare \cite[Art.~4.1]{PIZ10}).
+  It satisfies the Chasles cocycle relation $\psi_\omega(x,x'') = \psi_\omega(x,x') + \psi_\omega(x',x'')$ for $x,x',x'' \in \X$.%
+  \footnote{~This moment map $\psi_\omega$ can be interpreted as the moment map for the diffeological space $\X \times \X$ equipped with the $2$-form $\omega \ominus \omega = \pr_1^*\omega - \pr_2^*\omega$ and the diagonal action of $\G_\omega$.}
+  
+  From the two-points moment map $\psi_\omega$,
+  we can derive the \emph{one-point moment map} $\mu_\omega : \X \to \cG_\omega^*$ by choosing a base point $x_0 \in \X$.
+  As shown in \cite[Art.~5.1]{PIZ10},
+  $\mu_\omega$ is a primitive of $\psi_\omega$,
+  unique up to an additive constant $\varepsilon \in \cG_\omega^*$,
+  satisfying $\psi_\omega(x,x') = \mu_\omega(x') - \mu_\omega(x)$.
+  A standard choice is $\mu_\omega(x) = \psi_\omega(x_0,x)$.
+  
+  The equivariance properties of these moment maps and the associated Souriau's cocycle $\theta_\omega \in \Cinfty(\G_\omega, \cG_\omega^*)$ are described in detail in \cite[Art.~5.2]{PIZ10}.
+  For simply connected $\X$,
+  the holonomy $\Gamma_\omega$ is trivial,
+  which means the target space for Souriau's cocycle and moment maps is $\cG_\omega^*$ (as opposed to $\cG_\omega^*/\Gamma_\omega$ in the general case).
+  The universal Souriau class $\sigma_\omega$,
+  which lives in $\H^1(\G_\omega, \cG_\omega^*/\Gamma_\omega)$,
+  is therefore an element of $\H^1(\G_\omega, \cG_\omega^*)$.
+  The triviality of this cohomology class implies the existence of an equivariant moment map $\mu_\omega$ \emph{op.~cit.}
+  However,
+  the triviality of $\Gamma_\omega$ does not in general imply the triviality of the entire cohomology group $\H^1(\G_\omega, \cG_\omega^*)$.
+  Thus,
+  for a simply connected $\X$,
+  while the holonomy is trivial,
+  Souriau's class $\sigma_\omega$ may be non-trivial,
+  corresponding to non-trivial central extensions in the classical picture.
+  
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: The Candidate Quantum Hilbert Space
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}\artlabel[Towards the Quantum Hilbert Space]
+  \label{art:Towards Quantum Hilbert Space}
+  
+  A central aim of geometric quantization is the construction of the quantum Hilbert space $\cH$.
+  In our groupoid framework,
+  the space of morphisms $\cY = \Mor(\TT_\omega)$ of the prequantum groupoid $\TT_\omega$ serves as the fundamental arena for potential quantum states.
+  
+  Inspired by the algebraic structure of the groupoid,
+  a natural candidate for quantum states arises from considering \emph{multiplicative functions} on the space of morphisms.
+  A $\V$-valued function $\psi: \cY \to \V$, where $\V$ is a complex vector space equipped with a suitable composition operation
+  (typically representing the fiber of an associated vector bundle),
+  is called multiplicative if for any composable pair $y_1, y_2 \in \cY$,
+  we have:
+  $$
+    \psi(y_1 \cdot y_2) = \psi(y_1) \cdot \psi(y_2).
+    $$
+  Here,
+  the dot $\cdot$ on the left is the groupoid composition,
+  and the dot $\cdot$ on the right is the composition in $\V$.
+  The set of such functions, satisfying appropriate differentiability or regularity conditions,
+  forms a candidate space for the quantum Hilbert space $\cH$.
+  
+  This definition directly encodes the action and representation of the isotropy group $\T_\omega$.
+  For any $y \in \cY$ and any $\tau \in \TT_{\omega, \src(y)}$
+  (viewed as an element of $\cY$ with $\src(\tau) = \trg(\tau) = \src(y)$),
+  the composition $\tau \cdot y$ is defined.
+  The multiplicative property then implies $\psi(\tau \cdot y) = \psi(\tau) \psi(y)$.
+  The restriction of $\psi$ to each isotropy group $\TT_{\omega,x} \simeq \T_\omega$ defines a representation $\rho_x: \T_\omega \to \mathrm{End}(\V)$ given by $\rho_x(\tau)v = \psi(\tau)v$.
+  For the standard case where $\V=\CC$,
+  this means $\psi \restriction {\TT_{\omega,x}}$ must be a character (a 1-dimensional representation) of $\T_\omega$ for each $x$.
+  Thus,
+  the space of multiplicative functions on the groupoid naturally corresponds to representations of the isotropy group.
+  
+  As is standard in groupoid theory,
+  the space of multiplicative functions $\psi: \cY \to \V$ satisfying $\psi(\tau \cdot y) = \rho_x(\tau) \psi(y)$ for $\tau \in \TT_{\omega,\src(y)}$ is precisely how one identifies sections of the associated vector bundle $\mathcal{E} = \cY \times_{\T_\omega} \V \to \X$
+  (where the bundle projection is induced by the source map $\src: \cY \to \X$)
+  with equivariant functions on $\cY$. The multiplicative function perspective on $\cY$ is therefore equivalent to the associated bundle perspective over $\X$,
+  providing an intrinsic groupoid-theoretic definition of the quantum states.
+  
+  This concept of defining quantum states on the space of a groupoid resonates with ideas explored by Souriau later in his career concerning the role of positive type functions on the group of symmetries \cite{Sou04}
+  (which, in our case, is isomorphic to $\Aut(\TT_\omega, \blambda)$).
+  
+  The symmetry group $\Diff(\X, \omega) \simeq \Aut(\TT_\omega, \blambda)$ acts naturally on $\cY$ via automorphisms $\Phi$.
+  This action lifts to the space of multiplicative functions: $(\Phi_*\psi)(y) = \psi(\Phi^{-1}(y))$.
+  Since $\Phi$ is a multiplicative map (a groupoid homomorphism),
+  $\Phi_*\psi$ is also multiplicative, ensuring that the symmetry group acts on the candidate Hilbert space $\cH$.
+  As discussed in Article \ref{art: The Automorphism Group},
+  this lift is an isomorphism, suggesting that central extensions may not arise at this level of representation,
+  with the quantum nature encoded in the multiplicative property related to $\T_\omega$.
+  
+  Developing the full geometric quantization program requires defining a suitable inner product on $\cH$ and incorporating a notion of polarization to select physical states.
+  These steps,
+  along with a detailed study of the relevant representations of $\T_\omega$ and the induced representations of $\Diff(\X, \omega)$,
+  constitute essential directions for future research stemming from this prequantization framework on diffeological spaces.
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Relation to Classical Central Extensions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[Relation to Classical Central Extensions]
+  \label{art:Automorphism Group Extension} % Keep the label for potential internal references
+  
+  It is natural to question how the isomorphism $\Aut(\TT_\omega, \blambda) \simeq \Diff(\X, \omega)$ relates to the well-known phenomenon of non-trivial central extensions arising in the classical geometric quantization of symmetries, even on simply connected symplectic manifolds.
+  For instance,
+  the prequantization of the standard symplectic structure on $\RR^{2n}$ leads to the Heisenberg group extension for the translation group,
+  and the prequantization of the sphere $\S^2$ leads to the spin group $\mathrm{Spin}(3) \simeq \mathrm{SU}(2)$ as a central extension of $\SO(3)$.
+  
+  The key to understanding this lies in distinguishing the object to which the symmetries are lifted:
+  
+  $\ast$~In the \textbf{classical prequantum bundle picture},
+  central extensions emerge when considering the lift of a symmetry group (or its Lie algebra) acting on the base manifold $\X$ to the total space of the \emph{prequantum principal $\U(1)$-bundle} $P \to \X$,
+  or equivalently, to the space of sections of the associated line bundle. The failure of the lifted Lie bracket to match the lift of the base Lie bracket results in a cocycle valued in the Lie algebra of the fiber group ($\mathfrak{u}(1)$),
+  leading to a central extension of the symmetry Lie algebra and group by $\U(1)$.
+  
+  $\ast$~In the \textbf{prequantum groupoid picture},
+  the isomorphism $\Aut(\TT_\omega, \blambda) \simeq \Diff(\X, \omega)$ states that the full group of $\omega$-preserving diffeomorphisms $\phi$ lifts \emph{isomorphically} to act as automorphisms $\Phi$ of the \emph{entire prequantum groupoid} $(\TT_\omega, \blambda)$ that preserve the prequantum 1-form $\blambda$.
+  The object being acted upon without central extension here is the groupoid's space of morphisms $\cY = \Paths(\X)/\!\sim_\omega$ endowed with the form $\blambda$.
+  
+  The classical prequantum bundle $\Y \to \X$
+  (or, in our framework, the generalized prequantum bundle $\cY_x = \Mor(\TT_\omega, x, \ast) \to \X$, obtained by fixing a source point $x$)
+  is \emph{not} the same object as the full groupoid $\TT_\omega$.
+  The groupoid $\TT_\omega$ encompasses all such principal bundles $\cY_x$ for varying $x$,
+  and the arrows of $\TT_\omega$ can be seen as isomorphisms between fibers of these bundles over different points.
+  
+  The central extensions observed in the classical setting \emph{will reappear} when one descends from the groupoid level to consider actions on structures derived from the groupoid over the base space $\X$.
+  For example,
+  when considering the lifting of symmetries to the total space of the principal bundle $\cY_x \to \X$ or,
+  crucially,
+  to the space of sections of an associated bundle over $\X$ (which would be the candidate quantum Hilbert space),
+  the central extension structure related to the period group $\T_\omega$ will indeed typically emerge.
+  
+  Therefore,
+  the result $\Aut(\TT_\omega, \blambda) \simeq \Diff(\X, \omega)$ does not contradict classical findings.
+  Instead,
+  it provides a potentially deeper insight: the groupoid $(\TT_\omega, \blambda)$ serves as a fundamental,
+  extension-free prequantum object where the entire symmetry group $\Diff(\X, \omega)$ is faithfully represented.
+  The "quantic anomaly" manifested by central extensions in the classical picture is then understood as a phenomenon that arises when one projects or realizes this fundamental structure and its symmetries within the context of bundles or representation spaces built over the base space $\X$.
+  The essential quantic information,
+  captured by the period group $\T_\omega$, resides fundamentally in the isotropy group of the groupoid,
+  waiting to express itself as an extension upon descent to structures defined over $\X$. This perspective offers significant conceptual clarity,
+  especially when dealing with singular spaces where classical bundle constructions are challenging.
+  
+  \smallskip
+  \textbf{Note.} This phenomenon of symmetry breaking is reminiscent of passing from an equivariant two-point moment map $\psi(x,x')$ to a no longer equivariant one-point moment map $\mu(x) = \psi(x_0,x) + c$,
+  which is the general solution of the equation $\psi(x,x') = \mu(x') - \mu(x)$.
+  The one-point moment map is no longer equivariant under the linear coadjoint action but with the affine coadjoint action modified by the cocycle $\theta(g) = \psi(x_0,g(x_0)) + \Delta c$.
+\end{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: art: Future Directions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{article}
+  \artlabel[Future Directions]
+  \label{art:Future Directions}
+  
+  This paper focuses on the construction of the prequantum groupoid for connected and simply connected diffeological spaces.
+  A primary direction for future research is to extend this construction to the case of \emph{non-simply connected diffeological spaces}.
+  In this general setting,
+  the structure is expected to depend not only on the period group $\P_\omega$ but also on the homotopy of $X$,
+  captured by its fundamental group $\pi_1(X)$.
+  Several avenues for this generalization will be explored in Part II of this series.
+  
+  The path-based nature of our construction suggests a deep connection to Feynman's path integral formulation of quantum mechanics.%
+  \footnote{The relationship between geometric quantization and path integrals has been a subject of interest for many years,
+  with various approaches explored in the literature;
+  see, e.g., \cite{Hor24} for recent reflections on prequantization from a path integral viewpoint.}
+  Further investigation into how the structure of the prequantum groupoid $\TT_\omega$ directly encodes elements of the path integral formulation is a compelling direction for future research.
+  
+  Beyond the diffeological generalization,
+  several other avenues are opened by this work:
+  
+  $\ast$~Apply the prequantum groupoid construction to the coadjoint orbits of Lie groups,
+  which are fundamental examples in geometric quantization.
+  
+  $\ast$~Explore the space of multiplicative functions on the groupoid $\TT_\omega$ as candidate wave functions and the representations of the symmetry group $\Diff(X, \omega)$ on this space.
+  
+  $\ast$~Investigate how the Maslov correction,
+  crucial in the framework of geometric quantization (see, e.g., \cite{Sou75}),
+  manifests in the space of paths and within the structure of the prequantum groupoid.
+  
+  $\ast$~Incorporate Lagrangian polarizations into this path-space framework to achieve the reduction to a space of configurations.
+  
+  These questions point towards the development of a full geometric quantization program within the diffeological setting,
+  applicable to a wide range of spaces,
+  including those with singularities.
+  
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{IKZ10} % Use 99 or a number larger than your total entries
+  
+  \bibitem[DI83]{DI83}
+  Paul Donato and Patrick Iglesias.
+  {\em Exemple de groupes diff\'erentiels : flots irrationnels sur le tore}.
+  Preprint CPT-83/P.1524, Centre de Physique Th\'eorique, Marseille, July 1983. Published in {\em Comptes Rendus de l'Acad\'emie des Sciences}, 301(4), Paris, 1985.
+  \texttt{http://math.huji.ac.il/~piz/documents/EDGDFISLT.pdf}
+  
+  \bibitem[GIZ23]{GIZ23}
+  Serap G{\"u}rer and Patrick Iglesias-Zemmour.
+  {\em Orbifolds as stratified diffeologies}.
+  {Differential Geometry and its Applications}, 86:101969, 2023.
+  
+  \bibitem[GIZ25]{GIZ25}
+  Serap Gürer and Patrick Iglesias-Zemmour,
+  \emph{On Diffeology of Orbit Spaces},
+  (Preprint available at \texttt{http://math.huji.ac.il//~piz/documents/ODOOS.pdf}).
+  
+  \bibitem[Hor24]{Hor24}
+  Peter A. Horvathy.
+  {\em Prequantisation from the path integral viewpoint}.
+  Preprint arXiv:2402.17629, 2024.
+  
+  \bibitem[PIZ85]{PIZ85}
+  Patrick Iglesias.
+  {\em Fibr\'es diff\'eologiques et homotopie}.
+  Th\`ese de doctorat d'\'etat, Universit\'e de Provence, Marseille, 1985.
+  
+  \bibitem[PIZ95]{PIZ95}
+  Patrick Iglesias.
+  {\em La trilogie du moment}.
+  Ann. Inst. Fourier, 45(3):825--857, 1995.
+  
+  \bibitem[IKZ10]{IKZ10}
+  Patrick Iglesias, Yael Karshon, and Moshe Zadka.
+  {\em Orbifolds as diffeologies}.
+  Transactions of the American Mathematical Society, Vol. 362, Number 6, Pages 2811--2831, Providence R.I., 2010.
+  
+  \bibitem[PIZ10]{PIZ10}
+  Patrick Iglesias-Zemmour,
+  \emph{The moment maps in diffeology},
+  Mem. Amer. Math. Soc. \textbf{204} (2010), no. 962, viii+101 pp.
+  
+  \bibitem[PIZ13]{PIZ13}
+  Patrick Iglesias-Zemmour.
+  {\em Diffeology}.
+  Mathematical Surveys and Monographs, 185, Am. Math. Soc., Providence, RI, 2013.
+  (Revised version by Beijing World Publishing Corp., Beijing, 2022.)
+  
+  \bibitem[PIZ22]{PIZ22}
+  Patrick Iglesias-Zemmour.
+  {\em Diffeology}.
+  Reprint by Beijing World Publishing Corporation, Ltd. Beijing Branch, 2022. ISBN 978-7-5192-9608-7.
+  Accessible at \\
+  \url{http://math.huji.ac.il/~piz/documents/Diffeology.pdf}
+  
+  \bibitem[PIZ15]{PIZ15}
+  \bysame
+  {\em Example of singular reduction in symplectic diffeology}.
+  Proceedings of the American Mathematical Society, 144(3):1309--1324, 2016.
+  
+  \bibitem[IZP21]{IZP21}
+  Patrick Iglesias-Zemmour and Elisa Prato.
+  {\em Quasifolds, diffeology and noncommutative geometry}.
+  J. Noncommut. Geom., 15(2):735--759, 2021.
+  
+  \bibitem[PIZ24]{PIZ24}
+  Patrick Iglesias-Zemmour,
+  \emph{{\v C}ech-de Rham bicomplex in diffeology},
+  Israel J. Math. \textbf{259} (2024), no. 1, 239--276.
+  
+  \bibitem[MW74]{MW74}
+  Jerrold E. Marsden and Alan Weinstein,
+  \emph{Reduction of symplectic manifolds with symmetry},
+  Rep. Mathematical Phys. \textbf{5} (1974), no. 1, 121--130.
+  
+  \bibitem[Sat56]{Sat56}
+  Ichiro Satake,
+  \emph{On a generalization of the notion of manifold},
+  Proceedings of the National Academy of Sciences \textbf{42} (1956), 359--363.
+  
+  \bibitem[Sou70]{Sou70}
+  Jean-Marie Souriau.
+  {\em Structure des syst\`emes dynamiques}.
+  Dunod, Paris, 1970.
+  
+  \bibitem[Sou75]{Sou75}
+  \bysame %Jean-Marie Souriau.
+  \newblock \emph{Construction explicite de l'indice de Maslov. Applications}.
+  \newblock In: Group theoretical methods in physics (Fourth Internat. Colloq., Nijmegen, 1975), Lecture Notes in Phys., Vol. 50, Springer, Berlin, 1976, pp. 117--148.
+  
+  \bibitem[Sou04]{Sou04}
+  Jean-Marie Souriau,
+  \emph{C’est Quantique~? donc c’est géométrique},
+  in: Dominique Flament (dir),
+  \emph{Feuilletages -quantification géométrique : textes des journées d’étude des 16 et 17 octobre 2003, Paris, Fondation Maison des Sciences de l’Homme},
+  Série Documents de travail (Équipe F2DS), 2004.
+  
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Begin Private comments
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffalse
+\section*{Conceptual Analysis of the Prequantum Groupoid}
+
+These are profound questions that touch on the very nature of what ``quantization'' actually is geometrically. By moving the focus from the bundle to the groupoid, you have opened a door to interpreting quantum mechanics not just as ``sections of a bundle'' but as ``geometry of the path space.''
+
+Here are some thoughts on the specific points raised:
+
+\subsection*{1. The Nature of $\blambda$: Connection vs. Maurer-Cartan}
+You asked about the strange nature of $\blambda$. It is left/right invariant, which makes it look like a \textbf{Maurer-Cartan form}, but it lives on a groupoid, not a Lie group.
+
+\begin{itemize}
+  \item \textbf{On the fibers $\cY_x$:} It is a standard Ehresmann connection.
+  \item \textbf{On the Groupoid $\cY$:} It acts as a \textbf{universal connection}.
+  Think of it this way: The groupoid $\cY$ is a principal $\T_\omega$-bundle over the pair space $\X \times \X$. The form $\blambda$ defines a connection on this bundle.
+  \begin{itemize}
+    \item \textbf{Parallel Transport:} If you take a path in the base $\X \times \X$ (which is a pair of paths $(x_t, x'_t)$), the horizontal lift defined by $\blambda$ tells you exactly how the ``phase'' between the two endpoints evolves to keep the ``relative symplectic area'' constant.
+    \item \textbf{Curvature:} The fact that $d\blambda = \ends^*(\omega \ominus \omega)$ confirms this. It says the ``curvature'' of this groupoid connection is exactly the difference of the symplectic forms at the two endpoints.
+  \end{itemize}
+\end{itemize}
+
+\subsection*{2. The Feynman Interpretation: ``Condensation'' of Paths}
+This is the most exciting physical interpretation.
+
+In the Feynman path integral, we calculate amplitudes by summing over \textbf{all} paths:
+$$ \mathcal{A} = \int_{\Paths(\X)} e^{\frac{i}{\hbar} S[\gamma]} \mathcal{D}\gamma $$
+Your construction suggests a factorization of this integral.
+
+\begin{itemize}
+  \item \textbf{The Equivalence Class:} The relation $\gamma \sim_\omega \gamma'$ essentially groups together all paths that have the same ``symplectic action'' (modulo periods).
+  \item \textbf{The Quotient:} The projection $\class_\omega: \Paths(\X) \to \cY$ collapses this massive infinite-dimensional space into the finite-dimensional manifold $\cY$ (locally $\X \times \X \times \S^1$).
+\end{itemize}
+
+\textbf{Interpretation:}
+The groupoid $\cY$ represents the \textbf{``constructive interference'' skeleton} of the path space.
+\begin{itemize}
+  \item The ``fibers'' of the map $\class_\omega$ are the spaces of paths that are homotopically/symplectically equivalent.
+  \item If we could define a measure correctly, the Feynman integral could be viewed as an integration over the groupoid $\cY$, weighted by the ``volume'' of the fibers of $\class_\omega$.
+\end{itemize}
+
+\subsection*{3. Does a Section (Retraction) Exist?}
+You asked if there is a section $s: \cY \to \Paths(\X)$ such that $\class_\omega \circ s = \id$.
+
+\textbf{Topological Obstruction:}
+In the simply connected case, there is likely a topological obstruction to a \emph{global continuous} section.
+\begin{itemize}
+  \item $\Paths(\X)$ is contractible (since $\X$ is simply connected, paths can be shrunk to points).
+  \item $\cY$ contains the isotropy $\T_\omega \simeq \S^1$.
+  \item You cannot embed a circle $\S^1$ continuously into a contractible space such that it doesn't shrink to a point.
+  \item \textbf{Conclusion:} A global continuous section \textbf{cannot exist}.
+\end{itemize}
+
+\textbf{Physical Meaning (The Semiclassical Limit):}
+However, \textbf{local} sections do exist, and they have a deep physical meaning: \textbf{Geodesics}.
+\begin{itemize}
+  \item If you put a metric on $\X$, then for close enough points $x, x'$, there is a unique short geodesic.
+  \item This defines a local section: Map the abstract morphism in $\cY$ to the specific geodesic path in $\Paths(\X)$ that represents it.
+  \item This is exactly the \textbf{semiclassical approximation} (WKB). Classical mechanics ``picks'' a specific section (the critical points of the action) out of the equivalence class.
+\end{itemize}
+
+\textbf{``Condensation'':}
+So, the ``condensation'' you mention is exactly what happens when we go from Quantum to Classical.
+\begin{itemize}
+  \item \textbf{Quantum (Groupoid):} All paths in the class $[\gamma]_\omega$ matter.
+  \item \textbf{Classical (Section):} Only the ``shortest'' path (geodesic) in the class matters.
+\end{itemize}
+
+\subsection*{4. The ``True'' Representation of Automorphisms}
+The fact that $\Diff(\X, \omega)$ acts faithfully on $\cY$ without central extension is indeed ``promising.'' It suggests that the \textbf{central extension is an artifact of projection.}
+
+\begin{itemize}
+  \item The symmetry group acts cleanly on the ``total space'' (the groupoid).
+  \item The ``quantum anomaly'' (the central extension) appears only when we try to force this action down onto a specific Hilbert space of sections (choosing a polarization).
+\end{itemize}
+
+This suggests that \textbf{prequantization is symmetry-preserving}, and it is only \textbf{polarization} that breaks the symmetry and forces the central extension to appear. This aligns with the idea that quantization is a two-step process where the second step (polarization) is the destructive one.
+
+\subsection*{Summary}
+
+Your intuition about the ``condensation'' is spot on. The groupoid $\cY$ is the ``topological skeleton'' of the path space. The map $\class_\omega$ filters out the infinite-dimensional ``noise'' of path variations that don't change the action. The fact that no global section exists is a feature, not a bug---it proves that the quantum structure ($\cY$) has non-trivial topology that the classical path space ($\Paths$) lacks.
+
+\section*{Research Notes: Dynamics and the Feynman-Fubini Decomposition}
+
+This analysis moves from the \textit{kinematics} of quantization (bundles, groupoids, curvature) to the \textit{dynamics} (path integrals, Hamiltonians, and the semiclassical limit). The projection $\class_\omega$ acts as the bridge between these two worlds.
+
+\subsection*{1. The Nature of the Projection $\class_\omega$}
+The map $\class_\omega : \Paths(\X) \to \cY$ is not merely a quotient map; it should be viewed as a \textbf{fibration of infinite-dimensional spaces}.
+
+Consider the fiber over a specific arrow $y \in \cY$ with endpoints $(x, x')$:
+$$
+  \class_\omega^{-1}(y) = \left\{ \gamma \in \Paths(\X, x, x') \mid \int_{\gamma_{\mathrm{ref}}}^\gamma \Komega = 0 \right\}
+  $$
+where $\gamma_{\mathrm{ref}}$ is a reference path representing the class $y$.
+\begin{itemize}
+  \item \textbf{The Fiber as ``Null'' Space:} The fiber consists of all paths differing from the reference by a ``symplectically null'' homotopy.
+  \item \textbf{Physical Interpretation:} If a metric (Hamiltonian) is introduced, this fiber contains all quantum ``fluctuations'' around the classical path that do not alter the topological/geometric phase.
+  \item \textbf{Diffeological Status:} Understanding the diffeology of this fiber is crucial. In the simply connected case, it is likely contractible.
+\end{itemize}
+
+\subsection*{2. The WKB Approximation (Semiclassical Limit)}
+The WKB method relies on the observation that as $\hbar \to 0$, the path integral is dominated by critical points of the action. In this framework, the action functional $\mathcal{S}$ typically splits:
+$$
+  \mathcal{S}[\gamma] = \underbrace{\int_\gamma \alpha}_{\text{Geometric}} - \underbrace{\int_0^1 H(\gamma(t)) \, dt}_{\text{Dynamical}}
+  $$
+(or the symplectic area term minus the Hamiltonian term).
+
+The groupoid construction clarifies the separation of variables:
+\begin{enumerate}
+  \item \textbf{Geometric Term:} The term $\int \Komega$ is \emph{constant} on the fibers of $\class_\omega$. It descends perfectly to the groupoid $\cY$.
+  \item \textbf{Dynamical Term:} The Hamiltonian term varies along the fiber.
+  \item \textbf{Classical Path:} The classical trajectory $\gamma_{cl}$ is the specific point in the fiber $\class_\omega^{-1}(y)$ that minimizes the Hamiltonian energy.
+\end{enumerate}
+Thus, the WKB approximation corresponds to selecting a specific \textbf{section} $s: \cY \to \Paths(\X)$ defined by the metric (the section of geodesics).
+
+\subsection*{3. The ``Feynman-Fubini'' Decomposition}
+If we view the Feynman integral formally as an integration over $\Paths(\X)$, the projection $\class_\omega$ suggests a Fubini-type decomposition:
+$$
+  \int_{\Paths(\X)} e^{i \mathcal{S}[\gamma]} \mathcal{D}\gamma = \int_{y \in \cY} \left( \int_{\gamma \in \class_\omega^{-1}(y)} e^{i \mathcal{S}[\gamma]} \mathcal{D}\mu_{\text{fiber}} \right) \mathcal{D}\nu_{\text{groupoid}}
+  $$
+Since the geometric phase is constant on the fiber, it factors out:
+$$
+  \Psi(x, x') = \int_{y \in \Mor(x,x')} \underbrace{e^{i \text{Phase}(y)}}_{\text{Geometric (Groupoid)}} \left[ \underbrace{\int_{\gamma \in \text{Fiber}_y} e^{-i \int H dt} \mathcal{D}\mu}_{\text{Dynamical (Kernel)}} \right]
+  $$
+\textbf{Interpretation:}
+\begin{itemize}
+  \item \textbf{The Outer Integral (Quantum Geometry):} An integral over the prequantum groupoid $\cY$. It handles topology, interference of distinct sectors, and Aharonov-Bohm phases.
+  \item \textbf{The Inner Integral (Quantum Dynamics):} A real-valued (or positive) kernel. It measures the ``volume'' of the fiber weighted by kinetic energy, representing the probability amplitude of tunneling through that specific geometric channel.
+\end{itemize}
+
+This decomposition separates the \textbf{universal} geometry of the system (the groupoid $\TT_\omega$) from the \textbf{specific} dynamics (the Hamiltonian kernel).
+
+\section*{WKB as a Reduction of the Path Bundle}
+
+The transition from quantum to classical mechanics (the WKB approximation) can be interpreted geometrically as a \textbf{reduction of the structure group} of the path bundle defined by the prequantum groupoid.
+
+\subsection*{1. The Path Bundle Structure}
+Consider the projection $\class_\omega$ as defining a principal bundle structure:
+$$
+  \mathcal{G}_0 \hookrightarrow \Paths(\X) \xrightarrow{\class_\omega} \cY
+  $$
+\begin{itemize}
+  \item \textbf{Total Space $\Paths(\X)$:} The arena of quantum fluctuations.
+  \item \textbf{Base $\cY$:} The prequantum geometry (phase information).
+  \item \textbf{Structure Group $\mathcal{G}_0$:} The group of ``null-area'' loops. This infinite-dimensional group acts on the fibers by deforming paths without changing their symplectic class. In the path integral, this represents the ``quantum gauge freedom''---the freedom for paths to fluctuate away from the classical trajectory.
+\end{itemize}
+
+\subsection*{2. The Dynamical Section}
+The introduction of a Hamiltonian $H$ (or a metric) breaks the symmetry of the fiber. The Principle of Least Action, $\delta \mathcal{S} = 0$, identifies a unique \textbf{critical point} within each fiber $\class_\omega^{-1}(y)$.
+
+This defines a map:
+$$
+  s_{WKB}: \cY \to \Paths(\X), \quad y \mapsto \gamma_{cl}
+  $$
+where $\gamma_{cl}$ is the classical geodesic connecting the endpoints of $y$ with the correct phase. Geometrically, $s_{WKB}$ is a \textbf{global section} of the bundle (over the domain where geodesics are unique).
+
+\subsection*{3. Reduction to the Identity}
+In the language of $G$-structures, the existence of a global section implies that the bundle is trivializable, or equivalently, that the structure group can be \textbf{reduced to the identity}.
+
+\begin{itemize}
+  \item \textbf{Quantum Regime:} The physics involves the integration over the whole fiber. The structure group $\mathcal{G}_0$ is essential.
+  \item \textbf{Semiclassical (WKB) Regime:} The physics is approximated by the value on the section $s_{WKB}$. The infinite-dimensional structure group $\mathcal{G}_0$ is ``frozen'' or reduced to $\{e\}$.
+\end{itemize}
+
+\textbf{Conclusion:} The WKB method is the geometric process of replacing the infinite-dimensional principal bundle $\Paths(\X)$ with the finite-dimensional submanifold $s_{WKB}(\cY) \simeq \cY$, thereby eliminating the ``quantum gauge'' degrees of freedom.
+
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: End Private comments
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
