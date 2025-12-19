@@ -1,0 +1,2441 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  PROJECT: CDRBCID - Cech-De-Rham Bicomplex in Diffeology
+%%
+%%  Created by Patrick Iglesias-Zemmour on 18/07/18.
+%%  Copyright 2018 __MyCompanyName__.
+%%
+%%  All rights reserved.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: § Front Matter
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt,reqno]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Macro file
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Page Display
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent 0mm
+\parskip 0.5em plus 1pt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Theorem Environments
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheoremstyle{article} % ⟨name⟩
+{7pt} %  ⟨Space above⟩
+{7pt} %  ⟨Space below⟩
+{} %     ⟨Body font⟩
+{0pt} %  ⟨Indent amount⟩
+{\bf} %  ⟨Theorem head font⟩
+{.~} %  ⟨Punctuation after theorem head⟩
+{0pt} %  ⟨Space after theorem head⟩
+{} %     ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{article}
+\newtheorem{article}{}
+
+\def\artlabel[#1]{\textsc{#1}.}
+
+\newcommand{\art}[1]{(\text{\textsection} \ref{#1})}
+\newcommand{\xart}[2]{(\text{\textsection} \ref{#1}, #2)}
+
+\renewenvironment{proof}{\noindent \textit{Proof.}} {\nolinebreak\hfill $\square$}
+
+\renewcommand\thesection{\roman{section}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Packages Figures
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Pour figures et diagrammes
+% http://texdoc.net/texmf-dist/doc/latex/tikz-cd/tikz-cd-doc.pdf
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{
+arrow style=tikz,
+diagrams={>={Straight Barb[scale=0.8]}}
+}
+
+\newcommand{\rfl}[1]{\,{\buildrel{\displaystyle{#1}}\over{\hbox to 7mm{\rightarrowfill}}}\,}
+
+\usepackage{yfonts}
+
+\usepackage{cancel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Letters
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \A{\mathrm A}
+\def \B{\mathrm B}
+\def \C{\mathrm C}
+\def \D{\mathrm D}
+\def \E{\mathrm E}
+\def \F{\mathrm F}
+\def \G{\mathrm G}
+\def \H{\mathrm H}
+\def \I{\mathrm I}
+\def \J{\mathrm J}
+\def \K{\mathrm K}
+\def \L{\mathrm L}
+\def \M{\mathrm M}
+\def \N{\mathrm N}
+\def \O{\mathrm O}
+\def \P{\mathrm P}
+\def \Q{\mathrm Q}
+\def \R{\mathrm R}
+\def \S{\mathrm S}
+\def \T{\mathrm T}
+\def \U{\mathrm U}
+\def \V{\mathrm V}
+\def \W{\mathrm W}
+\def \X{\mathrm X}
+\def \Y{\mathrm Y}
+\def \Z{\mathrm Z}
+
+
+\newcommand{\CC}{{\bf C}}
+\newcommand{\FF}{{\bf F}}
+\newcommand{\HH}{{\bf H}}
+\newcommand{\KK}{{\bf K}}
+\newcommand{\NN}{{\bf N}}
+\newcommand{\QQ}{{\bf Q}}
+\newcommand{\RR}{{\bf R}}
+\newcommand{\TT}{{\bf T}}
+\newcommand{\ZZ}{{\bf Z}}
+
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cC}{{\mathcal C}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cE}{{\mathcal E}}
+\newcommand{\cF}{{\mathcal F}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cI}{{\mathcal I}}
+\newcommand{\cK}{{\mathcal K}}
+
+\newcommand{\cM}{\mathcal{M}}
+
+\newcommand{\cN}{\mathcal{N}}
+
+\newcommand{\cO}{{\mathcal O}}
+\newcommand{\cR}{{\mathcal R}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cV}{{\mathcal V}}
+
+\newcommand{\fB}{\textswab{B}}
+\newcommand{\fF}{\textswab{F}}
+
+\newcommand{\sC}{\mathsf{C}}
+\newcommand{\sZ}{\mathsf{Z}}
+\newcommand{\sB}{\mathsf{B}}
+\newcommand{\sH}{\mathsf{H}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abreviations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Cinfty}{{\mathcal C}^{\infty}}
+\newcommand{\Cech}{\v{C}ech\ }
+\newcommand{\class}{\mathrm{class}}
+\DeclareMathOperator{\coker}{coker}
+
+\DeclareMathOperator{\dom}{dom}
+\newcommand{\ds}{{d\!s}}
+\newcommand{\dt}{{d\!t}}
+
+\newcommand{\dR}{\mathrm{dR}}
+
+\DeclareMathOperator{\ev}{ev}
+\newcommand{\exit}{\mathrm{out}}
+
+\DeclareMathOperator{\Fl}{\mathsf{Fl}}
+
+\DeclareMathOperator{\Hom}{Hom}
+
+\newcommand{\init}{\mathrm{in}}
+\newcommand{\id}{{\bf 1}}
+
+\newcommand{\loc}{\text{loc}}
+
+\DeclareMathOperator{\Maps}{Maps}
+
+\newcommand{\pr}{{\rm pr}}
+\newcommand{\Param}{{\rm Param}}
+\DeclareMathOperator{\Paths}{Paths}
+
+\DeclareMathOperator{\Supp}{Supp}
+
+\newcommand{\ul}{\underline}
+
+\DeclareMathOperator{\Val}{im}
+
+\newcommand{\vB}{\check{\mathrm{B}}}
+\newcommand{\vC}{\check{\mathrm{C}}}
+\newcommand{\vH}{\check{\mathrm{H}}}
+\newcommand{\vZ}{\check{\mathrm{Z}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS General Layout
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%<<< Begin - Garamond style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{microtype}
+\usepackage[cal=scr,expert,frenchmath,uppercase = upright,greeklowercase = upright,greekfamily = didot, garamond]{mathdesign}
+\usepackage{ebgaramond}
+% Change the caligraphy to Euler characters
+\usepackage[mathcal]{eucal}
+\linespread{1.1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%>>> End - Garamond style or Charter style ?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \H{\mathrm H}
+\def \L{\mathrm L}
+\def \O{\mathrm O}
+\let \epsilon=\varepsilon
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Begin Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  \allowdisplaybreaks
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: • Title & Data
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \title[\v{C}ech-De-Rham Bicomplex in Diffeology]{\v{C}ech-De-Rham Bicomplex in Diffeology}
+  
+  \author{Patrick Iglesias-Zemmour}
+  
+  %\date{\today}
+  \date{January 31, 1922.}
+
+  \address{Patrick Iglesias-Zemmour --- Einstein Institute of Mathematics,
+  The Hebrew University of Jerusalem,
+  Campus Givat Ram,
+  9190401 Israel.}
+  \email{piz@math.huji.ac.il}
+  \urladdr{http://math.huji.ac.il/~piz}
+  
+  \keywords{Diffeology, \Cech Cohomology, De Rham Cohomology.}
+  \subjclass{58A12,55N05,53C99}
+  
+  \maketitle
+  
+%  \tikz[overlay,remember picture]\n
+%  {\n
+%  \node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \pdfcreationdate}}% \pdfcreationdate}};\n
+%  }\n
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - § Abstract
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    We propose a \Cech cohomology for diffeological spaces as the Hochschild cohomology of some characteristic gauge monoid.
+    Then,
+    we describe how this cohomology is connected with the De Rham cohomology,
+    through a double-complex which we make explicit.
+    We show that the first obstruction for the De Rham theorem in diffeology,
+    which is the middle term of the exact sequence of low-degree terms of the  associated spectral sequence,
+    can be interpreted as some group of $(\RR,+)$ principal fiber bundles.
+    That introduces a first characteristic class for diffeological spaces which does not exist for manifolds.
+  \end{abstract}
+    
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - § Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Introduction}
+  
+  This paper introduces a general \emph{\Cech cohomology} for diffeological spaces,
+  which is adapted to their specificity.
+  In particular,
+  it could not be a plain transliteration of what exists in topology,
+  since diffeological spaces can be substantially non trivial even with a trivial topology.
+  %
+  It seems that a good approach in diffeology,
+  for the \Cech cohomology,
+  will be to be defined as the \emph{Hochschild cohomology} of a \emph{gauge monoid},
+  associated with the specific generating family of \emph{round plots}.
+  The computation in the case of the irrational torus shows that this \Cech cohomology achieves its purpose,
+  even in this extreme case.
+  Indeed,
+  for the quotient $\T_\K = \RR/\K$,
+  with $\K \subset \RR$ any strict subgroup,
+  dense or not,
+  we get $\vH^\star(\T_\K,\RR) = \sH^\star(\K,\RR)$,
+  where the second term is the ordinary group cohomology of $\K$,
+  with real coefficients.
+  
+  Then,
+  we connect this \Cech cohomology with the De Rham cohomology through a double complex,
+  in Weil's style \cite{Wei52}.
+  We describe this complex,
+  the associated two filtrations and the spectral sequence.
+  Contrarily to the case of smooth manifolds,
+  the spectral sequence does not split in general and contains the obstructions to the De Rham theorem in diffeology.
+  We knew already
+  ---~by a specific computation~---
+  that the obstruction of the first De Rham homomorphism is the group of equivalent $(\RR,+)$ principal bundles,
+  equipped with a flat connection \cite{Igl85}.
+  Thanks to the \v{C}ech-De-Rham bicomplex,
+  we find this obstruction as the middle term in the low-degree sequence of the spectral sequence,
+  which gives to it a full-fledged geometrical status.
+  
+  We must acknowledge that the geometrical natures of the higher obstructions of the De Rham theorem still remain uninterpreted.
+  It would be certainly interesting to pursue this matter further.
+  
+  \textsc{Note 1.} This paper is a translation,
+  also a revision,
+  of a preprint \cite{PI88-91} written in French,
+  and issued first in 1988 by the Center for Theoretical Physics%
+  \footnote{Luminy, in Marseille (France).}.
+  It has never been published in a journal and remained a confidential document.
+  I felt recently the need to publish it after it has been cited a couple of times in \cite{Gur14} and \cite{Kur19}.
+  
+  This preprint was the first attempt to understand \emph{what happens to the De Rham theorem in diffeology}?
+  We know indeed that,
+  in diffeology,
+  the De Rham homomorphism is not necessarily an isomorphism.
+  The first and simplest counter-example is the irrational torus $\T_\alpha = \RR/ \ZZ + \alpha \ZZ$ \cite{DonIgl83}.
+  Its first cohomology group $\H^1(\T_\alpha,\RR)$
+  ---~interpreted \emph{a priori} as $\Hom(\pi_1(\T_\alpha),\RR)$~---
+  is equal to $\Hom(\ZZ^2,\RR) = \RR^2$.
+  While its first De Rham cohomology group $\H^1_{\D\R}(\T_\alpha)$ is equal to $\RR$.
+  There was one factor $\RR$ missing\dots
+  
+  \textsc{Note 2.} Diffeologies have been introduced by J.-M.~Souriau in the eighties,
+  and began to be developed at that time by his students,
+  \cite{Sou80},
+  \cite{DonIgl83},
+  \cite{Sou84-a},
+  \cite{Sou84-b},
+  \cite{Don84},
+  \cite{Igl85}.
+  A similar theory of ``differential spaces'' had been proposed by K.-T.~Chen in the seventies \cite{Che77}.
+  
+  \textsc{Acknowledgements:} I would like to thank the anonymous referee of the Israel Journal of Mathematics for his careful reading and corrections that improved the quality of the manuscript.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - § Diffeological Spaces And Differential Forms
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{Diffeological Spaces And Differential Forms}
+  
+  For self consistency we recall first some definitions in diffeology we use in the following.
+  Any detail can be found now in the textbook \cite{PIZ13}.
+  %    Then,
+  %    we reinterpret the definition of the differential forms in diffeology and introduce a few related constructions.
+  
+  %% MARK: • Diffeology And Diffeological Spaces
+  \begin{article}\artlabel[Diffeology And Diffeological Spaces]
+    \label{Diffeology-And-Diffeological-Spaces}
+    We call \emph{Euclidean domain} any open subset of some Euclidean space $\RR^n$,
+    for any integer $n$.
+    We call \emph{parametrization} in a set $\X$,
+    any map $\P \colon \U \to \X$,
+    where $\U$ is a Euclidean domain.
+    The set of all parametrizations in $\X$ is denoted by $\Param(\X)$.
+    
+    A \emph{diffeology} on a set $\X$ is the choice of a set $\cD$ of parametrizations in $\X$ which satisfies the following axioms.
+    
+    \begin{enumerate}
+      \item[1.] \textsc{Covering}\,: $\cD$ contains the constant parametrizations.
+      \item[2.] \textsc{Locality}\,: Let $\P$ be a parametrization in $\X$.
+      If for all $r \in \dom(\P)$ there is an open neighbourhood $\V$ of $r$ such that $\P \restriction \V \in \cD$,
+      then $\P \in \cD$.
+      \item[3.] \textsc{Smooth compatibility}\,: For all $\P \in \cD$,
+      for all $\F \in \Cinfty(\V,\dom(\P))$,
+      where $\V$ is a Euclidean domain,
+      $\P \circ \F \in \cD$.
+    \end{enumerate}
+    
+    A set $\X$ equipped with a diffeology is a \emph{diffeological space}.
+    The elements of $\cD$ are then called \emph{plots} of the diffeological space.
+  \end{article}
+  
+  %% MARK: • Smooth Maps
+  \begin{article}\artlabel[Smooth Maps]
+    A map $f \colon \X \to \X'$ is said to be \emph{smooth} if for any plot $\P$ in $\X$,
+    $f \circ \P$ is a plot in $\X'$.
+    If $f$ is smooth,
+    bijective,
+    and if its inverse $f^{-1}$ is smooth,
+    then $f$ is said to be a \emph{diffeomorphism}.
+    
+    Diffeological spaces and smooth maps constitute the category \{Diffeology\},
+    stable by set-theoretic operations,
+    whose isomorphisms are diffeomorphisms.
+    
+    The set of smooth map from $\X$ to $\X'$ can be equipped with a natural diffeology called \emph{functional diffeology}.
+    That makes the category Cartesian closed.
+    For example,
+    the set of (smooth) paths in $\X$,
+    that is,
+    $$
+    \Paths(\X) = \Cinfty(\RR,\X),
+    $$
+    is equipped with the functional diffeology.
+  \end{article}
+  
+  %% MARK: • Differential Forms In Diffeology
+  \begin{article}\artlabel[Differential Forms In Diffeology]
+    \label{Differential-forms-in-diffeology}
+    {A \emph{differential $k$-form} $\alpha$ on a diffeological space $\X$ is a mapping,
+    that associates with every plot $\P \colon \U \to \X$ a smooth $k$-form $\alpha(\P)$ on $\U$,
+    such that for any smooth parametrization $\F$ in $\U$,
+    $$
+    \alpha(\P \circ \F) = \F^*(\alpha(\P)).
+    $$}
+    The set of differential $k$-forms on $\X$ is a real vector space denoted by $\Omega^k(\X)$.
+    The total complex is denoted by
+    $$
+    \Omega^\star(\X) = \bigoplus_{k \in \NN} \Omega^k(\X).
+    $$
+    Let $\X'$ be another diffeological space and $f \colon \X \to \X'$ be a smooth map,
+    and let $\alpha' \in \Omega^k(\X')$.
+    Then,
+    the pullback of $\alpha'$ by $f$ is denoted by $f^*(\alpha')$,
+    this is an element of $\Omega^k(\X)$ and it is defined by
+    $$
+    f^*(\alpha)(\P) = \alpha(f \circ \P).
+    $$
+    The exterior differential and the exterior product are defined as follows:
+    $$
+    (d_\dR\alpha)(\P) = d_\dR[\alpha(\P)]
+    \quad \text{and} \quad
+    (\alpha \wedge \beta)(\P) = \alpha(\P) \wedge \beta(\P),
+    $$
+    where the exterior De Rham differential $d_\dR$ is a linear operator mapping $\Omega^k(\X)$ to $\Omega^{k+1}(\X)$,
+    for all $k \in \NN$;
+    and the wedge product is a bilinear operator from $\Omega^k \times \Omega^\ell$ to $\Omega^{k+\ell}$.
+    Then,
+    $\Omega^\star(\X)$ is a differential graduated algebra over $\RR$,
+    with unit the constant function equal to $1$.
+    The graduated subalgebra of De Rham cocycles (closed forms) and the ideal of De Rham coboundaries (exact forms) are well defined,
+    $$
+    \Z_\dR^\star(\X) = \bigoplus_{k \in \NN} \Z_\dR^k(\X)
+    \quad \text{and} \quad
+    \B_\dR^\star(\X) = \bigoplus_{k \in \NN} \B_\dR^k(\X).
+    $$
+    Where:
+    $\Z_\dR^k(\X) = \ker d_\dR \colon \Omega^k(\X) \to \Omega^{k+1}(\X)$,
+    $\B_\dR^k(\X) = d_\dR\big(\Omega^{k-1}(\X)\big)$ and $\B_\dR^0(\X) =\{0\}$.
+    The De Rham cohomology groups are then defined as usual:
+    $$
+    \H^k_\dR(\X) = \Z^k_\dR(\X)/\B_\dR(\X)
+    \quad \text{and} \quad
+    \H_\dR^\star(\X) = \bigoplus_{k \in \NN} \H^k_\dR(\X).
+    $$
+    
+    \textsc{Note.} The De Rham cohomology is still homotopic invariant in diffeology.
+    The proof uses the \emph{Chain-Homotopy Operator} \cite[\textsection 6.83]{PIZ13},
+    which is a linear operator satisfying:
+    $$
+    \cK \colon \Omega^k(\X) \to \Omega^{k-1}(\Paths(\X))
+    \quad \text{with} \quad
+    \cK \circ d + d \circ \cK = \hat 1^* - \hat 0^*,
+    $$
+    where $\hat t(\gamma) = \gamma(t)$,
+    for all $\gamma \in \Paths(\X)$.
+    Precisely,
+    
+    \textsc{Proposition} \textit{Let $\X'$ and $\X$ be two diffeological spaces.
+    Let $\alpha$ be a closed $k$-form on $\X$,
+    with $k \geq 1$.
+    Let $t \mapsto f_t$ be a smooth path in $\Cinfty(\X',\X)$,
+    that is,
+    a homotopy from $f_0$ to $f_1$.
+    Then $f_1^*(\alpha) = f_0^*(\alpha) + d\beta$,
+    with $\beta \in \Omega^{k-1}(\X)$.}
+    
+    It should be noted that the short proof that follows is essentially diffeological,
+    since it uses fundamentally the notion of differential forms on the space of paths,
+    which is not a manifold,
+    except in trivial cases.
+  \end{article}
+  
+  \begin{proof}
+    The homotopy $t \mapsto f_t$ induces a smooth map $\phi \colon \X' \to \Paths(\X)$,
+    with $\phi(x') = [t \mapsto f_t(x')]$.
+    Then,
+    the pullback by $\phi$ of the Chain-Homotopy Operator identity,
+    applied to $\alpha$,
+    gives $\phi^*(\cK(d\alpha)) + \phi^*(d(\cK(\alpha))) = \phi^*(\hat 1^*(\alpha)) - \phi^*(\hat 0^*(\alpha))$.
+    That is,
+    since $d\alpha = 0$ and $\phi^* \circ \hat t^* = (\hat t \circ \phi)^* = f_t^*$,
+    $d(\phi^*(\cK\alpha)) = f_1^*(\alpha) - f_0^*(\alpha)$.
+    That is,
+    $f_1^*(\alpha) = f_0^*(\alpha) + d\beta$,
+    with $\beta = \phi^*(\cK\alpha)$.
+  \end{proof}
+  
+  %% MARK: • D-Topology
+  \begin{article}\artlabel[D-Topology]
+    {We call D-topology on a diffeological space $\X$ the finest topology that makes the plots continuous.
+    A subset $\cO \subset \X$ is open for the D-topology if and only if $\P^{-1}(\cO)$ is open for all plots $\P$ \cite{Igl85}.}
+  \end{article}
+  
+  %% MARK: • Generating Families
+  \begin{article}\artlabel[Generating Families]
+    Let $\fF$ be any family of parametrizations in a set $\X$.
+    There exists a finest diffeology on $\X$ such that $\fF$ is made of plots in $\X$.
+    This diffeology is said to be \emph{generated} by $\fF$,
+    and $\fF$ is called a \emph{generating family}  \cite{Igl85}.
+    Every diffeology admits generating families,
+    at least the diffeology $\cD$ itself.
+    
+    The family \emph{covers} $\X$ if it is surjective on $\X$.
+    Otherwise one adds the constant parametrizations, without changing the diffeology.
+    That is why we consider only covering families.
+    
+    The plots $\P \colon \U \to \X$ of the generated family are the parametrizations such that for every point in $\U$,
+    there exist $\F \in \fF$ and a smooth parametrization $\Q \in \Cinfty(\V,\U)$ such that,
+    locally,
+    $\P =_\loc \F \circ \Q$.
+    
+    The \emph{nebula} $\cN$ of the generating family $\fF$ is the sum of the domains of its elements,
+    that is,
+    $$
+    \cN = \coprod_{\F \in \fF} \dom(\F) = \{ (\F, r) \mid \F \in \fF \text{ and } r \in \dom(\F) \}
+    $$
+    A plot in the nebula is any smooth parametrization with values,
+    locally,
+    into some fixed $\dom(\F)$.
+    In other words,
+    the set of indices $\F \in \fF$ is discrete for the sum diffeology.
+    A nebula comes with its \emph{evaluation map} defined by:
+    $$
+    \ev \colon \cN \to \X
+    \quad \text{with} \quad
+    \ev(\F,r) = \F(r).
+    $$
+    The evaluation map is a subduction,
+    that is,
+    it realizes $\X$ as a quotient of $\cN$.
+    In other words,
+    every diffeological space is a quotient of such a \emph{bubbles space} by an equivalence.
+  \end{article}
+  
+  %% MARK: • Diffeological Fiber Bundles
+  \begin{article}\artlabel[Diffeological Fiber Bundles]
+    A \emph{diffeological fibration},
+    or \emph{fiber bundle},
+    is a projection $\pi \colon \Y \to \X$,
+    where $\X$ and $\Y$ are diffeological spaces,
+    which is \emph{locally trivial along the plots}.
+    That means that,
+    there exists a diffeological space $\F$ such that for all plot $\P \colon \U \to \X$,
+    the pullback $\pr_1 \colon \P^*(\Y) \to \U$ is locally trivial with fiber $\F$,
+    where
+    $$
+    \P^*(\Y) = \{ (r,y) \in \U \times \Y \mid \P(r) = \pi(y \}.
+    $$
+    A \emph{principal fibration},
+    or a \emph{principal fiber bundle},
+    is a diffeological fiber bundle $\pi \colon \Y \to \X$ with a smooth free action of a diffeological group $\G$,
+    such that the fibers of $\pi$ are the orbits of $\G$,
+    and such that the local trivialisations of $\pr_1 \colon \P^*(\Y) \to \U$ intertwin the actions of $\G$ on each side.
+    For more details see \cite{Igl85} and \cite{PIZ13},
+    particularly \cite[\textsection 8.12 8.13]{PIZ13} for principal bundles.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - § Cech Cohomology On Diffeological Spaces
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{\Cech Cohomology On Diffeological Spaces}
+  
+  In this section,
+  we propose a \Cech cohomology for diffeological spaces.
+  A definition which tries to take in consideration the very specificity of diffeological spaces,
+  compared with Euclidean domain or manifolds.
+  Think for example to the irrational torus which has a trivial topology but which is highly not trivial from the point of view of diffeology \cite{DonIgl83}.
+  
+  Since we will build this cohomology as the Hochschild cohomology of some monoid,
+  we recall this definition we can find%
+  \footnote{We read in part X.5 (p. 291) of MacLane ``Homology''\,:
+  ``The homology of a group (or a monoid) is a special case of the Hochschild homology of its group ring'',
+  where Hochschild cohomology is introduced in \cite{Hoch45}.}
+  in \cite{Mac67}.
+  
+  %% MARK: • Hochschild Cohomology
+  \begin{article}\artlabel[Hochschild Cohomology]
+    \label{Hochschild-Cohomology}
+    Let $\cM$ be a monoid,
+    and let $(f,a) \mapsto f^*(a)$ be a covariant action of $\cM$ on some Abelian group $\A$.
+    For all $f,g \in \cM$ and all $a,b \in \A$,
+    $$
+    f^*(g^*(a)) = (g \circ f)^*(a)
+    \quad \text{and} \quad
+    f^*(a+b) = f^*(a) + f^*(b).
+    $$
+    The set $\sC^k(\cM,\A)$ of $k$-cochains from $\cM$ to $\A$ is defined as the space of maps $\sigma$ from $\cM^k$ to $\A$.
+    $$
+    \sC^k(\cM,\A) = \Maps(\cM^k,\A)
+    \quad \text{and} \quad
+    \sC^0(\cM,\A) = \A.
+    $$
+    The $i$-th simplicial faces of the cochain $\sigma$ are then defined by,
+    $$
+    \left \{ \begin{array}{lcl}
+      \delta_0\sigma (f_0,\ldots,f_k) & = & f_0^*\big(\sigma(f_1,\ldots,f_k)\big) \\
+      \delta_{i}\sigma (f_0,\ldots,f_k) & = &\sigma(f_0,\ldots,f_{i}\circ f_{i-1},\ldots,f_k),
+      \quad  0<i\leq k  \\
+      \delta_{k+1}\sigma (f_0,\ldots,f_k) & = & \sigma(f_0,\ldots,f_{k-1}) \\
+    \end{array}\right.
+    $$
+    for $k \geq 1$. And for $k=0$,
+    the two simplicial faces of the cochain $a$ are given by
+    $$
+    \delta_0(a)(f) = f^*(a)
+    \quad \text{and} \quad
+    \delta_1(a)(f) = a.
+    $$
+    The Hochschild coboundary operator is then defined by
+    $$
+    \delta \colon \sC^k(\cM,\A) \to \sC^{k+1}(\cM,\A)
+    \quad \text{with} \quad
+    \delta = \sum_{i=0}^{k+1} (-1)^i\delta_i.
+    $$
+    This coboundary operator satisfies as expected $\delta \circ \delta = 0$ and then defines a cohomology.
+    The group of $k$-cocycles is denoted by $\sZ^k(\cM,\A)$,
+    the group of $k$-boundaries is denoted by $\sB^k(\cM,\A)$,
+    and the \emph{Hochschild cohomology groups} are denoted by $\sH^k(\cM,\A)$.
+    $$
+    \left \{ \begin{array}{lcl}
+      \sZ^k(\cM,\A) & = & \ker[\delta \colon \sC^k(\cM,\A) \to \sC^{k+1}(\cM,\A)], \quad k\geq 0. \\[.3ex]
+      \sB^k(\cM,\A) & = & \delta \big(\sC^{k-1}(\cM,\A)\big), \quad k>0, \quad \text{and} \quad \sB^0(\cM,\A) =0. \\[.3ex]
+      \sH^k(\cM,\A) & = & \sZ^k(\cM,\A)/\sB^k(\cM,\A), \quad k \geq 0.
+    \end{array}\right.
+    $$
+    
+    \textsc{Remark.} The first Hochschild cohomology group has a particularly simple interpretation.
+    One gets immediately,
+    for a $0$-cochain $a$,
+    $\delta(a)(f) = f^*(a) - a$.
+    Thus,
+    $a \in \sZ^0(\cM,\A)$ if and only if $f^*(a) - a = 0$,
+    for all $f \in \cM$.
+    And since $\sB^0(\cM,\A) = \{0\}$,
+    we get
+    $$
+    \sH^0(\cM,\A) = \{ a \in \A \mid f^*(a) = a, \forall f \in \cM \}.
+    $$
+    This cohomology group is the subgroup in $\A$ made of fixed elements by the covariant action of the monoid $\cM$.
+  \end{article}
+  
+  %% MARK: • Nebulae And Round Plots
+  \begin{article}\artlabel[The Gauge Monoid of Round Plots]
+    \label{The-Gauge-Monoid-of-Round-Plots}
+    Let us introduce now the \emph{nebula of round plots} and the associated \emph{gauge monoid}.
+    
+    \textsc{Definition 1.} \textit{We call \emph{round parametrization},
+    and \emph{round plots},
+    every parametrization,
+    and plot,
+    defined on an open ball of some Euclidean domain.}
+    
+    The set of round plots of a diffeological space $\X$ is obviously a generating family.
+    Let $\cD$ be the diffeology of $\X$,
+    and let $\fB$ be the set of its round plots:
+    $$
+    \fB = \{ \phi \in \cD \mid \dom(\phi) \text{ is some Euclidean open ball $\B$} \}.
+    $$
+    We will denote by $\cB$ the nebula of the family $\fB$,
+    that is,
+    $$
+    \cB = \coprod_{\phi \in \fB} \dom(\phi) = \{ (\phi, r) \mid \phi \in \fB \text{ and } r \in \dom(\phi) \},
+    $$
+    and $\ev \colon \cB \to \X$ be the evaluation map $\ev(\phi,r) = \phi(r)$.
+    
+    Let us,
+    now,
+    introduce the second main object of this study.
+    
+    \textsc{Definition 2.} \textit{We denote by $\cM$ and we call \emph{gauge monoid} (of the round plots),
+    the set of smooth maps on $\cB$ that project,
+    along the evaluation map,
+    to the identity of $\X$,
+    that is,
+    $$
+    \cM = \{ f \in \Cinfty(\cB,\cB) \mid \ev \circ f = \ev \};
+    $$
+    }
+    and let
+    $$
+    f(\phi,r) = (f_\fB(\phi), f_\phi(r)),
+    $$
+    where $f \mapsto f_\fB \in \Maps(\fB,\fB)$ is the action of $\cM$ on the set of indices $\fB$,
+    and $f_\phi \in \Cinfty(\dom(\phi), \dom(f_\fB(\phi)))$.
+    
+    \textsc{Note.} Actually we can restrict our attention to the sub-monoid
+    $$
+    \cM' = \{ f\in \cM\mid \#\, \Supp(f) < \infty \}
+    $$
+    of transformations with finite support,
+    $\Supp(f) = \{ \phi \in \fB \mid f_\phi \neq \id_{\dom(\phi)} \}$.
+    It seems that nowhere in this work this is necessary,
+    however it could be necessary for some other developments.
+    It is good to leave the door open for that.
+  \end{article}
+  
+  %% MARK: • Differential Forms Revisited
+  \begin{article}\artlabel[Differential Forms Revisited]
+    \label{Differential-forms-Revisited}
+    Let $\alpha \in \Omega^k(\X)$,
+    its pullback
+    $$
+    \tilde\alpha = \ev^*(\alpha)
+    $$
+    is the smooth $k$-form on $\cB$ satisfying
+    $$
+    \tilde\alpha \restriction \{\phi\} \times \dom(\phi) = \alpha(\phi).
+    $$
+    And since for all $f \in \cM$,
+    $\ev \circ f = \ev$,
+    $$
+    f^*(\tilde\alpha) = \tilde\alpha
+    \quad \text{for all} \quad
+    f \in \cM.
+    $$
+    The evaluation map $\ev$ defines a morphism of De Rham complex
+    $$
+    \ev^* \colon \Omega^\star(\X) \to \Omega^\star(\cB)
+    $$
+    which takes its values in the subspace
+    $$
+    \Omega^\star_\cM(\cB) = \{ \tilde\alpha \in \Omega^\star(\cB) \mid \forall f \in \cM, \ f^*(\tilde\alpha) = \tilde\alpha \}
+    $$
+    of smooth forms on $\cB$ invariant by the covariant action of $\cM$.
+    Conversely:
+    
+    \textsc{Proposition.}~\textit{A smooth form $\tilde \alpha \in \Omega^k(\cB)$ is the pullback,
+    by the evaluation map,
+    of a differential form $\alpha$ on $\X$,
+    if and only if it is invariant by the action of the gauge monoid $\cM$,
+    that is
+    $$
+    f^*(\tilde\alpha) = \tilde\alpha \quad \text{for all} \quad f \in \cM.
+    $$
+    The form $\alpha \in \Omega^k(\X)$ such that $\tilde\alpha = \ev^*(\alpha)$ is then unique.}
+    
+    In other word,
+    the pullback $\ev^*$ realizes a De Rham complex equivalence:
+    $$
+    \Omega^\star(\X) \simeq \Omega^\star_\cM(\cB).
+    $$
+    The complex of differential forms on $\X$ is then identified with a subcomplex of the ordinary complex of smooth forms on the bubbles space.
+    
+    \textsc{Remark.} It is interesting to notice that,
+    in regard of the equivalence of the complexes above,
+    the space $\X$ itself,
+    which is a quotient of the nebula $\cB$ by the evaluation map,
+    is also the quotient of $\cB$ by the action of the gauge monoid $\cM$,
+    that is,
+    $$
+    \X \simeq \cB/\cM.
+    $$
+    Therefore,
+    considering the special structure of the nebula $\cB$,
+    it is not surprising that $\Omega^\star(\cB/\cM)$ identifies with $\Omega^\star_\cM(\cB)$ as its pullback by the evaluation map $\ev$,
+    for which $\cM$ is the gauge transformations monoid.
+    
+    We need however to clarify what does means this equivalence above.
+    The relation between two elements $(\phi,r)$ and $(\phi',r')$,
+    defined by the existence of $f \in \cM$ such that $(\phi',r') = f(\phi,r)$,
+    is reflexive and transitive but not symmetric.
+    The quotient above is defined considering the equivalence relation generated by the symmetric closure of the action of the monoid $\cM$ on $\cB$.
+    More precisely,
+    $(\phi',r')$ and $(\phi,r)$ are equivalent if there exists a finite chain $(\phi_i,r_i)_{i=1}^\N$ of elements of $\cB$,
+    and a sequence $(f_i)_{i=1}^{\N-1}$ of elements of $\cM$,
+    such that $(\phi_1,r_1) = (\phi,r)$,
+    $(\phi_\N,r_\N) = (\phi',r')$,
+    and for all $i = 1\ldots N-1$,
+    $(\phi_{i+1},r_{i+1}) = f_i(\phi_i,r_i)$ or $(\phi_i,r_i) = f_i(\phi_{i+1},r_{i+1})$.
+    Actually,
+    these chains reduce to alternating chains,
+    by composing the successive elements of the chain that can be composed.
+    Now,
+    for all $x \in \X$,
+    let $\hat x \in \fB$ with $\hat x \colon \RR^0 \to \X$ such that $\hat x(0) = x$.
+    Then,
+    for all $(\phi,r)$ such that $\phi(r)=x$,
+    there exists $f \colon \{\hat x\} \times \RR^0 \to \{\phi\} \times \dom(\phi)$ mapping $0$ to $r$ and satisfying $\ev \circ f = \ev$.
+    Hence,
+    all $(\phi,r)$ such that $\phi(r) = x$ are equivalent to $\hat x$,
+    and $\X \simeq \cB/\cM$.
+  \end{article}
+  
+  \begin{proof}
+    \begin{figure}[t]
+      \includegraphics[width=.7\textwidth]{Figures/Form-alpha.pdf}
+      %\vspace{-.25\baselineskip}
+      \caption{The form $\alpha$ on $\X$.}
+      \label{Form-alpha}
+    \end{figure}
+    Let $\tilde \alpha \in \Omega^k(\cB)$ such that $f^*(\tilde\alpha) = \tilde\alpha$ for all $f \in \cM$.
+    Consider a plot $\P \colon \U \to \X$.
+    The domain $\U$ admits a locally finite covers $\U = \cup_{i} \B_i$,
+    where the $\B_i$ are open balls,
+    for some set of indices.
+    Hence,
+    the restrictions $\phi_i = \P \restriction \B_i$ are compatibe round plots,
+    defined on $\B_i$;
+    that is,
+    they coincide on the intersection of their domains.
+    Let then $\alpha(\phi_i) = \tilde\alpha \restriction \{\phi_i\} \times \B_i \in \Omega^k(\B_i)$.
+    We shall check first that the $\alpha(\phi_i)$ are compatible and defines a smooth $k$-form on $\U$.
+    Let $r_0$ be some point in $\U$,
+    since the covering is locally finite,
+    the point $r_0$ belongs to only a finite number of balls of the cover.
+    Let $r_0 \in \B_i \cap \B_j$,
+    and let $\phi_i = \P \restriction \B_i$ and $\phi_j = \P \restriction \B_j$.
+    Then,
+    there exists a small ball $b \subset \B_i \cap \B_j$ such that $r \in b$,
+    let $\psi = \P \restriction b$,
+    it is a round plot.
+    Let $f_i \colon \{\psi\} \times b \to \{\phi_i\} \times \B_i$ be the inclusion:
+    $f_i(\{\psi\},r) = (\{\phi_i\},r)$,
+    and $f_i$ is the identity elsewhere.
+    Then,
+    for all $r \in b$,
+    $\ev(f_i(\{\psi\},r)) = \ev(\{\phi_i\},r) = \phi_i(r) = (\P \restriction \B_i)(r) = (\P \restriction b)(r) = \psi(r) = \ev(\{\psi\},r)$.
+    Thus,
+    $\ev \circ f_i = \ev$.
+    Hence $f_i^*(\tilde\alpha \restriction \{\phi_i\} \times \B_i) = \tilde\alpha \restriction \{\psi\} \times b$,
+    that is,
+    $f_i^*(\alpha(\phi_i)) = \alpha(\phi_i)\restriction b = \tilde\alpha \restriction \{\psi\} \times b$.
+    For the same reason,
+    we have $\alpha(\phi_j)\restriction b = \tilde\alpha \restriction \{\psi\} \times b$.
+    Thus,
+    $\alpha(\phi_i) \restriction \B_i \cap \B_j = \alpha(\phi_j) \restriction \B_i \cap \B_j$.
+    This property extends naturally to a finite intersection of balls.
+    Hence,
+    the family of differential forms $\alpha(\phi_i)$ is compatible,
+    there is a smooth $k$-form $\alpha(\P)$,
+    defined on $\U$,
+    such that $\alpha(\phi_i) = \alpha(\P) \restriction \B_i$.
+    Note that the form $\alpha(\P)$ does not depend of the covering:
+    If we have another locally finite covering by balls $\B'_{i'}$ giving $\alpha'(\P)$,
+    then the union of the two coverings is still a locally finite covering by balls $\B''_{i''}$ giving a form $\alpha''(\P)$,
+    which by construction is equal to $\alpha(\P)$ and $\alpha'(\P)$.
+    Therefore,
+    the form $\tilde\alpha$ defines a mapping $\P \to \alpha(\P)$ for all plot $\P$ in $\X$,
+    with $\alpha(\P) \in \Omega^k(\dom(\P))$.
+    
+    Let us check now that this mapping defines a differential $k$-form on $\X$,
+    that is,
+    $\alpha(\P \circ \F) = \F^*(\alpha(\P))$,
+    for all smooth parametrizations $\F$ in $\U$.
+    Let $\F \colon \V \to \U$ be a smooth parametrization.
+    Let $\B_i$ be a ball of the cover above.
+    Let $\V' = \F^{-1}(\B_i)$.
+    The subset $\V'$ is an Euclidean domain and admits a locally finite covering by balls.
+    Let $b$ be a ball of that covering.
+    On the nebula,
+    consider the map $\F_b \colon \{\P \circ \F \restriction b\}\times b \to \{\P \restriction \B_i\} \times \B_i$,
+    such that $\F_b(\P \circ \F \restriction b, s) = (\P \restriction \B_i,F(s))$.
+    One has,
+    $\ev \circ \F_b(\P \circ \F \restriction b, s) = \ev(\P \restriction \B_i,F(s)) = \P(\F(s)) = \ev(\P \circ \F \restriction b, s)$.
+    Thus,
+    $\F_b^*(\tilde\alpha \restriction (\P \restriction \B_i)) = \tilde\alpha \restriction (\P \circ \F \restriction b)$,
+    that is,
+    $\F^*(\alpha(\P\restriction \B_i) = \alpha(\P \circ \F \restriction b)$.
+    Because of the locality of pullback,
+    and the locality of smooth forms on Euclidean domains,
+    we get $\F^*(\alpha(\P)) = \alpha(\P \circ \F)$.
+    Therefore,
+    $\alpha$ defined above  is a differential form on $\X$.
+    The differential form $\alpha$ associated with $\tilde\alpha$ is unique,
+    because the evaluation map $\ev$ is a subduction \cite[\textsection 6.38 \& 6.39]{PIZ13}.
+    %
+    Note that,
+    for a real function $\tilde f \colon \cB \to \RR$,
+    invariant by $\cM$,
+    this is even simpler.
+    The function $f$ is defined on $\X$ by $f(x) = \tilde f(\hat x)$,
+    where $\hat x \colon \{0\} \to \X$ is the plot $\hat x(0) = x$.
+  \end{proof}
+  
+  %% MARK: • Cech Cohomology Of A Diffeological Space
+  \begin{article}\artlabel[\Cech Cohomology Of A Diffeological Space]
+    \label{Cech-Cohomology-Of-A-Diffeological-Space}
+    Let $\X$ be a diffeological space.
+    Let $\cB$ be its nebula of round plots.
+    Let $\cM$ be the gauge monoid of the evaluation map $\ev \colon \cB \to \X$.
+    Let $\R$ be an Abelian group and let
+    $$
+    \A = \Maps(\fB,\R).
+    $$
+    be the group of maps from the round plots to $\R$.
+    It is convenient to see $\A$ as the group of locally constant maps from the nebula $\cB$ to $\R$
+    \[
+    \A = \{ \tau \colon \cB \to \R \mid \forall \phi \in \fB, \exists c_\phi \in \R, \tau \restriction \{\phi\} \times \dom(\phi) = c_\phi \},
+    \]
+    where $\{\phi\} \times \dom(\phi)$ is a component of $\cB$ and $c_\phi$ some element in $\R$.
+    
+    We denote by $\vC^k(\X,\R)$ the group of \Cech $k$-cochains on $\X$ with values in $\R$,
+    \begin{equation}\tag{$\diamondsuit$}
+      \vC^k(\X,\R) = \Maps(\cM^k, \A) = \Maps\big(\cM^k, \Maps(\fB,\R)\big).
+    \end{equation}
+    
+    \textsc{Definition.} \textit{We define the $k$-th group of \Cech Cohomology of $\X$ with values in the Abelian group $\R$,
+    as the $k$-th Hochschild cohomology group of the monoid $\cM$ with values in $\A$.
+    We denote
+    \begin{equation}\tag{$\heartsuit$}
+      \vH^k(\X,\R) = \sH^k(\cM,\A)
+      \quad \text{and} \quad
+      \vH^\star(\X,\R) = \sH^\star(\cM,\A)
+    \end{equation}
+    }
+    \textsc{Note.} It is possible to understand immediately the $\vH^0(\X,\RR)$ for any diffeological space.
+    The \Cech $0$-cochains is the set $\vC^0(\X,\RR) = \Maps(\fB,\RR)$.
+    That is,
+    the real constant maps $c$ from the components of the nebula $\cB$ to $\RR$.
+    Now,
+    belonging to $\vH^0(\X,\RR)$ means $\delta c(f)=0$,
+    that is,
+    $f^*(c) = c$,
+    which means that $c = \ev^*(s)$ with $s \in \Cinfty(\X,\RR)$ and $ds=0$.
+    Hence,
+    $\vH^0(\X,\RR)$ is the set of local constant real functions on $\X$,
+    that is,
+    \[
+    \vH^0(\X,\RR) = \Maps(\pi_0(\X),\RR).
+    \]
+  \end{article}
+  
+  %% MARK: • Cech Cohomology Of Tori
+  \begin{article}\artlabel[\Cech Cohomology Of Tori]
+    \label{Cech-Cohomology-Of-Tori}
+    We call \emph{diffeologial torus} or simply \emph{torus} any quotient $\T_\K = \RR^n/\K$,
+    where $\K \subset \RR^n$ is a (diffeologically) discrete subgroup,
+    that is,
+    its subset diffeology is discrete
+    ---~generated by constant parametrizations.
+    For what follows,
+    we will not need that $\K$ generates $\RR^n$,
+    but obviously the term torus will be an abuse of language when it will not be the case.
+    We say that $\T_\K$ is an \emph{irrational torus} when the subgroup $\K$ generates $\RR^n$ but is strictly larger than a lattice.
+    Irrational tori have been the first case of significant diffeological spaces,
+    with the case $\K = \ZZ + \alpha \ZZ \subset \RR$ and $\alpha \in \RR-\QQ$ \cite{DonIgl83}.
+    
+    Then,
+    $\T_\K$ is a connected diffeological space,
+    the projection
+    $$
+    \pi \colon \RR^n \to \T_\K,
+    $$
+    is the universal covering of $\T_\K$ \cite[\textsection 8.26]{PIZ13},
+    and $\K$ is the first group of homotopy,
+    its \emph{fundamental group} \cite[\textsection 5.15]{PIZ13},
+    $$
+    \tilde \T_\K = \RR^n
+    \quad \text{and} \quad
+    \pi_1(\T_\K) = \K.
+    $$
+    Since $\T_\K$ is connected,
+    $$
+    \vH^0(\T_\K,\RR) = \RR.
+    $$
+    In order to compute the \Cech cohomology of $\T_\K$,
+    we remark that,
+    since the plots $\phi \in \fB$ are defined on balls,
+    thanks to the monodromy theorem \cite[\textsection 8.25]{PIZ13},
+    there exists a smooth map $f \colon \B \to \RR^n$ that lifts $\phi \colon \B \to \T_\K$.
+    That is,
+    $$
+    \phi = \pi \circ f.
+    $$
+    This map is unique as soon as we fix the image of one point in $\B$.
+    The set of liftings of $\phi$ is indexed by $\K$.
+    Now,
+    let $\F \in \cM$,
+    we denote by the same letter the action of $\F$ on $\cB$ and its action on the set of component $\pi_0(\cB) = \fB$.
+    In other words for all $(\phi,r) \in \cB$,
+    let
+    $\F(\phi,r) = (\phi', r')$.
+    That is,
+    $$
+    \F(\phi) = [\phi' \colon \B' \to \T_\K]
+    \quad\text{with}\quad
+    \phi' \circ \F = \phi.
+    $$
+    Let us pick a lifting $f'$ for $\phi'$.
+    We have then,
+    $$
+    \phi' \circ \F = \phi, \quad \phi = \pi \circ f, \quad \phi' = \pi \circ f'.
+    $$
+    Hence,
+    $$
+    \pi \circ f' \circ \F = \pi \circ f \quad \Rightarrow \quad \exists k \in \K, \quad f' \circ \F = f + k,
+    $$
+    and this $k$ is unique.
+    
+    \begin{figure}[ht]
+      \[
+      \begin{tikzcd}[column sep=large,every label/.append style = {font = \small}]
+        \B \arrow[rr, "\F"] \arrow[dd,swap, "f"] \arrow[dr, "\phi"] &       &  \B' \arrow[dd, "f'"] \arrow[dl, swap, "\phi'"]  \\
+        & \T_\K &  \\
+        \RR^n \arrow[rr, swap, "k"] \arrow[ur, swap, "\pi"]                  &       &  \RR^n \arrow[ul, "\pi"]
+      \end{tikzcd}
+      \]
+      \vspace{-.5cm}
+      \caption{Element of the Gauge Monoid of $\T_\K$.}
+      \label{cohomology-of-the-torus}
+    \end{figure}
+    
+    These relations are represented by the commutative diagram of Fig.\ref{cohomology-of-the-torus}.
+    Now,
+    choosing for each $\phi \in \fB$ a lifting $f$ in $\RR$,
+    defines a map
+    $$
+    \kappa : \cM \to \Maps(\fB,\K) \quad\text{by}\quad k = \kappa(\F)(\phi).
+    $$
+    Note this:
+    
+    \begin{itemize}
+    \item[--] The elements $k \in \K$ belong to $\cM$,
+    since $\pi \colon \RR^n \to \T_\K$ is a round plot and $\pi \circ k = \pi$,
+    that is,
+    $k_\fB(\pi) = \pi$ and $k_\pi(x) = x+k$.
+    \item[--] The liftings $f$ also belong to $\cM$ with $f(\phi,r) = (\pi, f(r))$,
+    that is:
+    $f_\fB(\phi) = \pi$ and $f_\phi(r) = f(r)$.
+    \end{itemize}
+    
+    \textsc{Proposition.} {\it For every $p$-cocycle $\sigma \in \vZ^p(\T_\K,\RR)$,
+    there exists a $(p-1)$-cochain $\epsilon$ such that
+    $$
+    \sigma(\F_1,\dots,\F_p)(\phi) = \sigma(k_1,\dots,k_p)(\pi) + \delta\epsilon(\F_1,\dots,\F_p)(\phi),
+    $$
+    with $\F_i \colon \phi_i \to \phi_{i+1}$,
+    $\phi_1=\phi$,
+    $k_i = \kappa(\F_i)(\phi_i)$,
+    that is,
+    $f_{i+1} \circ \F_i = f_i + k_i$,
+    as it is shown by the diagram of Figure~\ref{Cocycle-Morphism-For-TK}.
+    }
+    %
+    \begin{figure}[ht]
+      \[
+      \begin{tikzcd}[column sep=normal,every label/.append style = {font = \small}]
+        \phi_1 \arrow[r, "\F_1"] \arrow[d,swap, "f_1"] & \phi_2 \arrow[r, "\F_2"] \arrow[d,swap, "f_2"] & \phi_3 \arrow[d, "f_3"] \arrow[r, "\F_3"] & \dots \arrow[r, "\F_{p-1}"] & \phi_p \arrow[d, swap, "f_p"] \arrow[r, "\F_p"] & \phi_{p+1} \arrow[d, "f_{p+1}"] \\
+        \RR^n \arrow[r, swap, "k_1"] &  \RR^n \arrow[r, swap, "k_2"] & \RR^n \arrow[r, swap, "k_3"] & \dots \arrow[r,swap, "k_{p-1}"] & \RR^n \arrow[r, swap, "k_p"] & \RR^n
+      \end{tikzcd}
+      \]
+      \vspace{-.5cm}
+      \caption{Cocycle Morphism For $\T_\K$.}
+      \label{Cocycle-Morphism-For-TK}
+    \end{figure}
+    
+    \textsc{Corollary.} {\it The mapping that associates with all $\sigma \in \vC^p(\T_\K,\RR)$,
+    its restriction $\sigma \restriction \K^p$ which belongs to $\C^p(\K,\RR) = \Maps(\K^p,\RR)$,
+    defines a morphism in cohomology from $\vH^p(\T_\K, \RR)$ to $\sH^p(\K,\RR)$,
+    which is an isomorphism:
+    $$
+    \vH^\star(\T_\K, \RR) \simeq \sH^\star(\K,\RR).
+    $$
+    Where $\sH^\star(\K,\RR)$ is the ordinary cohomology of the group $\K$ with real coefficients.}
+  \end{article}
+  
+  \begin{proof}
+    \begin{figure}[ht]
+      \includegraphics[width=.6\textwidth]{Figures/Epsilon.pdf}
+      %\vspace{-.33\baselineskip}
+      \caption{Representing $\epsilon(\F_1,\dots,\F_{p-1})(\phi)$.}
+      \label{Epsilon}
+    \end{figure}
+    Let $\sigma \in \vC^p(\T_\K,\RR)$.
+    Let $[\F_i \colon \phi_i \to \phi_{i+1}] \in \cM$,
+    with $\phi_1=\phi$, $k_i = \kappa(\F_i)(\phi_i)$ and the liftings $f_i \colon \B_i \to \RR^n$ such that $f_{i+1} \circ \F_i = f_i + k_i$,
+    for $i=1,\dots,p$.
+    Let us consider the sum
+    $$
+    %\S_p = \sum_{i=0}^{p} (-1)^i \, \delta\sigma([\F_1,F_{p-i}],f_{p-i+1},[k_{p-i+1},k_p])(\phi)
+    \S_p = \sum_{i=0}^{p} (-1)^i \, \delta\sigma(\F_1,\dots,F_{p-i},f_{p-i+1},k_{p-i+1},\dots,k_p)(\phi)
+    $$
+    This sum begins with $\delta\sigma(\F_1,\dots,\F_p,f_{p+1})$ and ends with $(-1)^p\delta\sigma(f_1,k_1,\dots,k_p)$.
+    Let us define $\epsilon \in \vC^{p-1}(\T_\K,\RR)$,
+    by
+    $$
+    %\epsilon(\F_1,\dots,\F_{p-1})(\phi) = \sum_{i=0}^{p-1}(-1)^{i}\sigma([\F_1,\F_{p-1-i}],f_{p-i},[k_{p-i},k_{p-1}])(\phi),
+    \epsilon(\F_1,\dots,\F_{p-1})(\phi) = \sum_{i=0}^{p-1}(-1)^{i}\sigma(\F_1,\dots,\F_{p-1-i},f_{p-i},k_{p-i},\dots,k_{p-1})(\phi),
+    $$
+    for $p > 1$,
+    and for $p=1$\,:
+    $$
+    \epsilon \in \Maps(\fB,\RR) \quad\text{with}\quad \epsilon(\phi) = \sigma(f_1),
+    $$
+    with $\phi = \phi_1$ and $\pi \circ f_1 = \phi_1$.
+    
+    We shall show firstly that:
+    $$
+    \S_p = (-1)^{p+1}[\sigma(\F_1,\dots,\F_p)(\phi) - \sigma(k_1,\dots,k_p)(\pi)] + \delta\epsilon(\F_1,\dots,\F_p)(\phi).
+    $$
+    We shall begin by computing the example with $p=3$ to identify the recursivity of the computation of $\S_p$.
+    But before that,
+    we will change our notation and denote $\ul{k}_{i+1} = k_i$,
+    then the commutativity of the squares in the diagram of Figure \ref{Cocycle-Morphism-For-TK} becomes $f_{i+1} \circ \F_i = \ul{k}_{i+1} \circ f_i$.
+    In the definition of $\S_p$ above we will omit the prefix $\delta\sigma$ and the suffix $(\phi)$.
+    And we will shall encode the sequences $\F_a,\dots,F_b,f_c,k_d,\dots,k_p$ as follows:
+    
+    \begin{itemize}
+      \item[--] The $\F_i$ will be denote by their index $i$,
+      $\F_1$ becomes $1$,
+      etc.
+      \item[--] The commas will be replaced by centered periods,
+      for example: $\F_1, \F_2,\dots$ will be replaced by $1 \cdot 2 \cdots$.
+      \item[--] The only element $f_\ell$ will be replaced by $[\ell]$.
+      \item[--] The elements $\ul{k}_j$ will be replaced by their underlined index,
+      for example $\ul{k}_3$ will be written $\ul3$.
+      \item[--] The composite $F_{i+1} \circ \F_i$ will be replaced by $(i \cdot i+1)$.
+      \item[--] The composite $f_{i+1} \circ \F_i$ will be replaced by $(i \cdot i+1]$.
+      \item[--] The composite $\ul{k}_{i+1} \circ f_i$ will be replaced by $[i \cdot \ul{i+1})$.
+      \item[--] The composite $\ul{k}_{i+1} \circ \ul{k}_{i}$ will be replaced by $(\ul{i} \cdot \ul{i+1})$.
+    \end{itemize}
+    
+    The crossed-out index means that the index is omitted and the previous notations are completed by:
+    
+    \begin{itemize}
+      \item[--] The monomial $\cancel 1 \cdot 2 \cdot 3 \cdot [4]\cdot(1)$ represents $\sigma(\F_2,\F_3,f_4)(\F_1(\phi) = \phi_2)$.
+      \item[--] The monomial $\cancel{[1]}\cdot \ul{2} \cdot \ul{3} \cdot \ul{4} \cdot[1]$ represents $\sigma(\ul{k}_2,\ul{k}_3,\ul{k}_4)(f_1(\phi) = \pi)$.
+    \end{itemize}
+    
+    In particular $\epsilon(\F_1,\dots,\F_{p-1})(\phi)$ is represented by the diagram in Figure \ref{Epsilon}.
+    
+    Then,
+    the development of $S_3$ becomes then:
+    $$
+    \begin{array}{c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c}
+      + & \cancel 1\cdot 2\cdot 3\cdot [4]\cdot(1) & - & (1\cdot 2)\cdot 3\cdot [4] & + & 1\cdot (2\cdot 3)\cdot[4] & - & 1\cdot 2\cdot (3\cdot 4]   & + & 1\cdot 2\cdot 3 \\[.25cm]
+      - & \cancel 1\cdot 2\cdot [3]\cdot \ul4\cdot(1) & + & (1\cdot 2)\cdot [3]\cdot \ul4 & - & 1\cdot (2\cdot 3]\cdot\ul4   & + & 1\cdot 2\cdot [3\cdot \ul4)   & - & 1\cdot 2\cdot [3] \\[.25cm]
+      + & \cancel 1\cdot [2]\cdot \ul3\cdot \ul4\cdot(1) & - & (1\cdot 2]\cdot \ul3 \cdot \ul4  & + & 1\cdot [2 \cdot \ul3)\cdot\ul4  & - & 1\cdot [2]\cdot (\ul3\cdot \ul4) & + & 1\cdot [2]\cdot \ul3 \\[.25cm]
+      - & \cancel{[1]}\cdot \ul2\cdot \ul3\cdot \ul4\cdot[1] & + & [1\cdot \ul2)\cdot \ul3 \cdot \ul4  & - & [1] \cdot (\ul2 \cdot \ul3)\cdot\ul4 & + & [1]\cdot \ul2\cdot (\ul3\cdot \ul4)& - & [1]\cdot \ul2\cdot \ul3
+    \end{array}
+    $$
+    %
+    According to our notations,
+    the commutativity $f_{i+1} \circ \F_i = \ul{k}_{i+1} \circ f_i$ becomes $(i \cdot i+1] = [i\cdot \ul{i+1})$.
+    Then,
+    we cancel the two by two opposite terms:
+    %
+    $$
+    \begin{array}{c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c}
+      + & \cancel 1\cdot 2\cdot 3\cdot [4]\cdot(1)                     & - & (1\cdot 2)\cdot 3\cdot [4]                   & + & 1\cdot (2\cdot 3)\cdot[4]                 & - & \cancel{1\cdot 2\cdot (3\cdot 4]}    & + & \fbox{$1\cdot 2\cdot 3$} \\[.25cm]
+      - & \cancel 1\cdot 2\cdot [3]\cdot \ul4\cdot(1)                  & + & (1\cdot 2)\cdot [3]\cdot \ul4                & - & \xcancel{1\cdot (2\cdot 3]\cdot\ul4}      & + & \cancel{1\cdot 2\cdot [3\cdot \ul4)} & - & 1\cdot 2\cdot [3] \\[.25cm]
+      + & \cancel 1\cdot [2]\cdot \ul3\cdot \ul4\cdot(1)               & - & \bcancel{(1\cdot 2]\cdot \ul3 \cdot \ul4}    & + & \xcancel{1\cdot [2 \cdot \ul3)\cdot\ul4}  & - & 1\cdot [2]\cdot (\ul3\cdot \ul4)     & + & 1\cdot [2]\cdot \ul3 \\[.25cm]
+      - &  \fbox{$\cancel{[1]}\cdot \ul2\cdot \ul3\cdot \ul4\cdot[1]$} & + & \bcancel{[1\cdot \ul2)\cdot \ul3 \cdot \ul4} & - & [1] \cdot (\ul2 \cdot \ul3)\cdot\ul4      & + & [1]\cdot \ul2\cdot (\ul3\cdot \ul4)  & - & [1]\cdot \ul2\cdot \ul3
+    \end{array}
+    $$
+    Then,
+    we pull upwards and to the left, one degree, the terms that are below the diagonal of the canceled terms.
+    That gives the following table:
+    $$
+    \begin{array}{c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c@{\hspace{2pt}}c}
+      + & \cancel 1\cdot 2\cdot 3\cdot [4]\cdot(1)                     & - & (1\cdot 2)\cdot 3\cdot [4]              & + & 1\cdot (2\cdot 3)\cdot[4]             & - & 1\cdot 2\cdot [3]        & + & \fbox{$1\cdot 2\cdot 3$} \\[.25cm]
+      - & \cancel 1\cdot 2\cdot [3]\cdot \ul4\cdot(1)                  & + & (1\cdot 2)\cdot [3]\cdot \ul4           & - & 1\cdot [2]\cdot (\ul3\cdot \ul4)      & + & 1\cdot [2]\cdot \ul3     &   &  \\[.25cm]
+      + & \cancel 1\cdot [2]\cdot \ul3\cdot \ul4\cdot(1)               & - & [1] \cdot (\ul2 \cdot \ul3)\cdot\ul4    & + & [1]\cdot \ul2\cdot (\ul3\cdot \ul4)   & - &  [1]\cdot \ul2\cdot \ul3 &   &  \\[.25cm]
+      - &  \fbox{$\cancel{[1]}\cdot \ul2\cdot \ul3\cdot \ul4\cdot[1]$} &  & &  &      &  &   &  &
+    \end{array}
+    $$
+    Beginning with the framed elements,
+    we get:
+    $$
+    + 1\cdot 2\cdot 3 - \cancel{[1]}\cdot \ul2\cdot \ul3\cdot \ul4\cdot[1] = \sigma(\F_1,\F_2,\F_3)(\phi) - \sigma(k_1,k_2,k_3)(\pi).
+    $$
+    Next,
+    from left to right and top to bottom,
+    the three columns give:
+    \begin{eqnarray*}
+      \allowdisplaybreaks
+      \text{Column 1} & = &  + \cancel 1\cdot 2\cdot 3\cdot [4]\cdot(1) - \cancel 1\cdot 2\cdot [3]\cdot \ul4\cdot(1) + \cancel 1\cdot [2]\cdot \ul3\cdot \ul4\cdot(1)\\[.2cm]
+      & = & + \sigma(\F_2,\F_3,f_4)(\phi_2) - \sigma(\F_2,f_3,\ul k_4)(\phi_2) + \sigma(f_2,\ul k_3,\ul k_4)(\phi_2)\\[.2cm]
+      & = & + \epsilon (\F_2,\F_3)(\F_1(\phi))\\[.2cm]
+      \text{Column 2} & = &  - (1\cdot 2)\cdot 3\cdot [4] + (1\cdot 2)\cdot [3]\cdot \ul4 - [1] \cdot (\ul2\cdot \ul3)\cdot\ul4 \\[.2cm]
+      & = & - \sigma(\F_2\circ \F_1,\F_3,f_4)(\phi) + \sigma(\F_2 \circ \F_1,f_3, \ul k_4)(\phi) - \sigma(f_1,\ul k_3 \circ \ul k_2 ,\ul k_4)(\phi)\\[.2cm]
+      & = & - \epsilon(\F_2 \circ \F_1,\F_3)(\phi) \\[.2cm]
+      \text{Column 3} & = &  + 1 \cdot (2 \cdot 3) \cdot [4] - 1 \cdot [2] \cdot (\ul3 \cdot \ul4) + [1] \cdot \ul2 \cdot (\ul3\cdot \ul4) \\[.2cm]
+      & = & + \sigma(\F_1,\F_3\circ\F_2,f_4)(\phi) - \sigma(\F_1,f_2,\ul k_4 \circ \ul k_3)(\phi) + \sigma(f_1,\ul k_2, \ul k_4 \circ \ul k_3)(\phi).\\[.2cm]
+      & = & + \epsilon(\F_1,\F_3 \circ \F_2)(\phi) \\[.2cm]
+      \text{Column 4} & = &  - 1 \cdot 2 \cdot [3] + 1 \cdot [2] \cdot \ul3 - [1] \cdot \ul2 \cdot \ul3 \\[.2cm]
+      & = & - \sigma(\F_1,\F_2,f_3)(\phi) + \sigma(\F_1, f_2, \ul k_3)(\phi) - \sigma(f_1,\ul k_2 ,\ul k_3)(\phi) \\[.2cm]
+      & = & - \epsilon(\F_1,\F_2)(\phi).
+    \end{eqnarray*}
+    Thus,
+    $$
+    \text{Columns 1 + 2 + 3 + 4} = \delta\epsilon(\F_1,\F_2,\F_3).
+    $$
+    And then:
+    $$
+    \S_3 = \sigma(\F_1,\F_2,\F_3)(\phi) - \sigma(k_1,k_2,k_3)(\pi) + \delta \epsilon(\F_1,\F_2,\F_3).
+    $$
+    Now, if $\sigma$ is a cocycle:
+    $\delta\sigma = 0$,
+    then we get
+    $$
+    \sigma(\F_1,\F_2,\F_3)(\phi) = \sigma(k_1,k_2,k_3)(\pi) - \delta \epsilon(\F_1,\F_2,\F_3)
+    $$
+    This particular case reveals the general computation,
+    leading to the general formula above,
+    which is outlined in the Figure \ref{Cech-computation}.
+    The letters represent successive integers.
+    The diagram on the right represent the sequence of elements of the monoid that occur in the evaluation of $\delta\epsilon$.
+    
+    \begin{figure}[htp]
+      \includegraphics[width=.95\textwidth]{Figures/Cech-computation-v2.pdf}
+      \vspace{-.25\baselineskip}
+      \caption{Computing $\S_p$.}
+      \label{Cech-computation}
+    \end{figure}
+    
+    Consider now the restriction operation $\sigma \mapsto \sigma \restriction \K^p$,
+    with $\sigma \in \vC^p(\T_\K,\RR)$.
+    It commutes with the differential:
+    $(\delta \sigma) \restriction \K^p = \delta (\sigma \restriction \K^p)$.
+    The restriction $\sigma \restriction \K^p$ is a $p$-cochain of the group $\K$ with coefficients in $\RR$,
+    and $\delta$ is exactly the coboundary operator for the group cohomology with real coefficient.
+    Thus,
+    $\sigma \mapsto \sigma \restriction \K^p$ gives a well defined morphism,
+    $\class \colon \vH^p(\T_\K,\RR) \to \sH^p(\K, \RR)$.
+    
+    Let us check that $\class$ is surjective.
+    Let $s \in \sZ^p(\K,\RR)$, and $\phi \in \fB$.
+    We define
+    $$
+    \sigma(\F_1,\dots,\F_p)(\phi) = s(k_1,\dots, k_p)(\pi),
+    $$
+    with $\F_i \colon \phi_i \to \phi_{i+1}$,
+    $\phi_1=\phi$,
+    $k_i = \kappa(\F_i)(\phi_i)$,
+    The cocycle property can be regarded as the juxtaposition of diagrams of type Fig.\ref{cohomology-of-the-torus}.
+    
+    Let us check that $\class$ is injective.
+    Let $\sigma \in \vZ^p(\T_\K,\RR)$ such that $\class(\sigma) = 0$,
+    that is,
+    $\sigma \restriction \K^p = \delta s$,
+    with $s \in \Maps(\K^{p-1},\RR)$.
+    But,
+    for all $(\F_1,\dots,\F_p)(\phi)\in \cM^p \times \fB$,
+    $\sigma(\F_1,\dots,\F_p)(\phi) = (\sigma\restriction \K^p)(k_1,\dots,k_p)(\pi) + \delta \epsilon(\F_1,\dots,\F_p)$.
+    Then,
+    \begin{eqnarray*}
+      \sigma(\F_1,\dots,\F_p)(\phi) & = & \delta s(k_1,\dots,k_p)(\pi) + \delta \epsilon(\F_1,\dots,\F_p) \\
+      & = & \delta[s\circ \kappa^p + \epsilon](\F_1,\dots,\F_p)(\phi).
+    \end{eqnarray*}
+    Thus,
+    $\class(\sigma) = 0$.
+    Therefore,
+    we conclude that,
+    for all $p>0$,
+    $\vH^p(\T_\K,\RR) = \sH^p(\K, \RR)$.
+    In particular,
+    for $p=1$,
+    that coincides with $\Hom(\pi_1(\T_\K), \RR)$,
+    a prior natural identification \cite{PI88-91}.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - § Cech-De-Rham Cohomology Bicomplex
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{\Cech-De-Rham Cohomology Bicomplex}
+  
+  The relation between the De Rham cohomology and the \v{C}hech cohomology,
+  defined above,
+  is described by a differential bicomplex,
+  also called a double complex.
+  
+  %% MARK: • The Cech-De-Rham Bicomplex
+  \begin{article}\artlabel[The \Cech-De-Rham Bicomplex]
+    Let $\X$ be a diffeological space.
+    Let $\cB$ be its nebula of round plots.
+    Let $\cM$ be the gauge monoid of the evaluation map $\ev \colon \cB \to \X$.
+    Let $\Omega^k(\X)$ be the space of differential $k$-forms on $\X$,
+    identified with the gauge invariant $k$-forms on $\cB$,
+    as it has been established in \art{Differential-forms-in-diffeology}.
+    $$
+    \Omega^k(\X) = \{ \alpha \in \Omega^k(\cB) \mid f^*(\alpha) = \alpha, \forall f \in \cM \}.
+    $$
+    We define now the group of $p$-cochain of the monoid $\cM$ with values in the vector space $\Omega^q(\cB)$,
+    and we denote
+    $$
+    \sC^{p,q} = \sC^p(\cM,\Omega^q(\cB)) = \Maps(\cM^p,\Omega^q(\cB)).
+    $$
+    And then,
+    we get the bicomplex denoted by
+    $$
+    \sC^{\star,\star} = \bigoplus_{p,q \in \NN} \sC^{p,q},
+    $$
+    equipped with the differential operators $d$ and $\delta$ (see Figure \ref{bicomplex-CDR}),
+    $$
+    \left\{
+    \begin{array}{lcl}
+      d   & : & \sC^{p,q}\rightarrow \sC^{p,q+1}\\
+      \delta  & : & \sC^{p,q}\rightarrow \sC^{p+1,q},
+    \end{array}
+    \right.
+    $$
+    
+    \begin{figure}[th]
+      $$
+      \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+        & \vdots                                            & \vdots                                          &   \vdots                                        &         \\
+        (q=2) & \sC^{0,2} \arrow[u, "d"] \arrow[r, "\delta"] & \sC^{1,2} \arrow[u, "d"] \arrow[r,"\delta"] & \sC^{2,2} \arrow[u, "d"] \arrow[r,"\delta"] & \cdots  \\
+        (q=1) & \sC^{0,1} \arrow[u, "d"] \arrow[r, "\delta"]  & \sC^{1,1} \arrow[u, "d"] \arrow[r,"\delta"] & \sC^{2,1} \arrow[u, "d"] \arrow[r,"\delta"] & \cdots  \\
+        (q=0) & \sC^{0,0} \arrow[u, "d"] \arrow[r, "\delta"]  & \sC^{1,0} \arrow[u, "d"] \arrow[r,"\delta"] & \sC^{2,0} \arrow[u, "d"] \arrow[r,"\delta"] & \cdots  \\[-.5cm]
+        & (p=0)                                             & (p=1)                                           & (p=2)                                           & \cdots
+      \end{tikzcd}
+      $$
+      \vspace{-.5cm}
+      \caption{\Cech-De-Rham Bicomplex}
+      \label{bicomplex-CDR}
+    \end{figure}
+    
+    The operator $d$ on $\sC^{p,q}$ is defined by:
+    $$
+    d\sigma(f_1,\dots,f_p) = (-1)^p d_\dR\big[\sigma(f_1,\dots,f_p)\big],
+    $$
+    where $d_\dR$ is the ordinary exterior differential.
+    The operator $\delta$ has been defined above \art{Hochschild-Cohomology}.
+    
+    Now,
+    since the two operators $d_\dR$ and $\delta$ commute,
+    we get
+    $$
+    d \circ \delta + \delta \circ d = 0.
+    $$
+    
+    \textsc{Definition.} \textit{The complex $\sC^{\star,\star}$ defined above,
+    equipped with the two differential operators $d$ and $\delta$,
+    becomes a \emph{bicomplex},
+    according to S. Mac Lane \cite[\textsection XI.6]{Mac67}.
+    We call it the \emph{\Cech-De-Rham Complex} of the diffeological space $\X$.
+    The total differential operator is $\D =d+\delta$,
+    and satisfies $\D \circ \D = 0$.}
+    
+    We shall discuss,
+    in the following,
+    the exact relationship there exists between the De Rham and \Cech cohomologies,
+    thanks to this double complex.
+  \end{article}
+  
+  %% MARK: • The Cech-De-Rham Homomorphisms
+  \begin{article}\artlabel[The \Cech-De-Rham Homomorphisms]
+    We consider first the case $k=0$.
+    Let us remind that
+    $$
+    \left\{
+    \begin{array}{rcl}
+      \H^0_\dR(\X)  & = &  \{ s \in \Cinfty(\X, \RR) \mid ds = 0 \}, \\[.5ex]
+      \vH^0(\X,\RR) & = & \{ \sigma \in \Maps(\fB,\RR) \mid \delta \sigma = 0 \}.
+    \end{array}
+    \right.
+    $$
+    Thus,
+    any $s \in \Cinfty(\X, \RR)$ such that $ds = 0$ lifts on $\cB$ by a smooth function $\sigma$ that satisfies $d\sigma = 0$ and $\delta\sigma = 0$.
+    Thus,
+    $\sigma \in \vH^0(\X,\RR)$.
+    That defines the De Rham homomorphism $h_0 \colon s \mapsto \sigma$,
+    from $\H^0_\dR(\X)$ to $\vH^0(\X,\RR)$.
+    Conversely,
+    every $\sigma \in \Maps(\fB,\RR)$ is a smooth function on $\cB$ such that $d\sigma = 0$,
+    if moreover $\delta\sigma = 0$ then $\sigma$ descends on $\X$ into a smooth function $s$ that also satisfies $ds=0$.
+    Therefore,
+    
+    \textsc{Proposition.} {\it The first De Rham homomorphism is an isomorphism,
+    what we summarize by the exact sequence:
+    $$
+    \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+      0 \arrow[r] & \H_\dR^0(\X) \arrow[r,"h_0"] & \vH^0(\X,\RR) \arrow[r] & 0.
+    \end{tikzcd}
+    $$
+    }
+    %
+    We consider now the case $k \geq 1$,
+    and we shall define the series of \emph{\v{C}ech-De-Rham Homomorphisms}
+    $$
+    h_k \colon \H^k_\dR(\X) \to \vH^k(\X,\RR).
+    $$
+    Let
+    $$
+    \Z^{p,q} = \ker\big(d \colon \sC^{p,q}\to \sC^{p,q+1} \big) \cap \ker\big(\delta \colon \sC^{p,q} \to \sC^{p+1,q} \big),
+    $$
+    and
+    $$
+    \left\{
+    \begin{array}{rcll}
+      \B^{p,q} & = & d\big[\delta(\sC^{p-1,q-1}) \big] = \delta\big[d\big(\sC^{p-1,q-1}) \big], & p,q \geq 1 \\[.25cm]
+      \B^{0,q} & = & d\big[\ker\delta\big(\sC^{0,q-1} \to \sC^{1,q-1}) \big], & q \geq 1 \\[.25cm]
+      \B^{p,0} & = & \delta\big[\ker d\big(\sC^{p-1,0} \to \sC^{p-1,1})\big], & p \geq 1 \\[.25cm]
+      \B^{0,0} & = & \{0\}.
+    \end{array}\right.
+    $$
+    Since $\B^{p,q} \subset \Z^{p,q}$,
+    we define
+    $$
+    \K^{p,q} = \Z^{p,q}/\B^{p,q}.
+    $$
+    We can already notice that,
+    $$
+    \K^{0,q} = \H_\dR^q(\X) \quad \text{and} \quad \K^{p,0} = \vH^p(\X,\RR).
+    $$
+    
+    Now,
+    the homomorphism $h_k$ will be built by using a descending staircase homomorphism.
+    $$
+    h_{p,q} \colon \K^{p,q} \to \K^{p+1,q-1},
+    \quad \forall p \geq 0, \ q \geq 1.
+    $$
+    Consider an element $\kappa_{p,q} \in \K^{p,q}$,
+    and let $\alpha_{p,q}$ representing $\kappa_{p,q}$,
+    $$
+    \kappa_{p,q} = \class(\alpha_{p,q}), \quad \alpha_{p,q} \in \sC^{p,q}
+    \quad \text{with}\quad
+    d\alpha_{p,q} = 0
+    \quad \text{and}\quad
+    \delta\alpha_{p,q} = 0.
+    $$
+    Let us recall that $\sC^{p,q} = \Maps(\cM^p,\Omega^q(\cB))$,
+    and since every closed form on $\cB$ is exact:
+    $$
+    \exists \alpha_{p,q-1} \in \sC^{p,q-1}
+    \quad \text{such that}\quad
+    \alpha_{p,q} = d \alpha_{p,q-1}.
+    $$
+    Then,
+    the cochain
+    $$
+    \alpha_{p+1,q-1} = \delta\alpha_{p,q-1}
+    $$
+    satisfies
+    $$
+    \alpha_{p+1,q-1} \in \sC^{p+1,q-1}
+    \quad \text{with}\quad
+    d\alpha_{p+1,q-1} = 0
+    \quad \text{and}\quad
+    \delta\alpha_{p+1,q-1} = 0.
+    $$
+    \textsc{Proposition.} {\it The class $\kappa_{p+1,q-1} = \class(\alpha_{p+1,q-1}) \in \K^{p+1,q-1}$ depends only on $\kappa_{p,q}$,
+    and not of the choice or the representant $\alpha_{p,q}$,
+    neither on the choice of the primitive $\alpha_{p,q-1}$.}
+    
+    Therefore,
+    the construction being clearly additive,
+    we described an homomorphism $h_{p,q} \colon \K^{p,q} \to \K^{p+1,q-1}$,
+    for all $p \geq 0$ and $q \geq 1$.
+    This construction is described by Figure \ref{The-Homomorphism-h1}.
+    
+    \begin{figure}[thb]
+      $$
+      \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+        \sC^{p,q+1}                                                   & \                                                   & \   \\
+        \sC^{p,q} \arrow[u, "d"] \arrow[r, "\delta"]    & \sC^{p+1,q}                                     & \   \\
+        \sC^{p,q-1} \arrow[u, "d"] \arrow[r, "\delta"]  & \sC^{p+1,q-1} \arrow[u, "d"] \arrow[r,"\delta"] & \sC^{p+2,q-1}
+      \end{tikzcd}
+      \quad \quad
+      \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+        0                                                  &                    \                               & \  \\
+        \alpha_{p,q} \arrow[u, "d"] \arrow[r, "\delta"]  & 0                                                    & \  \\
+        \alpha_{p,q-1} \arrow[u, "d"] \arrow[r, "\delta"]  & \alpha_{p+1,q-1} \arrow[u, "d"] \arrow[r,"\delta"] & 0
+      \end{tikzcd}
+      $$
+      \vspace{-.5cm}
+      \caption{The Homomorphism $h_{p,q}$}
+      \label{The-Homomorphism-h1}
+    \end{figure}
+    
+    Now,
+    let $\alpha \in \Omega^k(\X)$ be a closed form,
+    $d\alpha = 0$.
+    The smooth form $\alpha_{0,k} = \ev^*(\alpha)$ satisfies $d\alpha_{0,k}=0$ and $\delta \alpha_{0,k}=0$.
+    Hence it belongs to $\Z^{0,k}$.
+    Let $\kappa_{0,k} = \class(\alpha_{0,k}) \in \K^{0,k}$.
+    Then,
+    by applying the chain of homomorphisms
+    $$
+    \begin{tikzcd}[column sep=normal,every label/.append style = {font = \small}]
+      \K^{0,k} \arrow[r, "h_{0,k}"]  & \K^{1,k-1} \arrow[r, "h_{1,k-1}"] & \cdots \arrow[r, "h_{k-2,2}"] & \K^{k-1,1} \arrow[r, "h_{k-1,1}"]  & \K^{k,0} \\[-.75cm]
+      \kappa_{0,k} \arrow[r,mapsto]  & \kappa_{1,k-1} \arrow[r,mapsto] & \cdots \arrow[r,mapsto] & \kappa_{k-1,1} \arrow[r,mapsto] & \kappa_{k,0}
+    \end{tikzcd}
+    $$
+    we get an element $\kappa_{0,k} \in \K^{k,0}$,
+    $$
+    \kappa_{k,0} = h_{k-1,1} \circ h_{k-2,2} \circ \cdots \circ h_{1,k-1} \circ h_{0,k} \big(\kappa_{0,k}\big).
+    $$
+    \textsc{Proposition} {\it The element $\kappa_{0,k}$ depends only on the class of $\alpha$ in $\H_\dR^k(\X)$,
+    and the element $\kappa_{0,k}$ belongs to $\vH^k(\X,\RR)$.}
+    
+    \textsc{Definition.} {\it The homomorphism defined by the construction above
+    $$
+    h_k \colon \H_\dR^k(\X) \to \vH^k(\X,\RR),
+    \quad \text{with} \quad
+    h_k(\kappa_{0,k}) = \kappa_{k,0},
+    $$
+    will be called the \emph{$k$-th \v{C}ech-De-Rham homomorphism} of the space $\X$.}
+    
+    \textsc{Note.} For higher cohomology group,
+    beginning at $k=1$,
+    the De Rham homomorphism is not necessarily an isomorphism,
+    in particular for tori $\T_\K = \RR/\K$.
+    On the one hand,
+    we have $\H^1_\dR(\T_\K) = \RR$.
+    On the other hand $\vH^1(\K,\RR) = \Hom(\K,\RR)$ \art{Cech-Cohomology-Of-Tori}.
+    Isomorphism happens only for $\K = a\ZZ$,
+    that is,
+    when $\T_\K \simeq \S^1$.
+    Otherwise $\H^1_\dR(\T_\K) \not\simeq \vH^1(\T_K,\RR)$.
+    To identify the kernel and the cokernel of the De Rham homomorphism is one important remaining question of this theory.
+    $$
+    \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+      0 \arrow[r] & \ker(h_k) \arrow[r] & \H_\dR^k(\X) \arrow[r,"h_k"] & \vH^k(\X,\RR) \arrow[r] & \coker(h_k) \arrow[r] & 0.
+    \end{tikzcd}
+    $$
+    That said,
+    for $k=1$,
+    $h_1$ is injective and we discuss a geometric interpretation of its cokernel in the next sections.
+  \end{article}
+  
+  \begin{proof}
+    Let $\kappa_{p,q} \in \K^{p,q}$,
+    with $q\geq 1$.
+    And let $\alpha_{p,q}$ representing $\kappa_{p,q}$.
+    Thus $d\alpha_{p,q}=0$ and $\delta \alpha_{p,q}=0$.
+    Since every closed form on $\cB$ is exact,
+    we pick $\alpha_{p,q-1} \in \sC^{p,q-1}$ such that $d\alpha_{p,q-1} = \alpha_{p,q}$.
+    And then,
+    we define $\alpha_{p+1,q-1} = \delta\alpha_{p,q-1}$.
+    Obviously,
+    $\delta\alpha_{p+1,q-1}=0$.
+    Now,
+    $d\alpha_{p+1,q-1}=0 = d\delta\alpha_{p,q-1}= \pm \delta d \alpha_{p,q-1} = \delta \alpha_{p,q} = 0$.
+    Hence,
+    $\alpha_{p+1,q-1} \in \Z^{p+1,q-1}$ and we can define $\kappa_{p+1,q-1} = \class(\alpha_{p+1,q-1}) \in \K^{p+1,q-1}$.
+    Now,
+    if we chose another primitive $\alpha'_{p,q-1}$ such that $d\alpha'_{p,q-1} = \alpha_{p,q}$,
+    then $d(\alpha'_{p,q-1} - \alpha_{p,q-1}) = 0$.
+    And,
+    
+    (A) If $q \geq 2$,
+    then there is $\beta \in \sC^{p,q-2}$ such that $\alpha'_{p,q-1} = \alpha_{p,q-1} + d\beta$.
+    Hence,
+    $\alpha'_{p+1,q-1} = \delta\alpha'_{p,q-1} = \delta \alpha_{p,q-1} + \delta d\beta$.
+    Thus,
+    $\kappa'_{p+1,q-1} = \class(\alpha'_{p+1,q-1}) = \class(\alpha_{p+1,q-1} + \delta d \beta) = \class(\alpha_{p+1,q-1}) = \kappa_{p+1,q-1}$.
+    
+    (B) If $q = 1$,
+    then $\alpha_{p,1} = de_{p,0}$ with $e_{p,0} \in \sC^{p,0} = \Maps(\cM^p,\Omega^0(\cB))$,
+    and $\kappa_{p+1,0} \in \K^{p+1,0} = \Z^{p+1,0}/\delta(\sC^{p+1,0})$.
+    If we consider another primitive $e'_{p,0}$,
+    then $e'_{p,0} = e_{p,0} + c$,
+    where $c \in \sC^{p,0}$ with $dc=0$.
+    Hence,
+    $\alpha'_{p+1,0} = \delta e'_{p,0} = \delta e_{p,0} + \delta c = \alpha_{p+1,0} + \delta c$.
+    But since $dc=0$,
+    $\delta c \in \B^{p,0}$.
+    Thus,
+    $\kappa'_{p+1,0} = \class(\alpha_{p+1,0} + \delta c) = \class(\alpha_{p+1,0}) = \kappa_{p+1,0}$.
+    
+    Next,
+    let $\alpha'^{p,q}$ represents the class $\kappa^{p,q}$.
+    
+    (A') If $p,q \geq 1$,
+    then $\alpha'^{p,q} = \alpha^{p,q} + d\delta \epsilon^{p-1,q-1}$.
+    We can choose the primitive $\alpha'^{p,q-1} = \alpha^{p,q-1} + \delta \epsilon^{p-1,q-1}$,
+    which gives $\delta\alpha'^{p,q-1} = \delta\alpha^{p,q-1}$.
+    
+    (B') If $p = 0$ and $q\geq 1$,
+    then $\alpha'^{0,q} = \alpha^{0,q} + d\epsilon^{0,q-1}$ with $\delta\epsilon^{0,q-1}= 0$.
+    Then,
+    again $\delta\alpha'^{0,q-1} = \delta\alpha^{0,q-1}$.
+    
+    Let us finish this proof by checking that $\K^{0,q} = \H_\dR^q(\X)$ and $\K^{p,0} = \vH^p(\X,\RR)$.
+    So,
+    let $\alpha^{0,q} \in \Z^{0,q}$.
+    That means that $\alpha^{0,q} \in \Omega^q(\cB)$ and satisfies firstly $\delta\alpha^{0,q} = 0$,
+    which means that $\alpha^{0,q} = \ev^*(\alpha)$ with $\alpha \in \Omega^q(\X)$,
+    and $d\alpha^{0,q} = 0$ which means that $d\alpha = 0$.
+    Thus $\Z^{0,q} \simeq \Z_\dR^q(\X)$.
+    Now an element of $\B^{0,q}$ is a differential $d\beta^{0,q-1}$ with $\delta\beta^{0,q-1}=0$.
+    Hence,
+    $d\beta^{0,q-1}= d(\ev^*(\beta))$ with $\beta \in \B_\dR^q(\X)$.
+    Therefore,
+    $\K^{0,q} = \Z^{0,q}/\B^{0,q} = \Z_\dR^q(\X)/ \B_\dR^q(\X) = \H_\dR^q(\X)$.
+    
+    Next,
+    let $\alpha^{p,0} \in \Z^{p,0}$.
+    That means that $\alpha^{p,0} \in \sC^{p,0} = \Maps(\cM^p,\Omega^0(\X))$ and satisfies $d\alpha^{p,0} = 0$ and $\delta \alpha^{p,0} = 0$.
+    From $d\alpha^{p,0} = 0$ we get that $\alpha^{p,0}(f_1,\dots,f_p)$ is constant on each component $\{\phi\} \times \dom(\phi)$,
+    and then $\alpha^{p,0} \in \vC^p(\X,\RR)$.
+    From $\delta \alpha^{p,0} = 0$ we deduce that $\alpha^{p,0} \in \vZ^p(\X,\RR)$.
+    Now,
+    an element of $\B^{p,0}$ is a differential $\delta\beta^{p-1,0}$ with $d\beta^{p-1,0} = 0$,
+    that is,
+    $\beta^{p-1,0} \in \vC^{p-1}$.
+    Therefore,
+    $\K^{p,0} = \Z^{p,0}/\B^{p,0} = \vZ^p(\X,\RR)/\vB^p(\X,\RR) = \vH^p(\X,\RR)$.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - § The Spectral Sequence of the Bicomplex
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{The Spectral Sequence of the Bicomplex}
+  
+  
+  %% MARK: • Cohomology Groups Of The Bicomplex
+  \begin{article}\artlabel[Cohomology Groups Of The Bicomplex]
+    \label{Cohomology-Groups-Of-The-Bicomplex}
+    The cohomology groups of the bicomplex are defined and denoted as follows:
+    %
+    \begin{equation*}
+      \begin{array}{l}
+        \left\{\begin{array}{llcl}
+          p \geq 1 & \H^{p,q}_{\delta} & = & \ker\big(\delta : \sC^{p,q}\rightarrow \sC^{p+1,q}\big) / \delta \big(\sC^{p-1,q}\big) \\[.3ex]
+          p=0 &  \H^{0,q}_{\delta} & = & \ker\big(\delta : \sC^{0,q}\rightarrow \sC^{1,q}\big)
+        \end{array}\right. \\[3ex]
+        \left\{\begin{array}{llcl}
+          q\geq 1 & \H^{p,q}_d & = & \ker\big(d : \sC^{p,q}\rightarrow \sC^{p,q+1} \big) / d \big(\sC^{p,q-1}\big) \\[.3ex]
+          q=0 &  \H^{p,0}_d & = & \ker\big(d : \sC^{p,0}\rightarrow \sC^{p,1}\big)
+        \end{array}\right .
+      \end{array}
+    \end{equation*}
+    %
+    Note that,
+    by definition
+    $$
+    \sC^{0,q}=\Omega^q(\cB).
+    $$
+    Then,
+    for all $\alpha \in \sC^{0,q}$ and all $f \in \cM$,
+    $\delta(\alpha)(f) = f^*(\alpha) - \alpha$.
+    Hence,
+    thanks to the Proposition in \art{Differential-forms-in-diffeology}
+    %
+    \begin{equation*}
+      \text{for all } q\in \NN \quad \H^{0,q}_\delta =\Omega^q(X).
+    \end{equation*}
+    %
+    On the other hand,
+    $\H^{p,0}_d$ is the kernel of the De Rham differential operator on $\sC^{p,0} = \Maps(\cM^p, \Omega^0(\cB))$.
+    Thus,
+    for $\sigma \colon \cM^p \to \Omega^0(\cB) = \Cinfty(\cB, \RR)$,
+    $d_\dR\sigma = 0$ means that $\sigma(f_1,\dots,f_p)$ is constant on each component of $\cB$.
+    Hence,
+    $\sigma \in \sC^p(\cM, \A)$,
+    where $\A$ is the group of locally constant real maps defined on $\cB$.
+    And that is exactly the group of \Cech $p$-cochains of $\X$ with values in $\RR$,
+    %
+    \begin{equation*}
+      \text{for all } p\in \NN\quad \H^{p,0}_d = \vC^p(X,\RR),
+    \end{equation*}
+  \end{article}
+  
+  %% MARK: • The Filtrations δ Of the Bicomplex
+  \begin{article}\artlabel[The Filtrations $\delta$ Of the Bicomplex]
+    The filtration $\delta$ is the set of sequences indexed by $q$,
+    got by projecting the differential operator $\delta$ onto the cohomological quotients of two consecutive horizontal lines,
+    in the previous diagram (Fig. \ref{bicomplex-CDR}).
+    Replacing the nodes of the diagram by the corresponding $d$-cohomological groups.
+    $$
+    \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+      \text{(Line $q > 0$)} \quad \cdots \arrow[r, "\delta"] & \ker[d \colon \sC^{p,q} \to \sC^{p,q+1}]/d[\sC^{p,q-1}] \arrow[r, "\delta"] &  \cdots
+    \end{tikzcd}
+    $$
+    beginning with $p = 0,1,2$ etc.
+    Now,
+    $\sC^{p,q} = \Maps(\cM^p,\Omega^q(\X))$ and the exterior derivative $d$ applies to the $\Omega^q(\X)$-part.
+    Since $\cB$ is the union of balls,
+    and balls are contractible,
+    every closed form is exact and all the terms of the $\delta$-sequence above vanishes except for the line indexed by $q = 0$,
+    which becomes
+    $$
+    \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+      %
+      \ker[d \colon \sC^{0,0} \to \sC^{0,1}] \arrow[r, "\delta"] &  \ker[d \colon \sC^{1,0} \to \sC^{1,1}] \arrow[r,"\delta"] & \cdots
+      %
+    \end{tikzcd}
+    $$
+    Now,
+    $$
+    \sC^{p,0} = \Maps(\cM^p,\Omega^0(\cB))
+    \quad \text{and} \quad
+    \Omega^0(\cB) = \Cinfty(\cB,\RR).
+    $$
+    Then,
+    $\ker[d \colon \sC^{p,0} \to \sC^{p,1}]$ is the set of locally constant maps from $\Maps(\cM^p,\Omega^0(\cB))$ to $\RR$,
+    thus $\ker[d \colon \sC^{p,0} \to \sC^{p,1}]$ is just the set $\vC^p(\X,\RR)$ as defined by ($\diamondsuit$) in \art{Cech-Cohomology-Of-A-Diffeological-Space},
+    which is also $ \H^{p,0}_d$ as stated just above.
+    Hence,
+    according to all that,
+    $$
+    \left\{
+    \begin{array}{ll}
+      q = 0 :    & \H_d^{0,0} \rfl{\delta}  \H_d^{1,0} \rfl{\delta}  \H_d^{2,0} \rfl{\delta}  \cdots \\[.25cm]
+      q \geq 1 : & \H^{p,q}_d = \{0\}.
+    \end{array}
+    \right.
+    $$
+    The filtration $\delta$ is summarized by the diagram of Figure \ref{delta-Subcomplex}.
+    \begin{figure}[ht]
+      $$
+      \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+        \vdots                                             & \vdots                                            &   \vdots                                           &        \\[-.5cm]
+        \{0\} \arrow[r,"\delta"]                           & \{0\}  \arrow[r, "\delta"]                        & \{0\} \arrow[r, "\delta"]                          & \cdots \\[-.5cm]
+        \H_d^{0,1} \arrow[u ,equal] \arrow[r,"\delta"] & \H_d^{1,1} \arrow[u,equal] \arrow[r,"\delta"] & \H_d^{2,1} \arrow[u,equal] \arrow[r,"\delta"]  & \cdots \\[-.5cm]
+        \vC^0(\X,\RR) \arrow[r,"\delta"]                   & \vC^1(\X,\RR)  \arrow[r, "\delta"]                & \vC^2(\X,\RR) \arrow[r, "\delta"]                  & \cdots \\[-.5cm]
+        \H_d^{0,0} \arrow[u ,equal] \arrow[r,"\delta"] & \H_d^{1,0} \arrow[u,equal] \arrow[r,"\delta"] & \H_d^{2,0} \arrow[u,equal] \arrow[r,"\delta"]  & \cdots
+      \end{tikzcd}
+      $$
+      \vspace{-.5cm}
+      \caption{Subcomplex of the $\delta$-filtration.}
+      \label{delta-Subcomplex}
+    \end{figure}
+    And, the \Cech subcomplex associated to the filtration $\delta$ is then denoted by
+    $$
+    \H^{\star,0}_d(X,\RR)= \bigoplus_{p\in\NN}\H^{p,0}_d
+    \quad \text{with}\quad \H^{p,0}_d  = \vC^p(X,\RR).
+    $$
+  \end{article}
+  
+  %% MARK: • The Filtrations d Of the Bicomplex
+  \begin{article}\artlabel[The Filtrations $d$ Of the Bicomplex]
+    The filtration $d$ is the set of sequences indexed by $p$,
+    got by projecting the differential operator $d$ onto the cohomological quotients of two consecutive vertical lines,
+    in the previous diagram (Fig. \ref{bicomplex-CDR}).
+    Replacing the nodes of the diagram by the corresponding $\delta$-cohomological groups.
+    That is,
+    for the node $(p,q)$,
+    and thanks to \art{Cohomology-Groups-Of-The-Bicomplex},
+    $$
+    \left\{
+    \begin{array}{ll}
+      p = 0 :    & \H_\delta^{0,q} = \ker[\delta \colon \sC^{0,q} \to \sC^{1,q}] = \Omega^q(\X). \\[.25cm]
+      p \geq 1 : & \H_\delta^{p,q} = \ker[\delta \colon \sC^{p,q} \to \sC^{p+1,q}]/\delta\big(\sC^{p-1,q}\big).
+    \end{array}
+    \right.
+    $$
+    Which gives the filtration summarized by the diagram of Figure \ref{d-Subcomplex}.
+    
+    \begin{figure}[thb]
+      $$
+      \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+        \vdots                                           & \vdots                             &   \vdots                            &         \\
+        \Omega^2(\X) = \H_\delta^{0,2} \arrow[u,"d"] & \H_\delta^{1,2} \arrow[u, "d"] & \H_\delta^{2,2} \arrow[u, "d"]  & \cdots  \\
+        \Omega^1(\X) = \H_\delta^{0,1} \arrow[u,"d"] & \H_\delta^{1,1} \arrow[u, "d"] & \H_\delta^{2,1} \arrow[u, "d"]  & \cdots  \\
+        \Omega^0(\X) = \H_\delta^{0,0} \arrow[u,"d"] & \H_\delta^{1,0} \arrow[u, "d"] & \H_\delta^{2,0} \arrow[u, "d"]  & \cdots
+      \end{tikzcd}
+      $$
+      \vspace{-.5cm}
+      \caption{Subcomplex of the $d$-filtration.}
+      \label{d-Subcomplex}
+    \end{figure}
+    And,
+    for all integer $p$,
+    the De Rham subcomplex associated to the filtration $d$ is then denoted by
+    $$
+    \H^{p,\star}_\delta(X,\RR)= \bigoplus_{q\in\NN}\H^{p,q}_\delta
+    \quad \text{with}\quad \H^{0,\star}_\delta = \Omega^\star(X).
+    $$
+  \end{article}
+  
+  %% MARK: • Bigraded Cohomolgy and Spectral Sequence
+  \begin{article}\artlabel[Bigraded Cohomolgy Spectral Sequence]
+    \label{Bigraded-Cohomolgy-Spectral-Sequence}
+    The \v{C}ech-De-Rham double complex gives two bi-graded cohomology groups associated with the two filtrations $d$ and $\delta$,
+    defining the two associated first quadrant spectral sequences.
+    According to universal conventions,
+    we have
+    $$
+    \E_0^{p,q} = \sC^{p,q},
+    \quad ^d\E^{p,q}_1 = \H_\delta^{p,q},
+    \quad ^\delta\E^{p,q}_1 = \H_d^{p,q},
+    $$
+    with
+    $$
+    ^d\E^{p,q}_2 = \H^q_d(\H^{p,\star}_\delta )
+    \quad \text{and} \quad
+    ^\delta\E^{p,q}_2 = \H^p_\delta(\H_d^{\star,q}).
+    $$
+    The \emph{De Rham bigraded group} is given by:
+    $$
+    \left\{
+    \begin{array}{lcl}
+      ^d\E^{p,q}_2 & = & \ker[d \colon \H^{p,q}_\delta \to \H^{p,q+1}_\delta]/ d\big( \H^{p,q-1}_\delta \big), \quad q \geq 1.  \\[.3ex]
+      ^d\E^{p,0}_2 & = & \ker[d \colon \H^{p,0}_\delta \to \H^{p,1}_\delta].  \\[.3ex]
+      ^d\E^{0,q}_2 & = & \H_\dR^q(\X).
+    \end{array}
+    \right .
+    $$
+    And the \emph{\Cech bigraded group} reduces to $\vH^\star(\X,\RR)$.
+    Precisely,
+    $$
+    ^\delta\E^{p,q}_2 = 0
+    \quad \text{for all} \quad q \geq 1,
+    \quad \text{and} \quad
+    ^\delta\E^{p,0}_2  =  \vH^p(\X,\RR).
+    $$
+    
+    \textsc{Proposition.} {\it The total cohomology associated with the differential operator $\D = d + \delta$ converges to $\vH^\star(\X,\RR)$.
+    The exact sequence of low-degree terms writes then
+    %
+    \begin{equation}\tag{$\clubsuit$}
+      \begin{tikzcd}[column sep=1.2em,every label/.append style = {font = \small}]
+        0 \arrow[rightarrow]{r} & \H^{1}_\dR(X) \arrow[r, "h_1"] & \vH^{1}(X,\RR) \arrow[r, "\eta_\init"] & {}^dE^{1,0}_2 \arrow[r, "\eta_\exit"] & \H^{2}_\dR(X) \arrow[r, "h_2"]  & \vH^{2}(X,\RR)
+      \end{tikzcd}
+    \end{equation}
+    %
+    where
+    $$
+    {}^d\E^{1,0}_2=\ker\big(d \colon \H^{1,0}_\delta  \rightarrow \H^{1,1}_\delta \big).
+    $$
+    }
+    We shall interpret in the next articles the obstruction to the De Rham theorem represented by this term ${}^d\E^{1,0}_2$.
+  \end{article}
+  
+  \begin{proof}
+    Since this is a first quadrant spectral sequence,
+    that is,
+    $\sC^{p,q} = 0$ if $p<0$ or $q<0$,
+    and since ${}^\delta\E^{p,q}_2 = 0$ for $q \geq 1$,
+    the total cohomology of the bicomplex coincides with the \Cech cohomology \cite[Thm. 4.8.1]{God64}.
+    Then,
+    the exact sequence of low-degree terms is the translation of the five-term exact sequence of the general first quadrant spectral sequence:
+    $$
+    0 \to {}^d\E^{0,1}_2 \to \H^1 \to {}^d\E_2^{1,0} \to {}^d\E_2^{0,2} \to \H^2.
+    $$
+    See Thm. 4.5.1 \emph{op. cit.}
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - § Obstruction In The \Cech-De-Rham Morphism
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Obstruction In The \Cech-De-Rham Morphism}
+  
+  %% MARK: •  Flows over Diffeological Spaces
+  \begin{article}\artlabel[Flows over Diffeological Spaces]
+    The first obstruction of the De Rham theorem involves a special kind of fiber bundle:
+    
+    \textsc{Definition.} {\it We call a principal fiber bundle over a diffeological space $\X$ with group the additive real numbers $(\RR, +)$ a \emph{flow} over $\X$.}
+    
+    Note that,
+    if $\X$ is a manifold,
+    the flows over $\X$ are trivial,
+    since every fiber bundle on a manifold with contractible fiber has a global smooth section,
+    and,
+    every principal fiber bundle with a global smooth section is trivial.
+    
+    Now,
+    let $\pi \colon \Y \to \X$ and $\pi' \colon \Y' \to \X$ two flows.
+    The direct sum $\pi \oplus \pi'$ is the $(\RR^2,+)$ principal bundle over $\X$,
+    with total space
+    $$
+    \Y \oplus \Y' = \{ (y,y') \in \Y \times \Y' \mid \pi(y) = \pi'(y') \}.
+    $$
+    The action of $\RR^2$ is the product of the two actions:
+    for all $(t,t') \in \RR^2$ and $(y,y') \in \Y \oplus \Y'$,
+    $(t,t')_{\Y \oplus \Y'}(y,y') = (t_\Y(y),t'_{\Y'}(y'))$.
+    The subscript denotes the actions of $\RR$ or $\RR^2$ on the total spaces.
+    Now,
+    consider the anti-diagonal $\ul\Delta = \{(t,-t)\}_{t \in \RR}$.
+    It acts on $\Y \oplus \Y'$ by $(t,-t)_{\Y \oplus \Y'}(y,y') = (t_\Y(y),-t_{\Y'}(y'))$.
+    
+    The quotient of  $\Y \oplus \Y'$ by the action of the anti diagonal $\ul\Delta$ is still a $(\RR,+)$ principal bundle over $\X$.
+    We denote it by $\pi'' \colon \Y'' \to \X$,
+    with
+    $$
+    \Y'' = \Y \oplus \Y' / \ul\Delta.
+    $$
+    Its elements are the classes of pairs $(y,y')$ that project on the same point $x \in \X$,
+    that is:
+    $$
+    \pi''(\class(y,y')) = \pi(y) = \pi'(y').
+    $$
+    The action of $(\RR,+)$ on $\Y''$ is the projection of the residual action of $(\RR^2,+)$ on $\Y \oplus \Y'$,
+    that is,
+    $$
+    t_{\Y''}(\class(y,y')) = \class(t_\Y(y),y') = \class(y,t_{\Y'}(y')).
+    $$
+    
+    We denote by $\Fl(\X)$ the set of equivalence classes of flows over $\X$.
+    The sum defined above passes to the set of classes:
+    $$
+    \class(\pi) + \class(\pi') = \class(\pi'').
+    $$
+    That operation is associative and gives to the set $\Fl(\X)$ a structure of Abelian group.
+    The identity is the class of the trivial bundle $\pr_1 \colon \X \times \RR \to \X$.
+    The inverse of the class of $\pi \colon \Y \to \X$ is the class of the same bundle,
+    but with the opposite action of $\RR$ $t \colon y \mapsto {-t}_\Y(y)$.
+    
+    We comment the case of the irrational torus $\T_\alpha$ in \xart{The-First-Obstruction-To-De-Rham-Theorem}{Remark 1}.
+  \end{article} % Flows over a Diffeological Space
+  
+  \begin{proof}
+    The operation $\class(\pi) + \class(\pi')$ is obviously commutative since $\pi \oplus \pi'$ is clearly equivalent to $\pi' \oplus \pi$.
+    The class of the trivial bundle $\pr_1 \colon \X \times \RR \to \RR$ is the identity,
+    thanks to the map $(x,t,y) \mapsto t_\Y(y)$ that identifies $\class (\pr_1 \oplus \pi)$ with $\pi$.
+    Now,
+    let $\bar\pi \colon \overline\Y \to \X$ be the same principal bundle $\pi \colon \Y \to \X$,
+    but with the opposite $(\RR,+)$-action.
+    That is,
+    $\overline\Y = \Y$ and $t_{\overline\Y}(y) = -t_\Y(y)$.
+    Consider the smooth map $y \mapsto \class(y,y)$ from $\Y$ to $(\Y \oplus \overline\Y)/\ul\Delta$.
+    It satisfies $t_\Y(y) \mapsto \class(t_\Y(y),t_\Y(y)) = \class(t_\Y(y),-t_{\overline\Y}(y)) = \class(y,y)$.
+    Hence,
+    it projects on $\X$ into a smooth section of $\pi \oplus \bar\pi$,
+    which is therefore trivial.
+    The associativity of the addition is left to the reader.
+  \end{proof}
+  
+  %% MARK: • About Connections in Diffeology
+  \begin{article}\artlabel[About Connections in Diffeology]
+    The notion of connection in diffeology \cite{Igl85} is the second important construction that occurs in the identification of the first obstruction of the De Rham's theorem.
+    To clarify the context,
+    we recall in this section the main properties,
+    for more details see \cite[\textsection 8.32]{PIZ13}.
+    
+    Consider a principal fiber bundle $\pi \colon \Y \to \X$,
+    with group $\G$.
+    Then,
+    the projection $\pi_* \colon \Paths(\Y) \to \Paths(\X)$,
+    with $\pi_*(\gamma) = \pi \circ \gamma$,
+    is a principal fiber bundle with group $\Paths(\G)$.
+    The group $\G$ injects in $\Paths(\G)$ by the constant paths.
+    
+    Roughly speaking,
+    a connection $\Theta$ on the $\G$-principal fiber bundle $\pi \colon \Y \to \X$,
+    is a reduction of the $\Paths(\G)$-principal fiber bundle $\pi_* \colon \Paths(\Y) \to \Paths(\X)$ to the subgroup $\G$ of constant paths,
+    see \cite[A5.1(4) \& A5.2(1)]{Igl85}.
+    Precisely,
+    we identify the connection with a smooth projector defined from the tautological bundle of the space $\Paths_\loc(\Y)$ of local paths%
+    \footnote{A local path in a diffeological space is any plot defined on some open interval of $\RR$.}
+    in $\Y$,
+    that is,
+    the set of pairs $(\gamma,t)$ such that $\gamma \in \Paths_\loc(\Y)$ and $t \in \dom(\gamma)$,
+    into the space of local paths in $\Y$,
+    which satifies a set of natural properties:
+    \begin{enumerate}
+      \item[1.] \emph{Domain}. $\dom(\Theta(\gamma,t)) = \dom(\gamma)$.
+      \item[2.] \emph{Lifting}. $\pi \circ \Theta(\gamma,t) = \pi \circ \gamma$.
+      \item[3.] \emph{Basepoint}. $\Theta(\gamma,t)(t) = \gamma(t)$.
+      \item[4.] \emph{Reduction}. $\Theta(a \cdot \gamma)(t) = a(t)_\Y \circ \Theta(\gamma,t)$,
+      where $a \colon \dom(\gamma) \to \G$ is a smooth path and $a \cdot \gamma \colon s \mapsto a(s)_\Y(\gamma(s))$.
+      \item[5.] \emph{Locality}. $\Theta(\gamma \circ f,s) = \Theta(\gamma, f(s)) \circ f$,
+      where $f$ is any smooth local path with values in $\dom(\gamma)$.
+      \item[6.] \emph{Projector}. $\Theta(\Theta(\gamma,t),t) = \Theta(\gamma,t)$
+    \end{enumerate}
+    The paths in the image of $\Theta$ are said to be \emph{horizontal}.
+    Precisely,
+    the path $\Theta(\gamma,t)$ is the \emph{horizontal projection} of $\gamma$,
+    pointed at $t$.
+    It is also the \emph{horizontal lifting} of the path $\pi \circ \gamma \in \Paths_\loc(\X)$,
+    passing through $\gamma(t)$ at time $t$.
+    
+    Regarded roughly as a reduction of a principal fiber bundle,
+    the connection $\Theta$ can be also interpreted as a smooth section of the quotient space $\pi_\star \colon  \Paths(\Y) \to \Paths(\Y)/\G$.
+    The section $\bar\Theta \colon \Paths(\X) \to \Paths(\Y)/\G$ associates with each path $p$ in $\X$ the $\G$-orbit of horizontal liftings of $p$.
+    $$
+    \begin{tikzcd}[column sep=normal,every label/.append style = {font = \small}]
+      \Paths(\Y)  \arrow[rr, "\class"] \arrow[rd, swap, "\pi_*"] &    & \Paths(\Y)/\G \arrow[dl,swap, "\pi_\star"] \\[.75cm]
+      & \Paths(\X) \arrow[bend right=30, swap, ur, "\bar\Theta"]  &
+    \end{tikzcd}
+    $$
+    Each path $\bar p \in \bar\Theta(p)$ is completely defined giving an origin $y \in \pi^{-1}(x)$,
+    with $y = \bar p(o)$ and $x = p(o)$.
+    The origin $o$ is actually arbitrary and the path $p$ can be considered local.
+  \end{article}
+  
+  %% MARK: • Connections on Torus Bundles
+  \begin{article}\artlabel[Connections on Torus Bundles]
+    Let $\pi \colon \Y \to \X$ by a principal fiber bundle with group a torus $\T_\K = \RR/\K$,
+    where $\K \subset \RR$ is a strict subgroup.
+    Among all possible connections,
+    we consider the special class defined by a \emph{connection form} $\lambda$.
+    That is:
+    
+    \begin{enumerate}
+      \item[1.] $\lambda \in \Omega^1(\Y)$.
+      \item[2.] $\lambda$ is $\T_\K$ invariant,
+      for all $\tau \in \T_\K$,
+      $\tau^*(\lambda) = \lambda$.
+      \item[3.] $\lambda$ is \emph{calibrated}\,:
+      for all $y \in \Y$,
+      $\hat y^*(\lambda) = \theta$,
+      where $\hat y \colon \T_\K \to \Y$ is the orbit map $\hat y(\tau) = \tau(y)$,
+      and $\theta = \class_*(\dt)$.
+    \end{enumerate}
+    
+    Then,
+    the connection associated with $\lambda$ is defined,
+    according to the definition above,
+    by:
+    $$
+    \Theta_\lambda(\gamma,t) \colon t' \mapsto \class\left( - \int_t^{t'} \lambda(\gamma)_s(1) \, \ds \right)_\Y \big(\gamma(t')\big)
+    $$
+    for all $\gamma \in \Paths(\Y)$,
+    and where the $\Y$ in index denotes the action of $\T_\K$ on $\Y$,
+    and $\class$ is the projection from $\RR$ to $\T_\K$.
+    More details are given in \cite[\textsection 8.37]{PIZ13}.
+    
+    Horizontal paths are the paths $\underline\gamma$ that cancel the connection form:
+    $\lambda(\underline\gamma)_t(1) = 0$ for all $t$.
+    
+    In particular,
+    that applies to flows over diffeological spaces,
+    the $(\RR,+)$-principal fiber bundles,
+    where $\class$ in the formula above is just the identity.
+    In that case,
+    we will denote by $\Fl^\bullet(\X) \subset \Fl(\X)$ the subgroup of classes of flows that support an infinitesimal connection defined by a connection form $\lambda$.
+  \end{article}
+  
+  %% MARK: • The First Obstruction To De Rham Theorem
+  \begin{article}\artlabel[The First Obstruction To De Rham Theorem]
+    \label{The-First-Obstruction-To-De-Rham-Theorem}
+    The first obstruction to the De Rham theorem,
+    relative to the \Cech cohomology,
+    is the cokernel of the morphism $h_1$ in the exact sequence
+    $$
+    \begin{tikzcd}[column sep=1.2em,every label/.append style = {font = \small}]
+      0 \arrow[rightarrow]{r} & \H^{1}_\dR(X) \arrow[r, "h_1"] & \vH^{1}(X,\RR) \arrow[r, "\eta_\init"] & {}^dE^{1,0}_2 \arrow[r, "\eta_\exit"] & \H^{2}_\dR(X) \arrow[r, "h_2"]  & \vH^{2}(X,\RR)
+    \end{tikzcd}
+    $$
+    It identifies naturally with $\Val(\eta_\init) = \ker(\eta_\exit)$.
+    Let us recall that:
+    $$
+    {}^dE^{1,0}_2 = \ker[d \colon \H_\delta^{1,0} \to \H_\delta^{1,1}]
+    \text{ with }
+    \left\{
+    \begin{array}{l}
+      \H_\delta^{1,0} = \ker(\delta \colon \sC^{1,0} \to \sC^{2,0}) / \delta(\sC^{0,0}) \\[5pt]
+      \H_\delta^{1,1} = \ker(\delta \colon \sC^{1,1} \to \sC^{2,1}) / \delta(\sC^{0,1}).
+    \end{array}
+    \right.
+    $$
+    In order to describe the space ${}^dE^{1,0}_2$ and the two morphisms $\eta_\init$ and $\eta_\exit$,
+    we will first interpret geometrically the space
+    $$
+    \H_\delta^{1,0} = \Z_\delta^{1,0}/\B_\delta^{1,0},
+    \ \text{ with } \
+    \Z_\delta^{1,0} = \ker(\delta \colon \sC^{1,0} \to \sC^{2,0})
+    \ \text{ and } \
+    \B_\delta^{1,0} = \delta(\sC^{0,0}).
+    $$
+    %
+    Let us recall that $\sC^{1,0} = \Maps(\cM,\Omega^0(\cB))$ and $\sC^{0,0}=\Omega^0(\cB)$.
+    By definition of the operator $\delta$,
+    the space $\Z_\delta^{1,0}$ is made of maps $\tau$ from $\cM$ to $\Omega^0(\cB)$ such that,
+    $$
+    \tau(g \circ f) = f^*(\tau(g)) + \tau(f),
+    \ \text{ for all $f$, $g$ in $\cM$.}
+    $$
+    And $\tau$ belongs to $\B_\delta^{1,0}$ if and only if there exists $\sigma \in \Omega^0(\cB)$ such that $\tau = \delta\sigma$,
+    that is,
+    $$
+    \delta\sigma(f) = f^*(\sigma) - \sigma,
+    \ \text{ for all $f \in \cM$}.
+    $$
+    Hence,
+    $$
+    \H_\delta^{1,0} = \{ \tau \mid \tau(g \circ f) = f^*(\tau(g)) + \tau(f) \} /
+    \{ \tau \mid \tau(f) = f^*(\sigma) - \sigma \}.
+    $$
+    Now,
+    every cocycle $\tau \in \Z_\delta^{1,0}$ defines an action of the monoid $\cM$ on $\cB \times \RR$,
+    that lifts the action of $\cM$ on $\cB$. % described in \xart{Differential-forms-Revisited}{Remark}
+    Let $f \in \cM$,
+    $b=(\phi,r) \in \cB$ and $t \in \RR$,
+    one has:
+    $$
+    f_\tau(b,t) = \big(f(b), t + \tau(f)(b)\big).
+    $$
+    Developed,
+    according to notation of \art{The-Gauge-Monoid-of-Round-Plots},
+    that gives:
+    $$
+    f_\tau(\phi,r,t) = \big(f_\fB(\phi), \phi_f(r), t + \tau(f)(\phi,r)\big).
+    $$
+    This binary relation $(b',t') = f_\tau(b,t)$,
+    for some $f \in \cM$,
+    extends to the equivalence relation $\sim_\tau$,
+    generated by the symmetric closure of the action of the monoid $\cM$ on $\cB \times \RR$,
+    that lifts the equivalence relation described in \xart{Differential-forms-Revisited}{Remark}.
+    We shall denote by $\cB \times_\tau \RR$ the quotient $(\cB \times \RR)/ \sim_\tau$.
+    We have,
+    then,
+    the commutative diagram:
+    $$
+    \begin{tikzcd}[column sep=large,every label/.append style = {font = \small}]
+      \cB \times \RR  \arrow[r, "\class"] \arrow[d, swap, "\pr_1"]  & \Y_\tau = \cB \times_\tau \RR \arrow[d, "\pi_\tau"] \\[.75cm]
+      \cB \arrow[r, swap, "\ev"]                                    & \X = \cB/\cM
+    \end{tikzcd}
+    $$
+    where the projection $\pi_\tau$ is defined by:
+    $$
+    \pi_\tau(\class(b,t)) = \ev(b),
+    \quad\text{that is,}\quad
+    \pi_\tau(\class(\phi,r,t)) = \phi(r).
+    $$
+    
+    \textsc{Theorem.} \textit{The projection $\pi_\tau \colon \Y_\tau \to \X$ is a flow over $\X$,
+    with the following action of $(\RR,+)$\,:
+    $$
+    s_\Y\big(\class(b,t)\big) = \class(b,t+s),
+    \text{ for all $s \in \RR$.}
+    $$
+    %
+    \textnormal{1.} Cohomologous cocycles define equivalent principal fiber bundles.
+    That is,
+    the principal bundle defined by $\tau + \delta\sigma$ is equivalent to the principal bundle defined by $\tau$.
+    That defines a map
+    $$
+    \Psi \colon \H_\delta^{1,0}(\X) \to \Fl(\X)
+    \quad \text{by} \quad
+    \class(\tau) \mapsto \class[\pi_\tau \colon \Y_\tau \to \X].
+    $$
+    \textnormal{2.} The map $\Psi$ is a group isomorphism and identifies $\H_\delta^{1,0}(\X)$ with $\Fl(\X)$. \\
+    \textnormal{3.} Through this identification,
+    the subspace ${}^dE^{1,0}_2 \subset \H_\delta^{1,0}(\X)$ becomes the subset $\Fl^\bullet(\X)$ of classes of flows that admit a connexion $1$-form $\lambda$.
+    }
+    $$
+    \begin{tikzcd}[column sep=1.2em,row sep=1.2em, every label/.append style = {font = \small}]
+      &                                &                                        & \Fl(\X)                                        &                                 &  \\
+      0 \arrow[r,"\ "] & \H^{1}_\dR(X) \arrow[r, "h_1"] & \vH^{1}(X,\RR) \arrow[r, ""] & \Fl^\bullet(\X) \arrow[r, "c_1"] \arrow[u, ""] & \H^{2}_\dR(X) \arrow[r, "h_2"]  & \vH^{2}(X,\RR) \\
+      &                                &                                        & 0  \arrow[u, ""]                                                &                                 &
+    \end{tikzcd}
+    $$
+    \textit{
+    \textnormal{4.} The morphism $\eta_\exit$ becomes the characteristic class $c_1 \colon \Fl^\bullet(\X) \to \H^{2}_\dR(X)$,
+    that associates the principal bundle with the cohomology class of the curvature of the connexion form $\lambda$. \\
+    \textnormal{5.} The obstruction of the first De Rham homomorphism identifies with the kernel of $c_1$,
+    that is,
+    the subspace of flows equipped with a flat connexion.
+    These are the various quotients of the trivial flow on the universal covering $\tilde\X$,
+    by a lifting of the action of the fundamental group $\pi_1(\X)$.
+    }
+    
+    \textsc{Remark 1.} Since the real principal fiber bundles over a manifold are trivial,
+    this obstruction vanishes in this case.
+    This shows how the surjectivity of the first De Rham homomorphism,
+    for manifolds,
+    is related to the existence of global smooth sections of bundles with contractible fiber.
+    
+    \textsc{Remark 2.}  In the case $\X=\T_\alpha$,
+    quotient of the $2$-torus $\T^2$ by the $1$-parameter subgroup of irrational slope $\alpha$,
+    the group $\Fl(\T_\alpha)$ has been directly computed in \cite{Igl86},
+    see also \cite[\textsection 8.39]{PIZ13}.
+    It shows a huge difference in behavior between Diophantine numbers (far from rational numbers) and Liouville numbers (close to rational numbers).
+    In the first case $\Fl(\T_\alpha) = \Fl^\bullet(\T_\alpha) = \RR$,
+    and in the second case $\dim(\Fl(\T_\alpha))= \infty$.
+    
+    \textsc{Remark 3.} The irrationnal torus $\T_\alpha$ is equivalent to the quotient of $\RR$ by the subgroup $\ZZ + \alpha \ZZ$.
+    It it always possible to equip any flow $\pi \colon \Y \to \T_\alpha$ with a connection.
+    Indeed,
+    we first lift any path in $\T_\alpha$ to the universal covering $\tilde\T_\alpha = \RR$,
+    which is essentially unique up to an element of $\ZZ+\alpha\ZZ$.
+    Then,
+    we remark that the pullback $\pr_1 \colon \class^*(\Y) \to \RR$ is trivial because it is a $(\RR,+)$-principal bundle over $\RR$.
+    Thus,
+    we just lift horizontally,
+    in the product $\tilde\T_\alpha \times \RR$,
+    the lifting of the path in $\tilde\T_\alpha$ and push it into $\Y$ by the second projection.
+    Now,
+    according to the above,
+    that shows that
+    
+    \textsc{Proposition.} \textit{For Liouville numbers $\alpha$,
+    there exists flows over $\T_\alpha$ equipped with connections that cannot be defined by a differential $1$-form.}
+    
+    This is the first case of this kind in diffeology,
+    and justify \emph{a posteriori} the introduction of general connections in the theory.
+    
+    \textsc{Remark 4.} In the general case,
+    the morphism
+    $$
+    c_1 \colon \Fl^\bullet(\X) \to \H^{2}_\dR(X)
+    $$
+    maps the connection form $\lambda$ to the cohomology class of its curvature,
+    that is,
+    $\omega$ such that $d\lambda = \pi^*(\omega)$.
+    It is a first genuine diffeological \emph{characteristic class},
+    since it vanishes on manifolds.
+  \end{article}
+  
+  \begin{proof}
+    Let $\pi \colon \Y \to \X$ be a flow and let us consider its pullback $\pr_1 \colon \ev^*(\Y) \to \cB$ over $\cB$.
+    Because $\pr_1$ is a $(\RR,+)$-principal bundle over a sum of open balls,
+    it is trivial over each ball.
+    There exists then,
+    for each round plot $\phi \in \fB$,
+    a smooth section $\rho \colon \dom(\phi) \to \ev^*(\Y)$ of the projection $\pr_1$.
+    Let $f \in \cM$,
+    the pullback of the flow $\pi \colon \Y \to \X$ by $\ev \circ f$ is identical to the pullback by $\ev$,
+    since $\ev \circ f = \ev$.
+    The fiber over $f(\phi,r)$ coincides with the fiber over $(\phi,r)$,
+    for all $(\phi,r) \in \cB$.
+    There exists then a smooth map $\tau \colon \cM \to \Cinfty(\cB, \RR)$ such that:
+    $$
+    \text{for all } b = (\phi,r) \in \cB, \quad \rho(f(b)) = \tau(f)(b) \cdot \rho(b),
+    $$
+    where the middle dot denotes the action of $\RR$ on the principal fiber bundle.
+    It is then easy to check that $\tau$ is a Hochschild $1$-cocycle of the monoid $\cM$ with values in $\Cinfty(\cB,\RR) = \Omega^0(\cB)$.
+    One checks also that if we change the section $\rho$,
+    the cocycle $\tau$ changes by a coboundary $\sigma$,
+    which is the difference of the two sections.
+    We just defined a map $\Psi$ that associates to the class of the flow $\pi \colon \Y \to \X$,
+    the class of $\tau$ in $\H_\delta^{1,0}(\X)$.
+    $$
+    \Psi \colon \Fl(\X) \to \H_\delta^{1,0}(\X)
+    \quad\text{with}\quad
+    \Psi\big(\class(\pi \colon \Y \to \X)\big) = \class(\tau).
+    $$
+    We showed also indirectly that $\Psi$ is injective.
+    
+    Conversely,
+    as we claim,
+    every $\tau \in \Z_\delta^{1,0}$ defines an action of $\cM$ on the product $\cB \times \RR$ that lifts the action of the monoid $\cM$ on $\cB$.
+    The group $(\RR,+)$ acts freely on the quotient $\Y_\tau = \cB \times_\tau \RR$ by $t \cdot \class(b,s) = \class(b, s+t)$.
+    That makes $\pi_\tau \colon \Y_\tau \to \X$ a $(\RR,+)$ principal bundle.
+    To test if the projection $\pi_\tau$ is indeed a fiber bundle over a diffeological space,
+    we have to check its pullbacks by the plots and verify that they are locally trivial.
+    It suffice to consider round plots.
+    So,
+    let $\phi \in \fB$,
+    $\phi^*(\Y_\tau) \simeq \{((\phi,r), \class(\phi',r',t')) \mid \phi(r) = \pi_\tau(\phi',r',t') = \phi'(r')\}$,
+    but since $\phi(r) = \phi'(r')$ then there is $t \in \RR$ such that $\class(\phi,r,t) = \class(\phi',r',t')$.
+    Thus,
+    $\phi^*(\Y_\tau) \simeq \{(\phi,r,t) \mid r \in \dom(\phi) \text{ and } t \in \RR\} \simeq \dom(\phi) \times \RR$.
+    Therefore,
+    $\pi_\tau$ is a $(\RR,+)$-principal fiber bundle.
+    
+    The class of $\tau$ in $\H_\delta^{1,0}(\X)$ is obviously associated with the class of the flow $\pi_\tau \colon \Y_\tau \to \X$,
+    by the map $\Psi$ defined above.
+    A cohomologous cocycle would have given an equivalent flow over $\X$.
+    The map $\Psi$ is then bijective,
+    and gives a geometrical interpretation of the intermediate cohomology group $\H_\delta^{1,0}(\X)$ as the group of flows over $\X$,
+    and here we get:
+    $$
+    \H_\delta^{1,0}(\X) \simeq \Fl(\X).
+    $$
+    It remains to identify now ${}^dE^{1,0}_2 = \ker[d \colon \H_\delta^{1,0} \to \H_\delta^{1,1}]$,
+    among $\Fl(\X)$.
+    That is,
+    $\class(\tau)$ in $\H_\delta^{1,0}$ such that $d(\class(\tau))=0$.
+    Let $\pi \colon \Y \to \X$ be a flow represented by $\tau$.
+    Let $\rho$ be a section of $\pr_1 \colon \ev^*(\Y) \to \cB$ over some $b \in \fB$,
+    as above.
+    We know that,
+    for all $f \in \cM$,
+    $\rho(f(b)) = \tau(f)(b) \cdot \rho(b)$.
+    Now,
+    for every round plot $\P$ in $\Y$ is associated a round plot $\pi \circ \P$ in $\X$.
+    For all $r \in \dom(\P)$,
+    $\rho(\pi \circ \P,r)$ and $\P(r)$ belong to the same fiber.
+    Therefore,
+    there exists a smooth map $\nu(\P) \colon \dom(\P) \to \RR$ such that
+    $$
+    \text{for all } r \in \dom(P), \quad \rho(\pi \circ \P,r) = \nu(\P)(r) \cdot \P(r).
+    $$
+    On the other hand,
+    the condition $d(\class(\tau))=0$ means $\class_\delta(d\tau)=0$,
+    that is,
+    there exists $\alpha \in \Omega^1(\cB)$ such that
+    $$
+    \text{for all } f \in \cM, \quad d\tau(f) = f^*(\alpha) - \alpha.
+    $$
+    We define then the mapping $\lambda$,
+    that associates with very round plot $\P$ in $\Y$,
+    the $1$-form
+    $$
+    \lambda(\P) = \alpha(\pi \circ \P) - d\nu(\P)
+    $$
+    on $\dom(\P)$.
+    One can check that $\lambda$ defines on $\Y$ a differential $1$-form,
+    and moreover that this $1$-form is a connection form.
+    
+    Conversely,
+    on can verify that if $\pi \colon \Y \to \X$ can be equiped with a connection $1$-form,
+    then $d(\class(\tau))=0$.
+    Thus,
+    the connecting space ${}^dE^{1,0}_2$ identies with the subset of flows over $\X$ that can be equipped with a connection $1$-form.
+    In summary:
+    $$
+    \H_\delta^{1,0} \simeq \Fl(\X)
+    \quad \text{and} \quad
+    {}^dE^{1,0}_2 \simeq \Fl^\bullet(\X).
+    $$
+    As an application of this constructions,
+    we consider the irrational torus $\T_\alpha = \RR/\ZZ + \alpha \ZZ$ \cite{DonIgl83}.
+    In that case we compute directly
+    $$
+    \H_\dR^1(\T_\alpha) = \RR,
+    \quad \vH^1(\T_\alpha,\RR) = \RR^2
+    \quad\text{and}\quad
+    \H_\dR^2(\T_\alpha) = 0.
+    $$
+    The exact sequence gives then $0 \to \RR \to \RR^2 \to \Fl^\bullet(\X) \to 0$.
+    We deduce then that $\Fl^\bullet(\X) = \RR$.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - Bibliography
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{thebibliography}{DonIgl83}
+    
+    \bibitem[Che77]{Che77}
+    Kuo-Tsai Chen.
+    \newblock \emph{Iterated path integral}.
+    \newblock {\em Bull. of Am. Math. Soc.}, 83(5):831--879, 1977.
+    
+    \bibitem[Don84]{Don84}
+    Paul Donato.
+    \newblock \emph{Rev\^etement et groupe fondamental des espaces diff\'e\-rentiels homog\`enes},
+    \newblock {Th\`ese de doctorat d'\'etat, Universit\'e de Provence, Marseille, 1984}.
+    
+    \bibitem[DonIgl83]{DonIgl83}
+    \newblock{Paul Donato and Patrick Iglesias.}
+    \newblock\emph{Exemple de groupes différentiels : flots irrationnels sur le tore.}
+    \newblock{Preprint CPT-83/P.1524, Centre de Physique Théorique, Marseille Luminy, July 1983.}
+    %\newline
+    \newblock{\scriptsize\verb!http://math.huji.ac.il/~piz/documents/EDGDFISLT.pdf!}
+    
+    \bibitem[DonIgl85]{DonIgl85}
+    \bysame
+    \newblock\emph{Exemple de groupes différentiels : flots irrationnels sur le tore.}
+    \newblock{\em Comptes Rendus de l'Acad{\'e}mie des Sciences}, 301(4), Paris, 1985.
+    
+    \bibitem[God64]{God64}
+    Roger Godement.
+    \newblock \emph{Topologie alg\'ebrique et th\'eorie des faisceaux}.
+    \newblock Hermann, Paris, 1964.
+    
+    \bibitem[Gur14]{Gur14}
+    Serap Gürer
+    \newblock \emph{Topologie algébrique des espaces difféologiques}.
+    \newblock PhD Th\`ese Université Lille 1, 2014.
+    
+    \bibitem[Hoch45]{Hoch45}
+    \emph{On the Cohomology Groups of an Associative Algebra}
+    Gerhard Hochschild
+    \newblock Annals of Mathematics, Second Series, Vol. 46, No. 1 (1945), pp. 58-67.
+    
+    \bibitem[Igl85]{Igl85}
+    Patrick Iglesias.
+    \newblock \emph{Fibr\'es diff\'eologiques et homotopie}.
+    \newblock Th\`ese de doctorat d'\'etat, Universit\'e de Provence, F.~Marseille, 1985.
+    
+    \bibitem[Igl86]{Igl86}
+    Patrick Iglesias.
+    \newblock \emph{Diff\'eologie d'espace singulier et petits diviseurs}.
+    \newblock {\em C.R.A.S.}, 302:519--522, Paris, 1986.
+    
+    \bibitem[PI88-91]{PI88-91}
+    \bysame
+    \newblock\emph{Bi-complexe cohomologique des espaces diff\'erentiables} \newline
+    \newblock{\scriptsize\verb!http://math.huji.ac.il/~piz/documents/BCCED.pdf!}
+    \newline
+    \newblock{A revision of \emph{Une cohomologie de \Cech pour les espaces diff\'erentiables et sa relation à la cohomologie de De Rham}}
+    \newblock{Preprint CPT -Marseille. CNRS CPT-88/P.2193.}
+    \newline
+    \newblock{\scriptsize\verb!http://math.huji.ac.il/~piz/documents/UCDCPLEDESRALCDDR.pdf!}
+    
+    \bibitem[PIZ13]{PIZ13}
+    Patrick Iglesias-Zemmour
+    \newblock\emph{Diffeology.}
+    \newblock{Mathematical Surveys and Monographs. The American Mathematical Society, vol. 185, USA R.I. 2013.}
+    
+    \bibitem[Kur19]{Kur19}
+    Katsuhiko Kuribayashi;
+    \newblock \emph{Simplicial cochain algebras for diffeological spaces.}
+    \newblock{preprint, arXiv:1902.10937.}
+    
+    \bibitem[Mac67]{Mac67}
+    Saunders MacLane.
+    \newblock \emph{Homology}.
+    \newblock Springer Verlag, New-York Heidelberg Berlin, 1967.
+    
+    \bibitem[Sou80]{Sou80}
+    Jean-Marie Souriau.
+    \newblock \emph{Groupes diff\'erentiels}.
+    \newblock Lecture notes in mathematics, 836:91--128, 1980.
+    
+    \bibitem[Sou84-a]{Sou84-a}
+    \bysame
+    \newblock \emph{Groupes diff\'erentiels et physique math\'e\-ma\-tique}.
+    \newblock Collection travaux en cours, pp.75--79, 1984.
+    
+    \bibitem[Sou84-b]{Sou84-b}
+    \bysame
+    \newblock \emph{Un algorithme g{\'e}n{\'e}rateur de structures quantiques}.
+    \newblock in Élie Cartan et les mathématiques d'aujourd'hui - Lyon, 25-29 juin 1984, Astérisque, no. S131 (1985), pp. 341-399.
+    
+    \bibitem[Wei52]{Wei52}
+    André Weil
+    \newblock \emph{Sur les théorèmes de De Rham.}
+    \newblock{Comment. Math. Helv. 26(1952), pp. 119--145.}
+    
+  \end{thebibliography}
+  
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: - Extra Text to Process
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
