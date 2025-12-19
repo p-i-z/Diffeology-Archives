@@ -23,3 +23,4 @@ This paper is a revised and formally published version of a preprint first writt
 ## Files in this Directory
 
 *   `CDRBCID.tex`: The complete, self-contained LaTeX source file for the paper.
+*   `Figures/` Folder containing the figures for the paper.
