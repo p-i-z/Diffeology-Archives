@@ -1,0 +1,280 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Fichier de style 'symétries et moment'.
+%%
+%% Version nettoyée et modernisée, Décembre 2025.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\typeout{Fichier de macros 'symetries et moment' (version nettoyee)}
+\typeout{Version du fevrier 2000, modifiee en Decembre 2025}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Required Packages
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{amsmath, amssymb}
+\usepackage{pifont} % For Zapf Dingbats symbols.
+\usepackage{layout} % For the \calclayout command.
+\usepackage[width=170mm, height=240mm, cam, noinfo, center]{crop}
+
+\usepackage{graphicx}      % The package that provides \includegraphics
+\usepackage{epstopdf}      % Automatically converts .ps files to .pdf for pdflatex
+
+% Pour page de couverture
+\usepackage{pdfpages}
+
+% Pour figures et diagrammes
+% http://texdoc.net/texmf-dist/doc/latex/tikz-cd/tikz-cd-doc.pdf
+\usepackage{tikz-cd}
+\usetikzlibrary{calc} % Utile pour des calculs de position avancés
+\tikzcdset{
+    arrow style=tikz,
+    diagrams={>={Straight Barb[scale=0.8]}} % Style de flèche standard et élégant
+}
+
+%% --- Font and Typography Packages ---
+
+\usepackage{microtype}
+% The mathdesign package provides the Utopia font.
+% Note: It redefines many math symbols and may conflict with symbols
+% from amssymb if they are used. The current text seems compatible.
+\usepackage[cal=scr,uppercase=upright,greeklowercase=upright,expert,utopia]{mathdesign}
+\linespread{1.2}
+
+%% --- Hyperlinks ---
+% Load hyperref last for best compatibility.
+\usepackage[hidelinks]{hyperref}
+
+%% --- Captions ---
+% Load caption package
+\usepackage[margin=0pt, font=small, labelfont=sc, justification=centering, labelformat=simple]{caption}
+
+\renewcommand{\thefigure}{\roman{figure}}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Layout and Page Geometry
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paperheight 240mm
+\paperwidth 160mm
+\marginparwidth = 0pt
+
+\setlength{\textwidth}{125mm}
+\setlength{\textheight}{180mm}
+\calclayout
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+\linespread{1.1}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Theorem and Proof Environments
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% End-of-proof and end-of-note symbols.
+\newcommand{\TheEndOfProof}{\rule{1mm}{2.5mm}}
+\newcommand{\TheEndOfNote}{\ding{119}} % Replaces plain TeX \font definition.
+
+%% Unnumbered theorem-like environments.
+\newtheorem{theoreme}{{\sc Th\'eor\`eme.}}
+\renewcommand{\thetheoreme}{}
+
+\newtheorem{lemme}{{\sc Lemme.}}
+\renewcommand{\thelemme}{}
+
+\newtheorem{corollaire}{{\sc Corollaire.}}
+\renewcommand{\thecorollaire}{}
+
+\newtheorem{proposition}{{\sc Proposition.}}
+\renewcommand{\theproposition}{}
+
+\newtheorem{definition}{{\sc D\'efinition.}}
+\renewcommand{\thedefinition}{}
+
+\newtheorem{exercice}{{\sc Exercice.}}
+\renewcommand{\theexercice}{}
+
+\newtheorem{ddemonstration}{{\sc D\'emonstration}}
+\renewcommand{\theddemonstration}{}
+
+%% Proof environment.
+%\newenvironment{demonstration}{\n
+%    \begin{ddemonstration}\n
+%}{\n
+%    \nolinebreak \TheEndOfProof \end{ddemonstration}\n
+%}\n
+\newenvironment{demonstration}{
+    \textsc{Démonstration.}
+}{
+    \nolinebreak \TheEndOfProof
+}
+
+%% Note-like environments.
+\newenvironment{exemple}{
+    \medskip\noindent{\sc Exemple.\ }
+}{
+    \nolinebreak\TheEndOfNote%\medskip
+}
+
+\newenvironment{conclusion}{
+    \medskip\noindent{\sc Conclusion.\ }
+}{
+    \nolinebreak\TheEndOfNote%\medskip
+}
+
+\newenvironment{note}{
+    \medskip\noindent{\sc Note.\ }
+}{
+    \nolinebreak\TheEndOfNote%\medskip
+}
+
+\newenvironment{remarque}{
+    \medskip\noindent{\sc Remarque.}
+}{
+    \nolinebreak\TheEndOfNote%\medskip
+}
+
+\newenvironment{notation}{
+    \medskip\noindent{\sc Notations.}
+}{
+    \nolinebreak\TheEndOfNote%\medskip
+}
+
+%% Renumbering chapter
+\renewcommand\thechapter{\Roman{chapter}}
+\numberwithin{equation}{chapter}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Font and Text Macros
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% --- Boldface Abbreviations (used) ---
+\renewcommand{\AA}{\mathbf{A}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\EE}{\mathbf{E}}
+\newcommand{\FF}{\mathbf{F}}
+\newcommand{\HH}{\mathbf{H}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\TT}{\mathbf{T}}
+\newcommand{\ZZ}{\mathbf{Z}}
+
+\newcommand{\rr}{\mathbf{r}}
+\newcommand{\vv}{\mathbf{v}}
+
+%% --- Calligraphic Abbreviations (used) ---
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cV}{\mathcal{V}}
+
+%% --- Typographic Helpers ---
+\newcommand{\cad}{c'est-\`a-dire }
+\newcommand{\ie}{{\em i.e.}\ }
+\newcommand{\cf}{{\em cf.}\ }
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Mathematical Macros
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% --- Redefined Standard Commands ---
+\renewcommand{\emptyset}{\varnothing}
+
+%% --- Brackets, Norms, etc. ---
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+\newcommand{\norme}[1]{\left\Vert #1 \right\Vert}
+\newcommand{\norm}[1]{\norme{#1}}
+\def\scal(#1,#2){\left\langle #1,#2\right\rangle}
+\newcommand{\vect}[1]{\left(\begin{array}{c}#1\end{array}\right)}
+\def\mat#1,#2,#3,#4{\left(\begin{array}{cc} #1 & #2 \\ #3 & #4\end{array}\right)}
+\newcommand{\mor}[1]{\mathrel{\mathop{\longrightarrow}\limits^{#1}}} 
+
+%% --- Mathematical Operators (using amsmath) ---
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\aire}{aire}
+\DeclareMathOperator{\Arc}{Arc}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\aut}{aut}
+\DeclareMathOperator{\but}{but}
+\DeclareMathOperator{\cst}{cst}
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\Cinf}{C^\infty}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Ham}{Ham}
+\DeclareMathOperator{\ham}{ham}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Imm}{Imm}
+\DeclareMathOperator{\Isom}{Isom}
+\DeclareMathOperator{\Lac}{Lac} % \Long is a LaTeX command
+\DeclareMathOperator{\Longi}{Long} % \Long is a LaTeX command
+\DeclareMathOperator{\Ogroup}{O} % \O is a LaTeX command
+\DeclareMathOperator{\Orth}{Orth}
+\DeclareMathOperator{\pcirc}{pc}
+\DeclareMathOperator{\PSL}{PSL}
+\DeclareMathOperator{\slin}{sl} % \sl is a LaTeX command
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\so}{so}
+\DeclareMathOperator{\surf}{surf}
+\DeclareMathOperator{\source}{src}
+\DeclareMathOperator{\Sp}{Sp}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\Sympl}{Sympl}
+\DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\vol}{vol}
+
+%% --- Miscellaneous Math Macros ---
+\newcommand{\DLie}{\text{\pounds}}
+\newcommand{\HdR}{H_{\mbox{$\scriptstyle {\rm dR}$}}}
+\newcommand{\ZdR}{Z_{\mbox{$\scriptstyle {\rm dR}$}}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\modulo}{{\em modulo}}
+\newcommand{\no}{\hbox{n${}^\circ$}}
+\newcommand{\tq}{\mathbin|}
+\newcommand{\tr}{\mathrm{Tr}} % Using \mathrm for better spacing.
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\undemi}{\frac{1}{2}} % Modernized from old TeX.
+\newcommand{\xo}{x_0} % Modernized from old TeX.
+\newcommand{\hs}{\hspace{2mm}}
+\newcommand{\module}[1]{\left\vert #1 \right\vert}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%% MARK: Complex Macros (Arrays, etc.)
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\map}[5]{
+    \begin{array}{rrccc}
+        #1 : & #2 & \longrightarrow & #3 \\
+             & #4 & \longmapsto     & #5
+    \end{array}
+}
+
+\newcommand {\equaldef}{\mathrel{\mathop{\kern 0pt =}^{\text{\scriptsize def}}}}
+
+%% --- Document-specific Settings ---
+% Allows page breaks within long multi-line equations (e.g., align).
+\allowdisplaybreaks

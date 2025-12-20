@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  PROJECT: Symmetries and Moment
+%%  MAIN FILE
+%%
+%%  Created by Patrick I-Z on 30/11/2025.
+%%  Rewritten and structured in December 2025.
+%%
+%%  All rights reserved.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt, twoside, reqno]{amsbook}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Macros
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% --- Custom Macros ---
+% Input the cleaned and modernized macro file.
+% Please ensure your macro file is named "SMBook-macro.tex".
+
+\input{SMBook-macro.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Document Information
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Symétries et Moment}
+\author{Patrick Iglesias-Zemmour}
+\date{2000 Revised 2025} % It's good practice to specify the date.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: BEGIN DOCUMENT
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Page de couverture
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \thispagestyle{empty}
+  
+  \includepdf[pages={1},noautoscale=false]{couverture/SetM-front-cover.pdf}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Front Matter
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \frontmatter
+  
+  \maketitle
+  
+  \cleardoublepage
+  
+  % --- Dedication Page ---
+  \cleardoublepage
+  \thispagestyle{empty}
+  \null
+  \vfill
+  \begin{flushright}
+    {\itshape À Alexandre, Lya et Nelly}
+  \end{flushright}
+  
+  % --- Preface ---
+  \cleardoublepage
+  \input{SMBook-Preface.tex} % <-- ADD THIS LINE
+  
+  % --- Table of Contents ---
+  \cleardoublepage
+  \tableofcontents
+  
+  \mainmatter
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Chapter 0
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{SMBook-Chap0.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Chapter 1
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{SMBook-Chap1.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Chapter 2
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{SMBook-Chap2.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Chapter 3
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{SMBook-Chap3.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Chapter 4
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{SMBook-Chap4.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Chapter 5
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{SMBook-Chap5.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Appendices
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \appendix
+  \input{SMBook-Appendices.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Back Matter (Bibliography, Index)
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  % \backmatter % Uncomment if you want appendices numbered differently etc.
+  
+  % --- Bibliography Placeholder ---
+  % \bibliographystyle{amsplain}
+  
+  \input{SMBook.bbl}
+  
+  \newpage
+  \thispagestyle{empty}
+  \null
+  \newpage
+  
+  % --- Index Placeholder ---
+  % \printindex
+  
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Quatrième de couverture
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \thispagestyle{empty}
+  
+  \includepdf[pages={1},noautoscale=false]{couverture/SetM-back-cover.pdf}
+
+  
+\end{document}
