@@ -14,4 +14,18 @@ The purpose of this new edition is to create a definitive and corrected referenc
 
 ## Compilation
 
-This book is written in LaTeX and is designed to be compiled with **pdfLaTeX**. The main file is `SMBook.tex`. All necessary packages and macros are included in the preamble of the main file, ensuring it is a self-contained project.
+This book is written in LaTeX and is designed to be compiled with **pdfLaTeX**. The main file is `SMBook.tex`. This archive contains the files:
+
+*   `the SMBook.tex`             The main file
+*   `the SMBook-macro.tex`       The macro file
+*   `the SMBook-Preface.tex`     The Revised Printing Preface
+*   `the SMBook-Chap0.tex`       The Introduction
+*   `the SMBook-Chap1.tex`       The Chapter 1 "Lagrange et les origines du calcul symplectique"
+*   `the SMBook-Chap2.tex`       The Chapter 2 "Les principes de la mécanique analytique"
+*   `the SMBook-Chap3.tex`       The Chapter 3 "Quelques exemples"
+*   `the SMBook-Chap4.tex`       The Chapter 4 "Invariance du lagrangien et théorème de Nœther"
+*   `the SMBook-Chap5.tex`       The Chapter 5 "L'application moment"
+*   `the SMBook-Appendices.tex`  The Appendices
+*   `the SMBook.bbl`             The Bibliography
+*   `the README.md`              The Monigraph README file 
+*   `the figures`                Directory of figures
