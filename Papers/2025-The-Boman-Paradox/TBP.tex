@@ -1,0 +1,731 @@
+\documentclass[10pt,letterpaper,reqno]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS File
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage[innercaption]{sidecap}
+
+% manage captions
+\usepackage[margin=10pt,font=small,labelfont=bf, labelformat=empty, labelsep=endash]{caption}
+
+% Required for the Draft Warning and Figures
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning, arrows.meta}
+
+% Basic style
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+\def\ni{\noindent}
+
+% Macros used in this document
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\Cinfty}{C^\infty}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cW}{\mathcal{W}}
+
+\DeclareMathOperator{\id}{\mathbf{id}}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\stab}{Stab}
+
+\newcommand{\loc}{\mathrm{loc}}
+
+% Theorem Environments
+\newtheorem*{theorem*}{Theorem} % Unnumbered theorems
+\newtheorem{theorem}{Theorem} % Numbered theorems
+\newtheorem*{proposition}{Proposition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+% Font style
+\usepackage{microtype}
+\usepackage[cal=scr,uppercase = upright,greekfamily = didot,greeklowercase = upright,expert,utopia]{mathdesign}
+\usepackage[supspaced=.04em]{superiors}
+\linespread{1.1}
+
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: The Title
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title[The Boman Paradox]{\textbf{The Boman Paradox}\\ \small When topology plus algebra do not define geometry}
+\author{Patrick Iglesias-Zemmour}
+
+\thanks{I thank the Hebrew University of Jerusalem for its continuous academic support.}
+
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Campus Givat Ram, $9190401$ Israel}
+\email{piz@math.huji.ac.il}
+
+\date{\today}
+
+\subjclass[2020]{Primary 58A40; Secondary 58D05, 57R50}
+\keywords{Diffeology, Wire Diffeology, Boman's Theorem, Diffeomorphism Groups, Diffeological Dimension, Foundations of Geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Begin Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: MACROS DraftWarning
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+%  \tikz[overlay,remember picture]{\node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{red}{Draft Version -- \pdfcreationdate}}}%\n
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Make Title
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Epigraph
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \thispagestyle{empty}
+  \vspace{0.5cm}
+  \begin{flushright}
+    \begin{minipage}{0.6\textwidth}
+      \itshape\small
+      \raggedleft
+      We shall not cease from exploration\\
+      And the end of all our exploring\\
+      Will be to arrive where we started\\
+      And know the place for the first time.
+      \par\vspace{1ex}
+      \upshape --- T.S. Eliot, \textit{Little Gidding}
+    \end{minipage}
+  \end{flushright}
+  \vspace{1cm}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Abstract
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    \noindent It is a commonly held view in the foundations of mathematics,
+    descending from Klein's Erlangen Program,
+    that a geometry is determined by a topological space and a group of symmetries acting upon it.
+    In this note,
+    we present a rigorous counter-example to this intuition:
+    the \emph{Wire Plane} ($\cW$).
+    
+    \noindent We prove that $\cW$ shares the exact same topology as the standard Euclidean plane $\RR^2$ and that its group of diffeomorphisms is algebraically identical to the standard group $\Diff(\RR^2)$.
+    Yet,
+    these two spaces are geometrically distinct:
+    the standard plane has dimension 2,
+    while the Wire Plane has dimension 1.
+    
+    \noindent This phenomenon,
+    which we call the \emph{Boman Paradox} in reference to the theorem that underlies the group isomorphism,
+    is resolved by observing that the identity map between the groups is not a diffeomorphism.
+    Furthermore,
+    we show that the space cannot be reconstructed as the quotient of its group.
+    This result demonstrates that the ``geometry'' is not contained in the abstract group,
+    nor in the topology.
+    Rather,
+    the \emph{local structure precedes the global symmetry}:
+    the space defines the group,
+    but the group is insufficient to reconstruct the space.
+  \end{abstract}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{Introduction}
+  
+  What constitutes a geometry?
+  Since Felix Klein's Erlangen Program (1872),
+  the standard answer has been:
+  a space $X$ equipped with a group of transformations $G$ acting transitively upon it.
+  This viewpoint reached its zenith with Jean-Marie Souriau,
+  who famously proposed that ``the group is the geometry'' \cite{Sou84}.
+  
+  Souriau's program was radical and rigorous.
+  He argued that the internal algebraic structure of the group---specifically the classification of its subgroups and normalizers---should be sufficient to characterize all geometric invariants,
+  effectively reducing geometry to group theory.
+  For instance,
+  in the context of Euclidean geometry,
+  the distance is not a primary ingredient;
+  it can be reconstructed as the class of pairs of points under the group action.
+  In this view,
+  the space itself is secondary,
+  often reconstructible as a quotient of the group (a homogeneous space).
+  Seeking to extend this perspective to differential geometry,
+  Souriau treated infinite-dimensional groups of diffeomorphisms as genuine geometric objects,
+  a foundational step from which the theory of \emph{Diffeology} emerged.
+  
+  However,
+  by introducing this structure,
+  Souriau unwillingly provided the tool that would undermine his own radical thesis.
+  While the abstract group captures the symmetries,
+  it fails to capture crucial geometric invariants---such as dimension---which belong strictly to the structure of the space.
+  
+  In this note,
+  we show that the assumption that ``topology plus algebra equals geometry'' is false in the context of differential geometry.
+  We exhibit two spaces,
+  the standard Euclidean plane $\RR^2$ and the \emph{Wire Plane} $\cW$,
+  which are indistinguishable through the lens of classical topology and abstract algebra,
+  yet are fundamentally distinct geometric objects.
+  
+  The distinction relies on Diffeology.
+  By defining smoothness via \emph{plots} (probes from Euclidean domains into the space) rather than charts,
+  diffeology allows us to assign a smooth structure to the plane that is strictly finer than the standard one.
+  This new structure,
+  the wire diffeology,
+  preserves the topology and the group of symmetries,
+  but collapses the dimension from 2 to 1.
+  
+  This phenomenon,
+  which we call the \emph{Boman Paradox} in reference to the theorem that underlies the group isomorphism,
+  highlights a crucial epistemological point:
+  geometry cannot be reduced to the sum of Topology and Algebra.
+  It requires a third,
+  distinct ingredient---the \emph{local smooth structure}---which determines the rigidity of the space and the nature of its symmetries.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The Wire Plane
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The Wire Plane}
+  
+  To construct the counter-example,
+  we must leave the restricted world of manifolds and enter the realm of \emph{Diffeology}.
+  In standard differential geometry,
+  a space is defined by \emph{charts} that flatten it onto Euclidean space.
+  In diffeology,
+  we invert this perspective:
+  a space is defined by \emph{plots}---probes that map Euclidean domains \emph{into} the space.%
+  \footnote{See formal definition of diffeological space in \cite[\textsection 1.5]{PIZ13}.}
+  
+  Let us define our central object,
+  the \emph{Wire Plane} $\cW$.
+  The underlying set is the standard Cartesian plane $\RR^2$.
+  However,
+  we rigidly restrict which parametrizations count as ``smooth.''
+  
+  \begin{definition}[The Wire Diffeology]
+    A parametrization $P: U \to \RR^2$ (where $U \subset \RR^n$ is open) is a \emph{plot} of the Wire Plane $\cW$ if and only if,
+    locally around every point,
+    $P$ factors through a smooth curve.
+    That is,
+    for every $u \in U$,
+    there exists a neighborhood $V$,
+    a smooth curve $\gamma: \RR \to \RR^2$,
+    and a smooth function $q: V \to \RR$ such that $P|_V = \gamma \circ q$.
+  \end{definition}
+  
+  \begin{figure}[htb]
+    \centerline{\includegraphics[width=0.6\textwidth]{Figures/Wire-plot.pdf}}
+    \vspace{0ex}
+    \caption{\textbf{ Figure \ref{wire-plot}---The factorization property.} Every plot $P$ in $\cW$ is locally of the form $\gamma \circ q$, where $\gamma$ is a smooth curve and $q$ is a smooth real-valued function.}
+    \label{wire-plot}
+  \end{figure}
+  
+  This definition satisfies the axioms of a diffeology:
+  it covers the set,
+  it is local by definition,
+  and it is stable under smooth composition.
+  
+  \textbf{Example.}
+  The map $P(u,v) = (\sin(u^2+v^2), \cos(u^2+v^2))$ is a valid plot of $\cW$,
+  as it factors through the circle $\gamma(t) = (\sin t, \cos t)$ via $q(u,v) = u^2+v^2$.
+  Conversely,
+  the identity map $\id(u,v) = (u,v)$ is \emph{not} a plot of $\cW$.
+  It cannot be compressed into a 1-dimensional factor.
+  
+  This brings us to the first geometric divergence: \emph{Dimension}.
+  In diffeology,
+  dimension is defined by a minimax principle:
+  it is the infimum of the dimensions of the domains required to generate the plots.%
+  \footnote{See definition of diffeological dimension in \cite[\textsection 1.78]{PIZ13}.}
+  Since every plot in $\cW$ is built from curves (domain dimension 1),
+  and the space is not discrete (meaning generated by constant plots),%
+  \footnote{A diffeological space is discrete if its plots are locally constant. See \cite[\textsection 1.20]{PIZ13}.}
+  we immediately have:
+  $$
+    \dim(\cW) = 1.
+    $$
+  Intuitively,
+  the ``wire'' structure forbids any 2-dimensional sliding motion.
+  While the set of points is the plane,
+  the \emph{mode of access} is strictly 1-dimensional.
+  
+  \textbf{Remark.}
+  The flexibility of this framework has proven useful well beyond the bounds of differential geometry.
+  For instance,
+  the probabilist Boris Tsirelson employed diffeology as early as 2006 to handle the singular quotient structures arising from Brownian local minima \cite{Tsi06}.
+  Interestingly,
+  Tsirelson relied on an early ``samizdat'' version of the foundational text \cite{PIZ13} available online,
+  recognizing the benefits of using plots to describe structures where standard topology failed.
+  This highlights that diffeology is not merely a generalization for its own sake,
+  but a tool for analyzing the ``wild'' spaces that naturally occur in mathematics.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The Topological Identity
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The Topological Identity}
+  
+  The first step in establishing the paradox is to show that the Wire Plane and the Standard Plane are indistinguishable from a topological perspective.
+  Every diffeological space carries a natural topology,
+  called the \emph{D-topology},
+  which is the finest topology making all plots continuous.%
+  \footnote{See definition of the D-topology in \cite[\textsection 2.8]{PIZ13}.}
+  
+  Let $\tau_{\text{std}}$ denote the standard Euclidean topology on $\RR^2$,
+  and $\tau_{\cW}$ denote the D-topology of the Wire Plane.
+  
+  \begin{proposition}
+    The D-topology of the Wire Plane coincides with the standard Euclidean topology:
+    $$\tau_{\cW} = \tau_{\text{std}}.$$
+  \end{proposition}
+  
+  \begin{proof}
+    The proof proceeds by double inclusion.
+    
+    \textbf{1.} Inclusion $\tau_{\text{std}} \subseteq \tau_{\cW}$.
+    The generating plots of $\cW$ are the standard smooth curves.
+    Since every standard smooth curve is continuous with respect to the Euclidean topology $\tau_{\text{std}}$,
+    the standard topology satisfies the condition of the D-topology.
+    Thus,
+    the D-topology $\tau_{\cW}$ must contain the standard topology $\tau_{\text{std}}$.
+    
+    \textbf{2.} Inclusion $\tau_{\cW} \subseteq \tau_{\text{std}}$.
+    We proceed by contradiction.
+    Assume there exists a set $U \in \tau_{\cW}$ that is not Euclidean open.
+    This implies there exists a point $x \in U$ and a sequence of points $\{x_n\}$ in the complement $U^c$ such that $x_n \to x$ in the Euclidean norm.
+    
+    To derive a contradiction,
+    we construct a plot of $\cW$ (a smooth curve $\gamma$) that passes through a subsequence of these points and converges to $x$.
+    We use a standard ``smashing'' technique (see Figure \ref{fig:plateau}).
+    
+    Let $\lambda: \RR \to [0,1]$ be a smooth transition function such that $\lambda(t) = 0$ for $t \le 0$ and $\lambda(t) = 1$ for $t \ge 1$.
+    Let $\{t_k\}$ be a sequence of times strictly decreasing to $0$.
+    We define $\gamma$ piecewise on intervals $[t_{k+1}, t_k]$ to interpolate between a subsequence $\{x_{n_k}\}$.
+    By scaling the transition function appropriately,
+    we ensure that all derivatives vanish at $0$,
+    making $\gamma$ a smooth curve in $\RR^2$.
+    
+    \begin{figure}[thb]
+      \centerline{\includegraphics[width=0.33\textwidth]{Figures/Smashing-function.pdf}}
+      \vspace{0ex}
+      \caption{\textbf{Figure \ref{fig:plateau}---A smooth transition function.} The function $\lambda$ used to connect points smoothly.}
+      \label{fig:plateau}
+    \end{figure}
+    
+    Since $\gamma$ is a plot of $\cW$,
+    it must be continuous in the D-topology.
+    Thus,
+    the preimage $V = \gamma^{-1}(U)$ must be open in $\RR$.
+    However,
+    $0 \in V$ (since $\gamma(0)=x \in U$),
+    but the sequence $t_k$ converges to $0$ and lies entirely in the complement (since $\gamma(t_k) = x_{n_k} \notin U$).
+    This contradicts the openness of $V$.
+    Therefore,
+    every D-open set must be Euclidean open.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The Algebraic Identity
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The Algebraic Identity}
+  
+  The second step is to show that the groups of symmetries of these two spaces are identical.
+  
+  In diffeology,
+  a map is \emph{smooth} if it maps plots to plots,
+  and a \emph{diffeomorphism} is a smooth bijection with a smooth inverse.%
+  \footnote{See definition of smooth maps and diffeomorphisms in \cite[\textsection 1.14 and 1.17]{PIZ13}.}
+  
+  We now compare $\Diff(\cW)$ with the standard group $\Diff(\RR^2)$.
+  The equality of these groups relies on a deep result in analysis known as \emph{Boman's Theorem} (1967) \cite{Bom67}.
+  
+  \begin{theorem*}[Boman]
+    A function $f: \RR^n \to \RR^m$ is smooth (of class $C^\infty$) if and only if it maps smooth curves to smooth curves.
+  \end{theorem*}
+  
+  \textbf{Intuition.}
+  One might suspect that testing a function along straight lines (Gateaux differentiability) would be sufficient to detect smoothness.
+  However,
+  there exist functions that are smooth along every line passing through the origin but are not even continuous.
+  Boman's theorem asserts that if we test along \emph{all} smooth curves,
+  we recover full smoothness.
+  This is the engine that drives the following proposition.
+  
+  \begin{proposition}
+    The group of diffeomorphisms of the Wire Plane is identical as a set to the group of standard diffeomorphisms of $\RR^2$:
+    $$
+      \Diff(\cW) = \Diff(\RR^2).
+      $$
+  \end{proposition}
+  
+  \begin{proof}
+    \textbf{1. Inclusion $\Diff(\RR^2) \subseteq \Diff(\cW)$}.
+    Let $\phi$ be a standard diffeomorphism.
+    Let $P$ be a plot in $\cW$.
+    Locally,
+    $P$ factors as $\gamma \circ q$,
+    where $\gamma$ is a smooth curve.
+    Then $\phi \circ P = \phi \circ \gamma \circ q$.
+    Since $\phi$ is standard smooth,
+    $\gamma' = \phi \circ \gamma$ is a smooth curve.
+    Thus,
+    $\phi \circ P$ factors through $\gamma'$,
+    making it a plot of $\cW$.
+    The same applies to $\phi^{-1}$.
+    
+    \textbf{2. Inclusion $\Diff(\cW) \subseteq \Diff(\RR^2)$}.
+    Let $\phi \in \Diff(\cW)$.
+    By definition,
+    $\phi$ must map plots of $\cW$ to plots of $\cW$.
+    Since smooth curves are plots of $\cW$,
+    $\phi$ must map smooth curves to smooth curves.
+    By Boman's Theorem,
+    this implies that $\phi$ is smooth in the standard sense.
+    Since $\phi^{-1}$ is also in $\Diff(\cW)$,
+    it is also standard smooth.
+    Thus,
+    $\phi \in \Diff(\RR^2)$.
+  \end{proof}
+  
+  \textbf{Remark on Filipkiewicz's Theorem.}
+  The result above---that these two groups are identical as sets but the spaces are not diffeomorphic---stands in sharp contrast to the celebrated theorem of Filipkiewicz \cite{Fil82}.
+  In the category of smooth manifolds,
+  the algebraic structure of the group of diffeomorphisms determines the smooth structure of the manifold:
+  if $\Diff(M) \cong \Diff(N)$ as groups,
+  then $M \cong N$ as manifolds.
+  The Boman Paradox demonstrates that this rigidity theorem fails in the broader context of diffeology.
+  Here,
+  the group isomorphism is the identity map,
+  yet the spaces have different dimensions.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The Geometric Schism
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The Geometric Schism}
+  
+  Despite their topological and algebraic identity,
+  the Standard Plane and the Wire Plane are geometrically distinct.
+  This distinction manifests in two profound ways:
+  their dimension and the smooth structure of their symmetry groups.
+  
+  We apply the minimax definition of dimension.
+  For the Standard Plane $\RR^2$,
+  the diffeology is generated by the single identity map $\id: \RR^2 \to \RR^2$.
+  The family $\{\id\}$ has dimension 2.
+  Since the identity has rank 2,
+  it cannot be generated by plots of lower dimension.
+  Thus,
+  $\dim(\RR^2) = 2$.
+  
+  For the Wire Plane $\cW$,
+  the diffeology is generated by the family of all smooth curves $\mathcal{C} = C^\infty(\RR, \RR^2)$.
+  The domain of every plot in this family is 1-dimensional.
+  Since the space is not discrete,
+  the dimension is exactly 1.
+  
+  \begin{proposition}
+    The diffeological dimensions differ:
+    $$
+      \dim(\RR^2) = 2 \quad \text{while} \quad \dim(\cW) = 1.
+      $$
+  \end{proposition}
+  
+  If we consider diffeology as an expression of geometry,
+  two spaces of different dimensions cannot embody the same geometric object.
+  This dimensional collapse is the first half of the paradox.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The Non-Smoothness of the Isomorphism
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{The Non-Smoothness of the Isomorphism}
+  
+  The paradox is resolved by examining the \emph{diffeological} nature of the isomorphism between the groups.
+  To do this,
+  we must view the group of diffeomorphisms not just as a set,
+  but as a diffeological space itself.
+  We equip $\Diff(X)$ with the \emph{functional diffeology},
+  where a parametrization in the group is smooth if and only if its action on the space is smooth.%
+  \footnote{Formally, a parametrization $P: U \to \Diff(X)$ is a plot if the evaluation map $(u,x) \mapsto P(u)(x)$ is a smooth map $U \times X \to X$. See \cite[\textsection 1.57 and 1.61]{PIZ13}.}
+  
+  Let $j: \Diff(\RR^2) \to \Diff(\cW)$ be the identity map on the set of bijections.
+  Is it a diffeomorphism?
+  
+  \begin{theorem}
+    The map $j: \Diff(\RR^2) \to \Diff(\cW)$ is not smooth.
+    Consequently,
+    the groups are distinct as diffeological groups.
+  \end{theorem}
+  
+  \begin{proof}
+    Consider the path of translations $P: \RR \to \Diff(\RR^2)$ defined by $P(t)(x,y) = (x+t, y)$.
+    This is a smooth path (a 1-plot) in the standard functional diffeology of $\Diff(\RR^2)$.
+    
+    To test if $P$ is a plot of $\Diff(\cW)$,
+    we must check if the associated evaluation map $\text{ev}_P: \RR \times \cW \to \cW$ is smooth.
+    Let us probe this map with a specific plot $Q: \RR^2 \to \RR \times \cW$ defined by $Q(u,v) = (u, (0,v))$.
+    Note that $v \mapsto (0,v)$ is a valid wire plot (a vertical line).
+    
+    The composition $\Phi = \text{ev}_P \circ Q$ is:
+    $$
+      \Phi(u,v) = P(u)(0,v) = (u, v).
+      $$
+    This is the identity map on $\RR^2$.
+    However,
+    as we established in Section 2,
+    the identity map is \emph{not} a plot of $\cW$ because it has rank 2 and cannot be factored through a curve.
+    
+    Hence,
+    the evaluation map is not smooth.
+    Therefore,
+    the path $P$ is not a plot of $\Diff(\cW)$,
+    and the inclusion $j$ is not smooth.
+  \end{proof}
+  
+  \textbf{Remark.}
+  The inverse map $j^{-1}: \Diff(\cW) \to \Diff(\RR^2)$ \emph{is} smooth.
+  The diffeology of $\Diff(\cW)$ is strictly \emph{finer} than that of $\Diff(\RR^2)$.
+  The group of the Wire Plane is more rigid;
+  it accepts fewer smooth paths than the standard group.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The Failure of the Quotient
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The Failure of the Quotient}
+  
+  In classical Lie theory,
+  a transitive action of a group $G$ on a space $X$ allows us to identify $X$ with the quotient $G/H$,
+  where $H$ is the stabilizer of a point.%
+    \footnote{When a group $G$ acts on a set $X$,
+  the stabilizer (or isotropy) of a point $x$ is the subgroup of $G$ that fix $x$.
+  Formally denoted by $\stab_G(x) = \{ h \in G \mid h(x) = x \}$.}
+  In diffeology,
+  this identification corresponds to the notion of a \emph{subduction}.%
+  \footnote{A map $\pi: X \to Y$ is a subduction if the plots of $Y$ are exactly the local push-forwards of plots of $X$. See \cite[\textsection 1.46 and 1.50]{PIZ13} for subductions and quotients.}
+  
+  \begin{theorem}
+    The orbit map $\hat{0}: \Diff(\cW) \to \cW$ defined by $\hat{0}(\phi) = \phi(0)$ is not a subduction.
+    In other words,
+    the Wire Plane is not diffeomorphic to the quotient of its symmetry group.
+  \end{theorem}
+  
+  \begin{proof}
+    For $\hat{0}$ to be a subduction,
+    every plot of the codomain $\cW$ must locally lift to a plot of the domain $\Diff(\cW)$.
+    Consider the simple plot $\gamma: \RR \to \cW$ defined by the horizontal axis: $\gamma(t) = (t, 0)$.
+    We seek a plot $P: \RR \to \Diff(\cW)$ such that $\hat{0} \circ P = \gamma$,
+    which means $P(t)(0) = (t, 0)$ for all $t$.
+    
+    For $P$ to be a plot of $\Diff(\cW)$,
+    the evaluation map $\text{ev}_P: \RR \times \cW \to \cW$ must be smooth.
+    Let us test this with the vertical wire $c(s) = (0, s)$.
+    We define the map $\Phi: \RR^2 \to \cW$ by evaluating the path $P$ on the wire $c$:
+    $$
+      \Phi(t, s) = P(t)(c(s)).
+      $$
+    Let us compute the rank of this map at $(0,0)$.
+    We may assume $P(0) = \id$.
+    \begin{itemize}
+      \item The partial derivative with respect to $s$ is determined by the curve $c$:
+      $\partial_s \Phi(0,0) = (0, 1)$.
+      \item The partial derivative with respect to $t$ is determined by the curve $\gamma$:
+      $\partial_t \Phi(0,0) = (1, 0)$.
+    \end{itemize}
+    The Jacobian matrix is the identity.
+    Thus,
+    $\Phi$ has rank 2.
+    
+    However,
+    every plot of $\cW$ must locally factor through a smooth curve,
+    so its rank is at most 1.
+    Therefore,
+    $\Phi$ is not a plot of $\cW$.
+    This contradiction implies that the path $P$ cannot exist in $\Diff(\cW)$.
+    The curve $\gamma$ cannot be lifted.
+  \end{proof}
+  
+  \begin{SCfigure}[50][htbp]
+    \includegraphics[width=0.5\textwidth]{Figures/The-wire.pdf}
+    \caption{\small\textbf{Figure~\ref{fig:The-wire} ---~The Forbidden Trans\-versa\-lity.}
+    An artistic representation of the \emph{Wire Diffeology}.
+    The space comprises the entire continuum of points in the plane (the background),
+    but its geometry is defined strictly by how these points are \emph{accessed}.
+    The drawing illustrates the generating family of plots: a dense arborescence of smooth curves where branches peel away tangentially.
+    While you still need two numbers to mark a point on the plane,
+    the ``legal'' motions are constrained to these 1-dimensional channels.
+    Sweeping areas
+    ---~the transverse motion~---
+    is forbidden.
+    \\ \null \hfill{(Image AI Gemini)}}
+    \label{fig:The-wire}
+  \end{SCfigure}
+  
+  \textbf{Remark: The Forbidden Transversality.}
+  The proofs of Theorem 1 and Theorem 2 rely on the same construction.
+  In both cases,
+  we combine a horizontal motion from the group with a vertical wire from the space to generate a 2-dimensional map.
+  Since the Wire Plane cannot support such maps,
+  the construction fails.
+  This reveals the fundamental rigidity of the Wire Plane:
+  one can slide \emph{along} a wire,
+  but one cannot slide \emph{the} wire itself.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Conclusion
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+\section{Conclusion}
+  
+  The Boman Paradox serves as a cautionary tale for the foundations of geometry.
+  It demonstrates that the classical invariants
+  ---~topology and the abstract group of symmetries~---
+  are insufficient to characterize a geometric structure.
+  
+  The Wire Plane $\cW$ and the Standard Plane $\RR^2$ are indistinguishable to the topologist and the algebraist.
+  Yet,
+  to the geometer equipped with the tools of diffeology,
+  they are worlds apart.
+  This distinction is captured by the \emph{diffeological group}:
+  $\Diff(\cW)$ and $\Diff(\RR^2)$ are distinct as diffeological spaces,
+  because the former forbids the transverse sliding of plots.
+  
+  This investigation is not a purely formal exercise.
+  The Wire Plane $\cW$ first emerged as the natural geometric setting for the ``Two-Thirds Power Law'' of human motor control \cite{PIZ25}.
+  In that model,
+  the brain's internal representation of space is functionally 1-dimensional,
+  apprehending the world through the paths it can trace.
+  The Boman Paradox thus has a concrete physical interpretation:
+  the symmetries of this neural geometry are insufficient to reconstruct the geometry itself.
+  
+  This result forces a re-evaluation of the hierarchy between Space and Group.
+  Jean-Marie Souriau famously posited that ``the group is the geometry'' \cite{Sou84}.
+  However,
+  by introducing diffeology to define the structure of these infinite-dimensional groups,
+  Souriau unwittingly changed the rules of the game.
+  The Boman Paradox demonstrates that within this broader framework,
+  the ``manifold property'' (homogeneity via subduction) is the exception,
+  not the rule.
+  The arrow of definition is irreversible:
+  the space uniquely determines the group,
+  but the group---even with its diffeological structure---cannot reconstruct the space.
+  
+  This result requires a refinement of the Kleinian ideal:
+  a geometry is not determined by the abstract group,
+  but by the pair formed by the diffeological space and its diffeological symmetry group,
+  which is deduced from it but cannot be separated from it.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Acknowledgements
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Acknowledgements}
+  I thank the Hebrew University of Jerusalem for its continuous academic support.
+  I am also grateful to the AI assistant Gemini (Google) for its assistance in the writing of this short article.
+  Data sharing is not applicable to this article as no new data were created or analyzed in this study.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Bibliography
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{thebibliography}{99}
+    
+    \bibitem{Bom67}
+    \textbf{J. Boman},
+    \textit{Differentiability of a function and of its compositions with functions of one variable}.
+    {Mathematica Scandinavica},
+    \textbf{20} (1967),
+    p.~{249--268}.
+    
+    \bibitem{Don84}
+    \textbf{P. Donato},
+    \textit{Revêtements de groupes différentiels},
+    Thèse de doctorat d'État,
+    Université de Provence, Marseille, 1984.
+    
+    \bibitem{Fil82}
+    \textbf{R. P. Filipkiewicz},
+    \textit{Isomorphisms between diffeomorphism groups},
+    Ergodic Theory Dynam. Systems,
+    \textbf{2} (1982), no. 2, p.~159--171.
+    
+    \bibitem{PIZdim}
+    \textbf{P. Iglesias-Zemmour},
+    \textit{Dimension in Diffeology},
+    Preprint, The Hebrew University of Jerusalem (2006).
+    
+    \bibitem{PIZ13}
+    \bysame %\textbf{P. Iglesias-Zemmour},
+    \textit{Diffeology},
+    Mathematical Surveys and Monographs,
+    \textbf{185},
+    AMS, Providence, RI, 2013.
+    
+    \bibitem{PIZ25}
+    \bysame %\textbf{P. Iglesias-Zemmour},
+    \textit{Is the brain a 1-dimensional diffeological space? The Geometry of the Two-Thirds Power Law},
+    Preprint, The Hebrew University of Jerusalem  (2025). \\
+    {\scriptsize\url{https://math.huji.ac.il/~piz/documents/ITBA1DDS.pdf}}.
+    
+    \bibitem{Sou84}
+    \textbf{J.-M. Souriau},
+    \textit{Les groupes comme universaux},
+    Scientia,
+    \textbf{119} (1984), p.~171--177.
+    
+    \bibitem{Tsi06}
+    \textbf{B. Tsirelson},
+    \textit{Brownian local minima, random dense countable sets and random equivalence classes},
+    Electronic Journal of Probability,
+    \textbf{11} (2006), p.~162--298.
+    
+  \end{thebibliography}
+\end{document}
