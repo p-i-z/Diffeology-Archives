@@ -29,3 +29,5 @@ This book is written in LaTeX and is designed to be compiled with **pdfLaTeX**. 
 *   `the SMBook.bbl`             The Bibliography
 *   `the README.md`              The Monigraph README file 
 *   `the figures`                Directory of figures
+*   `the couverure`              Directory of cover pages
+
