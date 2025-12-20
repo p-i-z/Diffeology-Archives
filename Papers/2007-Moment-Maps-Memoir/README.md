@@ -26,7 +26,7 @@ The new foundation is built on the following key principles:
 
 3.  **Systematic Treatment of Obstructions:** The theory naturally identifies and explains the two fundamental obstructions to perfect symmetry:
     *   **The Holonomy Group ($\Gamma$):** A subgroup of $\mathcal G^*$ arising from the fundamental group of $\mathcal X$. Its non-triviality is precisely the obstruction for an action to be **Hamiltonian**.
-    *   **Souriau's Class ($\sigma$):** A cohomology class in $H^1(\mathcal G, \mathcal G^*/\Gamma)$. Its non-triviality is the obstruction for the moment map to be **equivariant**.
+    *   **Souriau's Class ($\sigma$):** A cohomology class in $H^1(G, \mathcal G^*/\Gamma)$. Its non-triviality is the obstruction for the moment map to be **equivariant**.
 
 ## Key Results and Concepts
 
