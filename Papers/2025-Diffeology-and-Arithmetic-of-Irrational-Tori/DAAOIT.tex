@@ -1,0 +1,2364 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  PROJECT: Diffeology and Arithmetic of Irrational Tori
+%%
+%%  Created by Patrick I-Z on 03/04/2025.
+%%  Copyright 2025.
+%%
+%%  All rights reserved.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,letterpaper,reqno]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Page Display
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+%\oddsidemargin 45mm
+%\evensidemargin 18mm
+
+%\topmargin 15mm
+
+%\headheight 15mm
+%\headsep 15mm
+
+%\paperwidth 210mm
+%\paperheight 297mm
+
+%\textwidth 120mm
+%\textheight 180mm
+
+%\footheight 0pt
+%\footskip 10mm
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Packages
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{pdfpages}
+
+\usepackage{graphicx}
+
+\usepackage[margin=0pt, font=small, justification=centering]{caption}
+
+\usepackage{pifont}
+
+\def\finger{\raisebox{-4pt}{\huge\ding{46}}}
+
+\usepackage[hidelinks]{hyperref}
+
+% Pour figures et diagrammes
+% http://texdoc.net/texmf-dist/doc/latex/tikz-cd/tikz-cd-doc.pdf
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{arrow style=tikz, diagrams={>={Straight Barb[scale=0.8]}}}
+
+\usepackage{wrapfig}
+\setlength{\wrapoverhang}{.5\marginparwidth}
+\addtolength{\wrapoverhang}{\marginparsep}
+
+\newlength\savedlength
+\setlength{\savedlength}{\intextsep}
+\setlength{\intextsep}{0pt}
+
+%\usepackage{lipsum}
+
+\definecolor{red}{RGB}{200,52,82}
+\definecolor{purple}{RGB}{87,27,147}
+\definecolor{blue}{RGB}{0,0,255}
+
+\newenvironment{red}[1]{{\color{red}#1}}
+
+\newenvironment{purple}[1]{{\color{purple}#1}}
+
+\newenvironment{blue}[1]{{\color{blue}#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Style
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage[french]{babel}
+
+\usepackage{amssymb}
+\usepackage{amscd}
+
+\usepackage{verbatim}
+\usepackage{cancel}
+
+\usepackage{url}
+
+%\usepackage[mathbf, mathcal,text-hat-accent]{euler}
+
+%\usepackage{cjhebrew}
+
+\usepackage{pifont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Articles
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheoremstyle{article}% ⟨name⟩
+{7pt}%  ⟨Space above⟩
+{7pt}%  ⟨Space below⟩
+{}%      ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩
+{.\ }%  ⟨Punctuation after theorem head⟩
+{0pt}%  ⟨Space after theorem head⟩
+{}%     ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{article}
+\newtheorem{article}[subsection]{}
+%\newtheorem{theorem}{Theorem}
+
+\def\artlabel[#1]{{\textbf{#1}}}
+
+%\newcommand{\artend}{\nolinebreak\hfill$\blacktriangleright$}
+\newcommand{\artend}{}
+
+%\newcommand{\art}[1]{(art. \ref{#1})}
+
+\newenvironment{criterion*}{\textsc{Criterion.}\it}{}
+
+\newenvironment{definition}[1][]{\textbf{Definition} $\left(\hbox{#1}\right)$.\it}{}
+\newenvironment{definition*}{\textbf{Definition.}\it}{}
+
+\newenvironment{proposition}[1][]{\textbf{Proposition} $\left(\hbox{#1}\right)$.\it}{}
+\newenvironment{proposition*}{\textbf{Proposition.}\it}{}
+
+\newenvironment{theorem*}{\textbf{Theorem.}\it}{}
+\newenvironment{theorem}[1][]{\textbf{Theorem} $\left(\hbox{#1}\right)$.\it}{}
+
+\newenvironment{corollary}[1][]{\textbf{Corollary} $\left(\hbox{#1}\right)$.\it}{}
+\newenvironment{corollary*}{\textbf{Corollary.}\it}{}
+
+\newenvironment{remark}{\textbf{Remark.}}{}
+
+%\renewenvironment{proof}{\noindent \textit{Proof.}} {\nolinebreak\hfill $\square$}
+\newenvironment{proof*}{\noindent \textbf{Proof}} {\nolinebreak $\blacktriangleright$}
+\renewenvironment{proof}{\noindent \textbf{Proof.}} {\nolinebreak $\blacktriangleright$}
+\newenvironment{sketchproof}{\noindent \textbf{Sketch of Proof.}} {\nolinebreak$\blacktriangleright$}
+%\renewenvironment{proof}{\noindent \raisebox{-3pt}{\nib} \textbf{Solution:}} {\nolinebreak\hfill $\square$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Facilities
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\qmbox#1{\quad\mbox{#1}\quad}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  MARK: MACROS Abréviations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\cad}{c'est-\`a-dire }
+\newcommand{\ie}{{\em i.e. }}
+\newcommand{\cf}{{\em cf. }}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Bold faces
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\1}{{\hat 1}}
+\newcommand{\0}{{\hat 0}}
+\def \ends {\mathrm{ends}}
+
+\renewcommand{\AA}{\mbox{\bf A}}
+\newcommand{\BB}{\mbox{\bf B}}
+\newcommand{\CC}{\mathbf C}
+\newcommand{\DD}{\mbox{\bf D}}
+\newcommand{\EE}{\mbox{\bf E}}
+\newcommand{\FF}{\mbox{\bf F}}
+\newcommand{\GG}{{\mathbf G}}
+\newcommand{\HH}{\mbox{\bf H}}
+\newcommand{\II}{\mbox{\bf I}}
+\newcommand{\JJ}{\mbox{\bf J}}
+\newcommand{\KK}{{\mathbf K}}
+\newcommand{\LL}{\mbox{\bf L}}
+\newcommand{\MM}{\mbox{\bf M}}
+\newcommand{\NN}{{\mathbf N}}
+\newcommand{\OO}{\mbox{\bf O}}
+\newcommand{\PP}{{\mathbf P}}
+\newcommand{\QQ}{\mathbf Q}
+\newcommand{\RR}{\mathbf R}
+\renewcommand{\SS}{\mbox{\bf S}}
+\newcommand{\TT}{{\mathbf T}}
+\newcommand{\UU}{\mbox{\bf U}}
+\newcommand{\VV}{\mbox{\bf V}}
+\newcommand{\WW}{\mbox{\bf W}}
+\newcommand{\XX}{\mbox{\bf X}}
+\newcommand{\YY}{\mbox{\bf Y}}
+\newcommand{\ZZ}{\mathbf Z}
+
+\newcommand{\sfbZ}{{\boldsymbol{\mathsf Z}}}
+\newcommand{\sfbB}{{\boldsymbol{\mathsf B}}}
+\newcommand{\sfbH}{{\boldsymbol{\mathsf H}}}
+\newcommand{\sfbK}{{\boldsymbol{\mathsf K}}}
+
+\newcommand{\vH}{\check{\sfbH}}
+
+\newcommand{\CHO}{\sfbK}
+\newcommand{\HG}{\sfbH}
+
+
+\newcommand{\rr}{{\bold r}}
+\renewcommand{\tt}{{\bold t}}
+\newcommand{\vv}{{\bold v}}
+\newcommand{\xx}{{\bold x}}
+\newcommand{\yy}{{\bold y}}
+
+\newcommand{\balpha}{{\pmb{\alpha}}}
+\newcommand{\bbeta}{{\pmb{\beta}}}
+\newcommand{\bgamma}{{\pmb{\gamma}}}
+\newcommand{\bdelta}{{\pmb{\delta}}}
+\newcommand{\bepsilon}{{\pmb{\epsilon}}}
+\newcommand{\blambda}{{\pmb{\lambda}}}
+
+\newcommand{\bsigma}{\boldsymbol{\sigma}}
+
+\newcommand{\bzero}{\boldsymbol{0}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Math calligraphy
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cC}{{\mathcal C}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cE}{{\mathcal E}}
+\newcommand{\cF}{{\mathcal F}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cH}{{\mathcal H}}
+\newcommand{\cI}{{\mathcal I}}
+\newcommand{\cJ}{{\mathcal J}}
+\newcommand{\cK}{{\mathcal K}}
+\newcommand{\cL}{{\mathcal L}}
+\newcommand{\cM}{{\mathcal M}}
+\newcommand{\cN}{{\mathcal N}}
+\newcommand{\cO}{{\mathcal O}}
+\newcommand{\cP}{{\mathcal P}}
+\newcommand{\cQ}{{\mathcal Q}}
+\newcommand{\cR}{{\mathcal R}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cT}{{\mathcal T}}
+\newcommand{\cU}{{\mathcal U}}
+\newcommand{\cV}{{\mathcal V}}
+\newcommand{\cW}{{\mathcal W}}
+\newcommand{\cX}{{\mathcal X}}
+\newcommand{\cY}{{\mathcal Y}}
+\newcommand{\cZ}{{\mathcal Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Math letters
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \A{\mathrm A}
+\def \B{\mathrm B}
+\def \C{\mathrm C}
+\def \D{\mathrm D}
+\def \E{\mathrm E}
+\def \F{\mathrm F}
+\def \G{\mathrm G}
+\def \H{\mathrm H}
+\def \I{\mathrm I}
+\def \J{\mathrm J}
+\def \K{\mathrm K}
+\def \L{\mathrm L}
+\def \M{\mathrm M}
+\def \N{\mathrm N}
+\def \O{\mathrm O}
+\def \P{\mathrm P}
+\def \Q{\mathrm Q}
+\def \R{\mathrm R}
+\def \S{\mathrm S}
+\def \T{\mathrm T}
+\def \U{\mathrm U}
+\def \V{\mathrm V}
+\def \W{\mathrm W}
+\def \X{\mathrm X}
+\def \Y{\mathrm Y}
+\def \Z{\mathrm Z}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Math fraktur
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\fA}{{\mathfrak A}}
+\newcommand{\fC}{{\mathfrak C}}
+\newcommand{\fD}{{\mathfrak D}}
+\newcommand{\fF}{{\mathfrak F}}
+\newcommand{\fH}{{\mathfrak H}}
+\newcommand{\fG}{{\mathfrak G}}
+\newcommand{\fK}{{\mathfrak K}}
+\newcommand{\fL}{{\mathfrak L}}
+\newcommand{\fP}{{\mathfrak P}}
+\newcommand{\fS}{{\mathfrak S}}
+\newcommand{\fX}{{\mathfrak X}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Typography
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\over}{\above .2pt}
+\newcommand{\hs}{\hspace{2mm}}
+
+\newcommand*\oline[1]{%
+\vbox{%
+\hrule height 0.5pt%                  % Line above with certain width
+\kern0.25ex%                          % Distance between line and content
+\hbox{%
+\kern-0.1em%                        % Distance between content and left side of box, negative values for lines shorter than content
+\ifmmode#1\else\ensuremath{#1}\fi%  % The content, typeset in dependence of mode
+\kern-0.1em%                        % Distance between content and left side of box, negative values for lines shorter than content
+}% end of hbox
+}% end of vbox
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Abbreviations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+\newcommand{\ad}{\mathrm{ad}}
+
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\Aff}{\operatorname{\rm Aff}}
+\newcommand{\Arc}{\operatorname{\rm Arc}}
+\newcommand{\Aut}{\operatorname{\rm Aut}}
+
+\newcommand{\barRR}{\overline\RR}
+\newcommand{\binrel}{\ {\cR}\ }
+\newcommand{\but}{\hat \bf 1}
+
+\newcommand{\can}{\mathop{can}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\class}{\operatorname{class}}
+\newcommand{\cl}[1]{\left[ #1 \right]}
+\newcommand{\const}{\operatorname{const}}
+
+\newcommand{\Car}{\mathcal{C}}
+%\newcommand{\Car}{{\mathcal C}\!\text{har}}
+\newcommand{\CHK}{\mathrm{K}}
+\newcommand{\Cinfty}{\mathcal{C}^\infty}
+\newcommand{\Cldif}{{\rm C}}
+\newcommand{\comp}{{\rm comp}}
+
+
+\newcommand{\Def}{\mathrm{def}\,}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\dR}{\mathrm{dR}}
+\newcommand{\dt}{{dt}}
+
+\renewcommand{\emptyset}{\varnothing}
+
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Ext}{\operatorname{\rm Ext}}
+\newcommand{\Eucl}{{\rm Eucl}}
+
+\newcommand{\ev}{\mathrm{ev}}
+
+\newcommand{\ET}{\mathrm{ET}}
+
+\DeclareMathOperator{\Fb}{\boldsymbol{\mathsf{Fl}}}
+\DeclareMathOperator{\Fix}{\boldsymbol{\mathsf{Fix}}}
+
+\newcommand{\Gen}{\mathrm{Gen}}
+\newcommand{\germ}{\mathrm{germ}}
+\newcommand{\grad}{\mathrm{grad}}
+\newcommand{\graph}{\mathop{Graph}}
+
+\newcommand{\Geod}{\mathrm{Geod}}
+\newcommand{\GL}{\mathrm{GL}}
+
+\newcommand{\Ham}{\mathrm{Ham}}
+\newcommand{\Hom}{\mathrm{Hom}}
+
+\newcommand{\id}{\mathbf 1}
+\newcommand{\im}{\operatorname{\rm im}}
+
+\newcommand{\Int}{\operatorname{Int}}
+
+\newcommand{\Komega}{\cK\!\!\omega}
+\newcommand{\Ka}{\K}
+
+\newcommand{\loc}{\mathrm{loc}}
+
+\newcommand{\Lie}{\operatorname{\frak{L}}}
+\newcommand{\LieSL}{\operatorname{\frak{sl}}}
+\newcommand{\Loops}{\mathrm{Loops}\,}
+
+\newcommand{\Maps}{\mathrm{Maps}}
+\newcommand{\modulus}[1]{\mathop\vert #1 \mathop\vert}
+
+\newcommand{\Mor}{\mathrm{Mor}}
+
+\newcommand{\norme}[1]{\Vert #1 \Vert}
+\newcommand{\norm}[1]{\norme{#1}}
+\newcommand{\numero}{\hbox{n${}^\circ$} }
+
+\newcommand{\Numero}{\hbox{N${}^\circ$} }
+
+\newcommand{\Obj}{\mathrm{Obj}}
+\newcommand{\Orth}{\mathop{\rm Orth}\nolimits}
+\renewcommand{\O}{\mathop{\rm O}\nolimits}
+\newcommand{\Out}{\mathop{\rm Out}\nolimits}
+
+\newcommand{\Paths}{\mathrm{Paths}\,}
+\newcommand{\Params}{\mathrm{Params}\,}
+
+\newcommand{\per}{\mathrm{per}}
+\newcommand{\pr}{\operatorname{pr}}
+\newcommand{\product}{\mathrm{prod}}
+
+\newcommand{\rang}{\operatorname{\rm rg}}
+\newcommand{\rot}{\operatorname{\rm rot}}
+
+\newcommand{\scal}[2]{\langle #1,#2\rangle}
+\newcommand{\source}{\hat \bf 0}
+\newcommand{\src}{\mathrm{src}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\st}{\mathrm{st}}
+\newcommand{\SL}{\operatorname{\rm SL}}
+\newcommand{\PSL}{\operatorname{\rm PSL}}
+\newcommand{\Sp}{\operatorname{\rm Sp}}
+\newcommand{\SO}{\operatorname{\rm SO}}
+\newcommand{\Stab}{\operatorname{St}}
+\newcommand{\SU}{\operatorname{\rm SU}}
+\newcommand{\Sup}{\operatorname{\rm Sup}}
+\newcommand{\Surf}{\operatorname{Surf}}
+\newcommand{\surf}{\operatorname{surf}}
+\newcommand{\Sq}{\operatorname{Sq}}
+\newcommand{\Sone}{\S^1}
+\newcommand{\sq}{\operatorname{sq}}
+
+\newcommand{\simomega} {\displaystyle \mathop{\sim}_{\omega}}
+
+\newcommand{\tq}{\mathbin\mid}
+\newcommand{\tr}{\mathop{\rm tr}\nolimits}
+\newcommand{\trg}{\mathrm{trg}}
+
+\newcommand{\Tr}{\mathrm{Tr}}
+
+\newcommand{\undemi}{{\raisebox{-2.5pt}{1} \over \raisebox{1pt}{2}}}
+
+\newcommand{\val}{\mathop{Val}}
+\newcommand{\vect}[1]{\begin{pmatrix} #1 \end{pmatrix} }
+
+\usepackage[greek,english]{babel}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS DraftWarning
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Place a Warnining on the left if the parameter is "Y"
+\def\draftwarning#1{
+\if#1Y \tikz[overlay,remember picture]{\node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{red}{Draft Version -- \pdfcreationdate}}}%
+\else  {} \fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS General Layout
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS General Font Style Garamond of Charter
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%>>> Typeset style ?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{microtype}
+\usepackage[cal=scr,expert,frenchmath,uppercase = upright,greeklowercase = upright,greekfamily = didot, adobe-utopia]{mathdesign}
+
+\linespread{1.1}
+
+\renewcommand{\dt}{{d\!t}}
+\renewcommand{\Fb}{\mathbf{Fl}}
+\let \epsilon=\varepsilon
+
+\renewcommand{\thefigure}{\roman{figure}}
+\renewcommand{\thesection}{\Roman{section}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Commands that needs to be redefined
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \H{\mathrm H}
+\def \L{\mathrm L}
+\def \O{\mathrm O}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Display Formulas
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Begin paper
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Diffeology and Arithmetic of Irrational Tori}
+
+\author{Patrick Iglesias-Zemmour}
+
+\thanks{I thank the Hebrew University of Jerusalem, Israel, for its continuous academic support.
+I am also grateful to Professors Hillel Furstenberg and Benjamin Weiss for spending time with me in the past to explain the dynamics of Diophantine approximations.}
+
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Campus Givat Ram, $9190401$ Israel}
+
+\email{piz@math.huji.ac.il}
+
+\date{\today}
+
+% Add the subject classification
+\subjclass[2020]{58A40, 55R15, 37E10, 11J71, 57R30}
+
+% Add the keywords here
+\keywords{Diffeology, Diffeological spaces, Irrational tori, Principal bundles, Geometric invariants, Classification, Diophantine approximation, Small divisors, Cohomological equation, Irrational flows, Singular spaces}
+
+\begin{document}
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: General Display
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  {
+  \tikz[overlay,remember picture]{\node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \pdfcreationdate}};}
+  }
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Abstract
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    The irrational torus,
+    $\T_\alpha$,
+    originally introduced as a geometric model for quasicrystals,
+    is a foundational object in the theory of diffeology.
+    This paper,
+    after recalling its main algebraic properties,
+    provides a comprehensive analysis of a new geometric invariant for this singular space:
+    the group of flows, $\Fb(\T_\alpha, \RR)$.
+    This invariant, which is trivial for all manifolds,
+    arises as the core of the obstruction to the de Rham theorem in the diffeological setting.
+    We provide a complete computation and geometric interpretation of this group,
+    proving the isomorphism $\Fb(\T_\alpha, \RR) \simeq \RR \times \coker(\Delta_\alpha)$.
+    This result establishes a direct link between the intrinsic geometry of the irrational torus and the deep arithmetic (Diophantine) properties of its defining slope.
+  \end{abstract}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Introduction}
+  
+  Many of the most fruitful disciplines in mathematics have their roots in physics problems,
+  a tradition that stretches back to Euclidean geometry.
+  The work in this paper follows that same path.
+  The discovery of quasicrystals in the early 1980s presented a profound challenge to classical geometry,
+  demanding new frameworks to describe the aperiodic order they exhibited \cite{She84}.
+  Our work on diffeology,
+  beginning with the 1983 study of what we named the "irrational torus,"
+  was a direct response to this challenge \cite{DIZ83}.
+  The goal was to develop a geometry capable of handling the singular quotient spaces that arise as the "internal spaces" in the cut-and-project models of these new physical structures.
+  
+  Once introduced,
+  however,
+  the irrational torus took on a life of its own as a mathematical object.
+  As is often the case in mathematical physics,
+  the initial physical motivation opened up a new domain of pure geometric inquiry.
+  The irrational torus,
+  with its trivial topology but rich,
+  non-trivial smooth structure,
+  became a foundational example in the developing theory of diffeology
+  ---a perfect test case for exploring the properties of singular spaces.
+  
+  This paper is a contribution to that mathematical exploration.
+  Recent developments in the theory,
+  particularly the construction of the Čech-de Rham bicomplex for diffeological spaces \cite{PIZ24},
+  have provided the necessary tools to revisit this foundational object and analyze its deeper properties.
+  This has led to the definition of a new geometric invariant,
+  the group of flows $\Fb(\X, \RR)$.
+  This invariant is trivial for manifolds but is designed to be sensitive to the fine smooth structure of singular spaces like $\T_\alpha$;
+  it is the very object that lies at the core of the de Rham obstruction in this new geometry.
+  
+  This paper provides the complete theoretical foundation and detailed proofs for the results announced in \cite{PIZ25a}.
+  We will:
+  \begin{enumerate}
+    \item Formally define the abelian group structure of $\Fb(\X, \RR)$ for any diffeological space $\X$.
+    \item Prove the main classification theorem for the irrational torus: $\Fb(\T_\alpha, \RR) \simeq \RR \times \coker(\Delta_\alpha)$.
+    This includes a detailed analysis of the associated cohomological equation.
+    \item Provide a complete geometric interpretation of the components of this group,
+    the "drift" and the "fluctuation,"
+    showing how they determine whether the total space of the corresponding bundle is a manifold or an "exotic" non-manifold diffeological space.
+  \end{enumerate}
+  
+  The result brings the story full circle,
+  but on a mathematical plane.
+  It demonstrates that the intrinsic geometry of the irrational torus retains a precise memory of the deep arithmetic of its defining slope,
+  confirming its status as a remarkably rich and subtle mathematical object.
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Irrational Tori and Algebraic Number Fields
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      
+  \section{Irrational Tori and Algebraic Number Fields}
+  
+  Before introducing the new arithmetic invariant that is the main subject of this paper, we recall the algebraic structures that were discovered in the initial study of the irrational torus. These early results were the first indication that the geometry of this singular space---a model for the quasiperiodic properties of a quasicrystal, just as a regular torus models the periodicity of a crystal---was far richer than its trivial topology would suggest. They revealed that the diffeology of the irrational torus retains a precise memory of the algebraic properties of its defining slope.
+  
+  For instance, the computation of the group of components of the group of diffeomorphisms of $\T_\alpha = \T^2/\cS_\alpha$,%
+  \footnote{$\cS_\alpha = \{ (x, \alpha x) \mod 1 \mid x \in \RR \}$ is the irrational $1$-parameter subgroup of irrational slope $\alpha$. I chose the notation $\cS_\alpha$ to evoke a \emph{solenoid}, by analogy with a toroidal solenoid in electrical engineering, where a wire wound around a toroid traces a similar dense, uniform path.}
+  denoted $\Diff(\T_\alpha)$, reveals that:
+  $$
+    \pi_0(\Diff(\T_\alpha)) =
+    \left\{
+    \begin{array}{ll}
+    \{\pm 1\} \times \ZZ & \text{if $\alpha$ is a quadratic number} \\[2mm]
+    \{\pm 1\} & \text{otherwise}.
+    \end{array}
+    \right.
+    $$
+  We recall that a quadratic number is a solution of a quadratic equation with integer coefficients.
+  This relation has been extended to the general case of a codimension $1$ linear foliation of a torus,
+  that is,
+  the quotient $\T_\H$ of a torus $\T^n$ by an \emph{irrational hyperplane} $\H$ \cite{IZL90}.
+  Precisely,
+  let $\T^n$ be the quotient of $\RR^n$ by the lattice $\ZZ^n$,
+  and $\H \subset \RR^n$ be the hyperplane
+  $$
+    \H = \ker \balpha, \ \text{ with } \
+    \balpha = (\alpha_1 = 1,\alpha_2,\ldots,\alpha_n),
+    $$
+  where $\balpha$ is a linear $1$-form on $\RR^n$,
+  and the $\alpha_i$ are real numbers independent over $\QQ$:
+  $$
+    \sum_{i=1}^n q_i \alpha_i = 0, \ \text{ with $q_i \in \QQ$} \quad \Rightarrow \quad q_i = 0.
+    $$
+  We also denote by $\H \subset \T^n$ the image of $\H$ by the standard projection $\pr : \RR^n \to \T^n$,
+  i.e.,
+  $\pr(x) = \big(e^{2\pi i x_1}, \dots, e^{2\pi i x_n}\big)$,
+  and let
+  $$
+    \T_{\balpha} = \T^n/\H.
+    $$
+  The irrationality of the hyperplane $\H$
+  (so-called because its director vector $\balpha$ has rationally independent components: $\H \cap \ZZ^n = \{0\}$.)
+  ensures that its image is dense in $\T^n$,
+  leading to a non-Hausdorff quotient space $\T_{\balpha}$ with a trivial D-topology,
+  i.e.,
+  its only open subsets are $\varnothing$ and $\T_{\balpha}$.
+  But its diffeology is not trivial and one of its non-trivial aspect is revealed by the computation of the group of components of its group of diffeomorphisms.
+  Here are the objects involved in its computation,
+  $$
+    \E_\balpha = \balpha(\QQ^n) = \left\{ \sum_{i=1}^n q_i \alpha_i \mid q_i \in \QQ \right\}
+    \quad \text{and} \quad
+    \displaystyle \KK_\balpha = \left\{ \lambda \in \RR \mid \lambda \E \subset \E \right\}.
+    $$
+  The set $\E_\balpha$ is a $\QQ$-vector subspace of dimension $n$ in $\RR$,
+  it captures the ``frequencies'' of the irrational foliation.
+  The set $\KK_\balpha$ is the set of stabilizers of $\E_\balpha$,
+  by multiplication,
+  representing the scaling symmetries of the frequencies $\E_\balpha$.
+  
+  \begin{figure}[bt]
+    \includegraphics[width=.4\textwidth]{Algebraic-field-1.pdf}
+    \quad
+    \includegraphics[width=.4\textwidth]{Algebraic-field-2.pdf}
+    \caption{The two cases of characteristic field $\KK_\balpha$ when $n=3$.}
+    \label{Algebraic-fields} % Keep the label if you reference the figure    \label{Algebraic-fields}
+  \end{figure}
+  
+  \begin{theorem}[1-IZL]
+    The set $\KK_\balpha$ is an algebraic extension of $\QQ$ and $\E_\balpha$ is a $\KK_\balpha$-vector space.
+    In particular,
+    the dimension $d$ of $\KK_\balpha$ divides $n$.
+    The extension $\KK_\balpha$ is called the \emph{characteristic field} of the space $\T_\balpha$.
+  \end{theorem}
+  
+  That is,
+  $\KK_\balpha = \QQ(\lambda)$ for some algebraic number $\lambda$ of degree $d$.
+  And we get the following theorem that highlights how diffeology captures arithmetic invariants within the smooth structure of singular spaces arising from irrational foliations,
+  Establishing a fundamental algebraic structure underlying the geometry of irrational tori.
+  
+  \begin{theorem}[2-IZL]
+    The group $\pi_0(\Diff(\T_\balpha))$,
+    of components of the group of diffeomorphisms of $\T_\balpha$ is isomorphic to the group of units of an order in the characteristic field $\KK_\balpha$.
+    Thanks to Dirichlet's theorem,%
+    \footnote{For a reference to Dirichlet's theorem see \cite{BC67}.}
+    it is isomorphic to
+    $$
+      \pi_0(\Diff(\T_\balpha)) \simeq \{\pm1\} \times \ZZ^{r+s-1},
+      $$
+    where $r$ is the number of real roots of the characteristic polynomial $\P(\lambda)$ of the field $\KK_\balpha$ and $2s$ the number of complex non real solutions.
+  \end{theorem}
+  
+  As an example the case of $\balpha = (1, \alpha)$,
+  the ordinary irrational torus:
+  $n = 2$,
+  $d$ divides $n$,
+  thus $d = 1$ or $d=2$.
+  If $d = 1$ then $\KK_\alpha = \QQ$,
+  $r = 1, s = 0$ and $\pi_0(\Diff(\T_\alpha)) \simeq \{\pm1\}$,
+  otherwise $d = 2$ then $\KK_\balpha = \QQ(\sqrt{\alpha})$,
+  $r = 2, s = 0$ and $\pi_0(\Diff(\T_\alpha)) \simeq \{\pm1\} \times \ZZ$.
+  The factor $\ZZ$ represents the subgroup of matrices in $\GL(2,\ZZ)$ that stabilize the line%
+  \footnote{Actually the kernel of the linear $1$-form $\balpha$ is the line $y =-x/\alpha$,
+  which is equivalent.}
+  in $\RR^2$.
+  That is:
+  \begin{align*}
+    \vect{1 & \alpha} \vect{c & a \\ d & b} &= \vect{c + \alpha d & a + \alpha b} \\
+    &= (c + \alpha d) \vect{1 & \displaystyle \frac{a + \alpha b}{c + \alpha d}} \\
+    &= \lambda \vect{1 & \alpha} \ \text{ with } \ \lambda = c + \alpha d.
+  \end{align*}
+  This is an Abelian group made of the powers of its generator.
+  
+  For an hyperplane $\H \subset \RR^3$,
+  except the trivial case we have two possible situations,
+  depending on the characteristic polynomial represented in Figure $\ref{Algebraic-fields}$.
+  On left: Field corresponding to the characteristic polynomial $\P(\lambda) = \lambda^3-2$ (one real root, $r=1, s=1$),
+  leading to $\pi_0(\Diff(\T_\balpha)) \simeq \{\pm 1\} \times \ZZ^{1+1-1} = \{\pm 1\} \times \ZZ$.
+  On right: Field corresponding to $\P(\lambda) = \lambda^3-3\lambda+1$ (three real roots, $r=3, s=0$),
+  leading to $\pi_0(\Diff(\T_\balpha)) \simeq \{\pm 1\} \times \ZZ^{3+0-1} = \{\pm 1\} \times \ZZ^2$.
+  Here again,
+  It's an Abelian group made of the products of its generators.
+  There can be more than one depending on the roots of the characteristic polynomial.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: R-Bundles over Diffeological Spaces
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{$(\RR,+)$ Principal Bundles over Diffeological Spaces}
+  \label{R-bundles-over-diffeological-spaces}
+  In the classical category of differentiable manifold,
+  every fiber bundle with contractible fiber has a global smooth section;
+  see for example \cite{Hus94}.
+  Therefore,
+  every principal bundle over a manifold,
+  with structure group the additive group of real numbers $(\RR,+)$, is trivial.
+  However,
+  this does not hold in diffeology.
+  For instance,
+  the irrational torus fibration $\pi : \T^2 \to \T_\alpha$ is a nontrivial $(\RR,+)$ principal fibration.
+  See \cite{PIZ85} and \cite[\textsection 8.11]{PIZ13} for the formal definition of fibration,
+  and principal fibration,
+  in diffeology.
+  
+  This observation justifies the definition of a new invariant for any diffeological space $\X$:
+  the set $\Fb(\X,\RR)$ of $(\RR,+)$ principal bundles,
+  modulo isomorphisms,
+  with base $\X$.
+  Such fiber bundles are also called {\em flows} over $\X$,
+  since they are defined by a smooth action of $\RR$.
+  By construction,
+  $\Fb(\X,\RR)$ is a uniquely diffeological invariant,
+  as $\Fb(\X,\RR)$ contains only the trivial bundle when $\X$ is a manifold.
+  It reveals an internal complexity that is not revealed by previously introduced diffeological invariants.
+  
+  This construction,
+  initially introduced in \cite{PIZ85} and \cite{PIZ86},
+  is summarized below.
+  
+  %% MARK: Art. The Group $\Fb(\X, \RR)$
+  
+  \begin{article}
+    \artlabel[The Group $\Fb(\X, \RR)$.\hspace{1ex}]
+    \label{The-Group-Fb}
+    
+    Let $\pi : \Y \to \X$ and $\pi' : \Y' \to \X$ be two $(\RR,+)\text{-principal bundle}$.
+    Let us define the following operation, described in two steps:
+    
+    \begin{itemize}
+      \item[1.] Let $\pi \otimes \pi' : \Y \otimes \Y' \to \X$ be the fiber product defined by
+      $$
+        \Y \otimes \Y' = \{ (y,y') \in \Y \times \Y' \mid \pi(y) = \pi'(y') \},
+        $$
+      with $\pi \otimes \pi'(y,y') = \pi(y) = \pi'(y')$.
+      Note that the total space $\Y \otimes \Y'$ is identical to the pullback $\pi^*(\Y')$.
+      The result bundle $\pi \otimes \pi'$ is an $(\RR^2,+)$ principal bundle for the product of the action on each factor,
+      i.e.,
+      $$
+        (t,t')_{\Y \otimes \Y'}(y,y') = (t_\Y(y), t'_{\Y'}(y')).
+        $$
+      Let $\barRR$ be the antidiagonal:
+      $$
+        \barRR = \{ (t,-t) \mid t \in \RR \} \subset \RR^2,
+        $$
+      It is a subgroup of $(\RR^2,+)$.
+      
+      \item[2.] Let $\Y''$ be the quotient $\Y'' = (\Y \otimes \Y')/\barRR$ with
+      $\pi'' : \Y'' \to \X$,
+      such that,
+      for all $y'' = \cl{y,y'}$,
+      $\pi''(y'') = \pi(y) = \pi'(y')$,
+      where $\cl{y,y'}$ denotes the orbit of the pair $(y,y')$ by the action of $\barRR$.
+      That is:
+      $$
+        \cl{y,y'} = \{(t_\Y(y),-t_{\Y'}(y')) \mid t \in \RR \}.
+        $$
+    \end{itemize}
+    
+    This construction leads to the following propositions,
+    on the properties of this operation.
+    
+    \begin{proposition}[A]
+      The projection $\pi'' : \Y'' \to \X$ is again a $(\RR,+)\text{-principal bundle}$ for the additive action of $\RR$,
+      defined by:
+      $$
+        s_{\Y''}\cl{y,y'} = \cl{s_\Y(y),y'} = \cl{y,s_{\Y'}(y')}.
+        $$
+    \end{proposition}
+    
+    \begin{proposition}[B]
+      The operation $(\pi,\pi') \mapsto \pi''$ passes to the equivalence classes of $(\RR,+)\text{-principal bundle}$ over $\X$.
+      This operation is denoted additively:
+      $$
+        \class(\pi) + \class(\pi') = \class(\pi'').
+        $$
+      Let $p = \class(\pi)$,
+      $p' = \class(\pi')$,
+      and $p'' = \class(\pi'')$:
+      the operation $(p,p') \mapsto p'' = p + p'$ is an Abelian group operation on $\Fb(\X,\RR)$:
+      \begin{itemize}
+        \item[(a)] This operation is Abelian $p + p' = p' + p$.
+        
+        \item[(b)] This operation is associative $(p+p')+p'' = p+(p'+p'')$.
+        
+        \item[(c)] The class of the trivial bundle $\pr_1 : \X \times \RR \to \X$ is the identity element.
+        
+        \item[(d)] The inverse $-p$ is the class of the same principal fiber bundle $\pi : \Y \to \RR$,
+        but with the inverse $(\RR,+)$-action $\bar t_\Y(y) = (-t)_\Y(y)$.
+      \end{itemize}
+    \end{proposition}
+    
+    \textsc{Note.}  The group of flows $\Fb(\X,\RR)$ appears also,
+    independently,
+    in the \emph{\v{C}ech-de-Rham bi-complex in Diffeology},
+    as the bi-graded cohomology groups $\HG_\delta^{1,0}(\X)$,
+    see \cite[\textsection 21]{PIZ24} and here \cite{PIZ88}.
+    
+    \textbf{Remark.}
+      This invariant is native to singular geometry. Its vanishing for manifolds highlights the unique contribution of the diffeological framework and reveals a profound hierarchy of geometric structure. A fiber-preserving bijection between the torus $\T^2$ and the product $\T_\alpha \times \RR$ can be constructed using the Axiom of Choice. This insight reveals that all the total spaces we are considering---the manifold $\T^2$, the trivial bundle $\T_\alpha \times \RR$, and all the exotic spaces---are isomorphic as principal bundles in the category of sets. They are different realizations of the same underlying "principal projection."\footnote{A free action of a group on a set makes the set a product of its quotient by the group; the real question is: is it compatible with the structure (here the diffeology)?}
+      
+      The geometric distinctions between them are therefore not about the points or the set-theoretic fibration, but purely about the \emph{smooth structure} (the diffeology) imposed upon them. The group $\Fb(\T_\alpha, \RR)$ is thus revealed to be a classification of these distinct smooth structures that can be placed on a single, common underlying principal projection. As we will see in detail, the different elements of this group correspond to:
+      \begin{itemize}
+        \item[--] The zero element, corresponding to the standard product diffeology.
+        \item[--] A one-parameter family, corresponding to the unique \emph{manifold} structures that can be placed on this set, yielding the tori $\T^2$.
+        \item[--] An infinite-dimensional family (for non-Diophantine $\alpha$), corresponding to the "exotic," non-manifold diffeologies.
+      \end{itemize}
+      Diffeology gives concrete geometric embodiment to each of these algebraic classes, providing the language and tools to distinguish between structures that are indistinguishable at the level of sets.
+
+  \end{article}
+  
+  \begin{proof}\hspace{1ex}
+    (a)\hspace{1ex} First of all,
+    this operation is Abelian:
+    $\Y \otimes \Y'$ is equivalent to $\Y' \otimes \Y$ and the action of $(t,-t) \in \barRR$ becomes $(-t,t) \in \barRR$,
+    and $\cl{y,y'} \simeq \cl{y',y}$,
+    and $p + p' = p' + p$.
+    
+    (b)\hspace{1ex} Next,
+    let us prove first that this operation is associative:
+    Consider $\cl{y,\cl{y',y''}}$ on the one hand and $\cl{\cl{y,y'},y''}$ on the other hand:
+    \begin{align*}
+      \cl{y,\cl{y',y''}} & = \left\{ \left(t_\Y(y), -t_{\Y'''}\cl{y',y''}\right) \mid t \in \RR \right\} \ \text{ with } \ \Y''' = (\Y' \otimes \Y'')/\barRR \\
+      & = \left\{ \left(t_\Y(y), \cl{-t_{\Y'}(y'),y''}\right) \mid t \in \RR \right\} \\
+      & = \left\{ \left(t_\Y(y), \left\{ \left((s-t)_{\Y'}(y'),-s_{\Y''}(y'')\right) \mid s \in \RR \right\}\right) \mid t\in \RR \right\}\\
+      & \simeq \left\{ \left(t_\Y(y), (s-t)_{\Y'}(y'),-s_{\Y''}(y'')\right) \mid s, t \in \RR \right\}\\
+      & \simeq \left\{ \left( s_{\Y''''}\cl{y,y'}, -s_{\Y''}(y'') \right)  \mid s \in \RR \right\} \ \text{ with } \ \Y'''' = (\Y \otimes \Y')/\barRR \\
+      & = \cl{\cl{y,y'},y''}.
+    \end{align*}
+    
+    Thus,
+    
+    \begin{align*}
+      p+(p'+p'') & = \class\left(\left\{ \cl{y,\cl{y',y''}} \mid y \in \Y, y' \in \Y' \ \text{ and } \ y'' \in \Y'' \right\} \right) \\
+      & = \class \left( \left\{ \cl{\cl{y,y'},y''} \mid y \in \Y, y' \in \Y' \ \text{ and } \ y'' \in \Y'' \right\} \right) \\
+      & = (p+p')+p''.
+    \end{align*}
+    
+    (c)\hspace{1ex} Next,
+    let us show that the class of the trivial bundle is the identity element.
+    Let us denote $\bzero_\X$ the class of the trivial principal bundle $\pr_1 : \X \times \RR \to \X$.
+    For all element $(y,(x,t)) \in \Y \otimes (\X \times \RR)$,
+    we have $\cl{y,(x,t)} = \cl{-t_\Y(y),(x,0)}$ with $\pi(y) = x$.
+    Thus,
+    $\{ \cl{(y,(x,t))} \mid y \in \Y, \pi(y)= x, \text{ and } t \in \RR \} \simeq \Y$,
+    and $p + \bzero_\X = p$,
+    where $p = \class(\pi)$.
+    
+    (d)\hspace{1ex} Finally,
+    let us construct the inverse of a class of a bundle:
+    Let $\bar\pi : \bar\Y \to \X$ be the same fiber bundle but with the inverse action,
+    denoted by $t_{\bar\Y}(y) = -t_\Y(y)$.
+    Consider the diagonal map $\Delta : y \mapsto (y,y) \mapsto \cl{y,y}$,
+    from $\Y$ to $(\Y \otimes \bar\Y)/\barRR$.
+    The pair $(y,y)$ is equivalent to $t_{\Y\otimes\bar\Y}(y,y) = (t_\Y(y), -t_{\bar\Y}(y) = (t_\Y(y),t_\Y(y))$.
+    Thus,
+    $\Delta(y) = \Delta(t_\Y(y))$.
+    Therefore there exists a smooth map $\sigma : \X \to (\Y \otimes \bar\Y)/\barRR$ such that $\Delta = \sigma \circ \pi$,
+    and $\pi' \circ \sigma = \id_\X$.
+    % --- Tikzcd diagram ---
+    \begin{center}
+      \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+        \Y \arrow[d, swap, "\pi"] \arrow[r, "\Delta"] &  (\Y \otimes \bar\Y)/\barRR \arrow[d, "\pi'"] \\
+        \X \arrow[ru, "\sigma"] \arrow[r, swap, "\id_\X"] & \X
+      \end{tikzcd}
+    \end{center}
+    % --- End diagram ---
+    The map $\sigma$ is a smooth section of the $(\RR,+)$ principal fiber bundle $\pi' : (\Y \otimes \bar\Y)/\barRR \to \X$,
+    hence it is trivial \cite[\textsection 8.12]{PIZ13},
+    and $\bar p = \class(\bar\pi)$ is the inverse of $p$:
+    $p + \bar p = \bzero_\X$.
+    
+    This concludes the proof that $\Fb(\X,\RR)$,
+    equipped with this operation,
+    is an Abelian group.
+  \end{proof}
+  
+  %% MARK: Art. The Group $\Fb(\T, \RR)$
+  
+  \begin{article}
+    \artlabel[The Group $\Fb(\T, \RR)$]
+    \label{The-Group-FbT}
+    
+    Let us illustrate this construction by detailing the group $\Fb(\T,\RR)$ for $\T = \RR/\Ka$,
+    where $\Ka \subset \RR$ is a strict subgroup.
+    We refer to $\T$ as a \emph{general $1$-dimensional torus}, noting that it is irrational when $\Ka$ has more than one generator.
+    
+    \textbf{(A) The cohomology of $\Ka$ with values in $\Cinfty(\RR)$}
+    
+    The purpose of this section is to identify the group $\Fb(\T,\RR)$,
+    of equivalence classes of $(\RR,+)$ principal bundles over $\T$,
+    with a first group of cohomology of $\Ka$ with values in the Abelian group $\Cinfty(\RR)$ of smooth real functions on $\RR$.
+    
+    \begin{definition}[The Cocycles $\tau$]
+      Consider the subgroup $\Ka \subset \RR$ acting on $\Cinfty(\RR)$ by translations
+      $$
+        (k,f) \mapsto \T_k^*(f) = f \circ \T_k
+        \ \text{ with } \
+        (k,f) \in \Ka \times \Cinfty(\RR)
+        \ \text{ and } \
+        \T_k(x) = x + k.
+        $$
+      According to the standard definition,%
+      \footnote{For example in \cite{Kir74}.}
+      a $1$-cocycle of the group $\Ka$,
+      with values in $\Cinfty(\RR)$,
+      twisted by the action of $\Ka$ on $\Cinfty(\RR)$,
+      is a map
+      $$
+        \tau : \Ka \to \Cinfty(\RR)
+        \ \text{ such that } \
+        \tau(k + k') = \T_{k'}^*(\tau(k)) + \tau(k'),
+        $$
+      for all $k,k' \in \Ka$.
+      Explicitly,
+      for all $x \in \RR$,
+      $$
+        \tau(k+k')(x) = \tau(k)(x+k') + \tau(k')(x).
+        $$
+      We can write also $\tau(k,x)$ instead of $\tau(k)(x)$.
+      We shall denote by
+      \begin{multline*}
+        \sfbZ^1(\Ka,\Cinfty(\RR)) = \{ \tau \in \Maps(\Ka,\Cinfty(\RR)) \mid \tau(k + k') = \T_{k'}^*(\tau(k)) + \tau(k'), \\
+        \text{ for all } k,k' \in \Ka \},
+      \end{multline*}
+      the space of cocycles $\tau$,
+      where $\Maps(\A,\B)$ denotes the set of all maps from $\A$ to $\B$.
+    \end{definition}
+    
+    \begin{definition}[The Coboundaries $\Delta\sigma$]
+      A cocycle $\tau$ is a coboundary if there exists a function $\sigma \in \Cinfty(\RR)$ such that:
+      $$
+        \tau = \Delta\sigma
+        \ \text{ with } \
+        \Delta\sigma(k) = \T_k^*(\sigma) - \sigma.
+        $$
+      In other words if
+      $\tau(k)(x) = \sigma(x+k) - \sigma(x)$.
+      We denote,
+      $$
+        \sfbB^1(\Ka,\Cinfty(\RR)) = \{ \Delta\sigma \mid \sigma \in \Cinfty(\RR) \}.
+        $$
+    \end{definition}
+    
+    \begin{definition}[The First Cohomology Group]
+      As usual,
+      the first cohomology group of $\Ka$ with values in $\Cinfty(\RR)$,
+      twisted by the action on $\Cinfty(\RR)$ by translations,
+      is the quotient:
+      $$
+        \text{$\sfbH^1(\Ka,\Cinfty(\RR))$} = \text{$\sfbZ^1(\Ka,\Cinfty(\RR))$} / \text{$\sfbB^1(\Ka,\Cinfty(\RR))$}.
+        $$
+      Actually,
+      with the vector space structure on $\Cinfty(\RR)$,
+      these groups are also real vector spaces.
+    \end{definition}
+    
+    \textbf{(B) Lifting on $\RR \times \RR$ the action of $\Ka$ on $\RR$.}
+    
+    The cocycles $\tau \in \sfbZ^1(\Ka,\Cinfty(\RR))$ are used to lift,
+    on the product $\RR \times \RR$,
+    the action of $\Ka$ on $\RR$ by:
+    \begin{equation} \tag{E} %\renewcommand{\theequation}{$\spadesuit$}
+      \label{Ka-action}
+      k: \vect{x \\ t} \mapsto \vect{ x+k \\ t + \tau(k,x)},
+    \end{equation}
+    for all $(x,t) \in \RR \times \RR$.
+    Indeed,
+    denote this action by $k_{\RR \times \RR}$,
+    we have:
+    %
+    \begin{multline*}
+      k_{\RR \times \RR} \circ k'_{\RR \times \RR} (x,t)
+      = k_{\RR \times \RR}\big(k'_{\RR \times \RR} (x,t)\big)
+      = k_{\RR \times \RR}(x+k', t+\tau(k',x)) \\
+      = (x + k' + k, t+\tau(k',x) +\tau(k,x+k')) \\
+      = (x + k + k', t + \tau(k+k',x))
+      = (k+k')_{\RR \times \RR}(x,t).
+    \end{multline*}
+    %
+    Note also that
+    $$
+      \tau(0,x) = 0
+      \ \text{ and } \
+      \tau(-k,x) = \tau(k,x-k).
+      $$
+    
+    \textbf{(C) $(\RR,+)$ principal fiber bundle over $\T$ associated with a cocycle $\tau$.}
+    
+    Let $\tau \in \sfbZ^1(\Ka,\Cinfty(\RR))$.
+    Denote by
+    $$
+      \RR \times_\tau \RR = (\RR \times \RR)/\Ka
+      $$
+    the quotient of $\RR \times \RR$ by the action of $\Ka$ lifted by the cocycle $\tau$,
+    as defined in (\ref{Ka-action}).
+    Let
+    $$
+      \pr : \RR \times \RR \to \RR \times_\tau \RR
+      \ \text{ with } \
+      \pr(x,t) = \cl{x,t},
+      $$
+    the canonical projection.
+    We denote also by $\cl{x}$ the orbit of $x \in \RR$ by $\Ka$,
+    and by
+    $$
+      \pi : \RR \times_\tau \RR \to \T = \RR/\Ka,
+      \ \text{ the projection } \
+      \cl{x,t} \mapsto \cl{x}.
+      $$
+    \begin{theorem}[Construction]
+      Let us denote by $\Y$ the space $\RR \times_\tau \RR$.
+      For all $s \in \RR$,
+      let
+      $$
+        s_{\Y}[x,t] = [x,t +s].
+        $$
+      This defines a smooth free action of $(\RR,+)$ on $\Y$ that makes $\pi : \Y \to \T$,
+      the projection $\cl{x,t} \to \cl{x}$,
+      a principal fiber bundle.
+    \end{theorem}
+    
+    Then,
+    let us denote by $\H$ this association:
+    $$
+      \H : \sfbZ^1(\Ka,\Cinfty(\RR)) \to \Fb(\T,\RR)
+      \ \text{ with } \
+      \H(\tau) = \class\big(\pi : \Y = \RR \times_\tau \RR \to  \T = \RR/\Ka\big)
+      $$
+    We conclude by the main theorem:
+    
+    \begin{theorem}[Classification]
+      The association $\H : \sfbZ^1(\Ka,\Cinfty(\RR)) \to \Fb(\T,\RR)$ is a homomorphism,
+      \begin{equation*} %\renewcommand{\theequation}{\ding{60}}
+        \H(\tau + \tau') = \H(\tau) + \H(\tau').
+      \end{equation*}
+      It is surjective (epimorphism) and its kernel is the subgroup of coboundaries:
+      $$
+        \ker(\H) = \sfbB^1(\Ka,\Cinfty(\RR)).
+        $$
+      Therefore,
+      its projection (still denoted by $\H$) is an isomorphism:
+      $$
+        \Fb(\T,\RR) \ \mathop{\simeq}_\H \ \sfbH^1(\Ka,\Cinfty(\RR)).
+        $$
+    \end{theorem}
+    
+    \textbf{Note 1.} In the construction above,
+    the projection $\pr : (x,t) \mapsto \cl{x,t}$ is the universal covering on $\Y = \RR \times_\tau \RR$,
+    and $\pi_1(\Y) = \Ka$.
+    We recover this result by applying the long exact sequence of homotopy to the fiber bundle $\pi : \Y \to \T$,
+    since the fiber $\RR$ is contractible.
+    
+  \end{article} % The-Group-FbT
+  
+  \begin{figure}[bt]
+    \includegraphics[width=.80\textwidth]{T-alpha.pdf}
+    \caption{The Construction of $\T_\alpha$.}
+    \label{T-alpha}
+  \end{figure}
+  
+  \begin{proof}
+    We now proceed to prove the theorems stated in the article.
+    
+    \textbf{(1)} First,
+    we verify that the projection $\pr : (x,t) \mapsto \cl{x,t}$ from $\RR \times \RR$ to $\Y = \RR \times_\tau \RR$ is a covering.
+    Let $\P : r \mapsto y_r$ be a plot of $\Y$ and consider
+    $$
+      \P^*(\RR \times \RR) = \{(r,(x,t)) \in \operatorname{dom}(\P) \times \RR \times \RR \mid \cl{x,t} = \P(r) \}.
+      $$
+    Since $(x,t) \mapsto \cl{x,t}$ is a subduction the plot $\P$ has a local lift $r \mapsto (x_r,t_r)$.
+    Then,
+    $\Psi : (r,k) \mapsto (r,(x_r + k, t_r + \tau(k)(x_r)))$ is a smooth bijection from $\operatorname{dom}(\P) \times \Ka$ to $\P^*(\RR \times \RR)$.
+    Its inverse is given by $\Psi^{-1}(r,(x,t)) = (r,x-x_r)$ which is clearly smooth.
+    Thus,
+    $\pr : (x,t) \mapsto \cl{x,t}$ is a diffeological fibration with fiber $\Ka$,
+    thus a covering,
+    and since $\RR \times \RR$ is simply connected,
+    it is the universal covering \cite[\textsection 8.26]{PIZ13}.
+    
+    \textbf{(2)} Next,
+    let us prove that the projection $\pi : \Y = \RR \times_\tau \RR \to \T = \RR/\Ka$ is a $(\RR,+)$ principal fibration,
+    with its action of $\RR : s_\Y\cl{x,t} = \cl{x, t + s}$.
+    Let us note first that this action is well defined:
+    if $\cl{x,t} = \cl{x',t'}$,
+    then $x' = x + k$ and $t' = t + \tau(k)(x)$,
+    thus $t' + s = t+ s + \tau(k)(x)$ and $\cl{x',t' + s} = \cl{x, t + s}$.
+    
+    Next,
+    for the ones familiar with diffeology,
+    note that this construction is not exactly an associated bundle to the covering $\pr : \RR \to \T$ as described in \cite[\textsection 8.16]{PIZ13},
+    so we shall prove directly that it is indeed an $(\RR,+)$ principal bundle,
+    by applying the criterion established in \cite[\textsection 8.11]{PIZ13}.
+    Let us then check that the following action map is an induction,
+    \begin{equation*}
+      \begin{array}{rccl}
+        \F : & \Y \times \RR & \to      &  \Y \times \Y \\
+        &  (y,t)         & \mapsto &  (y,t_\Y(y))
+      \end{array}
+    \end{equation*}
+    
+    \textbf{(a)} First of all $\F$ is injective:
+    $\F(y,t) = \F(y',t')$ means $y = y'$ and $t_\Y(y) = t'_\Y(y)$.
+    Let $y = \cl{x,s}$,
+    then $t_\Y(y) =  t'_\Y(y)$ implies $\cl{x, t+s} = \cl{x, t'+s}$,
+    i.e.,
+    there exist $k \in \Ka$ such that $x = x+k$ and $t'+s = t + s + \tau(k,t)$.
+    But  $x = x+k$ implies $k=0$,
+    and then,
+    since $\tau(0,x) = 0$,
+    $t+s = t' + s$ implies $t=t'$.
+    
+    \textbf{(b)} Now,
+    $$
+      \F(\Y \times \RR) = \{(y,y') \in \Y \times \Y \mid \pi(y) = \pi(y') \};
+      $$
+    Consider a plot in $\F(\Y \times \RR)$,
+    that is,
+    a plot $r \mapsto (y_r,y'_r)$ in $\Y \times \Y$ such that $\pi(y_r) = \pi(y'_r)$,
+    for all $r$.
+    Since the map $\RR \times \RR \to \Y = \RR \times_\tau \Y$ is a subduction,
+    there are,
+    locally everywhere,
+    two smooth parametrizations $r \mapsto (x_r,t_r)$ and $r \mapsto (x'_r,t'_r)$ in $\RR \times \RR$ such that:
+    $y_r = \cl{x_r,t_r}$ and $y'_r = \cl{x'_r,t'_r}$, with $\pi(y_r) = \pi(y'_r) = \cl{x_r}$.
+    Thus,
+    there exists a smooth map $r \mapsto k_r$ such that $x'_r = x_r + k_r$,
+    but since $\Ka \subset \RR$ is discrete,
+    locally everywhere:
+    $k_r = k$ and $x'_r = x_r + k$.
+    Hence,
+    \begin{multline*}
+      y'_r = \cl{x_r + k,t'_r} = \cl{x_r, t'_r - \tau(k,x_r)} =  \cl{x_r, t_r + (t'_r -t_r - \tau(k,x_r))} \\
+      = \cl{x_r, t_r + s_r} \ \text{ with } \ s_r = t'_r -t_r - \tau(k,x_r).
+    \end{multline*}
+    Then,
+    $y'_r = \cl{x_r, t_r + s_r} = (s_r)_\Y(y_r) = \F(y_r,s_r)$,
+    and $r \mapsto s_r$ is a smooth parametrization in $\RR$.
+    Therefore,
+    $\F$ is an induction and that achieves the proof that $\pi : \Y = \RR \times_\tau \RR \to \T = \RR/\Ka$ is a $(\RR,+)$ principal fiber bundle.
+    
+    \textbf{(3)} Now,
+    let us prove that $\H$ is a homomorphism.
+    Let $\pi : \Y = \RR \times_\tau \RR \to \T = \RR/\Ka$ and $\pi' : \Y' = \RR \times_{\tau'} \RR \to \T = \RR/\Ka$.
+    The proof that $\H(\tau + \tau') = \H(\tau) + \H(\tau')$ will be done in two steps.
+    Let us introduce first the following notations:
+    %
+    \begin{itemize}
+      \item $\Y = \Y_\tau = \RR \times_\tau \RR := (\RR \times \RR)/\Ka$ with the action of $\Ka$ defined by $\tau$.
+      \item $\Y' = \Y_{\tau'} = \RR \times_{\tau'} \RR := (\RR \times \RR)/\Ka$ with the action of $\Ka$ defined by $\tau'$.
+      \item $\Y_{\tau,\tau'} = \RR \times_{\tau,\tau'} \RR^2 := (\RR \times \RR^2)/\Ka$ with the action of $\Ka$ on $\RR \times \RR^2$ associated with the pair $(\tau,\tau')$,
+      defined,
+      for all $k\in \Ka$ and $(t,t') \in \RR^2$,
+      by:
+      $$
+        k_{\RR \times \RR^2}(x,t,t') = (x + k,t + \tau(k,x),t'+ \tau'(k,x)).
+        $$
+      \item $\Y_{\tau + \tau'} = \RR \times_{\tau + \tau'} \RR := (\RR \times \RR)/\Ka$ with the action of $\Ka$ defined by $\tau + \tau'$.
+    \end{itemize}
+    %
+    We write $[x,t]_{\tau}$,
+    $[x,t']_{\tau'}$ and $[x,t,t']_{\tau,\tau'}$ the elements of $\Y_{\tau}$,
+    $\Y_{\tau'}$ and $\Y_{\tau,\tau'}$.
+    The first step consists to prove that
+    $$
+      \Y \otimes \Y' \simeq \Y_{\tau,\tau'}.
+      $$
+    Indeed,
+    consider the diagrams
+    \begin{center}
+      \begin{tikzcd}[column sep=normal, row sep=large, every label/.append style = {font = \small}]
+        (x,t,t') \arrow[d, mapsto, swap, "\pi_{\tau,\tau'}"] \arrow[r, mapsto, "j"] &  ((x,t), (x,t')) \arrow[d, mapsto, "\pi_\tau \otimes \pi_{\tau'}"] \\
+        \cl{x,t,t'}_{\tau,\tau'} \arrow[r, mapsto, swap, "\underline{j}"] & (\cl{x,t}_\tau,\cl{x,t'}_{\tau'})
+      \end{tikzcd}
+      %
+      \begin{tikzcd}[column sep=normal, row sep=large, every label/.append style = {font = \small}]
+        \RR \times \RR^2\arrow [d, swap, "\pi_{\tau,\tau'}"] \arrow[r, hook, "j"] &  (\RR \times \RR) \times (\RR \times \RR) \arrow[d, "\pi_\tau \otimes \pi_{\tau'}"] \\
+        \Y_{\tau,\tau'} \arrow[r, swap, "\underline{j}"] & \Y_\tau \otimes \Y_{\tau'}
+      \end{tikzcd}
+    \end{center}
+    %
+    The map $j$ is an induction,
+    that is a diffeomorphism onto its image equipped with the subset diffeology.
+    Then,
+    it descends to the quotient in $\underline j : \cl{x,t,t'}_{\tau,\tau'} \mapsto (\cl{x,t}_\tau, \cl{x,t}_{\tau'})$,
+    where it is a smooth bijection onto its image.
+    Since $j$ is an induction,
+    the inverse ${\underline j}^{-1}$ is smooth,
+    and then $\underline j$ a strict map \cite[\textsection 1.54]{PIZ13},
+    i.e. a diffeomorphism onto its image.
+    
+    The second step consists to show that the quotient $(\Y \otimes \Y')/\barRR$,
+    which is equivalent to $\Y_{\tau,\tau'}/\barRR$,
+    with $\barRR$ acts according to $s_{\tau,\tau'}\cl{x,t,t'}_{\tau,\tau'} = \cl{x,t+s,t'-s}_{\tau,\tau'}$ is realized by the projection
+    $$
+      \pr_{\tau,\tau'} : \Y_{\tau,\tau'} \to \Y_{\tau+\tau'}
+      \ \text{ with } \
+      \pr_{\tau,\tau'} : \cl{x,t,t'}_{\tau,\tau'} \mapsto \cl{x,t+t'}_{\tau+\tau'}.
+      $$
+    That achieves to prove that $\H(\tau) + \H(\tau') = \H(\tau + \tau')$.
+    
+    \textbf{(4)} We now prove that
+    $$
+      \ker(\H) = \sfbB^1(\Ka,\Cinfty(\RR)).
+      $$
+    A cocycle $\tau$ defines a trivial principal bundle if and only if there is a global smooth section $\bsigma : \T \to \Y$.
+    Then,
+    $\pr \circ \bsigma : \RR \to \Y$ has a smooth lift $x \mapsto (x,\sigma(x))$ in $\RR \times \RR$ such that $\bsigma(\cl{x}) = \cl{x,\sigma(x)}$.
+    This can be regarded as a consequence of the monodromy theorem \cite[\textsection 8.25]{PIZ13},
+    since the projection from $\RR \times \RR$ to its quotient $\Y$ is a covering, actually the universal covering.
+    Now,
+    for all $k \in \Ka$, on the one hand $\bsigma(\cl{x}) = \bsigma(\cl{x + k})$ gives $\cl{x,\sigma(x)} = \cl{x + k,\sigma(x + k)}$,
+    and on the other hand $\cl{x,\sigma(x)} = \cl{x + k,\sigma(x) + \tau(k,x)}$.
+    Thus,
+    $\sigma(x + k) = \sigma(x) + \tau(k,x)$,
+    that is,
+    $\tau(k,x) = \sigma(x + k) - \sigma(x)$,
+    meaning $\tau = \Delta\sigma$,
+    and therefore $\ker(\H) = \sfbB^1(\Ka,\Cinfty(\RR))$.
+    In consequence,
+    two maps $\tau$ and $\tau'$ satisfying (\ref{tau-cocycle}) define equivalent $(\RR,+)$ principal bundles if and only if there exists a map $\sigma \in \Cinfty(\RR)$ such that:
+    $\tau'(k,x) = \tau(k,x) + \sigma(x+k) - \sigma(x)$.
+    Therefore,
+    $\H : \sfbZ^1(\Ka,\Cinfty(\RR)) \to \Fb(\T,\RR)$ descends to the quotient  $\H : \sfbH^1(\Ka,\Cinfty(\RR)) \to \Fb(\T,\RR)$.
+    
+    
+    \textbf{(5)} Finally,
+    let us prove that $\H : \sfbZ^1(\Ka,\Cinfty(\RR)) \to \Fb(\T,\RR)$ is surjective.
+    Let $\pi : \Y \to \T$ be an $(\RR,+)$ principal bundle.
+    Consider the pullback of $\pi : \Y \to \X$ by the projection $\pr : \RR \to \T$,
+    that is,
+    the first projection $\pr_1: \pr^*(\Y) \to \RR$,
+    with
+    $$
+      \pr^*(\Y) = \{(x,y) \in \RR \times \Y \mid \pr(x) = \pi(y)\}.
+      $$
+    Since it is a principal fiber bundle over a manifold with a contractible fiber,
+    it has a smooth section and then it is trivial \cite{Hus94}.
+    Let $\Phi : \RR \times \RR \to \pr^*(\Y)$ such an isomorphism from the trivial bundle to $\pr^*(\Y)$.
+    Since $\pr_1 \circ \Phi = \pr_1$,
+    the isomorphism $\Phi$ writes
+    $$
+      \Phi(x,t) = (x,\phi(x,t)),
+      $$
+    where $\phi: \RR \times \RR \to \Y$ is smooth.
+    As an isomorphism of principal fiber bundle,
+    it satisfies $\Phi (s_{\RR \times \RR}(x,t)) = s_{\pr^*(\Y)}( \Phi(x,t))$,
+    that is,
+    $\Phi(x,s + t) = (x, \phi(x,s+t))$,
+    and then $s_{\pr^*(\Y)}(x,\phi(x,t)) = (x,s_\Y(\phi(x,t)))$.
+    Thus,
+    $$
+      \phi(x,s+t) = s_\Y(\phi(x,t)),
+      \ \text{ and then } \
+      \phi(x,t) = t_Y( \phi(x,0)).
+      $$
+    Let us rename
+    $$
+      \phi(x) := \phi(x,0).
+      $$
+    The map $\phi : \RR \to \Y$ is a smooth lift of $\pr$,
+    that is,
+    $\pi \circ \phi = \pr$,
+    which is summarized by the following diagram.
+    
+    % --- Tikzcd diagram ---
+    $$
+      \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \RR \times \RR \arrow[dr, swap, "\pr_1"] \arrow[r, "\Phi"] &  \pr^*(\Y) \arrow[d, "\pr_1"] \arrow[r, "\pr_2"]  & \Y \arrow[d,"\pi"] \\
+      {} & \RR \arrow[ru, swap, "\phi"] \arrow[r, swap, "\pr"] & \T
+      \end{tikzcd}
+      $$
+    % --- End diagram ---
+    
+    The map $\Phi : (x,t) \mapsto (x, t_\Y(\phi(x)))$ being an isomorphism from $\RR \times \RR$ to $\pr^*(\Y)$,
+    and since $\pi$ and $\pr$ are subductions,
+    the second projection $\pr_2 : \pr^*(\Y) \to \Y$ is a subduction.
+    
+    Thus,
+    $\Y$ is equivalent to the quotient of $\RR \times \RR$ by the relation $(x,t) \sim (x',t')$ if and only if $\pr_2 \circ \Phi(x,t) = \pr_2 \circ \Phi(x',t')$,
+    that is,
+    $t_\Y(\phi(x)) =  t'_\Y(\phi(x'))$.
+    This implies:
+    %
+    \begin{enumerate}
+      \item There exist $k \in \Ka$ such that $x' = x + k$.
+      \item There exists a map $\tau : \Ka \times \RR \to \RR$ such that
+      $$
+        \phi(x+k) = \tau(k,x)_\Y(\phi(x)).
+        $$
+    \end{enumerate}
+    %
+    The map $\tau$ satifies the \emph{cocycle condition}:
+    \begin{equation*} %\renewcommand{\theequation}{$\diamondsuit$}
+      \label{tau-cocycle}
+      \tau(k+k',x) = \tau(k, x+k') + \tau(k',x).
+    \end{equation*}
+    Therefore,
+    $(x',t') \sim (x,t)$ if and only if
+    $$
+      x' = x + k
+      \ \text{ and } \
+      t' = t + \tau(k,x).
+      $$
+    This cocycle $\tau \in \Cinfty(\Ka,\RR)$ lifts the action on $\Ka$ on $\RR$ to $\RR \times \RR$ according to Eq. (\ref{Ka-action}).
+    And since $\pr_2 \circ \Phi$ is a subduction,
+    $\Y$ is isomorphic to the quotient of $\RR \times \RR$ by this action:
+    $$
+      \Y \simeq \RR \times_\tau \RR = (\RR \times \RR)/ \Ka.
+      $$
+    This achieves the proof that the induced homomorphism $\H : \sfbH^1(\Ka,\Cinfty(\RR)) \to \Fb(\T,\RR)$ is surjective.
+    As shown in Part (4),
+    it is also injective,
+    and hence an isomorphism.
+  \end{proof}
+  
+  %% MARK: Art. Irrational Tori and Small Divisors: the Group $\Fb(\T_\alpha,\RR)$.
+  
+  \begin{article}
+    \artlabel[Irrational Tori and Small Divisors: the Group $\Fb(\T_\alpha,\RR)$.]
+    \label{Irrational-Tori-and-Small-Divisors}
+    
+    We shall now explore the geometry delivered by the group $\Fb(\T_\alpha,\RR)$.
+    This will illustrate the sensibility of the geometry (i.e., diffeology) of the quotient $\T_\Ka = \RR/\Ka$,
+    captured by the group $\Fb(\T_\Ka,\RR)$,
+    for the key example of $\Ka = \ZZ + \alpha \ZZ$,
+    where $\alpha \in \RR - \QQ$ and $\RR/\Ka = \T_\alpha$,
+    leading to distinct behaviors depending on the arithmetic nature of $\alpha$.
+    
+    Consider the representation of the irrational torus $\T_\alpha = \RR/(\ZZ + \alpha \ZZ)$ as $(\RR/\ZZ)/\alpha\ZZ = \T/\alpha\ZZ$,
+    where $\T = \RR/\ZZ$,
+    with $n(x) = x + n$, $x \in \RR$ and $n \in \ZZ$,
+    and then $\alpha\ZZ$ acts on $\T$ by $\alpha m \cl{x} = \cl{ x + \alpha m}$,
+    where $\cl{x} \in \T$ denotes the class of $x$ modulo $\ZZ$.
+    Of course,
+    $\T \simeq \S^1 \subset \CC$ by the identification $\cl{x} \mapsto z$,
+    with $z = e^{i2\pi x}$,
+    and we will use indifferently $\cl{x}$ or $z$ depending on context.
+    
+    Let's start by describing the cocycle $\tau$ in this particular case.
+    
+    %% MARK: Case A.
+    \smallskip\textbf{(A)} \textbf{The Cocycle $\boldsymbol\tau$.}
+    
+    Let us denote by $\pr : \T \to \T_\alpha$ the projection,
+    and let $\pi : \Y \to \T_\alpha$ be an $(\RR,+)$ principal fiber bundle.
+    The pullback $\pr_1 : \pr^*(\Y) \to \T$ is an $(\RR,+)$ principal fiber bundle over a manifold $\T \simeq \S^1$,
+    thus,
+    it is trivial:
+    $\pr^*(\Y) \simeq \T \times \RR$.
+    And the previous reconstruction of $\Y$,
+    for $\Ka$ acting on $\RR \times \RR$,
+    can be mimicked in this situation with $\ZZ$ acting on $\T \times \RR$ through a cocycle $\tau : \ZZ \to \Cinfty(\T,\RR)$ satisfying
+    $$%
+      \tau(m + m')(\cl{x}) = \tau(m)(\cl{x + m'\alpha}) + \tau(m')(\cl{x}).
+      $$%
+    \begin{proposition*}
+      Every cocycle $\tau$ is uniquely defined by a function $f \in \Cinfty(\T,\RR)$,
+      and every function $f \in \Cinfty(\T,\RR)$ uniquely defines a cocycle $\tau$ via the formula,
+      for all positive integers $m$:
+      %
+      \begin{multline}\tag{$\clubsuit$}
+        \label{Cocycle-tau-alpha}
+        \tau(m)(\cl{x}) = \sum_{k=0}^{m-1} f(\cl{x+k\alpha}),
+        \ \text{ with } \
+        f = \tau(1), \ \tau(0) = 0, \\
+        \ \text{ and } \
+        \tau(-m)(\cl{x}) = - \sum_{k=0}^{m-1} f(\cl{x+(k-m)\alpha}),
+      \end{multline}
+    \end{proposition*}
+    
+    Thus,
+    the cohomology group $\Fb(\T_\alpha,\RR)$ is a quotient of $\Cinfty(\T,\RR)$,
+    which we will now determine.
+    
+    %% MARK: Case B.
+    \smallskip\textbf{(B)}  \textbf{The Action of $\ZZ$ on $\S^1 \times \RR$.}
+    
+    Thanks to the explicit expression of the cocycle $\tau$ in equation (\ref{Cocycle-tau-alpha}),
+    the action of $\ZZ$ on $\S^1 \times \RR$ writes,
+    with $m>0$:
+    $$
+      \begin{aligned}
+      \underline{m}_{\S^1 \times \RR}(z,t) & = \left(z e^{i2\pi m \alpha}, t + \sum_{k=0}^{m-1} f\left(ze^{i 2\pi m \alpha}\right)\right)  \\
+      \underline{-m}_{\S^1 \times \RR}(z,t) & = \left(z e^{-i2\pi m \alpha}, t - \sum_{k=0}^{m-1} f\left(ze^{i 2\pi (k-m) \alpha}\right)\right),
+      \end{aligned}
+      $$
+    where we use the complex notation $z = e^{i2\pi x}$ for $\cl{x}$.
+    Let us introduce now the following diffeomorphism $h \in \Diff(\S^1\times \RR)$
+    $$
+      h : z \mapsto \left(z e^{i2\pi\alpha}, t + f(z)\right)
+      \ \text{ and } \
+      h^{-1}(z,t) = \left(z e^{-i2\pi\alpha}, t - f\left(z e^{-i2\pi\alpha}\right)\right).
+      $$
+    For all $m>$,
+    let us denote by $h^m$ the composite $m$-times of $h$,
+    by $h^{-m}$,
+    the composite $m$-times of $h^{-1}$,
+    and $h^0 = \id_{\S^1 \times \RR}$.
+    Then,
+    the action of $\ZZ$ on $\S^1 \times \RR$ writes,
+    for all $m \in \ZZ$
+    $$
+      \underline{m}_{\S^1 \times \RR}(z,t) = h^m(z,t).
+      $$
+    Thus,
+    the space $\Y = \S^1 \times_\tau \RR$ is the quotient of $\S^1 \times \RR$ by the $\ZZ$-iterations of the diffeomorphism $h$,
+    what we denote by:
+    $$
+      \Y : (\S^1 \times \RR)/\langle h \rangle.
+      $$
+    
+    %% MARK: Case C.
+    \smallskip\textbf{(C)}  \textbf{The Cohomological Equation.}
+    
+    A function $f \in \Cinfty(\T,\RR)$ defines a coboundary if and only if there exists $g \in \Cinfty(\T,\RR)$ satisfying
+    $$
+      f(\cl{x}) = g(\cl{x+\alpha}) - g(\cl{x}).
+      $$
+    Let $F, G \in \Cinfty_{\per}(\RR)$ denote the $1$-periodic functions representing $f$ and $g$,
+    respectively.
+    The above equation is then equivalent to
+    %
+    \begin{equation*}%\tag{\ding{95}}
+      \F(x) = \G(x+\alpha) - \G(x).
+    \end{equation*}
+    %
+    This equation in $\G$,
+    the \emph{cohomological equation},
+    is central to the study of dynamical systems,
+    particularly circle rotations,
+    with deep historical roots in problems involving small divisors
+    (see, e.g., Arnold \cite{Arn65, Arn80}, Moser \cite{Mos66}, Herman \cite{Her79}, Katok and Hasselblatt \cite{KH95}, and Ghy's survey  \cite{Ghy07}).
+    
+    %% MARK: Case D.
+    \smallskip\textbf{(D)} \textbf{The Decomposition of $\Fb(\T_\alpha, \RR)$.}
+    
+    Let $\Cinfty_{\per,0}(\RR) \subset \Cinfty_{\per}(\RR) $ be the vector subspace of $1$-periodic smooth real functions with mean value $0$\,:
+    $$
+      \Cinfty_{\per,0}(\RR) = \left\{\F \in \Cinfty_{\per}(\RR) \;\middle|\; \int_0^1 \F(x)\, dx = 0 \right\}.
+      $$
+    Consider the linear map
+    $$
+      \Delta_\alpha : \Cinfty_{\per}(\RR) \to \Cinfty_{\per,0}(\RR), \quad \text{ with } \quad \Delta_\alpha(\G) = [x \mapsto \G(x + \alpha) - \G(x)],
+      $$
+    Recalling that $\Fb(\T_\alpha, \RR)$ is the quotient of $\Cinfty(\T, \RR)$ (or equivalently $\Cinfty_{\per}(\RR)$) by the image of the related map $\G \mapsto \Delta_\alpha(\G)$,
+    we can analyze this quotient by decomposing $\Cinfty_{\per}(\RR)$ into its mean value and zero-mean components.
+    Let:
+    $$
+      \F \mapsto (c,\delta) \quad \text{ with } \quad \left\{ \begin{array}{ll} \displaystyle c = \int_0^1\F(x)\,dx & \in \RR, \\ \displaystyle \delta = \F - \int_0^1\F(x)\,dx & \in \Cinfty_{\per,0}(\RR). \end{array} \right.
+      $$
+    The mean value $c$ is clearly not affected by the coboundary condition $\Delta_\alpha \G$.
+    The obstructions for the zero-mean part $\delta$ lie precisely in the cokernel of $\Delta_\alpha$ restricted to functions mapping to $\Cinfty_{\per,0}(\RR)$.
+    This leads directly to the isomorphism:
+    %
+    \begin{equation*} %\renewcommand{\theequation}{$\clubsuit$}
+      \label{Fb-alpha}
+      \Fb(\T_\alpha, \RR) \simeq \RR \times \coker(\Delta_\alpha).
+    \end{equation*}
+    This decomposition separates each bundle class into two components:
+    the mean value $c$,
+    which we identify as the \emph{drift parameter}
+    (determining the average vertical shift in the bundle construction and related to the flow speed $1/c$),
+    and a zero-mean part $\delta = f - c$,
+    the \emph{fluctuation component},
+    whose class lies in $\coker(\Delta_\alpha)$.
+    The naturalness of this decomposition is particularly obvious in the expression of the generating diffeomorphism of the $\ZZ$ action on $\S^1 \times \RR$,
+    namely:
+    $$
+      h(z,t) = \big(z e^{i2\pi\alpha}, t + c + \delta(z)\big),
+      $$
+    Thanks to this decomposition into a significant product,
+    we now analyze the structure of the bundle $\pi: \Y = (\S^1 \times \RR)/\langle h \rangle \to \T_\alpha$ in $\Fb(\T_\alpha, \RR)$,
+    based on the value of the drift parameter $c$.
+    
+    %% MARK: Case D.1
+    \medskip\textbf{(D.1) Non-zero drift: $\mathbf{c \neq 0}$.}
+    
+    In this case,
+    the total space $\Y$ is a manifold,
+    always diffeomorphic to $\T^2$,
+    only the nature of the flow changes depending on the fluctuation $\delta$.
+    The drift $c$ governs the manifold nature of the total space.
+    
+    \smallskip\textbf{(D.1.a)} \textbf{Case $c \ne 0$ and $\delta = 0$.}
+    
+    This case describes the subspace $\RR \times \{0\} \subset \Fb(\T_\alpha, \RR)$.
+    The cocycle $\tau$ is not trivial and equivalent to the morphism
+    $$
+      \tau(m) : z \mapsto mc
+      \ \text{ and } \
+      f(z) = \tau(1)(z) = c = \text{const}.
+      $$
+    The corresponding diffeomorphism generating the quotient is
+    $$
+      h: (z,t) \mapsto \left(z e^{i 2\pi \alpha}, t + c\right).
+      $$
+    The structure of $\Y$ and the $(\RR,+)$ dynamics are given by:
+    
+    \begin{proposition*}
+      The total space $\Y = (\S^1 \times \RR) / \langle h \rangle$ is diffeomorphic to the torus $\T^2$.
+      The principal bundle $\pi : \Y = \S^1 \times_\tau \RR \to \T_\alpha$ is isomorphic to the standard fibration $\pi_\alpha : \T^2 \to \T_\alpha$.
+      The $(\RR,+)$ action corresponds,
+      under this isomorphism,
+      to the standard linear flow on $\T^2$ run at speed $1/c$.
+    \end{proposition*}
+    
+    This action of $(\RR,+)$ on $\T^2$ is also known as the linear flow running at speed $1/c$.
+    It is denoted in the dynamic systems literature by $\L_{1/c}$.
+    
+    This case,
+    where the class $\delta$ in $\coker(\Delta_\alpha)$ is zero,
+    is particularly significant because it encompasses \emph{all} non-trivial bundles when $\alpha$ is Diophantine.
+    Indeed,
+    in this case,
+    the cohomological equation above is known to be solvable for any $1$-periodic functions with zero mean.
+    This solvability implies that $\coker(\Delta_\alpha) = 0$ (cf. \cite[Thm. 12.2.2]{KH95}).
+    Consequently,
+    for Diophantine $\alpha$,
+    every class in $\Fb(\T_\alpha, \RR)$ is represented by a constant function.
+    In other words:
+    
+    \begin{theorem*}
+      For $\alpha$ Diophantine,
+      the group $\Fb(\T_\alpha,\RR)$ is isomorphic to $\RR$.
+      The total space of any non-trivial $(\RR,+)$-principal bundle over $\T_\alpha$ (corresponding to $c \neq 0$) is diffeomorphic to $\T^2$,
+      and the fibration $\pi$ is equivalent to the standard linear flow on $\T^2$ run at speed $1/c$.
+    \end{theorem*}
+    
+    \smallskip\textbf{(D.1.b)} \textbf{Case $c \ne 0$ and $\delta \ne 0$.}
+    
+    Since $\delta \ne 0$ this case concerns uniquely numbers $\alpha$ that are not Diophantine.%
+    \footnote{There is a convention sometimes found in dynamical systems literature,
+    referring to any non-Diophantine irrational number
+    (equivalently,
+    any irrational with infinite Liouville-Roth irrationality measure)
+    as a Liouville number.
+    This should be distinguished from the stricter definition,
+    often used in number theory
+    requiring $|\alpha - p/q| < 1/q^n$ for all $n \ge 1$,
+    identifies a subset of these numbers.
+    For our purposes,
+    the relevant class is precisely the set of non-Diophantine numbers.}
+    They are irrational numbers that are very well approximated by rationals.
+    Precisely,
+    $\alpha$ is \emph{non-Diophantine} if it is irrational and for every integer $k \geq 1$,
+    there exists infinitely many pairs of integers $(m, n)$ with $n \geq 1$, such that:%
+    \footnote{Note that stating existence for infinitely many pairs $(m,n)$ is equivalent to stating existence of at least one pair $(m,n)$ with $n\ge 2$ for each $k$,
+    because if one exists for $k$,
+    one must exist for $k+1$ etc.,
+    leading to infinitely many distinct pairs overall as $k$ increases.}
+    $$
+      0 < \left| n\alpha - m \right| < \frac{1}{n^k}.
+      $$
+    For non-Diophantine $\alpha$ the structure of $\Fb(\T_\alpha,\RR)$ is made explicit by this theorem:
+    
+    \begin{theorem*}
+      For non-Diophantine numbers $\alpha$,
+      unlike the Diophantine case where $\coker(\Delta_\alpha)$ reduces to $\{0\}$,
+      the cokernel is infinite-dimensional:
+      $$
+        \dim(\coker(\Delta_\alpha)) = \infty.
+        $$
+      Consequently
+      $$
+        \dim(\Fb(\T_\alpha,\RR)) = 1 + \infty.
+        $$
+    \end{theorem*}
+    
+    The infinite dimensionality of $\coker(\Delta_\alpha)$ for non-Diophantine $\alpha$ is a well-known consequence in the specialized field studying small divisor problems.
+    On this general question,
+    see for example the discussions in \cite{Her79, Arn83, KH95, Yoc95, For02}.
+    But for the sake of self-consistency we shall give a proof below.
+    
+    The geometry of these cases is given by the following theorem:
+    
+    \begin{theorem*}
+      For a cocycle $\tau$ corresponding to a pair $(c,\delta)$ with $c \ne 0$ and $\delta \ne 0$,
+      the space $\Y = \S^1 \times_\tau \RR$ is still diffeomorphic to the $2$-torus $\T^2$.
+      The transmutation of the action $s\cl{z,t} = \cl{z,t+s}$ on $\Y$ to $\T^2$ is a $(\RR,+)$ principal fibration which is not conjugate to the standard linear flow of slope $\alpha$,
+      but which shares the same (diffeological) space of orbits (the base space of the fiber bundle) $\T_\alpha$.
+    \end{theorem*}
+    
+    We shall see in details in the proof,
+    but the fact that $\Y$ is a manifold is a consequence that,
+    when $c \ne 0$,
+    the diffeomorphism $h$ generating the quotient acts freely and properly discontinuously.
+    Then,
+    because we know that $\RR^2$ is its universal covering and $\ZZ^2$ its fundamental group,
+    $\Y$ can only be diffeomorphic to $\T^2$.
+    
+    %% MARK: Case D.2
+    \medskip\textbf{(D.2) Zero drift: $\mathbf{c = 0}$.}
+    
+    In this case,
+    the total space $\Y$ is no longer a manifold but the product $\T_\alpha \times \RR$ as a set.
+    It is equipped with the usual product diffeology in the trivial case when the fluctuation vanishes,
+    and with an ``exotic'' diffeology in case of a non-zero fluctuation.
+    
+    \smallskip\textbf{(D.2.a)} \textbf{Case $c = 0$ and $\delta = 0$.}
+    
+    This case corresponds to the unique class of the trivial bundle,
+    whose cocycle $\tau$ is cohomologous to the zero-cocycle $\tau(n,z) = 0$.
+    The space $\Y = \S^1 \times_{\tau = 0} \RR = (\S^1/\ZZ) \times \RR = \T_\alpha \times \RR$ is not a manifold.
+    The projection $\pi$ is the projection on the first factor and the action of $\RR$ is the translation by any number on the second factor.
+    
+    \smallskip\textbf{(D.2.b)} \textbf{Case $c=0$ and $\delta \ne 0$.}
+    
+    This case requires $\alpha$ to be non-Diophantine,
+    as $\delta$ represents a non-zero class in $\coker(\Delta_\alpha)$.
+    The defining function $f=\delta$ has zero mean ($\int \delta = 0$).
+    This condition guarantees the existence of solutions $g: \S^1 \to \RR$ to the cohomological equation $\delta = g \circ \R_\alpha - g$.
+    Although a continuous solution is known to exist under this condition (cf. \cite{KH95}),
+    the crucial point for our diffeological analysis is that since $\cl{\delta} \ne 0$ in $\coker(\Delta_\alpha)$,
+    no such solution $g$ can be smooth.
+    
+    The existence of a solution $g$ allows us to construct a ``principal projection isomorphism'',
+    namely,
+    $\psi: \Y \to \T_\alpha \times \RR$ given by $\psi(\cl{z,t}) = (\cl{z}, t - g(z))$,
+    intertwining the action of $(\RR,+)$ and projecting on $\id_{\T_\alpha}$.
+    We can use this bijection to push the diffeology $\cD_\Y$ forward onto the product set $\T_\alpha \times \RR$,
+    resulting in a diffeological space $(\T_\alpha \times \RR, \cD'_{\product})$ which is diffeologically isomorphic to $(\Y, \cD_\Y)$ and carries the projection $\pr_1$ as its bundle structure.
+    
+    This bundle $(\T_\alpha \times \RR, \cD'_{\product}) \to \T_\alpha$ represents the class $\cl{\delta} \in \Fb(\T_\alpha, \RR)$.
+    Its non-triviality (since $\cl{\delta} \ne 0$) manifests directly in the fact that the canonical zero section $s_0: \T_\alpha \to \T_\alpha \times \RR$,
+    $s_0(\cl{z}) = (\cl{z}, 0)$,
+    is \emph{not smooth} with respect to the pushforward diffeology $\cD'_{\product}$.
+    As shown in the proof,
+    the smoothness of $s_0$ is equivalent to the smoothness of $g$,
+    which fails in this case.
+    
+    Thus,
+    although set-theoretically equivalent to the trivial bundle in the category of principal projections,
+    the bundle corresponding to $(c=0, \delta \ne 0)$ is smoothly non-trivial.
+    Its diffeological structure,
+    whether viewed on $\Y$ or pushed forward to $\T_\alpha \times \RR$,
+    reflects the non-smooth nature of the solution $g$ to the cohomological equation.
+    
+  \end{article}
+  
+  \begin{proof}
+    We will only prove what cannot be immediately deduced from the text.
+    In particular,
+    parts (A),
+    (B) and (C) require no more proof than is explicitly written.
+    
+    For the part (D),
+    we shall inspect every statement closely.
+    
+    \medskip{(D.1.a) Case $c \neq 0, \delta=0$.}\quad
+    Here $f$ is cohomologous to the constant $c$.
+    The action of $\ZZ$ on $\S^1 \times \RR$ is given by $m : (z,t) \mapsto (ze^{i2\pi m \alpha}, t + mc)$.
+    The following projection
+    $$
+      \pr : \S^1 \times \RR \to \T^2
+      \ \text{ with } \
+      \pr : \vect{z \\ t} \mapsto \vect{z_1 = e^{i2\pi t/c} \\ z_2 = \bar z e^{i 2\pi t \alpha/c} }
+      $$
+    realizes the quotient $(\S^1 \times \RR)/\ZZ$.
+    The action $s : (z,t) \mapsto (z,t+s)$ is transmuted to
+    $$
+      s_{\T^2} \vect{z_1  \\ z_2 }
+      = \vect{e^{i2\pi (t+s)/c} \\ \bar z e^{i 2\pi (t +s) \alpha/c} }
+      = \vect{z_1 e^{i2\pi s/c} \\ z_2 e^{i2\pi s\alpha/c} }.
+      $$
+    This is the linear flow on $\T^2$ of slope $\alpha$ run at speed $1/c$.
+    
+    For the Theorem in (D.1.a):
+    If $\alpha$ is Diophantine,
+    the equation $\varphi = \Delta_\alpha g $ has a smooth solution $g$ for any smooth $\varphi$ with zero mean \cite[Thm. 12.2.2]{KH95}.
+    Thus $\coker(\Delta_\alpha) = \{0\}$.
+    The decomposition $\Fb(\T_\alpha, \RR) \simeq \R \times \{0\} \cong \R$ follows.
+    All non-trivial bundles ($c \neq 0$) fall into this case,
+    have total space $\T^2$, and correspond to scaled linear flows.
+    
+    \medskip{(D.1.b) Case $c \neq 0, \delta \neq 0$.}\quad
+    This requires $\alpha$ to be non-Diophantine,
+    since $\delta \neq 0$ in the cokernel.
+    The generator is $h(z,t) = (ze^{i2\pi\alpha}, t+f(z))$, where $f=c+\delta$.
+    
+    The action is free as $\alpha$ is irrational.
+    Let us prove that the action is properly discontinuous.
+    Let
+    $$
+      S_n(z) = \sum_{k=0}^{n-1} f(z e^{i2\pi k \alpha}) = nc + D_n(z),
+      \ \text{ where } \
+      D_n(z) = \sum_{k=0}^{n-1} \delta(z e^{i2\pi k \alpha}).
+      $$
+    Since $\delta$ is smooth, it is bounded.
+    Although the cohomological equation $\delta = g \circ \R_\alpha - g$ may not admit a continuous solution $g$ for non-Diophantine $\alpha$ (and thus $D_n(z)$ might not be bounded), the sums grow sub-linearly.
+    Since $\delta$ has mean zero, the sequence of Birkhoff averages converges uniformly to zero:
+    $$
+      \lim_{n \to \infty} \frac{D_n(z)}{n} = \int_{\S^1} \delta(z)\, d\mu(z) = 0.
+      $$
+    Consequently, $D_n(z) = o(n)$.
+    The height of $h^n(z,t)$ is $t + S_n(z) = t + nc + D_n(z) = t + n(c + \epsilon_n(z))$, where $\epsilon_n(z) \to 0$ as $n \to \infty$.
+    Since $c \neq 0$,
+    $|t+S_n(z)| \to \infty$ as $|n| \to \infty$,
+    uniformly for $(z,t)$ in any compact set $K$.
+    Since $c \neq 0$ and $D_n(z)$ is uniformly bounded,
+    $|t+S_n(z)| \to \infty$ as $|n| \to \infty$,
+    uniformly for $(z,t)$ in any compact set $K$.
+    For any compact $K$,
+    $h^n(K) \cap K = \varnothing$ for large enough $|n|$.
+    The action is properly discontinuous.
+    Therefore,
+    the quotient $\Y = (\S^1 \times \RR) / \langle h \rangle$ is a smooth Hausdorff manifold.
+    We have seen above that its universal cover is $\RR^2$ and its fundamental group is $\ZZ^2$,
+    whatever the quotient is a manifold or not,
+    since manifolds constitute a full and faithful subcategory of diffeological spaces.
+    Therefore,
+    as in case (D.1.a),
+    $\Y$ is diffeomorphic to $\T^2$.
+    This proves the first part of the Theorem/Proposition in (D.1.b).
+    The second part,
+    that the resulting flow $s \cdot \cl{z,t} = \cl{z, t+s}$ on $\Y \cong \T^2$ is not smoothly conjugate to the standard linear flow when $\delta \neq 0$,
+    is a deeper result from dynamical systems which we accept here (see e.g., Herman \cite{Her79}).
+    
+    The result concerning the dimension,
+    namely $\dim(\Fb(\T_\alpha,\RR)) = 1 + \infty$,
+    is proved separately below (see Proof II).
+    
+    \medskip{(D.2.a) Case $c=0, \delta=0$.}\quad
+    The isomorphism $\H : \sfbH^1(\ZZ,\Cinfty(\S^1,\RR)) \to \Fb(\T_\alpha,\RR)$ sends $(0,0)$ to the trivial bundle $\pr_1 : \T_\alpha \times \RR \to \T_\alpha$.
+    
+    \medskip{(D.2.b) Case $c=0, \delta \neq 0$.}\quad
+    Again,
+    this requires $\alpha$ to be non-Diophantine.
+    The generating function is $f=\delta$,
+    with $\int \delta = 0$ but $\cl{\delta} \ne 0$ in $\coker(\Delta_\alpha)$.
+    
+    Since $\int \delta = 0$,
+    the equation $\delta(x) = g(x+\alpha) - g(x)$ admits a unique (up to a constant) solution $g: \T \to \RR$.
+    However, because $\cl{\delta} \ne 0$ in the smooth cokernel $\coker(\Delta_\alpha)$,
+    this solution $g$ cannot be smooth.
+    
+    Using this function $g$,
+    define the map $\psi: \Y \to \T_\alpha \times \RR$ by $\psi(\cl{z,t}) = (\cl{z}, t - g(z))$.
+    This map is a bijection,
+    and it intertwines the $\RR$-actions and projections,
+    making it a principal projection isomorphism.
+    
+    Let $\cD_\Y$ be the quotient diffeology on $\Y = (\S^1 \times \RR) / \langle h \rangle$.
+    Let $\cD'_{\product}$ be the pushforward diffeology on the set $\T_\alpha \times \RR$ induced by $\psi$.
+    By construction,
+    $\psi: (\Y, \cD_\Y) \to (\T_\alpha \times \RR, \cD'_{\product})$ is a diffeological isomorphism.
+    
+    The bundle $(\T_\alpha \times \RR, \cD'_{\product}) \to \T_\alpha$ represents the class $\cl{\delta}$.
+    To check if this bundle is smoothly trivial,
+    we examine its canonical zero section $s_0: \T_\alpha \to \T_\alpha \times \RR$,
+    defined by $s_0(\cl{z}) = (\cl{z}, 0)$.
+    
+    The section $s_0$ is smooth (as a map into the pushforward diffeology $\cD'_{\product}$) if and only if the composition $\varphi \circ s_0: \T_\alpha \to \Y$ is smooth (a plot in $\cD_\Y$),
+    where $\varphi = \psi^{-1}$.
+    We have $\varphi(\cl{z}, t) = \cl{z, g(z)+t}$,
+    so $(\varphi \circ s_0)(\cl{z}) = \varphi(\cl{z}, 0) = \cl{z, g(z)}$.
+    Let $s = \varphi \circ s_0$ be this section.
+    
+    The map $s: \T_\alpha \to \Y$ is smooth if and only if its lift $\tilde{s}: \S^1 \to \S^1 \times \RR$,
+    given by $\tilde{s}(z) = (z, g(z))$,
+    is smooth when composed with plots into $\S^1$.
+    This requires the map $z \mapsto g(z)$ to be smooth.
+    
+    Since $g$ is not smooth in this case,
+    the section $s = \varphi \circ s_0$ is not smooth,
+    and consequently the zero section $s_0$ is not smooth with respect to the pushforward diffeology $\cD'_{\product}$.
+    
+    Therefore,
+    the bundle represented by $(c=0, \cl{\delta}\ne 0)$ is smoothly non-trivial,
+    confirming $\cl{\delta} \ne 0$ in $\Fb(\T_\alpha, \RR)$.
+    The non-triviality is captured by the non-standard smooth structure $\cD'_{\product}$ placed on the product set $\T_\alpha \times \RR$.
+    
+    The proof of the infinite-dimensionality of the cokernel for non-Diophantine $\alpha$ is a standard result in the theory of small divisors.
+    For the sake of completeness,
+    a detailed proof using Fourier analysis is provided in the Appendix.
+  \end{proof}
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%
+    %% MARK: Conclusion
+    %%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    \section{Conclusion}
+    
+    The irrational torus, an object born from the need to build geometric models for the quasiperiodic properties of quasicrystals, has proven to be a remarkably fertile ground for pure mathematical exploration. Its study has consistently revealed that the diffeological framework is capable of detecting deep algebraic and arithmetic information that is invisible to classical topology. This paper represents the latest step in this long-term program.
+    
+    The progression of insights has revealed an increasingly fine hierarchy of geometric structure. The initial study uncovered its non-trivial homotopy groups, a purely algebraic feature. This was followed by the discovery that the group of components of its diffeomorphism group, $\pi_0(\Diff(\T_\alpha))$, is a subtle algebraic invariant that distinguishes whether the defining slope $\alpha$ is a quadratic irrationality \cite{DIZ83, IZL90}.
+    
+    The group of flows, $\Fb(\T_\alpha, \RR)$, introduced in this paper, represents a new and deeper layer of this structure. Its decomposition, $\Fb(\T_\alpha, \RR) \simeq \RR \times \coker(\Delta_\alpha)$, when combined with the analysis of the de Rham obstruction, reveals a fundamental stratification of the geometry of flows over $\T_\alpha$:
+    
+    \begin{enumerate}
+      \item For \emph{Diophantine} $\alpha$, the cokernel vanishes. Thus, $\Fb(\T_\alpha,\RR) = \Fb^\bullet(\T_\alpha,\RR) \simeq \RR$. In this case, every flow over the irrational torus admits a connection 1-form. The geometry is "tame" in the sense that it can be fully described by the infinitesimal theory of connections.
+      
+      \item For \emph{non-Diophantine} $\alpha$, the infinite-dimensional $\coker(\Delta_\alpha)$ component represents a vast family of flows whose non-triviality is of a purely analytical nature. These are precisely the bundles that \emph{cannot} be equipped with a connection 1-form. Their structure is so intrinsically tied to the non-solvability of the cohomological equation that they resist any infinitesimal description.
+    \end{enumerate}
+    
+    This reveals a new layer of geometric complexity. While it can be shown that any flow over $\T_\alpha$ admits a more general diffeological connection (defined as a lifting of paths), the non-Diophantine case provides an infinite-dimensional family of examples where this connection cannot be described infinitesimally by a 1-form. The invariant $\Fb(\X, \RR)$ is thus powerful enough to distinguish these subtle grades of geometric structure. In more extreme cases, such as for non-trivial bundles over the smoothly contractible irrational cone $\D_\alpha$, the obstruction is even stronger, precluding the existence of \emph{any} smooth connection whatsoever \cite{PIZ25b}.
+    
+    This consistent pattern---from homotopy, to diffeomorphism groups, and now to the group of flows---demonstrates the profound benefit of a geometric approach to these singular objects. The strangeness of the physical systems they model is mirrored by the strange, yet mathematically rich, properties of their geometric counterparts. Diffeology provides the language and tools to show that what might seem like a "pathological" quotient space is, in fact, a sophisticated geometric object that retains a precise memory of the algebraic and arithmetic data used to construct it.
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%
+    %% MARK: Further Remarks and Future Directions
+    %%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    \section*{Further Remarks and Future Directions}
+    
+    \textbf{1. Historical Context.} This paper represents an expanded and detailed account of results originally outlined in the 1986 Comptes Rendus note \cite{PIZ86}. The renewed interest in the interplay between Noncommutative Geometry and Diffeology motivates this wider publication of those results, now presented with full proofs and a more developed conceptual framework.
+    
+    \textbf{2. The Nature of the Obstruction.} Unlike classical $\S^1$-bundle theory for manifolds, classified by $\H^2(\M, \ZZ)$, the group $\Fb(\X, \RR)$ captures finer \emph{analytical obstructions}. For $\T_\alpha$, the $\coker(\Delta_\alpha)$ component classifies flows whose non-triviality is invisible to the classical theory of connections and curvature, demonstrating how this diffeological invariant reflects subtle analytical properties.
+    
+    \textbf{3. Rigidity and Symmetry.} The case of $\T_{\sqrt{p}}$ (where $p$ is not a perfect square) is particularly interesting. It exhibits both a rich symmetry group ($\pi_0(\Diff(\T_{\sqrt{p}})) \simeq \{\pm 1\} \times \ZZ$) and a rigid geometric structure ($\Fb(\T_{\sqrt{p}},\RR) \simeq \RR$, since $\sqrt{p}$ is Diophantine). This phenomenon of rigidity constrained by extensive symmetries is a theme that deserves further attention in diffeology.
+    
+    \textbf{4. A Counter-Intuitive Hierarchy.} It is noteworthy that the geometric complexity captured by $\Fb(\T_\alpha, \RR)$ behaves counter-intuitively with respect to the arithmetic of $\alpha$. It is the non-Diophantine case, where $\alpha$ is exceptionally well-approximated by rationals, that yields the richest bundle structure ($\dim(\Fb)=\infty$). Conversely, the Diophantine case, where $\alpha$ resists rational approximation, leads to an analytical regularity that restricts the geometry significantly ($\Fb \simeq \RR$).
+    
+    \textbf{5. Non-Linear Dynamics.} Our study focused on the linear rotation $\R_\alpha$. A natural extension is to consider "exotic irrational tori" of the form $\T_h = \S^1 / \langle h \rangle$, where $h$ is a diffeomorphism that is topologically, but not smoothly, conjugate to $\R_\alpha$. The invariant $\Fb(\T_h, \RR)$ would then be sensitive not just to the rotation number, but to the finer \emph{smooth conjugacy class} of the generating diffeomorphism, further illustrating the connection between diffeological invariants and subtle properties of dynamical systems.
+    
+    \textbf{6. Analogies in Hyperbolic Geometry.} A compelling direction for future research arises from extending the analogy between linear flows on $\T^2$ and geodesic flows on hyperbolic surfaces. The leaf space of the foliation by geodesics asymptotic to a point on the boundary, $\X_u = \Sigma/\mathcal{F}_u$, serves as a hyperbolic analog of the irrational torus. Investigating the structure of $\Fb(\X_u, \RR)$ could reveal how diffeological invariants capture information about the geometry of the surface $\Sigma$.
+    
+    \textbf{7. Connection to Noncommutative Geometry and Quasifolds.} The non-triviality of $\Fb(\X, \RR)$ appears deeply connected to the structure of the gauge groupoid $\GG_\X$ associated with a quasifold $\X$, as developed in \cite{IZP21}. Exploring the link between this bundle classification and the properties of the groupoid's $\mathrm{C}^*$-algebra presents a promising avenue for bridging the results herein with those of noncommutative geometry.
+    
+    \textbf{8. A Non-Trivial Bundle over a Contractible Base.} The power of the $\Fb(\X, \RR)$ invariant is further demonstrated by the existence of a non-trivial $(\RR,+)$-principal bundle over a smoothly contractible base, $\D_\alpha = \D/\ZZ$ \cite{PIZ-ANTRB}. This phenomenon, impossible for manifolds, shows that the invariant is sensitive to obstructions that are fundamentally diffeological, not topological, reinforcing its role as a necessary tool for classifying bundles in singular geometry.
+    
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Appendix: The Infinite-Dimensionality of the Cokernel
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+  \section*{Appendix: The Infinite-Dimensionality of the Cokernel}
+  
+    We shall prove using Fourier transforms,
+    that,
+    for $\alpha$ non-Diophantine,
+    the cokernel of $\Delta_\alpha: \Cinfty(\T, \RR) \to \Cinfty(\T, \RR)$,
+    with $\Delta_\alpha(g) = g \circ \R_\alpha - g$,
+    where $\R_\alpha$ is the rotation of angle $\alpha$ (that is, the multiplication by $e^{i2\pi\alpha}$),
+    is infinite-dimensional when $\alpha \in \RR - \QQ$ is not Diophantine.
+    This will justify the notation $\dim(\Fb(\T_\alpha,\RR)) = 1 + \infty$.
+    The strategy is to construct an infinite sequence of smooth functions $\{f_m\}$ and demonstrate that they cannot lie in the image of $\Delta_\alpha$;
+    specifically,
+    we show that if we assumed $f_m = \Delta_\alpha g_m$ for some smooth $g_m$,
+    the Fourier coefficients of this hypothetical $g_m$ would necessarily violate the rapid decay condition required for smoothness
+    (i.e., membership in the Schwartz space $\cS_{\RR}(\ZZ)$),
+    leading to a contradiction.
+    
+    \textbf{(a) Framework.}
+    
+    Let $\Cinfty(\T,\RR)$ be the space of smooth,
+    $1$-periodic,
+    real-valued functions on $\RR$.
+    We identify $\T = \RR/\ZZ$.
+    Any function $g \in \Cinfty(\T,\RR)$ has a Fourier series expansion
+    $$
+      g(x) = \sum_{k \in \ZZ} \hat{g}(k) e^{i2\pi k x}
+      $$
+    where the Fourier coefficients are given by
+    $$
+      \hat{g}(k) = \int_0^1 g(x) e^{-i2\pi k x} dx.
+      $$
+    The condition that $g(x)$ is real-valued for all $x$ is equivalent to the symmetry condition on its Fourier coefficients:
+    $$
+      {\hat{g}(k)}^* = \hat{g}(-k) \quad \forall k \in \ZZ,
+      $$
+    where the asterisk denotes the complex conjugate.
+    
+    The smoothness of $g$ is equivalent to the rapid decay of its Fourier coefficients,
+    meaning the sequence $\hat{g} = (\hat{g}(k))_{k \in \Z}$ belongs to the Schwartz space $\cS(\ZZ)$.
+    This means for every $\N \ge 0$,
+    there exists $\C_\N > 0$ such that
+    $$
+      |\hat{g}(k)| \le {\C_\N \over (1+|k|)^\N}, \ \forall k \in \ZZ.
+      $$
+    Let
+    $$
+      \cS_{\RR}(\ZZ) = \{ \hat{g} \in \cS(\Z) : {\hat{g}(k)}^* = \hat{g}(-k) \}.
+      $$
+    The Fourier transform $\cF: g \mapsto \hat{g}$ establishes a (topological) vector space isomorphism (over $\R$) between $\Cinfty(\T,\RR)$ and $\cS_{\RR}(\ZZ)$.
+    The operator $\Delta_\alpha g(x) = g(x+\alpha) - g(x)$ clearly maps $\Cinfty(\T,\RR)$ to itself,
+    since if $g$ is smooth and real-valued,
+    so is $\Delta_\alpha g$.
+    
+    \textbf{(b) Action of $\Delta_\alpha$ in Fourier Space.}
+    
+    Let $h = \Delta_\alpha g$.
+    Its Fourier coefficients are
+    $$
+      \hat{h}(k) = \lambda_k \hat{g}(k)
+      \ \text{ with } \
+      \lambda_k = e^{i2\pi k \alpha} - 1,
+      \ \text{ and then } \
+      \widehat{\Delta_\alpha g}(k) = \lambda_k \hat{g}(k).
+      $$
+    The operator $\Delta_\alpha$ corresponds via Fourier transform to the multiplication operator
+    $$
+      \M_\lambda: \hat{g} \mapsto (\lambda_k \hat{g}(k))_{k\in\ZZ}.
+      $$
+    We verify that $M_\lambda$ maps $\cS_{\RR}(\ZZ)$ to itself.
+    If $\hat{g} \in \cS_{\RR}(\ZZ)$,
+    let $\hat{h} = M_\lambda \hat{g}$.
+    Then $\hat{h} \in \cS(\Z)$ because $\cS(\Z)$ is an algebra under pointwise multiplication and $(\lambda_k)$ is a bounded sequence (thus a multiplier).
+    We check the reality condition:
+    $$
+      \hat{h}(k)^* = \big(\lambda_k \hat{g}(k)\big)^* = \lambda_k^* \hat{g}(k)^*,
+      \ \text{ and } \
+      \hat{h}(-k) = \lambda_{-k} \hat{g}(-k).
+      $$
+    Since $\alpha$ is real,
+    $\lambda_k^* = (e^{i2\pi k \alpha} - 1)^* = e^{-i2\pi k \alpha} - 1 = \lambda_{-k}$.
+    Since $\hat{g} \in \cS_{\RR}(\ZZ)$,
+    we have ${\hat{g}(k)}^* = \hat{g}(-k)$.
+    Therefore,
+    ${\hat{h}(k)}^* = \lambda_{-k} \hat{g}(-k) = \hat{h}(-k)$.
+    So,
+    $\hat{h} \in \cS_{\RR}(\ZZ)$.
+    
+    The image $\im(\Delta_\alpha)$ corresponds via $\cF$ to $\im(\M_\lambda|_{\cS_{\RR}(\ZZ)}) \subset \cS_{\RR}(\ZZ)$.
+    The cokernel is $\coker(\Delta_\alpha) = \Cinfty(\T,\RR) / \im(\Delta_\alpha)$,
+    which is isomorphic (as a real vector space) to:
+    $$
+      \coker(\Delta_\alpha) \simeq \cS_{\RR}(\ZZ) / \im(\M_\lambda|_{\cS_{\RR}(\ZZ)}).
+      $$
+    
+    \textbf{(c) The Non-Diophantine Condition.}
+    
+    An irrational number $\alpha$ is \emph{not} Diophantine if for every $\nu \ge 2$ and every $\C > 0$,
+    there exists $k \neq 0$ such that
+    $$
+      \|k\alpha\| < {\C \over |k|^{\nu-1}}.
+      $$
+    where $\|x\|$ denotes the distance to the nearest integer $\|x\| = \min_{p\in\Z} |x - p|$.
+    The magnitude of $\lambda_k$ is related to $\|k\alpha\|$:
+    $$
+      |\lambda_k| = |e^{i2\pi k \alpha} - 1| = |e^{i\pi k \alpha}(e^{i\pi k \alpha} - e^{-i\pi k \alpha})| = |1 \cdot 2i \sin(\pi k \alpha)| = 2 |\sin(\pi k \alpha)|.
+      $$
+    Since $|\sin(\pi x)| = \sin(\pi \|x\|)$ and $\sin(x) \approx x$ for small $x$,
+    we have $|\lambda_k| \approx 2\pi \|k\alpha\|$ when $\|k\alpha\|$ is small.
+    This implies that $|\lambda_k|$ can decay faster than any polynomial rate for certain sequences of $k$'s tending to infinity.
+    Specifically,
+    we can construct an infinite sequence $\K^+ = \{k_p\}_{p \ge 1}$ of distinct positive integers such that $k_p \to \infty$ as $p \to \infty$ and satisfying:
+    $$
+      |\lambda_{k_p}| < \frac{1}{k_p^{2p}} \quad \text{for all } p \ge 1.
+      $$
+    
+    $\blacktriangleleft$ \textbf{Justification}.
+    Since $\alpha$ is not Diophantine,
+    for any integer $\N \ge 1$,
+    the set $\S_\N = \{ k \in \ZZ - \{0\} : |\lambda_k| < 1/|k|^\N \}$ is infinite.
+    We construct $\K^+$ inductively.
+    Choose $k_1 \in \S_2$ with $k_1 > 0$.
+    Assume $k_1, \dots, k_{p-1}$ have been chosen.
+    Since $\S_{2p}$ is infinite,
+    we can choose $k_p \in \S_{2p}$ such that $k_p > k_{p-1}$.
+    If this $k_p$ is negative,
+    we can use $|k_p|$ instead,
+    since $|\lambda_{-k}| = |\lambda_k|$ and $|-k|^\N = |k|^\N$,
+    so $\S_\N$ is symmetric.
+    Thus we can always choose $k_p > k_{p-1} > 0$.
+    This yields the desired sequence $\K^+=\{k_p\}_{p \ge 1}$ of distinct positive integers with $k_p \to \infty$ and $|\lambda_{k_p}| < 1/k_p^{2p}$.
+    $\blacktriangleright$
+    
+    Let $\K = \K^+ \cup (-\K^+)$.
+    This set $K$ is infinite,
+    symmetric ($k \in \K \iff -k \in \K$),
+    and $0 \notin \K$.
+    For any $k \in \K$,
+    if $|k| = k_p$,
+    we have $|\lambda_k| = |\lambda_{k_p}| < 1/|k|^{2p}$.
+    
+    \textbf{(d) Constructing Elements in the Cokernel.}
+    
+    We construct an infinite set of functions $\{f_m\}_{m\ge 1}$ in $\Cinfty(\T, \RR)$ whose equivalence classes $[f_m]$ in $\coker(\Delta_\alpha)$ are linearly independent over $\RR$.
+    
+    \textbf{(d.1)} \textbf{Partition the sequence.}
+    We routinely partition the infinite set $\K^+$ into infinitely many disjoint infinite subsets $\K_m^+ = \{k_{p_j}^{(m)}\}_{j\ge 1}$ for $m=1, 2, \dots$.
+    Let $\K_m = \K_m^+ \cup (-\K_m^+)$.
+    The sets $\K_m$ ($m \ge 1$) are pairwise disjoint,
+    symmetric,
+    infinite,
+    contain no zero,
+    and their union is $\K$.
+    
+    \textbf{(d.2)} \textbf{Define functions $f_m$ via Fourier coefficients.}
+    For each $m \ge 1$,
+    define the sequence $\hat{f}_m = (\hat{f}_m(k))_{k \in \ZZ}$ by:
+    $$
+      \hat{f}_m(k) = \begin{cases}
+      |\lambda_k|^{1/2} & \text{if } k \in \K_m \\ 0 & \text{if } k \notin \K_m
+      \end{cases}
+      $$
+    
+    \textbf{(d.3)} \textbf{Check $\hat{f}_m \in \cS_{\R}(\Z)$.}
+    The reality condition holds by the same argument as in the previous version (symmetry of $\K_m$ and $|\lambda_k|=|\lambda_{-k}|$).
+    
+    For the rapid decay,
+    consider $k \in \K_m$.
+    Then $k \in K$,
+    so $|k| = k_p$ for some $p \ge 1$ (specifically, $p=p_j^{(m)}$ if $k=\pm k_{p_j}^{(m)}$).
+    We have $|\lambda_k| < 1/|k|^{2p}$.
+    Thus,
+    $$
+      |\hat{f}_m(k)| = |\lambda_k|^{1/2} < \left(\frac{1}{|k|^{2p}}\right)^{1/2} = \frac{1}{|k|^p}.
+      $$
+    Since $k \in \K_m$ and $|k| \to \infty$,
+    the corresponding index $p=p(k)$ also tends to infinity.
+    For any fixed $N \ge 0$,
+    we have $p > N$ for $|k|$ sufficiently large.
+    Thus,
+    for $|k|$ large enough and $k \in \K_m$,
+    $|\hat{f}_m(k)| < 1/|k|^N$.
+    Since $\hat{f}_m(k)=0$ for $k \notin \K_m$,
+    the sequence $\hat{f}_m$ decays faster than any fixed polynomial rate,
+    hence $\hat{f}_m \in \cS(\ZZ)$.
+    
+    Since $\hat{f}_m$ satisfies both conditions,
+    $\hat{f}_m \in \cS_{\RR}(\ZZ)$.
+    Let $f_m = \F^{-1}(\hat{f}_m)$.
+    Then $f_m \in \Cinfty(\T, \RR)$.
+    
+    \textbf{(d.4)} \textbf{Show $f_m \notin \im(\Delta_\alpha)$.}
+    Assume,
+    for contradiction,
+    that $f_m = \Delta_\alpha g_m$ for some $g_m \in \Cinfty(\T, \RR)$.
+    This requires
+    $$
+      \hat{g}_m(k) = {\hat{f}_m(k) \over \lambda_k} \ \text{(for $k \neq 0$) to be in $\cS_{\R}(\Z)$}.
+      $$
+    Consider $k \in \K_m$.
+    Then $k \neq 0$ and $|k|=k_p$ for some $p=p(k)$.
+    $$
+      |\hat{g}_m(k)| = \left| \frac{\hat{f}_m(k)}{\lambda_k} \right| = \frac{|\lambda_k|^{1/2}}{|\lambda_k|} = \frac{1}{|\lambda_k|^{1/2}}.
+      $$
+    Since $|\lambda_k| < 1/|k|^{2p}$ for $k \in \K_m$,
+    we get
+    $$
+      |\hat{g}_m(k)| > \frac{1}{(1/|k|^{2p})^{1/2}} = \frac{1}{1/|k|^p} = |k|^p.
+      $$
+    As $|k| \to \infty$ for $k \in \K_m$,
+    the corresponding index $p=p(k)$ also tends to infinity.
+    The magnitude $|\hat{g}_m(k)|$ grows super-polynomially ($|k|^p$ grows faster than any fixed power $|k|^N$ as $p \to \infty$).
+    This contradicts the requirement that $\hat{g}_m \in \cS(\Z)$.
+    Therefore,
+    $f_m \notin \im(\Delta_\alpha)$.
+    
+    \textbf{(d.5)} \textbf{Linear Independence.}
+    Suppose $\sum_{m=1}^\M c_m [f_m] = [0]$ in $\coker(\Delta_\alpha)$ for real coefficients $c_m$.
+    Then $\F = \sum_{m=1}^\M c_m f_m \in \im(\Delta_\alpha)$.
+    Let $\hat{\G} \in \cS_{\RR}(\ZZ)$ be such that $\hat{\F}(k) = \lambda_k \hat{\G}(k)$ for all $k$.
+    For $k \neq 0$,
+    $\hat{\G}(k) = \hat{\F}(k) / \lambda_k$.
+    Consider $k \in \K_{m_0}$ for some $1 \le m_0 \le \M$.
+    Then $\hat{\F}(k) = c_{m_0} \hat{f}_{m_0}(k)$ (since the supports $\K_m$ are disjoint).
+    Let $|k|=k_p$ for $p=p(k)$.
+    $$
+      \hat{\G}(k) = \frac{c_{m_0} \hat{f}_{m_0}(k)}{\lambda_k} = \frac{c_{m_0} |\lambda_k|^{1/2}}{\lambda_k}.
+      $$
+    $$ |\hat{\G}(k)| = |c_{m_0}| \frac{|\lambda_k|^{1/2}}{|\lambda_k|} = |c_{m_0}| \frac{1}{|\lambda_k|^{1/2}}.
+      $$
+    If $c_{m_0} \neq 0$,
+    then
+    $$
+      |\hat{\G}(k)| > |c_{m_0}| |k|^p.
+      $$
+    As $|k| \to \infty$ for $k \in K_{m_0}$,
+    $p=p(k) \to \infty$, so $|\hat{\G}(k)|$ grows super-polynomially.
+    This prevents $\hat{\G}$ from being in $\cS(\ZZ)$.
+    Therefore,
+    we must have $c_{m_0} = 0$.
+    Since this holds for each $m_0 = 1, \dots, \M$,
+    the classes $[f_m]$ are linearly independent over $\RR$.
+    
+    \textbf{Conclusion}.
+    We have constructed an infinite set of functions $\{f_m\}_{m\ge 1}$ in $\Cinfty(\T,\RR)$ whose equivalence classes $[f_m]$ in the cokernel $\coker(\Delta_\alpha) = \Cinfty(\T,\RR) / \im(\Delta_\alpha)$ are linearly independent over $\R$. Therefore, the dimension of the cokernel of $\Delta_\alpha$ acting on $\Cinfty(\T,\RR)$ is infinite when $\alpha$ is irrational and not Diophantine.
+
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: THE BIBLIOGRAPHY
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{thebibliography}{IZL90} % Adjusted label length estimate
+    
+    \bibitem[Arn65]{Arn65}
+    Vladimir I. Arnold,
+    \emph{Small denominators, mapping of the circumference onto itself},
+    Izv. Akad. Nauk SSSR Ser. Mat. \textbf{25} (1965), 21--86.
+    % Note: Original entry was missing page numbers and used a slightly different journal name format.
+    % Standard AMS style uses abbreviations and specific page format. I've used standard page numbers for this famous paper. Adjust if you prefer the original sparse format.
+    
+    \bibitem[Arn80]{Arn80}
+    \bysame,
+    \emph{Chapitres suppl{\'e}mentaires {\`a} la th{\'e}orie des {\'e}quations diff{\'e}rentielles},
+    MIR, Moscou, 1980.
+    
+    \bibitem[Arn83]{Arn83}
+    \bysame,
+    \emph{Geometrical Methods in the Theory of Ordinary Differential Equations},
+    Springer-Verlag, New York, 1983.
+    
+    \bibitem[BC67]{BC67}
+    Zenon I. Borevitch and Igor R. Chafarevitch,
+    \emph{Th{\'e}orie des nombres},
+    Monographies Internationales de Math{\'e}matiques Modernes, Gauthier-Villars, Paris, 1967.
+    
+    \bibitem[Che77]{Che77}
+    Kuo-Tsai Chen,
+    \emph{Iterated path integrals},
+    Bull. Amer. Math. Soc. \textbf{83} (1977), no. 5, 831--879.
+    
+    \bibitem[AC80]{AC80}
+    Alain Connes,
+    \emph{$\CC^*$-algèbres et géométrie différentielle},
+    C. R. Acad. Sci. Paris Sér. A-B \textbf{290} (1980), A599--A604.
+    
+    \bibitem[AC95]{AC95}
+    \bysame,
+    \emph{Noncommutative Geometry},
+    Academic Press, New York, 1995.
+        
+    \bibitem[DIZ83]{DIZ83}
+    Paul Donato and Patrick Iglesias,
+    \emph{Exemple de groupes différentiels: flots irrationnels sur le tore},
+    C. R. Acad. Sci. Paris Sér. I Math. \textbf{301} (1985), no. 4, 127--130. (Also available as Preprint CPT-83/P.1524, Centre de Physique Théorique, Marseille, July 1983).
+    % Note: Kept preprint info as potentially relevant, removed URL for typical print format.
+    
+    \bibitem[For02]{For02}
+    Giovanni Forni,
+    \emph{Deviation of ergodic averages for area-preserving flows on surfaces of higher genus},
+    Ann. of Math. (2) \textbf{155} (2002), no. 1, 1--103.
+    
+    \bibitem[Ghy07]{Ghy07}
+    \'Etienne Ghys,
+    \emph{Resonances and small divisors},
+    in: Kolmogorov’s Heritage in Mathematics, Springer, Berlin, 2007, pp. 187--213.
+    
+    \bibitem[Her79]{Her79}
+    Michael R. Herman, % Standardized name spelling
+    \emph{Sur la conjugaison différentiable des difféomorphismes du cercle à des rotations},
+    Publ. Math. Inst. Hautes Études Sci. \textbf{49} (1979), 5--233.
+    
+    \bibitem[Hus94]{Hus94}
+    Dale Husemoller,
+    \emph{Fibre Bundles},
+    Graduate Texts in Mathematics, vol. 20, Springer-Verlag, New York, 1994.
+
+    \bibitem[PIZ85]{PIZ85}
+    Patrick Iglesias,
+    \emph{Fibrations difféologiques et homotopie},
+    Sc.D thesis, Universit{\'e} de Provence, Marseille, 1985.
+    
+    \bibitem[PIZ86]{PIZ86}
+    \bysame,
+    \emph{Diff{\'e}ologie d'espace singulier et petits diviseurs},
+    C. R. Acad. Sci. Paris Sér. I Math. \textbf{302} (1986), no. 14, 519--522.
+    
+    \bibitem[PIZ88]{PIZ88}
+    \bysame,
+    \emph{Bi-complexe cohomologique des espaces diff\'erentiables},
+    Preprint CPT-88/P.2193, CNRS, Marseille, 1988. (Revision of \emph{Une cohomologie de \v{C}ech pour les espaces diff\'erentiables et sa relation à la cohomologie de De Rham}; revised version (1991) available at \texttt{http://math.huji.ac.il/{\textasciitilde}piz/documents/BCCED.pdf}).
+    % Note: Kept structure detailing relationship and URL with \texttt
+    
+    \bibitem[IZL90]{IZL90}
+    Patrick Iglesias and Gilles Lachaud,
+    \emph{Espaces différentiables singuliers et corps de nombres algébriques},
+    Ann. Inst. Fourier (Grenoble) \textbf{40} (1990), no. 1, 723--737.
+    
+    \bibitem[PIZ13]{PIZ13}
+    Patrick Iglesias-Zemmour,
+    \emph{Diffeology},
+    Mathematical Surveys and Monographs, vol. 185, American Mathematical Society, Providence, RI, 2013. (Revised version by Beijing World Publishing Corp., Beijing, 2022).
+    % Added note about revised version
+    
+    \bibitem[IZL18]{IZL18}
+    Patrick Iglesias-Zemmour and Jean-Pierre Laffineur,
+    \emph{Noncommutative Geometry and Diffeology: The Case of Orbifolds},
+    J. Noncommut. Geom. \textbf{12} (2018), no. 4, 1551--1572.
+    
+    \bibitem[IZP21]{IZP21}
+    Patrick Iglesias-Zemmour and Elisa Prato,
+    \emph{Quasifolds, diffeology and noncommutative geometry},
+    J. Noncommut. Geom. \textbf{15} (2021), no. 2, 735--759.
+    
+    \bibitem[PIZ24]{PIZ24}
+    \bysame,
+    \emph{{\v C}ech-de Rham bicomplex in diffeology},
+    Israel J. Math. \textbf{259} (2024), no. 1, 239--276.
+    
+    \bibitem[PIZ25a]{PIZ25a}
+    Patrick Iglesias-Zemmour,
+    \emph{A Geometric Measure of Irrationality},
+    preprint (2025), available at \\
+    \url{http://math.huji.ac.il/~piz/documents/AGMOI.pdf}.
+    
+    \bibitem[PIZ25b]{PIZ25b}
+    \bysame,
+    \emph{A Non-Trivial $(\RR,+)$ Principal Bundle over a Contractible Base},
+    Preprint (2025), available at \\
+    \url{http://math.huji.ac.il/~piz/documents/ANTRB.pdf}.
+
+    \bibitem[KH95]{KH95}
+    Anatole Katok and Boris Hasselblatt,
+    \emph{Introduction to the Modern Theory of Dynamical Systems},
+    Cambridge University Press, Cambridge, 1995.
+    
+    \bibitem[Kir74]{Kir74}
+    Alexandre A. Kirillov,
+    \emph{Elements de la th{\'e}orie des repr{\'e}sentations},
+    Ed. MIR, Moscou, 1974.
+    
+    \bibitem[Lee12]{Lee12}
+    John M. Lee,
+    \emph{Introduction to Smooth Manifolds}, 2nd ed.,
+    Graduate Texts in Mathematics, vol. 218, Springer, New York, 2012.
+    
+    \bibitem[Mas91]{Mas91}
+    William S. Massey,
+    \emph{A Basic Course in Algebraic Topology},
+    Graduate Texts in Mathematics, vol. 127, Springer-Verlag, New York, 1991.
+    
+    \bibitem[Mos66]{Mos66}
+    Jürgen Moser, % Standardized name spelling
+    \emph{A rapidly convergent iteration method and non-linear differential equations II},
+    Ann. Scuola Norm. Sup. Pisa Cl. Sci. (3) \textbf{20} (1966), 265--315.
+    % Note: Used standard reference format assuming Series 3 and looked up page numbers. Adjust if you prefer the original sparse info.
+    
+    \bibitem[SBGC84]{She84}
+    D. Shechtman, I. Blech, D. Gratias, and J. W. Cahn,
+    \emph{Metallic Phase with Long-Range Orientational Order and No Translational Symmetry},
+    Phys. Rev. Lett. \textbf{53} (1984), 1951--1953.
+
+    \bibitem[Sou80]{Sou80}
+    Jean-Marie Souriau, % Used full name instead of bysame, seems intended from original commented out name
+    \emph{Groupes différentiels},
+    in: Differential Geometrical Methods in Mathematical Physics (Proc. Conf., Aix-en-Provence/Salamanca, 1979), Lecture Notes in Math., vol. 836, Springer, Berlin-New York, 1980, pp. 91--128.
+    
+    \bibitem[Sti93]{Sti93}
+    John Stillwell,
+    \emph{Classical Topology and Combinatorial Group Theory}, 2nd ed.,
+    Graduate Texts in Mathematics, vol. 72, Springer-Verlag, New York, 1993.
+    
+    \bibitem[Yoc95]{Yoc95}
+    Jean-Christophe Yoccoz, % Standardized name spelling
+    \emph{Théorème de Siegel, nombres de Bruno et polynômes quadratiques},
+    Astérisque \textbf{231} (1995), 3--88.
+    
+  \end{thebibliography}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: End Document
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+\end{document}
+
