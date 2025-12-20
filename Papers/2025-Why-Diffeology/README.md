@@ -23,4 +23,4 @@ This paper is the ideal entry point for mathematicians and physicists seeking to
 ## Files in this Directory
 
 *   `WD.tex`: The complete, self-contained LaTeX source file for the paper.
-*   `/figures/`: Contains the figures for the paper.
+*   `/Figures/`: Contains the figures for the paper.
