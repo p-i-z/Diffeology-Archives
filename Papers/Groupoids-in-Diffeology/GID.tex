@@ -1,0 +1,1331 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  PROJECT: Groupoids in diffeology
+%%
+%%  Created by Patrick I-Z on 29/07/2025.
+%%  Copyright 2025.
+%%
+%%  All rights reserved.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,reqno,letterpaper,twoside]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: - Macro file
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+% Pour figures et diagrammes
+% http://texdoc.net/texmf-dist/doc/latex/tikz-cd/tikz-cd-doc.pdf
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{
+arrow style=tikz,
+diagrams={>={Straight Barb[scale=0.8]}}
+}
+
+\tikzset{
+symbol/.style={
+draw=none,
+every to/.append style={
+edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{url}
+
+%\usepackage[euler-digits,euler-hat-accent]{eulervm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: Environments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheoremstyle{article}%⟨name⟩
+{7pt}%  ⟨Space above⟩
+{7pt}%  ⟨Space below⟩
+{}%     ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩
+{.\ }%  ⟨Punctuation after theorem head⟩
+{0pt}%  ⟨Space after theorem head⟩
+{}%     ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{article}
+\newtheorem{article}{}
+
+\newcommand{\artlabel}[1]{\textbf{#1.}}
+
+\newcommand{\art}[1]{(\textsection~\ref{#1})}
+\newcommand{\See}[1]{(See \textsection~\ref{#1})}
+
+\def\qtext#1{\quad\text{#1}\quad}
+
+
+\newenvironment{definition}[1]%
+{\noindent\textbf{Definition#1.} \it}%
+{}
+
+\newenvironment{proposition}[1]%
+{\noindent\textbf{Proposition#1.} \it}%
+{}
+
+\newenvironment{corollary}[1]%
+{\noindent\textbf{Corollary#1.} \it}%
+{}
+
+\newenvironment{lemma}[1]%
+{\noindent\textbf{Lemma#1.} \it}%
+{}
+
+\newenvironment{theorem}[1]%
+{\noindent\textbf{Theorem#1.} \it}%
+{}
+
+\renewenvironment{proof}%
+{\noindent\textit{Proof.}}%
+{\nolinebreak\hfill $\square$}
+
+\newcommand{\remend}{\nolinebreak\hfill $\blacktriangleright$}
+
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\GG}{\mathbf{G}}
+\newcommand{\KK}{\mathbf{K}}
+\newcommand{\TT}{\mathbf{T}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\ZZ}{\mathbf{Z}}
+
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cF}{{\mathcal F}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cI}{{\mathcal I}}
+\newcommand{\cK}{{\mathcal K}}
+\newcommand{\cN}{{\mathcal N}}
+\newcommand{\cO}{{\mathcal O}}
+\newcommand{\cP}{{\mathcal P}}
+\newcommand{\cQ}{{\mathcal Q}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cT}{{\mathcal T}}
+\newcommand{\cU}{{\mathcal U}}
+\newcommand{\cY}{{\mathcal Y}}
+
+\newcommand{\fS}{{\frak S}}
+\newcommand{\eF}{{F}}
+
+\def \A{\mathrm A}
+\def \B{\mathrm B}
+\def \C{\mathrm C}
+\def \D{\mathrm D}
+\def \E{\mathrm E}
+\def \F{\mathrm F}
+\def \G{\mathrm G}
+\def \H{\mathrm H}
+\def \I{\mathrm I}
+\def \J{\mathrm J}
+\def \K{\mathrm K}
+\def \L{\mathrm L}
+\def \M{\mathrm M}
+\def \N{\mathrm N}
+\def \O{\mathrm O}
+\def \P{\mathrm P}
+\def \Q{\mathrm Q}
+\def \R{\mathrm R}
+\def \S{\mathrm S}
+\def \T{\mathrm T}
+\def \U{\mathrm U}
+\def \V{\mathrm V}
+\def \W{\mathrm W}
+\def \X{\mathrm X}
+\def \Y{\mathrm Y}
+\def \Z{\mathrm Z}
+
+\DeclareMathOperator{\Cinfty}{\mathrm{C}^\infty}
+\DeclareMathOperator{\Cinftyloc}{\mathrm{C}^\infty_\loc}
+%\DeclareMathOperator{\Clos}{Clos}
+\DeclareMathOperator{\Cone}{Cone}
+\DeclareMathOperator{\class}{class}
+\DeclareMathOperator{\clos}{clos}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\germ}{germ}
+\DeclareMathOperator{\Geod}{Geod}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Iso}{Iso}
+\DeclareMathOperator{\Kl}{{\K\ell}}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\sq}{sq}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\val}{val}
+
+\newcommand{\closure}[1]{\overline{#1}}
+\newcommand{\ds}{d\!s}
+\newcommand{\dt}{d\!t}
+\newcommand{\proofend}{\hfill $\square$}
+\newcommand{\id}{\mathbf 1}
+\newcommand{\loc}{\mathrm{loc}}
+
+\newcommand{\norm}[1]{\Vert{#1}\Vert}
+\newcommand{\OT}{\mathrm{OT}}
+\newcommand{\orbit}{{\mathrm{orbit}}}
+
+\newcommand{\Paths}{\operatorname{Paths}}
+\newcommand{\pathends}{\operatorname{ends}}
+\newcommand{\Komegatilde}{\K\tilde\omega}
+
+\newcommand{\Obj}{\operatorname{Obj}}
+\newcommand{\Mor}{\operatorname{Mor}}
+\newcommand{\source}{\operatorname{src}}
+\newcommand{\target}{\operatorname{trg}}
+\newcommand{\src}{\operatorname{src}}
+\newcommand{\trg}{\operatorname{trg}}
+
+\newcommand{\Torus}{\operatorname{T}}
+
+
+\newcommand{\powerset}{\raisebox{.15\baselineskip}{\Large\ensuremath{\wp}}}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\Sq}{\mathrm{Sq}}
+\newcommand{\sing}{\mathrm{sing}}
+\newcommand{\vect}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+\newcommand{\scal}[2]{\langle #1,#2\rangle}
+
+\newcommand{\Xsim}{{\X/\hspace{-1ex}\sim}}
+
+\def\Clos(#1){\overline{#1}}
+
+\renewcommand{\emptyset}{\varnothing}
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} %%% MR: utf8x is generally not recommended over utf8. Changed to utf8. If utf8x is specifically needed, can revert.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%<<< Begin - Garamond style or Charter style ?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{microtype}
+\usepackage[cal=scr,expert,sfscaled=false,frenchmath,uppercase = upright,greeklowercase = upright,greekfamily = didot, utopia]{mathdesign}
+
+\linespread{1.1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%>>> End - Garamond style or Charter style ?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \H{\mathrm H} %%% MR: These were redefined after the mathdesign package. Usually, such redefinitions are for specific reasons. Kept them.
+\def \L{\mathrm L}
+\def \O{\mathrm O}
+
+\def \epsilon{\varepsilon}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%>>> Sectionning
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand \thesection{\Roman{section}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Begin Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Title & Data
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \title{Groupoids in Diffeology}
+  
+  \author{Patrick Iglesias-Zemmour}
+  \address{Patrick Iglesias-Zemmour,
+  Einstein Institute of Mathematics,
+  The Hebrew University of Jerusalem,
+  Edmond J. Safra Campus,
+  Givat Ram,
+  $9190401$ Jerusalem,
+  Israel.
+  }
+  \thanks{The author thanks the Hebrew University of Jerusalem, Israel, for his continuous academic support. He is also grateful for the stimulating discussions and assistance provided by the AI assistant Gemini (Google).}
+  \email{piz@math.huji.ac.il}
+  \urladdr{http://math.huji.ac.il/~piz}
+  
+  \date{\today}
+  
+  \subjclass[2020]{Primary 58H05; Secondary 58A05, 22A22, 55R65, 57R18, 58B34, 53D50}
+  
+  \keywords{Diffeology, Diffeological Groupoid, Stratification, Klein Groupoid, Orbifolds, Quasifolds, Noncommutative Geometry, Geometric Quantization}
+  
+%  \tikz[overlay,remember picture]\n
+%  {\n
+%  \node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \today}}; %%% MR: Changed \pdfcreationdate to \today for more common usage, can be reverted.\n
+%  }\n
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Abstract
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    This expository paper recounts the development and application of the concept of diffeological groupoid,
+    from its introduction in 1985 to its use in current research.
+    We demonstrate how this single concept has served as a powerful and unifying tool for defining fundamental structures,
+    analyzing the stratification of complex spaces like orbifolds,
+    building a bridge to noncommutative geometry, and, most recently,
+    forging new approaches to geometric quantization.
+    The paper aims to provide a cohesive narrative of this journey,
+    making explicit certain concepts like the ``Klein groupoid'' and showcasing the enduring vitality of the diffeological groupoid in modern geometry and physics.
+  \end{abstract}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Introduction}
+  
+  At first glance,
+  a paper focused on \emph{diffeological} groupoids might seem to sit adjacent to the theme of topological group theory.
+  However,
+  this paper will argue that the opposite is true:
+  diffeology%
+  \footnote{A \textbf{diffeology} on a set $\X$ is a specified collection of maps $p: \U \to \X$,
+  called \textbf{plots},
+  where $U$ is an open subset of some $\RR^n$.
+  This collection must satisfy three axioms:
+  1) \textbf{Covering:} All constant maps are plots.
+  2) \textbf{Locality:} A map that is locally a plot is a plot.
+  3) \textbf{Smooth Compatibility:} Pre-composing a plot with a smooth map (in the usual sense) yields another plot.
+  A map $f: \X \to \Y$ between diffeological spaces is then \textbf{smooth} if it sends plots to plots,
+  which makes Diffeology a complete, co-complete, Cartesian closed category.
+  For a comprehensive treatment, see~\cite{PIZ13}.}
+  provides a powerful smooth enrichment of topology,
+  and its application to groups and groupoids represents a significant advance in our understanding of these structures.
+  Every diffeological group is,
+  by its nature,
+  a topological group when endowed with its D-topology,
+  but it carries a much finer structure. It is this finer,
+  smooth structure that allows us to distinguish and analyze objects that may be simple,
+  or even trivial,
+  from a purely topological viewpoint, yet are geometrically complex.
+  
+  The quintessential example,
+  and the one that motivated this entire research program,
+  is the irrational torus.
+  As a topological group,
+  it is a disaster:
+  the quotient of the compact Lie group $\Torus^2$ by a dense subgroup,
+  it inherits the coarse topology,
+  making it an indiscrete and uninteresting object from a purely topological viewpoint.
+  It loses all of its geometric personality.
+  As a diffeological group,
+  however,
+  the opposite is true.
+  It possesses a rich,
+  non-trivial geometry,
+  a non-trivial homotopy,
+  and a fascinating group of diffeomorphisms whose structure depends on the arithmetic properties of the torus's slope.
+  This demonstrates that the diffeological perspective reveals geometric and topological information that is invisible to topology alone;
+  it is the tool that allows us to study such important group-like objects in their full richness.
+  
+  The prime objects of ordinary differential geometry are manifolds,
+  which are by definition locally homogeneous spaces.
+  Their geometry,
+  in the spirit of Klein's Erlangen Program,
+  is captured by the action of global transformation groups.
+  Diffeology,
+  however,
+  introduces a universe of spaces that are not locally homogeneous.
+  These spaces possess intrinsic singularities,
+  where the local geometric structure changes from one point to another.
+  For such spaces,
+  a single global group may be no longer sufficient to capture the full richness of the geometry.
+  A finer,
+  more localized tool is required—one that can act differently at different points.
+  This is precisely the role of the groupoid,
+  the natural generalization of a group to an object with many units.
+  While the use of groupoids in diffeology is multifaceted—serving to define fiber bundles and other structures that refine classical constructions—an essential and indispensable role is to capture the local nature of singularities.
+  This is the specific task of the \textbf{Klein groupoid},
+  the groupoid of local diffeomorphisms of a space.
+  
+  The theory of diffeology,
+  first proposed by Jean-Marie Souriau for infinite-dimensional groups \cite{Sou80},
+  found its modern focus through the study of singular spaces.
+  The surprising discovery of the rich,
+  non-trivial structure of the irrational torus \cite{DIZ83} created the need for a new geometric machinery.
+  This led to the development of the concept of \textbf{diffeological groupoid} \cite{PIZ85},
+  which is internal to the category of diffeological spaces and central to this survey.
+  
+  This single idea proved to be the key.
+  It not only solved the immediate problem of the irrational torus but also provided a powerful,
+  unifying tool with broad applications.
+  The diffeological groupoid became the natural language for constructing the universal covering of any diffeological space;
+  for analyzing the intricate stratifications of orbifolds and orbit spaces;
+  for building a crucial bridge to Alain Connes' noncommutative geometry;
+  and,
+  most recently,
+  for forging a new approach to geometric quantization.
+  
+  This paper is structured as a journey through these applications,
+  illustrating the progressive realization of the groupoid's power.
+  \begin{itemize}
+    \item[--] We will begin by revisiting the 1985 thesis,
+    which laid the foundation for this theory,
+    explaining how the challenge of the irrational torus led to the definition of diffeological groupoids and,
+    through them,
+    a robust theory of fibrations and coverings.
+    \item[--] We will then explore its use in structural analysis,
+    detailing how groupoids provide the right lens through which to view the stratification of orbifolds and the diffeology of orbit spaces.
+    \item[--] Subsequently,
+    we will recount the pivotal role of the diffeological groupoid in forging a concrete link with noncommutative geometry,
+    first for orbifolds and then for the more general class of quasifolds.
+    \item[--] A central contribution of this paper will be to make explicit a concept that has remained implicit in previous work:
+    the \emph{``Klein groupoid''} of a diffeological space,
+    whose transitivity components define a fundamental, intrinsic stratification.
+    \item[--] Finally,
+    to demonstrate the concept's continuing vitality,
+    we will present its most recent application in the ongoing work on geometric quantization.
+  \end{itemize}
+  
+  This paper is intended as a cohesive,
+  expository narrative for a broad mathematical audience,
+  from graduate students to researchers in related fields.
+  It aims not only to recount past results but also to synthesize them,
+  highlighting the remarkable and consistent power of a single idea.
+  A central contribution of this survey is to make explicit concepts that have remained implicit in previous work,
+  most notably the role of the \emph{Klein groupoid} as a universal tool for understanding the intrinsic geometry of any diffeological space.
+  Ultimately,
+  the goal is to demonstrate how the diffeological groupoid allows us to solve problems,
+  unify concepts,
+  and open new avenues of inquiry across geometry and mathematical physics.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Sec. Foundations
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{Foundations: The Diffeological Groupoid ($1985$)}
+  
+  The axiomatic framework of diffeologies,
+  as first proposed by Jean-Marie Souriau,
+  was not initially conceived to study singular spaces.
+  Its purpose was to provide a rigorous differential framework for the most regular of objects:
+  infinite-dimensional Lie groups,
+  such as the group of symplectomorphisms or quantomorphisms~\cite{Sou80}.
+  The focus of the theory shifted unexpectedly following a ``crash test'' of these new axioms on the quotient space of the irrational torus~\cite{DIZ83}.
+  This space,
+  which was topologically trivial,
+  was expected to have a trivial diffeology.
+  The surprising discovery that it possessed a rich and non-trivial smooth structure was the primary impetus for the subsequent research program.
+  The immediate goal became to explain the previously computed homotopy groups of the irrational torus not as a standalone curiosity,
+  but as a natural consequence of a general theory.
+  The clear path was through the long exact homotopy sequence of a fibration.
+  However,
+  a significant obstacle stood in the way:
+  the projection $\pi_\alpha : \Torus^2 \to \Torus_\alpha$ is not locally trivial and does not satisfy the classical condition.
+  At the time,
+  no adequate theory of fiber bundles existed for this new category of spaces.
+  It was in the process of building this necessary machinery,
+  the subject of the 1985 thesis~\cite{PIZ85},
+  that the central concept of this paper was elaborated.
+  The most economic and significant way to define a diffeological fiber bundle was through the concept of a \emph{diffeological groupoid}
+  ---a groupoid internal to the category of diffeological spaces.
+  
+At the heart of this story is the diffeological groupoid,
+  but it appears in several distinct guises,
+  each tailored to a specific geometric purpose.
+  We will encounter \emph{the structure groupoid},
+  an analytical tool derived from an atlas;
+  \emph{the Poincaré groupoid},
+  which captures the homotopy structure of paths;
+  \emph{the Klein groupoid},
+  which reveals the intrinsic singularity structure of any space;
+  and finally,
+  \emph{the prequantum groupoid} (the \emph{quantum fog}\/),
+  which encodes the geometric phase of a physical system (the \emph{skeleton} embedded as the units).
+  Understanding the roles and relationships of these different actors is key to appreciating the unifying power of the groupoid concept.  
+  
+  \subsection{The Diffeological Groupoid}
+  
+  The first step was to equip the algebraic structure of a groupoid with a compatible smooth structure.
+  A \textbf{diffeological groupoid} was defined as a groupoid $\KK$ for which the set of objects,
+  $\Obj(\KK)$,
+  and the set of morphisms,
+  $\Mor(\KK)$, are both diffeological spaces, satisfying four conditions of smoothness for the groupoid operations:
+  \begin{enumerate}
+    \item The multiplication $(f,g) \mapsto f \cdot g$ is smooth.
+    \item The inversion $f \mapsto f^{-1}$ is smooth.
+    \item The source and target maps, $\source$ and $\target$, are smooth.
+    \item The identity injection $x \mapsto \id_x$ is an \emph{induction}.
+  \end{enumerate}
+  An induction is a smooth map that is a diffeomorphism onto its image equipped with the subset diffeology.
+  This definition ensures that all the structural maps of the groupoid respect the underlying diffeologies.
+  A crucial consequence is that the space of objects $\Obj(\KK)$ can be identified diffeologically with the subspace of identity morphisms,
+  meaning a diffeological groupoid is uniquely characterized by the diffeological space of its morphisms and the groupoid operation.
+  
+  \subsection{A New Definition for Fiber Bundles}
+  
+  With this new object, a more profound and powerful definition of fiber bundles became possible.
+  For any smooth surjection $\pi : \T \to \B$,
+  one can define its \textbf{structure groupoid},
+  whose objects are the points of the base $\B$ and whose morphisms are the diffeomorphisms between the fibers,
+  $\Mor(b, b') = \Diff(\T_b, \T_{b'})$.
+  This groupoid,
+  endowed with a natural functional diffeology,
+  captures the ``smooth structure'' of the projection.
+  
+  It is important to acknowledge that the foundational idea of associating a groupoid with a fiber bundle is due to Charles Ehresmann in the late 1950s~\cite{Ehr59}.
+  In the classical setting of differential geometry,
+  he demonstrated a fundamental equivalence between principal bundles over a manifold and transitive Lie groupoids.
+  This premonitory approach,
+  however,
+  was naturally limited by the category of manifolds.
+  
+  The diffeological framework significantly enriches this perspective by extending its applicability in two crucial directions.
+  First,
+  the isotropy groups of a diffeological groupoid are not restricted to being Lie groups;
+  they can be any diffeological group.
+  This includes singular groups,
+  such as the irrational tori that appear as fibers in the generalized prequantum bundles of non-integral closed 2-forms~\cite{PIZ95}.
+  Second,
+  and perhaps more profoundly,
+  the structure groups can be infinite-dimensional.
+  For a diffeological fibration $\pi : \T \to \B$ with fiber $\F$,
+  the isotropy groups of its structure groupoid are the diffeomorphism groups $\Diff(\F)$,
+  which are typically vast,
+  infinite-dimensional diffeological groups.
+  The concept of a fibrating groupoid is thus a far more general and flexible tool,
+  capable of defining and analyzing a much wider universe of geometric structures.
+  
+  This led to the central definition:
+  
+  \begin{definition}{~(Diffeological Fibration)} A smooth projection $\pi : \T \to \B$ is a \textbf{diffeological fibration} if its structure groupoid is \textbf{fibrating}—that is,
+    if its characteristic map $\chi: \Mor(\KK) \to \B \times \B$ is a \emph{subduction}.
+  \end{definition}
+  
+  A subduction is a smooth surjection such that plots on the target space admit local smooth lifts into the source space at every point of their domain.
+  This condition means that for any pair of points $(b, b')$ in the base, any plot of such pairs can be locally lifted to a smooth family of diffeomorphisms between the corresponding fibers.
+  
+  This sophisticated definition was shown to be equivalent to a more operative one:
+  a projection is a diffeological fibration if and only if it is \textbf{locally trivial along the plots} of the base,
+  that is,
+  if the pullbacks of the projection by the plots in the base are locally trivial.
+  
+  This equivalence was a key result,
+  establishing that the abstract groupoid condition precisely captured the necessary local lifting properties.
+  Crucially,
+  under this definition,
+  the projection onto the irrational torus $\Torus_\alpha$ is a diffeological fibration,
+  thereby solving the initial problem and bringing this singular object squarely into a rigorous geometric framework.
+  
+  \subsection{Principal Fibrations from Group Actions}
+  
+  Within the general theory of diffeological fibrations,
+  a particularly important subclass is that of \emph{principal fibrations},
+  which are central to gauge theories and classification problems.
+  Conceptually,
+  a principal fibration is a fiber bundle whose fibers are all diffeomorphic to a group $\G$,
+  which acts freely and transitively on them.
+  The formal definition in diffeology is as follows:
+  
+  \begin{definition}{~(Principal Fibration)}
+    A diffeological fibration $\pi: \T \to \B$ is a \textbf{principal $\G$-fibration} for a diffeological group $\G$ if there is a smooth action of $\G$ on $\T$ such that:
+    \begin{enumerate}
+      \item The action preserves the fibers (i.e., if $y \in \T_b$, then $g \cdot y \in \T_b$).
+      \item The action is free and transitive on each fiber.
+    \end{enumerate}
+  \end{definition}
+  
+  While this defines the structure,
+  the diffeological framework provides a remarkably direct and powerful criterion for determining when the quotient by a group action forms such a fibration.
+  Let $\G$ be a diffeological group acting smoothly on a diffeological space $\X$.
+  The key to understanding the structure of the quotient space $\X/\G$ lies in the geometry of the action itself,
+  captured by the \textbf{action graph map}:%
+  \footnote{We use the term ``action graph map'' for the map $\eF: \X \times \G \to \X \times \X$ given by $\eF(x,g) = (x, g \cdot x)$,
+  whose image is the graph of the action.
+  This is distinct from the standard ``action map'' $\alpha: \G \times \X \to \X$.
+  The codomain $\X \times \X$ is essential,
+  as the diffeological property of $\eF$ being an \emph{induction} is the central condition of the theorem.}
+  \[
+    \eF : \X \times \G \to \X \times \X, \quad \text{defined by} \quad \eF(x,g) = (x, g \cdot x).
+    \]
+  The central result is the following theorem~\cite{PIZ85, PIZ13}:
+  
+  \begin{theorem}{}
+    The projection $\pi: \X \to \X/\G$ is a principal diffeological fibration with structure group $\G$ if and only if the action graph map $\eF$ is an \textbf{induction}.
+  \end{theorem}
+  
+  This condition—that the map parameterizing the graph of the action is a diffeomorphism onto its image—is the crucial diffeological property.
+  It essentially requires that the action is free (a consequence of $\eF$ being injective) and that the orbits are ``well-separated'' in a diffeological sense.
+  When this holds,
+  the action is called a \emph{principal action}.
+  
+  This theorem is a powerful tool.
+  It provides a direct criterion based on the group action itself to certify that the quotient map is a principal fibration,
+  without needing to construct the full structure groupoid of the projection and verify that it is fibrating.
+  It thus forms an essential,
+  albeit indirect,
+  link between the theory of group actions and the theory of groupoids in diffeology,
+  showing how the properties of the former directly imply the fibrating nature of the latter.
+  
+  \subsection{Immediate Successes of the Theory}
+  
+  The definition of a diffeological fibration via fibrating groupoids was immediately validated by its powerful consequences,
+  which directly addressed the problems that motivated its creation~\cite{PIZ85}.
+  This ground-laying work established two crucial results.
+  
+  First,
+  it was proven that the projection of any diffeological group onto a quotient by any of its subgroups is a diffeological fibration.
+  This general theorem is of paramount importance, as it instantly provides a rigorous framework for a vast class of quotient spaces,
+  including the irrational torus. This result provided the formal justification for treating the projection $\pi_\alpha : \Torus^2 \to \Torus_\alpha$ as a fibration,
+  moving it from a singular case to a prime example of a general principle.
+  
+  Second,
+  and most crucially,
+  this definition was precisely what was needed to establish the long exact sequence of homotopy in the context of diffeology.
+  The existence of this sequence provided the ultimate conceptual tool.
+  By applying it to the now-certified fibration $\pi_\alpha$,
+  it provided a rigorous,
+  conceptual confirmation of the initial by-hand computation of the fundamental group,
+  $\pi_1(\Torus_\alpha) \simeq \ZZ^2$.
+  Furthermore,
+  it allowed for the first formal computation of the higher homotopy groups—which had to be defined as part of this groundwork
+  ---~showing that they vanish for $k>1$.
+  This necessity of building the theory from the ground up is reflected in the title of the thesis itself.
+  The discovery of the diffeological groupoid thus successfully bridged the gap,
+  providing the missing theoretical machinery.
+  
+  \subsection{The Universal Covering via the Poincaré Groupoid}
+  
+  The power of the diffeological groupoid was not limited to fiber bundle theory.
+  It also provided a universal and elegant method for constructing covering spaces.
+  The \textbf{Poincar\'e groupoid} (or fundamental groupoid) of a diffeological space $\X$,
+  denoted $\Pi(\X)$,
+  has the points of $\X$ as its objects and the fixed-ends homotopy classes of paths as its morphisms.
+  The concatenation of paths endows $\Pi(\X)$ with the structure of a diffeological groupoid which is,
+  moreover,
+  fibrating.
+  
+  This insight allows for a direct construction of the universal covering.
+  For a connected space $\X$ with a chosen basepoint $x_0$,
+  the \textbf{universal covering space} $\tilde\X$ is defined as the space of morphisms of the Poincaré groupoid starting at $x_0$:
+  \[
+    \tilde\X = \Mor_{\Pi(\X)}(\X, x_0, \star)
+    \]
+  The projection $\pi: \tilde\X \to \X$ is given by the target map,
+  $\pi([\gamma]) = \gamma(1)$.
+  This construction yields a principal fiber bundle with the fundamental group $\pi_1(\X, x_0)$ as its structure group.
+  The main theorem of this construction asserts that for any connected diffeological space $\X$,
+  this procedure yields a unique (up to isomorphism) simply connected covering space \cite{PIZ85}.
+  
+  This result is noteworthy for its remarkable generality,
+  a feature that starkly contrasts with the classical topological setting.
+  In topology,
+  the existence of a universal covering requires the base space to satisfy local niceness conditions,
+  such as being semilocally simply connected.
+  The diffeological framework bypasses these requirements entirely.
+  The reason for this discrepancy is fundamental: a diffeology is not defined by a system of open sets,
+  but by a system of smooth parameterizations (plots) from Euclidean domains.
+  The rich, contractible nature of these domains is ``incrusted'' into the very definition of the space's smooth structure.
+  
+  Because the Poincaré groupoid is constructed from the diffeological space of paths—an object which is always well-behaved in diffeology—it can be constructed for any diffeological space.
+  The main theorem thus asserts that \emph{every} connected diffeological space—regardless of whether it is singular,
+  infinite-dimensional,
+  or fails to satisfy classical local conditions—admits a unique,
+  simply connected universal covering.
+  This demonstrates the remarkable capacity of the diffeological groupoid framework to generalize fundamental topological constructions to a much broader class of spaces.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Sec. Stratification
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{Groupoids for Analyzing Structure: Stratification}
+  
+  The same conceptual machinery that proved so effective for defining global structures like fiber bundles also provides the essential tools for analyzing the local,
+  layered structure of singular spaces.
+  Many important diffeological spaces,
+  such as manifolds with corners or orbifolds,
+  are not homogeneous but are instead ``modeled'' on different local geometries from point to point \cite[Chap. 4]{PIZ13}. The intrinsic way to understand this layered structure is through the action of local diffeomorphisms, an action best formalized by a groupoid.
+  
+  \subsection{The Structure Groupoid of an Orbifold}
+  
+  To analyze the intrinsic structure of an orbifold $\X$, we associate a groupoid to a choice of atlas. The construction proceeds in several steps~\cite{IZL18}:
+  \begin{enumerate}
+    \item An \textbf{atlas} $\cA$ for $\X$ is a collection of charts $f: \RR^n/\Gamma \supset \U \to \X$
+    ---~that is, local diffeomorphisms~---
+    that cover $\X$.
+    
+    \item From this,
+    we form the \textbf{strict generating family} $\cF$,
+    consisting of the plots $\F = f \circ \class : \tilde{\U} \to \X$,
+    where $\tilde{\U} = \class^{-1}(\U) \subset \RR^n$ and $\class$ denotes the canonical projection onto the quotient space.%
+    \footnote{Throughout this paper,
+    the notation $\class$ will be used generically to denote the canonical projection from a space onto one of its quotients.}
+    
+    \item The \textbf{nebula} $\cN$ is the disjoint union of the domains of plots:
+    $\cN = \coprod_{\F \in \cF} \dom(\F)$.
+    The nebula is a manifold,
+    and the \textbf{evaluation map} $\ev: \cN \to \X$,
+    given by $\ev(\F,r) = \F(r)$,
+    is a subduction presenting $\X$ as a quotient of a manifold.
+  \end{enumerate}
+  The \textbf{structure groupoid} $\GG$ associated with the atlas $\cA$ is then defined. Its objects are the points of the nebula, $\Obj(\GG) = \cN$. Its morphisms are the germs of local diffeomorphisms of the nebula that are ``invisible'' at the level of the orbifold; that is, they project to the identity via the evaluation map:
+  \[
+    \Mor(\GG) = \{ \germ(\Phi)_\nu \mid \Phi \in \Diff_\loc(\cN) \text{ and } \ev \circ \Phi = \ev \restriction \dom(\Phi) \}.
+    \]
+  This groupoid captures the internal symmetries of the atlas presentation. The crucial link between this abstract construction and the geometry of the orbifold is the following fundamental lifting property~\cite{IKZ10}:
+  
+  \begin{theorem}{~(Lifting of Local Diffeomorphisms)}
+    Any local diffeomorphism of an orbifold lifts locally to a local diffeomorphism of the nebula.
+  \end{theorem}
+  
+  From this key result, everything else follows. It implies that the local symmetries of the orbifold are perfectly encoded by the arrows of the structure groupoid. The transitivity components of $\GG$ are precisely the fibers of the evaluation map, meaning the space of components is diffeomorphic to the orbifold $\X$ itself. This leads directly to the classification of the intrinsic Klein strata of the orbifold: two points belong to the same Klein stratum if and only if their local isotropy groups within the structure groupoid are conjugate. This analysis culminates in the main theorem on the structure of orbifolds~\cite{GIZ23}:
+  
+  \begin{theorem}{}
+    The Klein stratification of a diffeological orbifold (with a locally finite atlas) is a standard stratification. Its strata are locally closed manifolds, and the partition is locally finite.
+  \end{theorem}
+  
+  It is worth noting how this geometric construction relates to other groupoid-based approaches to orbifolds,
+  such as those of the Moerdijk school.
+  In that framework,
+  one often starts with a more abstract ``orbifold groupoid,''
+  which may not be effective.
+  It is a known result that the space of transitivity components of such a groupoid can be endowed with the structure of a diffeological orbifold.
+  The structure groupoid $\GG$ constructed here from the diffeology of the space is precisely the \emph{effective} part of that starting object.
+  This demonstrates that the diffeological approach is perfectly adequate for describing Satake's original V-manifolds,
+  and that the equivalence class of the structure groupoid $\GG$ emerges naturally as a fundamental invariant of the orbifold's geometry.
+  
+  \subsection{The Diffeology of Orbit Spaces}
+  
+  This analytical perspective extends to the more general case of orbit spaces $\M/\G$,
+  where $\M$ is a manifold and $\G$ is a compact Lie group.
+  The intrinsic geometry of the quotient space $\M/\G$ is captured by its \textbf{Klein stratification},
+  the partition of the space into orbits of its pseudogroup of local diffeomorphisms.
+  This stratification is fundamental because it decomposes the space into strata of equivalent singularity types,
+  since points in the same stratum are,
+  by definition,
+  locally diffeomorphically equivalent.
+  
+  The crucial insight of the diffeological approach is that this intrinsic partition is not merely a formal decomposition but is itself a \emph{geometric stratification}:
+  it is generated by the action of a groupoid.
+  This object,
+  which we will formally define in Section IV as the \textbf{Klein groupoid} of the space,
+  has the local diffeomorphisms as its arrows, and its transitivity components are precisely the Klein strata.
+  
+  The classical approach,
+  by contrast,
+  studies the projection of the \emph{orbit-type stratification} from $\M$ to the quotient.
+  This classical stratification on $\M$ groups points whose stabilizers are conjugate.
+  A deeper analysis using diffeological tools reveals that this extrinsic picture is incomplete~\cite{GIZ25}.
+  The intrinsic Klein stratification of the quotient does not always align with the projection of the orbit-type stratification.
+  The correct correspondence is found by considering a finer partition on $\M$:
+  the \textbf{isostabilizer decomposition}.
+  This partition groups points not just by the conjugacy class of their stabilizer,
+  but by the stabilizer subgroup itself.
+  
+  It is this decomposition that maps coherently to the intrinsic geometry of the quotient.
+  The main result of this analysis is that the projection $\M \to \M/\G$ induces a surjective map
+  (not \emph{a priori} injective as examples show)
+  from the isostabilizer decomposition of $\M$ to the Klein stratification of $\M/\G$.%
+  \footnote{It should be noted that the two stratifications: orbit type and Klein are not comparable,
+  as shown by the examples of $\P^2(\CC)/\SO(3)$ and the special quotient $\P^2(\CC)/\U(1)$ in the aforementioned paper.}
+  The groupoid of local diffeomorphisms of the quotient is thus a more refined instrument than the classical orbit-type structure on the source manifold.
+  It probes the \emph{intrinsic} geometry,
+  revealing the true singularity structure and establishing the correct correspondence between the group action on $\M$ and the diffeological geometry of the resulting orbit space $\M/\G$.
+  
+  Thus,
+  while the structure groupoid of an atlas is the key to understanding the presentation of an orbifold,
+  it is the Klein groupoid that reveals the intrinsic geometry of more general orbit spaces.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Sec. Noncommutative Geometry
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{A Bridge to Noncommutative Geometry}
+  
+  One of the most fruitful applications of the diffeological groupoid has been in building a concrete,
+  structural bridge to Alain Connes' Noncommutative Geometry.
+  The core philosophy of this program is to study ``singular'' geometric spaces by associating them with non-commutative algebras,
+  typically C*-algebras.
+  The diffeological groupoid,
+  constructed directly from the geometry of the space,
+  provides the perfect intermediate object to make this association rigorous and functorial.
+  
+  \subsection{The Orbifold Blueprint}
+  
+  The strategy for connecting diffeology to noncommutative geometry was first elaborated and proven in the case of orbifolds~\cite{IZL18}.
+  As established in the previous section,
+  any atlas of an orbifold $\X$ gives rise to a \textbf{structure groupoid} $\GG$.
+  This groupoid is not just an abstract entity;
+  it is a well-behaved diffeological groupoid which is both \emph{étale} and \emph{Hausdorff}.
+  
+  These properties are precisely the technical requirements needed to apply the standard construction,
+  developed by Jean Renault in~\cite{Ren80},
+  for associating a C*-algebra to a groupoid.
+  The construction proceeds by considering the space of compactly supported,
+  continuous complex-valued functions on the space of morphisms,
+  $\Mor(\GG)$.
+  This space is endowed with an algebraic structure where the groupoid multiplication defines a convolution product, and the groupoid inversion defines an involution.
+  The completion of this convolution algebra with respect to a suitable norm yields the \textbf{C*-algebra of the groupoid},
+  denoted $\C^*(\GG)$.
+  
+  This provided the essential blueprint:
+  a direct path from a geometric object
+  (an orbifold, via its atlas)
+  to an algebraic one (a C*-algebra).
+  It realized the goal of replacing a singular space with a well-behaved, albeit non-commutative, algebra.
+  
+  \subsection{Generalization to Quasifolds and Morita Equivalence}
+  
+  The full power of this connection is most evident in the generalization to \textbf{quasifolds}~\cite{IZP21}.
+  Quasifolds are a broader class of diffeological spaces,
+  locally modeled on quotients $\RR^n/\Gamma$ where $\Gamma$ is a countable
+  (but possibly infinite)
+  subgroup of the affine group.
+  This class includes the most interesting examples,
+  such as the irrational torus $\T_\alpha$,
+  and was originally explored%
+  \footnote{But not by diffeology techniques.}
+   by Elisa Prato inspired by the study of quasicrystals~\cite{Pra99}.
+  
+  The primary challenge in extending the construction from orbifolds to quasifolds was that the local structure groups $\Gamma$ are no longer finite.
+  Their orbits can be dense, and the proofs required substantial revision.
+  The key technical insight that made this generalization possible was the use of Baire's theorem,
+  which allowed arguments to be extended from the finite to the countable case.
+  
+  This generalization led to a crucial question.
+  The construction of the C*-algebra depends on the choice of an atlas for the quasifold.
+  A different atlas produces a different nebula,
+  a different structure groupoid $\GG'$, and thus a different C*-algebra $\C^*(\GG')$.
+  For the construction to be meaningful,
+  these different algebras must represent the same underlying ``noncommutative space.''
+  This is captured by the central result of the theory:
+  
+  \begin{theorem}{}
+    Let $\GG$ and $\GG'$ be the structure groupoids associated with two different atlases of the same quasifold $\X$.
+    Then the corresponding $\C^*$-algebras,
+    $\C^*(\GG)$ and $\C^*(\GG')$,
+    are \textbf{strongly Morita equivalent}.
+  \end{theorem}
+  
+  Morita equivalence is the accepted notion of isomorphism for C*-algebras in noncommutative geometry.
+  This theorem thus establishes that the construction yields a true invariant of the underlying space.
+  It associates a unique Morita equivalence class of C*-algebras to the diffeomorphic class of the quasifold.
+  
+  This result solidifies the bridge between the two theories,
+  confirming that the geometric information encoded in the diffeology of a quasifold is faithfully preserved in the algebraic structure of its associated noncommutative algebra.
+  This naturally opens avenues for further research aimed at deepening the dictionary between geometry and algebra.
+  For instance,
+  a compelling question,
+  prompted by discussions with Jiawen Zhang of Fudan University,
+  is to find the geometric interpretation within the quasifold $\X$ of the ideal structure of its C*-algebra.
+  For groupoid C*-algebras,
+  this structure is known to correspond to the open,
+  invariant subsets of the groupoid's space of objects~\cite{Ren80}.
+  Understanding how these subsets,
+  which live on the nebula,
+  project to a meaningful geometric structure on the quotient space $\X$ is a subtle and intriguing problem for future investigation.
+  
+  % \pagebreak
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Sec. The Klein Groupoid
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The Klein Groupoid:  An Explicit Framework for \\ Intrinsic Stratification}
+  
+  In the classical geometry of manifolds,
+  one can adopt two complementary perspectives,
+  a distinction often discussed with Souriau.
+  The first is a \textbf{passive view},
+  where the manifold is understood through an atlas of charts—a collection of external parameterizations.
+  The second is an \textbf{active view},
+  where the manifold is understood as a ``theater'' for the action of its group of diffeomorphisms.
+  In diffeology,
+  this distinction becomes even more acute and powerful.
+  The passive view is embodied by the set of all plots,
+  which forms the complete,
+  maximal atlas for the space.
+  The active view,
+  however,
+  requires a more refined tool than the global diffeomorphism group,
+  especially for spaces that are not locally homogeneous.
+  
+  For these singular spaces,
+  where the geometry changes from point to point,
+  a global group of transformations is too coarse an instrument.
+  A finer tool is needed,
+  one that captures the local nature of symmetry.
+  This is the essential role of the groupoid.
+  The \textbf{Klein groupoid} of a diffeological space is the ultimate realization of this active viewpoint.
+  It is the groupoid of all local symmetries,
+  and it is through its structure that the true intrinsic geometry of the space reveals itself.
+  
+  The previous sections have demonstrated the power of groupoids tailored to specific structures:
+  the structure groupoid of a fibration,
+  the structure groupoid of an orbifold atlas,
+  or the groupoid of local diffeomorphisms of a quotient space.
+  We now introduce a canonical and fundamental groupoid that can be associated with \emph{any} diffeological space,
+  providing a universal tool for understanding its intrinsic geometric structure.
+  This concept,
+  which has been implicit in much of the preceding analysis, we now make explicit.
+  
+\subsection{Formal Definition}
+  
+  The local geometry of a diffeological space is characterized by its pseudogroup of local diffeomorphisms.
+  It is natural to formalize this structure into a groupoid.
+  
+  \begin{definition}{~(The Klein Groupoid)}
+    Let $\X$ be any diffeological space. The \textbf{Klein groupoid} of $\X$, denoted $\Kl(\X)$, is the diffeological groupoid whose objects are the points of $\X$ and whose morphisms are the germs of local diffeomorphisms of $\X$.
+    \begin{itemize}
+      \item $\Obj(\Kl(\X)) = \X$.
+      \item $\Mor(\Kl(\X)) = \{ \germ(\phi)_x \mid \phi \in \Diff_\loc(\X), x \in \dom(\phi) \}$.
+    \end{itemize}
+    The source and target maps are given by $\source(\germ(\phi)_x) = x$ and $\target(\germ(\phi)_x) = \phi(x)$.
+  \end{definition}
+  
+  The smooth structure on this groupoid is not trivial.
+  The space of morphisms is endowed with a specific \textbf{functional diffeology} that was formally constructed for this purpose in~\cite{IZL18}.
+  The construction is a two-step process:
+  first,
+  a functional diffeology is defined on the space of local smooth maps itself,
+  a structure that carefully handles the variable domains of definition.
+  The space of morphisms $\Mor(\Kl(\X))$ is then endowed with the quotient diffeology induced by the ``germification'' map,
+  which takes a local diffeomorphism and a point in its domain to the corresponding germ.
+  This construction ensures that the composition and inversion are smooth,
+  and crucially,
+  that the injection of objects $x \mapsto \id_x$ is an induction,
+  making $\Kl(\X)$ a well-defined diffeological groupoid.
+  
+  This groupoid is the ultimate embodiment of Felix Klein's Erlangen Program in the context of diffeology.
+  It captures the full local symmetry of the space, where ``geometry'' is defined by the properties invariant under local diffeomorphisms.
+  
+  \subsection{The Klein Stratification and its Invariants}
+  
+  The action of the Klein groupoid on its space of objects naturally partitions the space into its orbits.
+  
+  \begin{definition}{~(The Klein Stratification)}
+    The Klein stratification of a diffeological space $\X$ is the partition of $\X$ into the transitivity components (orbits) of its Klein groupoid $\Kl(\X)$.
+  \end{definition}
+  
+  This stratification immediately captures the most fundamental numerical invariant of a diffeological space.
+  Since local diffeomorphisms preserve the diffeological dimension,
+  we have the following structural result:
+  
+  \begin{theorem}{}
+    The diffeological dimension map is constant on each Klein stratum.
+  \end{theorem}
+  
+  The dimension map is thus the first and most basic invariant revealed by the action of the Klein groupoid.
+  The partition into orbits is also a true stratification in the topological sense.
+  Because local diffeomorphisms are also homeomorphisms for the D-topology,
+  this partition automatically satisfies the frontier condition,
+  making it a \emph{basic stratification}.
+  The Klein strata are precisely the sets of points that are locally diffeomorphically equivalent,
+  thus partitioning the space into its distinct singularity types,
+  each with a well-defined dimension.
+  
+  \subsection{Unifying Power}
+  
+  The true power of this concept lies in its ability to provide a unified perspective on the structures discussed in the previous sections.
+  
+  For a smooth manifold, the Klein groupoid is transitive.
+  The action of local diffeomorphisms can connect any point to any other point,
+  and thus the Klein stratification consists of a single stratum: the manifold itself.
+  This reflects the principle of homogeneity for manifolds.
+  
+  For more complex spaces,
+  particularly those constructed as quotients,
+  the Klein groupoid provides the definitive language for their intrinsic geometry.
+  It replaces formal,
+  extrinsic structures with a geometric one generated by a groupoid action.
+  Consider the case of an orbit space $\M/\G$.
+  As we saw,
+  the intrinsic Klein stratification of the quotient reveals the true singularity types.
+  This intrinsic structure ``encrypts'' the essential geometric information of the group action on $\M$,
+  with the isostabilizer decomposition being the precise structure on the source that maps coherently to it.
+  
+  This principle is not limited to a small class of examples;
+  it is a fundamental tool in diffeology for understanding the geometry of a space.
+  In an analogous manner,
+  if we consider a space whose diffeology is the pushforward by a projection map—for example,
+  the ``shadow'' of a surface $\Sigma$ projected onto a plane—the Klein stratification of the resulting space will necessarily encrypt up to some level the geometric information about the singularities of the projection map.%
+  \footnote{This is certainly a path to follow and clarify.
+  The Klein groupoid of the target space encrypts the intrinsic singularities of that space,
+  which may not be a complete record of the singularities of the projection map.
+  For example,
+  consider the maps from $\RR$ to $\RR$ with the pushforward diffeology.
+  For the map $x \mapsto x^2$,
+  the singularity at the origin is preserved,
+  and the target space $[0,\infty[$ has a non-trivial Klein stratification.
+  For the map $x \mapsto x^3$,
+  however,
+  the singularity at the origin is ``smoothed out,''
+  and the target space is diffeomorphic to the standard $\RR$,
+  with a trivial Klein stratification.}
+  
+  In all these cases,
+  the Klein groupoid acts as the ultimate probe of the local structure.
+  It does not depend on how the space was constructed,
+  whether by a group action, a projection, or some other means.
+  It operates directly on the final space and reveals its inherent geometric hierarchy,
+  thereby paving the way to applications that
+  go well beyond geometry proper.
+  \subsection{Subgroupoids and Geometric Structures}
+  
+  The Klein groupoid $\Kl(\X)$ captures the full local symmetry of a diffeological space.
+  A powerful feature of this framework is that by restricting to subgroupoids, we can analyze additional geometric structures on $\X$.
+  If $\X$ is equipped with a geometric structure $\cS$ (such as a Riemannian metric~\cite[p.224]{PIZ25a} or a parasymplectic form),%
+  \footnote{We call parasymplectic any closed $2$-form.}
+  we can consider the subgroupoid of the Klein groupoid whose morphisms are the germs of local diffeomorphisms that preserve $\cS$.
+  The transitivity components of this subgroupoid then classify the points of $\X$ according to their local geometry with respect to $\cS$.
+  
+  This approach is particularly fruitful in symplectic diffeology.
+  Let $(\X, \omega)$ be a parasymplectic space.
+  We can define the \textbf{symplectic Klein groupoid},
+  $\Kl(\X, \omega)$,
+  as the subgroupoid of $\Kl(\X)$ consisting of germs of local automorphisms of $(\X,\omega)$.
+  
+  This leads to a purely geometric and diffeological definition of a presymplectic space.
+  In the theory of symplectic diffeology~\cite{PIZ10},
+  a parasymplectic space $(\X, \omega)$ is defined as \textbf{presymplectic} if its symplectic Klein groupoid $\Kl(\X, \omega)$ is transitive.
+  For manifolds,
+  this condition of local homogeneity is equivalent to the classical definition of a presymplectic form having constant rank.
+  However,
+  this new definition is a more fundamental generalization.
+  It replaces the classical criterion—a condition on the kernel of the form,
+  which relies on the tangent bundle—with an intrinsic, geometric one.
+  This avoids the often problematic and unnecessary complexity of defining tangent spaces for general diffeological spaces,
+  providing a robust definition that is native to the category.
+  
+  This perspective connects naturally to the theory of moment maps.
+  The universal moment map, $\mu_\omega$,
+  is a map from the space $\X$ to the space of momenta of the \emph{global} group of automorphisms,
+  $\Diff(\X,\omega)$.
+  This global object motivates a compelling avenue for future research: the question of a ``local moment map'' living naturally on the symplectic Klein groupoid itself.
+  Its construction is a central problem in symplectic diffeology,
+  as it would provide the key to extending the fundamental theorem that identifies the characteristics of a homogeneous presymplectic space with the level sets of the universal moment map~\cite[\textsection 9.26]{PIZ13}.
+  Such a generalization is crucial for infinite-dimensional models,
+  where the classical kernel-based definition of characteristics is problematic.
+  
+  \subsection{A Functorial Viewpoint: The Complete Picture}
+  
+  The relationship between the geometry of the nebula $\cN$ (a manifold) and the quasifold $\X$ (a singular space) can be framed in a powerful,
+  functorial way that provides the complete picture.
+  We have two fundamental geometric objects: the Klein groupoid of the nebula,
+  $\Kl(\cN)$,
+  and the Klein groupoid of the quasifold,
+  $\Kl(\X)$.
+  
+  Consider the subgroupoid of $\Kl(\cN)$,
+  let us call it $\GG_{\ev}$,
+  whose morphisms are the germs of local diffeomorphisms $\Phi$ of $\cN$ that project to local diffeomorphisms of $\X$.
+  That is,
+  a morphism $\germ(\Phi)_\nu$ belongs to $\GG_{\ev}$ if there exists a local diffeomorphism $\varphi$ of $\X$ such that the following diagram commutes locally:
+  \[
+    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+    \cN \arrow[d, swap, "\ev"] \arrow[r, "\Phi"] & \cN \arrow[d, "\ev"] \\
+    \X \arrow[r, swap, "\varphi"] & \X
+    \end{tikzcd}
+    \]
+  This construction naturally defines a functor of groupoids,
+  $\ev_*: \GG_{\ev} \to \Kl(\X)$.
+  The fundamental Lifting Theorem for orbifolds and quasifolds~\cite{IKZ10, IZP21} states precisely that this functor is surjective on morphisms.
+  Since the evaluation map $\ev$ is surjective by construction,
+  the functor is also surjective on objects.
+  
+  The Lifting Theorem implies that the functor $\ev_*$ is \textbf{surjective on both objects and morphisms}.
+  This is a very strong condition, much stronger than a mere equivalence of categories,
+  and it establishes that the Klein groupoid of the quasifold is,
+  in a precise sense,
+  a quotient of the lifted groupoid from the nebula.
+  
+  This provides a complete,
+  hierarchical picture.
+  The intrinsic geometry of the manifold $\cN$ projects onto the intrinsic geometry of the singular space $\X$.
+  The \textbf{structure groupoid} $\GG$ of the atlas,
+  which we used to build the C*-algebra, finds its ultimate conceptual place here:
+  it is precisely the kernel of this functor $\ev_*$.
+  It is the ``gauge'' subgroupoid consisting of all the internal symmetries of the atlas presentation that project to the identity (the units) in the Klein groupoid of the quasifold.
+  
+  This functorial picture can be generalized to any subduction,
+  raising a deep structural question: what property of a subduction ensures that the associated functor is surjective on morphisms?
+  This ``Lifting Property for Local Diffeomorphisms'' is not true for all subductions.
+  It holds for diffeological fibrations, where the uniformity of the fibers allows for lifting.
+  More subtly,
+  it holds for the subduction $\ev: \cN \to \X$ for quasifolds,
+  which is not a global fibration but rather a diffeological foliation whose transverse structure is locally constant,
+  modeled on quotients $\RR^n/\Gamma$.
+  This suggests that the class of subductions that admit such a lifting are those that possess a certain ``local fibration'' or ``uniform foliation'' structure.
+  Identifying and classifying this family of subductions is a compelling direction for future research.
+  
+  In this sense,
+  the Klein groupoid and its stratification are not just tools for studying the geometry;
+  they \emph{are} the intrinsic local geometry of the space.
+  It is this power to capture the most fundamental geometric essence of a space that allows the groupoid concept to be applied to the most profound problems,
+  including those at the interface of geometry and physics, as we shall now see.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Sec. Geometric Quantization
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{A New Frontier: Geometric Quantization by Paths}
+  
+  The journey of the diffeological groupoid culminates in its most recent application:
+  forging a new,
+  unified path in geometric quantization.
+  This approach is deeply connected to the spirit of Feynman's path integral formulation of quantum mechanics,
+  which posits that the quantum amplitude is a sum over all possible histories (paths) of a system.
+  Our construction provides a geometric framework for this idea,
+  building the prequantum structure directly from the space of paths of the classical system.
+  
+  \subsection{The Prequantum Groupoid: A Quantization à la Poincaré}
+  
+  Classical geometric quantization faces a well-known topological obstruction:
+  a "prequantum line bundle" only exists if the symplectic form is integral.
+  The following construction,
+  introduced in a forthcoming work~\cite{PIZ25b},
+  bypasses this obstruction entirely for any connected and simply connected parasymplectic space $(\X, \omega)$.
+  The new structure is not a bundle,
+  but a \textbf{prequantum groupoid},
+  $\TT_\omega$,
+  built as a diffeological quotient of the space of paths on $\X$.
+  
+  This construction is best understood as a "quantization" à la Poincaré.
+  
+  \begin{itemize}
+    \item The \textbf{Poincaré groupoid} $\Pi(\X)$ is a quotient of the space of paths where two paths are equivalent if they are homotopic.
+    Its isotropy group at a point $x$ is the fundamental group $\pi_1(\X,x)$,
+    which captures the \emph{homotopic phase}.
+    \item The \textbf{prequantum groupoid} $\TT_\omega$ is a quotient of the space of paths where two paths are equivalent if the integral of $\omega$ over any surface connecting them is a "period" of $\omega$.
+    Its isotropy group at a point $x$ is the torus of periods $\T_\omega$,
+    which captures the \emph{geometric phase}.
+  \end{itemize}
+  
+  The prequantum groupoid thus replaces the homotopic equivalence with a geometric equivalence dictated by the parasymplectic form.
+  
+  \subsection{The Geometry of the Prequantum Groupoid}
+  
+  The space of morphisms of the prequantum groupoid, $\cY_\omega = \Mor(\TT_\omega)$,
+  has a rich geometric structure.
+  The ``ends'' map, $\pathends: \cY_\omega \to \X \times \X$,
+  is a diffeological fibration.
+  The fiber over a pair of points $(x,x')$ is the space of all equivalence classes of paths from $x$ to $x'$.
+  This fiber is not a group,
+  but it is a \emph{principal homogeneous space} (a torsor) for the torus of periods $\T_\omega$.
+  This means that while there is no canonical ``identity'' path,
+  the group $\T_\omega$ acts freely and transitively on the set of paths connecting any two points.
+  
+  It is important to note that this fibration is not,
+  in general,
+  a principal bundle.
+  A principal bundle requires a global group action on the total space,
+  whereas here the action is ``fiber-wise'' by the isotropy groups.
+  This fibration of $\T_\omega$-torsors over $\X \times \X$ is the fundamental geometric object of the prequantization.
+  
+  \subsection{Advantages and Future Directions}
+  
+  This path-based framework offers two profound advantages over the classical approach.
+  First,
+  the prequantum groupoid \textbf{always exists} for any parasymplectic space with discrete periods.%
+  \footnote{Here,
+  discrete periods means a diffeologically discrete subgroup of $\RR$,
+  that is,
+  any strict subgroup $\P_\omega \subsetneq \RR$.
+  This is the case in particular of all manifolds (which, recall, are generally assumed to be Hausdorff and second countable).}
+  Second,
+  it \textbf{preserves all symmetries}:
+  the full group of automorphisms of the parasymplectic structure,
+  $\Diff(\X, \omega)$,
+  acts isomorphically as a group of automorphisms on the prequantum groupoid structure.
+  
+  This framework opens several avenues for a ``true'' quantization procedure.
+  The natural candidate for the space of quantum states,
+  or wave functions,
+  is the space of \emph{multiplicative functions} on the groupoid—smooth functions $\psi: \cY \to \CC$ such that $\psi(y_1 \cdot y_2) = \psi(y_1)\psi(y_2)$.%
+  \footnote{In the usual case of prequantization,
+  when the torus of periods is $\U(1)$.}
+  The group of automorphisms $\Diff(\X, \omega)$ acts naturally on this space,
+  providing the quantum dynamics.
+  
+  The advantage of this diffeological construction is its vast applicability.
+  It applies uniformly to any diffeological space,
+  be it a standard manifold,
+  an orbifold,
+  a quasifold,
+  or an infinite-dimensional space.
+  A current investigation,
+  for example,
+  involves applying this framework to the quantization of the deuteron,
+  modeled as a system on the orbifold $\Sigma^4 = (\S^2 \times \S^2)/\mathfrak{S}_2$.
+  This work demonstrates the continuing vitality of the diffeological groupoid,
+  showing that this concept,
+  born from a need to understand singular fibrations,
+  has evolved into a fundamental tool capable of providing new solutions and deeper insights into the most current problems in geometry and mathematical physics.
+  
+  By building the quantum phase structure directly from an equivalence relation on paths,
+  this approach offers a compelling geometric realization of the physical intuition behind the path integral.
+  
+  \subsection*{Note on the General Case}
+  The construction presented here for simply connected spaces serves as the foundation for the general case.
+  In a subsequent paper in progress,
+  the theory is extended to arbitrary connected diffeological spaces by lifting the structure to the universal covering space and then taking a quotient by the action of the fundamental group.
+  This general construction reveals a richer isotropy structure,
+  where the periods of $\omega$ are some extension,
+  related to the fundamental group $\pi_1(\X)$,
+  of the periods of the lifted $2$-form.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Conclusion
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Conclusion}
+  
+  This expository paper has recounted a thirty-year journey, tracing the evolution of a single, powerful concept: the diffeological groupoid. Born from a specific challenge—the need to make sense of the irrational torus—it has grown into a fundamental tool with applications across a wide swath of modern geometry.
+  
+  We have seen the groupoid play several distinct but interconnected roles. As a \textbf{definitional tool}, the concept of a \emph{fibrating groupoid} provided the key to a robust theory of fiber bundles and coverings in diffeology, one capable of rigorously explaining the homotopy of singular spaces and establishing the long exact sequence.
+  
+  The concept then evolved into a powerful \textbf{analytical instrument}. The \emph{structure groupoid} of an atlas allowed for a deep analysis of the internal symmetries of orbifolds and quasifolds. More fundamentally, the \emph{Klein groupoid} of local diffeomorphisms was shown to provide a universal language for the intrinsic geometry of any diffeological space, with its transitivity components—the Klein strata—partitioning the space into loci of constant diffeological dimension and equivalent singularity type.
+  
+  This analytical power, in turn, allowed the groupoid to serve as a \textbf{bridge between theories}. It forged a concrete, functorial link between the geometric world of singular diffeologies and the algebraic world of noncommutative geometry, associating a unique Morita equivalence class of C*-algebras to each quasifold. Most recently, it has offered a new bridge between classical and quantum mechanics. The \emph{prequantum groupoid}, constructed as a ``quantization'' in the mode of the Poincaré groupoid, provides a geometric realization of the path-integral philosophy, resolving long-standing issues in geometric quantization.
+  
+  From a definitional tool to an analytical one,
+  from a bridge between fields to a unifying principle,
+  the diffeological groupoid has proven to be an exceptionally durable and fertile concept.
+  Its ability to solve problems,
+  clarify structures,
+  and open new avenues of inquiry across a wide range of topics in geometry and mathematical physics is a testament to its fundamental nature.
+  The journey is far from over,
+  and the full potential of this powerful idea
+  ---to unify, to clarify, and to solve---
+  is surely yet to be exhausted
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Bibliography
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{thebibliography}{PIZ25b}
+    
+    \bibitem[DIZ83]{DIZ83}
+    Paul Donato and Patrick Iglesias-Zemmour,
+    \emph{Exemple de groupes différentiels : flots irrationnels sur le tore},
+    Preprint CPT-83/P.1524, Centre de Physique Théorique, Marseille, 1983; published in \emph{C. R. Acad. Sci. Paris Sér. I Math.} \textbf{301} (1985), no. 4, 127--130.\\
+    Available at {\scriptsize\url{http://math.huji.ac.il/~piz/documents/EDGDFISLT.pdf}}.
+    
+    \bibitem[Ehr59]{Ehr59}
+    Charles Ehresmann,
+    \emph{Catégories topologiques et catégories différentiables},
+    in: Colloque de Géom. Diff. Globale (Bruxelles, 1958), Centre Belge Rech. Math., Louvain, 1959, pp. 137--150.
+    
+    \bibitem[GIZ23]{GIZ23}
+    Serap G{\"u}rer and Patrick Iglesias-Zemmour,
+    \emph{Orbifolds as stratified diffeologies},
+    {Differential Geometry and its Applications} \textbf{86} (2023), 101969.
+    
+    \bibitem[GIZ25]{GIZ25}
+    \bysame
+    %Serap G{\"u}rer and Patrick Iglesias-Zemmour,
+    \emph{On Diffeology of Orbit Spaces},
+    (Preprint, 2025).
+    
+    \bibitem[IKZ10]{IKZ10}
+    Patrick Iglesias-Zemmour, Yael Karshon, and Moshe Zadka,
+    \emph{Orbifolds as diffeologies},
+    Transactions of the American Mathematical Society \textbf{362} (2010), no. 6, 2811--2831.
+    
+    \bibitem[IZL18]{IZL18}
+    Patrick Iglesias-Zemmour and Jean-Pierre Laffineur,
+    \emph{Noncommutative geometry and diffeology: the case of orbifolds},
+    J. Noncommut. Geom. \textbf{12} (2018), no. 4, 1551--1572.
+    
+    \bibitem[IZP21]{IZP21}
+    Patrick Iglesias-Zemmour and Elisa Prato,
+    \emph{Quasifolds, diffeology and noncommutative geometry},
+    J. Noncommut. Geom. \textbf{15} (2021), no. 2, 735--759.
+    
+    \bibitem[PIZ85]{PIZ85}
+    Patrick Iglesias-Zemmour,
+    \emph{Fibrations difféologiques et homotopie},
+    Thèse de doctorat d'état, Université de Provence, Marseille, 1985.
+    
+    \bibitem[PIZ95]{PIZ95}
+    \bysame,
+    \emph{La trilogie du moment},
+    Ann. Inst. Fourier \textbf{45} (1995), no. 3, 825--857.
+    
+    \bibitem[PIZ10]{PIZ10}
+    \bysame,
+    \emph{The moment maps in diffeology},
+    Mem. Amer. Math. Soc. \textbf{204} (2010), no. 962, viii+101 pp.
+    
+    \bibitem[PIZ13]{PIZ13}
+    \bysame,
+    \emph{Diffeology},
+    Mathematical Surveys and Monographs, 185, Am. Math. Soc., Providence, RI, 2013.
+    
+    \bibitem[PIZ25a]{PIZ25a}
+    \bysame,
+    \emph{Lectures on Diffeology},
+    Beijing World Publishing Corp., Beijing, 2025. ISBN: 978-7-5232-1841-9.
+    
+    \bibitem[PIZ25b]{PIZ25b}
+    \bysame,
+    \emph{Geometric Quantization by Paths, Part I: The Simply Connected Case},
+    (Preprint, 2025).
+    
+    \bibitem[Pra99]{Pra99}
+    Elisa Prato,
+    \emph{On a Generalization of the Notion of Orbifold},
+    C. R. Acad. Sci. Paris Sér. I Math. \textbf{328} (1999), no. 10, 887--890.
+    
+    \bibitem[Ren80]{Ren80}
+    Jean Renault,
+    \emph{A groupoid approach to C*-Algebras},
+    Lecture Notes in Math., vol. 793, Springer-Verlag, Berlin-Heidelberg-New York, 1980.
+    
+    \bibitem[Sou80]{Sou80}
+    Jean-Marie Souriau,
+    \emph{Groupes différentiels},
+    in: Differential geometrical methods in mathematical physics (Proc. Conf., Aix-en-Provence/Salamanca, 1979), Lecture Notes in Math., vol. 836, Springer, Berlin-New York, 1980, pp. 91--128.
+    
+  \end{thebibliography}
+  
+\end{document}
