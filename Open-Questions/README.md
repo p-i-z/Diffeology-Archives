@@ -4,7 +4,7 @@ This directory contains a curated collection of open problems, conjectures, and 
 
 ### Philosophy
 
-These are questions that have emerged from decades of research but remain unsolved. They are not necessarily difficult, but often highlight the subtle yet profound differences between diffeological structures and their classical counterparts in topology and differential geometry. The author believes that their solutions would significantly advance our understanding of singular spaces, infinite-dimensional groups, and the very foundations of what constitutes a "geometry."
+These are questions that have emerged from decades of research but remain unsolved. They are not necessarily difficult and they often highlight the subtle yet profound differences between diffeological structures and their classical counterparts in topology and differential geometry. The author believes that their solutions would significantly advance our understanding of singular spaces, infinite-dimensional groups, and the very foundations of what constitutes a "geometry."
 
 This collection is a living document and an open invitation to the mathematical community. Researchers who engage with these problems are encouraged to cite this archive. Solutions, partial results, or new insights are always welcome.
 
