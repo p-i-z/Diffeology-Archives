@@ -17,7 +17,7 @@ Diffeology was developed primarily to solve problems in **Symplectic Geometry** 
 
 ## Repository Structure
 
-The works in this archive are organized into two main categories:
+The works in this archive are organized into three main categories:
 
 ### /Papers/
 
@@ -35,6 +35,10 @@ This directory contains the source files for book-length works.
 -   **/Monographs/2013-Diffeology/**: The definitive reference for the theory of Diffeology (AMS 2013 and Beijing 2022 editions).
 -   **/Monographs/2026-The-Geometry-of-Motion/**: (Forthcoming) The definitive treatment of diffeology applied to mechanics.
 
+### /Open-Questions/
+
+A curated depository of significant open problems and conjectures in Diffeology. This section contains challenges that the author believes are crucial for the future development of the theory. It serves as an invitation to the mathematical community to engage with these problems and push the boundaries of the field.
+
 ## A Note on Diffeology
 
 Diffeology is an extension of classical differential geometry that provides a rigorous framework for doing calculus on spaces that are not necessarily manifolds. This includes quotients (such as orbifolds or irrational tori), function spaces, and spaces with singularities.
@@ -46,6 +50,7 @@ The philosophy of this work is to provide geometers, physicists, and other scien
 For a comprehensive introduction to the subject, see the author's book:
 *   **P. Iglesias-Zemmour, *Diffeology*** (Mathematical Surveys and Monographs, Vol. 185, AMS, 2013).
 *   A revised version is also available from Beijing World Publishing Corp. (2022).
+
 
 ## Usage and License
 
