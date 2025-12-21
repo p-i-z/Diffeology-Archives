@@ -10,14 +10,14 @@ After embedding the objects quasifolds into the category {Diffeology}, we associ
 
 ## Significance of the Paper
 
-This paper extends the structural bridge between **Noncommutative Geometry** and **Diffeology** established in the previous work on orbifolds to the more general class of **quasifolds**. Quasifolds, locally modeled on quotients $\RR^n/\Gamma$ where $\Gamma$ is a countable (possibly infinite) subgroup of the affine group, include fundamental examples like the irrational torus.
+This paper extends the structural bridge between **Noncommutative Geometry** and **Diffeology** established in the previous work on orbifolds to the more general class of **quasifolds**. Quasifolds, locally modeled on quotients $\mathbf{R}^n/\Gamma$ where $\Gamma$ is a countable (possibly infinite) subgroup of the affine group, include fundamental examples like the irrational torus.
 
 Key contributions include:
 1.  **Quasifolds as Diffeologies:** Formal identification of quasifolds as a subcategory of diffeological spaces, clarifying the nature of smooth maps between them (which may not always lift equivariantly).
 2.  **The Structure Groupoid:** Generalization of the structure groupoid construction to quasifolds, handling the technical challenges of dense orbits and infinite structure groups.
 3.  **Morita Equivalence:** Proof that different atlases of a quasifold yield MRW-equivalent groupoids and thus **Morita equivalent** associated C*-algebras.
 
-This work completes the picture for a broad class of singular spaces, showing that the diffeological invariant (the structure groupoid) perfectly captures the noncommutative invariant (the Morita class of the algebra), providing a rigorous geometric foundation for the study of spaces like the irrational torus and the $\QQ$-circle.
+This work completes the picture for a broad class of singular spaces, showing that the diffeological invariant (the structure groupoid) perfectly captures the noncommutative invariant (the Morita class of the algebra), providing a rigorous geometric foundation for the study of spaces like the irrational torus and the $\mathbf{Q}$-circle.
 
 ## Files in this Directory
 
