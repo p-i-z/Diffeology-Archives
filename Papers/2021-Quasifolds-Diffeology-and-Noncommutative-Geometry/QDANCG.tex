@@ -1,0 +1,1778 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  PROJECT: Quasifolds, Diffeology and Noncommutative Geometry
+%%  FILENAME: QDANCG.tex
+%%
+%%  Original Authors: Patrick Iglesias-Zemmour & Elisa Prato
+%%  Modernized for the Diffeology Archives in December 2025.
+%%
+%%  This is a self-contained document. All necessary macros
+%%  and packages are included in this preamble.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno]{amsart}
+
+%%====================================================================
+% MARK: - Preamble (Self-Contained)
+%%====================================================================
+
+% --- Core Packages ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage[hidelinks]{hyperref}
+
+% --- Typography and Layout ---
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+% Note: uppercase=upright handles the roman math capitals automatically
+\usepackage[cal=scr,frenchmath,uppercase=upright,greeklowercase=upright,greekfamily=didot,utopia]{mathdesign}
+\linespread{1.1}
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+% --- Figures and Diagrams ---
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{
+    arrow style=tikz,
+    diagrams={>={Straight Barb[scale=0.8]}}
+}
+
+% --- Theorem Environments (Specific to this paper) ---
+\newtheoremstyle{article}{7pt}{7pt}{}{0pt}{\bf}{.\ }{0pt}{}
+\theoremstyle{article}
+\newtheorem{article}{}
+\renewenvironment{proof}{\noindent \textit{Proof.}}{\nolinebreak\hfill $\square$}
+
+% --- Minimal Set of Required Macros ---
+
+% Standard Number Sets
+\newcommand{\CC}{\mathbf C}
+\newcommand{\GG}{\mathbf{G}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\ZZ}{\mathbf{Z}}
+
+% Calligraphic Letters
+\newcommand{\cA}{{\mathcal A}} \newcommand{\cB}{{\mathcal B}} \newcommand{\cC}{{\mathcal C}}
+\newcommand{\cD}{{\mathcal D}} \newcommand{\cF}{{\mathcal F}} \newcommand{\cI}{{\mathcal I}}
+\newcommand{\cN}{{\mathcal N}} \newcommand{\cO}{{\mathcal O}}
+\newcommand{\cQ}{{\mathcal Q}} \newcommand{\cU}{{\mathcal U}} \newcommand{\cV}{{\mathcal V}}
+
+% Fraktur Letters
+\newcommand{\fA}{{\mathfrak A}}
+\newcommand{\fF}{{\mathfrak F}}
+\newcommand{\fG}{{\mathfrak G}}
+\newcommand{\fS}{{\mathfrak S}}
+
+% Bold Letters
+\newcommand{\bS}{\mathbf{S}}
+\renewcommand{\gg}{\mathbf{g}}
+\renewcommand{\tt}{\mathbf{t}}
+
+% Mathematical Operators
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\class}{{class}}
+\DeclareMathOperator{\codom}{codom}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\ev}{{ev}}
+\DeclareMathOperator{\germ}{{germ}}
+\DeclareMathOperator{\GL}{{GL}}
+\DeclareMathOperator{\LCM}{\mathrm{LCM}}
+\DeclareMathOperator{\Maps}{Maps}
+\DeclareMathOperator{\Mor}{\mathrm{Mor}}
+\DeclareMathOperator{\Obj}{\mathrm{Obj}}
+\DeclareMathOperator{\pr}{\mathrm{pr}}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\src}{src}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\trg}{trg}
+\DeclareMathOperator{\U}{U}
+
+% Helper Macros
+\def\artlabel[#1]{{\sc #1}}
+\newcommand{\art}[1]{(\textsection \ref{#1})}
+\newcommand{\Czero}{\mathcal{C}^0}
+\newcommand{\id}{\mathbf 1}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\opcit}{\emph{op. cit.}\/}
+\newcommand{\vect}[1]{\begin{pmatrix} #1\end{pmatrix}}
+\renewcommand{\emptyset}{\varnothing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Document Information
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title[Quasifolds, Diffeology and Noncommutative Geometry]{Quasifolds, Diffeology and Noncommutative Geometry}
+
+\author{Patrick Iglesias-Zemmour}
+\author{Elisa Prato}
+
+\thanks{Research supported by the Laboratory Ypatia of Mathematical Sciences LIA LYSM AMU-CNRS-ECM-INdAM.
+And for E.P. also supported by the PRIN Project ``Real and Complex Manifolds: Geometry,
+Topology and  Harmonic Analysis’' (MIUR, Italy) and by GNSAGA (INdAM, Italy).}
+
+\date{February 23, 2022}
+
+\address{P.I-Z --- Einstein Institute of Mathematics,
+The Hebrew University of Jerusalem,
+Campus Givat Ram,
+9190401 Israel.}
+\email{piz@math.huji.ac.il}
+\urladdr{http://math.huji.ac.il/~piz}
+
+\address{E.P. --- Dipartimento di Matematica e Informatica ``U. Dini'',
+Universit\`a di Firenze,
+Viale Morgagni 67/A,
+50134 Firenze, Italy.}
+\email{elisa.prato@unifi.it}
+
+\keywords{Diffeology, Noncommutative Geometry, Orbifolds, Quasifolds, Groupoids}
+
+\subjclass[2010]{Primary 53; Secondary 58B34}
+
+\maketitle
+
+\tikz[overlay,remember picture]
+{
+\node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Final Version -- \today}};
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  After embedding the objects quasifolds into the category \{Diffeology\},
+  we associate a $\CC^*$-agebra with every atlas of any quasifold,
+  and show how different atlases give Morita equivalent algebras.
+  This builds a new bridge between diffeology and noncommutative geometry
+  ---~beginning with the today classical example of the irrational torus~---
+  which associates a Morita class of $\CC^*$-algebras with a diffeomorphic class of quasifolds.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Introduction
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction}
+
+This paper is a follow-up to ``Noncommutative geometry \& diffeology: the case of orbifolds'' \cite{IZL17}.
+In that article,
+a construction was established that associated a $\CC^*$-algebra with every orbifold,
+in a functorial way.
+Here we extend the construction to the more general \emph{quasifolds}.%
+\footnote{This also provides an answer to the referee of the first paper,
+who suggested to move on to more general diffeologies,
+in order to produce more interesting objects.}
+
+First of all,
+we identify quasifolds \cite{EP01} as objects in the category \{Diffeology\} \cite{PIZ13}.
+These are \emph{diffeological spaces} that are locally diffeomorphic,
+at each point,
+to some quotient $\RR^n\!/\Gamma$,
+for some integer $n$,
+and for $\Gamma$
+---~which may change from point to point~---
+a countable subgroup of $\Aff(\RR^n)$.
+As it appears clearly,
+the definition is similar to that of orbifolds \cite{IKZ10},
+except for the group $\Gamma$,
+which can be infinite,
+while it is finite for orbifolds ---
+whose original definition as independent objects has been published by Ishiro Satake in \cite{IS56,IS57}.
+
+By considering quasifolds as diffeologies,
+they inherit a structure of category which we denote by \{Quasifolds\},
+whose morphisms are smooth maps in the sense of diffeology.
+This remark carries a strong content,
+as can be seen in the lifting of smooth functions between quasifolds \art{Smooth-Maps-Between-Quasifolds}:
+the same phenomenon happening for orbifolds,
+where smooth maps may not lift locally equivariantly,
+happens also for strict%
+\footnote{Which are not orbifolds.}
+quasifolds.
+We have \emph{a priori} the sequence of categories:
+$$
+\text{\{Manifolds\}} \preceq  \text{\{Orbifolds\}} \preceq  \text{\{Quasifolds\}} \preceq  \text{\{Diffeology\}}.
+$$
+Then,
+we generalize to quasifolds the functor toward noncommutative geometry,
+developed in \cite{IZL17} for orbifolds.
+In the same way,
+we associate with each atlas of a quasifold a \emph{structure groupoid},%
+\footnote{Which can be regarded as the \emph{gauge groupoid} of the quasifold structure.}
+in \art{Building-The-Groupoid-Of-A-Quasifold}.
+The objects of this groupoid are the elements of the nebula of the strict generating family associated with the atlas.
+The arrows between the objects are the germs of the local diffeomorphisms of the nebula that are absorbed by the evaluation map,
+that is,
+which project to the identity on the quasifold.
+
+In parallel with the case of orbifolds,
+in \art{Lifting-The-Identity} and in \art{Lifting-Local-Diffeomorphisms} we generalize to quasifolds the two fundamental results:
+
+\textsc{Theorem.}~\textit{Any local smooth map on $\RR^n$ that projects to the identity in the quotient $\RR^n/\Gamma$,
+where $\Gamma$ is a countable subgroup of $\Aff(\RR^n)$,
+is everywhere locally the action of some $\gamma \in \Gamma$.}
+
+\textsc{Theorem.}~\textit{Local diffeomorphisms between quasifolds lift by local diffeomorphisms on the level of the strict generating families.
+Pointed local diffeomorphisms lift by pointed local diffeomorphisms,
+where the source and the target can be chosen arbitrarily in the appropriate fibers over the quasifold.}
+
+The difficulty here is to pass from the action of a finite group on a Euclidean domain to the action of a possibly infinite,
+but countable group,
+whose orbits can be dense.
+This has led us to a substantial revision of the methods,
+focusing on the countable nature of the groups,
+and has resulted in proofs that are minimal and essential.
+
+As said above,
+in \art{Building-The-Groupoid-Of-A-Quasifold} we define the structure groupoid associated with an atlas of the quasifold.
+Then,
+thanks to the previous theorem,
+in \art{Equivalence-Of-Structure-Groupoids} we prove the following:
+
+\textsc{Theorem.}~\textit{Two different atlases of a same quasifold give two equivalent groupoids,
+as categories \cite{SML78}.
+Consequently,
+two diffeomorphic quasifolds have equivalent structure groupoids.}
+
+In other words,
+the class of the structure groupoid is a diffeological invariant of the quasifold.
+Then,
+in \art{General-Description-Of-The-Structure-Groupoid},
+we give a general description of the structure groupoids.
+
+Next,
+in \art{MRW-Equivalence-Of-Structure-Groupoids} we prove the following:
+
+\textsc{Theorem.}~\textit{The groupoids associated with two different atlases of a same quasifold satisfy the Muhly-Renault-Williams equivalence.}
+
+Then,
+having proved in \art{The-Structure-Groupoid-is-Etale-and-Hausdorff} that the structure groupoids associated with the atlases of a quasifold are étale and Hausdorff,
+we show that they fulfill the conditions of Jean Renault's construction of an associated $\CC^*$-algebra,
+by equipping the set of morphisms with the same counting measure as in the case of orbifolds.
+And in \art{The-C*-Algebra-Of-an-Quasifold} we prove then,
+thanks to \art{MRW-Equivalence-Of-Structure-Groupoids},
+the main result:
+
+\textsc{Theorem.}~\textit{The $\CC^*$-algebras associated with different atlases of a same quasifold are Morita-equivalent.
+Therefore,
+diffeomorphic quasifolds have Morita-equivalent $\CC^*$-algebras.}
+
+Finally,
+we illustrate this construction with two simple examples:
+the traditional irrational torus $T_\alpha$ and the $\QQ$-circle,
+quotient of $\RR$ by $\QQ$.
+In these two examples,
+we observe that our construction gives the expected result.
+In work in progress,
+we apply these techniques also to the class of \emph{symplectic toric quasifolds} \cite{EP01,{FBEP01}}.
+
+From the very beginning,
+with the 1983 paper \cite{PDPI83} on the irrational torus $T_\alpha$,
+it was clear that there existed some connection between diffeology and noncommutative geometry.
+Beginning with the fact that two such tori $T_\alpha$ and $T_\beta$ were diffeomorphic if and only if $\alpha$ and $\beta$ were equivalent modulo $\GL(2,\ZZ)$,
+which is the same condition for their algebra to be Morita-equivalent \cite{MR81}.
+That could not be just chance.
+This work,
+which began with the case of orbifolds \cite{IZL17} and which continues here with quasifolds,
+shows and describes the logic behind this correspondence.
+We can reasonably expect wider links between the two theories,
+which will be addressed in the future.
+
+\textsc{Note 1.}
+Unlike the categorical approach,
+which defines its objects directly by means of higher structures (stacks, n-categories etc.),
+we induce the groupoid generating the $\CC^*$-algebra of the quasifold via its singular geometry encoded in the diffeology.
+So,
+to the current standard way \{groupoid $\to$ $\CC^*$-algebra\},
+we add a first floor \{diffeology $\to$ groupoid\},
+which is not trivial and makes this construction non-tautological.
+
+\textsc{Note 2.}
+The irrational tori in arbitary dimension,
+or quasitori,
+are particular quasifolds that are dual smooth geometric versions of quasilattices.
+Knowing how to associate a $\CC^*$-algebra to a quasifold in a structural fashion can be viewed as a kind of geometric quantization.
+In fact,
+the study of the spectrum of the Hamiltonian in a quasicrystal was at the origin of Alain Connes' noncommutative geometry.
+It is obviously interesting to have a smooth version of this,
+which is what we are providing.
+
+\textsc{Note 3.} We assume that the reader is familiar with the basic concepts in diffeology and we refer to the textbook \cite{PIZ13} for details.
+Let us just recall that a diffeology on a set $X$ is a set $\cD$ of smooth parametrizations,
+called \emph{plots},
+that satisfy three fundamental axioms:
+\emph{covering},
+\emph{locality} and \emph{smooth compatibility}.
+That said,
+there are a couple of important diffeological constructions that we use in the following.
+First,
+the \emph{quotient diffeology}:
+every quotient of a diffeological space inherits a natural diffeology for which the plots are the parametrizations that can be locally lifted by plots in the source space.
+Then,
+the \emph{subset diffeology}:
+every subset of a diffeological space inherits a diffeology for which the plots are the plots of the ambient space,
+but with values in the subset.
+For example,
+in diffeology a subset is \emph{discrete} if the subset diffeology is the discrete diffeology,
+that is,
+the plots are locally constant.
+For example $\QQ \subset \RR$ is discrete.
+Finally,
+the \emph{local diffeology}:%
+\footnote{Introduced with the definition of local smooth maps in \cite[\textsection 1.2.3]{PI85},
+see also \cite[\textsection 2.1]{PIZ13}.}
+a map $f$,
+from a subset $A$ of a diffeological space $X$ to a diffeological space $X'$,
+is a \emph{local smooth map} if and only if its composite $f \circ \P$ with a plot $P$ in $X$,
+defined on $\P^{-1}(A)$,
+is a plot in $X'$.
+That is equivalent to:
+$A$ is an open subset for the \emph{D-topology}%
+\footnote{See \cite[\textsection 2.8]{PIZ13}.}
+and $f$ restricted to $A$ is smooth for the subset diffeology.
+With local smooth maps come local diffeomorphisms,
+which are the fundamentals of modeling spaces in diffeology \cite[\textsection 4.19]{PIZ13},
+on which many constructions of subcategories are based,
+like manifolds, manifolds with boundary and corners, orbifolds, quasifolds etc.
+
+\textsc{Thanks.}~It is a pleasure for one of the authors (PIZ) to thank Anatole Khelif for useful discussions on $\CC^*$-algebras.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Diffeological Quasifolds
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Diffeological Quasifolds}
+
+The notion of \emph{quasifold} has been introduced in 1999 in the paper {``On a generalization of the notion of orbifold''} \cite{EP99},
+see also \cite{EP01}.
+The idea is that a $n$-quasifold is a smooth object which resembles locally everywhere a quotient $\RR^n/\Gamma$,
+where $\Gamma$ is some countable subgroup of diffeomorphisms.
+The analogy with orbifolds,
+for which $\Gamma$ is finite,
+is indeed clear.
+On the other hand,
+\emph{Diffeology} has been precisely developed,
+from the mid '80,
+to deal with this kind of situation,
+beginning with ``Exemple de groupes différentiels\ldots'' \cite{PDPI83}.
+In particular,
+\emph{orbifolds} have been later successfully included as a subcategory in \{Diffeology\} in the paper {``Orbifolds as Diffeology''} \cite{IKZ10}.
+It was natural to try to include also quasifolds,
+and this is what we do now.
+
+\begin{article}
+  \label{What-is-a-Diffeological-Quasifold}
+  \artlabel[What is a diffeological quasifold?]~---~We have indeed a diffeological version of quasifolds,
+  formally defined by:
+  
+  \textsc{Definition.}~\textit{A $n$-quasifold is a diffeological space $X$ which is locally diffeomorphic,
+  everywhere,
+  to some $\RR^n\!/\Gamma$,
+  where $\Gamma$ is a countable subgroup,
+  maybe infinite,
+  of $\Aff(\RR^n)$.
+  The group $\Gamma$ maybe changing from place to place.}
+  
+  In more words,
+  this definition means precisely the following:
+  for all $x \in X$, there exist a countable subgroup $\Gamma \subset \Aff(\RR^n)$,
+  and a local diffeomorphism $\phi$ from $\RR^n\!/\Gamma$ to $X$,
+  defined on some open subset $U \subset \RR^n\!/\Gamma$,
+  such that $x \in \phi(U)$.
+  The subset $U$ is open for the D-topology,
+  that is in this case,
+  the quotient topology \cite[\textsection 2.12]{PIZ13} by the projection map%
+  \footnote{In this paper the word $\class$ will denote generically the \emph{class map} from a space onto its quotient,
+  for a relation which has been clearly identified.}
+  $\class \colon \RR^n \to \RR^n\!/\Gamma$.
+  That said:
+  
+  \textsc{Definition.}~\textit{Any such diffeomorphism is called a \emph{chart}.
+  A set of charts $\cA$,
+  covering $X$,
+  is called an \emph{atlas}.}
+  
+  \textsc{Note.}~In the following we consider only quasifolds that support a \emph{locally finite} atlas,
+  that is,
+  every point in the quasifold is covered by a finite number of charts.
+  For example,
+  a symplectic toric quasifold has a canonical atlas made of a finite number of charts \cite[Thm. 3.2]{FBEP01}.
+  
+  \textsc{Remark 1.}~This approach to quasifolds considers spaces that are already equipped with a smooth structure,
+  that is,
+  a diffeology,
+  and then,
+  checks if that diffeology is generated by local diffeomorphisms with some quotients $\RR^n/\Gamma$.
+  This is the standard construction of modeling diffeology we mentioned above;
+  it applies to manifolds,
+  orbifolds\ldots and now quasifolds.
+  It is a reverse construction as the usual one,
+  where the smooth structure is built after equipping the underlying set with a family of injections,
+  compatible according to some specific conditions.
+  Recent works and results involving quasifolds in symplectic geometry can be found in \cite{FBEP18},
+  \cite{FBEP19},
+  and \cite{BPZ19}.
+  
+  \textsc{Remark 2.}~The group $\Gamma$ is chosen inside the affine group and not just the linear subgroup,
+  as it is the case for orbifolds.
+  In this way,
+  one immediately has the well known example of the \emph{irrational torus} $T_\alpha = \RR/\ZZ + \alpha \ZZ$ \cite{PDPI83},
+  where $\alpha x \in \RR - \QQ$,
+  as a quasifold.
+  But,
+  we can notice that $\Gamma$ could be embedded in $\GL(n+1,\RR)$ by considering $\RR^n$ as the subspace of height $1$ in $\RR^n \times \RR$,
+  and an element $(A,b) \in \Aff(\RR^n)$ acting on $\RR^n \times \{1\}$ by
+  $$
+  \vect{A & b \\ 0 & 1} \vect{X \\ 1} = \vect{ AX + b \\ 1}.
+  $$
+  Hence,
+  the affine or linear nature for the subgroup $\Gamma$ is not really discriminant.
+  
+  \textsc{Remark 3.}~In \emph{Example of Singular Reduction in Symplectic Diffeology} \cite{PIZ16},
+  an infinite dimensional quasi-projective space is built inside the category of diffeology.
+  That is,
+  an example of an infinite dimensional analog of the present concept of quasifold.
+  That leaves some space for a generalization of the kind of constructions explored in this paper.
+\end{article} % What is a Diffeological Quasifold?
+
+\begin{article}
+  \label{Smooth-Maps-Between-Quasifolds}
+  \artlabel[Smooth maps between quasifolds]~---~As an object of the category of diffeological spaces,
+  quasifolds inherit automatically the notion of smooth maps.
+  A smooth map from a quasifold to another quasifold is just a map which is smooth when the quasifolds are regarded as diffeological spaces.
+  It follows immediately that the composite of smooth maps between quasifolds is again a smooth map.
+  Hence,
+  quasifolds form a full subcategory of \{Diffeology\} we shall denote by \{Quasifolds\}.
+  
+  A special phenomenon appearing in the case of orbifolds persists for quasifolds:
+  smooth maps between diffeological quasifolds may have no local equivariant lifting,
+  as shown by the following example inspired by \cite[Example 25]{IKZ10}.
+  
+  Let $\alpha \in \RR - \QQ$ and $\CC_\alpha$ be the irrational quotient:
+  $$
+  \CC_\alpha = \CC/\Gamma \quad \text{with} \quad \Gamma = \{e^{i2\pi \alpha k}\}_{k \in \ZZ}.
+  $$
+  This diffeological space%
+  \footnote{Appearing already in \cite[Appendix 6]{PI85}.}
+  falls into the category of quasifolds.
+  
+  Let now $f \colon \CC \to \CC$ be defined by
+  \begin{figure}[t]
+    \includegraphics[width=.50\textwidth]{Figures/function-rho.pdf}
+    \caption{The function $\rho_n$.}
+    \label{function-rho}
+  \end{figure}
+  $$
+  f(z) = \begin{cases}
+    0 & \text{ if } r > 1 \text{ or } r = 0 \\
+    e^{-1/r} \rho_n(r)\ r & \text{ if } \frac{1}{n+1} < r \leq \frac{1}{n}
+    \text{ and $n$ is even } \\
+    e^{-1/r} \rho_n(r)\ z & \text{ if } \frac{1}{n+1} < r \leq \frac{1}{n}
+    \text{ and $n$ is odd},
+  \end{cases}
+  $$
+  where $r = \sqrt{|z|^2}$ and $\rho_n$ is a function vanishing flatly outside the interval $]1/(n+1),1/n[$ and not inside,
+  see Figure \ref{function-rho}.
+  
+  If we consider now $\tau \in \U(1)$,
+  one has:
+  $f(\tau z) = f(z)$ on the annulus $\frac{1}{n+1} < r \leq \frac{1}{n}$ if $n$ even,
+  and $f(\tau z) = \tau f(z)$ if $n$ is odd.
+  That is,
+  $f(\tau z) = h_z(\tau) f(z)$,
+  where $h_z(\tau) = 1$ or $h_z(\tau) = \tau$ depending on whether $z$ is in an even or odd annulus.
+  Hence,
+  $\class(f(\gamma z)) = \class(f(z))$ for all $\gamma \in \Gamma$.
+  Then,
+  the map $f$ projects onto a smooth map $\phi \colon \CC_\alpha \to \CC_\alpha$ defined by
+  $$
+  \phi(\class(z)) = \class(f(z)).
+  $$
+  Next,
+  assume that $f'$ is another lifting of $\phi$.
+  For all $z \in \CC$,
+  there exists $\gamma(z) \in \Gamma$ such that $f'(z) = \gamma(z) f(z)$.
+  We then get a smooth map $z \mapsto f'(z)/f(z) = \gamma(z)$ defined on $\CC-\{0\}$.
+  Since $\Gamma \subset \U(1)$ is diffeologically discrete \cite[Exercise 8 p. 14]{PIZ13},
+  this map is constant $\gamma(z) = \gamma$ and $f'(z) = \gamma f(z)$ on $\CC-\{0\}$,
+  and by continuity on $\CC$.
+  Thus,
+  two lifts of $\phi$ differ only by a constant in $\Gamma$,
+  which gives the same function $h'_z = h_z$.
+  Therefore,
+  because the homomorphism $h_z$ flips from the trivial homomorphism to the identity on successive annuli,
+  $\phi$ has no local equivariant smooth lifting.
+\end{article} % Smooth Maps Between Quasifolds
+
+\begin{article}
+  \label{Lifting-The-Identity}
+  \artlabel[Lifting the identity]~---~Let $\cQ = \RR^n\!/\Gamma$.
+  Consider a local smooth map $F$ from $\RR^n$ to itself,
+  such that $\class \circ F = \class$.
+  In other words,
+  $F$ is a local lifting of the identity on $\cQ$.
+  Then,
+  
+  \textsc{Theorem.}~\textit{$F$ is locally equal to some group action $F(r) =_\loc \gamma \cdot r = A r + b$,
+  where $\gamma = (A,b) \in \Gamma$,
+  for some $A \in \GL(\RR^n)$ and $b \in \RR^n$.}
+  %
+\end{article} % Lifting The Identity
+
+\begin{proof}
+  Let us assume first that $F$ is defined on an open ball $\cB$.
+  Then,
+  for all $r$ in the ball,
+  there exists a $\gamma \in \Gamma$ such that $F(r) = \gamma\cdot r$.
+  Next,
+  for every $\gamma \in \Gamma$, let
+  $$
+  F_\gamma \colon \cB \to \RR^n \times \RR^n \quad \mbox{with} \quad F_\gamma(r) = (F(r), \gamma\cdot r).
+  $$
+  Let $\Delta \subset \RR^n \times \RR^n$ be the diagonal and let us consider
+  $$
+  \Delta_\gamma = F_\gamma^{-1}(\Delta) = \{ r \in \cB \mid F(r) = \gamma\cdot r \}.
+  $$
+  \textsc{Lemma 1.}~There exist at least one $\gamma \in \Gamma$ such that the interior $\mathring{\Delta}_\gamma$ is non-empty.
+  
+  $\blacktriangleleft$~Indeed,
+  since $F_\gamma$ is smooth (thus continuous),
+  the preimage $\Delta_\gamma$ by $F_\gamma$ of the diagonal is closed in $\cB$.
+  However,
+  the union of all the preimages $F_\gamma^{-1}(\Delta)$
+  ---~when $\gamma$ runs over $\Gamma$~---
+  is the ball $\cB$.
+  Then,
+  $\cB$ is a countable union of closed subsets.
+  According to Baire's theorem,
+  there is at least one $\gamma$ such that the interior $\mathring{\Delta}_\gamma$ is not empty.~$\blacktriangleright$
+  
+  \textsc{Lemma 2.}~The union $\mathring{\Delta}_\Gamma = \cup_{\gamma \in \Gamma} \mathring{\Delta}_\gamma$ is an open dense subset of $\cB$.
+  
+  $\blacktriangleleft$~Indeed,
+  let $\cB' \subset \cB$ be an open ball.
+  Let us denote with a prime the sets defined above but for $\cB'$.
+  Then,
+  $\Delta'_\gamma = (F_\gamma  \restriction \cB' )^{-1}(\Delta) = \Delta_\gamma \cap \cB'$,
+  and then $\mathring{\Delta}'_\gamma = \mathring{\Delta}_\gamma \cap \cB'$.
+  Thus,
+  $\cB' \cap \mathring{\Delta}_\Gamma  = \cB' \cap (\cup_{\gamma \in \Gamma} \mathring{\Delta}_\gamma) = \cup_{\gamma \in \Gamma} \mathring{\Delta}'_\gamma$,
+  which is not empty for the same reason that $\cup_{\gamma \in \Gamma} \mathring{\Delta}_\gamma$ is not empty.
+  Therefore,
+  $\mathring{\Delta}_\Gamma$ is dense.~$\blacktriangleright$
+  
+  Hence,
+  there exists a subset of $\Gamma$,
+  indexed by a family $\cI$,
+  for which $\cO_i = \mathring{\Delta}_{\gamma_i} \subset \cB$ is open and non-empty,
+  $\cup_{i \in \cI} \cO_i$ is an open dense subset of $\cB$,
+  and $F \restriction \cO_i \colon r \mapsto A_i r + b_i$,
+  where $(A_i,b_i) \in \Aff(\RR^n)$.
+  Since $F$ is smooth,
+  the first derivative $\D(F)$ restricted to $\cO_i$ is equal to $A_i$,
+  and then the second derivative $\D^2(F) \restriction \cO_i = 0$,
+  for all $i \in \cI$.
+  Then,
+  since $\D^2(F) = 0$ on an open dense subset of $\cB$,
+  $\D^2(F) = 0$ on $\cB$,
+  that is $\D(F)(r) = A$ for all $r \in \cB$,
+  with $A \in \GL(n,\RR)$.
+  Now,
+  the map $r \mapsto F(r) - A r $,
+  defined on $\cB$,
+  is smooth.
+  But,
+  restricted on $\cO_i$ it is equal to $b_i$.
+  Its derivative vanishes on the open dense subset $\cup_{i \in \cI} \cO_i$ and thus vanishes on $\cB$.
+  Therefore,
+  $F(r) - A r = b$ on the whole $\cB$,
+  for $b \in \RR^n$
+  and $F(r) = A r + b$ on $\cB$,
+  with $\gamma = (A,b) \in \Gamma$.
+\end{proof}
+
+\begin{article}
+  \label{Lifting-Local-Diffeomorphisms}
+  \artlabel[Lifting local diffeomorphisms]~---~Let $\cQ = \RR^n\!/\Gamma$ and $\cQ' = \RR^{n'}\!/\Gamma'$,
+  where $\Gamma \subset \Aff(\RR^n)$ and $\Gamma' \subset \Aff(\RR^{n'})$ are countable subgroups.
+  Then,
+  
+  \textsc{Theorem.}~\textit{Every local smooth lifting $\tilde f$ of any local diffeomorphism $f$ from $\cQ$ to $\cQ'$ is necessarily a local diffeomorphism.
+  In particular $n = n'$.
+  %
+  Moreover,
+  let $x \in \dom(f)$,
+  $x' = f(x)$,
+  $r, r' \in \RR^n$ be such that $\class(r) = x$ and $\class(r') = x'$.
+  Then,
+  the local lifting $\tilde f$ can be chosen such that $\tilde f(r) = r'$.}
+  
+  Note that $n$ is also the diffeological dimension of $\RR^n/\Gamma$,
+  see \cite[\textsection 1.78]{PIZ13}.
+\end{article} % Lifting Local Diffeomorphisms
+
+\begin{proof}
+  Let the local diffeomorphism $f$ be defined on $U$ with values in $U'$.
+  By definition of local diffeomorphism,
+  they are both open for the D-topology.
+  Then $\tilde U = \class^{-1}(U)$ is open in $\RR^n$.
+  Since the composite $f \circ \class \colon \tilde{U} \to U'$ is a plot in $\cQ'$,
+  for all $r \in \tilde U$ there exists a smooth local lifting $\tilde f \colon \tilde{V} \to \RR^{n'}$,
+  defined on an open neighborhood of $r$,
+  such that $\class' \circ \tilde f = f \circ \class \restriction \tilde{V}$.
+  %
+  $$
+  \begin{array}{ccc}
+    \begin{tikzcd}[column sep=2cm, row sep=1cm,every label/.append style = {font = \small}]
+      \RR^n \supset \tilde{U} \supset \tilde{V} \arrow[d, swap, "\class"]  \arrow[r, "\normalsize \tilde f"] &  \RR^{n'} \arrow[d,"\class'"] \\
+      \cQ \supset U \arrow[r, swap, "f"] & \cQ'
+    \end{tikzcd}
+    & &
+    \begin{tikzcd}[column sep=2cm, row sep=1cm,every label/.append style = {font = \small}]
+      \RR^n \arrow[d, swap, "\class"]   &  \tilde{V}' \subset \tilde{U}' \subset \RR^{n'} \arrow[l, swap, "\normalsize \hat f"] \arrow[d,"\class'"] \\
+      \cQ  & U' \subset  \cQ' \arrow[l, "f^{-1}"]
+    \end{tikzcd}
+  \end{array}
+  $$
+  %
+  Let $x = \class(r)$,
+  $x' = f(x)$,
+  $r' = \tilde f(r)$,
+  and then $x' = \class'(r')$.
+  
+  Next,
+  let $\tilde{U}' = \class'^{-1}(U')$.
+  Since the composite $f^{-1} \circ \class'$ is a plot in $\cQ$,
+  there exists a smooth lifting $\hat f \colon \tilde{V}' \to \RR^n$,
+  defined on an open neighborhood of $r'$,
+  such that $\class \circ \hat f = f^{-1} \circ \class' \restriction \tilde{V}'$.
+  Let $r'' = \hat f(r')$,
+  which is a priori different from $r$.
+  
+  Now,
+  we consider the composite $\hat f \circ \tilde f \colon \tilde{W} \to \RR^n$,
+  where $\tilde{W} = \tilde f^{-1}(\tilde{V}')$ is a non-empty open subset of $\RR^n$ since it contains $r$.
+  Moreover,
+  $\hat f \circ \tilde f(r) = r''$.
+  It also satisfies $\class \circ (\hat f \circ \tilde f) = \class$.
+  Indeed,
+  $\class \circ (\hat f \circ \tilde f)
+  = (\class \circ \hat f) \circ \tilde f
+  = (f^{-1} \circ \class') \circ \tilde f
+  = f^{-1} \circ (\class' \circ \tilde f)
+  = f^{-1} \circ (f \circ \class)
+  = (f^{-1} \circ f) \circ \class
+  = \class$.
+  %
+  Thus,
+  thanks to \art{Lifting-The-Identity},
+  there exists,
+  locally,
+  $\gamma \in \Gamma$ such that $\hat f \circ \tilde f = \gamma \restriction \tilde{W}$.
+  By the way,
+  $r'' = (\hat f \circ \tilde f)(r) = \gamma \cdot r$.
+  Let $\bar f = \gamma^{-1} \circ \hat f$,
+  then: $\class \circ \bar f = \class \circ \gamma^{-1} \circ \hat f = \class \circ \hat f = f^{-1} \circ \class'$,
+  and $\bar f$ is still a local lifting of $f^{-1}$.
+  Thus $\bar f \circ \tilde f = \id_{\tilde{W}}$,
+  that is,
+  $\bar f = \tilde f^{-1} \restriction \tilde{W}$.
+  We conclude that,
+  around $r$,
+  $\tilde f$ is a local diffeomorphism.
+  Now,
+  if we consider any another point $r'''$ over $x'$,
+  there exists $\gamma'$ such that $\gamma' \cdot r' = r'''$;
+  changing $\tilde f$ to $\gamma' \circ \tilde f$ and $\bar f$ to $\bar f \circ {\gamma'}^{-1}$,
+  we get $\tilde f (r) = r'''$,
+  and $\tilde f$ and $\bar f$ still remain inverse of each other.
+  
+  Therefore,
+  for any $r \in \RR^n$ over $x$ and any $r' \in \RR^n$ over $x' = f(x)$,
+  we can locally lift $f$ to a local diffeomorphism $\tilde f$ such that $\tilde f(r) = r'$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Structure Groupoids of a Quasifold
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Structure Groupoids of a Quasifold.}
+
+In this section,
+we associate a \emph{structure groupoid}
+---~or \emph{gauge groupoid}~---
+which is a diffeological groupoid \cite[8.3]{PIZ13},
+with every atlas of a quasifold.
+Then we show that different atlases give equivalent groupoids:
+as categories,
+according to the Mac Lane definition \cite{SML78},
+and in the sense of Muhly-Renault-Williams \cite{MRW87}.
+We give a precise description of the structure groupoid in terms or the groupoid associated with the action of the structure groups $\Gamma$,
+and the connecting points of the charts.
+This construction is the foundation for a $\CC^*$-algebra associated with the quasifold.
+
+\begin{article}\artlabel[Building the groupoid of a quasifold.] ---
+  \label{Building-The-Groupoid-Of-A-Quasifold}
+  Let $X$ be a quasifold,
+  let $\cA$ be an atlas and let $\cF$ be the strict generating family over $\cA$.
+  We denote by $\cN$ the nebula%
+  \footnote{See definition in \cite[\textsection\ 1.76]{PIZ13}.}
+  of $\cF$,
+  that is,
+  the sum of the domains of its elements:
+  $$
+  \cN = \coprod_{F \in \cF} \dom(F) = \{ (F,r) \mid F \in \cF \text{ and } r \in \dom(F) \}.
+  $$
+  %The points $\nu \in \cN$ are the pairs $(F,r)$ such that $F \in \cF$ and $r \in \dom(F)$.
+  The \emph{evaluation map} is the natural subduction
+  $$
+  \ev \colon \cN \to X \quad \mbox{with} \quad \ev(F,r) = F(r).
+  $$
+  Following the construction in the case of orbifolds \cite{IZL17},
+  the \emph{structure groupoid} of the quasifold $X$,
+  associated with the atlas $\cA$,
+  is defined as the subgroupoid $\GG$ of germs of local diffeomorphisms of $\cN$ that project to the identity of $X$ along $\ev$.
+  That is,
+  $$
+  \left\{
+  \begin{array}{lcl}
+    \Obj(\GG) & = & \cN, \\ [1ex]
+    \Mor(\GG) & = & \{\ \germ(\Phi)_\nu \mid \Phi \in \Diff_\loc(\cN) \mbox{ and } \ev \circ \Phi = \ev \restriction \dom(\Phi) \}.
+  \end{array}
+  \right.
+  $$
+  \begin{figure}[t]
+    \includegraphics[width=.65\textwidth]{Figures/Quasifold.pdf}
+    \caption{The three levels of a quasifold.}
+    \label{The-three-levels-of-a-quasifold}
+  \end{figure}
+  %
+  The set $\Mor(\GG)$ is equipped with the functional diffeology inherited by the full groupoid of germs of local diffeomorphisms \cite[\textsection 2 \& 3]{IZL17}.
+  Note that,
+  given $\Phi \in \Diff_\loc(\cN)$ and $\nu \in \dom(\Phi)$,
+  there exist always two plots $F$ and $F'$ in $\cF$ such that $\nu=(F,r)$,
+  with $r \in \dom(F)$,
+  and a local diffeomorphism $\phi$ of $\RR^n$,
+  defined on an open ball centered in $r$,
+  such that $\dom(\phi) \subset \dom(F)$,
+  $\phi = \Phi \restriction \{F\}\times \dom(F)$
+  and $F' \circ \phi = F \restriction \dom(\phi)$.
+  That is summarized by the diagram:
+  $$
+  \begin{tikzcd}[column sep=small,every label/.append style = {font = \small}]
+    \dom(F) \supset \dom(\phi) \arrow[dr, swap, "F"]  \arrow[rr, "\normalsize \phi"] &    & \dom(F')\arrow[dl,"F'"] \\
+    & X  &
+  \end{tikzcd}
+  $$
+  \textsc{Note.}~According to the theorem in \art{Lifting-The-Identity},
+  the local diffeomorphisms,
+  defined on the domain of a generating plot,
+  and lifting the identity of the quasifold,
+  are just the elements of the structure group associated with the plot.
+  We can legitimately wonder what is the point of involving general germs of local diffeomorphisms,
+  if we merely end up with the structure group we could have began with.
+  The reason is that the structure groups connect the points of the nebula that project on a same point of the quasifold,
+  only when they are inside the same domain.
+  They cannot connect the points of the nebula that project on the same point of the quasifold but belonging to different domains,
+  with maybe different structure groups.
+  This is the reason why we cannot avoid the use of germs of local diffeomorphisms in the nebula,
+  to begin with.
+  That situation is illustrated in Figure \ref{The-three-levels-of-a-quasifold}.
+\end{article} % Building The Groupoid Of A Quasifold
+
+\begin{article}\artlabel[Equivalence of structure groupoids]
+  \label{Equivalence-Of-Structure-Groupoids}
+  Let us recall that a functor $\S \colon A \to C$ is an equivalence of categories if and only if,
+  $\S$ is full and faithful,
+  and each object $c$ in $C$ is isomorphic to $\S(a)$ for some object $a$ in $A$ \cite[Chap. 4 \textsection\ 4 Thm. 1]{SML78}.
+  If $A$ and $C$ are groupoids,
+  the last condition means that,
+  for each object $c$ of $C$,
+  there exist an object $a$ of $A$ and an arrow from $\S(a)$ to $c$.
+  
+  In other words:
+  let the \emph{transitivity-components} of a groupoid be the maximal full subgroupoids such that each object is connected to any other object by an arrow.
+  The functor $\S$ is an equivalence of groupoids if it is  full and faithful,
+  and surjectively projected on the set of transitivity-components.
+  
+  Now,
+  consider an $n$-quasifold $X$.
+  Let $\cA$ be an atlas,
+  let $\cF$ be the associated strict generating family,
+  let $\cN$ be the nebula of $\cF$ and let be $\GG$ the associated structure groupoid.
+  Let us first describe the \emph{morphology} of the groupoid.
+  
+  \textsc{Proposition.}~\textit{The fibers of the subduction $\ev \colon \Obj(\GG) \to X$ are exactly the transitivity-components of\/ $\GG$.
+  In other words,
+  the space of transitivity components of the groupoid $\GG$ associated with any atlas of the quasifold $X$,
+  equipped with the quotient diffeology,
+  is the quasifold itself.}
+  
+  \textsc{Theorem.}~\textit{Different atlases of $X$ give equivalent structure groupoids.
+  The structure groupoids associated with diffeomorphic quasifolds are equivalent.}
+  
+  In other words,
+  the equivalence class of the structure groupoids of a quasifold is a diffeological invariant.
+\end{article} % Equivalence Of Structure Groupoids
+
+\begin{proof}
+  These results are analogous to the results of \cite[\textsection 5]{IZL17}.
+  They have the same kind of proof.
+  The fact that the structure groups $\Gamma$ of the quasifolds are countable instead of finite has no negative consequences,
+  thanks to \art{Lifting-Local-Diffeomorphisms}.
+  
+  Let us start by proving the proposition.
+  Let $F \colon U \to X$ and $F' \colon U' \to X'$ be two generating plots from the strict family $\cF$,
+  and $r \in U \subset \RR$ and $r' \in U' \subset \RR'$.
+  Assume that $\ev(F,r) = \ev(F',r') = x$,
+  that is,
+  $x = F(r) = F'(r')$.
+  %
+  Note that $F = f \circ \class \restriction U$ and $F' = f' \circ \class' \restriction U'$,
+  where $f, f' \in \cA$.
+  Then,
+  $\psi = f'^{-1} \circ f$, defined on $f^{-1}(f'(U'))$ to $U'$,
+  is a local diffeomorphism that maps $\xi = f(\class(r))$ to $\xi' = f'(\class'(r'))$.
+  
+  Then,
+  according to \art{Lifting-Local-Diffeomorphisms},
+  $n=n'$ and there exists a local diffeomorphism $\varphi$ of $\RR^n$,
+  lifting locally $\psi$ and  mapping $r$ to $r'$.
+  Its germ realizes an arrow of the groupoid $\GG$ connecting $(F,r)$ to $(F',r')$.
+  Of course,
+  when $F(r) \neq F'(r')$ there cannot be an arrow, by definition.
+  Therefore,
+  as in the more restrictive case of orbifolds,
+  the fibers of the evaluation map are the transitive components of the structure groupoid $\GG$ of the quasifold.
+  
+  Now,
+  the theorem follows the formal flow of (\opcit\ \textsection5):
+  let $\cA$ and $\cA'$ be two atlases of $X$ and consider $\cA'' = \cA \coprod \cA'$.
+  With an obvious choice of notation: $\Obj(\GG'')=\Obj(\GG) \coprod \Obj(\GG')$ and $\GG''$ contains naturally $\GG$ and $\GG'$ as full subgroupoids.
+  The question then is:
+  how does the adjunction of the crossed arrows between $\GG$ and $\GG'$ change the distribution of transitivity-components?
+  According to the previous proposition,
+  it changes nothing since,
+  for $\GG$,
+  $\GG'$ or $\GG''$,
+  the set of transitivity-components are always exactly the fibers of the respective subductions $\ev$.
+  In other words,
+  the set of groupoid components is always $X$,
+  for any atlas of $X$.
+  Thus $\GG$ and $\GG'$ are equivalent to $\GG''$,
+  therefore $\GG$ and $\GG'$ are equivalent.
+\end{proof}
+
+\begin{article}\artlabel[General description of the structure groupoid.] ---
+  \label{General-Description-Of-The-Structure-Groupoid}
+  The general description of the structure groupoid of a quasifold $X$ follows exactly the description in the case of orbifolds (\opcit).
+  We remind it here for clarity.
+  Let $X$ be a quasifold.
+  Let $\cA$ be an atlas,
+  let $\cF$ be the associated strict generating family,
+  and let $\GG$ be the associated groupoid.
+  We know from the previous paragraph that the groupoid components in $\Obj(\GG)$ are the fibers of the projection $\ev \colon (F,r) \mapsto F(r)$.
+  Then,
+  the (algebraic) structure of the groupoid reduces to the algebraic structure of each full subgroupoid $\GG_x$,
+  $x \in X$,
+  that is,
+  $$
+  \left\{
+  \begin{array}{rcl}
+    \Obj(\GG_x) & = & \{(F,r) \in \cN \mid F(r) = x \}, \\
+    \Mor(\GG_x) & = & \big\{ \gg \in \Mor_\GG \big( (F,r),(F',r') \big) \mid F(r)=x \big\};
+  \end{array}
+  \right.
+  $$
+  more precisely,
+  $\gg = \germ(\varphi)_r$ where $\varphi$ is a local diffeomorphism defined in the domain of $F$ to the domain of $F'$,
+  mapping $r$ to $r'$ and such that $F' \circ \varphi =_\loc F$ on an open neighborhood of $r$.
+  In other words,
+  $$
+  \Obj(\GG_x) = \ev^{-1}(x) \quad \mbox{and} \quad \Mor(\GG_x) =  (\ev \circ \src)^{-1}(x).
+  $$
+  
+  Let $f$ be a chart in $\cA$,
+  let $U = \dom(f)$ and let $\tilde U = \class^{-1}(U) \subset \RR^n$ be the domain of its strict lifting $F = f \circ \class \restriction \tilde U$,
+  where $\class \colon \RR^n \to \RR^n/\Gamma$.
+  Without loss of generality,
+  we shall assume that the domains of all charts,
+  and thus the domains of the strict liftings,
+  are connected.
+  
+  The subgroupoid $\GG_x$ is the assemblage of the subgroupoids $\GG_x^F$.
+  For all $F \in \cF$,
+  $$
+  \left\{\begin{array}{rcl}
+    \Obj(G_x^F) & = & \{F\} \times \dom(F), \\
+    \Mor(\GG_x^F) & = & \{\germ(\varphi)_r \in \Mor(\GG_x) \mid r,\varphi(r) \in \dom(F)  \}.
+  \end{array} \right.
+  $$
+  That is,
+  $\Mor(\GG_x^F) = \src^{-1}(\Obj(G_x^F)) \cap \trg^{-1}(\Obj(G_x^F))$.
+  The assemblage is made first by connecting the groupoid $\GG_x^F$ to $\GG_x^{F'}$ with any arrow $\germ(\varphi)_r$,
+  from $(F,r)$ to $(F',r')$ such that $x=F(r)=F(r')$ and $\varphi(r)=r'$.
+  Secondly,
+  by spreading the arrows by composition.
+  We can represent this construction by a groupoid-set-theoretical diagram:
+  $$
+  \GG = \coprod_{x\in X} \GG_x \quad \text{and} \quad \GG_x = \GG_x^{F_1} \text{ --- } \GG_x^{F_2} \text{ --- } \cdots \text{ --- } \GG_x^{F_{N_x}}
+  $$
+  where the $F_i$'s are the charts having $x$ in their images and $N_x$ is the number of such charts
+  (the atlas $\cA$ is assumed locally finite).
+  The link between two groupoids: $G_x^{F_i} \text{ --- } G_x^{F_j}$ represents the spreading of the arrows by adjunction of one of them.
+  Note that this is absolutely not a smooth representation of $\GG$,
+  since the projection $\ev \circ \src \colon \Mor(\GG) \to X$ is a subduction.
+  Moreover,
+  the order of assembly has no influence on the result.
+  
+  \textsc{Examples.}~In the case of orbifolds,
+  where the structure group is finite,
+  this assemblage of groupoids can be completely visual:
+  for example, the teardrop in \cite[Figure 3]{IZL17}.
+  It is more difficult in the case of a strict quasifold,
+  with dense structure group.
+  For example,
+  the irrational torus $T_\alpha = \RR/(\ZZ + \alpha \ZZ)$,
+  which was described as a diffeological space in \cite{PDPI83} for the first time.
+  Now,
+  with the identification of this new subcategory \{Quasifolds\} in \{Diffeology\},
+  the irrational torus becomes a \emph{quasitorus}.%
+  \footnote{Or,
+  in this case,
+  a quasicircle.}
+  For the generating family $\{\class \colon \RR \to T_\alpha\}$,
+  the objects of the structure groupoid equal just $\RR$.
+  Moreover,
+  in this simple case,
+  as we see in \art{The-C*-Algebra-Of-The-Irrational-Torus},
+  the groupoid $\GG_\alpha$ is the groupoid of the action of the subgroup $\ZZ + \alpha \ZZ$ by translation.
+  Therefore,
+  one has
+  \[
+  \Obj(\GG_\alpha) = \RR
+  \quad \text{and} \quad
+  \Mor(\GG_\alpha) = \{(x,\tt_{n+\alpha m}) \mid x \in \RR \text{ and } n,m \in \ZZ \},
+  \]
+  where the bold letter $\tt$ denotes a translation.
+  The source and target are given by
+  $$
+  \src(x,\tt_{n+\alpha m}) = x \quad \text{and} \quad \trg(x,\tt_{n+\alpha m}) = x + n+\alpha m.
+  $$
+  Also,
+  the composition of arrows is given by
+  $$
+  (x,\tt_{n+\alpha m}) \cdot (x + n + \alpha m, \tt_{n' + \alpha m'}) = (x, \tt_{n+n' + \alpha(m+m')}).
+  $$
+  The subgroupoid $\GG_{\alpha,\tau}^{\class}$,
+  with $\tau \in T_\alpha$,
+  is then
+  $$
+  \GG_{\alpha,\tau}^{\class} = \{(x,\tt_k) \mid \class(x) = \tau \text{ and } k \in \ZZ + \alpha \ZZ \}.
+  $$
+  For example,
+  at $\tau = 0$ we get $\GG_{\alpha,0}^{\class} = \{(n+\alpha m, \tt_{n'+\alpha m'})\mid n,n',m,m' \in \ZZ\}$.
+\end{article} % General Description Of The Structure Groupoid
+
+\begin{article}\artlabel[The structure groupoid is étale and Hausdorff.] ---
+  \label{The-Structure-Groupoid-is-Etale-and-Hausdorff}
+  Let $\cA$ be an atlas of a quasifold $X$.
+  The structure groupoid $\GG$ associated with the generating family of the atlas $\cA$ is étale,
+  namely: the projection $\src \colon \Mor(\GG) \to \Obj(\GG)$ is an étale smooth map,
+  that is,
+  a local diffeomorphism at each point \cite[\textsection 2.5]{PIZ13}.
+  
+  \textsc{Proposition 1.}~\textit{For all $\gg \in \Mor(\GG)$,
+  there exists a D-open superset $\cO$ of $\gg$ such that $\src$ restricted to $\cO$ is a local diffeomorphism.}
+  
+  \textsc{Proposition 2.}~\textit{The groupoid $\GG$ is locally compact and Hausdorff.}
+  
+  \textsc{Note.}~Since the atlas $\cA$ is assumed to be locally finite,
+  the preimages of the objects of $\GG$ by the source map,
+  or the target map,
+  are countable.
+\end{article} % The Structure Groupoid is Étale and Hausdorff
+
+\begin{proof}
+  This proof is the same as in the case of orbifolds \cite[\textsection 7]{IZL17}.
+  We just have to pay attention to the fact the structure group is now countable,
+  and not just finite.
+  
+  (1) Let us first check that the groupoid $\GG$ is étale.
+  That is,
+  $\src \colon \Mor(\GG) \to \Obj(\GG)$ is everywhere a local diffeomorphism.
+  
+  Let us pick a germ $\gg = \germ(\Phi)_\nu \in \Mor(\GG)$,
+  with $\nu = \src(\gg) = (F,r)$ and $\trg(\gg) = (F',r')$.
+  Thus,
+  $\Phi$ is defined by some $\varphi \in \Diff_\loc(\RR^n)$ with $\dom(\varphi) \subset \dom(F)$,
+  $r' = \varphi(r) \in \dom(F')$ and such that $F' \circ \varphi = F \restriction \cB$.
+  We choose $\varphi \colon \cB \to \dom(F')$ to be defined on a small ball centered at $r$.
+  By abuse of notation,
+  we shall denote $\gg = \germ(\varphi)_r$,
+  where $\varphi \in \Diff_\loc(\dom(F),\dom(F'))$.
+  That is,
+  $\varphi$ now contains implicitly the data source and target.
+  %
+  Now,
+  let
+  $$
+  F = f \circ \class \quad \text{and} \quad F' = f' \circ \class',
+  $$
+  where $f$ and $f'$ belong to $\cA$,
+  $\class \colon \RR^n \to \RR^n/\Gamma$ and $\class' \colon \RR^n \to \RR^n/\Gamma'$ are the projections.
+  If $\psi$ is the transition map $f'^{-1} \circ f$,
+  then $\class(r) \in \dom(\psi)$ and $\psi(\class(r)) = \class'(r')$.
+  %
+  This situation is illustrated by the diagram of Figure \ref{Lifting-local-diffeomorphisms},
+  where,
+  except for the family $\varphi_s$ which will vary around $\varphi$,
+  the vertices and arrows are fixed as soon as the representant $\Phi$ of the germ $\gg$ is chosen.
+  \begin{figure}
+    $$
+    \begin{tikzcd}[column sep=1.5em, row sep=3em, every label/.append style = {font = \small}]
+      \dom(F) \arrow[rr, dotted, "\varphi_s"]  \arrow[d, swap, "\class"]       &                         & \dom(F') \arrow[d,"\class'"]           \\
+      \dom(f) \arrow[rr, dotted, "\psi"] \arrow[dr,swap,"f"] &                         & \dom(f') \arrow{dl}{f'} \\
+      &          X             &
+    \end{tikzcd}
+    $$
+    \caption{Lifting local diffeomorphisms}
+    \label{Lifting-local-diffeomorphisms}
+  \end{figure}
+  Now,
+  let
+  $$
+  \cO = \{ \germ(\varphi)_t \mid t \in \cB \} \subset \Mor(\GG).
+  $$
+  Hence,
+  $\src \restriction \cO \colon \germ(\varphi)_t \mapsto t$ is smooth and injective,%
+  \footnote{Maybe we should recall that $\germ(\varphi)_t = \germ(\varphi')_{t'}$ if and only if:
+  $t=t'$ and there exists an open ball $\cB$ centered at $t$ such that $\varphi \restriction \cB = \varphi' \restriction \cB$.}
+  as well as its inverse $t \mapsto \germ(\varphi)_t$,
+  which is defined on $\cB$.
+  Let us now show that $\cO$ is a D-open subset,
+  that is,
+  for each plot $\P \colon s \mapsto \gg_s$ in $\Mor(\GG)$,
+  the subset $\P^{-1}(\cO) \subset \dom(\P)$ is open.
+  Let $s \in \P^{-1}(\cO)$,
+  that is,
+  $\gg_s \in \cO$, \emph{i.e.} $\gg_s= \germ(\varphi)_{r_s}$,
+  where $r_s=\src(\gg_s)$,
+  the discrete index $F$ here is implicit.
+  
+  Then,
+  for all $s \in \dom(\P)$,
+  there exists a small ball $\cV$ centered at $s$ and a plot $s' \mapsto (\varphi_{s'},r_{s'})$,
+  defined on $\cV$,
+  such that $\gg_{s'} = \germ(\varphi_{s'})_{r_{s'}}$ with $\germ(\varphi_{s})_{r_s}=\germ(\varphi)_{r_s}$ and $r_{s'} \in \cB$.
+  Since $s' \mapsto \varphi_{s'}$ is smooth,
+  by definition the subset
+  $$
+  \{(s',r) \in \cV \times \cB \mid r \in \dom(\varphi_{s'}) \}
+  $$
+  is necessarily open.
+  Since it contains $(s,r_s)$,
+  it contains a product $\cV' \times \cB'$,
+  where $\cV'$ is a small ball centered at $s$ and $\cB'$ is a small ball centered at $r_s$.
+  This implies that,
+  for all $s' \in \cV'$,
+  $\cB' \subset \dom(\varphi_{s'})$.
+  In particular,
+  $\cB' \subset \dom(\varphi)$.
+  
+  Then,
+  $\xi_s = \varphi_s \circ \varphi^{-1} \colon \varphi(\cB') \to \dom(F')$ is a local diffeomorphism of $\dom(F')$.
+  However,
+  for all $s'$,
+  one has $\class' \circ \varphi_{s'} = \psi \circ \class$,
+  wherever it is defined.
+  This is shown by the above diagram,
+  where the dots denote a local map.
+  
+  Thus,
+  $\class' \circ \xi_{s'} = \class'$.
+  Indeed,
+  $\class' \circ \xi_{s'} = \class' \circ \varphi_{s'} \circ \varphi^{-1} = \psi \circ \class \circ \varphi^{-1}$
+  and $\psi \circ \class  = \class' \circ \varphi$.
+  Now,
+  thanks to \art{General-Description-Of-The-Structure-Groupoid},
+  for all $s' \in \cV'$ there is a $\gamma' \in \Gamma'$ such that $\xi_{s'} = \gamma'$,
+  and the map $s' \mapsto \gamma'$ is smooth.
+  Then,
+  since $\cV'$ is connected and $\Gamma'$ is discrete \cite[Exercise 8]{PIZ13},
+  $\gamma'$ is constant on $\cV'$.
+  Now $s \in \cV'$,
+  thus,
+  for $s'=s$,
+  $\gamma' = \varphi^{-1} \circ \varphi_s = \varphi^{-1} \circ \varphi = \id$.
+  Hence,
+  $\varphi_{s'} = \varphi$ on $\cV'$,
+  and $\gg_{s'} = \germ(\varphi)_{r_{s'}}$ on $\cV'$,
+  that is,
+  $\P(\cV') \subset \cO$.
+  Then,
+  each $s \in \dom(\P)$ such that $\P(s) \in \cO$ is the center of an open ball whose image is contained in $\cO$.
+  Therefore,
+  $\P^{-1}(\cO)$ is a union of open balls,
+  thus $\P^{-1}(\cO)$ is open and $\cO$ is D-open.
+  Thus,
+  the map $\src \colon \germ(\varphi)_t \mapsto t$,
+  restricted to $\cO$,
+  is a local diffeomorphism:
+  the source map is étale.
+  
+  (2) Next,
+  let us check that $\Mor(\GG)$ is Hausdorff.
+  As above,
+  let $\gg = \germ(\varphi)_r \in \Mor(\GG)$.
+  We can also represent $\gg$ by a triple $(F,r,\germ(\varphi)_r)$,
+  with $\varphi \in \Diff_\loc(\dom(F),\dom(F'))$.
+  Then,
+  let $\gg' = \germ(\psi)_s$ be another germ represented by $(G,s,\germ(\psi)_s)$,
+  different from $\gg$,
+  with $\psi \in \Diff_\loc(\dom(G),\dom(G'))$.
+  We separate the situation in three cases:
+  $$
+  \begin{array}{cll}
+    F \neq G &     \\
+    \text{or}  &     \\ [-1.2em]
+    F = G    & \left\{
+    \begin{array}{cl}
+      r \neq s   &  \\
+      \text{or}  & \\
+      r = s      & \text{ but} \quad \germ(\varphi)_r \neq \germ(\psi)_s
+    \end{array}
+    \right.
+  \end{array}
+  $$
+  In the first two cases ($F \neq G$,
+  and $F = G$ but $r \neq s$),
+  since the source map is étale and since the Nebula is Hausdorff,
+  it is sufficient to consider two small separated balls $\cB$ and $\cB'$,
+  centered around $r$ and $s$,
+  to get two D-open subsets of $\Mor(\GG)$ that separate the two different germs.
+  Indeed,
+  let $\cO = \src^{-1}(\cB)$ and $\cO' = \src^{-1}(\cB')$ be the D-open subset on which the source map is a local diffeomorphism.
+  If there were a point $\gg'' \in \cO \cap \cO'$,
+  then $\src(\gg'')$ would belong to $\cB \cap \cB'$,
+  which is empty.
+  
+  The last case ($(F,r,\germ(\varphi)_r)$ and  $(F,r,\germ(\psi)_r)$ with $\germ(\varphi)_r \neq \germ(\psi)_r$) divides in two subcases:
+  $\codom(\varphi) \neq \codom(\psi)$ and $\codom(\varphi) = \codom(\psi)$.
+  
+  In the first sub-case,
+  when $\codom(\varphi) \neq \codom(\psi)$,
+  since the codomains are different,
+  we consider a small ball $\cB$ around $r$ such that its images by $\varphi$ and $\psi$ are separated.
+  Then $\cO = \{\germ(\varphi)_t \mid t \in \cB\}$ and $\cO' = \{\germ(\psi)_t \mid t \in \cB\}$ are two open subsets in $\Mor(\GG)$ that separate $\gg$ and $\gg'$,
+  since no germ in $\cO'$ has the same codomain as any germ in $\cO$.
+  
+  In the second sub-case,
+  when $\codom(\varphi) = \codom(\psi)$,
+  let us consider the composite $f = \varphi \circ \psi^{-1}$,
+  defined on an open neighborhood of $\psi(r)$.
+  Thanks to the theorem of \art{Lifting-The-Identity},
+  $f(s) =_\loc \gamma' \cdot s$,
+  for some $\gamma' \in \Gamma'$,
+  which is the structure group of the quasifold for the plot $F'$.
+  Since we have assumed that $\germ(\varphi)_r \neq \germ(\psi)_r$,
+  we have that $\gamma' \neq \id$.
+  Hence, there is a small ball $\cB$ around $r$ on which $\varphi = \gamma' \circ \psi$.
+  Let $\cO' = \{(F, t, \germ(\psi)_t) \mid t \in \cB\}$ and $\cO = \{(F,t,\germ(\varphi)_t) \mid t \in \cB\}$,
+  that is,
+  $\cO = \{(F, t, \gamma' \circ \germ(\psi)_t) \mid t \in \cB\}$.
+  As we know,
+  they are two D-open subsets in $\Mor(\GG)$ and,
+  since $\gamma' \neq \id$,
+  we have that $\cO \cap \cO' = \varnothing$.
+  Therefore,
+  the two germs $(F, r, \germ(\varphi)_r)$ and $(F, r, \germ(\psi)_r)$ are separated.
+  
+  In conclusion,
+  $\Mor(\GG)$ is Hausdorff for the D-topology.
+  
+  According to the previous Note,
+  the preimages of an object $(F,r) \in \cN = \Obj(\GG)$ are the germs of all the local diffeomorphisms $\Phi \colon (F,r) \mapsto (F',r')$,
+  such that $F(r) = r'$ and $F =_\loc F' \circ \varphi$ around $r$,
+  where $\varphi$ is a local diffeomorphism of $\RR^n$.
+  Since the atlas $\cA$ is locally finite,
+  there are a finite number of $F' \in \cF$ such that $F(r) = F'(r')$.
+  Now,
+  for such $F'$ the number of $r' \in \dom F'$ such that $F'(r') = F(r)$ is at most equal to the number of elements of the structure group $\Gamma'$,
+  that is,
+  countable.
+  Therefore,
+  the preimages of $(F,r)$ by the source map are countable,
+  and that works obviously in the same way for the preimages of the target map.
+\end{proof}
+
+\begin{article}\artlabel[MRW-equivalence of structure groupoids.] ---
+  \label{MRW-Equivalence-Of-Structure-Groupoids}
+  We consider a quasifold $X$ and two atlases $\cA$ and $\cA'$,
+  with associated strict generating families $\cF$ and $\cF'$.
+  We shall show in this section that the associated groupoids are equivalent in the sense of Muhly-Renault-Williams \cite[2.1]{MRW87};
+  this will later give Morita-equivalent $\CC^*$-algebras.
+  
+  This section follows \cite[\textsection 8]{IZL17};
+  we just check that the fact that the structure groups are countable and not just finite,
+  does not change the result.
+  
+  Let us recall what is an MRW-equivalence of groupoids.
+  Let $\GG$ and $\GG'$ be two locally compact groupoids.
+  We say that a locally compact space $Z$ is a $(\GG,\GG')$-equivalence if
+  \begin{enumerate}
+    \item[(i)] $Z$ is a left principal $\GG$-space.
+    \item[(ii)] $Z$ is a right principal $\GG'$-space.
+    \item[(iii)] The $\GG$ and $\GG'$ actions commute.
+    \item[(iv)] The action of $\GG$ on $Z$ induces a bijection of $Z/\GG$ onto $\Obj(\GG')$.
+    \item[(v)] The action of $\GG'$ on $Z$ induces a bijection of $Z/\GG'$ onto $\Obj(\GG)$.
+  \end{enumerate}
+  Let $\src \colon Z \to \Obj(\GG)$ and $\trg \colon Z \to \Obj(\GG')$ be the maps defining the composable pairs associated with the actions of $\GG$ and $\GG'$.
+  That is,
+  a pair $(\gg,z)$ is composable if $\trg(\gg)=\src(z)$,
+  and the composite is denoted by $\gg \cdot z$.
+  Moreover,
+  a pair $(\gg',z)$ is composable if $\src(\gg')=\trg(z)$,
+  and the composite is denoted by $z \cdot \gg'$.
+  
+  Let us also recall that an action is principal in the sense of Muhly-Renault-Williams,
+  if it is free: $\gg \cdot z = z$ only if $\gg$ is a unit,
+  and the \emph{action map} $(\gg, z) \mapsto (\gg \cdot z, z)$,
+  defined on the composable pairs,
+  is proper  \cite[\textsection 2]{MRW87}.
+  
+  Now,
+  using the hypothesis and notations of \art{Equivalence-Of-Structure-Groupoids},
+  let us define $Z$ to be the space of germs of local diffeomorphisms,
+  from the nebula of the family $\cF$ to the nebula of the family $\cF'$,
+  that project on the identity by the evaluation map.
+  That is,
+  $$
+  Z = \left\{ \germ(f)_r \ \bigg\vert \
+  \begin{array}{l}
+    f \in \Diff_\loc(\dom(F),\dom(F'), r \in \dom(F), \\ [.5ex]
+    F \in \cF, F' \in \cF' \text{ and } F' \circ f = F \restriction \dom(f).
+  \end{array} \right\}.
+  $$
+  Let%
+  \footnote{For the sake of simplicity,
+  we make an abuse of notation:
+  in reality one should write,
+  more precisely,
+  $\src(\germ(f)_r) = (F, r)$ and $\trg(\germ(f)_r) = (F', f(r))$.}
+  $$
+  \src(\germ(f)_r) = r \quad \text{and}\quad \trg(\germ(f)_r) = f(r).
+  $$
+  Then,
+  the action of $\gg \in \Mor(\GG)$ on $\germ(f)_r$ is defined by composition if $\trg(\gg)=r$,
+  that is,
+  $\gg \cdot \germ(f)_r = \germ(f \circ \varphi)_s$,
+  where $\gg = \germ(\varphi)_s$,
+  $\varphi \in \Diff_\loc(\cN)$ and $\varphi(s) = r$.
+  Symmetrically,
+  the action of $\gg' \in \Mor(\GG')$ on $\germ(f)_r$ is defined if $\src(\gg')=f(r)$ by $z \cdot \gg' = \germ(\varphi' \circ f)_r$,
+  where $\gg' = \germ(\varphi')_{f(r)}$.
+  Then,
+  we have:
+  
+  \textsc{Theorem.}~\textit{The actions of\/ $\GG$ and $\GG'$ on $Z$ are principal,
+  and $Z$ is a $(\GG,\GG')$-equivalence in the sense of Muhly-Renault-Williams.}
+\end{article} % MRW Equivalence Of Structure Groupoids
+
+\begin{proof}
+  First of all,
+  let us point out that $Z$ is a subspace of the morphisms of the groupoid $\GG''$ built in \art{Equivalence-Of-Structure-Groupoids} by adjunction of $\GG$ and $\GG'$,
+  and is equipped with the subset diffeology.
+  All these groupoids are locally compact and Hausdorff \art{The-Structure-Groupoid-is-Etale-and-Hausdorff}.
+  
+  Let us check that the action of $\GG$ on $Z$ is free.
+  In our case,
+  $z=\germ(f)_r$ and $\gg = \germ(\varphi)_s$,
+  where $f$ and $\varphi$ are local diffeomorphisms.
+  If $\gg \cdot z = z$,
+  then obviously $\gg = \germ(\id)_r$.
+  
+  Next,
+  let us denote by $\rho$ the action of $\GG$ on $Z$,
+  defined on
+  $$
+  \GG \star Z = \{(\gg,z) \in \Mor(\GG) \times Z \mid \trg(\gg)=\src(z)\} \quad \text{by} \quad \rho(\gg,z) = \gg \cdot z.
+  $$
+  This action is smooth because the composition of local diffeomorphisms is smooth,
+  and passes onto the quotient groupoid in a smooth operation, see \cite[\textsection 3]{IZL17}.
+  Moreover, this action is invertible,
+  its inverse being defined on
+  $$
+  Z \star Z = \{(z',z) \in Z \times Z \mid \trg(z')=\trg(z)\} \quad \text{by} \quad \rho^{-1}(z',z) = (\gg=z' \cdot z^{-1},z).
+  $$
+  In detail,
+  $\rho^{-1}(\germ(h)_s, \germ(f)_r) = (\germ(f^{-1} \circ h)_s,\germ(f)_r)$,
+  with $f(r)=h(s)$.
+  Now,
+  the inverse is also smooth,
+  when $Z \star Z \subset Z \times Z$ is equipped with the subset diffeology.
+  In other words,
+  $\rho$ is an induction,
+  that is,
+  a diffeomorphism from $\GG \star Z$ to $Z \star Z$.
+  However,
+  since $\GG \star Z$ and $Z \star Z$ are defined by closed relations,
+  and $\GG$ and $Z$ are Hausdorff,
+  $\GG \star Z$ and $Z \star Z$ are closed into their ambient spaces.
+  Thus,
+  the intersection of a compact subset in $Z \times Z$ with $Z \star Z$ is compact,
+  and its preimage by the induction $\rho$ is compact.
+  Therefore,
+  $\rho$ is proper.
+  We notice that the fact that the structure groups are no longer finite but just countable does not play a role here.
+  
+  It remains to check that the action of $\GG$ on $Z$ induces a bijection of $Z/\GG$ onto $\Obj(\GG')$.
+  Let us consider the map $\class \colon Z \to \Obj(\GG')$ defined by $\class(\germ(f)_r) = f(r)$.
+  Then,
+  let $\class(z)=\class(z')$,
+  with $z=\germ(f)_r$ and $z'=\germ(f')_{r'}$,
+  that is,
+  $f(r)=f'(r')$.
+  However,
+  since $f$ and $f'$ are local diffeomorphisms,
+  $\varphi = f'^{-1} \circ f$ is a local diffeomorphism with $\varphi(r') = r$.
+  Let $\gg = \germ(\varphi)_{r'}$,
+  then $\gg \in \Mor(\GG)$ and $z'=\gg \cdot z$.
+  Hence,
+  the map $\class$ projects onto an injection from $Z/\GG$ to $\Obj(\GG')$.
+  Now,
+  let $(F',r') \in \Obj(\GG')$,
+  and let $x = F'(r') \in X$.
+  Since $\cF$ is a generating family,
+  there exist $(F,r) \in \Obj(\GG)$ such that $F(r)=x$.
+  Let $\psi$ and $\psi'$ be the charts of $X$ defined by factorization:
+  $F = \psi \circ \class$ and $F' = \psi' \circ \class'$,
+  where $\class \colon \RR^n \to \RR^n/\Gamma$ and $\class' \colon \RR^n \to \RR^n/\Gamma'$.
+  Let $\xi = \class(r)$ and $\xi' = \class'(r')$.
+  Since $\psi(\xi) = \psi'(\xi') = x$,
+  $\Psi =_\loc \psi'^{-1} \circ \psi$ is a local diffeomorphism from $\RR^n/\Gamma$ to $\RR^n/\Gamma'$ mapping $\xi$ to $\xi'$.
+  Hence,
+  according to \art{Lifting-Local-Diffeomorphisms},
+  there exists a local diffeomorphism $f$ from $\dom(F)$ to $\dom(F')$,
+  such that $\class' \circ f = \Psi \circ \class$ and $f(r) = r'$.
+  Thus,
+  $z = \germ(f)_r$ belongs to $Z$ and $\class(z)=r'$ (precisely the element $(F',r')$ of the nebula of $\cF'$).
+  Therefore,
+  the injective map $\class$ from $Z/\GG$ to $\Obj(\GG')$ is also surjective,
+  and identifies the two spaces.
+  Obviously,
+  what has been said for the side $\GG$ can be translated to the side $\GG'$;
+  the construction is completely symmetric.
+  In conclusion,
+  $Z$ satisfies the conditions of a $(\GG,\GG')$-equivalence,
+  in the sense of Muhly-Renault-Williams.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Associated $\CC^*$-Algebra.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{The $\CC^*$-Algebras Of A Quasifold}
+
+We use the construction of the $\CC^*$-Algebra associated with an arbitrary locally compact groupoid $\GG$,
+equipped with a Haar system,
+introduced and described by Jean Renault in \cite[Part II, \textsection 1]{JR80}.
+Note that,
+for this construction,
+only the topology of the groupoid is involved,
+and diffeological groupoids,
+when regarded as topological groupoids,
+are equipped with the D-topology%
+\footnote{Since smooth maps are D-continuous and diffeomorphism are D-homeomorphisms.}.
+
+We will denote by $\cC(\GG)$ the completion of the compactly supported continuous complex functions on $\Mor(\GG)$,
+for the uniform norm.
+And we still consider, as is done for orbifolds, the particular case where the Haar system is given by the \emph{counting measure}.
+Let $f$ and $g$ be two compactly supported complex functions,
+the convolution and the involution are defined by
+\begin{equation*}%\tag{$\clubsuit$}
+  f*g(\gamma) = \sum_{\beta \in \GG^x} f(\beta \cdot \gamma)g(\beta^{-1})
+  \quad \mbox{and} \quad f^*(\gamma) = f(\gamma^{-1})^*.
+\end{equation*}
+The sums involved are supposed to converge.
+Here,
+$\gamma \in \Mor(\GG)$,
+$x = \src (\gamma)$ and
+$\GG^x = \trg^{-1}(x)$ is the subset of arrows with target $x$.
+The star in $z^*$ denotes the conjugate of the complex number $z$.
+By definition,
+the vector space $\cC(\GG)$,
+equipped with these two operations,
+is the $\CC^*$-algebra associated with the groupoid $\GG$.
+
+\begin{article}\artlabel[The $\CC^*$-algebra of a quasifold.] ---
+  \label{The-C*-Algebra-Of-an-Quasifold}
+  Let $X$ be a quasifold,
+  let $\cA$ be an atlas and let $\GG$ be the structure groupoid associated with $\cA$.
+  Since the atlas $\cA$ is locally finite,
+  the convolution defined above is well defined.
+  Indeed,
+  in this case:
+  
+  \textsc{Proposition.}~\textit{For every compactly supported complex function $f$ on $\GG$,
+  for all $\nu = (F,r) \in \cN = \Obj(\GG)$,
+  the set of arrows  $\gg \in \GG^\nu$ such that $f(\gg) \neq 0$ is finite.
+  That is,
+  $\#\,\Supp(f \restriction \GG^\nu) < \infty$.
+  The convolution is then well defined on $\cC(\GG)$.}
+  
+  Then,
+  for each atlas $\cA$ of the quasifold $X$,
+  we get the $\CC^*$-algebra $\fA = (\cC(\GG),*)$.
+  The dependence of the $\CC^*$-algebra on the atlas is given by the following theorem,
+  which is a generalization of \cite[\textsection 9]{IZL17}.
+  
+  \textsc{Theorem.}~\textit{Different atlases give Morita-equivalent $\CC^*$-algebras.
+  Diffeomorphic quasifolds have Morita-equivalent $\CC^*$-algebras.}
+  
+  In other words,
+  we have defined a functor from the subcategory of isomorphic \{Quasifolds\} in diffeology,
+  to the category of Morita-equivalent \{$\CC^*$-Algebras\}.
+\end{article} % The $\CC^*$-algebra of a quasifold
+
+\begin{proof}
+  Considering the proposition,
+  $\GG^\nu = \trg^{-1}(\nu)$ with $\nu \in \Obj(\GG)$.
+  The space of objects of $\GG$ is a disjoint sum of Euclidean domains,
+  thus $\{\nu\}$ is a closed subset.
+  Now,
+  $\trg \colon \Mor(\GG) \to \Obj(\GG)$ is smooth then continuous, for the D-topology.
+  Hence,
+  $\GG^\nu = \trg^{-1}(\nu)$ is closed and countable by \art{The-Structure-Groupoid-is-Etale-and-Hausdorff}.
+  Now,
+  $\Supp(f \restriction \GG^\nu) = \Supp(f) \cap \GG^\nu$ is the intersection of a compact and a closed countable subspace,
+  thus it is compact and countable,
+  that is finite.
+  
+  Next,
+  thanks to \art{MRW-Equivalence-Of-Structure-Groupoids},
+  different atlases give equivalent groupoids in the sense of Muhly-Renault-Williams.
+  Moreover, thanks to \cite[Thm. 2.8]{MRW87},
+  different atlases give strongly Morita-equivalent $\CC^*$-algebras.
+  Therefore,
+  diffeomorphic quasifolds have strongly Morita-equivalent associated $\CC^*$-algebras.
+\end{proof}
+
+\begin{article}\artlabel[The $\CC^*$-Algebra of the irrational torus.] ---
+  \label{The-C*-Algebra-Of-The-Irrational-Torus}
+  The first and most famous example is the so-called Denjoy-Poincaré torus,
+  or irrational torus,
+  or noncommutative torus,
+  or,
+  more recently,
+  quasitorus.
+  It is,
+  according to its first definition,
+  the quotient set of the $2$-torus $T^2$ by the irrational flow of slope $\alpha \in \RR - \QQ$.
+  We denote it by $T_\alpha = T^2/\Delta_\alpha$,
+  where $\Delta_\alpha$ is the image of the line $y=\alpha x$ by the projection $\RR^2 \to T^2 = \RR^2/\ZZ^2$.
+  This space has been the first example studied with the tools of diffeology,
+  in \cite{PDPI83},
+  where many non trivial properties have been highlighted.%
+  \footnote{See for example Exercise 4 and \textsection 8.39 in \cite{PIZ13}.}
+  Diffeologically speaking,
+  $$
+  T_\alpha \simeq \RR/(\ZZ + \alpha \ZZ).
+  $$
+  The composite
+  $$
+  \begin{tikzcd}[column sep=2em,row sep=1.2em, every label/.append style = {font = \small}]
+    \RR \arrow[r,"\class"] & \RR/(\ZZ + \alpha \ZZ) \arrow[r, "f"] & T_\alpha,
+  \end{tikzcd}
+  \text{ with }
+  F = f \circ \class,
+  $$
+  summarizes the situation where $\cA = \{ f \colon  \RR/(\ZZ + \alpha \ZZ) \to T_\alpha\}$ is the canonical atlas of $T_\alpha$,
+  containing the only chart $f$,
+  and
+  $\cF = \{F = f \circ \class \}$ is the associated canonical strict generating family.
+  According to the above \art{Lifting-The-Identity},
+  the groupoid $\GG_\alpha$ associated with the atlas $\cA$ is simply
+  $$
+  \Obj(\GG_\alpha) = \RR
+  \quad \text{and} \quad
+  \Mor(\GG_\alpha) = \{ (x,\tt_{n+\alpha m}) \mid x \in \RR \text{ and } n,m \in \ZZ\}.
+  $$
+  However,
+  we can also identify $T_\alpha$ with $(\RR/\ZZ)/ [(\ZZ + \alpha \ZZ)/\ZZ]$,
+  that is
+  $$
+  T_\alpha \simeq \S^1/\ZZ,
+  \text{ with } \quad \underline{m}(z) = e^{2i\pi\alpha m} z,
+  $$
+  for all $m \in \ZZ$ and $z \in \S^1$.
+  Moreover,
+  the groupoid $\bS_\alpha$ of this action of $\ZZ$ on $\S^1 \subset \CC$ is simply
+  $$
+  \Obj(\bS_\alpha) = \S^1
+  \quad \text{and} \quad
+  \Mor(\bS_\alpha) = \{ (z,e^{2i\pi \alpha m}) \mid z \in \S^1 \text{ and } m \in \ZZ\}.
+  $$
+  The groupoids $\GG_\alpha$ and $\bS_\alpha$ are equivalent,
+  thanks to the functor $\Phi$ from the first to the second:
+  $$
+  \Phi_{\Obj}(x) = e^{2i\pi x}
+  \quad \text{and} \quad
+  \Phi_{\Mor}(x,\tt_{n + \alpha m}) = (e^{2i\pi x}, e^{2i\pi\alpha m}).
+  $$
+  Moreover,
+  they are also MRW-equivalent,
+  by considering the set of germs of local diffeomorphisms $x \mapsto e^{2i\pi x}$,
+  everywhere from $\RR$ to $\S^1$.
+  Therefore,
+  their associated $\CC^*$-algebras are Morita equivalent.
+  The algebra associated with $\bS_\alpha$ has been computed numerous times and it is called \emph{irrational rotation algebra} \cite{MR81}.
+  It is the universal $\CC^*$-algebra generated by two unitary elements $U$ and $V$,
+  satisfying the relation $VU = e^{2i\pi\alpha}UV$.
+  
+  \textsc{Remark 1.}~Thanks to the theorem \art{The-C*-Algebra-Of-an-Quasifold},
+  and because two irrational tori $T_\alpha$ and $T_\beta$ are diffeomorphic if and only if $\alpha$ and $\beta$ are conjugate modulo $\GL(2,\ZZ)$ \cite{PDPI83},
+  we get the corollary that,
+  if $\alpha$ and $\beta$ are conjugate modulo $\GL(2,\ZZ)$,
+  then $\fA_\alpha$ and $\fA_\beta$ are Morita equivalent.
+  Which is the direct sense of Rieffel's theorem \cite[Thm 4]{MR81}.
+  
+  \textsc{Remark 2.}~The converse of Rieffel's theorem is a different matter altogether.
+  We should recover a diffeological groupoid $\GG_\alpha$ from the algebra $\fA_\alpha$.
+  Then,
+  the space of transitive components would be the required quasifold,
+  as stated by the proposition in \art{Equivalence-Of-Structure-Groupoids}.
+  In the case of the irrational torus,
+  it is not very difficult.
+  The spectrum of the unitary operator $V$ is the circle $\S^1$ and the adjoint action by the operator $U$ gives $UVU^{-1} = e^{2i\pi \alpha} V$,
+  which translates on the spectrum by the irrational rotation of angle $\alpha$.
+  In that way,
+  we recover the groupoid of the irrational rotations on the circle,
+  which gives $T_\alpha$ as quasifold.
+  
+  \textsc{Remark 3.}~Of course,
+  the situation of the irrational torus is simple and we do not exactly know how it can be reproduced for an arbitrary quasifold.
+  However, this certainly is the way to follow to recover the quasifold from its algebra:
+  find the groupoid made with the Morita invariant of the algebra,
+  which will give the space of transitivity components as the requested quasifold.
+  
+\end{article} % The $\CC^*$-Algebra of the irrational torus
+
+\begin{article}\artlabel[The example of $\RR/\QQ$.] ---
+  \label{The-Example-of-R/Q}
+  The diffeological space $\RR/\QQ$ is a legitimate quasifold.
+  This is a simple example with a groupoid $\GG$ given by
+  $$
+  \Obj(\GG) = \RR
+  \quad \text{and} \quad
+  \Mor(\GG) = \{(x, \tt_r) \mid x \in \RR \text{ and } r \in \QQ \}.
+  $$
+  The algebra that is associated with $\GG$ is the set $\fA$ of complex compactly supported functions on $\Mor(\GG)$.
+  Let us identify $\Czero(\Mor(\GG),\CC)$ with $\Maps(\QQ, \Czero(\RR,\CC))$ by
+  $$
+  f = (f_r)_{r\in \QQ}
+  \quad \text{with} \quad
+  f_r(x) = f(x,\tt_r),
+  \quad \text{and let} \quad
+  \Supp (f) = \{ r \mid f_r \neq 0 \}.
+  $$
+  Then,
+  $$
+  \fA = \big\{ f \in \Maps(\QQ, \Czero(\RR,\CC)) \mid \#\,\Supp (f) < \infty \big\}.
+  $$
+  The convolution product and the algebra conjugation are,
+  thus,
+  given by:
+  $$
+  (f*g)_r(x) = \sum_s f_{r-s}(x+s) g_{s}(x),
+  \quad \text{and} \quad
+  f_r^*(x) = f_{-r}(x+r)^*.
+  $$
+  Now,
+  the quotient $\RR/\QQ$ is also diffeomorphic to the $\QQ$-circle
+  $$
+  \S_\QQ = \S^1/\cU_\QQ,
+  \quad \text{where} \quad
+  \cU_\QQ = \{e^{2i\pi r}\}_{r \in \QQ}
+  $$
+  is the subgroup of \emph{rational roots of unity}.
+  As a diffeological subgroup of $\S^1$,
+  $\cU_\QQ$ is discrete.
+  The groupoid $\bS$ of the action of $\cU_\QQ$ on $\S^1$ is given by:
+  $$
+  \Obj(\bS) = \S^1
+  \quad \text{and} \quad
+  \Mor(\bS) = \bigg\{(z, \tau) \ \bigg| \ z \in \S^1 \text{ and } \tau \in \cU_\QQ \bigg \}.
+  $$
+  The exponential $x \mapsto z = e^{2i\pi x}$ realizes a MRW-equivalence between the two groupoids $\GG$ and $\bS$.
+  Their associated algebras are Morita-equivalent.
+  The algebra $\fS$ associated with $\bS$ is made of families of continuous complex functions indexed by rational roots of unity,
+  in the same way as before:
+  $$
+  \fS = \big\{ (f_\tau)_{\tau\in \cU_\QQ} \ \big| \ f_\tau \in \Czero(\S^1,\CC) \text{ and } \#\, \Supp(f) < \infty \big\}.
+  $$
+  The convolution product and the algebra conjugation are,
+  then,
+  given by:
+  $$
+  (f*g)_\tau(z) = \sum_{\sigma} f_{\bar\sigma \tau}(\sigma z) g_{\sigma}(z)
+  \quad \text{and} \quad
+  f_\tau^*(z) = f_{\bar\tau}(\tau z)^*,
+  $$
+  where $\bar \tau = 1/\tau = \tau^*$,
+  the complex conjugate.
+  
+  Now,
+  consider $f$ and let $\cU_p$ be the subgroup in $\cU_\QQ$ generated by $\Supp(f)$;
+  this is the group of some root of unity $\varepsilon$ of some order $p$.
+  Let $M_p(\CC)$ be the space of $p \times p$ matrices with complex coefficients.
+  Define $f \mapsto M$,
+  from $\fS$ to $M_p(\CC) \otimes \cC^0(\S^1,\CC)$,
+  by
+  $$
+  %f \mapsto M \in M_p(\CC) \otimes \cC^0(\S^1,\CC)
+  %\quad \text{with} \quad
+  M(z)_\tau^\sigma = f_{\bar\sigma \tau}(\sigma z),
+  \quad \text{for all } z \in \S^1 \text{ and } \sigma, \tau \in \cU_p.
+  $$
+  That gives a representation of $\fS$ in the tensor product of the space of endomorphisms of the infinite-dimensional $\CC$-vector space $\Maps(\cU_\QQ,\CC)$ by $\cC^0(\S^1,\CC)$,
+  with finite support.
+  
+\end{article}
+
+%************************************************
+%***** Bibliographie
+%************************************************
+
+\begin{thebibliography}{YKMZ12}
+  
+  \bibitem[FBEP01]{FBEP01}
+  \newblock Fiammetta Battaglia and Elisa Prato,
+  \newblock {\em Generalized toric varieties for simple nonrational convex polytopes},
+  \newblock Int. Math. Res. Not. \textbf{24} (2001), 1315–1337.
+  
+  %    \bibitem[FBEP10]{FBEP10}
+  %    \newblock Fiammetta Battaglia and Elisa Prato,
+  %    \newblock {\em The Symplectic Penrose Kite,}
+  %    \newblock Commun. Math. Phys. 299, pp. 577--601 (2010).
+  
+  \bibitem[FBEP18]{FBEP18}
+  \bysame,
+  \newblock {\em Nonrational Symplectic Toric Cuts,}
+  \newblock {Internat. J. Math.} {\bf 29},19 pages (2018).
+  
+  \bibitem[FBEP19]{FBEP19}
+  \bysame
+  \newblock {\em Nonrational Symplectic Toric Reduction,}
+  \newblock {J. Geom. Phys.} {\bf 135}, pp. 98--105 (2019).
+  
+  \bibitem[BPZ19]{BPZ19}
+  \newblock Fiammetta Battaglia, Elisa Prato and Dan Zaffran,
+  \newblock {\em Hirzebruch surfaces in a one-parameter family,}
+  \newblock {Boll. Unione Mat. Ital.} {\bf 12}, pp. 293--305 (2019).
+  
+  \bibitem[PDPI83]{PDPI83}
+  \newblock {Paul Donato \& Patrick Iglesias.}
+  \newblock {\em Exemple de groupes différentiels~: flots irrationnels sur le tore,}
+  \newblock {Preprint CPT-83/P.1524. Centre de Physique Théorique, Marseille, July 1983.}
+  \newblock {Published in Compte Rendu de l'Acad{\'e}mie des Sciences, 301(4), Paris (1985).}
+  \newline
+  \newblock {\verb!http://math.huji.ac.il/~piz/documents/EDGDFISLT.pdf!}
+  
+  \bibitem[PI85]{PI85}
+  \newblock {Patrick Iglesias-Zemmour.}
+  \newblock {\em Fibrations Difféologiques et Homotopie.}
+  \newblock {Doctoral Thesis, Aix-Marseille University (1985).}
+  \newline
+  \newblock {\verb!http://math.huji.ac.il/~piz/documents/TheseEtatPI.pdf!}
+  
+  \bibitem[PIZ13]{PIZ13}
+  %\newblock {Patrick Iglesias-Zemmour.}
+  \bysame
+  \newblock {\em Diffeology.}
+  \newblock {Mathematical Surveys and Monographs. The American Mathematical Society, vol. 185, USA R.I. (2013).}
+  
+  \bibitem[PIZ16]{PIZ16}
+  \bysame
+  \newblock {\em Example of Singular Reduction in Symplectic Diffeology.}
+  \newblock {Proc. Amer. Math. Soc., Vol. 144, Number 3, Pages 1309–1324, USA R.I. (2016).}
+  
+  \bibitem[IKZ10]{IKZ10}
+  Patrick Iglesias, Yael Karshon and Moshe Zadka.
+  \newblock {\em Orbifolds as Diffeology.}
+  \newblock Transactions of the American Mathematical Society, Vol. 362, Number 6, Pages 2811--2831. Providence R.I. (2010).
+  
+  \bibitem[IZL17]{IZL17}
+  Patrick Iglesias-Zemmour and Jean-Pierre Laffineur.
+  \newblock {\em Noncommutative Geometry and Diffeology: The Case of Orbifolds.}
+  \newblock Journal of NonCommutative Geometry, Vol. 12, Issue 4, pp. 1551–1572 (2018).
+  
+  \bibitem[SML78]{SML78}
+  \newblock {Saunders Mac Lane.}
+  \newblock {\emph{Categories for the Working Mathematician}.}
+  \newblock {Graduate Texts in Mathematics 5.}
+  \newblock {Springer (1978).}
+  
+  \bibitem[MRW87]{MRW87}
+  \newblock {Paul Muhly, Jean Renault and Dana Williams.}
+  \newblock {\em Equivalence And Isomorphism For Groupoid $\CC^*$-Algebras.}
+  \newblock {J. Operator Theory 17, no 1 pp. 3--22 (1987).}
+  
+  \bibitem[EP99]{EP99}
+  \newblock {Elisa Prato,}
+  \newblock {\textit{On a Generalization of the Notion of Orbifold}.}
+  \newblock {Comptes Rendus de l'Académie des Sciences - Series I - Mathematics.}
+  \newblock {\textbf{328}(10), pp. 887-890 (2001).}
+  
+  \bibitem[EP01]{EP01}
+  \newblock {Elisa Prato,}
+  \newblock {\textit{Simple Non--Rational Convex Polytopes via Symplectic Geometry}.}
+  \newblock {Topology, \textbf{40}, pp. 961--975 (2001).}
+  
+  \bibitem[JR80]{JR80}
+  \newblock {Jean Renault.}
+  \newblock {\em A groupoid approach to $\CC^*$\!\!--Algebras.}
+  \newblock {Lecture notes in Mathematics (793), Springer-Verlag Berlin Heidelberg New-York (1980).}
+  
+  \bibitem[MR81]{MR81}
+  \newblock{Marc A. Rieffel.}
+  \newblock{\em $\CC^*$\!\!--Algebras Associated With Irrational Rotations.}
+  \newblock{Pacific Journal of Mathematics, Vol. 93, No. 2, 1981.}
+  
+  \bibitem[IS56]{IS56}
+  \newblock {Ishiro Satake.}
+  \newblock {\em On a Generalization of the Notion of Manifold},
+  \newblock {Proceedings of the National Academy of Sciences \textbf{42}, pp. 359--363 (1956).}
+  
+  \bibitem[IS57]{IS57}
+  \newblock {Ishiro Satake.}
+  \newblock {\em The Gauss-Bonnet Theorem for V-manifolds}.
+  \newblock {Journal of the Mathematical Society of Japan, Vol. 9, No. 4, pp. 464--492 (1957).}
+  
+\end{thebibliography}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fin du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
