@@ -4,12 +4,11 @@
 
 ### Context
 
-In the theory of singular spaces (such as orbifolds and quasifolds), there are three competing definitions of a "morphism," each with its own strengths and weaknesses:
+In the theory of singular spaces (such as orbifolds and quasifolds), there are three competing definitions of a "morphism:"
 
 1.  **Satake's Morphisms:** These are maps that locally lift to equivariant smooth maps between charts.
     *   **Limitation:** This definition fails to form a category. As Satake himself noted, the composition of two such maps is not guaranteed to be a map of the same type. In his foundational paper, he wrote:
 
-    
       > "The notion of $C^\infty$-map thus defined is inconvenient in the point that a composite of two $C^\infty$-maps defined in a different choice of defining families is not always a $C^\infty$ map."
 
 3.  **Stack Morphisms (Generalized Maps):** These are spans or bibundles that perfectly preserve the underlying groupoid structure.
@@ -22,9 +21,7 @@ In the theory of singular spaces (such as orbifolds and quasifolds), there are t
 
 We know these definitions are distinct. Specifically, Diffeology admits smooth maps (such as the counter-example presented in) that are not Satake-morphisms. This raises a fundamental question about the relationship between these structures.
 
-*   **Question:** Can we classify the obstruction that prevents a Diffeological morphism from being a Satake (or Stack) morphism?
-
-*   **Conjecture:** The obstruction lies in the non-triviality of a specific cohomology class associated with the "twisting" of the stabilizer groups along the map. Is there a characteristic class that precisely measures this "failure of equivariance"?
+*   **Question:** Details the relation between these behaviors. Can we classify the obstruction that prevents a Diffeological morphism from being a Satake (or Stack) morphism?
 
 ### References
 
