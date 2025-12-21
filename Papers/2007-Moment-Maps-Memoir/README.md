@@ -46,6 +46,5 @@ Building on this new foundation, the memoir develops a complete suite of tools f
 
 ## Files in this Directory
 
-*   `TMMID.tex`: The original LaTeX source file for the memoir.
-*   `fig-corner-orbifold.pdf` Corner Orbifold pdf file.
-*   `fig-cone-orbifold.pdf` Cone Orbifold pdf file.
+*   `TMMID.tex` The original LaTeX source file for the memoir.
+*   `/Figures/` Contains the figures for the paper.
