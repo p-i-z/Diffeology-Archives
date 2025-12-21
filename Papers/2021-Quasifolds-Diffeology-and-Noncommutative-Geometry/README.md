@@ -1,4 +1,4 @@
-# Quasifolds, Diffeology and Noncommutative Geometry (2021)
+# Quasifolds, Diffeology and Noncommutative Geometry
 
 > **Authors:** Patrick Iglesias-Zemmour, Elisa Prato
 > **Status:** Published in *Journal of Noncommutative Geometry*, Vol. 15, No. 2, pp. 735–759 (2021).
@@ -18,6 +18,10 @@ Key contributions include:
 3.  **Morita Equivalence:** Proof that different atlases of a quasifold yield MRW-equivalent groupoids and thus **Morita equivalent** associated C*-algebras.
 
 This work completes the picture for a broad class of singular spaces, showing that the diffeological invariant (the structure groupoid) perfectly captures the noncommutative invariant (the Morita class of the algebra), providing a rigorous geometric foundation for the study of spaces like the irrational torus and the $\QQ$-circle.
+
+### Philosophy: The Missing Geometric Object
+
+This work suggests a fundamental shift in perspective: Diffeology provides the missing geometric reality to Noncommutative Geometry. While NCG studies the "algebra of functions" on a virtual space, Diffeology identifies that space concretely as a quasifold. The non-commutativity arises not from the absence of a space, but from the specific nature of its singularities, which are encoded by the structure groupoid.
 
 ## Files in this Directory
 
