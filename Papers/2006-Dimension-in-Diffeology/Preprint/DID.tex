@@ -1,0 +1,1573 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  PROJECT: Dimension in Diffeology
+%%  FILENAME: DID.tex
+%%
+%%  Original Author: Patrick Iglesias-Zemmour
+%%  First typeset June 2006
+%%  Modernized for the Diffeology Archives in December 2025.
+%%
+%%  This is a self-contained document.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno]{amsart}
+
+%%====================================================================
+% MARK: - Preamble (Self-Contained)
+%%====================================================================
+
+% --- Core Packages ---
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+% --- Fonts ---
+\usepackage[cal=scr,uppercase=upright,greeklowercase=upright,utopia]{mathdesign}
+
+% --- Layout ---
+\parindent 0mm
+\parskip 0.5em plus 1pt
+\allowdisplaybreaks
+
+% --- Figures and Diagrams ---
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{arrow style=tikz, diagrams={>={Straight Barb[scale=0.8]}}}
+
+% --- Theorem Environments ---
+\theoremstyle{plain}
+\newtheorem{article}{}[section]
+\renewenvironment{proof}{\noindent{\sc Proof --}}{\nolinebreak\hfill$\blacksquare$}
+
+% --- Minimal Set of Required Macros ---
+
+% Standard Sets
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\KK}{\mathbf{K}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\ZZ}{\mathbf{Z}}
+
+% Calligraphic Letters
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cO}{\mathcal{F}}
+\newcommand{\cX}{\mathcal{X}}
+
+% Mathematical Operators
+\DeclareMathOperator{\Cinfty}{\mathcal{C}^\infty}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Domains}{Domains}
+\DeclareMathOperator{\dimension}{dim}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\Param}{Param}
+\DeclareMathOperator{\Gen}{Gen}
+
+% Helper Macros
+\newcommand{\art}[1]{(art.~\ref{#1})}
+\newcommand{\fig}[1]{(fig.~\ref{#1})}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\qtext}[1]{\quad\text{#1}\quad}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\interval}[1]{\left[ #1 \right[}
+\newcommand{\catDiff}{\{Diffeology\}}
+\newcommand{\artplus}[2]{(art.~\ref{#1}, #2)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Document Information
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  \title{Dimension in Diffeology}
+  \author{Patrick Iglesias-Zemmour}
+  \thanks{CNRS, LATP Université de Provence, France \& The Hebrew University of Jerusalem, Israel.}
+  \date{First typeset June 2006}
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Abstract
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    \noindent The notion of \emph{dimension} for diffeologies,
+    introduced here,
+    generalizes the dimension of manifolds.
+    More appropriate to diffeology is the \emph{dimension map}.
+    We give some elementary properties of this dimension under several diffeological constructions.
+    We illustrate these definitions with the example of the quotient spaces $\Delta_n = \RR^n/\mathrm{O}(n)$ for which $\dimension(\Delta_n) = n$,
+    due to the singularity at the origin.
+    Then,
+    we deduce that the dimension of the half-line $\Delta_\infty = [0,\infty[ \subset \RR$,
+    equipped with the subset diffeology,
+    is infinite at the origin.
+    And we show how this diffeological invariant can be used,
+    in particular,
+    to completely avoid topological considerations in some diffeological questions.
+  \end{abstract}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Introduction}
+  \addcontentsline{toc}{part}{Introduction}
+  
+  The introduction and the use of \emph{dimension} in diffeology \art{Dimension-of-a-diffeology} gives us a quick and easy answer to the question:
+  ``Are the diffeological spaces $\Delta_n = \RR^n/\mathrm{O}(n)$ and $\Delta_m = \RR^m/\mathrm{O}(m)$ diffeomorphic?''.
+  The answer is ``No'' ($n\neq m$) since $\dimension(\Delta_n) =n$ \art{Dimension-of-Rn/On},
+  and since the dimension is a diffeological invariant.
+  This method simplifies the partial result,
+  obtained in a much more complicated way in \cite{Igl85},
+  that $\Delta_1$ and $\Delta_2$ are not diffeomorphic.
+  Another example:
+  computing the dimension of the half-line $\Delta_\infty = [0, \infty[ \subset \RR$ we obtain:
+  $\dimension(\Delta_\infty) = \infty$,
+  due to the ``singularity'' at the origin \art{Dimension-of-the-half-line}.
+  Hence,
+  $\Delta_m$ is not diffeomorphic to the half-line $\Delta_\infty$ for any integer $m$.
+  Dimension appears to be the simplest diffeological invariant introduced until now,
+  and a useful one.
+  
+  Moreover dimension can,
+  in some situations,
+  avoids topological considerations for solving pure diffeological questions.
+  For example,
+  if we want to show that any diffeomorphism of the half line $\Delta_\infty$ preserves the origin it is possible to note that diffeomorphisms are homeomorphisms and then use the fact that any homeomorphism preserves the origin.
+  But,
+  we can just mention that the dimension \art{The-dimension-map} of $\Delta_\infty$ is $\infty$ at the origin and 1 elsewhere.
+  Then,
+  since the dimension map is a diffeological invariant \art{The-dimension-map-is-a-finer-invariant},
+  the origin is preserved.
+  This kind of consideration avoid topology where it is not needed,
+  and make diffeology technics still more independent from topology.
+  As an application,
+  we characterize the diffeomorphisms of $\Delta_\infty$ \art{The-diffeomorphisms-of-the-half-line}.
+  For all these reasons it seems that the notion of dimension in diffeology deserved to be emphasized,
+  it is what this paper is intended to do.
+  
+  For the reader who still doesn't know:
+  diffeology is a theory which generalizes ordinary differential geometry by including,
+  in its scope,
+  a huge catalog of objects going from quotient spaces,
+  regarded by many people as ``bad spaces'',
+  to infinite dimensional spaces,
+  like spaces of smooth maps.
+  Between these two extremes,
+  we find manifolds,
+  orbifolds and all the usual differential objects.
+  
+  The category $\set{\text{Diffeology}}$ is very stable by quotients,
+  subsets,
+  products,
+  sums.
+  Many examples and constructions can be found now to illustrate this theory in the web-based document \cite{PIZ05}.
+  
+  The notion of dimension of a diffeological space is rather simpe and natural,
+  it involves the notion of generating family.
+  A generating family of a diffeology $\cD$ is a set of parametrizations $\cF$ such that $\cD$ is the finest diffeology containing $\cF$.
+  More precisely,
+  $\cD$ is the intersection of all the diffeologies containing $\cF$.
+  Then,
+  we define the dimension of a generating family as the supremum of the dimensions of the domains of its elements.
+  And the dimension of a diffeological space is defined as the infimum of the dimensions of its generating families.
+  This dimension is an integer or is infinite.
+  
+  Because diffeological spaces are not always homogeneous nor locally transitive,
+  they may have ``singularities'',
+  this \emph{global dimension} needs to be refined into a \emph{dimension map}.
+  That is,
+  a map from the diffeological space to the integers extended by the infinite,
+  which associates to each point the dimension of the space at this point.
+  We show that the dimension of a diffeological space is the supremum of this dimension map.
+  Naturally,
+  the dimension map is an invariant of the category \{Diffeology\}.
+  
+  This diffeological dimension coincides with the usual definition when the diffeology space is a manifold.
+  That is,
+  when the diffeology is generated by local diffeomorphisms with $\RR^n$,
+  for some integer $n$.
+  
+  \textbf{Thanks} I am pleased to thank Yael Karshon for a pertinent remark about the use of the germs of a diffeology :) And also Henrique Macias for having incited me to publish this paper.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Vocabulary and notations
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Vocabulary and notations}
+  
+  Let us introduce first some vocabulary and let us fix some basics definitions and notations,
+  related to ordinary differential geometry.
+  
+  \begin{article}[Domains and parametrizations]
+    \label{Domains-and-parametrizations}
+    We call \emph{$n$-numerical domain} any subset of the vector space $\RR^n$,
+    open for the standard topology,
+    that is any union of open balls.
+    We denote by $\Domains(\RR^n)$ the set of all $n$-numerical domains,
+    $$
+      \Domains(\RR^n) = \{ U \subset \RR^n \mid U \mbox{ is open } \}.
+      $$
+    We denote by $\Domains$ the set of all the $n$-numerical domains when $n$ runs over the integers,
+    $$
+      U \in \Domains \ \Leftrightarrow \ \exists n \in \NN, \ U \in \Domains(\RR^n).
+      $$
+    The elements of $\Domains$ are called \emph{numerical domains},
+    or simply \emph{domains}.
+    
+    Let $X$ be any set,
+    we call \emph{$n$-parametrization} of $X$ any map $P : U \to X$ where $U$ is a $n$-numerical domain.
+    We denote by $\Param_n(X)$ the set of all the $n$-parametrizations of $X$.
+    $$
+      \Param_n(X) = \{ P : U \to X \mid U \in \Domains(\RR^n) \}.
+      $$
+    We denote by $\Param(X)$ the set of all the $n$-parametrizations of $X$,
+    when $n$ runs over the integers,
+    $$
+      \Param(X) = \bigcup_{n \in \NN} \Param_n(X) = \{ P : U \to X \mid U \in \Domains \}.
+      $$
+    We denote by $\dom(P)$ the \emph{definition set} of a parametrization $P$,
+    we call it the \emph{domain} of $P$.
+    That is,
+    if $P \in \Param(X)$ and $P : U \to X$,
+    then $\dom(P) = U$.
+    
+    Let $X$ be any set,
+    and $x$ be some point of $X$.
+    A \emph{superset} of $x$ is any subset $V$ of $X$ containing $x$.
+    If $X$ is a topological space,
+    an \emph{open superset} of $x$ is any superset of $x$ which is open for the given topology of $X$.
+    In particular,
+    if $r$ is some point of a numerical space $\RR^n$,
+    an \emph{open superset} of $r$ is any $n$-domain $V$ containing the point $r$.
+  \end{article}
+  
+  \begin{article}[Smooth maps and tangent linear maps]
+    \label{Smooth-maps-and-tangent-linear-maps}
+    Let $U$ be any $n$-domain and $V$ be any $m$-domain.
+    Let $f : U \to V$ be a \emph{smooth map},
+    that is an infinitely differentiable map,
+    $f \in \Cinfty(U,V)$.
+    
+    The \emph{tangent linear map},
+    or \emph{differential},
+    of $f$ will be denoted by $\D(f)$,
+    it is a smooth map from $U$ to the space of linear maps $\mathrm{L}(\RR^n, \RR^m)$.
+    Its value at the point $x \in U$ will be denoted by $\D(f)(x)$ or by $\D(f)_x$,
+    it is the matrix made up with the partial derivatives:
+    $$
+      \D(f)(x) = \begin{pmatrix}
+      \frac{\partial y_1}{\partial x_1} & \cdots & \frac{\partial y_1}{\partial x_{n}} \\
+      \vdots & \ddots & \vdots \\
+      \frac{\partial y_m}{\partial x_1}  & \cdots & \frac{\partial y_m}{\partial x_n}
+      \end{pmatrix}
+      \mbox{ where } f : x = \begin{pmatrix}x_1 \\ \vdots \\ x_n\end{pmatrix} \mapsto y = \begin{pmatrix}y_1 \\ \vdots \\ y_m\end{pmatrix}.
+      $$
+    Every partial derivative is a smooth map defined on $U$ with values in $\RR$.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Diffeologies and diffeological spaces
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Diffeologies and diffeological spaces}
+  
+  We remind the basic definition of a diffeology,
+  and the very basic example of the standard diffeology of domains.
+  More about diffeology or Chen's differentiable space can be found in \cite{Che77},
+  \cite{Sou81},
+  \cite{Sou84},
+  \cite{Don84},
+  \cite{DI85},
+  \cite{Igl85},
+  \cite{Igl86},
+  \cite{Igl87},
+  \cite{IL90},
+  \cite{PIZ05},
+  \cite{PIZ05a},
+  \cite{IKZ05}.
+  
+  \begin{article}[Diffeology and diffeological spaces]
+    \label{Diffeology-and-diffeological-spaces}
+    Let $X$ be any set.
+    A \emph{diffeology} of $X$ is a subset $\cD$ of parametrizations of $X$ whose elements,
+    called \emph{plots},
+    satisfy the following axioms.
+    
+    \begin{enumerate}
+      \item[D1.] \emph{Covering}\hspace{1em}Any constant parametrization is a plot:
+      for any point $x$ of $X$ and for any integer $n$,
+      the constant map $\mathbf{x} : \RR^n \to X$,
+      defined by $\mathbf{x}(r) = x$ for all $r$ in $\RR^n$,
+      is a plot.
+      \item[D2.] \emph{Locality}\hspace{1em}For any parametrization $P : U \to X$,
+      if $P$ is locally a plot at each point of $U$ then $P$ is a plot.
+      This means that,
+      if for any $r$ in $U$ there exists a superset $V$ of $r$ such that the restriction $P \restriction V$ is a plot,
+      then $P$ is a plot.
+      \item[D3.] \emph{Smooth compatibility}\hspace{1em}The composite of a plot with any smooth parametrization of its source is a plot:
+      let $P : U \to X$ be a plot and let $F$ be a parametrization belonging to $\Cinfty(V,U)$,
+      where $V$ is any numerical domain,
+      then $P \circ F$ is a plot.
+    \end{enumerate}
+    A set equipped with a diffeology is called a \emph{diffeological space}.
+    Note that we do not assume any structure on $X$,
+    $X$ is simply an amorphous set.
+    To refer to any element of $\cD$ we shall say equivalently:
+    a ``plot for the diffeology $\cD$'',
+    or a ``plot of the diffeological space $X$''.
+    
+    \begin{itemize}
+      \item[$\clubsuit$]The set of all the plots for the diffeology $\cD$,
+      defined on a numerical domain $U$,
+      will be denoted by $\cD(U)$.
+      A plot defined on an $n$-domain $U \subset \RR^n$ is called a $n$-plot.
+      The set of all the $n$-plots will be denoted by $\cD_n$.
+    \end{itemize}
+    
+    The first axiom implies that each point of $X$ is covered by a plot.
+    The second axiom clearly means that to be a plot is a local condition.
+    Note that ``$P \restriction V$ is a plot'' implies that $V$ is a domain \art{Domains-and-parametrizations}.
+    And,
+    the third axiom defines the \emph{class of differentiability} of the diffeology.
+    
+    Formally,
+    a diffeological space is a pair of a set $X$ and a diffeology $\cD$ of $X$.
+    But most of the time the diffeological space will be denoted by a single capital letter or a group of letters.
+    Note however that a diffeology contains always its underlying set as the set of its 0-plots,
+    that is $X \simeq \cD_0 = \cD(\RR^0) =\cD(\{0\})$.
+  \end{article}
+  
+  \begin{article}[Standard diffeology of domains]
+    \label{Standard-diffeology-of-domains}
+    The set $\Cinfty_\cO$ of all smooth parametrizations of a numerical domain $\cO$ is a diffeology.
+    That is,
+    for any domain $U$,
+    $\Cinfty_\cO(U) = \Cinfty(U,\cO)$.
+    We shall call this diffeology the \emph{standard diffeology},
+    or the \emph{smooth diffeology},
+    of the numerical domain $\cO$.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Differentiable maps
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Differentiable maps}
+  
+  Diffeological spaces are the objects of a category whose morphisms are \emph{differentiable maps},
+  and isomorphisms are \emph{diffeomorphisms}.
+  
+  \begin{article}[Differentiable maps and diffeomorphisms]
+    \label{Differentiable-maps-and-diffeomorphisms}
+    Let $X$ and $Y$ be two diffeological spaces and $F : X \to Y$ be a map.
+    The map $F$ is said to be \emph{differentiable} if for each plot $P$ of $X$,
+    $F \circ P$ is a plot of $Y$.
+    The set of differentiable maps from $X$ to $Y$ is denoted $\Cinfty(X,Y)$.
+    A bijective map $F : X \to Y$ is said to be a \emph{diffeomorphism} if both $F$ and $F^{-1}$ are differentiable.
+    The set of all diffeomorphisms of $X$ is a group denoted by ${\rm Diff}(X)$.
+  \end{article}
+  
+  \begin{article}[The Diffeology Category]
+    The composite of two differentiable maps is a differentiable map.
+    Diffeological spaces,
+    together with differentiable maps,
+    define a category,
+    denoted by \catDiff.
+    The isomorphisms of the category are diffeomorphisms.
+  \end{article}
+  
+  \begin{article}[Plots are the smooth parametrizations]
+    \label{Plots-are-smooth}
+    The set of differentiable maps from a numerical domain $U$ to a diffeological space $X$ is just the set of plots of $X$ defined on $U$.
+    This is a direct consequence of the axiom D3.
+    Hence,
+    $\Cinfty(U,X) = \cD(U)$.
+    If we add that,
+    for any numerical domain $X = \cO$,
+    $\cD(U)$ is the set of smooth parametrizations $\Cinfty(U,\cO)$ \art{Standard-diffeology-of-domains},
+    that justifies a posteriori the use of the symbol $\Cinfty$ to denote the differentiable maps between diffeological spaces.
+    For the same reason we may use indifferently the word \emph{smooth} or the word \emph{differentiable}.
+  \end{article}
+  
+  \begin{article}[Comparing diffeologies]
+    \label{Comparing-diffeologies}
+    A great number of constructions in diffeology use the following relation on diffeologies.
+    A diffeology $\cD$ of a set $X$ is said to be \emph{finer} than another $\cD'$ if $\cD$ is included in $\cD'$.
+    \emph{Fineness} is a partial order defined on the set of diffeologies of any set $X$.
+    If $X$ denotes a set equipped with a diffeology $\cD$ and $X'$ the same set equipped with the diffeology $\cD'$,
+    we denote $X \preceq X'$ to mean that $\cD$ is finer than $\cD'$.
+    We say indifferently that $\cD$ is \emph{finer} than $\cD'$ or $\cD'$ \emph{coarser} than $\cD$.
+    Note that \emph{coarser} means more plots and \emph{finer} means fewer plots.
+  \end{article}
+  
+  \begin{article}[Discrete and coarse diffeology]
+    \label{Discrete-and-coarse-diffeology}
+    There are a priori two universal diffeologies defined on any set $X$.
+    \begin{itemize}
+      \item[$\clubsuit$] The finest diffeology,
+      finer than any other diffeology.
+      This diffeology is called \emph{discrete diffeology}.
+      The plots of the discrete diffeology are the locally constant parametrizations.
+      \item[$\spadesuit$] The coarsest diffeology,
+      containing any other diffeology.
+      This diffeology is called the \emph{coarse diffeology}.
+      The plots of the coarse diffeology are all the parametrizations of $X$,
+      that is the whole set ${\rm Param}(X)$.
+    \end{itemize}
+    
+    In these two cases,
+    the three axioms of diffeology,
+    covering,
+    locality and smooth compatibility,
+    are obviously satisfied.
+    Therefore,
+    any diffeology is somewhere between the discrete and the coarse diffeologies.
+  \end{article}
+  
+  \begin{article}[Intersecting diffeologies]
+    \label{Intersecting-diffeologies}
+    Let $X$ be a set and $\cF$ be any family of diffeologies of $X$.
+    The intersection
+    $$
+      \inf(\cF) = \bigcap_{\cD \in \cF} \cD
+      $$
+    is a diffeology.
+    It is the coarsest diffeology contained in every element of $\cF$,
+    the finest being the discrete diffeology.
+    This proposition is used to prove that every family of diffeology has a \emph{supremum} and an \emph{infimum}.
+    In other words,
+    diffeologies form a \emph{lattice}.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Generating families
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Generating families}
+  
+  Generating families are a main tool for defining diffeologies,
+  starting with any set of parametrizations.
+  They are defined by the following proposition.
+  
+  \begin{article}[Generating families]
+    \label{Generating-families}
+    Let $X$ be a set,
+    let $\cF$ be any subset of parametrizations of $X$.
+    There exists a finest diffeology containing $\cF$.
+    This diffeology will be called the diffeology \emph{generated} by $\cF$ and denoted $\langle \cF \rangle$.
+    This diffeology is the infimum \art{Intersecting-diffeologies} of all diffeologies containing $\cF$,
+    that is the intersection of all the diffeologies containing $\cF$.
+    Given a diffeological space $X$,
+    a family $\cF$ generating the diffeology of $X$ is called a \emph{generating family} for $X$.
+    The plots of the diffeology generated by $\cF$ are given by the following characterization
+    \begin{itemize}
+      \item[$\clubsuit$] A parametrization $P : U \to X$ is a plot of the diffeology generated by $\cF$ if and only if for any point $r$ of $U$ there exists a superset $V$ of $r$ such that either $P \restriction V$ is a constant parametrization,
+      or there exists a parametrization $Q : W \to X$ element of $\cF$ and a smooth parametrization $F$ from $V$ to $W$ such that $P \restriction V = Q \circ F$.
+    \end{itemize}
+    In the second case,
+    we say that the plot $P$ \emph{lifts locally along} $F$,
+    or that $Q$ is a \emph{local lifting} of $P$ along $F$ \fig{fig-Local-lifting}.
+    Note that the process of generating family is a \emph{projector},
+    that is for any diffeology $\cD$ we have $\langle \cD \rangle = \cD$.
+  \end{article}
+  
+  \begin{article}[Generated by the empty set]
+    As a remark,
+    note that for any set $X$ the empty family $\cF = \varnothing \subset {\rm Param}(X)$ generates the discrete diffeology.
+  \end{article}
+  
+  \begin{figure}[ht]
+    \centerline{\includegraphics[width=0.5\textwidth]{Figures/fig-local-lifting.pdf}}
+    \caption{Local lifting of $P$ along $F$.}\label{fig-Local-lifting}
+  \end{figure}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Dimension of a diffeology
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Dimension of a diffeology}
+  \label{Dimension-of-a-diffeology}
+  
+  We define,
+  in this paragraph,
+  the \emph{global dimension} of a diffeology or a diffeological space.
+  This dimension is a diffeological invariant.
+  Further we will see a finer invariant,
+  the dimension map.
+  
+  \begin{article}[Dimension of a parametrization]
+    \label{Dimension-of-a-parametrization}
+    Let $P$ be any $n$-parametrization of some set $X$,
+    for some integer $n$.
+    We say that $n$ is the \emph{dimension} of $P$,
+    and we denote it by $\dimension(P)$.
+    That is,
+    $$
+      \mbox{For all } P \in \Param(X), \ \dimension(P) = n \ \Leftrightarrow \ P \in \Param_n(X).
+      $$
+  \end{article}
+  
+  \begin{article}[Dimension of a family of parametrizations]
+    \label{Dimension-of-a-family-of-parametrizations}
+    Let $X$ be a set and let $\cF$ be any family of parametrizations of $X$.
+    We define the \emph{dimension} of $\cF$ as the supremum of the dimensions of its elements \art{Domains-and-parametrizations},
+    $$
+      \dimension(\cF) = \sup \{ \dimension(F) \mid F \in \cF \}.
+      $$
+    Note that $\dimension(\cF)$ can be infinite if for any $n \in \NN$ there exists an element $F$ of $\cF$ such that $\dimension(F) = n$.
+    In this case we denote $\dimension(\cF) = \infty$.
+  \end{article}
+  
+  \begin{article}[Dimension of a diffeology]
+    \label{Dimension-of-a-diffeology}
+    Let $\cD$ be a diffeology.
+    The \emph{dimension} of $\cD$ is defined as the infimum of the dimensions of its generating families:
+    $$
+      \dimension(\cD) = \inf \{ \dimension(\cF) \mid \langle \cF \rangle = \cD \}.
+      $$
+    Let $X$ be a diffeological space and $\cD$ be its diffeology,
+    we define the dimension of $X$ as the dimension of $\cD$:
+    $$
+      \dimension(X) = \dimension(\cD) \in \NN \cup \{\infty\}.
+      $$
+  \end{article}
+  
+  \begin{article}[Dimensions of numerical domains]
+    \label{Dimensions-of-numerical-domains}
+    As we can expect,
+    the diffeological dimension of a numerical domain $U \subset \RR^n$,
+    equipped with the standard diffeology \art{Standard-diffeology-of-domains},
+    is equal to $n$.
+    That is,
+    for all $U \in \Domains(\RR^n)$,
+    $\dimension(U) = n$.
+  \end{article}
+  
+  \begin{proof}
+    Let us denote by $\mathcal{U}$ the domain $U$ equipped with the standard diffeology.
+    Let $\id_U$ be the identity map of $U$.
+    The singleton $\set{\id_U}$ is a generating family of $U$,
+    therefore \art{Dimension-of-a-diffeology} $\dimension(\mathcal{U}) \leq \dimension \set{\id_U}$.
+    But $\dimension\set{\id_U} = n$,
+    hence $\dimension(\mathcal{U}) \leq n$.
+    Now let us assume that $\dimension(\mathcal{U}) < n$.
+    So,
+    there exists a generating family $\cF$ for $\mathcal{U}$ such that $\dimension(\cF) < n$.
+    Since the identity map $\id_U$ is a plot of $\mathcal{U}$,
+    it lifts locally at every point along some element of $\cF$.
+    Thus,
+    for any $r \in U$ there exists a superset $V$ of $r$,
+    a parametrization $F : W \to U$,
+    element of $\cF$ (that is $F \in \Cinfty(W,U)$) and a smooth map $Q : V \to W$ such that $\id_U \restriction V = \id_V = F \circ Q$.
+    But $\dimension(\cF) < n$ implies that $\dimension(F)= \dimension(W) <n$.
+    Now,
+    the rank of the linear tangent map $\D(F \circ Q)$ \art{Smooth-maps-and-tangent-linear-maps} is less or equal to $\dimension(W) <n$,
+    but $\D(F \circ Q) = \D(\id_V) = \id_{\RR^n}$,
+    thus $\rank(\D(F \circ Q)) = \rank(\id_{\RR^n}) = n$.
+    Therefore,
+    there is no generating family $\cF$ of $U$ with $\dimension(\cF) <n$,
+    and $\dimension(U) = n$.
+  \end{proof}
+  
+  \begin{article}[Dimension zero spaces are discrete]
+    \label{dimension-zero-spaces-are-discrete}
+    A diffeological space has dimension zero if and only if it is discrete.
+  \end{article}
+  
+  \begin{proof}
+    Let $X$ be a set equipped with the discrete diffeology.
+    Any plot $P: U \to X$,
+    is locally constant.
+    So,
+    for any $r \in U$,
+    $P$ lifts locally,
+    on some domain containing $r$,
+    along the 0-plot $\mathbf{x} = [0 \mapsto x]$,
+    where $x = P(r)$.
+    Hence,
+    the 0-plots form a generating family and $\dimension(X) = 0$.
+    Conversely,
+    let $X$ be a diffeological space such that $\dimension(X) = 0$.
+    So,
+    the 0-plots generate the diffeology of $X$.
+    But,
+    any plot lifting locally along a 0-plot is locally constant.
+    Therefore,
+    $X$ is discrete.
+  \end{proof}
+  
+  \begin{article}[The dimension is a diffeological invariant]
+    \label{The-dimension-is-a-diffeological-invariant}
+    If two diffeological spaces are diffeomorphic,
+    then they have the same dimension.
+  \end{article}
+  
+  \begin{proof}
+    Let $X$ and $X'$ be two diffeological spaces.
+    Let $f : X \to X'$ be a diffeomorphism.
+    Let $\cF$ be a generating family of $X$.
+    The pushforward $\cF' = f_*(\cF)$ made up with the plots $f \circ F$,
+    where $F \in \cF$,
+    is clearly a generating family of $X'$.
+    Conversely let $\cF'$ a generating family of $X'$,
+    the pullback $f^*(\cF') = (f^{-1})_*(\cF')$ is a generating family of $X$.
+    And these two operations are inverse each from the other.
+    It is then clear that $\dimension(X) = \dimension(X')$.
+  \end{proof}
+  
+  \begin{article}[Has the set $\{0,1\}$ dimension 1?]
+    \label{has-the-set-0-1-dimension-1}
+    Let's consider the set $\{0,1\}$.
+    Let $\pi: \RR \to \{0,1\}$ be the parametrization defined by:
+    $$
+      \pi(x) = 0 \mbox{ if }x \in \QQ, \mbox{ and } \pi(x) = 1 \mbox{ otherwise.}
+      $$
+    Let $\{0,1\}_{\pi}$ be the set $\{0,1\}$ equipped with the diffeology generated by $\pi$ \art{Generating-families}.
+    Since $\{\pi\}$ is a generating family,
+    the dimension of $\{0,1\}_\pi$ is less than or equal to $1 = \dimension(\{\pi\})$.
+    But,
+    since the plot $\pi$ is not locally constant,
+    by density of the rational (or irrational) numbers in $\RR$,
+    the space $\{0,1\}_\pi$ is not discrete.
+    Hence,
+    $\dimension\{0,1\}_\pi\neq 0$ \art{dimension-zero-spaces-are-discrete},
+    and finally $\dimension \{0,1\}_\pi = 1$.
+    So,
+    a finite set may have a non zero dimension,
+    this example illustrates well the meaning of the dimension of a diffeological space.
+    This can be compared with the topological situation for which a space consisting in a finite number of points can be equipped with the discrete or the coarse topology,
+    for example.
+  \end{article}
+  
+  \begin{article}[Example: Dimension of tori]
+    \label{Dimension-of-tori}
+    Let $\Gamma \subset \RR$ be any strict subgroup of $(\RR,+)$ and let $T_\Gamma$ be the quotient $\RR/\Gamma$,
+    whose diffeology is generated by the projection $\pi : \RR \to \RR/\Gamma$.
+    So
+    $$
+      \dimension(T_\Gamma) = 1.
+      $$
+    This applies in particular to the circles $\RR/a \ZZ$,
+    with length $a >0$,
+    or to \emph{irrational tori} when $\Gamma$ is generated by more than one generators,
+    rationally independent.
+  \end{article}
+  
+  \begin{proof}
+    Since $\RR$ is a numerical domain,
+    $\pi$ is a plot of the quotient,
+    and $\cF = \set{\pi}$ is a generating family of $\RR/\Gamma$,
+    and $\dimension(\cF) = 1$.
+    Thus,
+    as a direct consequence of the definition \art{Dimension-of-a-diffeology},
+    $\dimension(\RR/\Gamma) \leq 1$.
+    Now,
+    if $\dimension(\RR/\Gamma) = 0$,
+    then the diffeology of the quotient is generated by the constant parametrizations \art{dimension-zero-spaces-are-discrete}.
+    Now,
+    $\pi$ is not locally constant,
+    therefore $\dimension(\RR/\Gamma) = 1$.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The dimension map of a diffeological space
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{The dimension map of a diffeological space}
+  \label{The-dimension-map-of-a-diffeological-space}
+  
+  Because diffeological spaces are not necessarily homogeneous,
+  the global dimension of a diffeological space \art{Dimension-of-a-diffeology} is a too rough invariant.
+  It is necessary to refine this definition and to introduce the dimension of a diffeological space at each of its points.
+  
+  \begin{article}[Pointed plots and germ of a diffeological space]
+    \label{Pointed-plots-of-a-diffeological-space}
+    Let $X$ be a diffeological space,
+    let $x \in X$.
+    Let $P : U \to X$ be a plot.
+    We say that $P$ is \emph{pointed at $x$} if $0 \in U$ and $P(0) = x$.
+    We will agree that the set of \emph{germs} of the pointed plots of $X$ at $x$ represents the \emph{germ of the diffeology} at this point,
+    and we shall denote it by $\cD_x$.
+  \end{article}
+  
+  \begin{article}[Local generating families]
+    \label{Local-generating-families}
+    Let $X$ be a diffeological space and let $x$ be any point of $X$.
+    We shall call \emph{local generating family at $x$} any family $\cF$ of plots of $X$ such that:
+    \begin{enumerate}
+      \item Every element $P$ of $\cF$ is pointed at $x$,
+      that is $0 \in \dom(P)$ and $P(0) =x$.
+      \item For any plot $P : U \to X$ pointed at $x$,
+      there exists a superset $V$ of $0 \in U$,
+      a parametrization $F : W \to X$ belonging to $\cF$ and a smooth parametrization $Q : V \to W$ pointed at $0\in W$ such that $F \circ Q = P \restriction V$.
+    \end{enumerate}
+    We shall say also that $\cF$ \emph{generates the germ $\cD_x$ of the diffeology $\cD$ of $X$ at the point $x$} \art{Pointed-plots-of-a-diffeological-space}.
+    And we denote,
+    by analogy with \art{Generating-families},
+    $\cD_x = \langle \cF \rangle$.
+    
+    Note that,
+    for any $x$ in $X$,
+    the set of local generating families at $x$ is not empty,
+    since it contains at the set of all the plots pointed at $x$,
+    and this set contains the constant parametrizations with value $x$ \art{Diffeology-and-diffeological-spaces}.
+  \end{article}
+  
+  \begin{article}[Union of local generating families]
+    \label{Union-of-local-generating_families}
+    Let $X$ be a diffeological space.
+    Let us choose,
+    for every $x \in {X}$,
+    a local generating family $\cF_x$ at $x$.
+    The union $\cF$ of all these local generating families,
+    $$
+      \cF = \bigcup_{x \in {X}}\cF_x,
+      $$
+    is a generating family of the diffeology of $X$.
+  \end{article}
+  
+  \begin{proof}
+    Let $P: U \to X$ be a plot,
+    let $r \in U$ and $x = P(r)$.
+    Let $T_r$ be the translation $T_r(r') = r' + r$.
+    Let $P'=P \circ T_r$ defined on $U' = T_r^{-1}(U)$.
+    Since the translations are smooth,
+    the parametrization $P'$ is a plot of $X$.
+    Moreover $P'$ is pointed at $x$,
+    $P'(0) = P \circ T_r (0) = P(r) = x$.
+    By definition of a local generating family \art{Local-generating-families},
+    there exists an element $F: W \to X$ of $\cF_x$,
+    a superset $V'$ of $0 \in U'$ and a smooth parametrization $Q' : V' \to W$,
+    pointed at $0$,
+    such that $P' \restriction V' = F \circ Q'$.
+    Thus,
+    $P \circ T_r \restriction V' = F \circ Q'$,
+    that is $P \restriction V = F \circ Q$,
+    where $V = T_r(V')$ and $Q = Q' \circ T_r^{-1}$.
+    Hence,
+    $P$ lifts locally,
+    at every point of its domain,
+    along an element of $\cF$.
+    Therefore,
+    $\cF$ is a generating family \art{Generating-families} of the diffeology of $X$.
+  \end{proof}
+  
+  \begin{article}[The dimension map]
+    \label{The-dimension-map}
+    Let $X$ be a diffeological space and let $x$ be a point of $X$.
+    By analogy with the global dimension of $X$ \art{Dimension-of-a-diffeology},
+    we define the \emph{dimension of $X$ at the point $x$} by:
+    $$
+      \dimension_x(X) = \inf \{ \dimension(\cF) \mid \langle \cF \rangle = \cD_x \}.
+      $$
+    The map $x \mapsto \dimension_x(X)$,
+    with values in $\NN \cup \{\infty\}$,
+    will be called the \emph{dimension map} of the space $X$.
+  \end{article}
+  
+  \begin{article}[Global dimension and dimension map]
+    \label{Global-and-pointwise-dimensions-of-a-diffeology}
+    Let $X$ be a diffeological space.
+    The global dimension of $X$ is the supremum of the dimension map of $X$:
+    $$
+      \dimension(X) = \sup_{x \in X} \set{\dimension_x(X)}.
+      $$
+  \end{article}
+  
+  \begin{proof}
+    Let $\cD$ be the diffeology of $X$.
+    Let us prove first that for every $x \in X$,
+    $\dimension_x(X) \leq \dimension(X)$,
+    which implies that $\sup_{x \in X} \dimension_x(X) \leq \dimension(X)$.
+    For that we shall prove that for any $x \in X$ and any generating family $\cF$ of $\cD$,
+    $\dimension_x(X) \leq \dimension(\cF)$.
+    Then,
+    since $\dimension(X) = \inf \{ \dimension(\cF) \mid \cF \in \cD \mbox{ and } \langle \cF \rangle = \cD \}$ we shall get,
+    $\dimension_x(X) \leq \dimension(X)$.
+    Now,
+    let $\cF$ be a generating family of $\cD$.
+    For any plot $P : U \to X$ pointed at $x$ let us choose an element $F$ of $\cF$ such that there exists a superset $V$ of $0 \in U$ and a smooth parametrization $Q : V \to {\rm def}(F)$ such that $F \circ Q = P \restriction V$.
+    Then,
+    let $r = Q(0)$ and $T_r$ be the translation $T_r(r') = r' + r$.
+    Let $F' = F \circ T_r$,
+    defined on $T_r^{-1}({\rm def}(F))$.
+    So $F'(0) = x$,
+    and $F'$ is a plot of $X$,
+    pointed at $x$,
+    such that $\dimension(F') = \dimension(F)$.
+    Let $Q' = T_r^{-1} \circ Q$,
+    so $Q'$ is smooth and $P \restriction V = F' \circ Q'$.
+    Thus,
+    the set $\cF'_x$ of all these plots $F'$ associated with the plots pointed at $x$ is a generating family of $\cD_x$,
+    and for each of them $\dimension(F') = \dimension(F) \leq \dimension(\cF)$.
+    Therefore $\dimension(\cF'_x) \leq \dimension(\cF)$.
+    But,
+    $\dimension_x(X) \leq \dimension(\cF'_x)$,
+    hence $\dimension_x(X) \leq \dimension(\cF)$.
+    And we conclude that $\dimension_x(X) \leq \dimension(X)$,
+    for any $x \in X$,
+    and $\sup_{x \in X} \dimension_x(X) \leq \dimension(X)$.
+    
+    Now,
+    let us prove that $\dimension(X) \leq \sup_{x \in X} \dimension_x(X)$.
+    Let us assume that $\sup_{x \in X} \dimension_x(X)$ is finite.
+    Otherwise,
+    according to the previous part we have $\sup_{x \in X} \dimension_x(X) \leq \dimension(X)$,
+    and then $\dimension(X)$ is infinite and $\sup_{x \in X} \dimension_x(X) = \dimension(X)$.
+    Now,
+    for any $x \in X$,
+    $\dimension_x(X)$ is finite.
+    And since the sequence of the dimensions of the generating families of $\cD_x$ is lower bounded,
+    there exists for any $x$ a generating family $\cF_x$ such that $\dimension_x(X) = \dimension(\cF_x)$.
+    For every $x$ in $X$ let us choose one of them.
+    Now,
+    let us define $\cF_m$ as the union of all these chosen families.
+    Thanks to \art{Union-of-local-generating_families},
+    $\cF_m$ is a generating family of $\cD$.
+    Hence,
+    $\dimension(X) \leq \dimension(\cF_m)$.
+    But $\dimension(\cF_m) = \sup_{F \in \cF_m} \dimension(F) = \sup_{x \in X} \sup_{F \in \cF_x} \dimension(F) = \sup_{x \in X} \dimension(\cF_x) = \sup_{x \in X} \dimension_x(X)$.
+    Therefore $\dimension(X) \leq \sup_{x \in X} \dimension_x(X)$.
+    And we can conclude,
+    from the two parts above,
+    that $\dimension(X) = \sup_{x \in X} \dimension_x(X)$.
+  \end{proof}
+  
+  \begin{article}[Local differentiable maps and diffeomorphisms]
+    \label{Local-differentiable-maps-and-local-diffeomorphisms}
+    Let $X$ and $X'$ be two diffeological spaces.
+    Let $f$ be a map from a subset $A$ of $X$,
+    to $X'$.
+    The map $f$ is said to be a \emph{local differentiable map} if for any plot $P$ of $X$,
+    $f \circ P$ is a plot of $X'$.
+    That is,
+    $P^{-1}(A)$ is a domain,
+    and either $P^{-1}(A)$ is empty or $f \circ P \restriction P^{-1}(A)$ is a plot of $X'$.
+    
+    $\clubsuit$ The composite of two local differentiable maps is a local differentiable map.
+    
+    The map $f$ is said to be a \emph{local diffeomorphism} if $f$ is injective,
+    locally differentiable as well as its inverse $f^{-1}$,
+    defined on $f(A)$.
+    
+    Let $x$ be a point of $X$ and $x'$ be a point of $X'$.
+    A \emph{local diffeomorphism} from $x$ to $x'$ is a local diffeomorphism $f$ defined on some superset $A$ of $x$ such that $f(x) = x'$.
+    We say that $X$,
+    at the point $x$,
+    is \emph{locally equivalent} to $X'$ at the point $x'$.
+    
+    $\spadesuit$ For $X = X'$,
+    the local diffeomorphisms split the space $X$ into classes according to the relation:
+    $x \sim x'$ if and only if there exists a local diffeomorphism $f$ mapping $x$ to $x'$.
+    These classes are called the \emph{orbits of the local diffeomorphisms} of $X$.
+  \end{article}
+  
+  \begin{proof}
+    Let us prove the assertion $\clubsuit$.
+    Let $X$,
+    $X'$ and $X''$ be three diffeological spaces.
+    Let $f$ be a locally differentiable map defined on $A$,
+    and $f'$ be a locally differentiable map defined on $A'$.
+    Let $f'' = f' \circ f$ defined on $A'' = f^{-1}(A')$.
+    Assume $A''$ not empty.
+    Let show that $f''$ is locally differentiable.
+    Let $P : U \to X$ be a plot of $X$.
+    The map $f$ is a locally differentiable,
+    so $P^{-1}(A)$ is a domain and $f \circ P \restriction P^{-1}(A)$ is a plot of $X'$.
+    Since $f'$ is locally differentiable,
+    and $f \circ P \restriction P^{-1}(A)$ is a plot of $X'$,
+    so $[f \circ P \restriction P^{-1}(A)]^{-1}(A') = (f \circ P)^{-1}(A')$ is a domain and $ f' \circ [f \circ P \restriction P^{-1}(A)] \restriction [(f \circ P)^{-1}(A')] = f' \circ f \circ P \restriction (f \circ P)^{-1}(A')$ is a plot of $X''$.
+    But $(f \circ P)^{-1}(A') = P^{-1}(f^{-1}(A')) = P^{-1}(A'')$,
+    thus $P^{-1}(A'')$ is a domain.
+    And $f' \circ f \circ P \restriction (f \circ P)^{-1}(A') = f'' \circ P \restriction P^{-1}(A'')$,
+    thus $f'' \circ P \restriction P^{-1}(A'')$ is a plot of $X''$.
+    Therefore $f''$ is locally differentiable.
+    
+    Now,
+    let us prove the assertion $\spadesuit$.
+    To be related by a local diffeomorphism is clearly reflexive:
+    the identity is a local diffeomorphism,
+    and symmetric:
+    if $f$ is a local diffeomorphism $f^{-1}$ is also a local diffeomorphism.
+    We have just to check its transitivity.
+    But this is a consequence of the transitivity of the local differentiability proved above and the transitivity of injectivity.
+  \end{proof}
+  
+  \begin{article}[The dimension map is a local invariant]
+    \label{The-dimension-map-is-a-finer-invariant}
+    Let $X$ and $X'$ be two diffeological spaces.
+    If $x \in X$ and $x' \in X'$ are two points related by a local diffeomorphism \art{Local-differentiable-maps-and-local-diffeomorphisms},
+    then $\dimension_x(X) = \dimension_{x'}(X')$.
+    In other words,
+    local diffeomorphisms (a fortiori global) can exchange only points where the spaces have the same dimension.
+    In particular,
+    for $X = X'$,
+    the dimension map is invariant under the local diffeomorphisms of $X$,
+    that is constant on the orbits of local diffeomorphisms \art{Local-differentiable-maps-and-local-diffeomorphisms}.
+  \end{article}
+  
+  \begin{article}[Transitive and locally transitive spaces]
+    \label{Transitive-and-locally-transitive-spaces}
+    A diffeological space $X$ is said to be \emph{transitive} if for any two points $x$ and $x'$ there exists a diffeomorphism $F$ \art{Differentiable-maps-and-diffeomorphisms} such that $F(x) = x'$.
+    The space is said to be \emph{locally transitive} if for any two points $x$ and $x'$ there exists a local diffeomorphism $f$ \art{Local-differentiable-maps-and-local-diffeomorphisms} defined on a superset of $x$ such that $f(x) = x'$.
+    If the space $X$ is transitive it is a fortiori locally transitive.
+    
+    As a direct consequence of \art{The-dimension-map-is-a-finer-invariant} :
+    if a diffeological space $X$ is locally transitive the dimension map \art{The-dimension-map} is constant,
+    a fortiori if the space $X$ is transitive.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Pushforwards of diffeologies, ...
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Pushforwards of diffeologies, subductions and dimensions}
+  
+  It is a well known property that the category of diffeological spaces is stable by quotient.
+  That is,
+  any quotient of a diffeological space has a natural diffeology,
+  called the quotient diffeology.
+  We shall see that,
+  as we can expect,
+  the dimension of the quotient is less than or equal to the dimension of the total space.
+  Let us remind first some needed diffeological constructions.
+  
+  \begin{article}[Pushforward of diffeologies]
+    \label{Pushforward-of-diffeologies}
+    Let $X$ be a diffeological space.
+    Let $X'$ be a set and $f : X \to X'$ be a map.
+    There exists a finest diffeology \art{Comparing-diffeologies} on $X'$ such that $f$ is differentiable.
+    This diffeology is called the \emph{pushforward} (or \emph{image}) of the diffeology $\cD$ of $X$ and is denoted by $f_*(\cD)$.
+    A parametrization $P : U \to X$ is an element of $f_*(\cD)$ if and only if for any $r \in U$ there exists a superset $V$ of $r$ such that either $P \restriction V$ is a constant parametrization or there exists a plot $Q : V \to X$ such that $P \restriction V = f \circ Q$.
+    In other words,
+    the diffeology $f_*(\cD)$ is generated \art{Generating-families} by the plots of the form $f \circ Q$ where $Q$ is a plot of $X$.
+  \end{article}
+  
+  \begin{article}[Subductions]\label{Subductions}
+    Let $X$ and $X'$ be two diffeological spaces.
+    A map $f : X \to X'$ is called a \emph{subduction} if it is a surjection and if the image of the diffeology of $X$ \art{Pushforward-of-diffeologies} coincides with the diffeology of $X'$.
+    In this case,
+    a parametrization $P:U \to X'$ is a plot if and only if for any $r \in U$ there exists a superset $V$ of $r$ and a plot $Q : V \to X$ such that $P \restriction V = f \circ Q$.
+  \end{article}
+  
+  \begin{article}[Quotients of diffeological spaces]
+    \label{Quotients-of-diffeological-spaces}
+    Let $X$ be a diffeological space and $\sim$ be any equivalence relation on $X$.
+    The quotient space $X' = X/\!\!\sim$ carries a \emph{quotient diffeology},
+    image of the diffeology of $X$ by the projection $\pi : X \to X'$.
+    A parametrization $P : U \to X'$ is a plot of the quotient diffeology if and only if for any $r$ of $U$ there exists a superset $V$ of $r$ and a plot $P' : V \to X$ such that $P \restriction V = \pi \circ P'$.
+    
+    Note that injective subductions are diffeomorphisms,
+    and the composite of two subductions is again a subduction.
+    This makes subductions a subcategory of the diffeology category.
+  \end{article}
+  
+  \begin{article}[Uniqueness of quotients]
+    \label{Uniqueness-of-quotients}
+    Let $X$,
+    $X'$ and $X''$ be three diffeological spaces.
+    Let $\pi' : X \to X'$ and $\pi'' : X \to X''$ be two subductions \art{Subductions}.
+    If there exists a bijection $f : X' \to X''$ such that $f \circ \pi' = \pi''$,
+    then $f$ is a diffeomorphism.
+    In other words the quotient diffeological structure is unique.
+  \end{article}
+  
+  \begin{proof}
+    Let $P :U \to X'$ be a plot and $r \in U$.
+    Since $\pi'$ is a subduction there exits a superset $V$ of $r$,
+    a plot $Q : V \to X$ such that $\pi' \circ Q = P \restriction V$.
+    Thus,
+    $f \circ P \restriction V = f\circ \pi' \circ Q = \pi'' \circ Q$.
+    But,
+    $\pi''$ is differentiable,
+    so $\pi'' \circ Q$ is a plot of $X''$.
+    Hence,
+    $f \circ P$ is locally a plot of $X''$ at every point of $U$,
+    therefore it is a plot \artplus{Diffeology-and-diffeological-spaces}{D2}.
+    Thus,
+    the map $f$ is differentiable.
+    Now,
+    since $f^{-1} \circ \pi'' = \pi'$,
+    the same holds for $f^{-1}$ and $f$ is a diffeomorphism.
+  \end{proof}
+  
+  \begin{article}[Dimensions and quotients of diffeologies]
+    \label{Dimensions-of-quotients}
+    Let $X$ and $X'$ be two diffeological spaces,
+    let $\pi: {X} \to {X}'$ be a subduction.
+    So we have $\dimension(X') \leq \dimension(X)$.
+    In other words,
+    for any equivalence relation $\sim$ defined on ${X}$,
+    $\dimension(X/\!\!\sim) \leq \dimension(X)$.
+  \end{article}
+  
+  \begin{proof}
+    Let $\cD$ and $\cD'$ be the diffeologies of $X$ and $X'$.
+    Let $\Gen(\cD)$ and $\Gen(\cD')$ be the set of all the generating families of $\cD$ and $\cD'$.
+    
+    Let us prove first that for any $\cF \in \Gen(\cD)$,
+    $\pi \circ \cF$ is a generating family of $\cD'$,
+    that is $\pi \circ \Gen(\cD) \subset \Gen(\cD')$.
+    Let $P: U \to X'$ be a plot and $r \in U$.
+    Since $\pi$ is a subduction,
+    there exists a superset $V$ of $r$ and a plot $Q: V \to X$ such that $\pi \circ Q = P \restriction V$.
+    Since $\cF$ generates $\cD$,
+    there exists a superset $W \subset V$,
+    a plot $F \in \cF$ and a smooth parametrization $\phi: W \to \dom(F)$,
+    such that $F \circ \phi = Q \restriction W$.
+    Then,
+    $P \restriction W = (\pi \circ F) \circ \phi$.
+    Hence,
+    any plot $P$ of $X'$ lifts locally along some element of $\pi \circ \cF$.
+    Thus,
+    $\pi \circ \cF$ is a generating family of $X'$.
+    
+    Now,
+    for any plot $P: U \to X$,
+    $\dimension(P) = \dimension(U) = \dimension \pi \circ P$.
+    Hence,
+    for any generating family $\cF \in \Gen(\cD)$,
+    $\dimension(\cF) = \dimension(\pi \circ \cF)$.
+    It follows:
+    \begin{align*}
+      \dimension(X') & = \inf_{\cF' \in \Gen(\cD') }\dimension(\cF') && \text{(by definition)} \\
+      & \leq \inf_{\cF \in \Gen(\cD) }\dimension(\pi \circ \cF) && \text{(since } \pi \circ \Gen(\cD) \subset \Gen(\cD')) \\
+      & \leq \inf_{\cF \in \Gen(\cD) }\dimension(\cF) && \text{(since } \dimension(\pi \circ \cF) = \dimension(\cF)) \\
+      & \leq \dimension(X) && \text{(by definition)}
+    \end{align*}
+    Therefore $\dimension(X')\leq \dimension(X)$.
+  \end{proof}
+  
+  \begin{article}[Pointed subduction and dimension]
+    \label{Pointed-subduction-and-dimension}
+    Let $X$ and $X'$ be two diffeological spaces,
+    and $\pi : X \to X'$ be a subduction.
+    Let $x$ be a point of $X$ and $x' = \pi(x)$.
+    We shall say that $\pi$ is a \emph{subduction at the point $x$} if the the germ of the diffeology of $X'$ at the point $x'$ is the pushforward of the germ of the diffeology of $X$ at the point $x$.
+    That is,
+    If for any plot $P' : U' \to X'$ pointed at $x'$,
+    there exists a superset $U$ of $0 \in U'$ a plot $P : U \to X$,
+    pointed at $x$,
+    such that $\pi \circ P = P' \restriction U$.
+    So,
+    we have $\dimension_{x'}(X') \leq \dimension_x(X)$.
+  \end{article}
+  
+  \begin{proof}
+    The same arguments developed in \art{Dimensions-of-quotients} apply here.
+  \end{proof}
+  
+  \begin{article}[Example: The dimension of $\RR^n/ \mathrm{O}(n,\RR)$]
+    \label{Dimension-of-Rn/On}
+    Let $\Delta_n = \RR^n/\mathrm{O}(n,\RR)$,
+    $n \in \NN$,
+    equipped with the quotient diffeology \art{Quotients-of-diffeological-spaces}.
+    Then,
+    $$
+      \dimension_0(\Delta_n) = n, \mbox{ and } \dimension_x(\Delta_n) = 1 \mbox{ if } x \neq 0.
+      $$
+    Hence,
+    the global dimension of the quotient is $\dimension(\Delta_n) = n$.
+  \end{article}
+  
+  \begin{proof}
+    1) Let us denote by $\pi_n : \RR^n \to \Delta_n$ the projection from $\RR^n$ onto its quotient.
+    Since,
+    by the very definition of $\mathrm{O}(n, \RR)$,
+    $\lVert x'\rVert = \lVert x\rVert$ if and only if $x' = A x$,
+    with $A \in \mathrm{O}(n, \RR)$,
+    there exists a bijection $f : \Delta_n \to [0, \infty[$ such that $f \circ \pi_n = \nu_n$,
+    where $\nu_n(x) = \lVert x\rVert^2$.
+    $$
+      \begin{tikzcd}[column sep=large, row sep=large,every label/.append style = {font = \small}]
+      \RR^n \arrow[dr,swap, "\nu_n"'] \arrow[d,swap, "\pi_n"] & \\
+      \Delta_n \arrow[r,swap, "f"] & {[0, \infty[}
+      \end{tikzcd}
+      $$
+    Now,
+    thanks to the uniqueness of quotients \art{Uniqueness-of-quotients},
+    $f$ is a diffeomorphism between $\Delta_n$ equipped with the quotient diffeology and $[0, \infty[$,
+    equipped with the pushforward of the standard diffeology of $\RR^n$ by the map $\nu_n$.
+    Now,
+    let us denote by $\cD_n$ the pushforward of the standard diffeology of $\RR^n$ by $\nu_n$.
+    The space $([0, \infty[, \cD_n)$ is a representation of $\Delta_n$ \art{Uniqueness-of-quotients}.
+    
+    2) Let us denote by $0_k$ the zero of $\RR^k$.
+    Now,
+    let us assume that the plot $\nu_n$ can be lifted at the point $0_n$ along a $p$-plot $P : U \to \Delta_n$,
+    with $p < n$.
+    Hence,
+    there exists a smooth parametrization $\phi : V \to U$ such that $P \circ \phi = \nu_n \restriction V$.
+    We can assume without loss of generality that $P(0_p) = 0$ and $\phi(0_n) = 0_p$.
+    If it is not the case we compose $P$ with a translation mapping $\phi(0_n)$ to $0_p$.
+    Now,
+    since $P$ is a plot of $\Delta_n$ it can be lifted locally at the point $0_p$ along $\nu_n$.
+    That is,
+    there exists a smooth parametrization $\psi : W \to \RR^n$ such that $0_p \in W$ and $\nu_n \circ \psi = P \restriction W$.
+    Let us denote $V' = \phi^{-1}(W)$,
+    we have the following commutative diagram:
+    $$
+      \begin{tikzcd}[column sep=large, row sep=huge,every label/.append style = {font = \small}]
+      {} & W \arrow[d,midway, "P \restriction W" description] \arrow[dr,swap, "\psi"']& {} \\
+      V' \arrow[ur, "\phi \restriction V'"] \arrow[r, "\nu_n \restriction V'"'] & {[0, \infty[}  & \RR^n \arrow[l, "\nu_n"]
+      \end{tikzcd}
+      $$
+    Now,
+    denoting $F = \psi \circ \phi \restriction V'$,
+    we get $\nu_n \restriction V' = \nu_n \circ F$,
+    with $F \in \Cinfty(V', \RR^n)$,
+    $0_n \in V'$ and $F(0_n) = 0_n$,
+    that is:
+    $$
+      \lVert x\rVert^2 = \lVert F(x)\rVert^2.
+      $$
+    The derivative of this identity gives:
+    $$
+      x \cdot \delta x = F(x) \cdot \D(F)(x)(\delta x), \mbox{ for all } x \in V' \mbox{ and for all } \delta x \in \RR^n.
+      $$
+    The second derivative,
+    computed at the point $0_n$,
+    where $F$ vanishes,
+    gives then:
+    $$
+      \id_n = \bar{M} M \quad\text{with}\quad M = \D(F)(0_n),
+      $$
+    and where $\bar{M}$ is the transposed matrix of $M$.
+    But $\D(F)(0_n) = \D(\psi)(0_p) \circ \D(\phi)(0_n)$.
+    Let us denote $A = \D(\psi)(0_p)$ and $B = \D(\phi)(0_n)$,
+    $A \in \mathrm{L}(\RR^p, \RR^n)$ and $B \in \mathrm{L}(\RR^n, \RR^p)$.
+    So $M = A B$ and the previous identity $\id_n = \bar{M} M$ becomes $\id_n = \bar{B} \bar{A} A B$.
+    But,
+    the rank of $B$ is less than or equal to $p$ which is,
+    by hypothesis,
+    strictly less than $n$ which would imply that the rank of $\id_n$ is strictly less than $n$.
+    And this is not true since the rank of the $\id_n$ is $n$.
+    Therefore,
+    the plot $\nu_n$ cannot be lifted locally at the point $0_n$ by a $p$-plot of $\Delta_n$ with $p < n$.
+    
+    3) The diffeology of $\Delta_n$,
+    represented by $([0, \infty[, \cD_n)$,
+    is generated by $\nu_n$.
+    Hence,
+    $\cF = \set{\nu_n}$ is a generating family of $\Delta_n$.
+    Therefore,
+    by definition of the dimension of diffeological spaces \art{Dimension-of-a-diffeology},
+    we have $\dimension(\Delta_n) \leq n$.
+    Let us assume that $\dimension(\Delta_n) = p$ with $p < n$.
+    So,
+    since $\nu_n$ is a plot of $\Delta_n$ it can be lifted locally,
+    at the point $0_n$,
+    along an element $P'$ of some generating family $\cF'$ of $\Delta_n$ satisfying $\dimension(\cF') = p$.
+    But,
+    by definition of the dimension of generating families \art{Dimension-of-a-family-of-parametrizations},
+    we get $\dimension(P') \leq p$,
+    that is $\dimension(P') < n$.
+    But this is not possible,
+    thanks to the second point.
+    Therefore,
+    $\dimension(\Delta_n) = n$.
+    Now,
+    since the dimension is a diffeological invariant \art{The-dimension-is-a-diffeological-invariant},
+    $\Delta_n = \RR^n / \mathrm{O}(n, \RR)$ is not diffeomorphic to $\Delta_m = \RR^m / \mathrm{O}(m, \RR)$,
+    $n \neq m$.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Pullbacks of diffeologies, ...
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Pullbacks of diffeologies, inductions and dimensions}
+  
+  The category \catDiff\ is stable by subset operation.
+  This stability is expressed by the following construction.
+  
+  \begin{article}[Pullbacks of diffeologies]
+    \label{Pullbacks-of-diffeologies}
+    Let $X$ be a set,
+    and $Y$ be a diffeological space.
+    Let $f : X \to Y$ be a map.
+    There exists a coarsest diffeology on $X$ such that the map $f$ is differentiable.
+    This diffeology is called the \emph{pullback diffeology}.
+    A parametrization $P : U \to X$ is a plot of the pullback diffeology if and only if $f \circ P$ is a plot of $Y$.
+    Let $\cD$ be the diffeology on $Y$,
+    $f^*{(\cD)}$ will denote the pullback diffeology of $\cD$ by $f$.
+    $$
+      f^*{(\cD)} = \{ P : U \to X \in {\rm Param}(X) \mid f \circ P \in \Cinfty(U,Y) \}
+      $$
+  \end{article}
+  
+  \begin{article}[Composition of pullbacks]
+    \label{Composites-of -pullbacks}
+    Let $X$,
+    $Y$ be two sets and $Z$ be a diffeological space.
+    Let $f : X \to Y$ and $g : Y\to Z$ be two maps.
+    Let $\cD$ be a diffeology on $Z$,
+    then $f^*(g^*(\cD)) = (g\circ f)^*(\cD)$.
+  \end{article}
+  
+  \begin{article}[Inductions]\label{Inductions}
+    Let $X$ and $Y$ be two diffeological spaces.
+    A map $f : X \to Y$ is called an \emph{induction} if $f$ is injective and if the pullback diffeology of $Y$ by $f$ coincides with the diffeology of $X$.
+    That is,
+    the plots of $X$ are the parametrizations $P$ of $X$ such that $f \circ P$ are plots of $Y$.
+    The composite of two inductions is again an induction.
+    Inductions make up a subcategory of the category \catDiff.
+  \end{article}
+  
+  \begin{article}[Surjective inductions]
+    \label{Surjective-inductions}
+    Let $f : X \to Y$ be an injection,
+    where $X$ and $Y$ are diffeological spaces.
+    The map $f$ is an induction if and only if for any plot $P$ of $Y$,
+    with values in $f(X)$,
+    the map $f^{-1}\circ P$ is a plot of $X$.
+    In particular,
+    surjective inductions are diffeomorphisms.
+  \end{article}
+  
+  \begin{article}[Subset diffeology and diffeological subspaces]
+    \label{Subset-diffeology-and-diffeological-subspaces}
+    Let $X$ be a diffeological space.
+    Any subset $A \subset X$ carries a natural diffeology induced by the inclusion.
+    Namely the pullback diffeology by the inclusion $j_{A} : A \hookrightarrow X$ \art{Inductions}.
+    Equipped with this \emph{induced diffeology} the subset $A$ is called a \emph{subspace} of $X$.
+    This diffeology is also called the \emph{subset diffeology}.
+    The plots of the subset diffeology of $A$ are the plots of $X$ taking their values in $A$.
+  \end{article}
+  
+  \begin{article}[Sums of diffeological spaces]
+    \label{Sums-of-diffeological-spaces}
+    Let $\cX$ be a family of diffeological spaces,
+    there exists on the disjoint union $\coprod_{X \in \cX} X$ of the elements of $\cX$ a finest diffeology such that each injection $j_X : X \hookrightarrow \coprod_{X \in \cX} X$,
+    $X \in \cX$,
+    is differentiable.
+    This diffeology is called the \emph{sum diffeology} of the family $\cX$.
+    The plots of the sum diffeology are the parametrizations $P:U\to \coprod_{X \in \cX} X$ which are locally plots of elements of the family $\cF$.
+    In other words,
+    a parametrization $P:U\to \coprod_{X \in \cX} X$ is a plot of the sum diffeology if and only if there exists an open covering $\{U_i\}_{i \in \cI}$ of $U$ and for each $i \in \cI$ an element $X_i$ of the family $\cX$,
+    such that $P\restriction U_i$ is a plot of $X_i$.
+    For this diffeology,
+    the injections $j_X$ are inductions.
+    
+    It is obvious,
+    thanks to \art{Global-and-pointwise-dimensions-of-a-diffeology},
+    that the dimension of a sum is the supremum of the dimensions of its components,
+    $$
+      \dimension \coprod_{X \in \cX} X = \sup_{X \in \cX} \dimension(X).
+      $$
+  \end{article}
+  
+  \begin{article}[Example : The dimension of the half-line]
+    \label{Dimension-of-the-half-line}
+    Unlike the situation of quotients \art{Dimensions-of-quotients},
+    there is no simple relation between the dimension of a subspace $A$ and the dimension of the ambient space $X$.
+    The dimension of $A \subset X$ can be less than,
+    equal or even greater than the dimension of $X$.
+    The following example is a clear illustration of that phenomenon.
+    
+    Let $\Delta_\infty = [0,\infty[ \subset \RR$ equipped with the subset diffeology.
+    Then,
+    $$
+      \dimension_0(\Delta_\infty) = \infty, \mbox{ and } \dimension_x(\Delta_\infty) = 1 \mbox{ if } x \neq 0.
+      $$
+    Hence,
+    the global dimension of the quotient is $\dimension(\Delta_\infty) = \infty$.
+  \end{article}
+  
+  \begin{proof}
+    First of all,
+    let us remark that any map $\nu_n : \RR^n \to \Delta_\infty$,
+    defined by $\nu_n(x) = \lVert x\rVert^2$,
+    is a plot of $\Delta_\infty$.
+    Indeed,
+    it is a smooth parametrization of $\RR$ and it takes its values in $[0, \infty[$.
+    Now,
+    let us assume that $\dimension(\Delta_\infty) = N < \infty$.
+    Hence for any integer $n$,
+    the plot $\nu_n$ lifts locally at the point $0_n$ along some $p$-plot of $\Delta_\infty$,
+    with $p \leq N$.
+    Let us choose now $n > N$.
+    So,
+    there exists a smooth parametrization $f : U \to \RR$ such that $\mathrm{Val}(f) \subset [0, \infty[$,
+    that is $f$ is a $p$-plot of $\Delta_\infty$.
+    And,
+    there exists a smooth parametrization $\phi : V \to U$ such that $f \circ \phi = \nu_n \restriction V$.
+    $$
+      \begin{tikzcd}[column sep=large, row sep=large,every label/.append style = {font = \small}]
+      & U \arrow[dr, "f"] & \\
+      V \arrow[ur, "\phi"] \arrow[rr, "\nu_n \restriction V"'] & & {[0, \infty[}
+      \end{tikzcd}
+      $$
+    We can assume,
+    without loss of generality,
+    that $0_p \in U$,
+    $\phi(0_n) = 0_p$,
+    which implies $f(0_p) = 0$.
+    Now,
+    let us follow the method of \art{Dimension-of-Rn/On}.
+    The first derivative of $\nu_n$ at a point $x \in V' = \phi^{-1}(V)$ is given by:
+    $$
+      x = \D(f)(\phi(x)) \circ \D(\phi)(x).
+      $$
+    Since $f$ is smooth,
+    positive and $f(0)=0$ we have,
+    in particular,
+    $\D(f)(0_p) = 0$.
+    Now,
+    considering this property,
+    the second derivative,
+    computed at the point $0_n$,
+    gives in matrix notation:
+    $$
+      \id_n = \bar{M} H M, \mbox{ where } M = \D(\phi)(0) \mbox{ and } H = \D^2(f)(0).
+      $$
+    The bar represents the transposition,
+    and $H$ is a symmetric bilinear map,
+    the hessian of $\phi$ at the point $0_n$.
+    The matrix $M$ represents the tangent map of $f$ at $0_p$.
+    Now,
+    since we chose $n > N$ and assumed $p \leq N$ we have $p < n$.
+    Thus the map $M$ has a non zero kernel and then $\bar{M} H M$ is degenerate,
+    which is impossible since $\id_n$ is non degenerate.
+    In other words,
+    the rank of $\bar{M} H M$ is less than or equal to $p < n$,
+    and the rank of $\id_n$ is $n$.
+    Therefore the dimension of $\Delta_\infty$ is infinite.
+  \end{proof}
+  
+  \begin{article}[The diffeomorphisms of the half line]
+    \label{The-diffeomorphisms-of-the-half-line}
+    We can illustrate the invariance of the dimension map \art{The-dimension-map} under diffeomorphisms \art{The-dimension-map-is-a-finer-invariant} by the following characterization of the diffeomorphisms of the half line $\Delta_\infty$ \art{Dimension-of-the-half-line}.
+    
+    A bijection $f : \interval{0,\infty} \to \interval{0,\infty}$ is a diffeomorphism,
+    for the subset diffeology induced by $\RR$,
+    if and only if:
+    \begin{enumerate}
+      \item The origin is fixed,
+      $f(0) = 0$.
+      \item The restriction of $f$ to the open half line is an increasing diffeomorphism of the open half-line,
+      $f \restriction \left]0,\infty\right[ \in {\rm Diff}^+(\left]0,\infty\right[)$.
+      \item The map $f$ is continuously indefinitely differentiable at the origin and its first derivative $f'(0)$ does not vanish.
+    \end{enumerate}
+    Moreover,
+    these three conditions are equivalent to the following:
+    $f$ is the restriction to $\interval{0, \infty}$ of a smooth parametrization $\tilde f$,
+    defined on an open superset of $\interval{0, \infty}$ and such that:
+    $\tilde f(0) =0$,
+    $\tilde f$ is strictly increasing on $\interval{0, \infty}$ and $\tilde f'(0) > 0$.
+  \end{article}
+  
+  \begin{proof}
+    Let us prove first that any diffeomorphism $f$ of $\Delta_\infty$ satisfies the three points of the proposition.
+    
+    1. Since the dimension map is invariant under diffeomorphism \art{The-dimension-map-is-a-finer-invariant} and since the origin is the only point where the dimension is infinite \art{Dimension-of-the-half-line},
+    $f$ fixes the origin.
+    That is $f(0) = 0$.
+    
+    2. Since $f(0) = 0$ and $f$ is a bijection we have $f(\left]0, \infty \right[) = \left]0, \infty \right[$.
+    Now,
+    since the restriction of a diffeomorphism to any subset is a diffeomorphism of this subset onto its image,
+    for the subset diffeology \cite{PIZ05},
+    we have $f \restriction \left]0,\infty\right[ \in {\rm Diff}(\left]0,\infty\right[)$.
+    The induced diffeology of the open interval being the standard diffeology \art{Standard-diffeology-of-domains}.
+    Moreover,
+    since $f(0) = 0$,
+    $f$ restricted to $\left]0,\infty\right[$ is necessarily increasing.
+    
+    3. Since $f$ is differentiable,
+    by the very definition of differentiability \art{Differentiable-maps-and-diffeomorphisms},
+    for any smooth parametrization $P$ of the interval $\interval{0,\infty}$ the composite $f \circ P$ is smooth.
+    In particular for $P = [t \mapsto t^2]$.
+    Hence,
+    the map $\varphi : t \mapsto f(t^2)$ defined on $\RR$ with values in $\interval{0, \infty}$ is smooth.
+    Now,
+    by theorem 1 of \cite{Whi43},
+    since $\varphi$ is smooth,
+    $f$ can be extended to an open superset of $\interval{0, \infty}$ by a smooth function.
+    Hence,
+    $f$ is continuously differentiable at the origin.
+    Moreover since $f$ is a diffeomorphism of $\Delta_\infty$,
+    what has been said for $f$ can be say for $f^{-1}$.
+    And,
+    since $(f^{-1})'(0) = 1/f'(0)$ and $f$ is increasing we have $f'(0) >0$.
+    
+    Conversely,
+    it is obvious that if $f$ is the restriction on $\interval{0, \infty}$ of a smooth function $\tilde f$ such that:
+    $\tilde f(0) =0$,
+    $\tilde f$ is strictly increasing on $\interval{0, \infty}$ and $\tilde f'(0) > 0$ then $f$ is differentiable for the subset diffeology as well as its inverse.
+    That is,
+    $f$ is a diffeomorphism of $\Delta_\infty$.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Locality, manifolds and dimension
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Locality, manifolds and dimension}
+  
+  We remind here the diffeological definition of \emph{manifolds}.
+  We check that the definition of dimension given in \art{Dimension-of-a-diffeology} coincides with the usual definition of the differential geometry.
+  
+  \begin{article}[Manifolds]
+    \label{Manifolds}
+    Let $X$ be a diffeological space,
+    and let $\cD$ be its diffeology.
+    If there exists an integer $n$ such that $X$ is locally diffeomorphic to $\RR^n$ in every point $x$ of $X$,
+    then we say that $X$ is a \emph{manifold} modeled on $\RR^n$.
+    We say also that $\cD$ is a \emph{manifold diffeology}.
+    More precisely,
+    for every point $x \in X$,
+    there exists a $n$-domain $U$ and a local diffeomorphism $F : U \to X$ \art{Local-differentiable-maps-and-local-diffeomorphisms} such that for some $r \in U$,
+    $F(r) = x$.
+    Such local diffeomorphism is called a \emph{chart} of $X$.
+    A collection of charts whose domains cover $X$ is called an atlas.
+  \end{article}
+  
+  \begin{article}[Dimension of manifolds]
+    \label{Dimension-of-manifolds}
+    For any manifold $X$ modeled on $\RR^n$ \art{Dimension-of-a-diffeology} \art{Manifolds},
+    we have $\dimension(X) = n$.
+  \end{article}
+  
+  \begin{proof}
+    Since $X$ is locally diffeomorphic to $\RR^n$ at every point,
+    the group of local diffeomorphisms of $X$ is transitive on $X$.
+    That is every point is equivalent to any other one \art{Local-differentiable-maps-and-local-diffeomorphisms},
+    hence the dimension map is constant \art{The-dimension-map-is-a-finer-invariant},
+    and equal to the dimension of $\RR^n$,
+    but $\dimension(\RR^n) = n$ \art{Dimensions-of-numerical-domains}.
+  \end{proof}
+  
+  \begin{article}[Diffeological manifolds]
+    \label{Diffeological-manifolds}
+    A more diffeological version of manifold follows the definition of diffeological vector spaces.
+    Let us remind \cite{PIZ05a} that a diffeological vector space over a field $\KK = \RR$ or $\CC$ is a vector space $(E,+,\cdot)$ with $E$ equipped with a diffeology such that $(E,+)$ is a diffeological group,
+    and the multiplication by a scalar is differentiable from $\KK \times E$ to $E$,
+    $\KK$ being equipped with the standard diffeology.
+    A \emph{diffeological manifold} $M$ modeled on $E$ is a diffeological space locally diffeomorphic at every point to $E$.
+    Since $E$ is transitive by translations,
+    which are diffeomorphisms,
+    the dimension of $M$ is constant and equal to the dimension of $E$.
+    The infinite sphere and the infinite projective space defined in \cite{PIZ05a} are two examples of such diffeological manifolds,
+    of infinite dimension.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Bibliography
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{thebibliography}{XXXX}
+    
+    \bibitem[Che77]{Che77}
+    Kuo Tsai Chen.
+    \newblock \emph{Iterated path integral}.
+    \newblock Bull. of Am. Math. Soc., 83(5):831--879, 1977.
+    
+    \bibitem[Don84]{Don84}
+    Paul Donato.
+    \newblock \emph{Revêtement et groupe fondamental des espaces différentiels homogènes}.
+    \newblock Thèse de doctorat d'état, Université de Provence, Marseille, 1984.
+    
+    \bibitem[DI85]{DI85}
+    Paul Donato \& Patrick Iglesias.
+    \newblock \emph{Exemple de groupes difféologiques : flots irrationnels sur le tore}.
+    \newblock Compte Rendu de l'Académie des Sciences, 301(4), 1985.
+    
+    \bibitem[Igl85]{Igl85}
+    Patrick Iglesias.
+    \newblock \emph{Fibrés difféologiques et homotopie}.
+    \newblock Thèse de doctorat d'état, Université de Provence, Marseille, 1985.
+    \newblock \url{http://www.umpa.ens-lyon.fr/~iglesias/these/}
+    
+    \bibitem[Igl86]{Igl86}
+    Patrick Iglesias.
+    \newblock \emph{Difféologie d'espace singulier et petits diviseurs}.
+    \newblock Compte Rendu de l'Académie des Sciences, 302:519--522, 1986.
+    
+    \bibitem[Igl87]{Igl87}
+    Patrick Iglesias.
+    \newblock \emph{Connexions et difféologie}.
+    \newblock In \emph{Aspects dynamiques et topologiques des groupes infinis de transformation de la mécanique}, volume 25, pages 61--78. Hermann, Paris, 1987.
+    
+    \bibitem[Igl95]{Igl95}
+    Patrick Iglesias.
+    \newblock \emph{La trilogie du Moment}.
+    \newblock Ann. Inst. Fourier, 45, 1995.
+    
+    \bibitem[IL90]{IL90}
+    Patrick Iglesias \& Gilles Lachaud.
+    \newblock \emph{Espaces différentiables singuliers et corps de nombres algébriques}.
+    \newblock Ann. Inst. Fourier, Grenoble, 40(1):723--737, 1990.
+    
+    \bibitem[PIZ05a]{PIZ05a}
+    Patrick Iglesias-Zemmour.
+    \newblock \emph{Diffeology of the Infinite Hopf Fibration}.
+    \newblock eprint, 2005.
+    \newblock \url{http://www.umpa.ens-lyon.fr/~iglesias/}
+    
+    \bibitem[PIZ05]{PIZ05}
+    Patrick Iglesias-Zemmour.
+    \newblock \emph{Diffeology}.
+    \newblock eprint, 2005.
+    \newblock \url{http://www.umpa.ens-lyon.fr/~iglesias/diffeology/}
+    
+    \bibitem[IKZ05]{IKZ05}
+    Patrick Iglesias, Yael Karshon and Moshe Zadka.
+    \newblock \emph{Orbifolds as diffeologies}.
+    \newblock 2005. \url{http://arxiv.org/abs/math.DG/0501093}
+    
+    \bibitem[Sou81]{Sou81}
+    Jean-Marie Souriau.
+    \newblock \emph{Groupes différentiels}.
+    \newblock In \emph{Lecture notes in mathematics}, volume 836, pages 91--128. Springer Verlag, New-York, 1981.
+    
+    \bibitem[Sou84]{Sou84}
+    Jean-Marie Souriau.
+    \newblock \emph{Groupes différentiels et physique mathématique}.
+    \newblock In \emph{Collection travaux en cours}, pages 75--79. Hermann, Paris, 1984.
+    
+    \bibitem[Whi43]{Whi43}
+    Hassler Whitney.
+    \newblock \emph{Differentiable even functions}.
+    \newblock Duke Math. J., 10:159--160, 1943.
+    
+  \end{thebibliography}
+  
+  \bigskip
+  \flushright{Patrick Iglesias-Zemmour \\ Einstein Institute \\
+  The Hebrew University of Jerusalem \\
+  Campus Givat Ram \\
+  Jerusalem 91904 \\
+  ISRAEL }
+  \flushright{\tt http://math.huji.ac.il/$\sim$piz/
+  \\ \tt piz@math.huji.ac.il}
+  
+\end{document}
