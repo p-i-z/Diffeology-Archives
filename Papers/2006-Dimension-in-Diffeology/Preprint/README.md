@@ -6,7 +6,7 @@
 
 ## Abstract
 
-The notion of *dimension* for diffeologies, introduced here, generalizes the dimension of manifolds. More appropriate to diffeology is the *dimension map*. We give some elementary properties of this dimension under several diffeological constructions. We illustrate these definitions with the example of the quotient spaces $\Delta_n = \RR^n/\mathrm{O}(n)$ for which $\dim(\Delta_n) = n$, due to the singularity at the origin. Then, we deduce that the dimension of the half-line $\Delta_\infty = [0,\infty[ \subset \RR$, equipped with the subset diffeology, is infinite at the origin. And we show how this diffeological invariant can be used, in particular, to completely avoid topological considerations in some diffeological questions.
+The notion of *dimension* for diffeologies, introduced here, generalizes the dimension of manifolds. More appropriate to diffeology is the *dimension map*. We give some elementary properties of this dimension under several diffeological constructions. We illustrate these definitions with the example of the quotient spaces $\Delta_n = \mathbf{R}^n/\mathrm{O}(n)$ for which $\dim(\Delta_n) = n$, due to the singularity at the origin. Then, we deduce that the dimension of the half-line $\Delta_\infty = [0,\infty[ \subset \mathbf{R}$, equipped with the subset diffeology, is infinite at the origin. And we show how this diffeological invariant can be used, in particular, to completely avoid topological considerations in some diffeological questions.
 
 ## A Note on this Version
 
