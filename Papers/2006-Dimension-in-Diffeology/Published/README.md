@@ -6,7 +6,7 @@
 
 ## Abstract
 
-We define the *dimension function* for diffeological spaces, a simple but new invariant. We show then how it can be applied to prove that, for two different integers $m$ and $n$ the quotient spaces $\RR^m\!/\mathrm{O}(m)$ and $\RR^n\!/\mathrm{O}(n)$ are not diffeomorphic, and not diffeomorphic to the half-line $[0,\infty) \subset \RR$.
+We define the *dimension function* for diffeological spaces, a simple but new invariant. We show then how it can be applied to prove that, for two different integers $m$ and $n$ the quotient spaces $\mathbf{R}^m\!/\mathrm{O}(m)$ and $\mathbf{R}^n\!/\mathrm{O}(n)$ are not diffeomorphic, and not diffeomorphic to the half-line $[0,\infty) \subset \mathbf{R}$.
 
 ## A Note on this Version
 
