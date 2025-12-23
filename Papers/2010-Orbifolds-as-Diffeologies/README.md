@@ -20,9 +20,21 @@ As Zadka was unfamiliar with diffeology, Iglesias-Zemmour explained the concept 
 
 This exchange—marking a "return" of diffeology to the forefront—sparked the collaboration that resulted in this paper.
 
+## Significance: A Shift in Perspective
+
+This paper marks a fundamental shift in perspective regarding the categorization of spaces in mathematics. We do not start with a pure set or a topological space to which structure is added; rather, we begin with a set that comes already "dressed" with its own diffeology—derived from its nature as a space of smooth functions, a quotient of a smooth manifold, or a subset of a Euclidean space. We then recognize this space as a member of a particular subcategory of diffeology—whether a manifold, an orbifold, a manifold with corners, or a quasifold. This approach respects the intrinsic diffeological structure given by the space's mathematical nature. 
+
+And since they are included in the category of Diffeology, they inherit all its categorical properties and constructions: smooth maps, diffeomorphism, homotopy, cohomology etc. without needing heuristic ad hoc extensions. This preserves the unity of Geometry. It unifies the field rather than fragmenting it into different "theories" for every new type of space. This is the lesson of "Orbifolds as Diffeologies".
+
+
 ## Archival Notes (2025)
 
 This document has been "transmuted" from the original legacy source code to a modern format for the **Diffeology Archives**.
+
+*   **Format:** Converted to `amsart` class with "ventilated prose" formatting.
+*   **Encoding:** All legacy accent commands converted to UTF-8.
+*   **Figures:** The original figures, which relied on the obsolete `eepic` package, have been completely redrawn using `TikZ`. The document is now self-contained and requires no external image files.
+*   **Macros:** Specific macros (e.g., `\labell`, `\mathbbm`) have been preserved or mapped to modern equivalents to maintain the logic of the original proof.
 
 ## Files in this Directory
 *   `OAD.tex`: The complete, self-contained LaTeX source file for the paper.
