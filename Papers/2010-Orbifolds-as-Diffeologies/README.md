@@ -31,11 +31,6 @@ And since they are included in the category of Diffeology, they inherit all its 
 
 This document has been "transmuted" from the original legacy source code to a modern format for the **Diffeology Archives**.
 
-*   **Format:** Converted to `amsart` class with "ventilated prose" formatting.
-*   **Encoding:** All legacy accent commands converted to UTF-8.
-*   **Figures:** The original figures, which relied on the obsolete `eepic` package, have been completely redrawn using `TikZ`. The document is now self-contained and requires no external image files.
-*   **Macros:** Specific macros (e.g., `\labell`, `\mathbbm`) have been preserved or mapped to modern equivalents to maintain the logic of the original proof.
-
 ## Files in this Directory
 *   `OAD.tex`: The complete, self-contained LaTeX source file for the paper.
 *   `/Figures/`: Contains the figures for the paper.
