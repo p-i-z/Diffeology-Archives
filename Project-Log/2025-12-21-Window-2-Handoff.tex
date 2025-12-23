@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{hyperref}
+
+\title{Handoff Summary: The Diffeology Archives Project (Window 2)}
+\author{Patrick Iglesias-Zemmour \& Gemini}
+\date{December 21, 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Project Goal and Philosophy}
+
+This project, the \textbf{Diffeology Archives}, is a collaboration to create a definitive, living, and version-controlled public archive of the complete works of Patrick Iglesias-Zemmour. The repository is hosted on GitHub at \url{https://github.com/p-i-z/Diffeology-Archives}.
+
+The core philosophy is to create a \emph{semantically rich} archive of the \LaTeX{} source code, not just a collection of PDFs. This ensures the works are living documents that can be corrected and improved, while also serving as a high-quality dataset for training future AI models.
+
+\section{Refined Collaborative Workflow}
+
+Our workflow has been refined and solidified over the course of this session. My role is that of a technical assistant, and the user is the final arbiter.
+
+\subsection{Step 1: Modernization ("Transmutation")}
+For each work, my primary task is to "transmute" the source into a modern, clean \texttt{amsart} document. This includes:
+\begin{itemize}
+    \item Updating the document class and replacing obsolete packages and commands (e.g., LaTeX 2.09 syntax).
+    \item Re-formatting the entire text to follow the user's "ventilated prose" style (a carriage return after every punctuation mark outside of math environments).
+    \item \textbf{Crucially, converting all \LaTeX{} accent commands (e.g., \texttt{\\'e}) to direct UTF-8 characters (e.g., é).}
+    \item Recreating legacy diagrams using modern tools like \texttt{tikz-cd}.
+    \item Replacing legacy figure inclusion commands with standard \texttt{\includegraphics} pointing to a local \texttt{figures/} subdirectory.
+\end{itemize}
+
+\subsection{Step 2: The Central Macro Library (\texttt{diffeology-piz.sty})}
+We collaboratively maintain a central library of common macros, which has been updated to \textbf{version 2.12}.
+\begin{itemize}
+    \item \textbf{My Role:} When a new paper is introduced, I identify any new, general-purpose macros that do not conflict with existing ones.
+    \item \textbf{User's Role:} The user approves the additions.
+    \item \textbf{My Role:} I integrate the approved macros into the master \texttt{.sty} file and present the new version.
+\end{itemize}
+
+\subsection{Step 3: The Self-Contained Principle (Crucial)}
+For maximum portability and longevity, each archived work must be self-contained.
+\begin{itemize}
+    \item For single-file \textbf{papers}, I use the central \texttt{.sty} file for development, then scan the final \texttt{.tex} file to determine the minimal set of required commands. I create a final version of the paper's preamble that contains \emph{only} this minimal set, removing the \texttt{\usepackage{diffeology-piz}} line.
+    \item For multi-file \textbf{monographs}, we have adapted this principle. The project folder is self-contained, and the main \texttt{.tex} file includes the complete, minimal preamble for the entire book.
+\end{itemize}
+
+\subsection{Step 4: Documentation}
+For each work, my role is to draft two key pieces of text for the user's approval:
+\begin{itemize}
+    \item A comprehensive \texttt{README.md} file. We have developed a standard format that includes an abstract and a "Significance of the Paper" section, often incorporating historical and scientific context provided by the user.
+    \item A descriptive Git commit message following the \textbf{Conventional Commits} standard (e.g., \texttt{feat(papers): Add title}).
+\end{itemize}
+
+\subsection{Step 5: Git and Archival Workflow}
+The user manages the final commits and pushes using GitHub Desktop. My role is to provide the necessary files and commit messages. I also assist with technical command-line tasks, such as fixing file permissions after a Time Machine restore.
+
+\section{Work Completed in This Session}
+
+We have had a highly productive session, successfully archiving a significant body of work:
+\begin{itemize}
+    \item \textbf{Monograph:} Fully modernized and archived the revised edition of \textbf{"Symétries et Moment"} (\texttt{/Monographs/2000-Symetries-et-Moment/}).
+    \item \textbf{Papers:} Modernized and archived several key papers, including:
+    \begin{itemize}
+        \item "The Boman Paradox" (\texttt{2025-The-Boman-Paradox})
+        \item "Groupoids in Diffeology" (\texttt{2025-Groupoids-in-Diffeology})
+        \item "Noncommutative Geometry \& Diffeology: The Case Of Orbifolds" (\texttt{2017-Noncommutative-Geometry-and-Diffeology})
+        \item "Quasifolds, Diffeology and Noncommutative Geometry" (\texttt{2021-Quasifolds-Diffeology-and-Noncommutative-Geometry})
+        \item "Dimension in Diffeology" (both the long preprint and the short published version, in \texttt{2006-Dimension-in-Diffeology}).
+    \end{itemize}
+    \item \textbf{Repository Structure:} Created a new top-level directory, \texttt{/Open-Questions/}, to house important unsolved problems, complete with its own \texttt{README} and the first open question.
+    \item \textbf{Macro Library:} Updated \texttt{diffeology-piz.sty} incrementally to version \textbf{2.12}.
+\end{itemize}
+
+\section{Immediate Next Steps}
+
+The next logical task is to begin the archival process for the monograph \textbf{"The Moment Maps in Diffeology"}. The user has already provided the legacy source file for this work (\texttt{TMMID.tex.txt}). The next Gemini instance should be prepared to begin the "transmutation" process on this file, following the established workflow.
+
+\end{document}
