@@ -1,0 +1,3508 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  PROJECT: AITD
+%%
+%%  Created by Patrick Iglesias-Zemmour on 16/04/15.
+%%  Copyright 2015-2020 PIZ.
+%%
+%%  All rights reserved.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: ***MACROS FOR AITD***
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Page Display
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Environment
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{proposition}{\textsc{Proposition}\textit}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Packages
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[usenames,dvipsnames]{color}
+
+\usepackage{pdfpages}
+
+\usepackage{graphicx}
+
+\usepackage[margin=0pt, font=small, justification=centering, labelformat=empty]{caption}
+
+\usepackage{pifont}
+
+\usepackage[hidelinks]{hyperref}
+
+% Pour figures et diagrammes
+% http://texdoc.net/texmf-dist/doc/latex/tikz-cd/tikz-cd-doc.pdf
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{
+arrow style=tikz,
+diagrams={>={Straight Barb[scale=0.8]}}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Style
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage[french]{babel}
+
+\usepackage{amssymb}
+\usepackage{amscd}
+
+\usepackage{verbatim}
+
+\usepackage{url}
+
+\usepackage{pifont}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Articles
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheoremstyle{article}% ⟨name⟩
+{7pt}%  ⟨Space above⟩
+{7pt}%  ⟨Space below⟩
+{}%      ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩
+{.\ }%  ⟨Punctuation after theorem head⟩
+{0pt}%  ⟨Space after theorem head⟩
+{}%     ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{article}
+\newtheorem{article}{}
+\newtheorem{theorem}{Theorem}
+
+\def\artlabel[#1]{{\textsc{#1}}.}
+\newcommand{\artend}{\nolinebreak\hfill$\blacktriangleright$}
+
+\renewenvironment{proof}{\noindent \textit{Proof.}} {\nolinebreak\hfill $\square$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Facilities
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\qmbox#1{\quad\mbox{#1}\quad}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Bold faces
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\1}{{\hat 1}}
+\newcommand{\0}{{\hat 0}}
+\def \ends {\mathrm{ends}}
+
+\renewcommand{\AA}{\mbox{\bf A}}
+\newcommand{\BB}{\mbox{\bf B}}
+\newcommand{\CC}{\mathbf C}
+\newcommand{\DD}{\mbox{\bf D}}
+\newcommand{\EE}{\mbox{\bf E}}
+\newcommand{\FF}{\mbox{\bf F}}
+\newcommand{\GG}{{\mathbf G}}
+\newcommand{\HH}{\mbox{\bf H}}
+\newcommand{\II}{\mbox{\bf I}}
+\newcommand{\JJ}{\mbox{\bf J}}
+\newcommand{\KK}{{\mathbf K}}
+\newcommand{\LL}{\mbox{\bf L}}
+\newcommand{\MM}{\mbox{\bf M}}
+\newcommand{\NN}{{\mathbf N}}
+\newcommand{\OO}{\mbox{\bf O}}
+\newcommand{\PP}{{\mathbf P}}
+\newcommand{\QQ}{\mathbf Q}
+\newcommand{\RR}{\mathbf R}
+\renewcommand{\SS}{\mbox{\bf S}}
+\newcommand{\TT}{{\mathbf T}}
+\newcommand{\UU}{\mbox{\bf U}}
+\newcommand{\VV}{\mbox{\bf V}}
+\newcommand{\WW}{\mbox{\bf W}}
+\newcommand{\XX}{\mbox{\bf X}}
+\newcommand{\YY}{\mbox{\bf Y}}
+\newcommand{\ZZ}{\mathbf Z}
+
+\newcommand{\rr}{{\bold r}}
+\renewcommand{\tt}{{\bold t}}
+\newcommand{\vv}{{\bold v}}
+\newcommand{\xx}{{\bold x}}
+\newcommand{\yy}{{\bold y}}
+
+\newcommand{\bbeta}{\pmb{\beta}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Math calligraphy
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cC}{{\mathcal C}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cE}{{\mathcal E}}
+\newcommand{\cF}{{\mathcal F}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cH}{{\mathcal H}}
+\newcommand{\cI}{{\mathcal I}}
+\newcommand{\cJ}{{\mathcal J}}
+\newcommand{\cK}{{\mathcal K}}
+\newcommand{\cL}{{\mathcal L}}
+\newcommand{\cM}{{\mathcal M}}
+\newcommand{\cN}{{\mathcal N}}
+\newcommand{\cO}{{\mathcal O}}
+\newcommand{\cP}{{\mathcal P}}
+\newcommand{\cQ}{{\mathcal Q}}
+\newcommand{\cR}{{\mathcal R}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cT}{{\mathcal T}}
+\newcommand{\cU}{{\mathcal U}}
+\newcommand{\cV}{{\mathcal V}}
+\newcommand{\cW}{{\mathcal W}}
+\newcommand{\cX}{{\mathcal X}}
+\newcommand{\cY}{{\mathcal Y}}
+\newcommand{\cZ}{{\mathcal Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Math letters
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \A{\mathrm A}
+\def \B{\mathrm B}
+\def \C{\mathrm C}
+\def \D{\mathrm D}
+\def \E{\mathrm E}
+\def \F{\mathrm F}
+\def \G{\mathrm G}
+\def \H{\mathrm H}
+\def \I{\mathrm I}
+\def \J{\mathrm J}
+\def \K{\mathrm K}
+\def \L{\mathrm L}
+\def \M{\mathrm M}
+\def \N{\mathrm N}
+\def \O{\mathrm O}
+\def \P{\mathrm P}
+\def \Q{\mathrm Q}
+\def \R{\mathrm R}
+\def \S{\mathrm S}
+\def \T{\mathrm T}
+\def \U{\mathrm U}
+\def \V{\mathrm V}
+\def \W{\mathrm W}
+\def \X{\mathrm X}
+\def \Y{\mathrm Y}
+\def \Z{\mathrm Z}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Math fraktur
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\fA}{{\mathfrak A}}
+\newcommand{\fC}{{\mathfrak C}}
+\newcommand{\fD}{{\mathfrak D}}
+\newcommand{\fF}{{\mathfrak F}}
+\newcommand{\fH}{{\mathfrak H}}
+\newcommand{\fG}{{\mathfrak G}}
+\newcommand{\fK}{{\mathfrak K}}
+\newcommand{\fL}{{\mathfrak L}}
+\newcommand{\fP}{{\mathfrak P}}
+\newcommand{\fX}{{\mathfrak X}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Typography
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\over}{\above .2pt}
+\newcommand{\hs}{\hspace{2mm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS Abbreviations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Ad}{\mathrm{Ad}}
+
+\newcommand{\class}{\mathrm{class}\,}
+
+\newcommand{\CHK}{\mathrm{K}}
+\newcommand{\Cinfty}{\mathcal{C}^\infty}
+
+\newcommand{\Def}{\mathrm{def}\,}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\dR}{\mathrm{dR}}
+\newcommand{\dt}{{dt}}
+
+\newcommand{\ev}{\mathrm{ev}}
+
+\newcommand{\grad}{\mathrm{grad}}
+
+\newcommand{\Geod}{\mathrm{Geod}}
+\newcommand{\GL}{\mathrm{GL}}
+
+\newcommand{\Ham}{\mathrm{Ham}}
+\newcommand{\Hom}{\mathrm{Hom}}
+
+\newcommand{\id}{\mathbf 1}
+
+\newcommand{\loc}{\mathrm{loc}}
+
+\newcommand{\Loops}{\mathrm{Loops}\,}
+
+\newcommand{\Maps}{\mathrm{Maps}}
+
+\newcommand{\Mor}{\mathrm{Mor}}
+
+\newcommand{\Obj}{\mathrm{Obj}}
+\renewcommand{\O}{\mathop{\rm O}\nolimits}
+
+\newcommand{\Paths}{\mathrm{Paths}\,}
+\newcommand{\Params}{\mathrm{Params}\,}
+
+\newcommand{\pr}{\mathrm{pr}}
+
+\newcommand{\src}{\mathrm{src}}
+\newcommand{\Sup}{\mathop{\rm Sup}\nolimits}
+\newcommand{\Surf}{\mathrm{Surf}}
+\newcommand{\Sq}{\mathrm{Sq}}
+
+\newcommand{\tr}{\mathop{\rm tr}\nolimits}
+\newcommand{\trg}{\mathrm{trg}}
+
+\newcommand{\vect}[1]{\left(\begin{array}{c}#1\end{array}\right) }
+
+\usepackage[greek,english]{babel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS General Layout
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%<<< Begin - Utopia style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{microtype}
+\usepackage[cal=scr,uppercase = upright,greekfamily = didot,greeklowercase = upright,utopia]{mathdesign}
+\usepackage[supspaced=.04em]{superiors}
+
+\linespread{1.1}
+
+\def \H{\mathrm H}
+\def \L{\mathrm L}
+\def \O{\mathrm O}
+\let \epsilon=\varepsilon
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%
+%% Mark:  ***DOCUMENT AITD***
+%%
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  \title{An Introduction To Diffeology}
+  \author{Patrick Iglesias-Zemmour}
+  
+  %%% À inclure pour le preprint
+  \date{August 25, 2017 -- Revision May 15,2020} % \today}
+  
+  \address{Einstein Institute of Mathematics,
+  The Hebrew University of Jerusalem,
+  Campus Givat Ram,
+  9190401 Israel.}
+  \email{piz@math.huji.ac.il}
+  \urladdr{http://math.huji.ac.il/~piz}
+  
+  %%%%  À inclure pour le preprint
+    \thanks{Text of the talk given at the Conference \href{https://ercpqg-espace.sciencesconf.org}{\color{Violet}{``New Spaces in Mathematics \& Physics''}},
+    September 28 – October 2, 2015
+    Institut Henri Poincaré Paris,
+    France}
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: DOCUMENT Abstract
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    This text presents the basics of Diffeology and the main domains:
+    Homotopy,
+    Fiber Bundles,
+    Quotients,
+    Singularities,
+    Cartan-de Rham Calculus
+    ---~which form the core of differential geometry~---
+    from the point of view of this theory.
+    We show what makes diffeology special and relevant in regard to these traditional subjects.
+  \end{abstract}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: DOCUMENT Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Introduction}
+  
+  
+  Since its creation,
+  in the early 1980s,
+  \emph{Diffeology} has become an alternative,
+  or rather a natural extension of traditional differential geometry.
+  With its developments in higher homotopy theory,
+  fiber bundles,
+  modeling spaces,
+  Cartan-de Rham calculus,
+  moment map and symplectic%
+  \footnote{About what it means ``to be symplectic'' in diffeology see \cite{PIZ10,PIZ16,PIZ17}.} program,
+  for examples,
+  diffeology now covers a large spectrum of traditional fields and deploys them from singular quotients to infinite-dimensional spaces
+  ---~and mixes the two~---
+  treating mathematical objects that are or are not strictly speaking manifolds,
+  and other constructions,
+  on an equal footing in a common framework.
+  We shall see some of its achievements through a series of examples,
+  chosen because they are not covered by the geometry of manifolds,
+  because they involve infinite-dimensional spaces or singular quotients,
+  or both.
+  
+  The growing interest in diffeology comes from the conjunction of two strong properties of the theory:
+  
+  \begin{enumerate}
+    \item[1.] Mainly,
+    the category \{Diffeology\} is stable under all set-theoretic constructions:
+    sums, products, subsets,
+    and quotients.
+    One says that it is a complete and co-complete category.
+    It is also Cartesian closed,
+    the space of smooth maps in diffeology has itself a natural \emph{functional diffeology}.
+    \item[2.] Just as importantly:
+    quotient spaces,
+    even non-Hausdorff,%
+    \footnote{\label{note1}Trivial under the various generalizations of\, $\C^\infty$ differential geometry à la Sikorski or Frölicher \cite{KriMic97} etc.
+    I am not considering the various algebraic generalizations that do not play on the same level of intuition and generality and do not concern exactly the same sets/objects,
+    lattices instead of quotients etc.}
+    get a natural non-trivial and meaningful diffeology.
+    That is in particular the case of \emph{irrational tori},
+    non-Hausdorff quotients of the real line by dense subgroups.
+    They own,
+    as we shall see,
+    a non trivial diffeology,
+    capturing faithfully the intrication of the subgroup into its ambient space.
+    This crucial property will be the raison d'être of many new constructions,
+    or wide generalizations of classical constructions,
+    that cannot exist in almost all extensions of differential geometry.\textsuperscript{\ref{note1}}
+  \end{enumerate}
+  
+  The treatment of any kind of singularities,
+  maybe more than the inclusion of infinite-dimensional spaces,
+  reveals how diffeology changes the way we understand smoothness and discriminates this theory among the various alternatives;
+  see,
+  for example,
+  the use of dimension in diffeology \cite{PIZ07},
+  which distinguishes between the different quotients $\RR^n\!/\O(n)$.
+  
+  The diagram in Figure \ref{The-Scope-of-Diffeology} shows the inclusivity of diffeology,
+  with respect to differential constructions,
+  in comparison with the classical theory.
+  \begin{figure}[t]
+    \includegraphics[width=.95\textwidth]{Figures/The-Scope-of-Diffeology.pdf}
+    \vspace{-.25\baselineskip}
+    \caption{Figure \ref{The-Scope-of-Diffeology} --- The scope of diffeology.}
+    \label{The-Scope-of-Diffeology}
+  \end{figure}
+  
+  \textsc{Connecting a Few Dots.}~The story began in the early 1980s,
+  when Jean-Marie Souriau introduced his \emph{difféologies} in a paper titled ``Groupes Différentiels'' \cite{Sou80}.
+  It was defined as a formal but light structure on groups,%
+  \footnote{Compared to functional analysis heavy structures.}
+  and it was designed for dealing easily with infinite-dimensional groups of diffeomorphisms,
+  in particular the group of symplectomorphisms or quantomorphisms.
+  He named the groups equipped with such a structure \emph{groupes différentiels},%
+  \footnote{Which translates in to English as ``differential'' or ``differentiable groups.''}
+  as announced in the title of his paper.%
+  \footnote{Actually,
+  difféologies are built on the model of K.-T. Chen's \emph{differentiable spaces} \cite{Che77},
+  for which the structure is defined over convex Euclidean subsets instead of open Euclidean domains.
+  That makes diffeology more suitable to extending differential geometry than Chen's differentiable spaces,
+  which focus more on homology and cohomology theories.}
+  His definition was made of five axioms that we can decompose today into a first group of three that gave later the notion of diffeology on arbitrary sets,
+  and the last two,
+  for the compatibility with the internal group multiplication.
+  But it took three years,
+  from 1980 to 1983,
+  to separate the first three general axioms from the last two specific ones and to extract the general structure of \emph{espace différentiel} from the definition of \emph{groupe différentiel}.
+  That was the ongoing work of Paul Donato on the covering of \emph{homogeneous spaces} of differential groups,
+  for one part,
+  and mostly our joint work on the \emph{irrational torus},
+  which made urgent and unavoidable a formal separation between groups and spaces in the domain of Souriau's \emph{differential structures},
+  as that gave a new spin to the theory.
+  Actually,
+  the first occurrence of the wording ``espace différentiel'',
+  including quotes,
+  appears in the paper ``Exemple de groupes différentiels~: flots irrationnels sur le tore,''
+  published in July 1983 \cite{DonIgl83}.%
+  \footnote{The final version has been published in the French Acad.  Sci. Proc. \cite{DonIgl85}.}
+  The expression was used informally,
+  for the purposes of the case,
+  without giving a precise definition.
+  The formal definition was published a couple of months later,
+  in October 1983,
+  in ``Groupes différentiels et physique mathématique'' \cite{Sou83}.
+  It took then a couple of years to bring the theory of \emph{espaces différentiel} to a new level:
+  with Souriau on generating quantum structures \cite{Sou84};
+  with Donato's doctoral dissertation on covering of homogeneous spaces,
+  defended in 1984 \cite{Don84},
+  and with my doctoral dissertation,
+  defended in 1985,
+  in which I troduced higher homotopy theory and diffeological fiber bundles%
+  \footnote{That is in this thesis that the first occurence of \emph{diffeological space} appears,
+  in replacement of \emph{differential space} which would have been confused with other structures.}
+  \cite{Igl85}.
+  
+  \bigskip
+  
+  What follows is an attempt to introduce the main constructions and results in diffeology,
+  past and recent,
+  through several meaningful examples.
+  More details on the theory can be found in the textbook \emph{Diffeology} \cite{PIZ13} and in related papers.
+  
+  %\newpage
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: DOCUMENT The Unexpected Example
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{The Unexpected Example: The Irrational Torus}
+  
+  Let us begin with the \emph{irrational torus} $\T_\alpha$.
+  At this time,
+  in the early 1980s,
+  physicists were interested in quantizing one-dimensional systems with a quasi-periodic potential,
+  that is,
+  a function $u$ from $\RR$ to $\RR$ which is the pullback of a smooth function $\U$ on a torus $\T^2 = \RR^2/\ZZ^2$ along a line of slope $\alpha$,
+  with $\alpha \in \RR - \QQ$.
+  If you prefer,
+  $u(x)=\U(e^{2i\pi x},e^{2i\pi\alpha x})$,
+  where $\U \in \Cinfty(\T^2,\RR)$.
+  That problem has drawn the attention of physicists and some mathematicians to the question of the statute of the quotient space
+  $$
+    \T_\alpha = \T^2/\Delta_\alpha,
+    $$
+  where $\Delta_\alpha \subset \T^2$ is a one-parameter subgroup,
+  the projection from $\RR^2$ of the line $y=\alpha x$,
+  that is,
+  $\Delta_\alpha = \{(e^{2i\pi x},e^{2i\pi\alpha x})\}_{x\in \RR}$.
+  
+  As a topological space,
+  $\T_\alpha$ is trivial,
+  because $\alpha$ is irrational and $\Delta_\alpha$ ``fills'' the torus,
+  that is,
+  its closure is $\T^2$.
+  And a trivial topological space is of no help.
+  The various differentiable approaches%
+  \footnote{Sikorski,
+  Frölicher,
+  ringed spaces,
+  etc.}
+  lead also to dead ends;
+  the only smooth maps from $\T_\alpha$ to $\RR$ are constant maps,
+  because the composition with the projection $\pi \colon \T^2 \to \T_\alpha$ should be smooth.
+  For these reasons,
+  the irrational torus was regarded by everyone as an extremely \emph{singular} space.
+  
+  But when we think a little bit,
+  the irrational torus $\T_\alpha$ is a group,
+  moreover,
+  an Abelian group,
+  and there is nothing more regular and homogeneous than a group.
+  And that was the point that made us,%
+  \footnote{Paul Donato and I.}
+  eager to explore $\T_\alpha$ through the approach of diffeologies.
+  But diffeologies were invented to study infinite-dimensional groups,
+  such as groups of symplectomorphisms,
+  and it was not clear that they could be of any help for the study of such ``singular'' spaces as $\T_\alpha$,
+  except that,
+  because a diffeology on a set is defined by its \emph{smooth parameterizations},
+  and because smooth parameterizations on $\T_\alpha$ are just (locally) the composites of smooth parameterizations into $\T^2$ by the projection $\pi \colon \T^2 \to \T_\alpha$,
+  it was already clear that the diffeology of $\T_\alpha$ was not the \emph{trivial diffeology} made of all parameterizations,
+  and neither was it the \emph{discrete diffeology} made only of locally constant parameterizations.
+  Indeed,
+  considering two smooth parameterizations%
+  \footnote{A \emph{parameterization} in a set $\X$ is just any map $\P$ defined on some open subset $\U$ of some numerical space $\RR^n$ into $\X$.}
+  $\P$ and $\P'$ in $\T^2$,
+  there is a great chance that $\pi \circ \P$ and $\pi \circ \P'$ are different.
+  And because $\P$ and $\P'$ are not any parameterizations but smooth ones,
+  that makes $\T_\alpha$ neither trivial nor discrete.
+  That was already a big difference with the traditional topological or differential approches we mentioned above that makes $\T_\alpha$ coarse.
+  
+  But how to measure this non triviality?
+  To what ends did this new approach lead?
+  That was the true question.
+  We gave some answers in the paper ``Exemple de groupes différentiels: flots irrationnels sur le tore'' \cite{DonIgl83}.
+  Thanks to what Paul Donato had already developed at this time on the covering of \emph{homogeneous differential spaces},
+  and which made the core of his doctoral dissertation \cite{Don84},
+  we could compute the fundamental group of $\T_\alpha$ and its universal covering $\tilde \T_\alpha$.
+  We found that
+  $$
+    \pi_1(\T_\alpha) = \ZZ \times \ZZ \quad\text{and}\quad \tilde \T_\alpha = \RR,
+    $$
+  with $\pi_1(\T_\alpha)$ included in $\RR$ as $\ZZ + \alpha \ZZ$.
+  That was a first insightful result showing the capability of diffeology concerning these spaces regarded ordinarily as (highly) singular.
+  Needless to say,
+  since then,
+  they become completely admissible.
+  
+  In the second half of the 1970s,
+  the quantum mechanics of quasi-periodic potentials hit the field of theoretical physics%
+  \footnote{The most famous paper on the question was certainly from Dinaburg and Sinai,
+  on ``The One-Dimensional Schr{\"o}dinger Equation with a Quasiperiodic Potential" \cite{DinSin75}.}
+  and the question of the structure of the space of leaves of the linear foliation of the $2$-torus sparked a new level of interest.
+  In particular,
+  French theoretical physicists used the techniques of \emph{noncommutative geometry} developed by Alain Connes.
+  So,
+  the comparison between the two theories became a natural question.
+  The notion of fundamental group or universal covering was missing at that time in noncom\-mutative geometry,%
+  \footnote{And are still missing today,
+  except for a few attempts to fill in the holes \cite{IZL16}.}
+  so it was not with these invariants that we could compare the two approaches.
+  That came eventually from the following result:
+  
+  \begin{theorem}[Donato-Iglesias, 1983]
+    \emph{Two irrational tori $\T_\alpha$ and $\T_\beta$ are diffeomorphic if and only if $\alpha$ and $\beta$ are conjugate modulo $\GL(2,\ZZ)$,
+    that is, if there exists a matrix
+    $$
+      \M = \begin{pmatrix} a & b \cr c & d \end{pmatrix} \in \GL(2,\ZZ) \quad\text{such that}\quad \beta = {a \alpha + b \over c\alpha + d}.
+      $$
+    }
+  \end{theorem}
+  
+  That result had its correspondence in Connes's theory,
+  due to Marc Rieffel \cite{Rie81}:
+  the $\CC^*$-algebras associated with $\alpha$ and $\beta$ are Morita-equivalent if and only if $\alpha$ and $\beta$ are conjugate modulo $\GL(2,\ZZ)$.
+  At this moment,
+  it was clear that diffeology was a possible alternative to noncommutative geometry.
+  Its advantage was to stay close to the special intuition and concepts developed by geometers along history.
+  
+  Actually,
+  because of irrationality of  $\alpha$ and $\beta$,
+  we showed that a diffeomorphism $\varphi \colon \T_\alpha \to \T_\beta$ could be fully lifted at the level of the covering $\RR^2$ of $\T^2$ into an affine diffeomorphism $\Phi(Z) = AZ + B$,
+  where $\A$ preserves the lattice $\ZZ^2 \subset \RR^2$,
+  that is,
+  $\A \in \GL(2,\ZZ)$,
+  and $\B \in \RR^2$.
+  The fact that these natural isomorphisms are preserved \emph{a minima} in diffeology was of course an encouragement to continue the exploration of this example,
+  and to push the test of diffeology even further.
+  
+  \medskip
+  \begin{figure}[t]
+    \includegraphics[width=.90\textwidth]{Figures/T2-MDelta.pdf}
+    \vspace{-.25\baselineskip}
+    \caption{Figure \ref{A-diffeomorphism-of-Talpha} --- A diffeomorphism from $\T_\alpha$ to $\T_\beta$.}
+    \label{A-diffeomorphism-of-Talpha}
+  \end{figure}
+  
+  And that is not all that could be said,
+  and has been said,
+  on irrational tori.
+  Indeed,
+  the category \{Diffeology\} has many nice properties:
+  in particular,
+  as we shall see in the following,
+  it is Cartesian closed.
+  That means in particular that the set of smooth maps between diffeological spaces has a natural diffeology.
+  We call it the \emph{functional diffeology}.
+  Thus any set of smooth maps between diffeological spaces has a fundamental group,
+  in particular the group $\Diff(\T_\alpha)$ of diffeomorphisms of $\T_\alpha$.
+  And its computation gives us another surprise:
+  
+  \begin{theorem}[Donato-Iglesias, 1983]
+    \emph{The connected component of $\Diff(\T_\alpha)$ is $\T_\alpha$,
+    acting by multiplication on itself.
+    Its group of connected components is}
+    $$
+      \pi_0(\Diff(\T_\alpha)) =
+      \left\{
+      \begin{array}{l}
+      \{\pm 1\} \times \ZZ \quad \text{if $\alpha$ is \emph{quadratic}} \\
+      \{\pm 1\} \quad\text{otherwise}.
+      \end{array}
+      \right.
+      $$
+  \end{theorem}
+  
+  We recall that a number is quadratic if it is a solution of a quadratic polynomial with integer coefficients.
+  That result was indeed discriminating,
+  since it did not appear in any other theory pretending to extend ordinary differential geometry.
+  That clearly showed that diffeology,
+  even for such a twisted example,
+  was subtle enough to distinguish between numbers, quadratic or not.
+  This property was not without reminding us about the periodicity of the continued fraction of real numbers.
+  
+  This computation has been generalized on the $\pi_0(\Diff(\T_\H))$ \cite{IglLac90},
+  where $\H \subset \RR^n$ is a totally irrational hyperplane and $\T_\H= \T^n/\H$.
+  
+  \begin{theorem}[Iglesias-Lachaud, 1990]
+    \emph{Let $\H \subset \RR^n$ be a totally irrational hyperplane,
+    that is,
+    $\H \cap \ZZ^n = \{0\}$.
+    Let $\T_\H = \T^n/\pr(\H)$,
+    where $\pr$ is the projection from $\RR^n$ to $\T^n$.
+    Let $w=(1,w_2,\dots,w_n)$ be the normalized $1$-form such that $\H = \ker(w)$.
+    The coefficients $w_i$ are independent on $\QQ$.
+    Let $\E_w = \QQ + w_2 \QQ + \dots + w_n \QQ \subset \RR$ be the
+    $\QQ$-vector subspace of $\RR$ generated by the $w_i$.
+    The subset
+    $$
+      \K_w = \{ \lambda \in \RR \mid \lambda \E_w \subset \E_w \}
+      $$
+    is an algebraic number field,
+    a finite extension of $\QQ$.
+    Then,
+    $\pi_0(\Diff(\T_\H))$ is the group of the units of an order of $\K_w$.
+    Thanks to the Dirichlet theorem,
+    $$
+      \pi_0(\Diff(\T_\H)) \simeq \{\pm 1\} \times \ZZ^{r+s-1},
+      $$
+    where $r$ and $s$ are the number of real and complex places of $\K_w$.
+    }
+  \end{theorem}
+  
+  Now,
+  since we have seen what diffeology is capable of,
+  we may have gotten your attention,
+  and it is time to give some details on what exactly a \emph{diffeology} on an arbitrary set is.
+  Then we shall see other applications of diffeology and examples,
+  some of them famous.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK:  DOCUMENT Category Diffeology
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{What is a Diffeology?}
+  
+  It is maybe time to give a precise meaning to what we claimed on the (one-dimensionnal) irrational torus.
+  As a preamble,
+  let us say that,
+  contrarily to many constructions in differential geometry,
+  diffeologies are defined just on sets
+  --~dry sets~--
+  without any preexisting structure,
+  neither topology nor anything else.
+  That is important enough to be underlined,
+  and that is also what makes the difference with the other approaches.
+  A diffeology on a set $\X$ consists in declaring what parameterizations are smooth.
+  Let us first introduce formally a fundamental word of this theory.
+  
+  \begin{article}\artlabel[Parametrization]
+    We call \emph{parameterization} in a set $\X$ any map $\P \colon \U \to \X$ such that $\U$ is some open subset of a Euclidean space.
+    If we want to be specific,
+    we say that $\P$ is an $n$-parameterization when $\U$ is an open subset of $\RR^n$.
+    The set of all parameterizations in $\X$ is denoted by $\Params(\X)$.
+    \artend
+  \end{article}
+  
+  Note that there is no condition of injectivity on $\P$,
+  neither any topology precondition on $\X$ a priori.
+  And also:
+  we shall say \emph{Euclidean domain} for ``open subset of an Euclidean space.''
+  Now,
+  
+  \begin{article}\artlabel[Definition of a diffeology]
+    A \emph{diffeology} on $\X$ is any subset $\cD$ of $\Params(\X)$ that satisfies the following axioms:
+    \begin{enumerate}
+      \item[1.] \textsc{Covering}: $\cD$ contains the constant parameterizations.
+      \item[2.] \textsc{Locality}: Let $\P$ be a parameterization in $\X$.
+      If,
+      for all $r \in \dom(\P)$,
+      there is an open neighborhood $\V$ of $r$ such that $\P \restriction \V \in \cD$,
+      then $\P \in \cD$.
+      \item[3.] \textsc{Smooth compatibility}: For all $\P \in \cD$,
+      for all $\F \in \Cinfty(\V,\dom(\P))$,
+      where $\V$ is a Euclidean domain,
+      $\P \circ \F \in \cD$.
+    \end{enumerate}
+    
+    A space equipped with a diffeology is called a \emph{diffeological space}.
+    The elements of the diffeology of a diffeological space are called the \emph{plots} of (or in) the space.%
+    \footnote{There is a discussion about diffeology as a sheaf theory in \cite[Annex]{Igl87}.
+    But we do not develop this formal point of view in general,
+    because the purpose of diffeology is to minimize the technical tools in favour of a direct,
+    more geometrical,
+    intuition.}
+    \artend
+  \end{article}
+  
+  The first and foremost examples of diffeological spaces are the Euclidean domains,
+  equipped with their \emph{smooth diffeology},
+  that is,
+  the ordinary smooth para\-metri\-za\-tions.
+  Pick,
+  for example,
+  the smooth $\RR^2$:
+  we have a diffeology on $\T^2 = \RR^2/\ZZ^2$ by lifting locally the parameterizations in $\RR^2$.
+  That is,
+  a plot of $\T^2$ will be a parameterization $\P \colon r \mapsto (z_r,z'_r)$ such that,
+  for every point in the domain of $\P$,
+  there exist two smooth parameterizations $\theta$ and $\theta'$, in $\RR$,
+  defined in the neighborhood of this point,
+  with $(z_r,z'_r)= (e^{2i\pi\theta(r)},e^{2i\pi\theta'(r)})$,
+  that is,
+  the usual diffeology that makes $\T^2$ the manifold we know.
+  But that procedure can be extended naturally to $\T_\alpha$.
+  Indeed,
+  a parameterization $\P \colon r \mapsto \tau_r$ in $\T_\alpha$ is a plot if there exists locally,
+  in the neighborhood of every point in the domain of $\P$,
+  a parameterization $\zeta \colon r \mapsto (z_r,z'_r)$,
+  such that $\tau_r= \pi(\zeta(r))$.
+  That construction is summarized by the sequence of arrows:
+  $$
+    \RR^2 \xrightarrow{\quad \mbox{$\pr$} \quad} \T^2 \xrightarrow{\quad \mbox{$\pi$} \quad} \T_\alpha.
+    $$
+  That is exactly the diffeology we consider when we talk about the irrational torus.
+  But this construction of diffeologies by \emph{pushforward} is actually one of the fundamental constructions of the theory.
+  However,
+  to go there,
+  we need first to introduce an important property of diffeologies.
+  
+  \begin{article}\artlabel[Comparing diffeologies]
+    Inclusion defines a partial order in diffeology.
+    If $\cD$ and $\cD'$ are two diffeologies on a set $\X$,
+    one says that $\cD$ is finer than $\cD'$ if $\cD \subset \cD'$,
+    or $\cD'$ is coarser than $\cD$.
+    Moreover,
+    diffeologies are stable by intersection,
+    which gives the following property:
+    
+    \textsc{Proposition}. \textit{This partial order,
+    called fineness,
+    makes the set of diffeologies on a set $\X$,
+    a \emph{lattice}.
+    That is,
+    every set of diffeologies has an infimum and a supremum.
+    As usual,
+    the infimum of a family is obtained by intersection of the elements of the family,
+    and the supremum is obtained by intersecting the diffeologies coarser than any element of the family.}
+    
+    The infimum of every diffeology,
+    the finest diffeology,
+    is called the \emph{discrete diffeology}.
+    It consists of locally constant parameterizations.
+    The supremum of every diffeology,
+    the coarsest diffeology,
+    is called the \emph{coarse} or \emph{trivial diffeology},
+    and it is made of all the parameterizations.
+    As we shall see,
+    these bounds will be useful for defining diffeologies by properties (Boolean functions).
+    \artend
+  \end{article}
+  
+  Now,
+  we can write the construction by pushforward:
+  
+  \begin{article}\artlabel[Pushing forward diffeologies] Let $f \colon \X \to \X'$ be a map,
+    and let $\X$ be a diffeological space,
+    with diffeology $\cD$.
+    Then,
+    there exists a finest diffeology on $\X'$ such that $f$ is smooth.
+    It is called the \emph{pushforward} of the diffeology of $\X$.
+    We denote it by $f_*(\cD)$.
+    If $f$ is surjective,
+    its plots are the parameterizations $\P$ in $\X'$ that can be written $\Sup_i f \circ \P_i$,
+    where the $\P_i$ are plots of $\X$ such that the $f \circ \P_i$ are compatible,
+    that is,
+    coincide on the intersection of their domains,
+    and $\Sup$ denotes the smallest common extension of the family $\{f\circ\P_i\}_{i\in \cI}$.
+    
+    In particular,
+    the diffeology of $\T^2$ is the pushforward of the smooth diffeology of $\RR^2$ by $\pr$,
+    and the diffeology on $\T_\alpha$ is the pushforward of the diffeology of $\T^2$ by $\pi$,
+    or,
+    equivalently,
+    the pushforward of the smooth diffeology of $\RR^2$ by the projection $\pi \circ \pr$.
+    
+    \textsc{Note 1}. Let $\pi \colon \X \to \X'$ be a map between diffeological spaces.
+    We say that $\pi$ is a \emph{subduction} if it is surjective and if the pushforward of the diffeology of $\X$ coincides with the diffeology of $\X'$.
+    In particular $\pr \colon \RR^2 \to \T^2$ and $\pi \colon \T^2 \to \T_\alpha$ are two subductions.
+    Subductions make a subcategory,
+    since the composite of two subductions is again a subduction.
+    \artend
+    
+    \textsc{Note 2}. Let $\X$ be a diffeological space and $\sim$ be an equivalence relation on $\X$.
+    Let $\Q = \X/\!\!\sim$ be the quotient set,%
+    \footnote{I regard always a quotient set as a subset of the set of all subsets of a set.}
+    that is,
+    $$
+      \Q = \{\class(x) \mid x \in \X \} \quad\text{and}\quad \class(x) = \{ x' \mid x' \sim x \}.
+      $$
+    The pushforward on  $\Q$ of the diffeology of $\X$ by the projection $\class$ is called the \emph{quotient diffeology}.
+    Equipped with the quotient diffeology,
+    $\Q$ is called the \emph{quotient space} of $\X$ by $\sim$.
+    This is the first important property of the category \{Diffeology\},
+    it is closed by quotient.
+  \end{article}
+  
+  Then,
+  after having equipped the irrational tori with a diffeology (actually the quotient diffeology),
+  we would compare different irrational tori with respect to diffeomorphisms.
+  For that,
+  we need a precise definition.
+  
+  \begin{article}\artlabel[Smooth maps]
+    Let $\X$ and $\X'$ be two diffeological spaces.
+    A map $f \colon \X \to\X'$ is \emph{smooth} if,
+    for any plot $\P$ in $\X$,
+    $f \circ \P$ is a plot in $\X'$.
+    The set of smooth maps from $\X$ to $\X'$ is denoted,
+    as usual,
+    by $\Cinfty(\X,\X')$.
+    
+    \textsc{Note 1.} The composition of smooth maps is smooth.
+    Diffeological spaces,
+    together with smooth maps,
+    make a category that we denote by \{Diffeology\}.
+    
+    \textsc{Note 2}. The isomorphisms of the category \{Diffeology\} are the bijective maps,
+    smooth as well as their inverses. They are called \emph{diffeomorphisms}.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[What about manifolds]
+    The time has come to make a comment on manifolds.
+    Every manifold is naturally a diffeological space;
+    its plots are the smooth parameterizations in the usual sense.
+    That makes the category \{Manifolds\} a full and faithful subcategory of \{Diffeology\}.
+    But we should insist on diffeology not be understood as a generalization of the theory of manifolds.
+    It happens that,
+    between many other things,
+    diffeology extends the theory of manifolds,
+    but its true nature is to extend the differential calculus on domains in Euclidean spaces,
+    and is the way it should be regarded.
+    \artend
+  \end{article}
+  
+  Let us continue to explore our example of the irrational torus $\T_\alpha$.
+  We still have to describe its fundamental group and its universal covering.
+  Actually,
+  the way it was treated in the founding paper \cite{DonIgl83} used special definitions adapted only to groups and homogeneous spaces,
+  because at this time,
+  diffeology was only about groups.
+  It was clear at this moment that considering diffeology only on groups was insufficient,
+  and that we missed a real independent theory of fiber bundles and homotopy in diffeology.
+  That was the content of my doctoral dissertation ``Fibrations difféologiques et homotopie'' \cite{Igl85}.
+  
+  Let us begin with the covering thing.
+  A covering is a special kind of fiber bundle with a discrete fiber.
+  But all these terms must be understood in the sense of diffeology,
+  especially the word \emph{discrete}.
+  Let me give an example:
+  
+  \textsc{Proposition.}~\textit{The rational numbers $\QQ$ are discrete in $\RR$.}
+  
+  This is completely natural for everyone,
+  except that this is false as far as topology is concerned.
+  But we are talking diffeology:
+  if we equip $\QQ$ with the diffeology \emph{induced} by $\RR$,
+  it is not difficult to prove%
+  \footnote{A nice application of the intermediate value theorem.}
+  that $\QQ$ is discrete,
+  that is,
+  its diffeology is discrete.
+  And that is the meaning we want to give to be a \emph{discrete subset} of a diffeological space.
+  Well,
+  we still have to elaborate a little bit about \emph{induced diffeology}.
+  
+  \begin{article}\artlabel[Pulling back diffeologies]
+    Let $f \colon \X \to \X'$ be a map,
+    and let $\X'$ be a diffeological space with diffeology $\cD'$.
+    Then,
+    there exists a coarsest diffeology on $\X$ such that $f$ is smooth.
+    It is called the \emph{pullback} of the diffeology of $\X'$.
+    We denote it by $f^*(\cD')$.
+    Its plots are the parameterizations $\P$ in $\X$ such that $f \circ \P$ is a plot of $\X'$.
+    
+    In particular,
+    that gives to any subset $\A \subset \X$,
+    where $\X$ is a diffeological space,
+    a \emph{subset diffeology},
+    that is,
+    $j^*(\cD)$,
+    where $j \colon \A \to \X$ is the inclusion and $\cD$ is the diffeology of $\X$.
+    A subset equipped with the subset diffeology is called a \emph{diffeological subspace}.
+    Now it is clear what is meant by a \emph{discrete subset} of a diffeological space:
+    it is a subset such that its induced diffeology is discrete.
+    
+    \textsc{Note}.
+    Let $j \colon \X \to \X'$ be a map between diffeological spaces.
+    We say that $j$ is an \emph{induction} if $j$ is injective and if the pullback of the diffeology of $\X'$ coincides with the diffeology of $\X$.
+    For example,
+    in the case of the irrational torus,
+    the injection $t \mapsto (e^{2i\pi t},e^{2i\pi\alpha t})$ from $\RR$ to $\T^2$ is an induction.
+    That means precisely that if $r \mapsto (z_r,z'_r)$ is smooth in $\T^2$ but takes its values in $\Delta_\alpha$,
+    then there exists a smooth parameterization $r \mapsto t_r$ in $\RR$ such that $z_r = e^{2i\pi t_r}$ and $z'_r = e^{2i\pi \alpha t_r}$.
+    \artend
+  \end{article}
+  
+  Then,
+  with this construction,
+  the category \{Diffeology\},
+  which was closed by quotient,
+  is also closed by inclusion.
+  
+  Now,
+  continuing with our example,
+  there are two reasons we need a good concept of fiber bundle in diffeology.
+  
+  \begin{enumerate}
+    \item[1.] Coverings of diffeological spaces should be defined as fiber bundles with discrete fiber.
+    (We shall see then that we are even able to build a universal covering,
+    unique up to isomorphism,
+    for every diffeological space.)
+    
+    \item[2.] If we look closely at the projection $\pi \colon \T^2 \to \T_\alpha$,
+    we observe that this looks like a fiber bundle with fiber $\Delta_\alpha \simeq \RR$.
+    Thus,
+    if the long homotopy sequence could apply to diffeological fiber bundles,
+    we would get immediately $\pi_1(\T_\alpha) = \pi_1(\T^2) = \ZZ^2$,
+    since the fiber $\RR$ is contractible.
+  \end{enumerate}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: DOCUMENT Fiber Bundles
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Fiber Bundles}
+  
+  Of course,
+  the classical definition of locally trivial fiber bundles is powerless here,
+  since $\T_\alpha$ has a trivial topology.
+  The situation is more subtle~--~we are looking for a definition%
+  \footnote{The definition of fiber bundles in diffeology
+  ---~their two equivalent versions~---
+  has been introduced in ``Fibrés difféologiques et homotopie'' \cite{Igl85}.}
+  that satisfies the following two conditions:
+  
+  \begin{enumerate}
+    \item[1.] The quotient of a diffeological group by any subgroup is a diffeological fibration,
+    whatever the subgroup is.
+    
+    \item[2.] For diffeological fibrations,
+    the long exact homotopy sequence applies.
+  \end{enumerate}
+  
+  Since we refer to diffeological groups,
+  we have to clarify their definition.
+  
+  \begin{article}\artlabel[Diffeological groups]
+    A diffeological group is a group $\G$ that is also a diffeological space such that,
+    the multiplication $(g,g') \mapsto gg'$ and the inversion $g \mapsto g^{-1}$ are smooth.
+    \artend
+  \end{article}
+  
+  That needs a comment on the product of diffeological spaces,
+  since we refer to the multiplication in a diffeological group $\G$ which is defined on the product $\G \times \G$.
+  
+  
+  \begin{article}\artlabel[Product of diffeological spaces]
+    Let $\{\X_i\}_{i \in \cI}$ be any family of diffeological spaces.
+    There exists on the product $\X = \prod_{i \in \cI} \X_i$ a coarsest diffeology such that every projection $\pi_i \colon \X \to \X_i$ is smooth.
+    It is called the \emph{product diffeology}.
+    A plot in $\X$ is just a parameterization $ r \mapsto (x_{i,r})_{i\in \cI}$ such that each $r \mapsto x_{i,r}$ is a plot of $\X_i$.
+    
+    \textsc{Note}. The category \{Diffeology\} is then closed by products.
+    \artend
+  \end{article}
+  
+  There are two equivalent definitions of diffeological bundles;
+  the following one is the pedestrian version.
+  
+  \begin{article}\artlabel[Diffeological fiber bundles]
+    Let $\pi \colon \Y \to \X$ be a map with $\X$ and $\Y$ two diffeological spaces.
+    We say that $\pi$ is a fibration,
+    with fiber $\F$,
+    if,
+    for every plot $\P \colon \U \to \X$,
+    the pullback
+    $$
+      \pr_1\colon \P^*(Y) \to \U \quad\text{with}\quad \P^*(\Y) = \{(r,y) \in \U \times \Y \mid \P(r) = \pi(y) \},
+      $$
+    is locally trivial with fiber $\F$.
+    That is,
+    every point in $\U$ has an open neighborhood $V$ such that there exists a diffeomorphism $\phi\colon \V\times \F \to \pr_1^{-1}(\V) \subset \P^*(\Y)$,
+    with $\pr_1 \circ \phi = \pr_1$\,:
+    $$
+      \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \V\times\F \arrow[dr, swap, "\pr_1"] \arrow[r, "\phi"] &  \P^*(\Y) \restriction \V \arrow[d, "\pr_1"] \arrow[r, "\pr_2"]  & \Y \arrow[d,"\pi"] \\
+      {} & \V \arrow[r, swap, "\P \restriction \V"] & \X
+      \end{tikzcd}
+      $$
+    This definition extends the usual definition of smooth fiber bundles in differential geometry.
+    But it contains more:
+    
+    \textsc{Proposition}. \textit{The projection $\pi \colon \G \to \G/\H$,
+    where $\G$ is a diffeological group and $\H \subset \G$ is any subgroup,
+    is a diffeological fibration.}
+    
+    We have now the formal framework where $\pi\colon \T^2 \to \T_\alpha$ is a legitimate fiber bundle.
+    This definition of fiber bundle satisfies also the long sequence of homotopy;
+    we shall come back to that subject later.
+    
+    Since we have a definition of fiber bundles,
+    we inherit naturally the notion of a diffeological covering:
+    
+    \textsc{Definition of Coverings}.
+    \textit{A covering of a diffeological space $\X$ is a diffeological fibration $\pi\colon \hat \X \to \X$ with a discrete fiber.}
+    
+    \textsc{Note}. The projection $\pi\colon \RR \to \RR/(\ZZ + \alpha \ZZ)$ is a simply connected covering,
+    since $\RR$ is a diffeological group and $\ZZ + \alpha \ZZ$ is a subgroup.
+    The fact that $\RR/(\ZZ + \alpha \ZZ)$ is diffeomorphic to $\T_\alpha$ is an exercise left to the reader.
+    \artend
+  \end{article}
+  
+  There is an alternative to the definition of fiber bundles involving a groupoid of diffeomorphisms.
+  This alternate definition is maybe less intuitive,
+  but it is more internal to diffeology.
+  It is based on the existence of a natural diffeology on the set of smooth maps between diffeological spaces.
+  
+  \begin{article}\artlabel[The functional diffeology]
+    Let $\X$ and $\X'$ be two diffeological spaces.
+    There exists on $\Cinfty(\X,\X')$ a coarsest diffeology such that the \emph{evaluation map}
+    $$
+      \ev \colon \Cinfty(\X,\X') \times \X \to \X' \quad\text{defined by}\quad \ev(f,x) = f(x),
+      $$
+    is smooth.
+    Thus diffeology is called the \emph{functional diffeology}.
+    
+    \textsc{Note 1.} A parameterization $r \mapsto f_r$ is a plot for the functional diffeology if the map $(r,x) \mapsto f_r(x)$ is smooth.
+    
+    \textsc{Note 2.} There exists a natural diffeomorphism between $\Cinfty(\X,\Cinfty(\X',\X''))$ and $\Cinfty(\X \times \X',\X')$.
+    That makes the category \{Diffeology\} \emph{Cartesian closed},
+    which is a pretty nice property.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Fiber bundles: the groupoid approach]
+    Let $\pi \colon \Y \to \X$ be a map with $\X$ and $\Y$ two diffeological spaces.
+    Consider the groupoid $\KK$ whose objects are the points of $\X$ and the arrows from $x$ to $x'$ are the diffeomorphisms from $\Y_x$ to $\Y_{x'}$,
+    where the preimages $\Y_x = \pi^{-1}(x)$ are equipped with the subset diffeology.
+    
+    There is a \emph{functional diffeology} on $\KK$ that makes it a \emph{diffeological groupoid}.
+    The set $\Obj(\KK) = \X$ is obviously equipped with its own diffeology.
+    Next,
+    a parameterization $r \mapsto \phi_r$ in $\Mor(\KK)$,
+    defined on a domain $\U$,
+    will be a plot if
+    \begin{enumerate}
+      \item[1.] $r \mapsto (\src(\phi_r),\trg(\phi_r))$ is a plot of $\X \times \X$.
+      \item[2.] The maps $\ev \colon \U_\src \to \Y$ and $\overline \ev \colon \U_\trg \to \Y$,
+      defined by $\ev \,(r,y) = \phi_r(y)$ and $\overline\ev \, (r,y) = \phi_r^{-1}(y)$,
+      on $\U_\src = \{ (r,y) \in \U \times \Y \mid y \in \Def(\phi_r) \}$ and $\U_\trg =\{ (r,y) \in \U \times \Y \mid y \in \Def(\phi_r^{-1}) \}$,
+      are smooth,
+      where these two sets are equipped with the subset diffeology of the product $\U \times \Y$.
+    \end{enumerate}
+    We have,
+    then,
+    the following theorem \cite{Igl85}\,:
+    
+    \textsc{Theorem}. \textit{The map $\pi$ is a fibration if and only if the characteristic map
+    $$
+      \chi \colon \Mor(\KK) \to \X \times \X, \quad \text{defined by} \quad \chi(f) = (\src(f),\trg(f)),
+      $$
+    is a subduction.}
+    
+    Thanks to this approach,
+    we can construct,
+    for every diffeological fiber bundle,
+    a principal fiber bundle
+    ---~by spliting the groupoid~---
+    with which the fiber bundle is associated.
+    It is possible then to refine this construction and define fiber bundles with structures (e.g., linear).
+    \artend
+  \end{article}
+  
+  The next step concerning fiber bundles will be to establish the long homotopy sequence,
+  but that requires preliminary preparation,
+  beginning with the definition of the homotopy groups.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: DOCUMENT Homotopy Theory
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Homotopy Theory}
+  
+  The basis of homotopy begins by understanding what it means to be \emph{homotopic},
+  that is,
+  to share  the same ``place'' (\textgreek{τόπος}) or ``component''.
+  
+  \begin{article}\artlabel[Homotopy and connexity]
+    Let $\X$ be a diffeological space;
+    we denote by $\Paths(\X)$ the space of (smooth) paths in $\X$,
+    that is,
+    $\Cinfty(\RR,\X)$.
+    The ends of a path $\gamma$ are denoted by
+    $$
+      \0(\gamma) = \gamma (0), \quad \1(\gamma) = \gamma(1) \quad\text{and}\quad \ends(\gamma)=(\gamma(0),\gamma(1)).
+      $$
+    We say that two points $x$ and $x'$ are \emph{connected} or \emph{homotopic} if there exists a path $\gamma$ such that $x=\0(\gamma)$ and $x'=\1(\gamma)$.
+    
+    To be connected defines an equivalence relation whose equivalence classes are called \emph{connected components},
+    or simply \emph{components}.
+    The set of components is denoted by $\pi_0(\X)$.
+    
+    \textsc{Proposition}. \textit{
+    The space $\X$ is the \emph{sum} of its connected components,
+    that is,
+    $$
+      \X= \coprod_{\X_i \in \pi_0(\X)} \X_i.
+      $$
+    Moreover,
+    the partition in connected components is the finest partition of $\X$ that makes $\X$ the sum of its parts.}
+    \artend
+  \end{article}
+  
+  It is time to give the precise definition of the sum of diffeological spaces that founds the previous proposition.
+  
+  \begin{article}\artlabel[Sum of diffeological spaces]
+    Let $\{\X_i\}_{i \in \cI}$ be a familly of diffeological spaces.
+    There exists a finest diffeology on the sum $\X = \coprod_{\X_i \in \cI} \X_i$ such that each injection $j_i = x \mapsto (i,x)$,
+    from $\X_i$ to $\X$,
+    is smooth.
+    We call this the \emph{sum diffeology}.
+    The plots of $\X$ are the parameterization $r \mapsto (i_r,x_r)$ such that $r \mapsto i_r$ is locally constant.
+    \artend
+  \end{article}
+  
+  With that definition,
+  we close one of the most interesting aspects of the category \{Diffeology\}.
+  This category is stable by all the set-theoretic constructions:
+  sum, product, part, quotient.
+  It is a complete and co-complete category,
+  every direct or inverse limit of diffeological spaces having their natural diffeology.
+  Moreover,
+  the category is Cartesian closed.
+  
+  That is by itself very interesting,
+  as a generalization of the smooth category of Euclidean domains.
+  But there are a few other generalizations that have these same properties (Frölicher spaces, for example).
+  What really makes the difference is that,
+  these nice properties apply to a category that includes non trivially extremely singular spaces,
+  as we have seen with the irrational tori,
+  and that is what makes \{Diffeology\} so unique.
+  But let us now come back to the homotopy theory.
+  
+  \begin{article}\artlabel[The fundamental group and coverings]
+    Let $\X$ be a connected diffeological space,
+    that is,
+    $\pi_0(\X) = \{\X\}$.
+    Let $x \in \X$ be some point.
+    We denote by $\Loops(\X,x) \subset \Paths(\X)$ the subspaces of \emph{loops} in $\X$,
+    based at $x$,
+    that is,
+    the subspace of paths $\ell$ such that $\ell(0)=\ell(1)=x$.
+    As a diffeological space,
+    with its functional diffeology,
+    this space has a set of components.
+    We define the \emph{fundamental group}%
+    \footnote{Formally speaking,
+    the homotopy groups are objects of the category \{Pointed Sets\}.
+    In particular,
+    $\pi_0(\X,x) = (\pi_0(\X),x)$.}
+    of $\X$,
+    at the point $x$,
+    as
+    $$
+      \pi_1(\X,x) = \pi_0(\Loops(\X,x), \hat x),
+      $$
+    where $\hat x$ is the constant loop $t\mapsto x$.
+    The group multiplication on $\pi_1(\X,x)$ is defined as usual,
+    by concatenation:
+    $$
+      \tau \cdot \tau' = \class \bigg[t \mapsto \left\{
+      \begin{array}{l l }
+      \ell(2t) & \text{if} \quad t \leq1/2 \\
+      \ell'(2t-1) & \text{if} \quad t>1/2
+      \end{array}
+      \right.\bigg],
+      $$
+    where $\tau = \class(\ell)$ and $\tau' = \class(\ell')$.
+    The inverse is given by $\tau^{-1} = \class[t \mapsto \ell(1-t)]$.
+    Actually,
+    we work with stationary paths for the concatenation to be smooth.
+    A stationary path is a path that is constant on a small interval around $0$ and also around $1$.
+    We have now a few main results.
+    
+    \textsc{Proposition}.
+    \textit{The groups $\pi_1(\X,x)$ are conjugate to each other when $x$ runs over $\X$.
+    We denote $\pi_1(\X)$ their type.}
+    
+    We say that $\X$ is \emph{simply connected} if its fundamental group is trivial,
+    $\pi_1(\X) = \{0\}$.
+    Now we have the following results.
+    
+    \textsc{Theorem [Universal Covering]}. \textit{Every connected diffeological space $\X$ has a unique
+    ---~up to isomorphism~---
+    simply connected covering $\pi \colon \tilde \X \to \X$.
+    It is a principal fiber bundle with group $\pi_1(\X)$.
+    It is called the \emph{universal covering};
+    every other connected covering is a quotient of $\tilde \X$ by a subgroup of $\pi_1(\X)$.}
+    
+    Actually,
+    the universal covering is \emph{half} of the \emph{Poincaré groupoid},
+    quotient of the space $\Paths(\X)$ by fixed-end homotopy relation \cite[Section 5.15]{PIZ13}.
+    This is the second meaningful construction of groupoid in the development of diffeology.
+    
+    \textsc{Monodromy theorem}. \textit{Let $f \colon \Y \to \X$ be a smooth map,
+    where $\Y$ is a simply connected diffeological space.
+    With the notations above,
+    there exists a unique lifting $\tilde f \colon \Y \to \tilde \X$ once we fix $\tilde f(y) = \tilde x$,
+    with $x=f(y)$ and $\tilde x \in \pi^{-1}(x)$.}
+    
+    These are the more relevant constructions and results,
+    familiar to the differential geometer,
+    concerning the fundamental group on diffeological spaces.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Two examples of coverings]
+    Let us now come back to our irrational torus $\T_\alpha = \T^2/\Delta_\alpha = [\RR^2/\ZZ^2]/\Delta_\alpha$,
+    that is,
+    $\T_\alpha = \RR^2/[\ZZ^2 \times \{(x,\alpha x)\}_{x \in \RR}] = [\RR^2/\{(x,\alpha x)\}_{x \in \RR}]/\ZZ^2$.
+    The quotient $\RR^2/\{(x,\alpha x)\}_{x \in \RR}$ can be realized by $\RR$ with the projection $(x,y) \mapsto y-\alpha x$.
+    Then,
+    the action of $\ZZ^2$ on $\RR^2$ induces the action on $\ZZ^2$ on $\RR$ by $(n,m)(x,y)=(x+n,y+m) \mapsto y+m - \alpha(x+n)= y-\alpha x + (m-\alpha n)$.
+    That is,
+    $(n,m) \colon t \mapsto t + m-\alpha n$.
+    Therefore,
+    $\T_\alpha \simeq \RR/\ZZ + \alpha \ZZ$.
+    Since $\RR$ is simply connected,
+    thanks to the theorem on existence and unicity of the universal covering,
+    $\tilde \T_\alpha = \RR$ and the $\pi_1(\T_\alpha)$ injects in $\RR$ as $\ZZ + \alpha \ZZ$.
+    Of course,
+    there is no need for all these sophisticated tools to get this result,
+    as we have seen in \cite{DonIgl83}.
+    But this shows how the pedestrian computation integrates seamlessly the general theory.
+    
+    Another example%
+    \footnote{It was first elaborated by Paul Donato in his dissertation \cite{Don84}.
+    We just reinterpret it with our tools.}
+    of this theory,
+    is one in infinite dimensions:
+    the universal covering of $\Diff(\S^1)$.
+    The group is equipped with its functional diffeology.
+    Let $f$ be a diffeomorphism of $\S^1 = \RR/\ZZ$,
+    and assume that $f$ fixes $1$.
+    Let $\pi \colon t \mapsto e^{2i\pi t}$,
+    from $\RR$ to $\S^1$,
+    be the universal covering.
+    The composite $f \circ \pi$ is a plot.
+    Thanks to the monodromy theorem,
+    since $\RR$ is simply connected,
+    $f \circ \pi$ has a unique smooth lifting $\tilde f \colon \RR \to \RR$,
+    such that $\tilde f(0)=0$\,:
+    $$
+      \begin{tikzcd}[column sep=large,every label/.append style = {font = \small}]
+      \RR \arrow[r, "\tilde f"] \arrow[d, swap, "\pi"] & \RR \arrow[d,"\pi"] \\
+      \S^1 \arrow[r, swap, "f"] & \S^1
+      \end{tikzcd}
+      $$
+    Then,
+    $\pi \circ \tilde f = f \circ \pi$ implies that $\tilde f(t+1) = \tilde f(t) +k$,
+    $k \in \ZZ$,
+    but $f$ cannot be injective unless $k=\pm 1$.
+    Next,
+    $f$ being a diffeomorphism implies that $\tilde f$ is a diffeomorphism of $\RR$,
+    that is,
+    a strictly increasing or decreasing function.
+    Assume that $\tilde f$ is increasing;
+    then $\tilde f(t+1) = \tilde f(t) + 1$.
+    Thus,
+    the \emph{positive diffeomorphisms} of $\S^1$ are the quotient of the increasing diffeomorphisms of $\RR$ satisfying that condition.
+    Now,
+    let $\tilde f_s(t)=f(t) + s(t-\tilde f(t))$,
+    with $s \in [0,1]$.
+    We still have $\tilde f_s(t+1) = \tilde f_s(t)+1$ and $\tilde f_s'(t)= s + (1-s)\tilde f'(t)$,
+    which still is positive.
+    Thus,
+    since $\tilde f_0(t)=\tilde f(t)$ and $\tilde f_1(t)=t$,
+    the group
+    $$
+      \widetilde{\Diff}_+(\S^1) = \{ \tilde f \in \Diff_+(\RR) \mid \tilde f(t+1) = \tilde f(t) +1 \}
+      $$
+    is contractible,
+    hence simply connected.
+    It is the universal covering of $\Diff_+(\S^1)$,
+    the group  of the positive diffeomorphisms of $\S^1$.
+    The monodromy theorem indicates that there are only $\ZZ$ different liftings $\tilde f$ of a given diffeomorphism $f$.
+    Hence,
+    $\pi_1(\Diff_+(\S^1)) = \ZZ$.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Higher homotopy groups]
+    Let $\X$ be a diffeological space and $x \in \X$.
+    Since $\Loops(\X,x)$ is a diffeological space that contains $\hat x \colon t \mapsto x$,
+    there is no obstruction to defining the \emph{higher homotopy groups} by recursion:
+    $$
+      \pi_n(\X,x) = \pi_{n-1}(\Loops(\X,x),\hat x), \quad n \geq 1.
+      $$
+    One can also define the recursion of diffeological spaces:
+    $$
+      \begin{array}{c}
+      \X_0 = \X, \ x_0 = x \in \X_0 \ ; \
+      \X_1 = \Loops(\X_0,x_0), \ x_1 = [t \mapsto x_0] \in \X_1 \ ; \ \dots \\
+      \dots \ ; \ \ \X_n = \Loops(\X_{n-1}, x_{n-1}),\ x_n = [t \mapsto x_{n-1}] \in \X_n \ ; \  \dots
+      \end{array}
+      $$
+    Thus,
+    $\pi_n(\X,x) = \pi_{n-1}(\Loops(\X,x),\hat x)$,
+    that is,
+    $\pi_n(\X,x) = \pi_{n-1}(\X_1, x_1) = \dots = \pi_1(\X_{n-1},x_{n-1}) =  \pi_0(\X_n,x_n)$.
+    Since $\pi_n(\X,x)$ is the fundamental group of a diffeological space,
+    it is a group.
+    And that is the formal definition of the \emph{$n$-th homotopy group}%
+    \footnote{It is Abelian for $n=2$.}
+    of $\X$ at the point $x$.
+    
+    We can feel in particular here,
+    the benefits of considering all these spaces
+    --~$\X$,
+    $\Paths(\X)$,
+    $\Loops(\X)$,
+    and so on~--
+    on an equal footing.
+    Being all diffeological spaces,
+    the recursion does not need any supplementary construction than the ones already defined.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[The homotopy sequence of a fiber bundle]
+    One of the most important properties of diffeological fiber bundles is their long homotopy sequence.
+    Let $\pi \colon \Y \to \X$ be a fiber bundle with fiber $\F$.
+    Then,
+    there is a long exact sequence of group homomorphisms \cite{Igl85},
+    $$
+      \begin{array}{l}
+      \cdots \to \pi_n(\F) \to \pi_n(\Y) \to \pi_n(\X) \to \pi_{n-1}(\F) \to \cdots \\
+      \cdots \to \pi_0(\F)\, \to \pi_0(\Y)\, \to \pi_0(\X) \to 0.
+      \end{array}
+      $$
+    As usual in these cases,
+    if the fiber is homotopy trivial,
+    then the base space has the homotopy of the total space.
+    And that is what happens for the irrational torus $\pi_k(\T_\alpha)= \pi_k(\T^2)$,
+    $k \in \NN$.
+    
+    Let us consider another example,
+    in infinite dimensions this time.
+    Let $\S^\infty$ be the \emph{infinite-dimensional sphere} in the Hilbert space $\cH=\ell^2(\CC)$.
+    We equip first $\cH$ with the fine diffeology of vector space \cite[Section 3.7]{PIZ13}.
+    Then,
+    we prove that $\S^\infty \subset \cH$,
+    equipped with the subset diffeology,
+    is contractible \cite[Section 4.10]{PIZ13}.
+    Then we consider the \emph{infinite projective space} $\CC\P^\infty=\S^\infty/\S^1$,
+    where $\S^1$ acts on the $\ell^2$ sequences by multiplication.
+    The projection $\pi \colon \S^\infty \to \CC\P^\infty$ is then a diffeological principal fibration with fiber $\S^1$.
+    The homotopy exact sequence gives then $\pi_2(\CC\P^\infty) = \ZZ$ and $\pi_k(\CC\P^\infty) = 0$ if $k \neq 2$,
+    which is what we expected.
+    
+    That would prove if necessary that we can work on singular constructions or infinite-dimensional spaces,
+    using the same tools and the same intuition as when we deal with ordinary differential geometry.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Connections on fiber fundles and homotopy invariance]
+    Let $\pi\colon \Y \to \X$ be a principal fiber bundle with group $\G$.
+    That fabricates a new principal fibration $\pi_* \colon \Paths(\Y) \to \Paths(\X)$ with structure group $\Paths(\G)$.
+    Roughly speaking,
+    a \emph{connection} on $\pi$ is a reduction of this \emph{paths fiber bundle} to the subgroup $\G \subset \Paths(\G)$,
+    consisting of constant paths \cite[Section 8.32]{PIZ13}.
+    We require for this reduction to satisfy a few axioms:
+    locallity (sheaf condition on the interval of $\RR$),
+    compatibility with concatenation, and so on.
+    The main point is that once we have a path $\gamma$ in $\X$ and a point $y$ over $x = \gamma(t)$,
+    there exists a unique \emph{lift} $\tilde\gamma$ of $\gamma$ such that $\tilde\gamma(t) = y$,
+    this is called the \emph{horizontal lift}.
+    Moreover,
+    if $y'=g_\Y(y)$, the lift $\gamma'$ of $\gamma$ passing at $y'$ at the time $t$ is the shifted $\gamma' = g_\Y \circ \gamma$.
+    That property is exactly what we call a reduction of $\pi_*$ to $\G$.
+    
+    An important consequence of the existence of a connection on a principal fiber bundle is the homotopy invariance of pullbacks.
+    
+    \textsc{Proposition}.
+    \textit{Let $\pi\colon \Y \to \X$ be a principal fiber bundle with group $\G$,
+    equipped with a connection.
+    Let $t \mapsto f_t$ be a smooth path in $\Cinfty(\X',\X)$,
+    where $\X'$ is any diffeological space.
+    Then,
+    the pullbacks $\pr_0 \colon f_0^*(\Y) \to \X'$ and $\pr_1 \colon f_1^*(\Y) \to \X'$ are equivalent.}
+    
+    \textsc{Corollary}. \textit{Any diffeological fiber bundle equipped with a connection over a contractible space is trivial.}
+    
+    We know that this is always true in ordinary differential geometry,
+    because every principal bundle over a manifold can be equipped with a connection.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[The group of flows of a space]
+    Connections are usually defined in ordinary differential geometry by a differential form with values in some Lie algebra.
+    As we have seen,
+    that is not the way chosen in diffeology,
+    for a few good reasons.
+    First,
+    for such an important property as the homotopy invariance of pullbacks,
+    a broad definition of connection is enough.
+    Moreover, we have no indisputable concept of Lie algebra in diffeology,%
+    \footnote{Even for the moment map,
+    in symplectic diffeology,
+    we do not need the definition of a Lie algebra,
+    as we shall see later on.}
+    and choosing one definition rather than another would link a universal concept,
+    such as \emph{parallel transport},
+    to an arbitrary choice.
+    
+    And there is also a new diffeological construction where the difference between general connections and form-valued connections is meaningful enough to justify a posteriori our choice.
+    That is the computation of the \emph{group of flows} over the irrational torus  \cite[Section 8.39]{PIZ13}.
+    Let us begin with a definition:
+    
+    \textsc{Definition}. \textit{We shall call \emph{flow} over a diffeological space $\X$,
+    any $(\RR,+)$-principal bundle over $\X$.}
+    
+    There is an additive operation on the set $\text{Flows}(\X)$ of (equivalence classes of) flows.
+    Let $a=\class(\pi \colon \Y \to \X)$ and $a'=\class(\pi' \colon \Y' \to \X)$ be two classes of flows.
+    Consider the pullback $\pi^*(\Y') = \{ (y,y') \in \Y \times \Y' \mid \pi(y) = \pi'(y') \}$.
+    It is a $(\RR^2,+)$ principal bundle over $\X$ by $(y,y') \mapsto \pi(y)=\pi'(y')$.
+    Let $\Y''$ be the quotient of $\pi^*(\Y')$ by the antidiagonal action of $\RR$,
+    that is,
+    $\underline{t}(y,y') = (t_\Y(y), -t_{\Y'}(y'))$.
+    And let $\pi'' \colon \Y'' \to \X$ be the projection $\pi''(\class(y,y')) = \pi(y)=\pi'(y')$.
+    We define then $a + a' = a''$ with $a''=\class(\pi''\colon \Y'' \to \X)$.
+    
+    The set $\text{Flows}(\X)$,
+    equipped with this addition,
+    is an Abelian group.
+    The neutral element is the class of the trivial bundle,
+    and the inverse of a flow is the same bundle but with the inverse action of $\RR$.
+    Note that this group is a kind of Picard group on a diffeological space,
+    but with $\RR$ instead of $\S^1$ as structure group,
+    and if this group doesn't appear in ordinary differential geometry,
+    it is because every principal bundle with fiber $\RR$ over a manifold is trivial.
+    But that is not the case in diffeology,
+    and we know one such nontrivial bundle,
+    the irrational torus $\pi \colon \T^2 \to \T_\alpha$.
+    
+    Let $\pi \colon \Y \to \T_\alpha$ be a flow.
+    Consider the pullback $\pr_1 \colon \pr^*(\Y) \to \RR$,
+    where $\pr \colon \RR \to \T_\alpha$ is the universal covering.
+    It is an $\RR$-principal fiber bundle over $\RR$,
+    so it is trivial.
+    Let $\phi \colon \RR \times \RR \to \pr^*(\Y)$ be an isomorphism.
+    Thus $\Y \simeq \RR \times \RR/\pr_2 \circ \phi$.
+    But $\pr_2 \circ \phi$ is any lifting on the second factor of $\RR \times \RR$,
+    of the action of $\ZZ \oplus \alpha \ZZ$ on the first one:
+    $$
+      \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \RR \times \RR \arrow[r, "\phi"] \arrow[dr, swap, "\pr_1"] & \pr^*(\Y) \arrow[d,"\pr_1"] \arrow[r,"\pr_2"] & \Y \arrow[d,"\pi"] \\
+      & \RR \arrow[r, swap, "\pr"] & \T_\alpha
+      \end{tikzcd}
+      $$
+    A lifting of a subgroup $\Gamma \subset \RR$ on the second factor of $\RR \times \RR$,
+    where $\Gamma$ acts by translation on the first factor,
+    is given,
+    for all $k \in \Gamma$ and $(x,\tau) \in \RR \times \RR$,
+    by
+    $$
+      k \colon (x,t) \mapsto (x + k, t + \tau(k)(x)),
+      $$
+    where $\tau \colon \Gamma \to \Cinfty(\RR)$ is a cocycle satisfying
+    $$
+      \tau(k + k')(x) = \tau(k)(x + k') + \tau(k')(x).
+      $$
+    Two cocycles $\tau$ and $\tau'$ define the same flow if they differ from a coboundary $\delta \sigma$:
+    $$
+      \tau'(k)(x) = \tau(k)(x) + \sigma(x+k) - \sigma(x), \quad \text{with} \quad \sigma \in \Cinfty(\RR).
+      $$
+    In other words,
+    $$
+      \text{Flows}(\RR/\Gamma) = \H^1(\Gamma,\Cinfty(\RR)).
+      $$
+    Applied to $\Gamma = \ZZ + \alpha \ZZ$,
+    that gives $\text{Flows}(\T_\alpha)$ equivalent to the group of real $1$-periodic functions $f$,
+    after some normalization,
+    modulo the relation:
+    $$
+      f \sim f' \quad \text{if} \quad f'(x) = f(x) + g(x+\alpha) - g(x).
+      $$
+    This relation is known as the \emph{small divisors Arnold's cohomology relation}.
+    The solution depends on the arithmetic of $\alpha$:
+    if $\alpha$ is a diophantine or a Liouville number,
+    $\text{Flows}(\T_\alpha)$ is one-dimensional or $\infty$-dimensional.%
+    \footnote{As $\H^1(\Gamma,\Cinfty(\RR))$,
+    the group $\text{Flows}(\RR/\Gamma)$ is obviously a real vector space.}
+    
+    Moreover,
+    every flow $\pi \colon \Y \to \T = \RR / \Gamma$ defined by a cocycle $\tau$,
+    can be naturally equipped with the connection associated with the covering $\pr \colon \RR \to \T$ \cite[Section 8.36]{PIZ13}.
+    However,
+    not all these bundles support a connection form \cite[Section 8.37]{PIZ13},
+    only those whose cocycle $\tau$ defining $\pi$ is equivalent to a homomorphism from $\Gamma$ to $\RR$;
+    see \cite[Exercise 139]{PIZ13}.
+    In other words,
+    if the cocycle $\tau$ is not cohomologous to a homomorphism,
+    then there is no connection that can be defined by a connection form.
+    In particular,
+    for $T_\alpha$,
+    the only flow equipped with connections defined by a connection form is the Kronecker flow (with arbitrary speeds).
+    \artend
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: DOCUMENT Modeling Diffeology
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Modeling Diffeology}
+  
+  Now we have seen a few constructions in diffeology and applications to unusual situations:
+  singular quotients and infinite-dimensions spaces.
+  It will be interesting to revisit some constructions of differential geometry and see what diffeology can do with them.
+  
+  \begin{article}\artlabel[Manifolds]
+    Every manifold owns a natural diffeology,
+    for which the plots are the smooths parameterizations.
+    There is a definition internal to the category diffeology:%
+    \footnote{We could use too the concept of generating families;
+    see \cite[Section 1.66]{PIZ13}.}
+    
+    \textsc{Definition}. \textit{An $n$-manifold is a diffeological space locally diffeomorphic to $\RR^n$ at each point.}
+    
+    With this definition,
+    as diffeological spaces,
+    \{Manifolds\} form a full subcategory of the category \{Diffeology\}.
+    \artend
+  \end{article}
+  
+  Of course,
+  this definition needs a precise use of the wording \emph{locally diffeomorphic}.
+  
+  \begin{article}\artlabel[Local smooth maps, D-topology and so on]
+    Very soon after the initial works in diffeology,
+    it was clear that we needed to enrich the theory with local considerations,
+    which were missing until then.
+    To respect the spirit of diffeology,
+    I defined directly the concept of local smoothness \cite{Igl85},
+    as follows:
+    
+    \textsc{Definition}. \textit{Let $\X$ and $\X'$ be two diffeological spaces.
+    Let $f$ be a map from a subset $\A \subset \X$ into $\X'$.
+    We say that $f$ is \emph{local smooth} if,
+    for each plot $\P$ in $\X$,
+    $f \circ \P$ is a plot of $\X'$.}
+    
+    Note that $f \circ \P$ is defined on $\P^{-1}(\A)$,
+    and a first condition for $f \circ \P$ to be a plot of $\X'$ is that $\P^{-1}(\A)$ be open.
+    That leads immediately to a second definition:
+    
+    \textsc{Definition}. \textit{A subset $\A \subset \X$ will be said to be \emph{D-open} if $\P^{-1}(\A)$ is open for all plots $\P$ in $\X$.
+    The D-open subsets in $\X$ define a topology on $\X$ called the \emph{D-topology}.}
+    
+    We have,
+    then,
+    the following proposition linking these two definitions:
+    
+    \textsc{Proposition}. \textit{A map $f$ defined on a subset $\A \subset \X$ to $\X'$ is local smooth if and only if:
+    $\A$ is D-open,
+    and $f \colon \A \to \X'$ is smooth when $\A$ is equipped with the subset diffeology.}
+    
+    To avoid misunderstanding and signify that $f$ is local smooth
+    ---~not just smooth for the subset diffeology~---
+    we note $f\colon \X \supset \A \to \X$.
+    
+    Next,
+    since we have local smooth maps,
+    we have \emph{local diffeomorphisms} too.
+    
+    \textsc{Definition}. \textit{We say that $f \colon \X \supset \A \to \X'$ is a \emph{local diffeomorphism} if $f$ is injective,
+    if it is local smooth,
+    and if its inverse $f^{-1} \colon \X' \supset f(\A) \to \X$ is local smooth.
+    We say that $f$ is a local diffeomorphism at $x \in \X$ if there is a superset $\A$ of $x$ such that $f\restriction \A \colon \X \supset \A \to \X'$ is a local diffeomorphism.}
+    
+    In particular,
+    these definitions give a precise meaning to the sentence ``the space $\X$ is locally diffeomorphic to $\X'$ at each/some point''.
+    
+    That was the beginning of the new concept of \emph{local diffeology} which guides everything modeling in diffeology.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Orbifold as diffeologies]
+    The word \emph{orbifold} was coined by Thurston \cite[Chapter 13]{Thu78} in 1978 as a replacement for \emph{V-manifold},
+    a structure invented by Ichiro Satake in 1956 \cite{Sat56}.
+    
+    \begin{figure}[th]
+      \centerline{\includegraphics[width=.475\textwidth]{Figures/TearDrop-Satake.pdf}}
+      \caption{Figure \ref{fig-teardrop-satake} --- The Teardrop as Satake's Orbifold.}
+      \label{fig-teardrop-satake}
+    \end{figure}
+    
+    These new objects have been introduced to describe the smooth structure of spaces that look like manifolds,
+    except around a few points,
+    where they look like quotients of Euclidean domains by finite linear groups.
+    Satake captured the smooth structure around the singularities by a family of compatible \emph{local uniformizing systems} defining the orbifold.%
+    \footnote{We will not discuss this construction here.
+    The original description by Satake is found in \cite{Sat56},
+    and a discussion of this definition is in \cite{IKZ10}.}
+    Figure \ref{fig-teardrop-satake} gives an idea about what would be an uniformizing system for the ``teardrop'' with one conic singularity.
+    
+    The main problem with Satake's definition is that it does not lead to a
+    satisfactory notion of smooth maps between orbifolds,
+    and therefore prevents the conception of a category of orbifolds.
+    Indeed,
+    in \cite[p. 469]{Sat57},
+    Satake writes this footnote:
+    \begin{quote}
+      ``The notion of $C^\infty$-map thus defined is inconvenient in the point that a composite of two $C^\infty$-maps defined in a different choice of defining families is not always a $C^\infty$ map.''
+    \end{quote}
+    For a mathematician,
+    that is very annoying.
+    
+    Considering orbifolds as diffeologies solved the problem.
+    Indeed,
+    in \cite{IKZ10},
+    we defined a \emph{diffeological orbifold} by a modelling process in the same spirit as for smooth manifolds
+    
+    \textsc{Definition}.
+    \textit{An orbifold is a diffeological space that is localy diffeomorphic,
+    at each point,
+    to some quotient space} $\RR^n/\Gamma$,
+    \textit{for some finite subgroup $\Gamma$ of the linear group} $\GL(n,\RR)$,
+    depending possibly on the point.
+    
+    Figure \ref{The-Teardrop} gives an idea about what is a diffeological orbifold:
+    the teardrop as some diffeology on the sphere $\S^2$.
+    
+    \begin{figure}[th]
+      \includegraphics[width=.95\textwidth]{Figures/TearDrop.pdf}
+      \vspace{-.25\baselineskip}
+      \caption{Figure \ref{The-Teardrop} --- The teardrop as diffeology.}
+      \label{The-Teardrop}
+    \end{figure}
+    
+    Once this definition is given,
+    we could prove (\emph{op. cit.}) that,
+    according to this definition,
+    every Satake defining family of a local uniformizing system was associated with a diffeology of orbifold and,
+    conversely,
+    that every diffeological orbifold was associated with a Satake defining family of a local uniformizing system.
+    And we proved that these constructions are inverse to each other,
+    modulo equivalence.
+    
+    Thus,
+    the diffeology framework fulfilled Satake's program by embedding orbifolds into diffeological spaces,
+    and providing them naturally with good,
+    workable,
+    smooth mappings.
+    
+    The difficulty met by Satake is subtle and can be explained as follows:
+    he tried to define smooth maps between orbifolds as maps that have equivariant liftings on the level of Euclidean domains,
+    before quotienting.
+    But the embedding of orbifolds into \{Diffeology\} shows that,
+    if that is indeed satisfied for local diffeomorphisms
+    (see \cite[Lemma 20, 21, 22]{IKZ10}),
+    it is not necessarily the case for ordinary smooth maps,
+    as this counter-example 25 shows.
+    
+    Consider the cone orbifolds $\cQ_n = \RR^2/\ZZ_n$,
+    and let $f \colon \RR^2 \to \RR^2$,
+    $$
+      f(x,y) = \begin{cases}
+      0 & \text{ if } r > 1 \text{ or } r = 0 \\
+      e^{-1/r} \rho_n(r) (r,0) & \text{ if } \frac{1}{n+1} < r \leq \frac{1}{n}
+      \text{ and $n$ is even } \\
+      e^{-1/r} \rho_n(r) (x,y) & \text{ if } \frac{1}{n+1} < r \leq \frac{1}{n}
+      \text{ and $n$ is odd},
+      \end{cases}
+      $$
+    where $r = \sqrt{x^2 + y^2}$ and $\rho_n$ is a smooth non-zero real function which is zero outside the interval $\mathopen]1/(n+1),1/n\mathclose[$.
+    Then,
+    for all integers $m$ dividing $n$,
+    $f$ projects onto a smooth map $\phi \colon \cQ_m \to \cQ_n$ that cannot be lifted locally in an equivariant smooth map,
+    over a neighborhood of $0$.
+    Again,
+    diffeology structured the problem in a way that almost solved it.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Noncommutative geometry \& diffeology: the case of \break orbifolds]
+    The question of a relation between diffeology and noncommutative geometry appeared immediately with the study of the irrational torus \cite{DonIgl83}.
+    The condition of diffeomorphy between two irrational tori $\T_\alpha$ and $\T_\beta$,
+    that is,
+    $\alpha$ and $\beta$ conjugate modulo $\GL(2,\ZZ)$,
+    coincided clearly in noncommutative geometry,
+    with the Morita-equivalent of the $\CC^*$-algebras associated with the foliations \cite{Rie81}.
+    That suggested a structural relationship between diffeology and noncommutative geometry deserving to be explored,
+    but that question had been left aside since then.
+    
+    We recently reopened the case of this relationship,
+    considering orbifolds.
+    And we exhibited a simple construction associating naturally,
+    with every diffeological orbifold a $\CC^*$-algebra,
+    such that two diffeomorphic orbifolds give two Morita-equivalent algebras \cite{IZL16}.
+    %
+    Before continuing,
+    we need to recall a general definition \cite[Sections 1.66 and 1.76]{PIZ13}.
+    
+    \textsc{Definition}. \textit{Let $\X$ be a diffeological space.
+    We define the \emph{nebula} of a set $\cF$ of plots in $\X$ as the diffeological sum
+    $$
+      \cN = \coprod_{\P \in \cF} \dom(\P) = \{ (\P,r) \mid \P \in \cF, \ r \in \dom(\P) \},
+      $$
+    where each domain is equipped with its standard smooth diffeology.
+    Then,
+    we define the \emph{evaluation map}
+    $$
+      \ev \colon \cN \to \X \quad\text{by}\quad \ev \colon (\P,r) \mapsto \P(r).
+      $$
+    We say that $\cF$ is a \emph{generating family} of $\X$ if $\ev$ is a subduction.}
+    
+    Now,
+    let $\cQ$ be an orbifold.
+    A local diffeomorphism $\F$ from a quotient $\RR^n/\Gamma$ to $\cQ$ will be called a \emph{chart}.
+    A set $\cA$ of charts whose images cover $\cQ$ will be called an \emph{atlas}.
+    With every atlas $\cA$ is associated a special generating family $\cF$ by considering the strict lifting of the charts $\F \in \cA$ to the corresponding $\RR^n$.
+    Precisely,
+    let $\pi_\Gamma = \RR^n \to \RR^n/\Gamma$, $\F \colon \RR^n/\Gamma \supset \dom(\F) \to \cQ$;
+    then $\cF = \{\F \circ \pi_\Gamma\}_{\F \in \cA}$.
+    We call $\cF$ the \emph{strict generating family} associated with $\cA$,
+    and we denote by $\cN$ its nebula.
+    
+    Next,
+    we consider the groupoid $\GG$ whose objects are the points of the nebula $\cN$,
+    and the arrows,
+    the germs of local diffeomorphisms $\varphi$ of $\cN$ that project on the identity by $\ev$,
+    that is,
+    $\ev \circ \varphi = \ev$.
+    We call $\GG$ the \emph{structure groupoid} of $\cQ$.
+    Then,
+    for a suitable but natural \emph{functional diffeology} on $\GG$,
+    we have the following \cite{IZL16}:
+    
+    \textsc{Theorem 1.}\ \textit{The groupoid $\GG$ is Hausdorff and etale.
+    The groupoids associated with different atlases are equivalent as categories.}
+    
+    Hence,
+    thanks to the etale property,
+    we can associate a $\CC^*$-algebra $\fA$ with $\GG$ by the process described by Renaud in \cite{Ren80}.
+    We have,
+    then,
+    
+    \textsc{Theorem2.}\ \textit{The groupoids associated with different atlases of an orbifold are equivalent in the sense of Muhly--Renault--Williams \cite{MRW87}.
+    Therefore,
+    their $\CC^*$-algebras are Morita-equivalent.}
+    
+    This Morita-equivalence between the $\CC^*$-algebras associated with different atlases of the orbifold is the condition required to make this construction meaningful and categorical.
+    That construction is the first bridge between diffeology and noncommutative geometry;
+    it gives an idea where and how diffeology and noncommutative geometry respond to each other,
+    at least at the level of orbifolds.%
+    \footnote{There is a more general subcategory of \{Diffeology\} for which such a construction leads to the same conclusion.
+    It is the subject of a work in progress.}
+    \begin{center}
+      \begin{tikzcd}
+        \{\text{Diffeology}\} \supset \{\text{Orbifolds}\}
+        \arrow[dr, red, start anchor={south east}, end anchor={north west}]
+        & & \text{$\CC^*$-Algebras} \\
+        & \text{Groupoids} \arrow[ur, red, start anchor={north east}, end anchor={south west}]
+        &
+      \end{tikzcd}
+    \end{center}
+    
+    As an example,
+    let us consider the simple orbifold $\Delta_1 = \RR/\{\pm 1\}$.
+    The structure of the orbifold is represented by the pushforward of the standard diffeology from $\RR$ to $[0,\infty[$,
+    by the square map $\text{sqr} \colon t \mapsto t^2$.
+    The singleton $\cF =\{ \text{sqr} \}$ is a strict generating family,
+    and the structure groupoid $\GG$ is the groupoid of the action of $\Gamma = \{\pm 1\}$,
+    that is,
+    $$
+      \Obj(\GG) = \RR \qmbox{and} \Mor(\GG) = \{ (t,\varepsilon,\varepsilon t) \mid \varepsilon = \pm 1 \} \simeq \RR \times \{\pm 1\}.
+      $$
+    A continuous function $f$ on $\Mor(\GG)$ to $\CC$ is a pair of functions $f=(a,b)$,
+    where $a(t)=f(t,1)$ and $b(t)=f(t,-1)$.
+    With this convention,
+    the algebra of the orbifold is then represented by a submodule of $\M_2(\CC) \otimes \cC^0(\RR,\CC)$,
+    $$
+      f = (a,b) \mapsto \M = \bigg[t \mapsto \begin{pmatrix} a(t) & b(-t) \cr b(t) & a(-t) \end{pmatrix}\bigg],
+      $$
+    with $\M^*(t) = [{}^\tau\M(t)]^*$. The superscript $\tau$ represents the transposition,
+    and the asterisk represents the complex conjugation element by element.
+    
+    Note that we still trace the orbifold in the characteristic polynomial $\P_\M(\lambda)$,
+    which is invariant by the action of $\{\pm 1\}$,
+    and is then defined on the orbifold $\Delta_1$ itself,
+    $\P_\M(\lambda) \colon t \mapsto \lambda^2 - \lambda \tr(\M(t)) + \det(\M(t))$,
+    where $\tr(\M(t)) = a(t) + a(-t)$ and $\det(\M(t)) = a(t)a(-t) - b(t)b(-t)$ are obviously $\{\pm 1 \}$ invariant.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Manifolds with boundary and corners]
+    \label{Manifolds-with-Boundary-and-Corners}
+    One day,
+    in 2007,
+    I received an e-mail from a mathematical physicist,
+    wondering how diffeology behaves around the corners\dots
+    Here is an excerpt:
+    
+    \begin{quote} ``I have just one worry about this theory.
+      I found it very difficult to check that there's a diffeology on the closed interval $[0,1]$ such that a smooth function $f \colon [0,1] \to \RR$ is smooth in the usual sense,
+      even at the endpoints. \ $\dots$
+      This problem would become very easy to solve using Chen's definition of smooth space,
+      which allows for plots whose domain is any convex subset of $\RR^n$.''
+    \end{quote}
+    
+    And our colleague to end his remark by this wish,
+    that people interested in diffeology ``are hoping you could either solve this problem in the context of diffeologies, or switch to Chen's definition\dots''.
+    
+    The good news is that it is not necessary to give up diffeology to be happy.
+    There is indeed a diffeology on $[0,1]$ such that ``a smooth function $f \colon [0,1] \to \RR$ is smooth in the usual sense''.
+    And that diffeology is simply the subset diffeology,
+    precisely \cite[Section 4.13]{PIZ13},
+    
+    \textsc{Theorem}. \textit{Let $\H_n \subset \RR^n$ be the half-space defined by $x_1 \geq 0$,
+    equipped with the subset diffeology.
+    Let $f \in \Cinfty(\H_n,\RR)$;
+    then there exists a smooth function $\F$,
+    defined on an open superset of $\H_n$ in $\RR^n$,
+    such that $f = \F \restriction \H^n$.}
+    
+    This proposition is a consequence of a famous Whitney theorem on extension of smooth even functions \cite{Whi43}.
+    By the way,
+    it gives a solid basis to the vague concept of ``smooth in the usual sense'',
+    as to be smooth in the usual sense means then to be smooth for the diffeology.
+    
+    We can investigate further and characterize the local diffeomorphisms of half-spaces \cite[Section 4.14]{PIZ13}\,:
+    
+    \textsc{Theorem}. \textit{A map $f \colon \A \to \H_n$, with $\A \subset \H_n$, is a
+    local diffeomorphism for the subset diffeology if
+    and only if: $\A$ is open in $\H_n$, $f$ is injective,
+    $f(\A \cap \partial \H_n) \subset \partial \H_n$, and for
+    all $x \in \A$ there exist an open ball $\cB \subset \RR^n$
+    centered at $x$ and a local diffeomorphism $\F \colon \cB \to
+      \RR^n$ such that $f$ and $\F$ coincide on $\cB \cap \H_n$.}
+    
+    Thanks to this theorem,
+    it is then easy to include the manifolds with boundary into the category \{Diffeology\},
+    in the same way we included the categories \{Manifolds\} and \{Orbifolds\}.
+    
+    \textsc{Definition}. \textit{An $n$-dimensional \emph{manifold with boundary} is a diffeological space $\X$ which is diffeomorphic,
+    at each point,
+    to the half-space $\H_n$.
+    We say that $\X$ is \emph{modeled} on $\H_n$.}
+    
+    Thanks to the previous theorems,
+    it is clear that this definition covers completely,
+    and not more,
+    the usual definition of manifold with boundary one can find for example in \cite{GuiPol74} or \cite{Lee06}.
+    In other words,
+    the ordinary category \{Manifolds with Boundary\} is a natural full subcategory of \{Diffeology\},
+    the category \{Manifolds\} being itself a full subcategory of \{Manifolds with Boundary\}.
+    
+    Moreover,
+    we have a similar result for the subset diffeology of corners,
+    thanks to a Schwartz theorem%
+    \footnote{In this case,
+    it is a simple corollary of the Whitney theorem \cite[Remark p. 310]{Whi43}.}
+    \cite{Sch75}\,:
+    
+    \textsc{Theorem}. \textit{Let $\K^n$ be the positive $n$-corner in $\RR^n$ defined by $x_i \geq 0$,
+    with $i = 1, \dots, n$,
+    equipped with the subset diffeology.
+    Let $f \in \Cinfty(\K^n,\RR)$;
+    then there exists a smooth function $\F$,
+    defined on an open superset of $\K^n$ in $\RR^n$,
+    such that $f = \F \restriction \K^n$.}
+    
+    Actually,
+    this property extends to any differential $k$-form on $\K^n$:
+    it is the restriction of a smooth $k$-form on $\RR^n$  \cite{GIZ17-a}.
+    
+    As for manifolds with boundary,
+    it is natural to define the $n$-dimensional \emph{manifolds with corners} as diffeological spaces that are locally diffeomorphic to $\K^n$ at each point.
+    We get naturally then the category \{Manifolds with Corners\} as a new subcategory of \{Diffeology\}.
+    
+    Back to the alternative Chen versus Souriau:
+    the three axioms of diffeologies are indeed identical to the preceding three axioms of Chen's differentiable spaces \cite{Che77},
+    except for the domains of plots that are open instead of being convex.
+    Chen's spaces had been introduced with homology and cohomology in mind,
+    and that is why he chose the convex subsets as domains for his plots.
+    On another side,
+    the choice of open subsets positions diffeology as a competitor to differential geometry itself.
+    And now,
+    the fact that smooth maps for half-spaces or corners,
+    equipped with the subset diffeology,
+    coincide with what was guessed heuristically to describe manifolds with boundary or corners,
+    is another confirmation that there is no need to amend the theory in any way.
+    For example,
+    we could define smooth simplices in diffeological spaces as smooth maps from the standard simplices,
+    equipped with its subset diffeology.
+    And that would cover the usual situation in differential geometry.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Fr\"olicher spaces as reflexives diffeological spaces]
+    We recall that a Fr\"olicher structure on a set $\X$ is defined by a pair of sets $\cF \subset \Maps(\X,\RR)$ and $\cC \subset \Maps(\RR,\X)$ that satisfies the double condition:
+    \begin{eqnarray*}
+      &\cC = \{ c \in \Maps(\RR,\X) \mid \cF \circ c \subset \Cinfty(\RR,\RR) \}, \\
+      &\cF = \{ f \in \Maps(\X,\RR) \mid f \circ \cC \subset \Cinfty(\RR,\RR) \}.
+    \end{eqnarray*}
+    A set $\X$ equipped with a Fr\"olicher structure is called a Fr\"olicher space \cite{KriMic97}.
+    Now,
+    let $\X$ be a diffeological space,
+    $\cD$ be its diffeology,
+    and $\Cinfty(\X,\R)$ be its set of real smooth maps.
+    
+    \textsc{Definition.} \textit{We say that $\X$ is \emph{reflexive} if $\cD$ coincides with the coarsest diffeology on $\X$,
+    for which the set of real smooth maps is exactly $\Cinfty(\X,\R)$.}
+    
+    Then,
+    thanks to Boman's theorem \cite{Bom67},
+    one can show%
+    \footnote{The concept of reflexive space has been suggested by Yael Karshon,
+    and we established the equivalence with Fr\"olicher spaces,
+    together with Augustin Batubenge and Jordan Watts,
+    at a seminar in Toronto in 2010.}
+    that a Fr\"olicher space,
+    equipped with the coarsest diffeology such that the elements of $\cF$ are smooth,
+    is reflexive.
+    And one can check conversely that a reflexive diffeological space satisfies the Fr\"olicher conditions above;
+    see \cite[Exercises 79 and 80]{PIZ13}.
+    In other words,
+    
+    \textsc{Proposition.} \textit{The category of Fr\"olicher spaces coincides with the subcategory of reflexive diffeological spaces.}
+    \artend
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: DOCUMENT Cartan, de Rham Calculus
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Cartan--de Rham Calculus}
+  
+  With fiber bundles and homotopy,
+  differential calculus is one of the most developed domains in diffeology.
+  We begin first with the definition of a differential form on a diffeological space.
+  
+  \begin{article}\artlabel[Differential forms]
+    Let $\U \subset \RR^n$;
+    we denote by $\Lambda^k(\RR^n)$ the vector space of linear $k$-forms on $\RR^n$, $k \in \NN$.
+    We call \emph{smooth $k$-form} on $\U$ any smooth map $a\colon \U \to \Lambda^k(\RR^n)$.
+    
+    Now,
+    let $\X$ be a diffeological space.
+    
+    \textsc{Definition}. \textit{We call \emph{differential $k$-form} on $\X$ any map $\alpha$ that associates,
+    with every plot $\P \colon \U \to \X$,
+    a smooth $k$-form $\alpha(\P)$ on $\U$ that satisfies the compatibility condition:
+    $$
+      \alpha(\P \circ \F) = \F^*(\alpha(\P)),
+      $$
+    for all smooth parameterizations $\F$ in $\U$.}
+    
+    The set of $k$-forms on $\X$ is denoted by $\Omega^k(\X)$.
+    Note that $\Omega^0(\X) = \Cinfty(\X,\RR)$.
+    
+    Note also that one can consider an $n$-domain $\U$ as a diffeological space;
+    in this case,
+    a differential $k$-form $\alpha$ is immediately identified with its value $a = \alpha(\id_\U)$ on the identity,
+    $\alpha \in \Omega^k(\U)$ and $a \in \Cinfty(\U, \Lambda^k(\RR^n))$.
+    
+    The two main operations on the differential forms on a diffeological space are as follows:
+    
+    \begin{enumerate}
+      \item[1.] \textsc{The pullback.} Let $f \in \Cinfty(\X',\X)$ be a smooth map between diffeological spaces,
+      and let $\alpha \in \Omega^k(\X)$.
+      Then $f^*(\alpha) \in \Omega^k(\X')$ is the $k$-form defined by
+      $$
+        [f^*(\alpha)](\P') = \alpha (f \circ \P'),
+        $$
+      for all plots $\P'$ in $\X'$.
+      \item[2.] \textsc{The exterior derivative.} Let $\alpha \in \Omega^k(\X)$;
+      its exterior derivative $d\alpha \in \Omega^{k+1}(\X)$ is defined by
+      $$
+        [d\alpha](\P) =d[\alpha(\P)],
+        $$
+      for all plots $\P$ in $\X$.
+    \end{enumerate}
+    
+    Then,
+    we have a de Rham complex $\Omega^*(\X)$,
+    with an endomorphism $d$ that satisfies
+    $$
+      d \circ d = 0, \quad\text{and}\quad
+      \left\{ \begin{array}{l}
+      \Z^*_\dR(\X) = \ker(d \colon \Omega^*(\X) \to \Omega^{*+1}(\X)) \\
+      \B^*_\dR(\X) = d(\Omega^{*-1}(\X)) \subset \Z^*_\dR(\X).
+      \end{array} \right.
+      $$
+    This defines a de Rham cohomology series of groups
+    $$
+      \quad \H^k_\dR(\X) = \Z^k_\dR(\X) / \B^k_\dR(\X).
+      $$
+    Note that this series begins with $k=0$,
+    for which $\B^0_\dR(\X) = \{0\}$.
+    
+    The first cohomology group $\H^0_\dR(\X)$ is easy to compute.
+    The differential $d\!f$ of a smooth function $f \in \Omega^0(\X)$ vanishes if and only if $f$ is constant on the connected components of $\X$.
+    Thus,
+    $\H_\dR(\X)$ is the real vector space generated by $\pi_0(\X)$,
+    that is,
+    $\text{Maps}(\pi_0(\X),\RR)$.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Quotienting differential forms]
+    One of the main procedures on differential forms is \emph{quotienting forms}.
+    I mean the following:
+    let $\X$ and $\X'$ be two diffeological spaces,
+    and let $\pi\colon \X \to \X'$ be a subduction.
+    The following criterion \cite{Sou84} identifies $f^*(\Omega^*(\X'))$ into $\Omega^*(\X)$\,:
+    
+    \textsc{Proposition}. \textit{Let $\alpha \in \Omega^*(\X)$.
+    There exists $\beta \in \Omega^*(\X')$ such that $\alpha = \pi^*(\beta)$ if and only if,
+    for all pairs of plots $\P$ and $\P'$ in $\X$,
+    if $\pi \circ \P = \pi \circ \P'$,
+    then $\alpha(\P) = \alpha(\P')$.}
+    
+    That proposition helps us to compute $\H_\dR(\T_\alpha)$,
+    for example.
+    Actually,
+    the criterion above has a simple declination for coverings.
+    
+    \textsc{Proposition}. \textit{Let $\X$ be a diffeological space and $\pi \colon \tilde \X \to \X$ its universal covering.
+    Let $\tilde \alpha \in \Omega^*(\tilde X)$.
+    There exists $\alpha \in \Omega^*(\X)$ such that $\tilde \alpha = \pi^*(\alpha)$ if and only if,
+    $\tilde \alpha$ is invariant by $\pi_1(\X)$,
+    that is,
+    $k^*(\tilde \alpha) = \tilde \alpha$ for all $k \in \pi_1(\X)$.}
+    
+    Indeed,
+    for the criterion above,
+    $\pi \circ \P = \pi \circ \P'$ if and only if,
+    locally on each ball in the domain of the plots,
+    there exists an element $k \in \pi_1(\X)$ such that $\P' = k \circ \P$ on the ball.
+    
+    Now,
+    let us apply this criterion to any irrational torus $\T = \RR/\Gamma$,
+    where $\Gamma$ is a strict dense subgroup of $\RR$.
+    A $1$-form $\tilde \alpha \in \RR$ writes $\tilde a(x)\, d\!x$.
+    It is invariant by $\Gamma$ if and only if $a(x) = a$ is constant.
+    Let $\theta$ be the $1$-form whose pullback is $d\!x$;
+    then
+    $$
+      \Omega^1(\T) = \RR \theta \quad\text{and}\quad \H^1_\dR(\T) = \RR.
+      $$
+    Obviously,
+    $\H^0_\dR(\T) = \RR$ and $\H^k_\dR(\T) = \{0\}$ if $k>1$.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Parasymplectic form on the space of geodesics]
+    It is well known that,
+    if the space $\Geod(\M)$ of (oriented) \emph{geodesic trajectories} (aka unparametrized geodesics) of a Riemannian manifold $(\M,g)$ is a manifold,
+    then this manifold is naturally symplectic for the quotient of the presymplectic form defining the geodesic flow.
+    A famous example is the geodesics of the sphere $\S^2$,
+    for which the space of geodesics is also $\S^2$, equipped with the standard surface element.%
+    \footnote{For a judicious choice of constant.}
+    In this case,
+    the mapping from the unit bundle $\U\S^2$ to $\Geod(\S^2)$ is realized by the moment map of the rotations:
+    $$
+      \ell \colon \U\S^2 = \{(x,u)\in \S^2 \times \S^2 \mid u \cdot x = 0 \} \to \Geod(\S^2) \ \text{with}\  \ell(x,u) = x \wedge u.
+      $$
+    Now,
+    what about the space of geodesics of the $2$-torus $\T^2 = \RR^2/\ZZ^2$,
+    for example?
+    It is certainly not a manifold because of the mix of closed and unclosed geodesics.
+    And about the canonical symplectic structure,
+    does it remain something from it?
+    And what?
+    That is exactly the kind of question diffeology is able to answer.
+    
+    The geodesics of $\T^2$ are the characteristics of the differential $d\lambda$ of the Liouville $1$-form $\lambda$ on $\U\T^2$,
+    associated with the ordinary Euclidean product:
+    $$
+      \lambda (\delta y) = u \cdot \delta x, \quad\text{with}\quad y = (x,u) \in \U\T^2 \quad\text{and}\quad \delta y \in \T_y(\U\T^2).
+      $$
+    And then,
+    $$
+      \Geod(\T^2) = \bigg\{ \pr\{x+tu\}_{t\in \RR} \times \{u\} \subset \T^2 \times \S^1 \mid (x,u) \in \U\T^2 \bigg\}.
+      $$
+    The direction of the geodesic $\pr_2 \colon ( \pr\{x+tu\}_{t\in \RR},u) \mapsto u$ is a natural projection on $\S^1$\,:
+    $$
+      \begin{tikzcd}[column sep={3.5em,between origins}, row sep=2.5em, every label/.append style = {font = \small}]
+      \U\T^2 \arrow[rr, "\pi"] \arrow[dr,swap,"\pr_2"]       &        & \Geod(\T^2) \arrow[dl,"\pr_2"] \\
+      & \S^1   &
+      \end{tikzcd}
+      $$
+    The fiber $\pr_2^{-1}(u) \subset \Geod(\T^2)$,
+    is the torus $\T_u$ of all lines with slope $u$.
+    We have seen that,
+    depending on whether the slope is rational or not,
+    we get a circle or an irrational torus.
+    As we claimed,
+    $\Geod(\T^2)$ equipped with the quotient diffeology of $\U\T^2$ is not a manifold.
+    However,
+    there exists on $\Geod(\T^2)$ a closed $2$-form $\omega$ such that $d\lambda = \pi^*(\omega)$ \cite{PIZ16-b}.
+    We say that $\Geod(\T^2)$ is parasymplectic.%
+    \footnote{The meaning of the word \emph{symplectic} in diffeology is still under debate.
+    That is why I use the wording \emph{parasymplectic} to indicate a closed $2$-form.}
+    
+    Actually,
+    this example is just a special case of the general situation \cite{PIZ16-c}.
+    
+    \textsc{Theorem}. \textit{Let $\M$ be a Riemannian manifold.
+    Let $\Geod(\M)$ be the space of geodesics,
+    defined as the characteristics of the canonical presymplectic $2$-form $d\lambda$ on the unit bundle $\U\M$.
+    Then,
+    there exists a closed $2$-form $\omega$ on $\Geod(\M)$ such that $d\lambda = \pi^*(\omega)$.}
+    
+    This result is a direct application of the criterion above on quotienting forms.
+    It is strange that we had to wait so long to clarify this important point,
+    which should have been one of the first results in diffeology.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Differential forms on manifolds with corners]
+    We claimed previously that the smooth maps $f \colon \K_n \to \RR$,
+    where $\K_n$ is the $n$-dimensional corner,
+    are the restrictions of smooth functions defined on some open neighborhood of $\K_n$ in $\RR^n$.
+    We have more \cite{GIZ16-a}\,:
+    
+    \textsc{Proposition}. \textit{Let $\omega \in \Omega^k(\K^n)$ be a differential $k$-form on $\K^n$.
+    Then,
+    there exists a smooth $k$-form $\bar\omega$ defined on some open neighborhood of $\K^n \subset \RR^n$ such that $\omega = \bar\omega \restriction \K^n$.}
+    
+    This proposition has,
+    then,
+    a corollary (\emph{op. cit.})\,:
+    
+    \textsc{Theorem}. \textit{Let $\M$ be a smooth manifold.
+    Let $\W \subset \M$,
+    equipped with the subset diffeology,
+    be a submanifold with boundary and corners.
+    Any differential form on $\W$ is the restriction of a smooth form defined on an open neighborhood.}
+    
+    That closes the discussion about the compatibility between diffeology and manifolds with boundary and corners for any question relative to the de Rham complex.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[The problem with the de Rham homomorphism]
+    Let us focus on $1$-forms,
+    precisely,
+    the $1$-forms on $\T_\alpha$,
+    to take an example.
+    The integration on paths defines the first de Rham homomorphism.
+    Let $\epsilon$ be a closed $1$-form on $\T_\alpha$
+    (actually any $1$-form,
+    since they are all closed).
+    Consider the map
+    $$
+      \gamma \mapsto \int_\gamma \epsilon = \int_0^1 \epsilon(\gamma)_x(1) \, d\!x,
+      $$
+    where $\gamma \in \Paths(\T_\alpha)$.
+    Because $\epsilon$ is closed and because the integral depends only on the fixed end homotopy class of $\gamma$,
+    restricted to $\Loops(\T_\alpha)$,
+    this integral defines a homomorphism from $\pi_1(\T_\alpha)$ to $\RR$.
+    And since the integral on a loop of a differential $d\!f$ vanishes,
+    the integral depends only on the cohomology class of $\epsilon$.
+    Thus,
+    we get the first de Rham homomorphism:%
+    \footnote{See \cite[Section 6.74]{PIZ13} for the general construction and for the justifications needed.}
+    $$
+      h \colon \H^1_\dR(\T_\alpha) \to \Hom(\pi_1(\T_\alpha),\RR) \quad\text{defined by}\quad \epsilon \mapsto [\ell \mapsto \int_\ell \epsilon].
+      $$
+    Now,
+    since $\H^1_\dR(\T_\alpha) = \RR$ and $\Hom(\pi_1(\T_\alpha),\RR)= \RR^2$,
+    the de Rham homomorphism cannot be an isomorphism,
+    as it is the case for Euclidean domains,
+    or more generally ordinary manifolds.
+    Actually,
+    it is precisely given by
+    $$
+      h \colon a \mapsto [(n,m) \mapsto a(n+\alpha m)],
+      $$
+    where $a \in \H^1_\dR(\T_\alpha)$ is represented by $a \dt$ on $\RR$,
+    and $\pi_1(\T_\alpha) = \ZZ + \alpha \ZZ \subset \RR$.
+    
+    This hiatus is specific to diffeology,
+    versus differential geometry.
+    It is,
+    however,
+    still true that,
+    for any diffeological space,
+    the first de Rham homomorphism is injective, and we can interpret geometrically its cokernel.%
+    \footnote{For differential forms in higher degree,
+    this is still a work in progress.}
+    
+    Let $\tilde\T_\alpha(=\RR)$ denote the universal covering of $\T_\alpha$.
+    Consider then a homomorphism $\rho$ from $\pi_1(\T_\alpha)$ to $(\RR,+)$.
+    Then,
+    build the associated bundle $\pr \colon \tilde \T_\alpha \times_\rho \RR \to \T_\alpha$,
+    where $\pi_1(\T_\alpha)$ acts diagonally on the product $\tilde \T_\alpha \times \RR$.
+    That is,
+    for all $(x,t) \in \tilde\T_\alpha \times \RR$ and all $k \in \pi_1(\T_\alpha)$,
+    $k \colon (x,t) \mapsto (x+k, t + \rho(k))$.
+    Let $\class \colon \tilde \T_\alpha \times \RR \to \tilde \T_\alpha \times_\rho \RR$ be the projection.
+    $$
+      \begin{tikzcd}[column sep=large,every label/.append style = {font = \small}]
+      \tilde \T_\alpha \times \RR \arrow[r, "\class"] \arrow[d, swap, "\pr_1"] & \tilde \T_\alpha \times_\rho \RR \arrow[d,"\pr"] \\
+      \tilde\T_\alpha \arrow[r, swap, "\pi"] & \T_\alpha
+      \end{tikzcd}
+      $$
+    
+    The right down arrow,
+    $\pr \colon \class(x,t) \mapsto \pi(x)$ is a principal $(\RR,+)$ fiber bundle for the action $s \colon \class(x,t) \mapsto \class(x, t+s)$.
+    This principal fiber bundle has a natural connection induced by the connection of the universal covering.
+    Pick a path $\gamma$ in $\T_\alpha$ and a point $\tilde x$ over $x=\gamma(t)$;
+    there exists a unique lifting $\tilde\gamma$ such that $\tilde\gamma(t)=\tilde x$.
+    Then,
+    we define the horizontal lifting $\bar\gamma$ of $\gamma$ passing through $\class(\tilde x,s)$ by $\bar\gamma(t') = \class(\tilde\gamma(t'), t'-t + s)$.
+    This connection is,
+    by construction,
+    flat.
+    Indeed,
+    the subspace $\{\class(\tilde x, 0) \mid \tilde x \in \tilde\T_\alpha \}$ is a reduction of the principal fiber bundle $\pr \colon \tilde \T_\alpha \times_\rho \RR \to \T_\alpha$ to the group $\pi_1(\T_\alpha)/ \ker(\rho)$.
+    Now,
+    in \cite[Section 8.30]{PIZ13},
+    we prove that a homomorphism $\rho\colon \pi_1(\T_\alpha) \to \RR$ gives a trivial fiber bundle $\pr$ if and only if $\rho$ is the de Rham homomorphism of a closed $1$-form $\epsilon$.
+    And eventually,
+    we prove the following:
+    
+    \textsc{Proposition}. \textit{The cokernel of the de Rham homomorphism is equivalent to the set of equivalence classes of $(\RR,+)$-principal bundle over $\T_\alpha$,
+    equipped with a flat connection.
+    This result is actually general for any diffeological space $\X$.}
+    
+    Note that this analysis puts on an equal footing the surjectivity of the first de Rham homomorphism and the triviality of principal $(\RR,+)$-principal bundles over manifolds.
+    That deserved to be noticed.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[The chain-homotopy operator]
+    The \emph{chain-homotopy operator} $\CHK$ is a fundamental construction in differential calculus \cite[Section 6.83]{PIZ13}.
+    It is related in particular to integration of closed differential forms,
+    homotopic invariance of de Rham cohomology,
+    and the moment map in symplectic geometry,
+    as we shall see in the following.
+    
+    Let $\X$ be a diffeological space;
+    there exists a smooth linear operator
+    $$
+      \CHK\colon \Omega^p(\X) \to \Omega^{p-1}(\Paths(\X)) \quad\text{with}\quad p \geq 1,
+      $$
+    that satisfies
+    $$
+      \CHK \circ d +d  \circ \CHK = \1^* - \0^*,
+      $$
+    where $\0,\1\colon \Paths(\X) \to \X$ are defined by $\hat t(\gamma) = \gamma(t)$.
+    
+    Explicitly,
+    let $\alpha$ be a $p$-form of $\X$, with $p>1$, and
+    $\P \colon \U \to \Paths(\X)$ be an $n$-plot. The value of
+    $\CHK\alpha$ on the plot $\P$, at the point $r \in \U$,
+    evaluated on $(p-1)$ vectors $(v)_{i=2}^p = (v_2)\dots(v_{p})$ of
+    $\RR^n$, is given by
+    $$
+      \CHK\alpha\,(\P)_r(v)_{i=2}^p =
+      \int_0^1 \alpha \left( \vect{t \\ r} \mapsto \P(r)(t)
+      \right)_{t \choose r} \vect{1 \\ 0}
+      \vect{0 \\ v_i}_{i=2}^p \dt.
+      $$
+    For $p=1$,
+    $$
+      \CHK \alpha \colon \gamma \mapsto \int_\gamma \alpha = \int_0^1 \alpha(\gamma)_t \,\dt
+      $$
+    is the usual integration along the paths.
+    
+    Note that there is no equivalent to this operator in ordinary differential geometry since there is no concept of differential forms on the space of paths,
+    even for a manifold.
+    Of course,
+    there are a few bypasses,
+    but none is as direct or efficient as the operator $\CHK$,
+    as we shall see now.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Homotopic invariance of de Rham cohomology]
+    Consider an homotopy $t \mapsto f_t$ in $\Paths(\Cinfty(\X,\X'))$,
+    where $\X$ and $\X'$ are two diffeological spaces.
+    
+    \textsc{Proposition}. \textit{Let $\alpha \in \Omega^k(\X')$ and $d\alpha = 0$.
+    Then,
+    $f_1^*(\alpha) = f_0^*(\alpha) + d\beta$,
+    with $\beta \in \Omega^{k-1}(\X)$.}
+    
+    In other words,
+    the de Rham cohomology is homotopic invariant:
+    $$
+      \class(f_1^*(\alpha)) = \class(f_0^*(\alpha)) \in \H_\dR^k(\X).
+      $$
+    Let us prove this rapidly.
+    Consider the smooth map $\varphi \colon \X \to \Paths(\X')$ defined by $\varphi(x) = [t \mapsto f_t(x)]$.
+    Take the pullback of the chain-homotopy identity,
+    $\varphi^*(\CHK(d\alpha) + d(\CHK\alpha)) = \varphi^*(\1^*(\alpha)) - \varphi^*(\0^*(\alpha))$.
+    That is,
+    $\varphi^*(d(\CHK\alpha)) = d(\varphi^*(\CHK\alpha))= (\1 \circ \varphi)^*(\alpha) - (\0 \circ \varphi)^*(\alpha)$.
+    But,
+    $\hat t \circ \varphi = f_t$,
+    thus $f_1^*(\alpha) -f_0^*(\alpha) = d\beta$ with $\beta = \varphi^*(\CHK\alpha)$.
+    
+    That is one of the most striking uses of this chain-homotopy operator,
+    and it proves at the same time how one can take advantage of diffeology,
+    even in a traditional course on differential geometry.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Integration of closed $1$-forms]
+    Consider a manifold $\M$ and a closed $1$-form $\alpha$ on $\M$.
+    We know that if $\alpha$ is integral,
+    that is,
+    its integral on every loop is a multiple of some number called the \emph{period},
+    then there exists a smooth function $f$ from $\M$ to the circle $\S^1$ such that $\alpha = f^*(\theta)$,
+    where $\theta$ is the canonical length element.
+    This specific construction has an ultimate generalization in diffeology that avoids the integral condition~--~and that is what diffeology is for,
+    indeed.
+    
+    Let $\alpha$ be a closed $1$-form on a connected diffeological space $\X$.
+    Consider the equivalence relation on $\Paths(\X)$ defined by
+    $$
+      \gamma \sim \gamma' \quad\text{if}\quad \ends(\gamma) = \ends(\gamma') \quad\text{and}\quad \int_\gamma \alpha = \int_{\gamma'} \alpha.
+      $$
+    The quotient $\fX_\alpha = \Paths(\X)/\!\sim$ is a groupoid for the addition%
+    \footnote{Actually,
+    this addition is defined on the stationary paths,
+    but since the space of stationary paths is a deformation retract of the space of paths,
+    that does not really matter.}
+    $\class(\gamma) + \class(\gamma') = \class(\gamma \vee \gamma')$,
+    when $\gamma(1) = \gamma'(0)$.
+    Because the integral of $\alpha$ on $\gamma$ does not depend on its fixed-endpoints homotopy class,
+    the groupoid $\fX_\alpha$ is a covering groupoid,
+    a quotient of the Poincaré groupoid $\fX$.
+    Let $\F_\alpha \colon \fX_\alpha \to \RR$ be $\F_\alpha(\class(\gamma)) = \CHK\alpha(\gamma) = \int_\gamma \alpha$.
+    
+    $$
+      \begin{tikzcd}[column sep=2.5em, row sep={5em,between origins}, every label/.append style = {font = \small}]
+      \Paths(\X) \arrow[dr, swap, "\ends"] \arrow[r, "\class"] &  \fX \arrow[d] \arrow[r, "\class"]  & \fX_\alpha \arrow[r,"\F_\alpha"] \arrow[ld] & \RR \arrow[d,"\pr"] \\
+      {} & \X \times \X \arrow[rr,swap,"f_\alpha"]  & {} & \T_\alpha = \RR/\P_\alpha
+      \end{tikzcd}
+      $$
+    
+    The function $\F$ integrates $\alpha$ on $\fX_\alpha$,
+    in the sense that,
+    thanks to the chain-homotopy identity,
+    $d\F_\alpha = \1^*(\alpha) - \0^*(\alpha)$.
+    Let $o \in \X$ be a point defined as an \emph{origin} of $\X$,
+    and define $\X_\alpha$ to be the subspace of $\fX_\alpha$ made of classes of paths with origin $o$.
+    Let $\pi = \1\restriction \X_\alpha$;
+    then $d\F = \pi^*(\alpha)$,
+    with $\F = \F_\alpha \restriction \X_\alpha$.
+    The covering $\X_\alpha$ of $\X$ is the smallest covering where the pullback of $\alpha$ is exact.
+    We call it the integration covering of $\alpha$.
+    Its structure group $\P_\alpha$ is the \emph{group of periods} of $\alpha$,
+    that is,
+    $$
+      \P_\alpha = \bigg\{ \int_\ell \alpha \mid \ell \in \Loops(\X) \bigg\}.
+      $$
+    
+    \textsc{Proposition}. \textit{If the group of periods $\P_\alpha$ is a strict subgroup of $\RR$,
+    then $\pr \colon \RR \to \T_\alpha = \RR/\P_\alpha$ is a covering,
+    and there exists a smooth map $f\colon \X \to \T_\alpha$ such that $f^*(\theta) = \alpha$,
+    with $\theta$ being the projection of $\dt$ on $\T_\alpha$ by $\pr$.}
+    
+    This proposition \cite[Section 8.29]{PIZ13} is the ultimate generalization of the integration of integral $1$-forms in differential geometry,
+    allowed by diffeology.
+    We can notice that the usual condition of second countability for manifolds is in fact a sufficient precondition.
+    The real obstruction,
+    valid for manifolds as well as for general diffeological spaces,
+    is that the group of periods $\P_\alpha$ is discrete in $\RR$,
+    and that is equivalent to being a strict subgroup of $\RR$.
+    \artend
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: DOCUMENT Symplectic Diffeology
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Symplectic Diffeology}
+  
+  During the 1990s a lot of symplectic-like geometry situations were explored,
+  essentially in infinite-dimensional spaces,
+  but not only,
+  with more or less success.
+  What these attempts at generalization missed was a uniform framework of concepts and vocabulary,
+  precise definitions framing the context of their studies.
+  Each example came with its own heuristic and context,
+  for example,
+  the nature of the moment maps were not clearly stated:
+  for the case of the moment of imprimitivity \cite{Zie96},
+  it was a function with values the Dirac delta functions (distributions);
+  for another example involving the connections of a torus bundle \cite{Dnl99},
+  it was the curvature of the connection.
+  And Elisa Prato's quasifolds \cite{Pra01},
+  for which the moment map is defined on a space that is not a legitimate manifold but a singular quotient,
+  adds up to these infinite-dimensional examples.
+  
+  What we shall see now is how diffeology is the missing framework,
+  where all these examples find their places,
+  are treated on an equal footing,
+  and give what we are waiting for from them.
+  
+  The general objects of interest will be arbitrary closed $2$-forms on diffeological spaces,
+  for which we introduce this new terminology:
+  
+  \textsc{Definition}. \textit{We call \emph{parasymplectic space}%
+  \footnote{The quality of being \emph{symplectic} or \emph{presymplectic} will be discussed and get a precise meaning.
+  The word \emph{parasymplectic} seemed free and appropriate to denote a simple closed $2$-form.}
+  any diffeological space $\X$,
+  equipped with a closed $2$-form $\omega$.}
+  
+  Next,
+  we consider the group of \emph{symmetries} (or \emph{automorphisms}) of $\omega$,
+  denoted by $\Diff(\X,\omega)$.
+  The pseudogroup $\Diff_\loc(\X,\omega)$ of local symmetries will play some role too.
+  Then,
+  to introduce the \emph{moment map} for any group of symmetries $\G$,
+  we need to clarify some vocabulary and notations:%
+  \footnote{Remember that a diffeological group is a group that is a diffeological space such that the multiplication and the inversion are smooth.}
+  
+  \textsc{Definition}. \textit{We shall call \emph{momentum}%
+  \footnote{Plural \emph{momenta}.}
+  of a diffeological group $\G$ any left-invariant $1$-form.
+  We denote by $\cG^*$ its space of \emph{momenta},
+  that is,
+  $$
+    \cG^* = \{\varepsilon \in \Omega^1(\G) \mid \mathrm{L}(g)^*(\varepsilon) = \varepsilon, \mbox{ for all } g \in \G \}.
+    $$
+  The set $\cG^*$ is obviously a real vector space%
+  \footnote{It is also a diffeological vector space for the functional diffeology,
+  but we shall not discuss that point here.}.}
+  
+  \begin{article}\artlabel[The moment map]
+    Let $(\X,\omega)$ be a parasymplectic space and  $\G$ be a diffeological group.
+    A \emph{symmetric action} of $\G$ on $(\X,\omega)$ is a smooth morphism $g \mapsto g_\X$ from $\G$ to $\Diff(\X,\omega)$,
+    where $\Diff(\X,\omega)$ is equipped with the functional diffeology.
+    That is,
+    $$
+      \text{for all $g\in \G$}, \quad g_\X^*(\omega)=\omega.
+      $$
+    
+    Now,
+    to grab the essential nature of the moment map,
+    which is a map from $\X$ to $\cG^*$,
+    we need to understand it in the simplest possible case.
+    That is,
+    when $\omega$ is exact,
+    $\omega = d\alpha$,
+    and when $\alpha$ is also invariant by $\G$,
+    $g_\X^*(\alpha) = \alpha$.
+    In these conditions,
+    the moment map is given by
+    $$
+      \mu \colon \X \to \cG^*
+      \quad
+      \text{with}
+      \quad
+      \mu(x) = \hat x^*(\alpha),
+      $$
+    where $\hat x \colon \G \to \X$ is the \emph{orbit map} $\hat x (g)= g_\X(x)$.
+    We check immediately that,
+    since $\alpha$ is invariant by $\G$,
+    $\hat x^*(\alpha)$ is left invariant by $\G$,
+    and therefore $\mu(x) \in \cG^*$.
+    
+    But,
+    as we know,
+    not all closed $2$-forms are exact,
+    and even if they are exact,
+    they do not necessarily have an invariant primitive.
+    We shall see now,
+    how we can generally come to a situation,
+    so close to the simple case above,
+    that,
+    modulo some minor subtleties,
+    we can build a good moment map in all cases.
+    
+    Let us consider now the general case,
+    with $\X$ connected.
+    Let $\CHK$ be the chain-homotopy operator, defined previously.
+    Then,
+    the differential $1$-form $\K\omega$,
+    defined on $\Paths(\X)$,
+    satisfies $d[\CHK\omega] = (\1^* - \0^*)(\omega)$,
+    and $\CHK\omega$ is invariant by $\G$ \cite[Section 6.84]{PIZ13}.
+    Considering $\bar\omega = (\1^* - \0^*)(\omega)$ and $\bar\alpha = \CHK\omega$,
+    we are in the simple case:
+    $\bar\omega = d\bar\alpha$ and $\bar\alpha$ invariant by $\G$.
+    We can apply the construction above and then we define the \emph{paths moment map} by
+    $$
+      \Psi \colon \Paths(\X) \to \cG^*
+      \quad \mbox{with} \quad
+      \Psi(\gamma) = \hat \gamma^*(\CHK\omega),
+      $$
+    where $\hat \gamma \colon \G \to \Paths(\X)$ is the orbit map $\hat \gamma(g)= g_\X \circ \gamma$ of the path $\gamma$.
+    
+    The paths moment map is additive with respect to the concatenation,
+    $$
+      \Psi(\gamma \vee \gamma') = \Psi(\gamma) + \Psi(\gamma'),
+      $$
+    and it is equivariant by $\G$,
+    which acts by composition on $\Paths(\X)$,
+    and by coadjoint action on $\cG^*$.
+    That is,
+    for all $g,k \in \G$ and $\epsilon \in \cG^*$,
+    $$
+      \Ad(g)\colon k \mapsto gkg^{-1} \quad\text{and}\quad \Ad_*(g)\colon \epsilon \mapsto \Ad(g)_*(\epsilon) =  \Ad(g^{-1})^*(\epsilon).
+      $$
+    
+    Then,
+    we define the \emph{holonomy} of the action of $\G$ on $\X$ as the subgroup
+    $$
+      \Gamma = \{\Psi(\ell) \mid \ell \in \Loops(\X) \} \subset \cG^*.
+      $$
+    The group $\Gamma$ is made of (closed) $\Ad_*$-invariant momenta.
+    But $\Psi(\ell)$ depends only on the homotopy class of $\ell$,
+    so then $\Gamma$ is a homomorphic image of $\pi_1(\X)$,
+    more precisely,
+    its abelianized.
+    
+    \textsc{Definition}. \textit{If $\Gamma = \{0\}$,
+    we say that the action of $\G$ on $(\X,\omega)$ is \emph{Hamiltonian}.
+    The holonomy $\Gamma$ is the obstruction for the action of the group $\G$ to be Hamiltonian.}
+    
+    Now,
+    we can push forward the paths moment map on $\cG^*/\Gamma$,
+    as suggested by the commutative diagram
+    $$
+      \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \Paths(\X) \arrow[d, swap, "\ends"] \arrow[r, "\Psi"] &  \cG^* \arrow[d, "\class"] \\
+      \X \times \X \arrow[r, swap, "\psi"] & \cG^*\!\!/\Gamma
+      \end{tikzcd}
+      $$
+    and we get then the \emph{two-points moment map}\,:
+    $$
+      \psi(x,x') = \class(\Psi(\gamma)) \in \cG^*\!\!/\Gamma, \quad\text{for any path $\gamma$ such that}\quad \ends(\gamma) = (x,x').
+      $$
+    The additivity of $\Psi$ becomes the Chasles's cocycle condition on $\psi$\,:
+    $$
+      \psi(x,x') + \psi(x',x'') = \psi(x,x'').
+      $$
+    
+    The group $\Gamma$ is invariant by the coadjoint action.
+    Thus,
+    the coadjoint action passes to the quotient group $\cG^*\!\!/\Gamma$,
+    and $\psi$ is a natural group-valued moment map,
+    equivariant for this quotient coadjoint action.
+    
+    Because $\X$ is connected,
+    there exists always a map
+    $$
+      \mu \colon \X \to \cG^*\!\!/\Gamma
+      \quad \mbox{such that} \quad
+      \psi(x,x') = \mu(x') - \mu(x).
+      $$
+    The solutions of this equation are given by
+    $$
+      \mu(x)=\psi(x_0,x) + c,
+      $$
+    where $x_0$ is a chosen point in $\X$ and $c$ is a constant.
+    These are the \emph{one-point moment maps}.
+    But these moment maps $\mu$ are a priori no longer equivariant.
+    Their variance introduces a $1$-cocycle $\theta$ of $\G$ with values in $\cG^*\!\!/\Gamma$ such that
+    $$
+      \mu(g(x))= \Ad_*(g)(\mu(x)) + \theta(g), \quad \text{with} \quad \theta(g) = \psi(x_0,g(x_0)) + \Delta c(g),
+      $$
+    where $\Delta c$ is the coboundary due to the constant $c$ in the choice of $\mu$.
+    We say that the action of $\G$ on $(\X,\omega)$ is \emph{exact} when the cocycle $\theta$ is trivial.
+    Defining
+    $$
+      \Ad_*^\theta (g) \colon \nu \mapsto \Ad_*(g)(\nu) + \theta(g), \quad\text{then}\quad \Ad_*^\theta (gg') = \Ad_*^\theta (g) \circ \Ad_*^\theta (g').
+      $$
+    The cocycle property of $\theta$,
+    that is,
+    $\theta(gg') = \Ad_*(g)(\theta(g')) + \theta(g)$,
+    makes $\Ad_*^\theta$ an action of $\G$ on the group $\cG^*\!\!/\Gamma$.
+    This action is called the \emph{affine action}.
+    For the affine action,
+    the moment map $\mu$ is equivariant:
+    $$
+      \mu(g(x))= \Ad_*^\theta(g)(\mu(x)).
+      $$
+    
+    This construction extends to the category \{Diffeology\},
+    the moment map for manifolds introduced by Souriau in \cite{Sou70}.
+    When $\X$ is a manifold and the action of $\G$ is Hamiltonian,
+    they are the standard moment maps he defined there.
+    The remarkable point is that none of the constructions brought up above involves differential equations,
+    and there is no need for considering a possible Lie algebra either.
+    That is a very important point.
+    The momenta appear as invariant $1$-forms on the group,
+    naturally,
+    without intermediaries,
+    and the moment map as a map in the space of momenta.
+    
+    Note that the group of automorphisms $\G_\omega = \Diff(\X,\omega)$ is a legitimate diffeological group.
+    The above constructions apply and give rise to universal objects:
+    \emph{universal momenta} $\cG_\omega^*$,
+    \emph{universal path moment map} $\Psi_\omega$,
+    \emph{universal holonomy} $\Gamma_\omega$,
+    \emph{universal two-points moment map} $\psi_\omega$,
+    \emph{universal moment maps} $\mu_\omega$,
+    and \emph{universal Souriau's cocycles} $\theta_\omega$.
+    
+    A \emph{parasymplectic action} of a diffeological group $\G$ is a smooth morphism $h \colon \G \to \G_\omega$,
+    and the objects,
+    associated with $\G$,
+    introduced by the above moment maps constructions,
+    are naturally subordinate to their universal counterparts.
+    
+    We shall illustrate this construction by two examples in the next paragraphs.
+    More examples can be found in \cite[Sections 9.27~--~9.34]{PIZ13}
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Example $1$: The moment of imprimitivity]
+    Consider the cotangent space $\T^*\M$ of a manifold $\M$,
+    equipped with the standard symplectic form $\omega = d\lambda$\,,
+    where $\lambda$ is the Liouville form.
+    Let $\G$ be the Abelian group $\Cinfty(\M,\RR)$.
+    Consider the action of $\G$ on $\T^*\M$ defined by
+    $$
+      f \colon (x,a) \mapsto (x, a - d\!f_x),
+      $$
+    where $x \in \M$,
+    $a \in \T^*_x\M$,
+    and $df_x$ is the differential of $f$ at the point $x$.
+    Then,
+    the moment map is given by
+    $$
+      \mu \colon (x,a) \mapsto d[f \mapsto f(x)] = d[\delta_x],
+      $$
+    where $\delta_x$ is the Dirac distribution $\delta_x(f)=f(x)$.
+    
+    Since $\delta_x$ is a smooth function on $\Cinfty(\M,\RR)$,
+    its differential is a $1$-form.
+    Let us check that this $1$-form is invariant:
+    
+    Let $h \in \Cinfty(\M,\RR)$,
+    $\L(h)^*(\mu(x)) = \L(h)^*(d[\delta_x])= d[\L(h)^*(\delta_x)]=d[\delta_x \circ \L(h)]$,
+    but $\delta_x \circ \L(h) \colon f \mapsto \delta_x(f+h) = f(x) + h(x)$.
+    Then,
+    $d[\delta_x \circ \L(h)] = d[f \mapsto f(x) + h(x)] = d[f \mapsto f(x)] = \mu(x)$.
+    
+    We see that in this case,
+    the moment map identifies with a function with values distributions but still has the definite formal statute of a map into the space of momenta of the group of symmetries.
+    
+    Moreover,
+    this action is Hamiltonian and exact.
+    This example,
+    generalized to diffeological space,
+    is developped in \cite[Exercise 147]{PIZ13}.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Example $2$: The $1$-forms on a surface]
+    Let $\Sigma$ be a closed surface,
+    oriented by a  $2$-form $\Surf$.
+    Consider  $\Omega^1(\Sigma)$,
+    the infinite-dimensional vector space  of $1$-forms on $\Sigma$,
+    equipped with the functional diffeology.
+    Let $\omega$ be the antisymmetric bilinear map defined on $\Omega^1(\Sigma)$ by
+    $$
+      \omega(\alpha,\beta) = \int_\Sigma \alpha\wedge \beta,
+      $$
+    for all $\alpha$, $\beta$ in $\Omega^1(\Sigma)$.%
+    \footnote{Since the exterior product $\alpha \wedge\beta$ is a $2$-form of $\Sigma$,
+    there exists $\varphi \in \Cinfty(\Sigma,\RR)$ such that $\alpha \wedge \beta = \varphi \times \Surf$.
+    By definition,
+    $\int_\Sigma \alpha \wedge \beta = \int_\Sigma \varphi \times \Surf$.}
+    With this bilinear form is naturally
+    associated a differential $2$-form $\omega$ on $\Omega^1(\Sigma)$,
+    defined by
+    $$
+      \omega(\P)_r(\delta r,\delta' r) =
+      \int_\Sigma {\partial \P(r) \over \partial r}(\delta r)
+      \wedge
+      {\partial \P(r) \over \partial r}(\delta' r),
+      $$
+    for all $n$-plots $\P \colon \U \to \X$,
+    for all  $r \in \U$, $\delta r$ and $\delta' r$ in
+    $\RR^n$.
+    Moreover,
+    $\omega$ is the differential of the $1$-form $\lambda$ on $\Omega^1(\Sigma)$\,:
+    $$
+      \omega = d\lambda
+      \qmbox{with}
+      \lambda(\P)_r(\delta r) =
+      \frac{1}{2} \int_\Sigma \P(r)\wedge {\partial \P(r) \over \partial r}(\delta r).
+      $$
+    Define now the action of the additive group $\Cinfty(\Sigma,\RR)$ on $\Omega^1(\Sigma)$ by
+    $$
+      f \colon \alpha \mapsto  \alpha + df.
+      $$
+    Then,
+    $\Cinfty(\Sigma,\RR)$ acts by symmetry on $(\Omega^1(\Sigma), \omega)$,
+    for all $f$ in $\Cinfty(\Sigma,\RR)$,
+    $f^*(\omega) = \omega$.
+    
+    The moment map of $\Cinfty(\Sigma,\RR)$ on $\Omega^1(\Sigma)$ is given (up to a constant) by
+    $$
+      \mu \colon \alpha \mapsto d \bigg[ f \mapsto \int_\Sigma
+      f \times d\alpha\bigg].
+      $$
+    The moment map is invariant by the action of $\Cinfty(\Sigma,\RR)$,
+    that is,
+    exact,
+    and Hamiltonian.
+    And here again,
+    the moment map is a function with values distributions.
+    
+    Now,
+    $\mu(\alpha)$ is fully characterized by $d\alpha$.
+    This is why we find in the literature on the subject,
+    that the moment map for this action is the exterior derivative
+    (or curvature, depending on the authors) $\alpha \mapsto d\alpha$.
+    As we see again in this example that,
+    diffeology  gives a precise meaning by procuring a unifying context.
+    One can find the complete conputation of this example in \cite[Section 9.27]{PIZ13}.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Symplectic manifolds are coadjoint orbits]
+    Because symplectic forms of manifolds have no local invariants,
+    as we know thanks to Darboux's theorem,
+    they have a huge group of automorphisms.
+    This group is big enough to be transitive \cite{Boo69},
+    so that the universal moment map identifies the symplectic manifold with its image,
+    which,
+    by equivariance,
+    is a coadjoint orbit (affine or not) of its group of symmetries.
+    In other words,
+    coadjoint orbits are the universal models of symplectic manifolds.
+    
+    Precisely,
+    let $\M$ be a connected Hausdorff manifold,
+    and let $\omega$ be a closed $2$-form on $\M$.
+    Let $\G_\omega = \Diff(\M, \omega)$ be its group of symmetries and $\cG^*_\omega$ its space of momenta.
+    Let $\Gamma_\omega$ be the holonomy,
+    and $\mu_\omega$ be a universal moment map with values in $\cG^*_\omega/\Gamma_\omega$.
+    We have,
+    then,
+    the following:
+    
+    \textsc{Theorem}. \textit{The form $\omega$ is symplectic,
+    that is non-degenerate,
+    if and only if:
+    \begin{enumerate}
+      \item[1.] the group $\G_\omega$ is transitive on $\M$;
+      \item[2.] the  universal moment map $\mu_\omega \colon \M \to \cG^*_\omega/\Gamma_\omega$ is injective.
+    \end{enumerate}
+    }
+    
+    This theorem is proved in \cite[Section 9.23]{PIZ13},
+    but let us make some comments on the keys elements.
+    Consider the closed $2$-form $\omega = (x^2 + y^2) \, dx \wedge dy$;
+    one can show that it has an injective universal moment map $\mu_\omega$.
+    But its group $\G_\omega$ is not transitive,
+    since $\omega$ is degenerate in $(0,0)$,
+    and only at that point.
+    Thus,
+    the transitivity of $\G_\omega$ \cite{Boo69} is necessary.
+    
+    Let us give some hint about the sequel of the proof.
+    Assume $\omega$ is symplectic.
+    Let $m_0, m_1 \in \M$ and $p$ be a path connecting these points.
+    For all $f \in \Cinfty(\M,\RR)$ with compact support,
+    let
+    $$
+      \F \colon t \mapsto e^{t\grad_\omega(f)}
+      $$
+    be the exponential of the symplectic gradient of the $f$.
+    Then,
+    $\F$ is a 1-parameter group of automorphisms,
+    and its value on $\Psi_\omega(p)$ is:
+    $$
+      \Psi_\omega(p)(\F) = [f(m_1) - f(m_0)] \times \dt.
+      $$
+    Now,
+    if $\mu_\omega(m_0)=\mu_\omega(m_1)$,
+    then there exists a loop $\ell$ in $\M$ such that $\Psi_\omega(p)=\Psi_\omega(\ell)$.
+    Applied to the $1$-plot $\F$,
+    we deduce $f(m_1) = f(m_0)$ for all $f$.
+    Therefore $m_0=m_1$,
+    and $\mu_\omega$ is injective.
+    
+    Conversely,
+    let us assume that $\G_\omega$ is transitive,
+    and $\mu_\omega$ is injective.
+    By transitivity,
+    the rank of $\omega$ is constant.
+    Now,
+    let us assume that $\omega$ is degenerate,
+    that is,
+    $\dim (\ker(\omega)) > 0$.
+    Since the distribution $\ker(\omega)$ is integrable,
+    given two different points $m_0$ and $m_1$ in a characteristic,
+    there exists a path $p$ connecting these two points and drawn entirely in the characteristic,
+    that is,
+    such that $dp(t)/\dt \in \ker(\omega)$ for all $t$.
+    But that implies $\Psi_\omega(p)=0$ \cite[Section 9.20]{PIZ13}.
+    Hence,
+    $\mu_\omega(m_0) = \mu_\omega(m_1)$.
+    But we assumed $\mu_\omega$ is injective.
+    Thus,
+    $\omega$ is nondegenerate,
+    that is,
+    symplectic.
+    \artend
+  \end{article}
+  
+  \begin{article}\artlabel[Hamiltonian diffeomorphisms]
+    Let $(\X,\omega)$ be a parasymplectic diffeological space.
+    We have seen above that the universal moment map $\mu_\omega$ takes its values into the quotient $\cG^*_\omega/\Gamma_\omega$,
+    where the holonomy $\Gamma_\omega \subset \cG^*_\omega$ is a subgroup made of closed $\Ad_*$-invariant $1$-forms on $\G$.
+    This group $\Gamma_\omega$ is the very obstruction for the action of the group of symmetries $\G_\omega = \Diff(\X,\omega)$ to be Hamiltonian.
+    
+    \textsc{Proposition}. \textit{There exists a largest connected subgroup $\Ham(\X,\omega) \subset \G_\omega$ with vanishing holonomy.
+    This group is called the group of \emph{Hamiltonian diffeomorphisms}.
+    Every Hamiltonian smooth action on $(\X,\omega)$ factorizes through $\Ham(\X,\omega)$.}
+    
+    Hence,
+    the moment map $\bar\mu_\omega$ with respect to the action of $\H_\omega = \Ham(\X,\omega)$ takes its values in the vector space of momenta $\cH^*_\omega$.
+    One can prove also that the Hamiltonian moment map $\bar\mu_\omega$ is still injective when $\X$ is a manifold.
+    It is probably an embedding in the diffeological sense \cite[Section 2.13]{PIZ13},
+    but that has still to be proved.
+    
+    Perhaps most interesting is how this group is built.
+    Let $\G_\omega^\circ$ be the neutral component of $\G_\omega$,
+    and $\pi \colon \tilde \G_\omega^\circ \to \G_\omega^\circ$ be its universal covering.%
+    \footnote{For universal covering of diffeological groups,
+    see \cite[Section 7.10]{PIZ13}.}
+    For all $\gamma \in \Gamma_\omega$,
+    let $\F_\gamma \in \Hom^\infty(\tilde \G_\omega^\circ,\RR)$ be the primitive of $\pi^*(\gamma)$,
+    that is,
+    $d\F_\gamma = \pi^*(\gamma)$ and $\F_\gamma(\id_{\tilde \G_\omega^\circ}) = 0$.
+    Next,
+    let
+    $$
+      \F \colon \tilde \G_\omega^\circ \to \RR^{\Gamma_\omega} = \prod_{\gamma \in \Gamma_\omega} \RR
+      \quad\text{defined by}\quad
+      \F(\tilde g) = (\F_\gamma(\tilde g))_{\gamma \in \Gamma_\omega}.
+      $$
+    The map $\F$ is a smooth homomorphism,
+    where $\RR^{\Gamma_\omega}$ is equipped with the product diffeology.
+    Then \cite[Section 9.15]{PIZ13},
+    $$
+      \Ham(\X,\omega) = \pi (\ker (\F)).
+      $$
+    This definition gives the same group of Hamiltonian diffeomorphisms when $\X$ is a manifold \cite[Section 9.16]{PIZ13}.
+    
+    Now,
+    let $\P_\gamma$ be the group of periods of $\gamma \in \Gamma_\omega$,
+    that is,
+    $$
+      \P_\gamma = \F(\pi_1(\G_\omega^\circ,\id_{\G_\omega^\circ})) = \bigg\{ \int_\ell \gamma \mid \ell \in \Loops(\G_\omega^\circ,\id) \bigg\}.
+      $$
+    Then,
+    let
+    $$
+      \PP_\omega = \prod_{\gamma \in \Gamma_\omega} \P_\gamma
+      \quad\text{and}\quad
+      \TT_\omega = \prod_{\gamma \in \Gamma_\omega} \T_\gamma
+      \quad\text{with}\quad
+      \T_\gamma = \RR/\P_\gamma.
+      $$
+    Each homomorphism $\F_\gamma$ projects onto a smooth homomorphism $f_\gamma \colon \G_\omega^\circ \to \T_\gamma$,
+    and the homomorphism $\F$ projects onto a smooth homomorphism $f \colon \G_\omega^\circ \to \TT_\omega$,
+    according to the following commutative diagram of smooth homomorphisms:
+    $$
+      \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \tilde \G_\omega^\circ \arrow[d, swap, "\pi"] \arrow[r, "\F"]  & \RR^{\Gamma_\omega} \arrow[d,"\pr"] \\
+      \G_\omega^\circ \arrow[r, swap, "f"] & \TT_\omega
+      \end{tikzcd}
+      $$
+    with $\ker(\pi) = \pi_1(\G_\omega^\circ,\id_{\G_\omega^\circ})$,
+    $\ker(\pr) = \PP_\omega = \F(\ker(\pi))$.
+    We get,
+    then,
+    $$
+      \Ham(\X,\omega) = \ker (f),
+      $$
+    an alternative,
+    somewhat intrinsic,
+    definition of the group of Hamiltonian diffeomorphisms as the kernel of the \emph{holonomy homomorphism} $f$.
+    \artend
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: DOCUMENT In Conclusion
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{In Conclusion}
+  
+  We have proposed in this text to switch from the rigid category \{Manifolds\} to
+  the flexible category \{Diffeology\},
+  which is now well developed.
+  This is a category closed under every set-theoretic operation,
+  complete,
+  co-complete,
+  and Cartesian closed,
+  which includes on an equal footing:
+  manifolds,
+  singular quotients,
+  and infinite-dimensional spaces.
+  It is an ideal situation already,
+  from the pure point of view of categoricians,
+  and mainly the reason for the interest of the theory in that discipline;
+  see for example
+  ``Model Category Structures'',
+  \cite{ChrWu14} \cite{Kih19},
+  or ``Differentiable Homotopy Theory''%
+  \footnote{Opposed to intrinsic geometric homotopy theory,
+  which we described previously in this chapter.}
+  \cite{IwaNob19}.%
+  \footnote{The Japanese school is very productive in these fields these days,
+  using diffeology as a tool or a general framework.
+  One can consult other papers on the subject,
+  already published or not,
+  for examples \cite{SYH18, Kih19-b, Har19, HaSh19, Kur19}.}
+  
+  But of course,
+  the primary interest of diffeology lies first and foremost in its very strength in geometry.
+  The geometer will find pleasant and useful the flexibility of diffeology,
+  to extend in a unique formal and versatile framework,
+  different constructions in various fields,
+  without inventing each time a heuristic framework that momentarily satisfies its needs.
+  For example,
+  the construction of the moment map and the integration of any closed $2$-form on any diffeological space \cite[Section 8.42]{PIZ13},
+  are the prerequisite for an extension of symplectic geometry on spaces that are not manifolds,
+  but that have bursted into mathematical physics these last decades with the problems of quantization and field theory.
+  
+  Then,
+  beyond all these circumstances and technicalities,
+  what does diffeology have to offer on a more formal or conceptual level?
+  The answer lies partly in Felix Klein's Erlangen program \cite{Kle72}\,:
+  
+  \begin{quote}
+    The totality of all these transformations we designate as the {\it principal group} of space-transformations;
+    {\it geometric properties are not changed by the transformations of the principal group}.
+    And,
+    conversely,
+    {\it geometric properties are characterized by their remaining invariant under the transformations of the principal group}...
+    
+    As a generalization of geometry arises then the following comprehensive problem:
+    
+    {\it Given a manifoldness and a group of transformations of the same;
+    to investigate the configurations belonging to the manifoldness with regard to such properties as are not altered by the transformations of the group.}
+  \end{quote}
+  
+  As we know,
+  these considerations are regarded by mathematicians as the modern understanding of the word/concept of {\em geometry}.
+  A geometry is given as soon as a space and a group of transformations of this space are given.%
+  \footnote{Jean-Marie Souriau reduces the concept of geometry to the group itself \cite{Sou03}
+  But this is an extreme point of view I am not confident to share,
+  for several reasons.}.
+  
+  Consider Euclidean geometry,
+  defined by the group of Euclidean transformations,
+  our {\em principal group},
+  on the Euclidean space.
+  We can interpret,
+  for example,
+  the {\em Euclidean distance} as the invariant associated with the action of the Euclidean group on the set of pairs of points.
+  We can superpose a pair of points onto another pair of points,
+  by an Euclidean transformation,
+  if and only if the distance between the points is the same for the two pairs.%
+  \footnote{We could continue with the case of triangles and other elementary constructions~--~circles,
+  parallels etc.~--~and a comparison between Euclidean and symplectic geometry,
+  for example,
+  from a strict Kleinian point of view.
+  See the discussion in \cite{PIZ02}.}
+  Hence,
+  {\em geometric properties} or {\em geometric invariants} can be regarded as the orbits of the {\em principal group} in some spaces built on top of the principal space,
+  and also as fixed/invariant points,
+  since an orbit is a fixed point in the set of all the subsets of that space.
+  In brief,
+  what emerges from these considerations suggested by Felix Klein's principle is the following:
+  
+  \textsc{Claim.}~A geometry is associated with/defined by a {\em principal group} of transformations of some space,
+  according to Klein's statement.
+  The various geometric properties/invariants are described by the various actions of the principal group on spaces built on top of the principal space:
+  products,
+  sets of subsets,
+  and so on.
+  Each one of these properties,
+  embodied as orbits,
+  stabilizers,
+  quotients,
+  and so on,
+  captures a part of this geometry.
+  
+  Now,
+  how does diffeology fits to this context?
+  
+  \hspace{1em}- One can regard a diffeological space as the collection of the plots that gives its structure.
+  That is the {\em passive approach}.
+  
+  \hspace{1em}- Or we can look at the space through the action of its group of diffeomorphisms:%
+  \footnote{We consider more precisely the action of the pseudo-group of local diffeomorphisms.}
+  on itself,
+  but also on its powers or parts or maps.
+  That is the {\em active approach}.
+  
+  This dichotomy appears already for manifolds,
+  where the change of coordinates (transition functions of an atlas) is the passive approach.
+  The active approach,
+  as the action of the group of diffeomorphisms,
+  is often neglected,
+  and there are a few reasons for that.
+  Among them,
+  the group of diffeomorphisms is not a Lie group {\em stricto sensu}~--~it does not fit in the category \{Manifolds\}~--~and that creates a psychological issue.
+  A second reason is that its action on the manifold itself is transitive~--%
+  \footnote{Generally,
+  manifolds are regarded as connected,
+  Haussdorf,
+  and second countable.}
+  there are no immediate invariants,
+  one having first to consider some secondary/subordinate spaces to make the first invariants appear.
+  
+  These obstacles,
+  psychological or real,
+  vanish in diffeology.
+  First of all,
+  the group of diffeomorphisms is naturally a diffeological group.
+  And here is an example of space,
+  where the action of the group of diffeomorphisms,
+  the principal group in the sense of Klein,
+  captures a good preliminary image of its geometry.%
+  \footnote{And not just of its topology.}
+  
+  \bigskip
+  \begin{figure}[ht]
+    \includegraphics[width=.475\textwidth]{Figures/Square.pdf}
+    \vspace{-0.5\baselineskip}
+    \caption{Figure \ref{the-Square} --- A diffeomorphism of the square.}
+    \label{the-Square}
+  \end{figure}
+  \bigskip
+  
+  Consider the square $\Sq = \mathopen[-1,+1\mathclose]^2$,
+  equipped with the subset diffeology.
+  Its decomposition in orbits,
+  by its group of diffeomorphisms,
+  is the following:
+  
+  \begin{enumerate}
+    \item[1.] the 4-corners-orbit;
+    \item[2.] the 4-edges-orbit;
+    \item[3.] the interior-orbit.
+  \end{enumerate}
+  
+  Any diffeomorphism preserves separately the interior of the square and its border,
+  which is a consequence of the D-topology.%
+  \footnote{A diffeomorphism is in particular an homeomorphism for the D-topology.
+  We can use that, or homotopy.}
+  But the fact that a diffeomorphism of the square cannot map a corner into the interior of an edge is a typical smooth property
+  (see \cite{GIZ16-b, GIZ17-a},
+  and some comments on more general stratified spaces \cite{GIZ17-b}).
+  
+  On the basis of this simple example,
+  we can experiment the Klein's principle with the group of diffeomorphisms of a non-transitive diffeological space.
+  The square being naturally an object of the theory,
+  there is no need for heuristic extension here.%
+  \footnote{See paragraph \ref{Manifolds-with-Boundary-and-Corners} above.}
+  
+  \textsc{Claim.} \textit{Hence,
+  considering the group of diffeomorphisms of a diffeological space as its principal group,
+  we can look at diffeology as the formal framework that makes {\em differential geometry},
+  the geometry ---~in the sense of Felix Klein~--- of the group of diffeomorphisms.
+  Or possibly,
+  the (larger) pseudogroup of local diffeomorphisms.}
+  
+  That principle,
+  in the framework of diffeology,
+  can be regarded as the definitive expression of Souriau's point of view,
+  developed in his paper ``Les groupes comme universaux'' \cite{Sou03}.
+  
+  Because diffeology is a such large and stable category that encompasses satisfactorily so many various situations,
+  from singular quotients to infinite dimensions,
+  mixing even these cases \cite{PIZ16},
+  one can believe that this interpretation of diffeology fulfills its claim and answers in some sense to the second part of the title of this book.
+    
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: THE BIBLIOGRAPHY
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+\begin{thebibliography}{KriMic97}
+    
+    \bibitem[Bom67]{Bom67}
+    {Jan Boman.}
+    {\em Differentiability of a function and of its compositions with functions of one variable.}
+    {Mathematica Scandinavica, 20, pp. 249--268 (1967)}.
+    
+    \bibitem[Boo69]{Boo69}
+    {William M. Boothby.}
+    {\em Transitivity of the automorphisms of certain geometric structures.}
+    {Trans. Amer. Math. Soc., vol. 137, pp. 93--100 (1969).}
+    
+    \bibitem[Che77]{Che77}
+    {Kuo-Tsai Chen.}
+    {\em Iterated path integrals.}
+    {Bull. of Am. Math. Soc., 83(5), pp. 831--879 (1977)}.
+    
+     \bibitem[ChrWu14]{ChrWu14}
+     {Dan Christensen and Enxin Wu.}
+     {\em The Homotopy Theory Of Diffeological Spaces.}
+     {N. Y. J. Math. 20, 1269-1303 (2014).}
+
+    \bibitem[DS75]{DinSin75}
+    Efim Dinaburg and Yaacov Sinai.
+    {\em The one-dimensional schr{\"o}dinger equation with a quasiperiodic potential.}
+    {Funct. Anal. Appl., vol. 9, pp. 279---289 (1975).}
+    
+    \bibitem[Dnl99]{Dnl99}
+    {Simon K. Donaldson.}
+    {\em Moment maps and diffeomorphisms.}
+    {Asian Journal of Math, 3, pp. 1--16 (1999).}
+    
+    \bibitem[DonIgl83]{DonIgl83}
+    {Paul Donato and Patrick Iglesias.}
+    {\em Exemple de groupes différentiels : flots irrationnels sur le tore.}
+    {Preprint CPT-83/P.1524, Centre de Physique Théorique, Marseille (July 1983).}
+    {Published in {\em Comptes Rendus de l'Acad{\'e}mie des Sciences}, 301(4), Paris (1985).}
+    \newline
+    \newblock{\scriptsize\verb!http://math.huji.ac.il/~piz/documents/EDGDFISLT.pdf!}
+    
+    \bibitem[Don84]{Don84}
+    {Paul Donato.}
+    {\em Rev\^etement et groupe fondamental des espaces diff\'e\-rentiels homog\`enes.}
+    {Th\`ese de doctorat d'\'etat, Universit\'e de Provence, Marseille (1984).}
+    
+    \bibitem[GuiPol74]{GuiPol74}
+    {Victor Guillemin and Alan Pollack.}
+    {\em Differential topology.}
+    {Prentice Hall, New Jersey (1974)}.
+    
+    \bibitem[GIZ16-a]{GIZ16-a}
+    {Serap Gürer and Patrick Iglesias-Zemmour.}
+    {\em $k$-Forms on Half-Spaces.}
+    {Blog post (2016).}
+    \newline
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/DBlog-Rmk-kFOHS.pdf|}
+    
+    \bibitem[GIZ16-b]{GIZ16-b}
+    \bysame
+    {\em Diffeomorphisms Of The Square.}
+    {Blog post (2016).}
+    \newline
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/DBlog-Rmk-DOTS.pdf|}
+    
+    \bibitem[GIZ17-a]{GIZ17-a}
+    \bysame
+    {\em Differential Forms On Manifolds With Boundary and Corners.}
+    {ePrint (2017).}
+    \newline
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/OMWBAC.pdf|}
+    
+    \bibitem[GIZ17-b]{GIZ17-b}
+    \bysame
+    {\em Differential Forms On Stratified Spaces I \& II.}
+    {Bulletin of the Australian Mathematical Society, 98, (2018), pp. 319-330; 99 (2019), pp. 311–318.}
+    \newline
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/DFOSS.pdf|}
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/DFOSS-A.pdf|}
+
+  \bibitem[Har19]{Har19}
+    Tadayuki Haraguchi.
+   {\em Homotopy structures of smooth CW complexes.}
+    {preprint, arXiv:1811.06175.}
+
+    \bibitem[HaSh19]{HaSh19}
+    Tadayuki Haraguchi, Kazuhisa Shimakawa;
+    {\em A model structure on the category of diffeological spaces.}
+    {\em preprint, arXiv:1311.5668.}
+
+    \bibitem[Igl85]{Igl85}
+    {Patrick Iglesias.}
+    {\em Fibrations diff{\'e}ologique et homotopie.}
+    {Th{\`e}se d'{\'e}tat, Universit{\'e} de Provence, Marseille (1985).}
+    
+    \bibitem[Igl87]{Igl87}
+     \bysame
+    {\em Connexions et diff{\'e}ologie.}
+    {In {Aspects dynamiques et topologiques des groupes infinis de transformation de la m{\'e}canique},
+    vol.~25 of {\em Travaux en cours}, pp. 61--78, Hermann, Paris (1987).}
+    \newline
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/CED.pdf|}
+    
+    \bibitem[IglLac90]{IglLac90}
+    Patrick Iglesias and Gilles Lachaud.
+    {\em Espaces diff\'erentiables singuliers et corps de nombres alg\'ebriques.}
+    Ann. Inst. Fourier, Grenoble, 40(1), pp. 723--737 (1990).
+    
+    \bibitem[PIZ02]{PIZ02}
+    Patrick Iglesias-Zemmour.
+    {\em Aperçu des Origines de la Mécanique Symplectique.}
+    In Actes du Colloque “Histoire des géométries”, vol. I, Maison des  Sciences de l'Homme, Paris (2004).
+    \newline
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/AOGS-MSH.pdf|}
+    
+    \bibitem[PIZ07]{PIZ07}
+    \bysame
+    {\em Dimension in diffeology.}
+    {Indagationes Mathematicae, 18(4) (2007).}
+    
+    \bibitem[PIZ10]{PIZ10}
+     \bysame
+    {\em The moment maps in diffeology.}
+    {Memoirs of the American Mathematical Society, vol. 207, Am. Math. Soc., Providence RI (2010).}
+    
+    \bibitem[PIZ13]{PIZ13}
+     \bysame
+     {\em Diffeology.}
+    {Mathematical Surveys and Monographs, vol. 185, Am. Math. Soc., Providence RI (2013).}
+    \newline
+    \newblock{\scriptsize\verb|http://www.ams.org/bookstore-getitem/item=SURV-185|}
+    
+    \bibitem[PIZ13-a]{PIZ13-a}
+     \bysame
+    {\em Variations of integrals in diffeology.}
+    {Canad. J. Math., vol. 65 (6) (2013) pp. 1255–1286.}
+    
+    \bibitem[PIZ16]{PIZ16}
+     \bysame
+    {\em Example of singular reduction in symplectic diffeology.}
+    {Proc. Amer. Math. Soc., 144(2):1309--1324 (2016).}
+    
+    \bibitem[PIZ16-b]{PIZ16-b}
+     \bysame
+    {\em The Geodesics Of The 2-Torus.}
+    {Blog post (2016).}
+    \newline
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/DBlog-Rmk-TGOT2T.pdf|}
+    
+    \bibitem[PIZ16-c]{PIZ16-c}
+     \bysame
+    {\em Diffeology Of The Space of Geodesics.}
+    {Work in progress.}
+    %\newline
+    %\newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/DBlog-Rmk-PSSOTSOG.pdf|}
+    
+    \bibitem[PIZ17]{PIZ17}
+     \bysame
+    {\em Every Symplectic Manifolds Is A Coadjoint Orbit.}
+    {In Proceedings of Science, volume 224 — Frontiers of Fundamental Physics 14 (FFP14) - Mathemarical Physics (2017).}
+    \newline
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/ESMIACO.pdf|}
+    
+    \bibitem[IKZ10]{IKZ10}
+    {Patrick Iglesias, Yael Karshon and Moshe Zadka.}
+    {\em Orbifolds as Diffeology.}
+    {Transactions of the American Mathematical Society, 362(6), pp. 2811--2831. Am. Math. Soc., Providence RI (2010).}
+    
+    \bibitem[IZL16]{IZL16}
+    {Patrick Iglesias-Zemmour and Jean-Pierre Laffineur.}
+    {\em Noncommutative Geometry and Diffeologies: The Case of Orbifolds.}
+    {Journal of Noncommutative Geometry. Volume 12, Issue 4 (2018) pp. 1551–1572.}
+    \newline
+    \newblock{\scriptsize\verb|http://math.huji.ac.il/~piz/documents/CSAADTCOO.pdf|}
+    
+    \bibitem[IwaNob19]{IwaNob19}
+    Norio Iwase and Nobuyuki Izumida.
+    {\em Mayer-Vietoris sequence for differentiable/diffeological spaces.}
+    {Algebraic Topology and Related Topics (Mohali, 2017), Trends in Mathematics, Birkh\"auser (2019) pp. 123-151.}
+
+    \bibitem[Kih19]{Kih19}
+    Hiroshi Kihara;
+    {\em Model category of diffeological spaces.}
+    {J. Homotopy Relat. Struct. 14 (2019), no. 1, 51-90.}
+
+    \bibitem[Kih19-b]{Kih19-b}
+    Hiroshi Kihara.
+    {\em Quillen equivalences between the model categories of smooth spaces, simplicial sets, and arc-gengerated spaces.}
+    {preprint, arXiv:1702.04070.}
+
+    \bibitem[Kle72]{Kle72}
+    {Felix Klein.}
+    {\em Vergleichende Betrachtungen über neuere geometrische Forschungen.}
+    {Math. Ann., 43 (1893), pp. 63–100.}
+    {\& Verlag von Andreas Deichert, pp. 6-8 (1872).}
+    \newline
+    \newblock{\scriptsize\verb|http://www.deutschestextarchiv.de/book/view/klein_geometrische_1872|}
+    
+    \bibitem[KriMic97]{KriMic97}
+    {Andreas Kriegl and Peter Michor.}
+    {\em The convenient setting of global analysis.}
+    {Mathematical Surveys and Monographs, vol. 53., Am. Math. Soc., Providence RI (1997).}
+
+  \bibitem[Kur19]{Kur19}
+    Katsuhiko Kuribayashi;
+    {\em Simplicial cochain algebras for diffeological spaces.}
+    {preprint, arXiv:1902.10937.}
+
+    \bibitem[Lee06]{Lee06}
+    {John M. Lee},
+    {\em Introduction to Smooth Manifolds.}
+    {Graduate Texts in Mathematics, Springer Verlag, New York (2006)}.
+    
+    \bibitem[MRW87]{MRW87}
+    {Paul Muhly, Jean Renault and Dana Williams.}
+    {\em Equivalence And Isomorphism For Groupoid $\CC^*$-Algebras.}
+    {J. Operator Theory 17, no 1 pp. 3--22 (1987).}
+    
+    \bibitem[Omo86]{Omo86}
+    {Stephen Malvern Omohundro.}
+    {\em Geometric Perturbation Theory in Physics.}
+    {World Scientific (1986).}
+    
+    \bibitem[Pra01]{Pra01}
+    {Elisa Prato,}
+    {\textit{Simple Non--Rational Convex Polytopes via Symplectic Geometry}.}
+    {Topology, {40}, pp. 961--975 (2001).}
+    
+    \bibitem[Ren80]{Ren80}
+    {Jean Renault.}
+    {\textit{A groupoid approach to C*-Algebras}.}
+    {Lecture notes in Mathematics (793), Springer-Verlag Berlin Heidelberg New-York (1980).}
+    
+    \bibitem[Rie81]{Rie81}
+    {Marc Rieffel.}
+    {\em {$C^*$}-algebras associated with irrationnal rotations.}
+    {Pacific Journal Of Mathematics Vol. 93, No. 2, Tokyo (1981).}
+
+    \bibitem[Sat56]{Sat56}
+    {Ichiro Satake.}
+    {\textit{On a generalization of the notion of manifold}.}
+    {Proceedings of the National Academy of Sciences, 42, pp. 359--363 (1956).}
+    
+    \bibitem[Sat57]{Sat57}
+     \bysame
+    {\emph{The Gauss-Bonnet Theorem for V-manifolds}.
+    Journal of the Mathematical Society of Japan, (9)4, pp. 464--492 (1957).}
+    
+    \bibitem[Sch75]{Sch75}
+    {Gerald Schwarz.}
+    {\em Smooth Functions Invariant under the Action of a Compact Lie Group},
+    {Topology, 14, pp. 63--68 (1975).}
+
+    \bibitem[SYH18]{SYH18}
+    Kazuhiko Shimakawa, Kohei Yoshida, Tadayuki Haraguchi;
+    {\em Homology and cohomology via enriched bifunctors.}
+    {Kyushu J. Math. 72 (2018), no. 2, 239-252.}
+
+    \bibitem[Sou70]{Sou70}
+    {Jean-Marie Souriau.}
+    {\em Structure des syst\`emes dynamiques.}
+    {Dunod Editions, Paris (1970).}
+    
+    \bibitem[Sou80]{Sou80}
+     \bysame
+    {\em Groupes diff\'erentiels.}
+    {Lect. Notes in Math., 836, pp. 91--128,}
+    {Springer Verlag, New-York (1980).}
+    
+    \bibitem[Sou83]{Sou83}
+     \bysame
+    {\em Groupes différentiels et physique mathématique.}
+    {Preprint CPT-83/P.1547, Centre de Physique Théorique, Marseille (October 1983).}
+    \newline
+    \newblock{\scriptsize\verb!http://math.huji.ac.il/~piz/documents-others/JMS-GDEPM-1983.pdf!}
+    
+    \bibitem[Sou84]{Sou84}
+     \bysame
+    {\em Un algorithme g{\'e}n{\'e}rateur de structures quantiques.}
+    {Preprint CPT-84/PE.1694, Centre de Physique Th{\'e}orique, Marseille (1984).}
+    
+    \bibitem[Sou03]{Sou03}
+     \bysame
+    {\em Les groupes comme universaux.}
+    In Dominique Flament, editor, {\em Histoires de g{\'e}om{\'e}tries},
+    Documents de travail ({\'E}quipe F2DS). Fondation Maison des Sciences de
+    l'Homme (2003).
+    \newline
+    \newblock{\scriptsize\verb!http://semioweb.msh-paris.fr/f2ds/docs/geo_2002/Document02_Souriau1.pdf!}
+    
+    \bibitem[Thu78]{Thu78}
+    {William Thurston.}
+    \textit{The Geometry and Topology of Three-Manifolds} (Chap. 13).
+    {Princeton University lecture notes, years 1978--1981.}
+    \newline
+    \newblock{\scriptsize\verb|http://library.msri.org/books/gt3m/PDF/13.pdf|}
+    
+    \bibitem[Whi43]{Whi43}
+    {Hassler Whitney.}
+    {\textit{Differentiable even functions}.}
+    {Duke Mathematics Journal, 10(1), pp. 159--160 (1943)}.
+    
+    \bibitem[Zie96]{Zie96}
+    {Fran\c cois Ziegler.}
+    {\em Th\'eorie de Mackey symplectique, in M\'ethode des orbites et repr\'esentations quantiques.}
+    {Th\`ese de doctorat d'Uni\-ver\-sit\'e, Universit\'e de Provence, Marseille (1996).}
+    \newline
+    \newblock{\scriptsize\verb!http://arxiv.org/pdf/1011.5056v1.pdf!}
+    
+  \end{thebibliography}
+  
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % Fin du document
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+\end{document}
