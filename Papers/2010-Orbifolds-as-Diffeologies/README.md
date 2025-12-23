@@ -14,7 +14,11 @@ This paper originated from a chance conversation during Patrick Iglesias-Zemmour
 
 Finding the traditional explanation confusing, Iglesias-Zemmour interrupted and proposed a diffeological definition instead: "For me, an orbifold is a diffeological space that is locally diffeomorphic to $\mathbb{R}^n/\Gamma$, with $\Gamma$ being a finite linear subgroup."
 
-As Zadka was unfamiliar with diffeology, Iglesias-Zemmour explained the concept to him. This exchange—marking a "return" of diffeology to the forefront of the conversation—sparked the collaboration that resulted in this paper.
+As Zadka was unfamiliar with diffeology, Iglesias-Zemmour explained the concept to him. When Yael Karshon returned, she was excited by this new perspective. This enthusiasm is captured in the paper's acknowledgements, where she ironically notes:
+
+> "I am grateful to Sue Tolman for convincing me, years ago, that I don't understand orbifolds."
+
+This exchange—marking a "return" of diffeology to the forefront—sparked the collaboration that resulted in this paper.
 
 ## Archival Notes (2025)
 
