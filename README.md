@@ -15,6 +15,13 @@ Diffeology was developed primarily to solve problems in **Symplectic Geometry** 
 2.  Papers on Symplectic Geometry that motivate or apply the diffeological framework.
 3.  Monographs that cover the classical and modern aspects of this interplay.
 
+## Technical Standards
+
+The TeX source files in this archive are designed to be **autonomous and directly compilable**.
+
+*   **Self-Contained:** Each document is structured to compile without missing dependencies. Figures are provided in local subdirectories.
+*   **Tested Environment:** All documents have been modernized, verified, and successfully compiled using the **MacTeX distribution (version 2025)**.
+
 ## Repository Structure
 
 The works in this archive are organized into three main categories:
