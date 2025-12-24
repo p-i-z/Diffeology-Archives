@@ -1,0 +1,1245 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Example of Singular Reduction in Symplectic Diffeology
+%%  Patrick Iglesias-Zemmour
+%%  Archived: 2025
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno,letterpaper]{amsart}
+
+%--------------------------------------------------------------------------
+% Packages
+%--------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usepackage[hidelinks]{hyperref}
+
+%--------------------------------------------------------------------------
+% Page Layout & Typography
+%--------------------------------------------------------------------------
+\parindent 0mm
+\parskip .5ex plus 2pt
+\linespread{1.1}
+
+%--------------------------------------------------------------------------
+% Theorem Styles
+%--------------------------------------------------------------------------
+\newtheoremstyle{article}% ⟨name⟩
+{7pt}%  ⟨Space above⟩
+{7pt}%  ⟨Space below⟩
+{}%     ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩
+{.\ }%  ⟨Punctuation after theorem head⟩
+{0pt}%  ⟨Space after theorem head⟩
+{}%     ⟨Theorem head spec⟩
+
+\theoremstyle{article}
+\newtheorem{article}{}
+
+\newcommand{\artlabel}[1]{\textbf{\textsc{#1}}}
+\newcommand{\art}[1]{(\textsection\ref{#1})}
+\newcommand{\alinea}[1]{\vskip-\lastskip\vspace{.25\baselineskip plus 2pt minus 2pt} \noindent\textsc{#1}}
+
+%--------------------------------------------------------------------------
+% Macros (Integrated from EOSRISD-macro.tex)
+%--------------------------------------------------------------------------
+
+% Upright letters
+\def \F{\mathrm F}
+\def \G{\mathrm G}
+\def \K{\mathrm K}
+\def \M{\mathrm M}
+\def \N{\mathrm N}
+\def \Q{\mathrm Q}
+\def \T{\mathrm T}
+\def \U{\mathrm U}
+\def \V{\mathrm V}
+\def \X{\mathrm X}
+\def \Z{\mathrm Z}
+
+% Sets
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\PP}{\mathbf{P}}
+\newcommand{\QQ}{\mathbf{Q}}
+
+% Calligraphic
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+
+% Operators
+\DeclareMathOperator{\Ad}{Ad}
+\DeclareMathOperator{\Cinfty}{\mathcal{C}^\infty}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\id}{\mathbf 1}
+\DeclareMathOperator{\Loops}{Loops}
+\DeclareMathOperator{\Paths}{Paths}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Surf}{Surf}
+\DeclareMathOperator{\Maps}{Maps}
+\DeclareMathOperator{\pr}{pr}
+
+% Symbols
+\newcommand{\0}{\hat 0}
+\newcommand{\1}{\hat 1}
+\newcommand{\CHK}{\mathcal{K}}
+\newcommand{\class}{\operatorname{class}}
+\newcommand{\dt}{\mathop{dt}\nolimits}
+\newcommand{\eends}{\operatorname{ends}}
+\newcommand{\modulus}[1]{\vert #1 \vert}
+\newcommand{\oline}[1]{\overline{#1}}
+\newcommand{\qmbox}[1]{\quad\mbox{#1}\quad}
+\newcommand{\QPS}{{\mathrm{QP}}_{\alpha}^\infty}
+\newcommand{\Torus}{\mathbb{T}}
+
+\usepackage[T1]{fontenc}
+
+\usepackage[cal=scr,uppercase = upright,greekfamily = didot,greeklowercase = upright,utopia]{mathdesign}
+
+\linespread{1.1}
+
+
+%--------------------------------------------------------------------------
+% Title Data
+%--------------------------------------------------------------------------
+
+\begin{document}
+
+\title[Example of Singular Reduction in Symplectic Diffeology]{Example of Singular Reduction \\ in Symplectic Diffeology}
+
+\author{Patrick Iglesias-Zemmour}
+\email{piz@math.huji.ac.il}
+\urladdr{http://math.huji.ac.il/~piz/}
+
+\date{2016 (Published) / 2025 (Archived)}
+
+\maketitle
+
+\begin{abstract}
+We present an example of symplectic reduction
+in diffeology where the space involved is infinite
+dimensional and the reduction is singular.
+This example is a mix of two cases that are not handled by ordinary symplectic geometry.
+We show that, in this infinite dimensional example,
+the singularities are distributed in such a way that
+the symplectic form, restricted to a generic level of the moment map,
+passes to the reduced space.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Introduction
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction}
+
+We equip the space of periodic functions from $\RR$ to $\CC$ with a homogeneous symplectic structure.
+Then,
+we push this structure forward on the space of Fourier coefficients.
+We give an autonomous description of the diffeology we obtain that way.
+Next,
+we equip the infinite product of toruses with a {\em tempered diffeology},
+introduced for the purpose of the example.
+Equipped with this diffeology,
+the infinite torus acts smoothly by automorphisms on the symplectic space of Fourier coefficients.
+We compute the moment map of the action of the infinite torus.
+Given a sequence of rationally independent real numbers we induce the real line in the infinite torus
+as an \textit{irrational solenoid} and consider the induced action on the space of Fourier coefficients.
+This action is not free and generates infinitely many singular orbits.
+We consider then a generic level subspace of the moment map of the solenoid
+(they are all isomorphic to the infinite sphere) and
+we reduce it by the action of the solenoid.
+We call that quotient an \textit{infinite quasi-projective space}.
+We show eventually that, in spite of the presence of singular orbits, the restriction
+of the symplectic form passes to the quotient and equip every infinite quasi-projective space with
+a \emph{parasymplectic structure},
+that is,
+a closed $2$-form.
+
+This is a very informative example. It shows that, not only is diffeology a very versatile and flexible
+approach of differential geometry,
+but it offers moreover the right framework to deal with singularities, even in infinite dimensional situation
+where all the difficulties are met.
+For the basic constructions and the vocabulary of diffeology used here we recommend the lecture of the book \cite{PIZ13}.
+
+\textbf{A few words on Symplectic Diffeology.} For the sake of simplicity I decided to call \textit{parasymplectic space}
+any diffeological space equipped with a closed $2$-form.
+In diffeology there may be a few different ways to understand the word \emph{symplectic}%
+\footnote{For example, a symplectic space could also be defined as a parasymplectic space generated by symplectic plots,
+as it has been suggested once by Yael Karshon.
+That would include,
+for example,
+the cone orbifold $\cQ_m= \CC/\ZZ_m$,
+which is excluded by the definition of this article.}.
+The definition I present here uses the two main tools at our disposal:
+the group of automorphisms of the parasymplectic structure and the universal moment map%
+\footnote{The \emph{moment maps} relative to a closed $2$-form are described in \cite{PIZ10} or in chapter 9 of \cite{PIZ13}.
+The \emph{universal moment map} is the moment map for the group of all the automorphisms of the $2$-form.}.
+We recall that the moment maps are defined for any parasymplectic space and do not need any particular conditions
+on the parasymplectic form. Actually what we really need is the pseudogroup of local automorphisms.
+Then we can distinguish four cases for a parasymplectic space:
+
+\begin{enumerate}
+
+\item[($+\ +$)] The local automorphisms are transitive and the universal moment map has discrete prevalues%
+\footnote{We call \emph{prevalues} of a function, the preimages of its values.}.
+For manifolds, that is a characterisation of symplectic forms%
+\footnote{For manifold the universal moment map is actually injective.}.
+In this case, we shall say that the diffeological space, equipped with such a parasymplectic form, is \textbf{symplectic}%
+\footnote{A stronger case is when the group of automorphisms is transitive,
+in this case the space is symplectic homogeneous.}.
+
+\item[($+\ -$)] The local automorphisms are transitive but the the prevalues of the moment map are not discrete.
+For manifolds, that is a characterization of presymplectic forms.
+We shall say in this case that the parasymplectic form is \textbf{presymplectic}.
+
+\item[($-\ +$)] The local automorphisms are not transitive but the moment map has discrete prevalues.
+That is the case of some classic pictures like cone orbifolds for examples;
+or forms, symplectic everywhere except in a few points, where it vanishes.
+We have no special vocabulary yet for this kind of space.
+
+\item[($-\ -$)] The local automorphisms are not transitive and the prevalues of the moment map are not discrete.
+That is the general case of parasymplectic spaces.
+In this case,
+as well as the previous one,
+we can still analyse the space in terms of orbits of the pseudogroup of automorphisms and the various level of the universal moment map in each orbit.
+
+\end{enumerate}
+
+\bigskip\noindent\textbf{Thanks} to Elisa Prato who invited me to Firenze for discussing the subject,
+and also to Fiama Bataglia.
+The discussion I had with them led me to develop this example as an infinite dimensional version of one of their cases,
+see \cite{EP01}.
+It would be certainly interesting to develop more seriously the diffeological version of their general constructions.
+Thanks also to the anonymous referee for his careful reading of the manuscript,
+for his advices and corrections that contributed to improve it.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Review on the Moment Maps of a Parasymplectic Form
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Review on the Moment Maps of a Parasymplectic Form}
+
+Let $(\X,\omega)$ be a parasymplectic space.
+Let $\G$ be a diffeological group,
+with a smooth action $g \mapsto g_\X$ on $\X$,
+preserving $\omega$,
+that is,
+$g_\X^*(\omega)=\omega$ for all $g\in \G$.
+We denote by $\cG^*$ the space of \emph{momenta} of $\G$,
+defined as the left-invariant differential $1$-forms on $\G$,
+$$
+\cG^* = \{\varepsilon \in \Omega^1(\G) \mid \mathrm{L}(g)^*(\varepsilon) = \varepsilon, \mbox{ for all } g \in \G \}.
+$$
+To understand the essential nature of the moment map,
+which is a map from $\X$ to $\cG^*$,
+it is good to consider the simplest case,
+and use it then as a guide to extend this simple construction to the general case.
+
+\textbf{The Simplest Case}. Consider the case where $\X$ is a manifold,
+and $\G$ is a Lie group.
+Let us assume that $\omega$ is exact
+$\omega = d\alpha$,
+and that $\alpha$ is also invariant by $\G$.
+Regarding $\omega$,
+the \emph{moment map}%
+\footnote{Precisely, one moment map, since they are defined up to a constant.}
+of the action of $\G$ on $\X$ is the map
+$$
+\mu : \X \to \cG^*
+\quad
+\mbox{ defined by }
+\quad
+\mu(x) = \hat x^*(\alpha),
+$$
+where $\hat x : \G \to \X$ is the \emph{orbit map} $\hat x (g)= g_\X(x)$.
+
+As we can see,
+there is no obstacle,
+in this simple situation,
+to generalize, \emph{mutatis mutandis},
+the moment map to a diffeological group acting by automorphisms on a diffeological parasymplectic space%
+\footnote{Actually,
+we shall be in this simple situation further,
+with the action of the infinite torus on the space of rapidly decreasing sequences.}.
+But,
+as we know,
+not all closed $2$-forms are exact,
+and even if they are exact,
+they do not necessarily have an invariant primitive.
+We shall see now,
+how we can generally come to a situation,
+so close to the simple case above,
+that modulo some minor subtleties we can build a good moment map in all cases.
+
+\textbf{The General Case}. We consider a connected parasymplectic diffeological space $(\X,\omega)$,
+and a diffeological group $\G$ acting on $\X$ and preserving $\omega$.
+Let $\cK$ be the Chain-Homotopy Operator, defined in \cite[6.83]{PIZ13}.
+The differential $1$-form $\cK\omega$,
+defined on $\Paths(\X)$,
+is related to $\omega$ by $d[\cK\omega] = (\1^* - \0^*)(\omega)$,
+and $\cK\omega$ is invariant by $\G$.
+Considering $\bar \omega = (\1^* - \0^*)(\omega)$ and $\bar\alpha = \cK\omega$,
+we are in the simple case:
+$\bar\omega = d\bar\alpha$ and $\bar\alpha$ invariant by $\G$.
+We can apply the construction above and define then the \emph{Moment Map of Paths} by
+$$
+\Psi : \Paths(\X) \to \cG^*
+\quad \mbox{with} \quad
+\Psi(\gamma) = \hat \gamma^*(\cK \omega),
+$$
+and $\hat \gamma : \G \to \Paths(\X)$ is the orbit map $\hat \gamma(g)= g_\X \circ \gamma$ of a path $\gamma$.
+The moment of paths is additive with respect to the concatenation,
+$$
+\Psi(\gamma \vee \gamma') = \Psi(\gamma) + \Psi(\gamma').
+$$
+This paths moment map $\Psi$ is equivariant by $\G$,
+acting by composition on $\Paths(\X)$,
+and by coadjoint action on $\cG^*$.
+Next,
+defining the \emph{Holonomy} of the action of $\G$ on $\X$ by
+$$
+\Gamma = \{\Psi(\ell) \mid \ell \in \Loops(\X) \} \subset \cG^*,
+$$
+the \emph{Two-Points Moment Map} is defined by pushing $\Psi$ forward on $\X\times\X$,
+$$
+\psi(x,x') = \class(\Psi(\gamma)) \in \cG^*/\Gamma,
+$$
+where $\gamma$ is a path connecting $x$ to $x'$,
+and where $\class$ denotes the projection from $\cG^*$ onto its quotient $\cG^*/\Gamma$.
+The holonomy $\Gamma$ is the obstruction for the action of $\G$ to be \emph{Hamiltonian}.
+The additivity of $\Psi$ becomes the Chasles' cocycle condition
+$$
+\psi(x,x') + \psi(x',x'') = \psi(x,x'').
+$$
+The group $\Gamma$ is invariant by the coadjoint action.
+Thus,
+the coadjoint action passes to the quotient $\cG^*/\Gamma$,
+and $\psi$ is equivariant.
+Because $\X$ is connected,
+there exists always a map
+$$
+\mu : \X \to \cG^*/\Gamma
+\quad \mbox{such that} \quad
+\psi(x,x') = \mu(x') - \mu(x).
+$$
+Up to an arbitrary constant,
+$\mu$ is given by $\mu(x)=\psi(x_0,x)$,
+where $x_0$ is a chosen point in $\X$.
+But this map is \textit{a priori\/} no longer equivariant.
+Its variance introduce a $1$-cocycle $\theta$ of $\G$ with values in $\cG^*/\Gamma$ such that
+$$
+\mu(g(x))= \Ad_*(g)(\mu(x)) + \theta(g),
+$$
+with $\theta(g) = \psi(x_0,g(x_0))$, modulo a coboundary due to the constant in the choice of $\mu$.
+This construction extends to the category \{Diffeology\},
+the moment map for manifolds introduced by Souriau in \cite{Sou70}.
+The remarkable point is that none of the constructions brought up above involves differential equations,
+and there is no need of considering a putative Lie algebra either.
+That is a very important point.
+The momenta appear as invariant $1$-forms on the group,
+naturally,
+without intermediary,
+and the moment map as a map in the space of momenta.
+
+Note that the group of automorphisms $\G_\omega = \Diff(\X,\omega)$ is a legitimate diffeological group.
+The above constructions apply and give rise to universal objects:
+\emph{universal momenta} $\cG_\omega^*$,
+\emph{universal path moment map} $\Psi_\omega$,
+\emph{universal holonomy} $\Gamma_\omega$,
+\emph{universal two-points moment map} $\psi_\omega$,
+\emph{universal moment maps} $\mu_\omega$,
+\emph{universal Souriau's cocycles} $\theta_\omega$.
+A \emph{parasymplectic action} of a diffeological group $\G$ is a smooth morphism $h : \G \to \G_\omega$,
+and the objects,
+associated with $\G$,
+introduced by the above moment maps constructions,
+are naturally subordinate to their universal counterparts.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Diffeology on Fourier Coefficients of Periodic Functions
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Diffeology on Fourier Coefficients of Periodic Functions}
+
+We denote by $\Cinfty_\mathrm{per}(\RR,\CC)$ the space of 1-periodic functions defined on $\RR$ with values in $\CC$,
+that is,
+$$
+\Cinfty_\mathrm{per}(\RR,\CC) = \{f \in \Cinfty(\RR,\CC) \mid f(x+1) = f(x) \}.
+$$
+We equip this space with the functional diffeology. Let us recall that a plot for
+this diffeology is a parametrization $\P : \U \to \Cinfty_\mathrm{per}(\RR,\CC)$ such that the
+map $(r,t) \mapsto \P(r)(t)$, from $\U \times \RR$ to $\CC$, is smooth.
+
+Let $f \in \Cinfty_\mathrm{per}(\RR,\CC)$, we denote by $(f_n)_{n\in \ZZ}$ its sequence of Fourier coefficients,
+that is,
+$$
+f_n = \int_0^1 f(x) e^{-2i\pi n x} \, dx, \mbox{ for all } n \in \ZZ.
+$$
+We recall that the Fourier series converges to $f$, uniformly on $[0,1]$
+\cite[\textsection 2 Thm.~1]{Vil68}.
+We denote by
+$$
+f(x)=\sum_{n \in \ZZ} f_n\,e^{2i\pi n x} \qmbox{the limit} f(x) = \lim_{\N \to \infty} \sum_{n=-\N}^{+\N} f_n\,e^{2i\pi n x}.
+$$
+Let $j$ be the map from $\Cinfty_\mathrm{per}(\RR,\CC)$ to the set of series of complex numbers
+$\Maps(\ZZ,\CC)$, that associates a smooth periodic function with its Fourier coefficients,
+$$
+j : \Cinfty_\mathrm{per}(\RR,\CC) \to \Maps(\ZZ,\CC) \qmbox{with} j(f) = (f_n)_{n\in \ZZ}.
+$$
+That map $j$ is injective, and we denote by $\cE$ its image, that is,
+the subspace of $\Maps(\ZZ,\CC)$ made of the Fourier coefficients of
+smooth periodic functions,
+$$
+\cE = \left\{ (f_n)_{n\in\ZZ} = j(f) \mid f \in \Cinfty_\mathrm{per}(\RR,\CC)\right\}.
+$$
+We know that the subspace $\cE$ is made exactly of all rapidly decreasing sequences of complex numbers (\textit{op. cit.}),
+$$
+(f_n)_{n\in \ZZ} \in \cE \qmbox{iff, for all $p \in \NN$,} n^p f_n \xrightarrow[\modulus{n} \to \infty]{} 0.
+$$
+
+\begin{article}\artlabel{Functional Diffeology on Fourier Coefficients.}\
+A parametrizations $\P : r \mapsto (f_n(r))_{n\in\ZZ}$ in $\cE$ is a plot,
+for the pushforward of the functional diffeology on $\Cinfty_\mathrm{per}(\RR,\CC)$,
+if and only if:
+\begin{enumerate}
+    \item The functions $f_n : \dom(\P) \to \CC$ are smooth.
+    \item For all closed ball $\oline{\cB}\subset \dom(\P)$, for every $k \in \NN$, for all $p \in \NN$, there exists
+    a positive number $\M_{k,p}$ such that, for all integer $n\neq 0$,
+    \begin{equation}\tag{$\diamondsuit$}
+    \left| {\partial^k f_n(r) \over \partial r^k} \right| \leq {\M_{k,p} \over \modulus{n}^p} \quad \mbox{for all $r\in \cB$}.
+    \end{equation}
+\end{enumerate}
+
+\alinea{Note~1.}~In other words, the parametrization $r \mapsto (f_n(r))_{n\in \ZZ}$
+is a plot of this diffeology if the functions $f_n$ are smooth and their derivatives are uniformly rapidly decreasing,
+what we denote also by
+$$
+n^p {\partial^k f_n(r) \over \partial r^k} \xrightarrow[\modulus{n} \to \infty]{} 0.
+$$
+\alinea{Note~2.}~By compactness, it is enough that, for every point $r_0\in\dom(\P)$,
+there exists a ball $\cB'$ centered at $r_0$ such that ($\diamondsuit$)
+holds to ensure that ($\diamondsuit$) holds on  every closed ball $\oline{\cB}\subset\dom(\P)$.
+\end{article}
+
+\begin{proof}
+Let us check, first of all, that the condition $(\diamondsuit)$ defines a diffeology on the space $\cE$ of
+rapidly decreasing sequences of complex numbers.
+
+\alinea {Covering axiom}~--- If $f_n(r) = f_n$ is constant in $r$, for all $n$,
+then the condition $(\diamondsuit)$ is trivially satisfied for $k>0$, and for $k=0$ it means that
+the series is rapidly decreasing, what it is.
+
+\alinea {Locality axiom}~--- According to Note~2, $(\diamondsuit)$ is a local condition.
+
+\alinea {Smooth compatibility axiom}~--- Let $\P : (r \mapsto f_n(r))_{n\in\ZZ}$
+satisfying $(\diamondsuit)$ and $\F : s \mapsto r$
+be a smooth parametrization in the domain of $\P$. We have, for all $k>0$,
+$$
+{\partial^k f_n(s) \over \partial s^k} = \sum_{\ell = 1}^{k}
+{\partial^\ell f_n(r) \over \partial r^\ell} \cdot
+\Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right),
+$$
+where the $\Q_{k,\ell}$ are polynomials.
+Now, since $s \mapsto r$ is smooth,
+the partial derivatives are bounded on every ball,
+and because the $\Q_{k,\ell}$ are polynomials in the partial derivatives,
+as a function of $s$,
+they are bounded operators on every ball.
+Let then $s_0\in \dom(\F)$, $r_0=\F(s_0)$ and $\cB$ be a ball
+centered at $r_0$ such that the condition $(\diamondsuit)$ is satisfied.
+Let $\cB' \subset \F^{-1}(\cB)$ be a ball centered at $s_0$, we have for all $s \in \cB'$,
+\begin{eqnarray*}
+    \left|{\partial^k f_n(s) \over \partial s^k}\right| & \leq & \sum_{\ell = 1}^{k}
+    \left| {\partial^\ell f_n(r) \over \partial r^\ell} \right|
+    \left| \vphantom{{\partial^\ell f_n(s) \over \partial s^k}}  \Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right)\right|\\
+    & \leq & \sum_{\ell = 1}^{k} {\M_{\ell,p} \over \modulus{n}^p} \, \mathop{\rm sup}_{s \in \cB'} \left| \Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right)\right|,
+\end{eqnarray*}
+where the $\M_{\ell,p}$ are the constants of the inequality $(\diamondsuit)$ for the ball $\cB$.
+Let then
+$$
+m_{k,\ell} = \mathop{\rm sup}_{s \in \cB'} \left| \Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right)\right|
+\qmbox{and} \M'_{k,p} = \sum_{\ell = 1}^{k}  m_{k,\ell} \, \M_{\ell,p} \, ,
+$$
+we get, for all $s\in \cB'$,
+$$
+\left|{\partial^k f_n(s) \over \partial s^k}\right|
+\leq {\M'_{k,p} \over \modulus{n}^p}.
+$$
+Hence, thanks to Note~2, $\P \circ \F$ still satisfies the condition $(\diamondsuit)$.
+Therefore, this condition defines a diffeology on the set $\cE$ of
+rapidly decreasing sequences of complex numbers.
+
+Let us show now that the diffeology defined on $\cE$ by ($\diamondsuit$) is the pushforward by $j$
+of the functional diffeology of $\Cinfty_\mathrm{per}(\RR,\CC)$.
+
+\alinea{A.---}~Let us prove, first of all, that $j$ is smooth, where $\Cinfty_\mathrm{per}(\RR,\CC)$ is
+equipped with the functional diffeology and $\cE$ with the diffeology defined by ($\diamondsuit$).
+Let $\P : r \to f_r$ be a plot of $\Cinfty_\mathrm{per}(\RR,\CC)$ defined on some real domain $\U$,
+the composite $j \circ \P$ writes
+$$
+j\circ \P : r \mapsto (f_n(r))_{n\in\ZZ} \qmbox{with} f_n(r) = \int_0^1 f_r(x) e^{-2i\pi n x}\, dx.
+$$
+Clearly, since $(r,x) \mapsto f_r(x)$ is smooth, the $f_n : r \mapsto f_n(r)$ are smooth, and we have
+$$
+{\partial^k f_n(r) \over \partial r^k} = \int_0^1 {\partial^k f_r(x) \over \partial r^k} e^{-2i\pi n x}\,dx.
+$$
+For all nonzero integer $n$, after $p$ integrations by parts, we get
+$$
+{\partial^k f_n(r) \over \partial r^k} =  {1 \over (2i\pi n)^{p}} \int_0^1 {\partial^{p} \over \partial x^{p}}
+\left( {\partial^k f_r(x) \over \partial r^k}\right)\, e^{-2i\pi n x}\,dx.
+$$
+Therefore, defining for every ball $\cB\subset\dom(\P)$ the number
+$$
+\M_{k,p} = {1 \over (2\pi)^p} \mathop{\rm sup}_{r \in \cB} \mathop{\rm sup}_{x \in [0,1]}
+\left| {\partial^{p} \over \partial x^{p}} {\partial^k  \over \partial r^k}f_r(x) \right|,
+$$
+we have
+$$
+\left| {\partial^k f_n(r) \over \partial r^k} \right| \leq {\M_{k,p} \over \modulus{n}^p}\quad \mbox{for all $r\in \cB$.}
+$$
+Hence, $j \circ \P$ is a plot of $\cE$. Therefore $j$ is smooth.
+
+\alinea{B.---}~Conversely, remember that $j$ is injective, then
+let us show that $j^{-1}: \cE \to \Cinfty_\mathrm{per}(\RR,\CC)$ is smooth.
+Let $\P: r \mapsto (f_n(r))_{n\in\ZZ}$ be a parametrization in $\cE$ satisfying the condition $(\diamondsuit)$, and let
+$$
+j^{-1}\circ \P : r \mapsto [x \mapsto f_r(x)].
+$$
+The parametrization $r \mapsto f_r$ is given by
+$$
+f_r(x) = \lim_{\N \to \infty} \S_\N(r,x) \qmbox{with} \S_\N(r,x) = \sum_{n=-\N}^{+\N} f_n(r)e^{2i\pi n x}.
+$$
+The $\S_\N$ are smooth for all $\N$, we want to show that the limit $(r,x) \mapsto f_r(x)$ is smooth too.
+For all $k,p,\N \in \NN$, let us introduce the series of partial derivatives
+$$
+\S_\N^{k,p}(r,x) = {\partial^p \over \partial x^p}{\partial^k \over \partial r^k}\S_\N(r,x) =
+\sum_{n=-\N}^{+\N} (2i\pi n)^p {\partial^k f_n(r) \over \partial r^k} e^{2i\pi n x}.
+$$
+The functions $\S_\N^{k,p}$ are smooth, with respect to the pair $(r,x)$, for all $\N,k,p$.
+Let us denote by $\modulus{\S}_\N^{k,p}(r,x)$ the series of moduli of the terms of $\S_\N^{k,p}$
+$$
+\modulus{\S}_\N^{k,p}(r,x) = \sum_{n=-\N}^{+\N} \modulus{2\pi n}^p \left|{\partial^k f_n(r) \over \partial r^k}\right|.
+$$
+Then, let $\oline{\cB} \subset \dom(\P)$ be some closed ball.
+Thanks to the hypothesis, applying (2) to $p+2$, we have, for all $r\in \cB$,
+\begin{eqnarray*}
+    \sum_{n=-\N}^{+\N} \modulus{2\pi n}^p \left| {\partial^k f_n(r) \over \partial r^k} \right| & \leq &
+    c + 2\sum_{n=1}^\N (2\pi)^p {\M_{k,p+2} \over n^2},
+\end{eqnarray*}
+where $c$, corresponding to $n=0$, is some constant. Hence, for all $r\in\cB$, $x\in[0,1]$ and $\N\in\NN$
+$$
+\modulus{\S}_\N^{k,p}(r,x) \leq \K
+$$
+where $\K= c + 2(2\pi)^p \M_{k,p+2}(\pi^2/6)$. Next, since the series $\modulus{\S}_\N^{k,p}(r,x)$
+is increasing and upper bounded, it
+is convergent, and therefore the series $\S_\N^{k,p}(r,x)$ is also convergent. Moreover, according to what preceded:
+the sequence of smooth functions $\S_\N^{k,p}$
+converges uniformly on $\cB \times [0,1]$ to some function $\S_\infty^{k,p}$ when $\N \to \infty$.
+Now, according to a classical result of differential calculus,
+see for example (an obvious improvement of) \cite[Thm. 3.10]{Don00},
+the map $(r,x) \mapsto f_r(x) = \lim_{\N\to\infty}\S_N(r,x)$ is smooth,
+and the $\S_\infty^{k,p}$ are the partial derivatives
+$$
+\S_\infty^{k,p}(r,x) = {\partial^p \over \partial x^p}{\partial^k \over \partial r^k}f_r(x).
+$$
+Thus, the parametrization $r \mapsto [x \mapsto f_r(x)]$ is a plot of $\Cinfty_\mathrm{per}(\RR,\CC)$
+such that $j(r\mapsto f_r) = (f_n(r))_{n\in\ZZ}$.
+Therefore, $j$ is a diffeomorphism from $\Cinfty_\mathrm{per}(\RR,\CC)$, equipped with the functional diffeology, to
+$\cE$, equipped with the diffeology defined by $(\diamondsuit)$. In other words, the diffeology defined on $\cE$ by $(\diamondsuit)$
+is the pushforward of the functional diffeology on $\Cinfty_\mathrm{per}(\RR,\CC)$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: The Infinite Torus
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{The Infinite Torus }
+
+We denote by $\Torus^\infty$ the group of infinite sequences $\Z = (z_n)_{n\in \ZZ}$, with $z_n \in  \U(1)$, that is,
+$$
+\Torus^\infty = \prod_{n \in \ZZ} \U(1).
+$$
+We consider the natural $\CC$-linear action of $\Torus^\infty$ on $\cE$,
+$$
+(z_n)_{n \in \ZZ} \cdot (\Z_n)_{n \in \ZZ} = (z_n \Z_n)_{n \in \ZZ}.
+$$
+Indeed, multiplying by a number of modulus 1 transforms a rapidly decreasing sequence of complex numbers into another,
+and every element $z=(z_n)_{n \in \ZZ} \in \Torus^\infty$ is invertible,
+$$
+(z_n)_{n \in \ZZ}^{-1} = (\bar z_n)_{n \in \ZZ},
+$$
+where $\bar z$ denotes the conjugate.
+Moreover, for every plot $r \mapsto (\Z_n(r))_{n\in \ZZ}$ in $\cE$, for all $p \in \NN$,
+$$
+\left|{\partial^p z_n\Z_n(r) \over \partial r^p}\right|
+= \left|{\partial^p \Z_n(r) \over \partial r^p}\right|.
+$$
+Obviously, the same holds for the inverse.
+Hence, the action of $(z_n)_{n \in \ZZ}$ is smooth as well as its inverse, and then $(z_n)_{n \in \ZZ}$
+acts on $\cE$ by diffeomorphism. Thus, we got a monomorphism
+$$
+\eta : \Torus^\infty \to \GL^\infty(\cE) = \GL(\cE) \cap \Diff(\cE).
+$$
+
+\begin{article}\textbf{The Tempered Diffeology on the Infinite Torus.}\
+We shall say that a parametrization $\zeta : r \mapsto (z_n(r))_{n\in \ZZ}$ in $\Torus^\infty$ is {\em tempered}
+if the $z_n$ are smooth and if for every $k \in \NN$,
+for every $r_0$ in the domain of the parametrization,
+there exist a closed ball $\oline{\cB}\subset\dom(\zeta)$ centered at $r_0$, a polynomial $\P_k$ and
+an integer $\N$ such that
+\begin{equation}
+    \renewcommand{\theequation}{$\heartsuit$}
+    \forall r \in \cB, \forall n > \N, \quad \left|{\partial^k z_n(r) \over \partial r^k}\right| \leq \P_k(n).
+\end{equation}
+The tempered parametrizations form a group diffeology on $\Torus^\infty$.
+Equipped with the tempered diffeology, the action of the group $\Torus^\infty$
+on $\cE$ is smooth. Moreover,
+for all $\N\in \NN$, the injection $\iota_\N : \Torus^\N \to \Torus^\infty$ defined
+as follows is an induction:
+$$
+\iota_\N(\zeta) = \Z \qmbox{with}  \left\{
+\begin{array}{ll}
+    \Z_n = \zeta_n & \mbox{if $n \in \{1,\ldots,\N\}$}, \\
+    \Z_n = 1  & \mbox{otherwise}.
+\end{array}
+\right.
+$$
+\end{article}
+
+\begin{proof}
+Let us show first that the condition $(\heartsuit)$ defines a diffeology, actually a sub-diffeology of the
+product diffeology on the infinite product of toruses $\T^\infty = \prod_{n\in \ZZ} \Torus$.
+
+\alinea {Covering axiom}~--- If $\zeta = (z_n)_{n\in \ZZ}$ is constant,
+then $\modulus{\partial^k z_n(r)/\partial r^k}$ is equal to $1$ for $k = 0$ and equal to $0$ for $k>0$.
+Thus we chose $\P_0(n)=1$ and $\P_k(n)=0$ for $k\neq 0$, and the
+condition $(\heartsuit)$ is satisfied.
+
+\alinea {Locality axiom}~--- The condition $(\heartsuit)$ is local in the variable $r$, by construction.
+
+\alinea {Smooth compatibility axiom}~--- Let $\zeta : (r \mapsto z_n(r))_{n\in \ZZ}$
+satisfying $(\heartsuit)$ and $\F : s \mapsto r$
+be a smooth parametrization in the domain of $\zeta$. We have, for all $k>0$,
+$$
+{\partial^k z_n(s) \over \partial s^k} = \sum_{\ell = 1}^{k}
+{\partial^\ell z_n(r) \over \partial r^\ell} \cdot
+\Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right),
+$$
+where the $\Q_{k,\ell}$ are polynomials. Therefore,
+$$
+\left|{\partial^k z_n(s) \over \partial s^k}\right| \leq \sum_{\ell = 1}^{k}
+\left|{\partial^\ell z_n(r) \over \partial r^\ell}\right| \,
+\left| \vphantom{{\partial^\ell z_n(r) \over \partial r^\ell}} \Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right)\right|.
+$$
+Since the function $s\mapsto r$ is smooth, the partial derivatives are bounded on every ball,
+and these polynomials are locally absolutely bounded operators.
+Let
+$$
+\M_{k,\ell} = \sup_{r \in \cB}
+\left|\Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right)\right|.
+$$
+Next, let $\N_\ell$ satisfying ($\heartsuit$) for $k=\ell$, and $\N' = \sup_{\ell = 1\ldots k} \N_\ell$, then
+for all $n>\N'$,
+$$
+\left|{\partial^k z_n(s) \over \partial s^k}\right| \leq \sum_{\ell = 1}^{k}
+\M_{k,\ell}\left|{\partial^\ell z_n(r) \over \partial r^\ell}\right| \leq \sum_{\ell = 1}^{k}
+\M_{k,\ell}\P_\ell(n).
+$$
+Hence, the partial derivatives of the $z_n$ with respect to $r$ are still upper bounded by polynomials,
+and the axiom of compatibility is satisfied.
+
+Therefore, the condition $(\heartsuit)$ defines a diffeology on the set $\Torus^\infty$.
+Let us check now that $(\heartsuit)$ defines a group diffeology.
+First of all, let $z : r \mapsto (z_n(r))_{n\in\ZZ}$ and $z' : r \mapsto (z'_n(r))_{n\in\ZZ}$ be two plots of $\Torus^\infty$,
+the derivatives of the $n$-th term $r \mapsto z_n(r)z'_n(r)$, of the product $zz'$, writes
+$$
+{\partial^k z_n(r)z'_n(r) \over \partial r^k} = \sum_{\ell = 0}^{k}
+{k \choose \ell}
+{\partial^{k-\ell} z_n(r) \over \partial r^{k-\ell}} \cdot
+{\partial^{\ell} z'_n(r) \over \partial r^{\ell}}.
+$$
+Hence,
+\begin{eqnarray*}
+    \left|{\partial^k z_n(r)z'_n(r) \over \partial r^k} \right|
+    & \leq & \sum_{\ell = 0}^{k} {k \choose \ell} \left|{\partial^{k-\ell} z_n(r) \over \partial r^{k-\ell}}\right| \,
+    \left|{\partial^{\ell} z'_n(r) \over \partial r^{\ell}}\right| \\
+    & \leq & \sum_{\ell = 0}^{k} {k \choose \ell} \P_{k-\ell}(n) \, \P'_\ell(n).
+\end{eqnarray*}
+Thus, the partial derivatives of the product $z_nz'_n$ are still upper bounded by a polynomial.
+For the inverse mapping $z^{-1} = (\bar z_n)_{n\in\ZZ}$, we have,
+since $\bar z_n(r)z_n(r)=1$,
+$$
+{\partial^k z_n(r)\bar z_n(r) \over \partial r^k} = 0,
+$$
+that is,
+$$
+z_n {\partial^{k} \bar z_n(r) \over \partial r^{k}} +
+\sum_{\ell = 0}^{k-1}
+{k \choose \ell}
+{\partial^{k-\ell} z_n(r) \over \partial r^{k-\ell}} \cdot
+{\partial^{\ell} \bar z_n(r) \over \partial r^{\ell}}= 0.
+$$
+Therefore,
+$$
+{\partial^{k} \bar z_n(r) \over \partial r^{k}} = -{1 \over z_n(r)} \sum_{\ell = 0}^{k-1}
+{k \choose \ell}
+{\partial^{k-\ell} z_n(r) \over \partial r^{k-\ell}} \cdot
+{\partial^{\ell} \bar z_n(r) \over \partial r^{\ell}}.
+$$
+Thus, if the partial derivatives $\partial^\ell \bar z_n(r)/\partial r^\ell$
+are absolutely bounded by a polynomial for all $\ell<k$, then the $k$-th derivative
+$\partial^k \bar z_n(r)/\partial r^k$ is also absolutely bounded by a polynomial.
+And since $\modulus{\partial \bar z_n(r)/ \partial r} = \modulus{\partial z_n(r) / \partial r}$,
+by recursion, $\partial^k \bar z_n(r)/\partial r^k$ is upper bounded by a polynomial.
+Therefore, $\Torus^\infty$, equipped with the tempered diffeology is a diffeological group.
+
+For the last sentence, the injection $\iota_\N : \Torus^\N \to \Torus^\infty$ is clearly smooth since,
+for all plots $\zeta$ in $\Torus^\N$,
+the derivatives of the components $\Z_n$ of the composite $\iota_\N \circ \zeta : r \mapsto (\Z_n(r))_{n\in\ZZ}$ vanish for $n$ outside $\{1,\ldots,\N\}$,
+hence
+$$
+n^p\,{\partial^k \Z_n(r) \over \partial r^k} = 0 \qmbox{if $\modulus{n} > \N$.}
+$$
+Conversely if
+$\zeta : r \mapsto (\Z_n(r))_{n\in\ZZ}$ is a plot of $\Torus^\infty$ with values in $\iota_\N(\Torus^\N)$,
+then the components $r \mapsto \Z_n(r)$ are smooth,
+by definition of the diffeology on $\Torus^\infty$,
+and hence $\iota_\N^{-1}\circ \zeta$ is smooth.
+Therefore, $\iota_\N$ is an induction.
+\end{proof}
+
+\begin{article}\textbf{Induced Solenoids}~---
+A sequence $\alpha = (\alpha_n)_{n\in\ZZ}$ of positive numbers, is independent over $\QQ$,
+if for every finitely supported sequence $(q_n)_{n\in\ZZ}$ of rational numbers $q_n \in \QQ$,
+$$
+\sum_{n\in\ZZ} q_n \alpha_n = 0 \quad \Rightarrow \quad q_n = 0 \qmbox{for all} n.
+$$
+In the following we will consider such sequences with $\modulus{\alpha_n} \leq 1$.
+Then,
+the map
+$$
+\iota : \RR \mapsto \Torus^\infty, \qmbox{defined by} \iota(t) = \bigg(e^{2i\pi\alpha_n t}\bigg)_{n\in \ZZ},
+$$
+is obviously injective,
+but it is moreover an induction,
+that is,
+a diffeomorphism onto its image equipped with the subset diffeology.
+We call the image $\iota(\RR) \subset \T^\infty$,
+an \textit{irrational solenoid}.
+\end{article}
+
+\begin{proof}
+Let us show first that such irrational sequences $\alpha = (\alpha_n)_{n\in\ZZ}$ exist.
+Consider a transcendental number $\alpha$.
+We define
+$$
+\alpha_0 = 1 \qmbox{and} \alpha_m = \alpha^m - \left[{\alpha^m}\right] \quad \mbox{for $m\neq0$},
+$$
+where the bracket denotes the integral part.
+That defines $\alpha_n$ for all $n\in \ZZ$. Now, for a finitely supported sequence of rational numbers $q_n$,
+we have
+\begin{eqnarray*}
+    \sum_{n\in \ZZ} q_n \alpha_n & = & q_0 + \sum_{n \in \ZZ \atop n\neq 0}
+    q_n\left(\alpha^n -
+    [\alpha^n]\right) \\
+    &=& q_0 - \sum_{n \in \ZZ \atop n\neq 0} q_n [\alpha^n] + \sum_{n \in \ZZ \atop n\neq 0} q_n\alpha^n,
+\end{eqnarray*}
+with only a finite part of this sum is not zero. Then, if $\sum_{n\in\ZZ} q_n \alpha_n =0$ we multiply
+both sides by $\alpha^\ell$,
+with $\ell$ big enough to get an algebraic equation in $\alpha$,
+with all powers positive.
+But we assumed $\alpha$ transcendental,
+then all the coefficients are $0$,
+what implies $q_n= 0$, for all $n\in \ZZ$.
+
+Next, we need to check first of all that $\iota$ is smooth.
+The successive derivatives are simply
+$$
+{\partial^k e^{2i\pi\alpha_n t} \over \partial t^k} = (2i\pi\alpha_n)^k e^{2i\pi\alpha_n t}.
+$$
+Since $0<\alpha_n \leq 1$, for all $n \in \ZZ$, we have
+$$
+\left|{\partial^k e^{2i\pi\alpha_n t} \over \partial t^k}\right| \leq (2\pi)^k.
+$$
+Hence,
+the derivatives are absolutely upper bounded by (constant) polynomials,
+$\P_k(n) = (2\pi)^k$,
+and therefore $\iota$ is a plot in $\Torus^\infty$.
+Conversely,
+consider a plot in $\Torus^\infty$
+with values in $\iota(\RR)$,
+the composite with the projection on the first two components gives a plot in $\Torus^2$ with values in the solenoid $(\exp(2i\pi t),\exp(2i\pi\alpha t))_{t\in \RR}$.
+But the injection
+$t \mapsto (\exp(2i\pi t),\exp(2i\pi\alpha t))$ being an induction \cite[Exercise 31]{PIZ13},
+it follows that $\iota$ is also an induction.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Symplectic Structure on the Space of Fourier Coefficients
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Symplectic Structure on the Space of Fourier Coefficients}
+
+We recall that a differential $k$-form $\varepsilon$ on the diffeological space $\cE$ is a map that associates,
+with every plot $\P$ in $\cE$,
+a $k$-form $\varepsilon(\P)$ on $\dom(\P)$ such that,
+for all smooth parametrization $\F$ in $\dom(\P)$, one has
+$$
+\varepsilon(\P\circ \F) = \F^*(\varepsilon(\P)).
+$$
+
+\begin{article}\textbf{Symplectic Structure on $\Cinfty_\mathrm{per}(\RR,\CC)$}~---
+Let $\Surf$ be the standard symplectic form on $\CC$, defined by
+$$
+\Surf_z(\delta z, \delta'z) = {1\over 2i}\left[\delta\bar z \, \delta'z - \delta'\bar z \, \delta z\right],
+$$
+where $z,\delta z,\delta'z \in \CC$.
+For all $x\in \RR$, let
+$$
+\hat x : \Cinfty_\mathrm{per}(\RR,\CC) \to \CC \qmbox{with} \hat x(f) = f(x)
+$$
+be the {\em evaluation map}.
+Because $\hat x$ is smooth, the pullback ${\hat x}^*(\Surf)/\pi$ is a $2$-form on $\Cinfty_\mathrm{per}(\RR,\CC)$,
+and it is closed because $\Surf$ is closed.
+We denote by $\omega$ its mean value
+$$
+\omega = {1\over \pi}\int_0^1 \hat x^*(\Surf) \, dx.
+$$
+Evaluated on a plot $\P: r \mapsto f_r$ in $\Cinfty_\mathrm{per}(\RR,\CC)$, $\omega$ is given by
+$$
+\omega(\P)_r(\delta r, \delta'r) = {1 \over 2i\pi}\int_0^1 \left\{ {\partial \oline{f_r(x)} \over \partial r}(\delta r)
+{\partial f_r(x) \over \partial r}(\delta'r)\right.
+- \left. {\partial \oline{f_r(x)} \over \partial r}(\delta'r)
+{\partial f_r(x) \over \partial r}(\delta r)\right\} dx.
+$$
+Since integration is a smooth operation,
+$\omega$ is still a differential closed $2$-form.
+Now,
+$\omega$ is invariant by translation $\Tr_g : f \mapsto f+g$,
+and $\Cinfty_\mathrm{per}(\RR,\CC)$ is an homogeneous space of itself.
+The moment map of this action is given,
+up to a constant, by:
+$$
+\mu(f) = {1 \over 2i\pi} d \bigg[g \mapsto \int_0^1 \bar f g - \bar g f\bigg].
+$$
+An easy check shows that $\mu$ is injective.
+Thus $\Cinfty_\mathrm{per}(\RR,\CC)$ equiped with $\omega$ is a {\em diffeological symplectic space},
+in a strong sense.
+Indeed, $\Cinfty_\mathrm{per}(\RR,\CC)$ acts transitively on itself by translation.
+This action preserves $\omega$ and the moment map for this action is injective.
+That falls under the definition we gave for being symplectic in diffeology,
+as the case $(+\ +)$ of the Introduction,
+and considering \cite[\textsection 9.19, Note~3]{PIZ13}.
+By transfer,
+that applies to the pushforward of $\omega$ on $\cE$.
+
+\end{article}
+
+\begin{proof}
+The $2$-form $\omega$ is actually exact,
+we choose the primitive $\varepsilon$ defined by
+$$
+\varepsilon(\P)_r(\delta r) = {1 \over 2i\pi} \int_0^1
+\oline{f_r(x)} \, {\partial f_r(x) \over \partial r}(\delta r) \, dx.
+$$
+We use the notation of the Memoir on the Moment Maps in Diffeology \cite{PIZ10}.
+Now,
+since the space $\Cinfty_\mathrm{per}(\RR,\CC)$ is contractible,
+we can compute the moment map through the paths moment map
+applied, for every $f$, to the path $\gamma_f:t \mapsto tf$. That is,
+$$
+\mu(f)= \Psi(\gamma_f) = \hat\gamma_f^* (\CHK\omega),
+$$
+where $\CHK$ is Chain-Homotopy Operator. But $\omega = d\varepsilon$ and we recall that
+$$
+d\CHK + \CHK d = \1^* - \0^*.
+$$
+Therefore
+\begin{eqnarray*}
+    \mu(f) & = & \hat\gamma_f^* (\CHK (d \varepsilon))\\
+    & = & \hat\gamma_f^* \left[\1^*(\varepsilon) - \0^*(\varepsilon) - d(\CHK\varepsilon)\right] \\
+    & = & (\1\circ \hat\gamma_f)^*(\varepsilon) -(\0\circ \hat\gamma_f)^*(\varepsilon) -
+    d \left[ \hat\gamma_f^* (\CHK\varepsilon) \right]
+\end{eqnarray*}
+But $\hat \gamma_f(g) = [t\mapsto T_g(tf)= tf + g]$, thus $\1\circ \hat\gamma_f(g)= f+g$,
+that is,
+$\1\circ \hat\gamma_f=T_f$.
+Then,
+\begin{eqnarray*}
+    T_f^*(\varepsilon)(r\mapsto g_r)_r(\delta r) &= & \varepsilon(r \mapsto g_r + f)_r(\delta r) \\
+    &=& {1\over 2i\pi}\int_0^1 \left(\oline{g_r(x)} + \oline{f(x)}\right){\partial g_r \over \partial r}(\delta r) \, dx \\
+    &=& \varepsilon(r\mapsto g_r)_r(\delta r) \\
+    &+& d\bigg[g \mapsto {1\over 2i\pi} \int_0^1 \oline{f(x)}g(x) \, dx\bigg](r \mapsto g_r)_r(\delta r),
+\end{eqnarray*}
+that is,
+$$
+(\1\circ \hat\gamma_f)^*(\varepsilon) = \varepsilon +  d\bigg[g \mapsto {1\over 2i\pi} \int_0^1 \oline{f(x)}g(x) \, dx\bigg].
+$$
+On the other hand, $\0\circ \hat\gamma_f(g)= g$, that is,
+$\0\circ \hat\gamma_f=\id$ and $(\0\circ \hat\gamma_f)^*(\varepsilon) = \varepsilon$.
+Next, since $\varepsilon$ is a $1$-form,
+$\CHK\varepsilon$ is a function on $\Paths(\Cinfty_\mathrm{per}(\RR,\CC))$, precisely
+$\CHK\varepsilon(\gamma)= \int_\gamma \varepsilon$.
+Thus $\hat \gamma_f^*(\CHK\varepsilon)= (\CHK\varepsilon)\circ \hat \gamma_f$.
+But $(\CHK\varepsilon)\circ \hat \gamma_f(g)= \CHK\varepsilon(t \mapsto tf+g) = \int_0^1\varepsilon(t\mapsto tf+g)_t(1) dt$,
+that is,
+\begin{eqnarray*}
+    (\CHK\varepsilon)\circ \hat \gamma_f(g) &=& \int_0^1\varepsilon(t\mapsto tf+g)_t(1) \,dt \\
+    &=& {1\over 2i\pi} \int_0^1 \left\{ \int_0^1 (t\oline{f(x)} +\oline{g(x)}) f(x)\, dx \right\} \,dt \\
+    &=& {1\over 2i\pi}{1\over 2} \int_0^1 \modulus{f(x)}^2 dx + {1\over 2i\pi} \int_0^1 \oline{g(x)} f(x) \,dx
+\end{eqnarray*}
+Therefore,
+$$
+d \left[(\CHK\varepsilon)\circ \hat \gamma_f\right] = d\bigg[g\mapsto {1\over 2i\pi}\int_0^1 \oline{g(x)} f(x) \,dx\bigg].
+$$
+Combining everything into the expression of $\mu(f)$ we get what was announced.
+\end{proof}
+
+\begin{article}\textbf{Action of the Infinite Torus and Moment Maps}~---
+We consider the $2$-form $\omega$ defined above pushed on the space of Fourier coefficients $\cE$.
+Evaluated on a plot $\P:r\mapsto (f_n(r))_{n\in\ZZ}$,
+$$
+\omega(\P)_r(\delta r, \delta'r) =
+{1 \over 2i\pi}\sum_{n\in\ZZ} {\partial \oline{f_n(r)} \over \partial r}(\delta r)
+{\partial f_n(r) \over \partial r}(\delta'r) - {\partial \oline{f_n(r)} \over \partial r}(\delta'r)
+{\partial f_n(r) \over \partial r}(\delta r).
+$$
+The ordinary action  $(z_n)_{n\in\ZZ}\cdot(\Z_n)_{n\in\ZZ} = (z_n\Z_n)_{n\in\ZZ}$,
+of the infinite torus $\Torus^\infty$ on $\cE$,
+is Hamiltonian and exact.%
+\footnote{Being exact means having an equivariant solution to the equation in $\mu$, $\varphi(x,x')=\mu(x')-\mu(x)$ \cite[Chapter 9]{PIZ13}}
+The Moment Map $\mu$ is given by
+$$
+\mu(\Z) = {1\over 2i\pi} \sum_{n\in\ZZ} \modulus{\Z_n}^2 \, \pi_n^*(\theta) + \sigma,
+$$
+where $\pi_n : \Torus^\infty \to \U(1)$ is the $n$-th projection $\pi_n(\Z) = \Z_n$,
+$\theta$ is the canonical invariant $1$-form on $\U(1)$,
+and $\sigma$ is some constant momentum of $\Torus^\infty$ (a constant invariant $1$-form).
+
+Let $(\alpha_n)_{n\in\ZZ}$ be a sequence of numbers independent over $\QQ$.
+We denote by $\iota : \RR \to \Torus^\infty$ the induction of $\RR$ in $\T^\infty$,
+$\iota(t) = (e^{2i\pi \alpha_n t})_{n\in\ZZ}$,
+and by $\underline{t}(\Z_n)_{n\in\ZZ} = (e^{2i\pi \alpha_n t} \Z_n)_{n\in\ZZ}$,
+the induced action of $\RR$ on $\cE$.
+Its moment map is given by
+$$
+\nu(\Z) = h(\Z) \, dt \qmbox{with} h(\Z) = \sum_{n\in\ZZ} \alpha_n \modulus{\Z_n}^2 + c,
+$$
+where $c$ is some constant.
+\end{article}
+
+\begin{proof}
+The primitive $\varepsilon$ of $\omega$, that is,
+$$
+\varepsilon(\P)_r(\delta r)  = {1 \over 2i\pi}\sum_{n\in\ZZ} \oline{\Z_n(r)} \, {\partial \Z_n(r) \over \partial r}(\delta r),
+$$
+where $r \mapsto (\Z_n(r))_{n\in \ZZ}$ is a plot of $\cE$,
+is obviously invariant under the action of $\Torus^\infty$.
+Therefore, the action is Hamiltonian and equivariant \cite[\textsection 9.11]{PIZ13}.
+And, the moment map is, up to a constant, the pullback of $\varepsilon$ by the orbit map
+$\hat \Z: \T^\infty \to \cE$, $\hat \Z(z)=z\Z$, where $z=(z_n)_{n\in \ZZ}$ and $\Z=(\Z_n)_{n\in \ZZ}$.
+Therefore, $\mu(\Z)= \hat \Z^*(\varepsilon) + \sigma$.
+Now, let $\theta$ be the canonical $1$-form on $\U(1)$ defined by
+$$
+\theta(\zeta)_r(\delta r) = \bar\zeta(r){\partial \zeta(r) \over \partial r}(\delta r),
+$$
+for all plots $\zeta$ in $\U(1)$. Let $\pi_n : \Torus^\infty \to \U(1)$ be the $n$-th projection $\Z \mapsto \Z_n$, for all
+$\Z= (\Z_n)_{n\in\ZZ} \in \cE$. Let $\zeta : r \mapsto(\zeta_n(r))_{n\in\ZZ}$ be a plot in $\Torus^\infty$,
+the moment map $\mu$ is then explicitely given, up to the constant $\sigma$, by:
+\begin{eqnarray*}
+    \mu(\Z)(\zeta)_r(\delta r) & = & \hat\Z^*(\varepsilon)(\zeta)_r(\delta r)\\
+    & = & \varepsilon(\hat \Z \circ \zeta)_r(\delta r) \\
+    & = &  {1 \over 2i\pi}\sum_{n\in\ZZ} \oline{\Z_n \zeta_n(r)}\,{\partial \Z_n  \zeta_n(r) \over \partial r}(\delta r) \\
+    & = &  {1 \over 2i\pi}\sum_{n\in\ZZ} \modulus{\Z_n}^2 \, \bar \zeta_n(r)\,{\partial \zeta_n(r) \over \partial r}(\delta r) \\
+    & = &  {1 \over 2i\pi}\sum_{n\in\ZZ} \modulus{\Z_n}^2 \, \pi_n^*(\theta)(\zeta)_r(\delta r).
+\end{eqnarray*}
+Therefore, the general moment map is written:
+$$
+\mu(\Z) =  {1 \over 2i\pi}\sum_{n\in\ZZ} \modulus{\Z_n}^2 \, \pi_n^*(\theta) + \sigma.
+$$
+Remark that,
+for all $n\in\ZZ$,
+for all ball $\cB \subset \dom(\zeta)$,
+there exists a smooth function $\tau_n$,
+defined on $\cB$,
+such that $\zeta_n(r) = \exp(2i\pi\, \tau_n(r))$.
+Then,
+modulo a constant,
+the moment map is also given by
+$$
+\mu(\Z)(\zeta)_r(\delta r) = \sum_{n\in\ZZ} \modulus{\Z_n}^2 \, {\partial \tau_n(r) \over \partial r}(\delta r).
+$$
+Note also that, since $\zeta$ is a plot in $\Torus^\infty$ for the tempered diffeology,
+the norm of the derivatives $\partial \zeta_n(r) / \partial r$, that is,
+the norm of $\partial \tau_n(r) / \partial r$,
+are upper bounded by a polynomial in $n$ what insures the convergence of the series defining the moment map just above.
+
+Now, consider the induction $\iota$.
+It induces a projection $\iota^* : \cT^{\infty*} \to \RR^*$,
+where $\cT^{\infty*}$ is the space of momenta of $\Torus^\infty$.
+The moment maps with respect to the group $\RR$ are then the composites $\nu = \iota^* \circ \mu$, that is,
+$$
+\nu = \iota^*\bigg\{  {1 \over 2i\pi}\sum_{n\in\ZZ} \modulus{\Z_n}^2 \, \pi_n^*(\theta) + \sigma \bigg\}
+={1 \over 2i\pi}\sum_{n\in\ZZ} \modulus{\Z_n}^2 \, (\pi_n\circ\iota)^*(\theta) + \iota^*(\sigma).
+$$
+But $\pi_n\circ \iota : t \mapsto \exp(2i\pi \alpha_n t)$ then $(\pi_n\circ\iota)^*(\theta) = 2i\pi \alpha_n\, dt$.
+Thus, $\nu(\Z) = h(\Z) \, dt$ with $h(\Z) = \sum_{n\in\ZZ} \alpha_n \modulus{\Z_n}^2 + c$,
+where $\iota^*(\sigma) = c\, dt$,
+$c \in \RR$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Quasiprojective action of the Real Line and Reduction
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Quasiprojective Action of the Real Line and Reduction}
+
+Let $\alpha=(\alpha_n)_{n\in\ZZ}$ be a sequence of positive numbers, independent over $\QQ$.
+Let $\S^\infty_\alpha$ be the unit level%
+\footnote{The choice of the constant $c$ in the moment map $\nu$ being irrelevant for the following,
+we choose $c=0$.} of the moment map $\nu$ of the action of $\RR$,
+$$
+\S^\infty_\alpha = \bigg\{ \Z = (\Z_n)_{n\in\ZZ} \in \cE \ \bigg\vert\ \sum_{n\in\ZZ} \alpha_n \modulus{\Z_n}^2 = 1 \bigg\}.
+$$
+Let $\QPS$ be the quotient of $\S^\infty_\alpha$ under the action of $\RR$, and $\pr$ be the projection,
+$$
+\pr : \S^\infty_\alpha \to \QPS \qmbox{and} \QPS= \S^\infty_\alpha/\RR.
+$$
+We say that the quotient space is an \textit{Infinite Quasiprojective Space}.
+
+\smallskip\noindent\textsc{Note.}\
+Consider a general level $\sum_{n\in\ZZ} \alpha_n \modulus{\Z_n}^2 - c$,
+with $c>0$.
+By the change $\Z_n \mapsto \sqrt{\alpha_n}\Z_n/\sqrt{c}$,
+the subspace $\S^\infty_\alpha$ is mapped into $\S^\infty \subset \cE$,
+the unit sphere in $\cE$.
+Now,
+if all $\alpha_n$ would be equal to $1$,
+then the action of $\RR$ would give the action of $\S^1$ and $\QPS$ would be diffeomorphic to the infinite projective space $\CC\PP^\infty=\S^\infty/\S^1$,
+and the projection $\pr : \S^\infty_\alpha \to \QPS$ would be the infinite Hopf fibration%
+\footnote{Same set but with another diffeology as in \cite[\textsection 4.11]{PIZ13}.}.
+And that justifies our choice of vocabulary.
+
+\begin{article}\textbf{The Orbits of the Quasiprojective Action of $\RR$}~---
+The analysis of the action of $\RR$ on $\S^\infty_\alpha$ in terms of orbits is given by the following properties.
+\begin{enumerate}
+
+    \item Let $\Z \in \S^\infty_\alpha$.
+    If there exist $\Z_n \neq 0$ and $\Z_m \neq 0$,
+    then the stabilizer of $\Z$ is $\{0\}$ and the orbit of $\Z$ by $\RR$,
+    equipped with the subset diffeology,
+    is diffeomorphic to $\RR$.
+    They are the {\em principal orbits}.
+
+    \item The {\em singular orbits}, that is, the non principal orbits, are the
+    subspaces
+    $$
+    \S^1_n = \{ \Z \in \S^\infty_\alpha \mid \Z_m = 0 \mbox{ if } m \neq n \}, \qmbox{with} n\in \ZZ.
+    $$
+    Each singular orbit, equipped with the subset diffeology, is diffeomorphic to the circle $\S^1$.
+
+    \item The singular locus, that is, the union
+    $
+    \cS = \bigcup_{n\in\ZZ} \S^1_n \subset \S^\infty_\alpha,
+    $
+    equipped with the subset diffeology, is actually the diffeological sum%
+    \footnote{See  \cite[1.39]{PIZ13}.}
+    $$
+    \cS = \coprod_{n\in\ZZ} \S^1_n, \qmbox{and} \dim(\cS) = 1.
+    $$
+
+    \item The regular locus, that is, the subset $\S^\infty_\alpha - \cS$, is D-open%
+    \footnote{That is, open for the D-topology \cite[2.8]{PIZ13}.}.
+
+\end{enumerate}
+
+\end{article}
+
+\begin{proof}
+For the first item, let $\Z\in \S^\infty_\alpha$ with $\Z_n \neq 0$ and  $\Z_m \neq 0$, the map
+$$
+t \mapsto (e^{2i\pi \alpha_n t}z_n, e^{2i\pi \alpha_m t}z_m) \qmbox{with}
+z_n={\Z_n \over \modulus{\Z_n}} \qmbox{and} z_m={\Z_m \over \modulus{\Z_m}}
+$$
+is an induction from $\RR$ into $\Torus^2$, because $\alpha_n$ and $\alpha_m$ are independent over $\QQ$,
+see \cite[Exercise 31]{PIZ13}.
+It follows from there that the orbit map $t \mapsto \underline{t}(\Z)$ is an induction.
+
+For the second item, there exists $n$ such that for all $m \neq n$, $\Z_m = 0$
+but $\Z_n\neq 0$, since $\sum_{n\in\ZZ} \alpha_n \modulus{\Z_n}^2>0$. The orbit map is a covering
+onto the circle $\S^1_n$ induced in $\S^\infty_\alpha$.
+
+For the third item, let $\P : \U \to \cS$ be a plot. For every $n \in \ZZ$ let
+$\cO_n = (\pi_n\circ \P)^{-1}(\CC-\{0\})$, where $\pi_n : \S^\infty_\alpha \to \CC$ is the projection
+$\pi_n((\Z_m)_{m\in \ZZ}) = \Z_n$.
+Since $\pi_n \circ \P$ is smooth,
+thus continuous, every $\cO_n\subset \U$ is open. Moreover, let $n\neq m$,
+assume $r \in \cO_n\cap\cO_m$, that is, $\Z_n(r)\neq 0$ and $\Z_m(r)\neq 0$,
+but $\P$ takes its values in the union of the $\S^1_m$,
+$m \in \ZZ$,
+hence $\Z_n(r)\neq 0$ implies $\Z_m(r) = 0$ for all $m\neq n$ thus $\cO_n\cap\cO_m = \varnothing$.
+Therefore,
+$$
+\U = \bigcup_{n\in \ZZ} \cO_n \qmbox{and} \cO_n \cap \cO_m = \varnothing \mbox{ for all } n\neq m.
+$$
+That means that the $\cO_n$ make an open partition of $\U$.
+Then, each $\cO_n$ is an union of connected components of $\U$.
+Thus, $\P$ takes locally its values in the $\S^1_n$,
+$n\in \ZZ$, that means that $\cS$ is the diffeological sum of the circles $\S^1_n$, $n\in \ZZ$ (\textit{op. cit.}).
+
+For the fourth item, let $\P:\U \to \S^\infty_\alpha$ be a plot, $\P(r)=(\Z_n(r))_{n \in \ZZ}$.
+For all $r_0 \in \P^{-1}(\S^\infty_\alpha - \cS)$ there exist
+at least two different indices $n$ and $m$ such that $\Z_n(r_0)\neq 0$ and $\Z_m(r_0)\neq 0$. Since $\Z_n$ and
+$\Z_m$ are smooth there exists an open neighborhood $\V$ of $r_0$ such that $\Z_n(r)\neq 0$ and $\Z_m(r)\neq 0$,
+for all $r \in \V$, that is, $\V \subset \P^{-1}(\S^\infty_\alpha - \cS)$. Thus, $\P^{-1}(\S^\infty_\alpha - \cS)$
+is a union of open domains, it is then an open domain, and consequently $\S^\infty_\alpha - \cS$ is D-open.
+\end{proof}
+
+\begin{article}\textbf{Symplectic Reduction on the Quasiprojective Space}~---
+Independent of the various types of fibers of the projection $\pr : \S^\infty_\alpha \to \QPS$,
+and the singularities induced on the quotient space $\QPS$,
+there exists a differential closed $2$-form $\varpi$ on $\QPS$ such that
+$$
+\omega \restriction \S^\infty_\alpha = \pr^*(\varpi).
+$$
+
+\noindent\textsc{Note.}\ The group $\T^\infty$ being abelian, it still acts on the reduced space $\QPS$,
+its moment on this space is the projection of the moment $\mu$ of its action on $\S^\infty_\alpha$
+\cite[\textsection 9.13]{PIZ13}.
+\end{article}
+
+\begin{proof}
+We shall apply the general criterion for a differential form to be the pullback of another one \cite[\textsection 6.38]{PIZ13}.
+Let $\P : \U \to \S^\infty_\alpha$ and $\P' : \U \to \S^\infty_\alpha$ be two plots
+$$
+\begin{array}{ccc}
+    \begin{array}{c}
+        \begin{tikzpicture}[node distance=1.75cm, auto]
+            
+            \pgfmathsetmacro{\shift}{0.3ex}
+            
+            \node (A) {$\U$};
+            \node (B) [right of=A] {$\S^\infty_\alpha$};
+            \node (C) [below of=B] {$\QPS$};
+            
+            \draw[transform canvas={yshift=0.5ex},->] (A) -- (B) node[above,midway] {$\P$};
+            \draw[transform canvas={yshift=-0.5ex},->](A) -- (B) node[below,midway] {$\P'$};
+            \draw[->](B) to node {$\pr$}(C);
+            
+        \end{tikzpicture}
+    \end{array}
+    & \mbox{ such that } & \pr \circ \P = \pr \circ \P'.
+\end{array}
+$$
+
+We want to check if, in these conditions, $\omega(\P) = \omega(\P')$.
+That would insure the existence of $\varpi$,
+a (necessarily closed) $2$-form on $\QPS$ such that $\omega = \pr^*(\varpi)$ \cite[\textsection 6.38]{PIZ13}.
+We consider first of all what happens on the open subset
+$$\U_0 = \P^{-1}(\S^\infty_\alpha - \cS).$$
+Since $\pr \circ \P = \pr \circ \P'$,
+$\P^{-1}(\S^\infty_\alpha - \cS) = \P'^{-1}(\S^\infty_\alpha - \cS) = \U_0$.
+Now,
+the restrictions of $\P$ and $\P'$ on $\U_0$ take their values in the subset of $\S^\infty_\alpha$ made of principal orbits of $\RR$,
+for which the stabilizer of the action of $\RR$ is $\{0\}$.
+Thus,
+for each $r \in \U_0$ there is a unique $\tau(r) \in \RR$ such that,
+for all $n$,
+$\Z'_n(r) = e^{2i\pi \alpha_n \tau(r)}\Z_n(r)$.
+The function $\tau$ is smooth.
+Indeed,
+for all $r_0 \in \U_0$,
+there exists $n \in \ZZ$ such that $\Z_n(r_0)\neq 0$.
+Then there exists a neighborhood of $r_0$ where $\Z_n(r)\neq 0$.
+On this neighborhood $\Z'_n(r)\neq 0$,
+and $e^{2i\pi \alpha_n \tau(r)} = \Z'_n(r)/\Z_n(r)$.
+But $r \mapsto \Z'_n(r)$ and $r \mapsto \Z_n(r)$ are smooth,
+thus $r \mapsto e^{2i\pi \alpha_n \tau(r)}$ is smooth,
+and therefore so is $\tau$.
+
+Now,
+$\omega = d\varepsilon$, and
+\begin{eqnarray*}
+    \varepsilon(\P')_r(\delta r) &=& {1 \over 2i\pi} \sum_{n\in\ZZ} \oline{\Z_n'(r)}{\partial \Z'_n(r) \over \partial r}(\delta r) \\
+    & = & {1 \over 2i\pi} \sum_{n\in\ZZ} \oline{\Z_n(r)}{\partial \Z_n(r) \over \partial r}(\delta r) \\
+    & + & \bigg(\sum_{n\in\ZZ} \alpha_n \oline{\Z_n(r)}\, \Z_n(r)\bigg) {\partial \tau(r) \over \partial r}(\delta r) \\
+    & = & \varepsilon(\P)_r(\delta r) +  \tau^*(dt)_r(\delta r).
+\end{eqnarray*}
+Therefore, $[\omega(\P') - \omega(\P)] \restriction \U_0 = 0$.
+Thus, by continuity, $[\omega(\P') - \omega(\P)] \restriction \oline\U_0 = 0$, where $\oline\U_0$ is the closure of $\U_0$.
+It remains to check what happens on the complementary subset $\V = \U-\oline\U_0$.
+The subset $\V$ is open,
+thus $\P\restriction \V$ and  $\P'\restriction \V$ are two plots of $\S^\infty_\alpha$ but with values in the subset of singular orbits $\cS$.
+Since $\cS$ has dimension $1$ and $\omega$ is a $2$-form,
+$\omega(\P\restriction \V) = \omega(\P'\restriction \V) = 0$, see \cite[\textsection 6.39 Note]{PIZ13},
+In conclusion $\omega(\P') = \omega(\P)$ everywhere on $\U$.
+That proves that there exists a $2$-form $\varpi$ on $\QPS=\S^\infty_\alpha/\RR$ such that $\pr^*(\varpi) = \omega$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Bibliography
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{Don00}
+    
+    \bibitem[Don00]{Don00}
+    {Paul Donato,}
+    {\textit{Calcul diff\'erentiel pour la licence}.}
+    {Dunod, Paris (2000).}
+    
+    \bibitem[PIZ10]{PIZ10}
+    {Patrick Iglesias-Zemmour,}
+    {\textit{Moment Maps in Diffeology}.}
+    {Memoir of the AMS, vol. 192.}
+    {Am. Math. Soc., Providence RI, (2010).}
+    
+    \bibitem[PIZ13]{PIZ13}
+    {Patrick Iglesias-Zemmour,}
+    {\textit{Diffeology}.}
+    {Mathematical Surveys and Mo\-no\-graphs, vol. 185.}
+    {Am. Math. Soc., Providence RI, (2013).}
+    
+    \bibitem[EP01]{EP01}
+    {Elisa Prato,}
+    {\textit{Simple Non--Rational Convex Polytopes via Symplectic Geometry}.}
+    {Topology, \textbf{40} (2001), pp. 961--975.}
+    
+    \bibitem[Sou70]{Sou70}
+    {Jean-Marie Souriau.}
+    {\em Structure des syst\`emes dynamiques,}
+    {Dunod, Paris 1970.}
+    
+    \bibitem[Vil68]{Vil68}
+    {Naum Vilenkin,}
+    {\em Special Functions and the Theory of Group Representations.}
+    {Translations of Mathematical Mo\-no\-graphs.}
+    {Am. Math. Soc., Providence RI (1968).}
+    
+\end{thebibliography}
+
+\end{document}
