@@ -1,0 +1,1469 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Orbifolds As Stratified Diffeologies
+%%  Serap Gürer & Patrick Iglesias-Zemmour
+%%  Archived: 2025
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno,letterpaper,twoside]{amsart}
+
+%--------------------------------------------------------------------------
+% Packages
+%--------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{graphicx}
+\usepackage[normalem]{ulem} % For \sout (strikeout)
+\usepackage[margin=10pt,font=small,labelfont=bf, labelformat=empty, labelsep=endash]{caption}
+\usepackage[hidelinks]{hyperref}
+
+% TikZ and Diagrams
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{
+    arrow style=tikz,
+    diagrams={>={Straight Barb[scale=0.8]}}
+}
+\tikzset{
+    symbol/.style={
+        draw=none,
+        every to/.append style={
+            edge node={node [sloped, allow upside down, auto=false]{$#1$}}
+        }
+    }
+}
+
+%--------------------------------------------------------------------------
+% Page Layout & Typography
+%--------------------------------------------------------------------------
+\parindent 0mm
+\parskip .5ex plus 2pt
+\linespread{1.1}
+
+%--------------------------------------------------------------------------
+% Theorem Styles
+%--------------------------------------------------------------------------
+\newtheoremstyle{article}% ⟨name⟩
+{7pt}%  ⟨Space above⟩
+{7pt}%  ⟨Space below⟩
+{}%     ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩
+{.---\ }%  ⟨Punctuation after theorem head⟩
+{0pt}%  ⟨Space after theorem head⟩
+{}%     ⟨Theorem head spec⟩
+
+\theoremstyle{article}
+\newtheorem{article}{}
+
+\def\artlabel[#1]{\textsc{\textsc{#1.}}}
+\newcommand{\art}[1]{(\textsection~\ref{#1})}
+\newcommand{\See}[1]{(See \textsection~\ref{#1})}
+\def\qtext#1{\quad\text{#1}\quad}
+\newcommand{\remend}{\nolinebreak\hfill $\blacktriangleright$}
+
+% Environments
+\newenvironment{definition}[1]%
+{\noindent\textsc{Definition#1.} \it}%
+{}
+
+\newenvironment{proposition}[1]%
+{\noindent\textsc{Proposition#1.} \it}%
+{}
+
+\newenvironment{theorem}[1]%
+{\noindent\textsc{Theorem#1.} \it}%
+{}
+
+\renewenvironment{proof}%
+{\noindent\textit{Proof.}}%
+{\nolinebreak\hfill $\square$}
+
+%--------------------------------------------------------------------------
+% Macros
+%--------------------------------------------------------------------------
+
+% Sets
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\ZZ}{\mathbf{Z}}
+
+% Calligraphic
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cF}{{\mathcal F}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cI}{{\mathcal I}}
+\newcommand{\cK}{{\mathcal K}}
+\newcommand{\cO}{{\mathcal O}}
+\newcommand{\cQ}{{\mathcal Q}}
+\newcommand{\cS}{{\mathcal S}}
+\newcommand{\cT}{{\mathcal T}}
+\newcommand{\cU}{{\mathcal U}}
+
+% Roman Letters (Used in text)
+\def \A{\mathrm A}
+\def \D{\mathrm D}
+\def \F{\mathrm F}
+\def \G{\mathrm G}
+\def \H{\mathrm H}
+\def \K{\mathrm K}
+\def \M{\mathrm M}
+\def \N{\mathrm N}
+\def \P{\mathrm P}
+\def \Q{\mathrm Q}
+\def \S{\mathrm S}
+\def \T{\mathrm T}
+\def \U{\mathrm U}
+\def \V{\mathrm V}
+\def \X{\mathrm X}
+
+% Operators
+\DeclareMathOperator{\Cinfty}{\mathrm{C}^\infty}
+\DeclareMathOperator{\Cone}{Cone}
+\DeclareMathOperator{\class}{class}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\Geod}{Geod}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\sq}{sq}
+\DeclareMathOperator{\Stab}{St}
+\DeclareMathOperator{\Str}{Str}
+
+% Symbols
+\newcommand{\id}{\mathbf 1}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\norm}[1]{||#1||}
+\newcommand{\Sq}{\mathrm{Sq}}
+\newcommand{\vect}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\scal}[2]{\langle #1,#2\rangle}
+\let \epsilon=\varepsilon
+
+%--------------------------------------------------------------------------
+% Title Data
+%--------------------------------------------------------------------------
+
+\begin{document}
+
+\title{Orbifolds As Stratified Diffeologies}
+
+\author{Serap Gürer}
+\address{Serap Gürer,
+Galatasaray University,
+Ortaköy, Çırağan Cd. No:36,
+34349 Beşiktaş\,/\,İstanbul, Turkey.}
+\email{sgurer@gsu.edu.tr}
+
+\author{Patrick Iglesias-Zemmour}
+\address{Patrick Iglesias-Zemmour,
+Einstein Institute of Mathematics,
+The Hebrew University of Jerusalem,
+Edmond J. Safra Campus,
+Givat Ram,
+9190401 Jerusalem,
+Israel.
+}
+\email{piz@math.huji.ac.il}
+\urladdr{http://math.huji.ac.il/~piz}
+
+\date{August 2022 --- January 2023}
+
+\keywords{Orbifolds, Diffeology, Stratification.}
+\subjclass{58A35, 58A10}
+
+\maketitle
+
+\begin{abstract}
+We discuss general properties of stratified spaces in diffeology.
+This leads to a formal framework for the theory of stratifications.
+In particular, we consider the Klein stratification of diffeological orbifolds,
+defined by the action of local diffeomorphisms.
+We show that it is a standard stratification in the sense that the partition of the space into orbits of local diffeomorphisms is locally finite
+(for orbifolds with locally finite atlases),
+it satisfies the frontier condition and the orbits are locally closed manifolds.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Introduction
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction}
+
+A recurrent problem in the theory of stratified spaces is the  competition of two structures:
+the topology of the global space and the smooth manifold structure of the strata within.
+There are a few proposals to reconcile the two,
+meaning to exhibit a smooth structure,
+in some sense,
+that covers at the same time the ambient topology and the manifold structure of the strata.
+See for example \cite{AFLT17,JW17,MCNM18} to cite a few.
+
+Diffeology gives a global answer to this question,
+thanks to the versatility of its objects.
+By nature,
+diffeology is not hostile to singularities which are naturally absorbed,
+or encrypted,
+in its definition.
+A good illustration would be the teardrop diffeology defined on the $2$-sphere \cite[Fig. 2]{IZL18}.
+Manifolds with boundary and corners \cite[\textsection 4.16]{PIZ13} \cite{GIZ19},
+orbifolds \cite{IKZ10,IZL18},
+quasifolds \cite{IZP21},
+subspaces,
+singular quotients even with infinite dimensions \cite{PIZ16-a}.
+All these objects,
+or situations,
+are well described by diffeology without the help of extra structures or heuristic definitions.
+Some of them,
+like manifolds with corners,
+come with an obvious stratification:
+the vertices,
+the edges,
+the faces etc. that are clearly identified by the diffeology only.
+This is the reason why the theory of stratification in diffeology is not of same nature than in traditional differential geometry.
+In particuler,
+there is no competition in diffeology between the global structure and the structure of the strata since they inherit naturally,
+by induction,
+their smooth structure from the diffeology of the ambient space \cite[\textsection 1.29,1.33]{PIZ13}.
+This is especially the case for most of the examples of stratified spaces that are at the origin of the classical theory,
+such as algebraic sets,
+manifolds with boundaries or corners,
+simplices etc.
+
+The only question remaining is to define properly what a stratified space is,
+to discuss its variants and to study its particular properties from the point of view of diffeology.
+
+The first step would be to identify the natural extension to diffeology of the usual notion of topological stratified space.
+It consists,
+roughly speaking,
+to replace the word ``topology'' by ``diffeology''.
+That is what we will call the \emph{standard stratification}.
+This is defined,
+on a space $\X$,
+as a partition into a set $\cS$ of subsets called strata,
+that satisfies the three conditions of stratified topological spaces for the D-topology of $\X$ \cite[\textsection 2.8]{PIZ13},
+%  \footnote{See \cite{PI85} and \cite[\textsection 2.8]{PIZ13}.}\n
+which are:
+The frontier condition,
+to be locally finite and the strata to be locally closed submanifold for the induced diffeology.
+
+It is clear however that these three conditions are not of the same nature,
+the most important and fundamental property is certainly the \emph{frontier condition} which epitomizes the concept of stratification and which stipulates that the topological closure of a stratum is a union of strata.
+The topology involved here is naturally the D-topology.
+The other properties:
+That the set of strata is locally finite and the strata are locally closed manifolds appear as secondary labels characterizing the type of stratification considered.
+We can imagine a few others,
+locally conical for example,
+and so on.
+
+On the other hand,
+a natural stratification defined by the action of diffeomorphisms pre-exists on any diffeological spaces:
+The decomposition into \emph{Klein strata},
+introduced in \cite[\textsection 1.42]{PIZ13}.
+This \emph{Klein stratification} satisfies the fundamental \emph{frontier condition},
+and admits a few variants based on the same principle \cite{PIZ22-a}.
+Hence,
+every diffeological space is structurally stratified.
+The action of the diffeomorphisms,
+or local diffeomorphisms,
+delivers a stratification internally hidden or embedded in the diffeology.
+This stratification is irrelevant for manifolds%
+\footnote{Manifolds are usually considered Hausdorff and second-countable.}
+since connected manifolds are homogeneous under the action of diffeomorphisms,
+local or not.
+Klein stratification is reserved for diffeological spaces that are not manifolds,
+as it reveals the essential singularities embedded in the diffeology,
+if any.
+We can think here again of manifolds with corners,
+for example.
+
+Of course,
+for a general diffeological space the Klein strata may be not manifolds,
+but the main property of stratifications is satisfied.
+This is the reason why we introduce the notion of \emph{basic stratification} in diffeology as partitions that satisfy the frontier condition.
+Indeed,
+from the point of view of diffeology  it is not necessary to enforce the structure of the strata since they inherit naturally the induced diffeology,
+that make them diffeological subspaces.
+Whatever the strata is,
+we stay inside the category \{Diffeology\}.
+On the other hand,
+in classical differential geometry it is important to require that the strata are manifolds since it is the only smooth structure known by the theory.
+This constraint then vanishes in diffeology.
+
+Thus,
+in diffeology,
+stratifications begin with the frontier condition which is already satisfied by its own geometry defined by the action of the group of diffeomorphisms,
+or by local diffeomorphisms.
+However,
+this Klein stratification is the maximal case of stratifications defined by the smooth actions of diffeological groups.
+Indeed since diffeomorphisms are homeomorphism,
+for a smooth action of a diffeological group the closure of an orbit is a union of orbits.
+This consideration leads us to the definition of \emph{geometric stratifications},
+the ones defined by smooth action of diffeological groups.
+On the other hand,
+a stratification which does not satisfy the geometric condition will be called a \emph{formal stratification}.
+
+A simple example of a geometric stratification which is not Klein,
+is the partition of the real line $\RR$\,:
+$\S_- = \{x <0\}$, %]-\infty,0[$,
+$\S_0 = \{0\}$,
+$\S_+ = \{x>0\}$. %]0, +\infty[$.
+They are the orbit of the multiplication by a positive number.
+However,
+as topological stratification, it is equivalent to the Klein stratification of the subspace of $\RR^2$ union of:
+$\S_- = \{(0,y) \mid y>0\}$,
+$\S_0 = \{(0,0)\}$,
+$\S_+ = \{(x,0) \mid x>0\}$.
+
+Until now,
+we introduced implicitely three labels:
+The first one [B] for basic,
+means we have a partition which is a basic stratification.
+The second one [LF] for locally finite,
+and [\sout{LF}] otherwise.
+The third label [G] when the stratification is geometric.
+We reserve the label [GK] to notify a Klein stratification.
+
+Next,
+we have to consider the nature of the strata.
+To respect the traditional approach we will introduce the label [M] for manifold.
+It will indicate that all the strata are submanifolds for the induced diffeology.
+We shall use the label [\sout{M}] in the opposite case.
+We give the example of the space of geodesic trajectories of the torus $\T^2$,
+which is not a manifold,
+and for which a countable infinite subset of Klein strata are diffeomorphic to a circle,
+and are irrational tori otherwise.
+That does not prevent the theory of stratifications from working properly,
+and distinguish between strata.
+Diffeology takes over,
+with the action of local diffeomorphisms,
+when topology is insufficient.
+
+In the traditional theory of stratification,
+particular attention is paid to whether the strata are locally closed or not.
+It turns out that this condition is related to topological properties of the space $\cS$ of strata.
+In every case,
+the space of strata inherits the quotient diffeology of $\X$ which describes,
+in some way,
+the \emph{transverse smooth structure}.
+The D-topology of $\cS$ is actually the quotient topology of the D-topology of $\X$ \cite[\textsection 2.12]{PIZ13}.
+This D-topology is an Alexandroff topology \cite{PA37} for the pre-order $\S \preceq \S'$ if $\S \subset \overline \S'$,
+the overline meaning the closure for the D-topology.
+In every case,
+the space of strata of a stratified diffeological space is a so-called PrOSet (Pre Ordered Set) for the quotient diffeology.
+It also turns out that the quotient topology satisfies the $\T_0$ axiom of separation%
+\footnote{That means that for every two points in $\cS$ there is a D-open neighborhood of one of them that does not contain the other one.}
+if and only if the strata are locally closed,
+and that is equivalent for the pre-order to be a partial order.
+The space of strata is then a POSet (Partial Ordered Set),
+see for example \cite{SY19}.
+These considerations lead to introduce a new label [$\T_0$],
+to signify that the strata are locally closed.
+We denote the opposite case by [\sout{$\T_0$}].
+The action of the irrational solenoid is an example of a geometric stratification for which the strata are manifolds and the space of strata is not $\T_0$.
+It is actually an irrational torus where the preorder is not a partial order.
+
+%  These labels [B], [LF], [\sout{LF}], [G], [GK], [M], [\sout{M}], [$\T_0$] and [\sout{$\T_0$}] are the main labels we need in that paper.\n
+These labels:
+%
+\begin{itemize}
+\item[{[B]}] For basic:
+the closure of a stratum is a union of strata.
+\item[{[LF]}] The stratification is locally finite (or not locally finite [\sout{LF}]).
+\item[{[G]}] The strata are the orbits of a group,
+or a pseudo group of diffeomorphisms.
+\item[{[GK]}] The strata are the orbits of the group of diffeomorphisms,
+or the pseudo group of local diffeomorphisms.
+\item[{[M]}] All the strata are manifolds (or not [\sout{M}]).
+\item[{[$\T_0$]}] The strata are locally closed:
+the space of strata is $\T_0$ separated (or not [\sout{$\T_0$}]).
+\end{itemize}
+%
+are the main ones we need in that article.
+Obviously,
+according to particular stratification we could study in the future we can imagine other labels,
+as for example [C] for locally conical,
+but this does not concern us at the moment.
+
+Now, coming back to the standard stratification of diffeological spaces,
+we could describe their family by the encoding [B]-[LF]-[M]-[$\T_0$].
+Another example,
+the stratification defined by a smooth action of a compact Lie group on a manifold will belong to the family [B]-[LF]-[G]-[M]-[$\T_0$].
+The manifolds with corners fall in the family [B]-[LF]-[GK]-[M]-[$\T_0$],
+and so on.
+
+After having drawn the general picture of the theory of stratification in diffeology,
+we focus in this paper on diffeological orbifolds.
+Like every diffeological space,
+orbifolds are stratified by the action of local diffeomorphisms.
+We describe explicitely the structure of these strata and we prove the main thorem of this article:
+
+\textsc{Theorem}{\it The stratification of diffeological orbifolds by local diffeomorphisms is standard:
+The Klein strata are locally closed manifolds.
+If the orbifold is locally finite in the sense that it admits a locally finite atlas,
+then the stratification is locally finite.
+The code for such orbifolds is then \textup{[B]-[LF]-[GK]-[M]-[$\T_0$]}.
+}
+
+\textsc{Acknowledgements.}~We sincerely thank the anonymous referee who by his remarks allowed us to correct and improve our work.
+He pointed out in particular the case of singular Stefan foliations%
+\footnote{Precisely \cite[Theorem 3]{PS74}.}
+which indeed fall within the general framework of diffeological stratified spaces.
+As for his remark on Whitney’s conditions,
+we think that it is  associated with geometric stratifications for some families of local diffeomorphisms.
+We reserve this question for a future work.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Diffeological Stratified Spaces
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Diffeological Stratified Spaces}
+
+Beginning with stratification in diffeology,
+it is necessary to connect with the standard and commonly admitted definition,
+for example \cite[Definition 1.1 and 1.8]{Klo07}.
+It will consist,
+roughly speaking,
+to change the word ``topology'' by ``diffeology''.
+
+\begin{article}
+\artlabel[Standard Diffeological Stratifications]
+\label{Standard-Diffeological-Stratifications}
+Consider a diffeologiacal space $\X$,
+we call \emph{standard stratification} of $\X$ any locally finite partition in \emph{strata} $\cS$ of $\X$,
+such that:
+
+\begin{enumerate}
+    \item Each stratum is a manifold for the induced diffeology.
+    \item Each stratum is locally closed for the D-topology.
+    \item The strata satisfy the \emph{frontier condition}\/:
+    for all $\S,\S' \in \cS$,
+    $$
+    \S \cap \overline\S' \neq \varnothing \quad \Rightarrow \quad \S \subset \overline\S'.
+    $$
+    In other words the closure of a stratum is a union of strata.
+\end{enumerate}
+
+We remind that the D-topology of a diffeological space is the finest topology that makes the plots continuous \cite[\textsection 1.2.3]{PI85} and \cite[\textsection 2.8]{PIZ13}.
+A subset $\A \subset \X$ is open for the D-topology (or D-open) if $\P^{-1}(\A)$ is open for any plot $\P$ in $\X$.
+
+We remind also that every subset of a diffeological space is naturally a diffeological subspace,
+whose plots are the plots of the ambient space but taking their values in the subset [Ibid. \textsection 1.33].
+Now,
+a subspace of a diffeolgical space is a submanifold if its diffeology is a manifold diffeology,
+that is,
+generated by local diffeomorphisms with some Euclidean space [Ibid. \textsection 4.1].
+\end{article}
+
+\begin{article}
+\artlabel[Basic Diffeological Stratifications]
+\label{Basic-Diffeological-Stratifications}
+
+The first condition for a partition $\cS$ of a space $\X$ to be a stratification is to satisfy the frontier condition,
+that the closure of a stratum is a union of strata.
+This is the very nature of the concept of stratification.
+In the standard approach,
+the ambient space is only a topological space,
+but the strata are supposed to be equiped with a manifold structure and maybe the first question raised by the theory is how to manage the competition between the two structures.
+In diffeology,
+since every subset inherits a natural subset diffeology there is no need to enforce the structure of the strata,
+they are always regarded as diffeological subspaces.
+They can be or not manifolds but that is not anymore a necessity,
+they stay in the category \{Diffeology\}.
+Note that the traditional approach has no choice,
+with respect to the smooth structure of the strata,
+but to require them to be manifolds,
+since this is the only smooth structure in classical differential geometry,
+defined without additional or heuristic considerations.
+This is the reason that justifies the following definition of \emph{basic diffeological stratification}\,:
+
+\begin{definition}{}
+    Let $\X$ be a diffeological space,
+    we call \emph{basic stratification} of $\X$ any partition $\cS$ of $\X$ in strata such that the closure,
+    for the D-topology,
+    of a stratum is a union of strata.
+\end{definition}
+
+We can reword the condition of basic stratification in several ways,
+starting with:
+$$
+\text{For all \ $\S, \S' \in \cS$}, \ \  \S \cap \bar \S' \neq \varnothing \ \Rightarrow \ \S \subset \bar \S'.
+$$
+Another way,
+$$
+\text{For all \ $\S \in \cS$, \ \ there exists \ $\Sigma \subset \cS$ \ such that:} \quad \overline \S = \bigcup_{\S' \in \Sigma} \S'.
+$$
+We will refer to partitions that satisfy the frontier condition above with the label [B],
+for basic.
+
+Now,
+the set of strata $\cS$ has a natural quotient diffeology,
+that is,
+the pushforward of the diffeology \cite[\textsection 1.43]{PIZ13} of $\X$ by the projection
+$$
+\Str : \X \to \cS \ \ \text{with} \ \ \Str(x) = \S \ \ \text{iff} \ \ x \in \S.
+$$
+This diffeology represents the \emph{smooth tranversal structure} of the stratification,
+in the sense that a plot $\P$ in $\cS$ is everywhere represented locally by some plot $\Q$ in $\X$ such that $\P \restriction \dom(\Q) = \Str \circ\, \Q$.
+Moreover,
+the D-topology of the space $\cS$,
+equiped with the quotient diffeology,
+is the quotient topology of the D-topology of $\X$ \cite[\textsection 2.12]{PIZ13}.
+It will play a role later.
+\end{article}
+
+\begin{article}
+\artlabel[Category of Diffeological Stratifications]
+\label{Category-of-Diffeological-Stratifications}
+A smooth map $f$ from a diffeological stratified space $(\X,\cS)$ to another $(\X',\cS')$ is said to be \emph{stratified} if it maps strata into strata.
+That is,
+if there exists a map $\phi$ from $\cS$ to $\cS'$ such that:
+$$
+\Str \circ f = \phi \circ \Str,
+$$
+where $\Str$ denote the projection from the space to the space of strata.
+This is summarized by the commutative diagram:
+$$
+\begin{tikzcd}[column sep=1.3cm,row sep=1.3cm,every label/.append style = {font = \small}]
+    \X \arrow[r,"f"] \arrow[d,swap, "\Str"] & \X' \arrow[d,"\Str"] \\
+    \cS \arrow[r,"\phi"] & \cS'
+\end{tikzcd}
+$$
+Note that since $\Str$ are subduction,
+the map $\phi$ is automatically smooth.
+
+Diffeological stratified spaces together with \emph{stratified smooth maps} as morphisms define the category of \{Stratified Diffeology\}.
+The isomorphisms of this category are the \emph{stratified diffeomorphisms}.
+\end{article}
+
+\begin{figure}[t]
+\includegraphics[width=.5\textwidth]{Figures/Frontier-condition.pdf}
+\vspace{-.25\baselineskip}
+\caption{The frontier condition.}
+\label{Frontier-condition}
+\end{figure}
+
+\begin{article}
+\artlabel[Geometric Stratifications]
+\label{Geometric-Stratifications}
+An important class of stratification is defined by the actions of groups on spaces,
+Precisely:
+
+\begin{proposition}{}
+    Let $\G$ be a diffeological group acting smoothly on a diffeological space $\X$.
+    That is,
+    a smooth morphism $g \mapsto g_\X$ from $\G$ to $\Diff(\X)$,
+    equipped with the functional diffeology.
+    Then:
+    
+    The partition of $\X$ by the orbits of $\G$ is a basic stratification.
+    We call such stratifications \emph{geometric}.
+\end{proposition}
+
+See \cite[\textsection 1.57, 7.1 and 7.4]{PIZ13} for the definitions involved in the proposition.
+We shall use the label [G] to specify that a stratification is defined,
+or recognized,
+as a geometric stratification.
+When a stratification is not geometric,
+or when we don't know,
+we just say that it is a \emph{formal stratification}.
+\end{article}
+
+\begin{proof}
+Let $\cO_x$ and $\cO_y$ be two orbits of $\G$.
+Assume that $x \in \overline\cO_y$ and let $x' \in \cO_x$.
+Let $\U'$ be an D-open neighborhood of $x'$ and $g \in \G$ such that $g_\X(x) = x'$.
+Let $\U = g_\X^{-1}(\U')$.
+Since $g_\X \in \Diff(\X)$,
+$\U$ is an open neighborhood of $x$ and since $x \in \overline\cO_y$ there exists $z \in \cO_y \cap \U$,
+and $\cO_y = \cO_{z}$.
+On Figure \ref{Frontier-condition},
+we represent $z$ as $f(y)$ with $f \in \G$.
+Hence,
+$z' = g_\X(z) \in \U' \cap \cO_y$.
+Thus,
+$\cO_y \cap \U' \neq \varnothing$,
+and $x' \in \overline\cO_y$.
+Therefore,
+the closure of any orbit is a union of orbits.
+The partition of a diffeological space by a smooth action of a diffeological group is a basic stratification.
+\end{proof}
+
+\begin{article}
+\artlabel[Klein Stratifications]
+\label{Klein-Stratifications}
+The \emph{Klein strata} of a diffeological space $\X$ have been introduced in \cite[\textsection 1.42]{PIZ13} as the orbits of the goup of diffeomorphisms $\Diff(\X)$.
+The fact that they constitute a stratification was established and discussed in \cite{PIZ22-a},
+as well as their variants. 
+The standard example of this situation is the square $\Sq$ of Figure \ref{the-Square}.
+The group $\Diff(\Sq)$ has three orbits:
+
+\begin{enumerate}
+    \item[1.] the 4-corners-orbit;
+    \item[2.] the 4-edges-orbit;
+    \item[3.] the interior-orbit.
+\end{enumerate}
+
+Note that if we prefer considering connected Klein strata,
+orbits of the identity component of the group of diffeomorphisms,
+they are nine in number and are independently the corners, edges and interior.
+
+Now,
+the notion of stratification goes hand in hand with that of singularity we will discuss later.
+The idea of singularity is by definition local.
+We consider then the local geometry of a diffeological space:
+it is defined at each point by the germ of the diffeology there \cite[\textsection 2.19]{PIZ13}.
+The local geometry at each point is preserved by the action of local diffeomorphisms,
+which is no more a group but a so-called pseudo-group,
+we denote it by $\Diff_\loc(\X)$.
+Local diffeomorphisms can exchange only points with the same local geometry.
+That leads to the following definition,
+which is the variant of Klein strata we will use
+
+\begin{definition}{} Let $\X$ be a diffeological space,
+    We call (local) \emph{Klein strata} the orbits of its local diffeomorphisms.
+    The set of Klein strata is called the \emph{Klein stratification} of $\X$.
+\end{definition}
+
+Therefore,
+diffeological spaces share this important property:
+
+\begin{proposition}{}
+    Every diffeological space has a natural stratification embedded in its diffeology,
+    revealed by the action of the local diffeomorphisms
+\end{proposition}
+
+We shall use the label [GK] to specify that a stratification is a Klein stratification,
+or by the whole group of diffeomorphisms,
+or by its identity component,
+or by the action of local diffeomorphisms.
+
+Note that for manifolds in particular,
+this stratification is trivial since a $n$-manifold is everywhere locally diffeomorphic to $\RR^n$.
+But that remark applies also to every homogeneous,
+or locally homogeneous,
+diffeological space,
+for example the irrational tori.
+
+\textsc{Remark.}
+The frontier condition which is the essence of stratification is {\em a priori} a topological condition:
+homeomorphisms preserve closure.
+Stratification in diffeology inherits from topology,
+through the D-topology which is a by-product of it,
+but is not reduced to it as the example of the square shows.
+It is homeomorphic to the disk which has only two orbits,
+the boundary and the interior,
+instead of three:
+the vertices,
+the edges and the interior.
+Note however that,
+since D-topology is a by-product of diffeology,
+Klein stratification,
+and more generally geometric stratifications,
+can be defined without the help of D-topology since local diffeomorphisms are originally defined without it.
+Geometric stratifications,
+and Klein stratifications in particular,
+are pure products of diffeology. %\remend
+\end{article}
+
+\begin{figure}[t]
+\includegraphics[width=.475\textwidth]{Figures/Square.pdf}
+\vspace{-0.5\baselineskip}
+\caption{A diffeomorphism of the square.}
+\label{the-Square}
+\end{figure}
+
+\begin{article}
+\artlabel[Diffeological Stratifications as PrOSet and POSet]
+\label{Diffeological-Stratifications-as-PrOSet-and-POSet}
+Let $\cS$ be a stratification on a diffeological space $\X$,
+and let $\cS$ equiped with the quotient diffeology.
+
+Consider the following binary relation on $\cS$:
+$$
+\S \preceq \S' \quad \Leftrightarrow \quad \S \subset \bar\S'.
+$$
+It is clearly reflexive and transitive,
+that is,
+a pre-order on $\cS$.
+
+It is a well known fact that the quotient on $\cS$ of the topology of the total space $\X$ is an Alexandrov topology.
+Since the quotient of the D-topology of $\X$ is the D-topology of $\cS$ \cite[\textsection 2.12]{PIZ13},
+one could say anachronistically that the diffeology of $\cS$ is an \emph{Alexandrov diffeology}.%
+\footnote{If we need it,
+an Alexandrov diffeology could be {\em a priori} a diffeology whose D-topology is an Alexandrov topology.
+This definition could be amended in the future if necessary.}
+
+The open subsets of the D-topology on $\cS$ are the upper sets for the relation $\preceq$,
+that is,
+any union of cones:
+$$
+\Cone(S) = \{ \S' \mid \S \preceq \S' \}
+$$
+
+\textsc{Remark.} In some case the Alexandrov D-topology of the space $\cS$ is trivial with the Alexandrov diffeology of $\cS$ non trivial.
+This is the case of the geometric stratification of the $2$-torus by the irrational solenoid:
+$$
+\underline t_{\T^2} (z_1,z_2) = \big(z_1 e^{2i\pi t},z_2 e^{2i\pi \alpha t}\big),
+$$
+where $t \in \RR$,
+$(z_1,z_2) \in \T^2$ and $\alpha \in \RR -\QQ$.
+In this case every orbit of $\RR$ is in the closure of any other orbit,
+since the closure of any orbit is the $2$-torus itself.
+As we can notice,
+in this case one  have for all $\S, \S' \in \cS$,
+$\S \preceq \S'$ and $\S' \preceq \S$.
+The pre-order $\preceq$ is not a partial order,
+but the diffeology of $\cS = \T_\alpha$ is not trivial \cite{DI83}.
+\remend
+
+Now,
+it happens that the D-topology of the space of strata satisfies an axiom of separation,
+the minimal $\T_0$.
+That is,
+for any two point $\S, \S' \in \cS$ there a D-open neighborhood of one of them that does not contain the other one.
+In this case:
+
+\begin{theorem}{}\textup{(See \cite{SY19})}
+    The D-topology of the space of strata satisfies the $\T_0$ axiom of separation if and only if the preorder $\preceq$ is a partial order,
+    that is,
+    antisymetric:
+    $\S \preceq \S'$ and $\S' \preceq \S$ implies $\S = \S'$.
+    This is equivalent to the fact that the strata are locally closed.
+    \footnote{For every point of $\S$ there is a neighborhood $\V$ in $\X$ such that $\S \cap \V$ is closed in $\V$.}
+\end{theorem}
+
+If that is the case we say that $\cS$ is a POSet.
+We shall use the label [$\T_0$] to specify that the space of strata is a POSet,
+which is equivalent to the strata being locally closed or the preorder being a partial order,
+and we will note [\sout{$\T_0$}] otherwise.
+
+\end{article}
+
+\begin{article}
+\artlabel[Manifold or Not Manifold]
+\label{Manifold-or-Not-Manifold}
+Since diffeology includes so many various subcategories it is not surprising to have stratifications for which the strata are not manifolds,
+at least not all of them.
+A simple example would be the space of (oriented) geodesics of the $2$-torus,
+let us denote it by $\X = \Geod(\T^2)$.
+It is described in the blog post \cite{PIZ16-b}.
+Without going into details,
+let us say that
+$$
+\Geod(\RR^2) \simeq \S^1 \times \RR \ \text{ and } \ \Geod(\T^2) \simeq \Geod(\RR^2)/\ZZ^2,
+$$
+    with the following action of $\ZZ^2$\,:
+$$
+\underline k(u,\rho) = (u, \rho + u \cdot k),
+$$
+where $k = (m,n) \in \ZZ^2$,
+$\underline k$ is the action of $k$ on $\T^2$,
+$(u,\rho) \in \S^1 \times \RR$,
+$u \cdot k$ is the scalar product of $u \in \S^1 \subset \RR^2$ by $k \in \ZZ^2 \subset \RR^2$.
+A point in $\X$ will be denoted by $x=\class(u,\rho) = (u,\class_u(\rho))$.
+
+Actually this kind of diffeological space,
+locally diffeomorphic to the quotient of an Euclidean space by a countable subgroup of the affine group,
+has been categorized recently as \emph{quasifolds},
+their diffeological version \cite{IZP21}.
+
+The fibers of the projection $\pr_1 : (u,\tau) \mapsto u$ from $\X$ to $\S^1$ are the rational or irrational tori $\T_u = \RR/[\cos(\theta) \ZZ + \sin(\theta) \ZZ]$,
+with $u = (\cos(\theta),\sin(\theta))$,
+according to the dependence over $\QQ$ of $\cos(\theta)$ and $\sin(\theta)$.
+They are manifolds (circles) only when the line $\RR u$ is \emph{rational},
+that is,
+when there are two integers $m,n$ such that $m \cos(\theta) + n \sin(\theta) = 0$.
+The space $\X$ is a \emph{group bundle}.%
+\footnote{Not a diffeological fiber bundle in the sense of \cite{PI85} since the fibers are not diffeomorphic.}
+
+It is proved in \cite{PIZ22-b} that the restriction to a fiber $\T_u$ of a diffeomorphism $f \in \Diff(\X)$ is a diffeomorphism to some fiber $\T_{u'}$.
+Hence,
+$f$ projects on a diffeomorphism of $\S^1$.
+On the other hand,
+we know that two torus $\T_u$ and $\T_{u'}$ are diffeomorphic if and only if $u$ and $u'$ are conjugate modulo $\GL(2,\ZZ)$ \cite{DI83}.
+That is,
+if there exists a matrix $\M \in \GL(2,\ZZ)$ such that
+$$
+\M u = \lambda u',
+$$
+with $\lambda = \pm \norm{\M u}$.
+The map $f \mapsto \M$ is then a morphism from $\Diff(\X)$ to $\GL(2,\ZZ)$.
+It happens that this morphism is surjective [ibid.].
+That is,
+if $u,u' \in \S^1$ are equivalent modulo $\GL(2,\ZZ)$ there exists a diffeomorphism $f$ of $\X$ such that $f(\T_u) = \T_{u'}$.
+
+Let us show that quickly.
+Assume that $u' = \M u / \norm{\M u}$,
+with $\M \in \GL(2,\ZZ)$.
+Consider the map $\F$ from $\S^1 \times \RR$ to itself defined by
+$$
+\F : (v,\rho) \mapsto (v',\rho'), \ \text{ with } \ v' = {\M v \over \norm{\M v}} \ \text{ and } \ \rho' = {\rho \over \norm{\M v}}.
+$$
+It is clearly a diffeomorphism.
+Now,
+let $k \in \ZZ^2$ and $(v'',\rho'') = \F(v,\rho + v \cdot k)$.
+Thus
+$$
+v'' = {\M v \over \norm{\M v}} \ \text{ and } \
+\rho'' = {\rho + v \cdot k \over \norm{\M v}}.
+$$
+But,
+$$
+\rho''  =  {\rho + v \cdot k \over \norm{\M v}}
+    =  {\rho \over \norm{\M v}} + {v \cdot k \over \norm{\M v}}
+    =  {\rho \over \norm{\M v}} + {\M v \over \norm{\M v}} \cdot (\M^{-1})^t k,
+$$
+where the supscript $t$ denotes the transposition.
+Hence,
+$$
+v'' = v' \ \text{ and } \ \rho'' = \rho' + v' \cdot k' \ \text{ with } \ k' = (\M^{-1})^t k \in \ZZ^2.
+$$
+Therefore,
+$$
+\F\circ \underline{k} (v,\rho) = \underline{k'}(\F(v,\rho)).
+$$
+So,
+there exists a smooth map $f$ from $\Geod(\T^2) = (\S^1 \times \RR) / \ZZ^2$ to itself such that $\class \circ \F = f \circ \class$.
+This map $f$ is a diffeomorphism of $\Geod(\T^2)$ which projects on $\M$ acting on $\S^1$,
+and satisfies by construction $f(\T_u) = \T_{u'}$.
+
+$$
+\begin{tikzcd}[column sep=1.3cm,row sep=1.3cm,every label/.append style = {font = \small}]
+    \S^1 \times \RR \arrow[r,"\F"] \arrow[d,swap, "\class"] & \S^1 \times \RR \arrow[d,"\class"] \\
+    \Geod(\T^2) \arrow[r,"f"] & \Geod(\T^2)
+\end{tikzcd}
+$$
+
+Now,
+the group $\RR$ acts on $\S^1 \times \RR$ additively on the second factor,
+for all $s \in \RR$ and $(u,t) \in \S^1 \times \RR$ we denote $\underline{s}(u,t) = (u, t+s)$.
+This action commutes with the action of $\ZZ^2$,
+$\underline{s} \circ \underline{k} = \underline{k} \circ \underline{s}$.
+It defines then an action of $\RR$ on $\Geod(\T^2)$ by $\underline{s}(u,\tau) = (u, \class_u(t+s))$ with $\tau = \class_u(t)$.
+This action is transitive on the fibers $\T_u$.
+Thus,
+composing the action of $\M \in \GL(2,\ZZ)$ above with this action of $\RR$,
+we conclude that the orbits of the group $\Diff(\X)$ are the subspaces
+$$
+\cO_{(u,\tau)} = \bigcup_{\M \in \GL(2,\ZZ)} \T_{\underline{\M}(u)},
+\quad \text{with} \quad
+\underline{\M}(u) = {\M u \over \norm{\M u}}.
+$$
+Thus,
+except for the rational lines $\RR u$,
+which constitute one orbit of $\GL(2,\ZZ)$,
+the Klein strata are not manifolds.
+The space of Klein strata identifies with the quotient:
+$$
+\X/\Diff(\X) \simeq \S^1/\GL(2,\ZZ).
+$$
+Therefore,
+we shall use the label [M] to specify that the strata are all manifolds and [\sout{M}] otherwise.
+
+\textsc{Remark.} The connected Klein strata,
+orbits of the identity component of the group of diffeomorphisms,
+are the fibers $\T_u$ of the projection $\pr_1 : \X \to \S^1$.
+In that case the space of strata is $\S^1$ and the stratification is [$\T_0$].
+\end{article}
+
+\begin{article}
+\artlabel[The Example of Manifolds with Corners]
+\label{The-Example-of-Manifolds-with-Corners}
+
+Manifolds with corners have been introduced in diffeology as spaces locally diffeomorphic to some corners $\K^n = [0,\infty[^n$,
+equiped with the subset diffeology \cite[\textsection 4.16 Note]{PIZ13}.
+It is proved there that smooth real functions on $\K^n$,
+in the sense of diffeology,
+are restrictions of smooth functions defined on an open neighborhood of $\K^n$ in $\RR^n$.
+Later this result has been extended to any differential $k$-form \cite{GIZ19}.
+In this paper,
+the Theorem 2 states that the local diffeomorphims of the corner $\K^n$ can exchange only points of the same strata $\S$,
+defined by the number of vanishing coordinates,
+between $0$ and $n$.
+Therefore,
+the Klein strata of a manifold with corners are the union of the images of the strata of the corner $\K^n$,
+by the charts of the manifold.
+\end{article}
+
+\begin{article}
+\artlabel[Singularities of Diffeological Spaces]
+\label{Singularities-of-Diffeological-Spaces}
+Klein strata are associated with the idea of \emph{singularity}.
+They discriminate the points of the diffeological space according to their geometry.
+However,
+the singularity is a relative concept,
+a point is not singular by itself but relatively to others.
+This means for the square,
+for example,
+that the corners are singular to the interior points,
+as are the edges,
+but they are not equivalent to each other.
+
+The definition of singularity dwells precisely in the preorder associated with the local Klein stratification.
+To be accurate we should distinguish between two cases:
+when the precedence relation is a partial order and when it is not.
+
+\begin{definition}{} Let $\X$ be a diffeologial space such that its Klein stratification,
+    by local diffeomorphisms,
+    defines a partial order.
+    Then,
+    a point $x$ is singular with respect to another point $x'$ is the strata $\S$ of $x$ precedes the strata $\S'$ of $x'$.
+    That is,
+    $\S \preceq \S'$.
+\end{definition}
+
+In this case the notion of singularity is totally handled by the D-topology.
+When the precedence is not a partial order,
+it is more complicated.
+We could introduce an equivalence relation:
+$\S \sim \S'$ when $\S \preceq \S'$ and $\S' \preceq \S$,
+and declare that $x$ is singular with respect to $x'$ if $\S \preceq \S'$ with $\S \not\sim \S'$.
+However,
+if that would work for some geometric stratifications like the irrational solenoid,
+for which all strata are diffeomorphic and equivalent to each other,
+it is clearly not satisfactory for the Klein stratification of the space of geodesic trajectories of $\T^2$,
+since they would be all equivalent to each other without being diffeomorphic. %\See{Manifold-or-Not-Manifold}.
+This shows the limit of topology in this case,
+and force to consider the notion of singularity more carefully.
+
+By the way, note also that the irrational torus has no singularity,
+which is not surprising since it is a group.
+It is,
+in this case,
+another kind of singularity which resides in the global nature of the space,
+and comes from the mismatch between its trivial topology and its non-trivial diffeology.
+\end{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: The Case of Orbifolds
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{The Case of Orbifolds}
+
+\begin{article}
+\artlabel[Diffeological Orbifolds]
+\label{Diffeological Orbifolds}
+An \emph{orbifold} is a diffeological space $\X$ which is everywhere locally diffeomorphic to a quotient $\RR^n/\Gamma$,
+for some integer $n$ and where $\Gamma$ is a finite subgroup of $\GL(n,\RR)$,
+which may change from one point to another \cite{IKZ10}.
+A \emph{chart} of $\X$ is any local diffeomorphism $f$ from $\RR^n/\Gamma$ to $\X$.
+A set $\cA$ of charts covering $\X$ is called an \emph{atlas}.
+We assume in general the atlas to be locally finite,
+that is,
+every point $x \in \X$ is in the image of a finite number of charts.
+We denote by $\class : \RR^n \to \RR^n/\Gamma$ the canonical projection,
+and $\F = f \circ \class$.
+The set
+$$
+\cF = \{ \F = f \circ \class \mid f \in \cA \}
+$$
+is a generating family of $\X$  called the \emph{strict generating family} associated with the atlas $\cA$.
+For examples:
+
+(A) Consider the map $\Phi_m : \CC \to \CC$ with $\Phi_m(z) = z^m$,
+then $\CC$ equiped with the pushforward of the standard diffeology of $\CC$ by $\Phi_m$ is an orbifold diffeomorphic to $\cQ_m = \CC/\cU_m$,
+with $\cU_m$ the group of $m$th-roots of unity.
+We call it the \emph{cone orbifold}.
+
+(B) Another simple example,
+the \emph{corner orbifold} $\cK_2 = [\RR/\{\pm 1\}]^2$ is the image in $\RR^2$ of the map $\sq^2 : (x,y) \mapsto (x^2,y^2)$
+
+(C) We have also the typical example of teardrop $\cT$ whose diffeology on $\S^2 \subset \RR^3 \simeq \CC \times \RR$ is illustrated by the Figure \ref{TearDrop}.
+%
+\begin{figure}[th]
+    \includegraphics[width=1\textwidth]{Figures/TearDrop.pdf}
+    \caption{The Teardrop as a diffeology on the sphere.}
+    \label{TearDrop}
+\end{figure}
+%
+Let $\N = (0,1)$ be the North pole.
+The following set of parametrizations $\zeta$ defines an orbifold diffeology on $\S^2$ with a $\cU_m$-cyclic singular north pole.
+Let $\U$ be an Euclidean domain,
+$$
+\zeta \colon \U \to \S^2 \quad \mbox{with} \quad \zeta(r) = \begin{pmatrix}z(r) \\ t(r) \end{pmatrix},
+\quad \mbox{and} \quad |z(r)|^2 + t(r)^2 =1,
+$$
+such that, for all $r_0 \in \U$,
+
+\begin{enumerate}
+    \item if $\zeta(r_0) \neq \N$,
+    then there exists a small ball $\cB$ centered at $r_0$ such that $\zeta \restriction \cB$ is smooth.
+    \item If $\zeta(r_0)=\N$,
+    then there exist a small ball $\cB$ centered at $r_0$ and a smooth parametrization $z$ in $\CC$ defined on $\cB$ such that,
+    for all $r\in \cB$,
+    $$
+    \zeta(r) = {1 \over \sqrt{1 + |z(r)|^{2m}}}\begin{pmatrix} z(r)^m \\ 1 \end{pmatrix}.
+    $$
+\end{enumerate}
+
+\end{article}
+
+\begin{article}
+\artlabel[Local Centered Charts]
+\label{Local-Centered-Charts}
+Let $\X$ be an orbifold and $x \in \X$.
+Let $f \in \cA$ be a chart defined on some D-open subset $\U \subset \RR^n/\Gamma$ and let $\F = f \circ \class$.
+Let $\tilde\U$ be the domain of $\F$,
+$\tilde\U = \class^{-1}(\U) \subset \RR^n$.
+Let $r \in \tilde\U$ such that $\F(r) = f(\class(r)) = x$.
+
+\begin{proposition}{}
+    There exists a $\Gamma$-invariant Euclidean scalar product on $\RR^n$ and for the associated metric,
+    there exists a ball $\cB(r,\epsilon)$ centered in $r$ with radius $\epsilon$ such that:
+    \begin{enumerate}
+        \item For all $r' \in \cB(r,\epsilon)$,
+        $\Stab_\Gamma(r') \subset \Gamma_r$,
+        with $\Gamma_r = \Stab_\Gamma(r)$ the stabilizer of $r$.
+        \item The map $j_r : \class_{\Gamma_r}(r') \mapsto \class_\Gamma(r')$ is a local diffeomorphism from $\cB(r,\epsilon)/\Gamma_r$ to $\tilde\U/\Gamma$.
+        The composite $f \circ j_r$ is a local diffeomorphism from $\cB(r,\epsilon)/\Gamma_r$ to $\X$.
+        We call it a \emph{centered chart} on $x$.
+    \end{enumerate}
+\end{proposition}
+\end{article}
+
+\begin{proof}
+Since the group $\Gamma \subset \GL(n,\RR)$ is finite,
+one considers the new Euclidean scalar product defined by:
+$$
+u \cdot v = {1 \over \# \Gamma} \sum_{\gamma \in \Gamma} \scal{\gamma u}{\gamma v},
+$$
+where the brackets denote the ordinary scalar product.
+This scalar product is obviously $\Gamma$-invariant.
+For this new metric,
+let $\cB(r,\epsilon) \subset \tilde\U$ be a ball centered in $r$ with radius $\epsilon$:
+$$
+\text{For all $r' \in \cB(r,\epsilon)$, \ for all $\gamma \in \Stab_\Gamma(r)$}: \quad  \gamma(r') \in \cB(r,\epsilon).
+$$
+Indeed,
+on the one hand:
+$\norm{\gamma(r'-r)} = \norm{r'-r} < \epsilon$.
+On the other hand,
+$\norm{\gamma(r') - r} = \norm{\gamma(r'-r)}$,
+since $\gamma \in \Stab_\Gamma(r)$.
+Thus,
+$\norm{\gamma(r') - r} < \epsilon$ and $\gamma(r') \in \cB(r,\epsilon)$.
+
+Next,
+there exists $\epsilon \in \RR$ such that:
+$$
+\gamma\big(\cB(r,\epsilon)\big) \cap \cB(r,\epsilon) = \varnothing
+\quad \text{for all $\gamma \notin \Stab_\Gamma(r)$.}
+$$
+Indeed,
+let $\gamma \notin \Stab_\Gamma(r)$,
+and let $r_\gamma = \gamma(r)$.
+Then,
+$r_\gamma \neq r$,
+and since $\Gamma$ is finite
+---~so is the number of $\gamma$ that are not in $\Stab_\Gamma(r)$~---
+there exits $\epsilon \in \RR$ such that the balls $\cB(r,\epsilon)$ and $\cB(r_\gamma,\epsilon) = \gamma(\cB(r,\epsilon))$ are disjoint,
+for all $\gamma \notin \Stab_\Gamma(r)$.
+
+Now, consider the map $j_r : \class_{\Gamma_r}(r') \mapsto \class_\Gamma(r')$,
+defined on $\cB(r,\epsilon)/\Gamma_r$ to $\tilde\U/\Gamma$.
+Explicitely:
+$$
+j_r : \{\gamma(r') \mid \gamma \in \Stab_\Gamma(r) \} \mapsto \{\gamma(r') \mid \gamma \in \Gamma \}.
+$$
+The map $j_r$ is injective:
+$$
+j_r^{-1} : \class_\Gamma(r') \mapsto \class_\Gamma(r') \cap \cB(r,\epsilon).
+$$
+Next,
+the map $j_r$ is a smooth injection since the $\class$ projections are subductions.
+$$
+\begin{tikzcd}[column sep=1cm,row sep=1cm,every label/.append style = {font = \small}]
+    %    \cB(r,\epsilon) \arrow[hookrightarrow]{r}{j} \arrow[d,swap, "\class_{\Gamma_r}"] & \tilde\U \arrow[d,"\class_\Gamma"] \\
+    \cB(r,\epsilon) \arrow[r,symbol=\subset] \arrow[d,swap, "\class_{\Gamma_r}"] & \tilde\U \arrow[d,"\class_\Gamma"] \\
+    \cB(r,\epsilon)/\Gamma_r \arrow[r,"j_r"] & \tilde\U/\Gamma
+\end{tikzcd}
+$$
+Then,
+let $s \mapsto \sigma_s$ be a plot in $\tilde\U/\Gamma$ but taking its values in $j_r(\cB(r,\epsilon))$.
+Since $\class_\Gamma$ is a subduction,
+there exists locally a smooth lifting $s \mapsto r'_s$ in $\tilde\U$ such that $\sigma_s = \class_\Gamma(r'_s)$.
+We assume  that the lifting is defined on a small ball.
+By connexity $r'_s$ belongs to $\cB(r,\epsilon)$ or one of the balls $\gamma\big(\cB(r,\epsilon)\big)$ with $\gamma \notin \Stab_\Gamma(r)$.
+If that is the case,
+then $s \mapsto \gamma^{-1}(r'_s)$ is a smooth local lifting with values in $\cB(r,\epsilon)$.
+Hence,
+$j_r^{-1}$ is smooth and $j_r$ is an induction.
+An induction is a diffeomorphism onto its image.
+Now,
+since $\U$ is the quotient of $\tilde\U$ by a group of diffeomorphisms,
+the projection $\class_\Gamma$ is not just a subduction but a local subduction and then a D-open map \cite[\textsection 2.18 and Exercise 60]{PIZ13}.
+Thus,
+$\class_\Gamma(\cB(r,\epsilon)) = j_r\big(\class_{\Gamma_r}(\cB(r,\epsilon))\big)$ is D-open.
+Therefore,
+$j_r$ is a local diffeomorphism [Ibid. \textsection 2.10] and $f \circ j_r$ is a chart of $\X$.
+\end{proof}
+
+\begin{article}
+\artlabel[Klein Strata]
+\label{Klein Strata}
+We choose the variant definition of Klein strata of a diffeological space as orbits of local diffeomorphisms.
+They satisfy the basic frontier condition of stratified spaces \cite[\textsection 1.42]{PIZ13} and \cite{PIZ22-a}.
+
+Let $\X$ be an $n$-orbifold,
+let $\cA$ be an atlas of $\X$ and we keep the definitions and notations introduced in the previous paragraph.
+Let $x \in \X$,
+let $f$ be a chart defined on some D-open subset of $\RR^n/\Gamma$,
+let $\F = f \circ \class_\Gamma$ and $r \in \dom(\F)$ such that $\F(r) = x$.
+
+\begin{definition}{}
+    The stabilizer $\Stab_\Gamma(r)$ of $r$ in $\Gamma$ is called \emph{isotropy} of $x$ in the chart $f$.
+\end{definition}
+
+\begin{proposition}{}\textup{\cite[Lemma 20-21]{IKZ10}}
+    Two different charts on $x$ give equivalent isotropies,
+    conjugate by an element of $\GL(n,\RR)$.
+\end{proposition}
+
+Now we can characterize the Klein strata of the orbifold $\X$
+
+\begin{proposition}{}
+    Two points $x$ and $x'$ in $\X$ are on the same Klein stratum if and only if their isotropies are conjugate modulo $\GL(n,\RR)$.
+    In other words,
+    if $f$ and $f'$ are two charts of $\X$ on $x$ and $x'$,
+    with notations introduced previously:
+    $$
+    \exists\M \in \GL(n,\RR)\ : \
+    \forall \gamma \in \Stab_\Gamma(r), \
+    \M \gamma \M^{-1} \in \Stab_{\Gamma'}(r'),
+    $$
+    which can be shortened to:
+    $$
+    \Gamma'_{r'} = \M\, \Gamma_r\, \M^{-1}.
+    $$
+\end{proposition}
+\end{article}
+
+\begin{proof}
+Let $g$ be a local diffeomorphism,
+defined on some D-open $\cO$,
+such that $g(x) = x'$.
+Let $f : \U \to \X$ be a chart of $\X$ and $\F = f \circ \class_\Gamma$,
+with $\F(r) = x$ and $r \in \tilde\U = \class_\Gamma^{-1}(\U) = \dom(\F)$.
+Let $\cB(r,\epsilon)$ be the domain of a local centered chart $f_r = f \circ j_r$,
+as defined above.
+Let $\F_r = f_r \circ \class_{\Gamma_r}$ with $\Gamma_r = \Stab_\Gamma(r)$.
+Let $f'$ be a chart over $x'$,
+$\F' = f' \circ \class_{\Gamma'}$,
+$r' \in \dom(\F')$ with $\F'(r') = x'$.
+There exists a local lifting $\psi$ defined on some open neighborhood of $r$ in $\cB(r,\epsilon)$ to $\tilde\U'$ such that
+$$
+\F' \circ \psi =_\loc g \circ \F_r.
+$$
+We can admit that $\dom(\psi) = \cB(r,\epsilon)$,
+possibly for a smaller $\epsilon$.
+The Lemma 20-21 of \cite{IKZ10} claims that this lifting $\psi$ is a local diffeomorphism.
+$$
+\begin{tikzcd}[column sep=1cm,row sep=1cm,every label/.append style = {font = \small}]
+    \cB(r,\epsilon) \arrow[r,"\psi"] \arrow[d,swap, "\F_r"] & \tilde\U' \arrow[d,"\F'"] \\
+    \X \supset \cO \arrow[r,"g"] & \X
+\end{tikzcd}
+$$
+Thus,
+for all $\gamma \in \Stab_\Gamma(r)$\ there exists $\gamma' \in \Gamma$ such that for all $s \in \cB(r,\epsilon)$\,:
+$$
+\psi(\gamma s) = \gamma' \psi(s),
+\quad \text{that is} \quad
+\gamma' = \psi \circ \gamma \circ \psi^{-1}
+$$
+{\it A priori} $\gamma'$ depends on $s$ and $\gamma$,
+but since it depends smoothly on $s$ and  since $\Gamma$ is discrete,
+it depends only on $\gamma$.
+Thus,
+$h : \gamma \mapsto \gamma'$ is an isomorphism from $\Stab_\Gamma(r)$ onto its image.
+On the other hand $h(\gamma)(r') = \psi \circ \gamma \circ \psi^{-1}(r') = \psi \circ \gamma (r) = \psi(r) = r'$.
+Therefore $h$ is an isomorphism from $\Stab_\Gamma(r)$ to $\Stab_\Gamma(r')$.
+
+Next,
+the derivative of the identity $\psi(\gamma s) = h(\gamma) \psi(s)$ for $s = r$ gives
+$$
+h(\gamma) = \M \gamma \M^{-1}
+\quad \text{with} \quad
+\M = \D(\psi)(r).
+$$
+Hence,
+we get,
+as claimed,
+that $\Stab_\Gamma'(r') = \M\, \Stab_\Gamma(r)\, \M^{-1}$
+
+Conversely,
+assume that there is $\M \in \GL(n,\RR)$ such that $\Stab_\Gamma'(r') = \M\, \Stab_\Gamma(r)\, \M^{-1}$.
+Define locally around $r$
+$$
+\psi : s \mapsto r' + \M(s-r).
+$$
+The map $\psi$ is clearly a diffeomorphism.
+Let $\gamma \in \Stab_\Gamma(r)$,
+then $\psi(\gamma s) = r' + \M(\gamma s-r) = r' + \M \gamma(s-r)$ since $\gamma r = r$.
+On the other hand,
+$h(\gamma)\psi(s) = \M \gamma \M^{-1}[r' + \M(s-r)] = r' + \M \gamma(s-r)$ since $\M \gamma \M^{-1}r' = r'$.
+Hence,
+$\psi(\gamma s) = h(\gamma)\psi(s)$ the map $\psi$ descends to the quotient $\X$ into a local diffeomorphism.
+\end{proof}
+
+\begin{article}
+\artlabel[Klein Strata Are Locally Closed Manifolds]
+\label{Klein Strata Are Locally Closed Manifolds}
+Consider an orbifold $\X$.
+Let $f : \U \to \X$ be a chart of $\X$ and $\F = f \circ \class_\Gamma$,
+with $\F(r) = x$ and $r \in \tilde\U = \class_\Gamma^{-1}(\U) = \dom(\F)$.
+Let $\cB(r,\epsilon)$ be the domain of a local centered chart $f_r = f \circ j_r$,
+as defined above.
+Let $\F_r = f_r \circ \class_{\Gamma_r}$ with $\Gamma_r = \Stab_\Gamma(r)$.
+
+\begin{proposition}{}
+    The projection $\F_r : \cB(r,\epsilon) \to \X$ is open and closed,
+    for the D-topology.
+\end{proposition}
+
+As a corollary,
+we get:
+
+\begin{theorem}{}
+    Let $\X$ be an orbifold.
+    The Klein strata $\Str(x)$,
+    for all $x \in \X$,
+    are locally closed submanifolds of $\X$.
+    If $\X$ admits a locally finite atlas,
+    then the Klein stratification of the orbifold $\X$ satisfies the standard conditions,
+    encoded by \textup{[B]-[LF]-[GK]-[M]-[$\T_0$]}.
+\end{theorem}
+
+We recall that the Klein strata,
+here orbits of local diffeomorphisms,
+are naturally equipped with the subset diffeology.
+\end{article}
+
+\begin{proof}
+In the following,
+open and closed refer to the D-topology.
+We recall that the D-topology of a quotient is the quotient of the D-topology \cite[\textsection 2.12]{PIZ13}.
+
+Since $f_r$ is a local diffeomorphism it is sufficient to check these properties on $\class_{\Gamma_r} : \cB(r,\epsilon) \to \cB(r,\epsilon)/\Gamma_r$.
+As we have said previously,
+since the subduction is a local subduction,
+$\class_{\Gamma_r}$ is open [Ibid. \textsection 2.18 and Exercise 60]\,:
+images of open subsets are open.
+
+Now,
+let $\A \subset \cB(r,\epsilon)$ be a closed subset.
+Its image $\class_{\Gamma_r}(\A)$ is closed if its complement $\complement\class_{\Gamma_r}(\A)$ is open.
+That is,
+if its pullback $\class_{\Gamma_r}^{-1} \big(\complement\class_{\Gamma_r}(\A)\big)$ is open.
+The pullback of the complement of the image $\class_{\Gamma_r}(\A)$ is equal to the ball $\cB(r,\epsilon)$ minus the orbit of $\A$,
+that is,
+$\cB(r,\epsilon) - \cup_{\gamma \in \Gamma_r}\gamma(\A)$.
+Since $\A$ is closed and $\# \Gamma_r < \infty$,
+$\cup_{\gamma \in \Gamma_r}\gamma(\A)$ is closed and $\cB(r,\epsilon) - \cup_{\gamma \in \Gamma_r}\gamma(\A)$ is open.
+Hence,
+$\class_{\Gamma_r}(\A)$ is closed.
+The projection $\class_{\Gamma_r}$ is then closed,
+and therefore,
+open and closed.
+
+Now,
+$\X$ is locally equivalent to the quotient $\cB(r,\epsilon)/\Gamma_r$.
+The structure of the strata sharing conjugate stabilizers under a smooth action of a compact group has been clarified:
+\cite[Theorem 3.3]{Bre72} claims that the subset of points with conjugated stabilizers is a topological manifold,
+locally closed.
+Since the action of $\Gamma_r$ on $\cB(r,\epsilon)$ is smooth,
+these manifods are smooth [Ibid. Proof].
+
+That applies in particular to the strata
+$$
+\Str(r) = \{ r' \in \cB(r,\epsilon) \mid \Stab_{\Gamma}(r') = \Stab_\Gamma(r) \},
+$$
+passing through $r$ which projection on $\Str(x)$ by the chart $f_r$.
+Since for all $r' \notin \Str(r)$,
+$\Stab_{\Gamma_r}(r') \subsetneq \Stab_\Gamma(r)$,
+the projection $\class_{\Gamma_r} \restriction \Str(r)$ is one-to-one.
+Then,
+since it is a bijective subduction it is a diffeomorphism from $\Str(r)$ to its image.
+Hence,
+since $\class_{\Gamma_r}$ is open and closed,
+$f_r(\class_{\Gamma_r}\Str(r))$ is a locally closed submanifold.
+\end{proof}
+
+\begin{article}
+\artlabel[Concluding Remarks]
+\label{Concluding-Remarks}
+In this paper we have presented a program for the theory of stratifications in diffeology.
+Noting first that in diffeology,
+this theory avoids by default the hiatus between the topology of the ambient space and smooth structure of the strata.
+That is because the ambient space has its own smooth structure described by its diffeology,
+which perfectly integrates the singularities inherent to the space.
+This is for one aspect of the theory.
+Another aspect is that any part of a diffeological space inherits the subset diffeology and there is no reason to coerce the structure of the strata a priori.
+Each partition is admissible as long as it satisfies the frontier condition.
+These two aspects make diffeology an excellent formal framework for developing a theory of stratification.
+
+We then proposed to categorize the different identified properties,
+satisfied by a stratification,
+with a series of characteristic labels,
+which allows us to improve the concept of stratified spaces by including many different cases separately,
+or refining some of them.
+Starting with the label [B] for basic,
+which indicates that the frontier condition is fulfilled.
+Then,
+we have discussed these various labels [LF] [G] [GK] [M] [$\T_0$] and gave some examples.
+We have identified the code of the standard stratification:
+the minimum conditions for which a stratified diffeological space corresponds to what one expects from the usual theory of stratification:
+[B]-[LF]-[M]-[$\T_0$].
+To enrich the theory,
+inclusion of further labels,
+such as [C] for locally conical,
+into this scheme would be possible.
+
+
+The very nature of diffeology,
+its capability to integrate the singularities inherent to its smooth structure,
+is revealed by the very specific Klein stratification defined by the action of diffeomorphisms,
+or local diffeomorphisms,
+on the space itself.
+Each diffeological space has its own natural geometric stratification,
+embedded in its diffeology,
+which reveals in particular its internal singularities.
+
+As an application of this approach,
+we have treated in detail the case of orbifolds.
+The Klein strata of an orbifold are grouped by conjugate isotropies and are locally closed submanifolds.
+If in addition the orbifold admits a locally finite atlas,
+then the Klein stratification is locally finite,
+which makes it the usual standard for geometric stratification.
+
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Bibliography
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{MCNM18}
+    
+    \bibitem[PA37]{PA37}
+    \newblock{Pavel Alexandroff,}
+    \newblock{\em Diskrete Räume},
+    \newblock{Mat. Sb. (N.S.) 2(3): 501--519, 1937.}
+    
+    \bibitem[AFLT17]{AFLT17}
+    \newblock{David Ayala, John Francis and Hiro Lee Tanaka,}
+    \newblock{\em Local structures on stratified spaces},
+    \newblock{Adv. Math. 307: 903--1028, 2017.}
+    
+    \bibitem[Bre72]{Bre72}
+    Glen~E. Bredon.
+    \newblock {\em Introduction to compact transformation groups}.
+    \newblock {Academic Press, New-York, 1972.}
+    
+    \bibitem[MCNM18]{MCNM18}
+    \newblock{Marius Crainic and Jo\~ao Nuno Mestre},
+    \newblock {\em Orbispaces as differentiable stratified spaces},
+    \newblock{Lett. Math. Phys. 108(3): 805--859, 2018.}
+    
+    \bibitem[DI83]{DI83}
+    \newblock{Paul Donato and Patrick Iglesias},
+    \newblock{\em Exemple de groupes différentiels : flots irrationnels sur le tore},
+    \newblock{Preprint, CPT-83/P.1524, 1983.}
+    \newblock{Published in C. R. Acad. Sci. 301: 127--130, 1985}
+    
+    \bibitem[GIZ19]{GIZ19}
+    \newblock{Serap G\"urer and Patrick Iglesias-Zemmour},
+    \newblock {\em Differential forms on manifolds with boundary and corners.}
+    \newblock{Indagationes Mathematicae 30: 920–-929, 2019},
+    
+    \bibitem[PI85]{PI85}
+    \newblock{Patrick Iglesias-Zemmour},
+    \newblock {\em Fibrations diff\'eologiques et homotopie},
+    \newblock{State doctorate dissertation, Universit\'e de Provence, Marseille},
+    \newblock{1985}.
+    
+    \bibitem[PIZ13]{PIZ13}
+    \bysame
+    %\newblock{Patrick Iglesias-Zemmour.}
+    \newblock{\em Diffeology.}
+    \newblock{Mathematical Surveys and Monographs. The American Mathematical Society, (185), USA R.I. 2013.}
+    
+    \bibitem[PIZ16-a]{PIZ16-a}
+    \bysame
+    %\newblock{Patrick Iglesias-Zemmour.}
+    \newblock{\em Example of singular reduction in symplectic diffeology.}
+    \newblock{Proc. Amer. Math. Soc. 144(3): 1309–-1324, 2016.}
+    
+    \bibitem[PIZ16-b]{PIZ16-b}
+    \bysame
+    %\newblock{Patrick Iglesias-Zemmour.}
+    \newblock{\em The Geodesics of the $2$-Torus.}
+    \newblock{Blog post July 2016}.\\
+    \verb|http://math.huji.ac.il/~piz/documents/DBlog-Rmk-TGOT2T.pdf|
+    
+    \bibitem[PIZ22-a]{PIZ22-a}
+    \bysame
+    %\newblock{Patrick Iglesias-Zemmour.}
+    \newblock{\em Klein Stratification of Diffeological Spaces.}
+    \newblock{Blog post February 2022}.\\
+    \verb|http://math.huji.ac.il/~piz/documents/DBlog-Rmk-KSODS.pdf|
+    
+    \bibitem[PIZ22-b]{PIZ22-b}
+    \bysame
+    %\newblock{Patrick Iglesias-Zemmour.}
+    \newblock{\em Diffeomorphisms of $\Geod(\T^2)$.}
+    \newblock{Blog post February 2022}.\\
+    \verb|http://math.huji.ac.il/~piz/documents/DBlog-Rmk-DOGT2.pdf|
+    
+    \bibitem[IZL18]{IZL18}
+    Patrick Iglesias-Zemmour and Jean-Pierre Laffineur,
+    \newblock{\em Noncommutative geometry and diffeology: The case of orbifolds}.
+    \newblock{J. Noncommut. Geom. 12(4): 1551--1572, 2018.}
+    
+    \bibitem[IKZ10]{IKZ10}
+    Patrick Iglesias, Yael Karshon and Moshe Zadka.
+    \newblock{\em Orbifolds as Diffeology.}
+    \newblock{Transactions of the American Mathematical Society 362(6): 2811--2831, 2010.}
+    
+    \bibitem[IZP21]{IZP21}
+    Patrick Iglesias-Zemmour and Elisa Prato,
+    \newblock{\em Quasifolds, diffeology and noncommutative geometry}.
+    \newblock{J. Noncommut. Geom. 15(2): 735--759, 2021}.
+    
+    \bibitem[Klo07]{Klo07}
+    \newblock{Benoît Kloeckner.}
+    \newblock\emph{Quelques Notions d'Espaces Stratifiés.}
+    \newblock{Séminaire de Théorie Spectrale et Géométrie 26: 13--28, Grenoble, 2007/08.}
+    
+    \bibitem[PS74]{PS74}
+    \newblock{Peter Stefan.}
+    \newblock{\em Accessible sets, orbits, and foliations with singularities.}
+    \newblock{Proc. London Math. Soc. 3(29): 699--713, 1974.}
+    
+    \bibitem[JW17]{JW17}
+    \newblock{Jordan Watts.}
+    \newblock{\em The Differential Structure of an Orbifold.}
+    \newblock{Rocky Mountain Journal of Mathematics 47(1): 289--327, 2017.}
+    
+    \bibitem[SY19]{SY19}
+    \newblock{Shoji Yokura.}
+    \newblock{\em Decomposition Spaces and POSet-Stratified Spaces.}
+    \newblock{Tbilisi Math. J. 13(2): 101--127, 2020.}
+    \newblock{\scriptsize\verb!https://arxiv.org/abs/1912.00339v1!}
+    
+\end{thebibliography}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fin du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
