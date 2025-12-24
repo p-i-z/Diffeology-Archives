@@ -1,0 +1,998 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Differential Forms On Manifolds With Boundary and Corners
+%%  Serap Gürer & Patrick Iglesias-Zemmour
+%%  Archived: 2025
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno,letterpaper,twoside]{amsart}
+
+%--------------------------------------------------------------------------
+% Packages
+%--------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\usepackage[hidelinks]{hyperref}
+
+%--------------------------------------------------------------------------
+% Page Layout & Typography
+%--------------------------------------------------------------------------
+\parindent 0mm
+\parskip .5ex plus 2pt
+\linespread{1.1}
+
+%--------------------------------------------------------------------------
+% Theorem Styles
+%--------------------------------------------------------------------------
+\newtheoremstyle{article}% ⟨name⟩
+{7pt}%  ⟨Space above⟩
+{7pt}%  ⟨Space below⟩
+{}%     ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩
+{.\ }%  ⟨Punctuation after theorem head⟩
+{0pt}%  ⟨Space after theorem head⟩
+{}%     ⟨Theorem head spec⟩
+
+\theoremstyle{article}
+\newtheorem{article}{}
+
+\def\artlabel[#1]{\textbf{\textsc{#1}}}
+\newcommand{\art}[1]{(\textsection\ref{#1})}
+\renewenvironment{proof}{\noindent \textit{Proof.}} {\nolinebreak\hfill $\square$}
+
+%--------------------------------------------------------------------------
+% Macros
+%--------------------------------------------------------------------------
+
+% Sets
+\newcommand{\RR}{\mathbf{R}}
+
+% Calligraphic
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cO}{{\mathcal O}}
+\newcommand{\cQ}{{\mathcal Q}}
+\newcommand{\cU}{{\mathcal U}}
+
+% Roman Letters (Used in text)
+\def \A{\mathrm A}
+\def \D{\mathrm D}
+\def \F{\mathrm F}
+\def \G{\mathrm G}
+\def \H{\mathrm H} % Half-space
+\def \J{\mathrm J}
+\def \K{\mathrm K} % Corner
+\def \M{\mathrm M}
+\def \N{\mathrm N}
+\def \O{\mathrm O}
+\def \P{\mathrm P}
+\def \Q{\mathrm Q}
+\def \S{\mathrm S}
+\def \T{\mathrm T}
+\def \U{\mathrm U}
+\def \V{\mathrm V}
+\def \X{\mathrm X}
+\def \Y{\mathrm Y}
+\def \Z{\mathrm Z}
+
+% Operators
+\DeclareMathOperator{\Cinfty}{\mathrm{C}^\infty}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\sq}{sq}
+\DeclareMathOperator{\Strata}{Strat}
+\DeclareMathOperator{\val}{val}
+\DeclareMathOperator{\rk}{rank}
+
+% Symbols
+\newcommand{\id}{\mathbf 1}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\norm}[1]{||#1||}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\vect}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\let \epsilon=\varepsilon
+
+%--------------------------------------------------------------------------
+% Title Data
+%--------------------------------------------------------------------------
+
+\begin{document}
+
+\title[Differential Forms On Manifolds With Boundary and Corners]{Differential Forms On Manifolds \\ With Boundary and Corners}
+
+\author{Serap Gürer}
+\address{Serap Gürer --- Galatasaray University, Ortaköy, Çırağan Cd. No:36, 34349 Beşiktaş/İstanbul, Turkey.}
+\email{sgurer@gsu.edu.tr}
+
+\author{Patrick Iglesias-Zemmour}
+\address{Patrick Iglesias-Zemmour --- CNRS, France \& The Hebrew University of Jerusalem, Israel.}
+\email{piz@math.huji.ac.il}
+
+\thanks{This research is partially supported by Tübitak, Career Grant No. 115F410,
+by Galatasaray University Research Fund Grant No. 19.504.003 and by the Labex Archimède, Aix-Marseille Université.}
+\thanks{The authors thank the «~Institut d'Études Politiques d'Aix en Provence~» for its hospitality,
+at Espace Seguin,
+in July 2016 and 2017.}
+
+\date{2019 (Published) / 2025 (Archived)}
+
+\keywords{Diffeology, Manifolds with Corners, Differential Forms.}
+\subjclass{58A35, 58A10}
+
+\maketitle
+
+\begin{abstract}
+We identify the category of manifolds with boundary and corners with a subcategory of the category \{Diffeology\}.
+Then,
+we show that any differential form on a manifold with boundary or corners,
+embedded in a smooth manifold,
+extends to a differential form on an open neighbourhood.
+As an example of application,
+we discuss the structure of $\SO(2)^n$ invariant closed 2-forms on $\RR^{2n}$.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: § Introduction
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introduction}
+
+The $n$-corner $\K^n \subset \RR^n$ is defined by $x_i\geq 0$, $i=1,\dots,n$, it is equipped with the subset diffeology.
+The definition of manifolds with corners follows naturally:
+
+\textsc{Definition.} --- \textit{A $n$-manifold with corners is a diffeological space which is everywhere locally diffeomorphic to the corner $\K^n$.}
+
+The introduction of manifolds with corners goes back to J. Cerf and A. Douady in \cite{Cer61,Dou62},
+and has been since adapted or refined by many authors,
+for example \cite{ADLH73,GP74,Lee06,Joy10} and more.
+
+In \art{Manifolds-with-Corners-as-Diffeological-Spaces} we show that the classical approach and the diffeological definition lead to the same category,
+which was mandatory.
+This result extends the special case of manifolds with boundary addressed in \cite[\textsection 4.16]{PIZ13}.
+
+Considering next differential forms defined on corners,
+we prove in \art{Differential-Forms-On-Corners} the following extension lemma:
+
+\textsc{Lemma.} \textit{Every differential form on the corner $\K^n$ extends to a smooth form on an open neighbourhood of $\K^n$ in $\RR^n$.}
+
+From which we deduce the main theorem:
+
+\textsc{Theorem.} \textit{Every differential form on a manifold with corners,
+embedded in a smooth manifold,
+extends smoothly to an open neighbourhood.}
+
+We could have said that every differential form defined on a manifold with corners extends smoothly to an open neighbourhood,
+but only in the sense that a manifold with corners can always be embedded in itself as a «pièce à coins»%
+\footnote{Definition according to Douady and Herault :
+«Let $\V$ be a manifold (without boundary) and let $\X$ be a closed set in $\V$.
+We say that $\X$ is a ``piece with corners'' (\emph{pièce à coins}) of $\V$ if,
+for all $x_0 \in \X$,
+there exists a neighbourhood $\U$ of $x_0$ in $\V$ and functions $u_1,\dots, u_k$ of class $\Cinfty$ on $\U$ such that $d_{x_0}u_1,\dots, d_{x_0}u_k$  are linearly independent and that $\X \cap \U$ is the set of $x \in \U$ such that $u_1(x)\geq 0,\dots,u_k(x)\geq 0$.»};
+according to Douady et al. in \emph{Arrondissement des Variétés à Coins} \cite[Proposition 3.1]{ADLH73}.
+%
+Let us notice also that the theorem above applies in particular to differential forms on manifolds with boundary,
+since they are a particular case of manifolds with corners.
+
+In \art{Other-Corners} we give a variation of this theorem for other corners:
+powers of various \emph{half-lines} $\Delta_k = \RR^k/\O(k)$.
+And,
+in \art{An-Application} we give an application of this analysis to the decomposition of $\SO(2)^n$ invariant closed $2$-forms on $\RR^{2n}$.
+
+\textsc{Note.}~--- For more details on diffeology,
+the reader is referred to the textbook \emph{Diffeology} \cite{PIZ13}.
+
+\textsc{Thanks.}~--- The authors gratefully thank the two referees of this paper for their comments and suggestions,
+which definitely help to improve its quality.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: § Diffeology Of Manifolds With Corners
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Diffeology Of Manifolds With Corners}
+
+We first recall some definitions in diffeology that we shall use in the following.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: article: Diffeology And Diffeological Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{article}\artlabel[Diffeology And Diffeological Spaces.]
+\label{Diffeology-And-Diffeological-Spaces}
+A \emph{diffeology} on a set $\X$ is the choice of a set $\cD$ of parametrizations in $\X$ which satisfies the following axioms.
+
+\begin{enumerate}
+    \item \textsc{Covering}\,: $\cD$ contains the constant parametrizations.
+    \item \textsc{Locality}\,: Let $\P$ be a parametrization in $\X$.
+    If for all $r \in \dom(\P)$ there is an open neighbourhood $\V$ of $r$ such that $\P \restriction \V \in \cD$,
+    then $\P \in \cD$.
+    \item \textsc{Smooth compatibility}\,: For all $\P \in \cD$,
+    for all $\F \in \Cinfty(\V,\dom(\P))$,
+    where $\V$ is a Euclidean domain,
+    $\P \circ \F \in \cD$.
+\end{enumerate}
+
+We recall that a parametrization is a map defined on an open subset of an Euclidean space.
+A set $\X$ equipped with a diffeology is a \emph{diffeological space}.
+The elements of $\cD$ are then called plots of the diffeological space.
+
+\textsc{Smooth Maps.} --- \textit{
+A map $f \colon \X \to \X'$ is said to be \emph{smooth} if for any plot $\P$ in $\X$,
+$f \circ \P$ is a plot in $\X'$.
+If $f$ is smooth,
+bijective,
+and if its inverse $f^{-1}$ is smooth,
+then $f$ is said to be a \emph{diffeomorphism}.
+}
+
+Diffeological spaces and smooth maps constitute the category \{Diffeology\} whose diffeomorphisms are isomorphisms.
+
+\textsc{Subset Diffeology, Subspaces.} --- \textit{Let $\A$ be a subset of a diffeological space $\X$.
+The plots in $\X$ which take their values in $\A$ are a diffeology called \emph{subset diffeology}.
+Equipped with this diffeology,
+$\A$ is said to be a \emph{subspace} of $\X$.}
+
+\textsc{Local Smooth Maps.} --- \textit{
+The finest topology on $\X$ such that the plots are continuous is called \emph{D-Topology}.
+A map $f \colon \A \to \X'$,
+where $\A$ is a subset of $\X$,
+is said to be \emph{local smooth} if $\A$ is a D-open subset of $\X$,
+and $f$ is smooth for the subset diffeology.
+We denote by $\Cinfty_\loc(\X,\X')$ the set of local smooth maps from $\X$ to $\X'$.
+}
+
+Actually $f$ is local smooth if and only if,
+for all plots $\P$ in $\X$,
+the composite $f \circ \P \colon \P^{-1}(\A) \to \X'$ is a plot.
+That implies in particular that $\A$ is D-open,
+by definition of the D-topology.
+
+\textsc{Local Diffeomorphisms.} --- \textit{
+We say that $f \colon \A \to \X'$ is a \emph{local diffeomorphism} if it is an injective local smooth map and $f^{-1}$,
+defined on $f(\A)$,
+is also a local smooth map.
+We denote by $\Diff_\loc(\X,\X')$ the set of local diffeomorphisms from $\X$ to $\X'$.
+A smooth map or a local smooth map is said to be \emph{étale} if it is a local diffeomorphism at each point.}
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: article: Corners as Diffeological Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{article}\artlabel[Corners as Diffeological Spaces.]
+\label{Corners-as-Diffeological-Spaces}
+We denote by $\K^n$ the \emph{corner}
+$$
+\K^n = \{ (x_i)_{i=1}^n \in \RR^n \mid x_i \geq 0,\ i=1,\dots,n\},
+$$
+and we  equip it with the subset diffeology%
+\footnote{The corner $\K^n$ is the diffeological $n$-power of the half-line $\K = \mathopen[0,\infty\mathclose[ \subset \RR$,
+equipped with the subset diffeology.}.
+A plot in $\K^n$ is just a smooth parametrization to $\RR^n$ but taking its values in $\K^n$.
+
+The corner $\K^n$ is \emph{embedded} in $\RR^n$,
+and closed.
+That is,
+the D-topology of the induction $\K^n \subset \RR^n$ coincides with the induced topology%
+\footnote{The standard topology of $\RR^n$ is the D-topology of its standard smooth structure.}
+of $\RR^n$.
+
+The natural filtration of $\K^n$,
+$
+\X_0 = \{0\}\subset\X_1\subset \dots \subset \X_n=\K^n,
+$
+is defined by
+$$
+\X_j = \{(x_i)_{i=1}^n \in \K^n \mid \text{there exist } i_1<\dots<i_{n-j} \text{ such that } x_{i_\ell} = 0 \}.
+$$
+
+The subset $\S_j = \X_j - \X_{j-1}$ is the set of points in $\RR^n$ which have $j$ coordinates positive,
+and the others null:
+$$
+\S_j = \bigg\{
+(x_i)_{i=1}^n \in \RR^n \, \bigg| \,
+\begin{array}{l}
+\text{There exist } i_1<\dots<i_j \text{ such that } x_{i_\ell} > 0, \\
+\text{and } x_m = 0 \text{ for all } m \notin \{i_1,\dots,i_j \}
+\end{array}
+\bigg\}.
+$$
+The \emph{layer} $\S_j$ is D-open in $\X_j$,
+for $j \geq 1$.
+It is the sum of $ n \choose j$ connected components called \emph{strata},
+indexed by a string of $j$ ones and $n-j$ zeros.
+
+\textsc{Theorem 1.} --- \textit{A map $f \colon \K^n \to \RR^k$ is smooth for the subset diffeology if and only if it is the restriction of a smooth map on some open neighbourhood of $\K^n$.}
+
+This statement means technically that,
+if for all smooth parametrizations $\P \colon \U \to \RR^n$ such that $\P(\U) \subset \K^n$, $f \circ \P \in \Cinfty(\U,\RR^k)$,
+then there exists an open neighbourhood $\cO$ of $\K^n$ and $\F \in \Cinfty(\cO,\RR^k)$ such that $f = \F \restriction \K^n$.
+
+\textsc{Theorem 2.} --- \textit{Let $f\in \Diff_\loc(\K^n)$.
+Then,
+$f$ respects the natural stratification,
+\textit{i.e.} if $x\in \S_j$,
+then $f(x)\in \S_j$.
+Moreover,
+$f$ is the restriction of an étale map defined on an open neighbourhood of its domain of definition.}
+\end{article}
+
+\begin{proof}
+Theorem 1 was already proven in \cite[\textsection 4.16]{PIZ13}.
+%
+For Theorem 2,
+let $\P$ be a parametrization in an Euclidean domain.
+We denote by $\rk(\P)_x$ the rank of $\P$ at the point $x$,
+that is,
+the dimension of the image of the tangent linear map $\D(\P)(x)$.
+
+\textsc{Lemma.} --- \textit{Let $\P \colon \U \rightarrow \K^n$ be a plot.
+If $\P(r) \in \S_j$,
+then $\rk(\P)_r \leq j$.}
+
+$\blacktriangleleft$ \textit{Proof.} Let $\P \colon \U \rightarrow \K^n$ be a plot and assume that $\P(r) \in \S_j$.
+Then,
+$\P(r)=(\P_1(r),\P_2(r),\dots,\P_n(r))$ where there exist exactly $i_1 < \dots < i_{n-j}$ indices such that  $\P_{i_k}(r) = 0$.
+Since $\P_{i_k}(r') \geq 0$ for all $r' \in \U$ and $\P_{i_k}(r) = 0$,
+then $\D(\P_{i_k})(r) = 0$.
+That is,
+$\rk(\P)_r \leq j$. \nolinebreak \hfill $\blacktriangleright$
+
+Now,
+let us come back to the local diffeomorphism $f$,
+and assume first that $f$ is defined on all $\K^n$.
+Let $x \in \S_j$ and $x' = f(x) \in \S_k$ and $k \neq j$.
+We can choose $k > j$.
+There exists a smooth map $\F$ defined on an open neighbourhood $\cO \supset \K^n$,
+such that $f$ and $\F$ coincide on $\K^n$,
+$f = \F \restriction \K^n$.
+And also,
+there exists a smooth map $\G$ defined on an open neighbourhood $\cO' \supset \K^n$,
+such that $f^{-1}$ and $\G$ coincide on $\K^n$,
+$f^{-1} = \G \restriction \K^n$.
+The restriction of $\G$ on $\S_k$ is a plot in $\K^n$,
+and $\G \restriction \S_k \colon x' \mapsto x \in \S_j$.
+By the lemma,
+$\rk(\G \restriction \S_k)_{x'} \leq j$.
+But $\G \restriction \S_k = \G \circ j_k$,
+where $j_k: \S_k \hookrightarrow \K^n$ is identified with a plot.
+And we know that $(\F \circ \G \restriction \S_k)(t)= \F \circ \G \circ j_k(t)=\F \circ \G(j_k(t))$.
+But $j_k$ takes values in $\partial \K^n$ (the boundary of $\K^n$).
+Now,
+since $f$ is a homeomorphism of $K^n$ for the $\D$-topology, it maps the boundary into the boundary,
+and $\G$ and $f^{-1}$ coincide on the boundary.
+So we have $\F\circ \G(j_k(t)) = \F \circ f^{-1}(j_k(t))$.
+As well,
+$\F$ and $f$ coincide on the boundary,
+and $\F \circ \G(j_k(t))=f \circ f^{-1}(j_k(t))=j_k(t)$.
+Thus,
+$\rk(\F \circ \G \restriction \S_k)_{x'} = \rk(j_k)_{x'} = k \leq \rk (\G \restriction \S_k)_{x'}\leq j$.
+But,
+we assumed that $k>j$ which is a contradiction,
+and $k=j$.
+
+Now,
+consider the smooth parametrization $\G \circ \F \colon \cU \to \RR^n$,
+with $\cU = \F^{-1}(\cO')$.
+Then,
+$\cU \supset \K^n$ and $\G \circ \F \restriction \K^n = \id_{\K^n}$.
+Hence,
+for all $x \in \mathring{\K}^n$,
+$\D(\G \circ \F)(x) = \D(f^{-1} \circ f)(x) = \D(\id_{\mathring{\K}^n}) = \id_{\RR^n}$,
+and by continuity,
+for all $x \in \K^n$,
+$\D(\G \circ \F)(x) =\id_{\RR^n}$.
+Therefore,
+for all $x \in \K^n$,
+$\rk(\F)_x$ is maximum and equal to $n$.
+Hence,
+$\F$ is étale on $\K^n$.
+And obviously,
+the same for $\G$.
+The situation,
+where $f$ is only local,
+is similar.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: article: Manifolds with Corners as Diffeological Spaces
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{article}\artlabel[Manifolds with Corners as Diffeological Spaces.]
+\label{Manifolds-with-Corners-as-Diffeological-Spaces}
+The concept of manifolds with corners goes back to Cerf \cite[Chap. 1 \textsection 1.2]{Cer61},
+and Douady \cite[\textsection 4]{Dou62} (as \emph{variétés à bords anguleux}).
+Over time the various descriptions of manifolds with boundary or corners evolved to a commonly accepted definition,
+see for example Lee in \cite[pp. 251-252]{Lee06} from which we extract the following definition%
+\footnote{See also Joyce in \cite[Chap. 2]{Joy10}.}.
+
+\textsc{Classical Definition.} --- \textit{Let $\M$ be a paracompact Hausdorff topological space.
+A $n$-chart with corners for $\M$ is a pair $(\U,\phi)$,
+where $\U$ is an open subset of $\K^n$,
+and $\phi$ is a homeomorphism from $\U$ to an open subset of $\M$.
+Two charts with corners $(\U,\phi)$ and $(\V,\psi)$ are said to be smoothly compatible if the composite map
+$\psi^{-1} \circ \phi \colon \phi^{-1}(\psi(\V)) \to \psi^{-1}(\phi(\U))$ is a diffeomorphism in the
+sense that it admits a smooth extension to an open set in $\RR^n$.
+An $n$-atlas with corners for $\M$ is a pairwise compatible family of n-charts with corners covering $\M$.
+A maximal atlas is an atlas which is not a proper subset of any other atlas.
+An $n$-manifold with corners is a paracompact Hausdorff topological space $\M$ equipped with a maximal $n$-atlas with corners.}
+
+Then,
+from the diffeology point of view:
+
+\textsc{Diffeological Definition.} --- \textit{A $n$-manifold with corners is a diffeological space $\X$ which is everywhere locally diffeomorphic to the corner $\K^n$.}
+
+The \{Manifolds with Corners\} form a subcategory of \{Diffeology\}.
+The smooth maps between manifolds with corners are just the smooth maps between diffeological spaces.
+Theorems 1 and 2 of the previous subsections ensure that morphisms between manifolds with corners preserve their natural stratifications.
+
+\textsc{Theorem.} --- \textit{Let $(\M,\cA)$ be a $n$-manifold with corners according to the classical framework,
+$\cA$ being the maximal atlas of $\M$.
+The diffeology $\cD$ on $\M$ generated%
+\footnote{See \cite[\textsection 1.66]{PIZ13} for the definition of \emph{generating family}.}
+by the charts $\F \in \cA$ is a diffeology of manifold with corners for which $\Diff_\loc(\K^n,\M) = \cA$.
+The D-topology of $(\M,\cD)$ coincides with the given topology of $(\M,\cA)$.
+We shall denote $\Phi \colon (\M,\cA) \mapsto (\M,\cD)$ this association.
+Conversely,
+let $(\M,\cD)$ be a diffeological $n$-manifold with corners.
+Equip $\M$ with its D-topology,
+then $\cA = \Diff_\loc(\K^n,\M)$ is a maximal atlas equipping $\M$ with a usual structure of manifold with corners.
+Let $\Psi \colon (\M,\cD) \mapsto (\M,\cA)$ be this association.
+Then $\Phi$ and $\Psi$ are inverse of each other.}
+
+Hence,
+the classical category of manifolds with corners,
+defined using the heuristic of what smoothness means for maps on closed subsets of Euclidean domains,
+fits fully and faithfully in the category \{Diffeology\}.
+That shows,
+by the way,
+that it is unnecessary to adopt the axiomatics where plots are defined on convex subsets,
+as in Chen's approach \cite{Che77},
+to include manifolds with corners in the new category.
+Specifying the local model to be a corner equipped with its subset diffeology is,
+indeed,
+sufficient.
+
+\textsc{Note 1.} --- As in the case of ordinary manifolds,
+the category \{Manifolds with corners\} is closed for products and sums but is not closed for the other usual set theoretical operations.
+As members of the category \{Diffeology\},
+manifolds with corners inherit of all the diffeological constructions:
+fiber bundles,
+homotopy,
+differential calculus,
+homology,
+cohomology,
+etc.
+
+\textsc{Note 2.} --- Since,
+for a corner,
+coordinates are smooths,
+manifolds with corners are \emph{reflexive diffeological spaces} \cite[Exercise 79]{PIZ13}.
+Also,
+the set of smooth real maps from a manifold with corner is a \emph{differential structure} in the sense of Sikorski \cite{Sik72}.
+Indeed,
+real smooth maps from $\K^n$ to $\RR^m$ are still the restrictions of smooth maps on open neighbourhoods of $\K^n$.
+
+\textsc{Note 3.} --- The diffeology framework gives a different perspective on the definition of strata of a $n$-manifold with corners $\M$.
+We can regard it as the \emph{active point of view}.
+Indeed,
+instead of defining the strata through local chart
+---~the \emph{passive point of view}---~
+following Theorem 2 of \art{Corners-as-Diffeological-Spaces},
+one can define the different strata of $\M$ as the connected components of the orbits of the pseudogroup of local diffeomorphisms $\Diff_\loc(\M)$.
+That is,
+$$
+\Strata(\M) = \{\cO_i \in \pi_0(\cO) \mid \cO \in \M/\Diff_\loc(\M)\}.
+$$
+Moreover,
+$\Strata(\M)$ does not capture only,
+as a set,
+the decomposition of $\M$ in strata,
+but its quotient diffeology can be regarded as the \emph{transversal smooth structure} of the stratification,
+see \cite[\textsection 1.42]{PIZ13}.
+Note also that the \emph{regular part} of $\M$,
+that is,
+the principal orbit of $\Diff_\loc(\M)$,
+is the union of strata of dimension $n$.
+It is a regular $n$-submanifold and an open dense subset of $\M$ as it must be.
+Actually,
+$\M$ has a (geometrical) structure of locally conelike stratified space \cite{GIZ18}.
+\end{article}
+
+\begin{proof}
+Let us consider a manifold with corners $(\M,\cA)$,
+according to the classical definition.
+The finest diffeology $\cD$ making the charts $\F \in \cA$ smooth is the set of parametrizations $\P \colon \U \to \M$ that satisfy the following:
+there is a covering of $\U$ by a family of open sets $\U_i$,
+and for each index $i$ a chart $\F_i \in \cA$ and a smooth maps $\Q_i \colon \U_i \to \K^n$ such that $\P \restriction \U_i = \F_i \circ \Q_i$.
+We write $\P = \sup \F_i \circ \Q_i$.
+
+Now, the charts $\F \in \cA$ are smooth,
+by construction,
+and injective.
+Their domains are open for the induced topology of $\K^n$,
+which is also the D-topology of $\K^n$,
+according to above.
+
+Let us show now that the topology of $\M$ and its D-topology coincide.
+Let first $\cO \subset \M$ be an open subset of $\M$.
+Let $\P$ be a plot of $\M$,
+then $\P = \sup_i \F_i \circ \Q_i$ for some family of indices,
+with the $\F_i$ in $\cA$ and the $\Q_i$ smooth parametrizations in $\K^n$.
+Then,
+$\P^{-1}(\cO) = (\sup \F_i \circ \Q_i)^{-1}(\cO) = \cup_i \Q_i^{-1}(\F_i^{-1}(\cO))$.
+And since the $\F_i$ and the $\Q_i$ are continuous,
+$\P^{-1}(\cO)$ is open.
+Thus,
+$\cO$ is open for the D-topology.
+Conversely,
+let $\cO$ be open for the D-topology.
+For all $x \in \cO$,
+there exists $\F_x \in \cA$ such that $x \in \val(\F_x)$.
+Since $\F_x$ is a plot for $\cD$,
+$\F_x^{-1}(\cO)$ is open in $\K^n$,
+and since $\F_x$ is a local homeomorphism from $\K^n$ to $\M$,
+$\F_x \restriction \F_x^{-1}(\cO)$ is still a local homeomophism.
+Then,
+$\val(\F_x \restriction \F_x^{-1}(\cO))$ is open in $\M$.
+But $\val(\F_x \restriction \F_x^{-1}(\cO)) = \cO \cap \val(\F_x)$,
+thus $\cO = \cup_x \cO \cap \val(\F_x)$ is a union of open subsets,
+then open in $\M$.
+Therefore the topologies coincide.
+
+Let us prove now that $\Diff_\loc(\K^n,\M) = \cA$.
+Let $\Phi \in \Diff_\loc(\K^n,\M)$.
+Since the two topologies coincide,
+we know already that $\Phi$ is a local homeomorphism from $\K^n$ to $\M$.
+Now let $\F \in \cA$,
+thus $\F^{-1} \circ \Phi = \F^{-1} \circ (\sup \F_i \circ \Q_i)$,
+where $\Phi = \sup \F_i \circ \Q_i$,
+as previously.
+Hence,
+$\F^{-1} \circ \Phi = \sup (\F^{-1} \circ \F_i) \circ \Q_i$.
+But the $\F^{-1} \circ \F_i$ and the $\Q_i$ are smooth,
+and moreover local diffeomorphisms,
+thus $\F^{-1} \circ \Phi$ is a local diffeomorphism,
+and then also $\Phi^{-1} \circ \F$.
+Hence,
+since $\cA$ is maximal,
+$\Diff_\loc(\K^n,\M) \subset \cA$.
+Next let $\F \in \cA$.
+We know already that $\F$ is smooth,
+and a local homeomorphism for both topologies.
+Let us show that $\F^{-1} \colon \val(\F) \to \K^n$ is smooth.
+Let $\P$ be a plot in $\val(\F) \subset \M$,
+then $\P = \sup \F_i \circ \Q_i$.
+Hence,
+$\F^{-1} \circ \P = \sup (\F^{-1} \circ \F_i) \circ \Q_i$.
+Thus,
+$\F^{-1}$ is smooth and $\F$ is a local diffeomorphism.
+Therefore,
+$\cA \subset \Diff_\loc(\K^n,\M)$,
+and then $(\M,\cD)$ is a diffeological manifold with corners such that $\Diff_\loc(\K^n,\M) = \cA$.
+
+The proof of the converse,
+from $(\M,\cD)$ to $(\M,\cA)$ with $\cA = \Diff_\loc(\K^n,\M)$,
+is of the same vein. We leave it as an exercise for the reader.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: § Extension of Differential Forms on Corners
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Extension of Differential Forms on Manifolds with Corners}
+
+In this section,
+we prove that any differential form on a manifold with corners is the restriction of a differential form on an open neighbourhood,
+after having been pushed inside itself as a submanifold with corner,
+thanks to a construction due to Douady \emph{et al.} described in \cite[Proposition 3.1]{ADLH73}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: article: The Square Function Lemma
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{article}\artlabel[The Square Function Lemma.]
+\label{The-Square-Function-Lemma}
+Let $\sq \colon \RR^n \to \K^n$ be the smooth parametrization:
+$$
+\sq(x_1,\dots,x_n) = (x_1^2,\dots,x_n^2).
+$$
+Then $\sq^* \colon \Omega^k(\K^n) \to \Omega^k(\RR^n)$ is injective.
+That is,
+for all $\alpha \in \Omega^k(\K^n)$,
+if $\sq^*(\alpha) = 0$,
+then $\alpha = 0$.
+\end{article}
+
+\begin{proof}
+Note that each component of $\X_j - \X_{j-1}$ is diffeomorphic to $\RR^j$.
+Thus,
+if $\sq^*(\alpha) = 0$,
+then $\alpha \restriction (\X_j - \X_{j-1}) = 0$,
+because $\sq \restriction \sq^{-1}(\X_j - \X_{j-1})$ is a $2$-fold covering over $\X_j - \X_{j-1}$.
+Hence,
+for all plots $\Q$ in $\X_j - \X_{j-1}$,
+$\alpha(\Q)=0$.
+%
+Let then,
+for some $j\geq 1$,
+$\P_j \colon \U_j \to \X_j$ be a plot.
+According to \art{Corners-as-Diffeological-Spaces},
+the subset $\cO_j = \P_j^{-1}(\X_j - \X_{j-1})$ is open,
+and $\alpha(\P_j \restriction \cO_j) = \alpha(\P_j) \restriction \cO_j = 0$.
+By continuity,
+$\alpha(\P_j) \restriction \overline{\cO}_j = 0$,
+where $\overline{\cO}_j$ is the closure of $\cO_j$.
+Let then $\U_{j-1} = \U_j - \overline{\cO}_j$ and $\P_{j-1} = \P_j \restriction \U_{j-1}$.
+Then,
+$\U_{j-1}$ is open and $\P_{j-1} \colon \U_{j-1} \to \X_{j-1}$ is a plot.
+%
+This construction gives a descending recursion,
+starting with any plot $\P \colon \U \to \K^n$,
+by initializing $\P_n = \P$,
+$\U_n = \U$ and $\X_n = \K^n$.
+One has $\P_j = \P \restriction \U_j$,
+$\U_{j-1} \subset \U_j$,
+the recursion ends with a plot $\P_0$ with values in $\X_0 = \{0\}$,
+and $\alpha(\P_0) = 0$ since $\P_0$ is constant.
+%
+Therefore $\alpha = 0$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: article: Differential Forms On Corners
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{article}\artlabel[Differential Forms On Corners.]
+\label{Differential-Forms-On-Corners}
+The extension of smooth real functions on corners \art{Corners-as-Diffeological-Spaces},
+is a particular case of the following lemma on differential forms of any degree.
+
+\textsc{Lemma.} \textit{Any differential $k$-form on the corner $\K^n$,
+equipped with the subset diffeology of\/ $\RR^n$,
+is the restriction of a smooth differential $k$-form defined on some open neighbourhood of the corner.
+}
+
+In other words,
+the pullback $:j^* \colon \Omega^k(\RR^n) \to \Omega^k(\K^n)$ is surjective,
+where $j$  denotes the inclusion from $\K^n$ to $\RR^n$.
+
+As a corollary of the previous lemma we get:
+
+\textsc{Theorem.} \textit{Let $\M$ be a Hausdorff paracompact submanifold with corners,
+embedded in a smooth manifold $\M'$.
+Then,
+any form $\omega \in \Omega^k(\M)$ can be smoothly extended to an open neighbourhood of $\M$ in $\M'$.}
+
+\textsc{Note 1.} Thanks to \cite[Proposition 3.1]{ADLH73}, every manifold with corners can be embedded in itself.
+Thus,
+in the previous theorem,
+to be a submanifold with corners of a smooth manifold is not a restriction.
+
+\textsc{Note 2.} The theorem applies obviously to manifold with boundary,
+since they are a particular case of manifolds with corners.
+
+\textsc{Note 3.} There is a subtlety about the value of a form \cite[\textsection 6.40]{PIZ13} at the boundary of a manifold with corners.
+For example on the half-line $\mathopen[0,\infty\mathclose[ \subset \RR$,
+the restriction $\alpha$ of the constant $1$-form $a\, d\!x$ is a differential form on the half line.
+Its value at $0$ is zero,
+since it vanishes when precomposed by a plot and evaluated at zero,
+that is,
+$\alpha(\gamma)_0 = 0$ for all paths $\gamma$ in $\mathopen[0,\infty\mathclose[$ such that $\gamma(0)=0$.
+But,
+of course,
+the value of the extension $a\,d\!x$ of $\alpha$ on $\RR$,
+at the point $0$,
+is the number $a$,
+as usual.
+So,
+we have to be careful when using the notion of values when it comes to differential forms in diffeology.
+\end{article}
+
+\begin{proof}
+Let us prove the lemma.
+Let $\omega \in \Omega^k(\K^n)$ and $\mathring\K^n = \{ (x_i)_{i=1}^n \mid x_i > 0, i=1,\dots,n \}$.
+One has
+$$
+\omega \restriction \mathring\K^n = \sum_{i_1<\dots<i_k} a_{i_1 \dots i_k}(x_1, \dots, x_n)\ dx_{i_1} \wedge \dots \wedge dx_{i_k},
+$$
+with $i_j = 1,\dots,n$ and $a_{i_1 \dots i_k} \in \Cinfty(\mathring\K^n,\RR)$.
+Recall that $\sq \colon (x_i)_{i=1}^n \mapsto (x_i^2)_{i=1}^n$,
+then
+$$
+\sq^*(\omega) = \sum_{i_1<\dots<i_k} \A_{i_1 \dots i_k}(x_1,\dots, x_n)\ dx_{i_1} \wedge \dots \wedge dx_{i_k},
+$$
+where $\A_{i_1 \dots i_k} \in \Cinfty(\RR^n,\RR)$.
+Let $\varepsilon_j : (x_1,\dots, x_j,\dots,x_n) \mapsto (x_1,\dots, -x_j,\dots,x_n)$,
+then $ \sq \circ \varepsilon_j = \sq$ and
+$(\sq \circ \varepsilon_j)^*(\omega) = \varepsilon_j^*(\sq^*(\omega))$,
+that is,
+$\sq^*(\omega) = \varepsilon_j^*(\sq^*(\omega))$.
+Hence,
+\begin{eqnarray*}
+    \varepsilon_j^*(\sq^*(\omega)) & =& \sum_{i_1<\dots<i_k \atop i_\ell \neq j} \A_{i_1 \dots i_k}(x_1,\dots, -x_j,\dots, x_n)\ dx_{i_1} \wedge \dots \wedge dx_{i_k} \\
+    & - & \sum_{i_1 < \dots \leq j \leq \dots < i_k} \A_{i_1\dots j \dots i_k}(x_1,\dots, -x_j,\dots, x_n)\ dx_{i_1} \wedge \dots \wedge dx_j \wedge \dots \wedge dx_{i_k}.
+\end{eqnarray*}
+Then,
+\begin{eqnarray*}
+    \A_{i_1 \dots i_k \atop i_\ell \neq j}(x_1,\dots, -x_j,\dots, x_n) & = & \A_{i_1 \dots i_k}(x_1,\dots, x_j,\dots, x_n), \\
+    \A_{i_1 \dots j \dots i_k}(x_1,\dots, -x_j,\dots, x_n) & = & - \A_{i_1\dots j \dots i_k}(x_1,\dots, x_j,\dots, x_n).
+\end{eqnarray*}
+Hence,
+$$
+\A_{i_1 \dots j \dots i_k}(x_1,\dots, x_j=0,\dots, x_n) = 0.
+$$
+Thus,
+$$
+\quad \A_{i_1\dots j \dots i_k}(x_1,\dots, x_j,\dots, x_n) = 2 x_j \underline{\A}_{i_1\dots j \dots i_k}(x_1,\dots, x_j,\dots, x_n),
+$$
+with $\underline{\A}_{i_1\dots j \dots i_k} \in \Cinfty(\RR^n,\RR)$.
+By induction,
+there are real smooth functions $\hat\A_{i_1\dots i_k}$ defined on $\RR^n$ such that
+$$
+\quad \A_{i_1 \dots i_k}(x_1,\dots, x_n) = 2^k x_{i_1}\dots x_{i_k} \hat\A_{i_1\dots i_k}(x_1,\dots, x_n).
+$$
+Now,
+$$
+\sq^*(\omega\restriction \mathring \K^n) = \sq^*(\omega) \restriction \{x_i \neq 0\}
+$$
+implies
+\begin{eqnarray*}
+    & & \sum_{i_1<\dots<i_k} 2^k x_{i_1}\dots x_{i_k} a_{i_1 \dots i_k}(x^2_1,\dots, x^2_n)\ dx_{i_1} \wedge \dots \wedge dx_{i_k} \\
+    & = &
+    \sum_{i_1<\dots<i_k} 2^k x_{i_1}\dots x_{i_k} \hat\A_{i_1 \dots i_k}(x_1,\dots, x_n) \ dx_{i_1} \wedge \dots \wedge dx_{i_k}.
+\end{eqnarray*}
+Hence,
+$$
+\hat\A_{i_1 \dots i_k}(x_1,\dots, x_n) = a_{i_1 \dots i_k}(x^2_1,\dots, x^2_n) \quad \text{for } x_i \neq 0, i = 1,\dots,n.
+$$
+Thus $(x_1,\dots, x_n) \mapsto \hat\A_{i_1 \dots i_k}(x_1,\dots, x_n)$,
+which belongs to $\Cinfty(\RR^n,\RR)$,
+is even in each variable.
+Therefore,
+according to Whitney's theorem on even smooth functions \cite[Theorem 1 \& Remark p.160]{Whi43},
+there exist
+$$
+\underline{a}_{i_1 \dots i_k} \in \Cinfty(\RR^n,\RR),
+$$
+such that
+$$
+\hat\A_{i_1 \dots i_k}(x_1,\dots, x_n) = \underline{a}_{i_1 \dots i_k}(x_1^2,\dots, x_n^2).
+$$
+One deduces:
+$$
+\underline{a}_{i_1 \dots i_k}(x_1,\dots, x_n) = a_{i_1 \dots i_k}(x_1,\dots, x_n), \text{ for all } (x_1,\dots, x_n) \in \mathring{\K}^n.
+$$
+Then,
+defining the $k$-form $\underline\omega$ on $\RR^n$ by
+$$
+\underline\omega = \sum_{i_1<\dots<i_k} \underline{a}_{i_1 \dots i_k}(x_1, \dots, x_n)\ dx_{i_1} \wedge \dots \wedge dx_{i_k},
+$$
+one has already
+$$
+\underline\omega \restriction \mathring\K^n = \omega \restriction \mathring\K^n.
+$$
+Let us show that $\underline\omega \restriction \K^n = \omega$.
+That is,
+let us check that for all plot $\P \colon \U \to \RR^n$,
+$\P^*(\underline\omega)=\omega(\P)$.
+Actually,
+one has
+$$
+\sq^*(\omega) = \sq^*(\underline\omega \restriction \K^n).
+$$
+Indeed:
+\begin{eqnarray*}
+    \sq^*(\omega) & = & \sum_{i_1\dots i_k} \A_{i_1\dots i_k}(x_1,\dots,x_n)\ dx_{i_1}\wedge\dots\wedge dx_{i_k} \\
+    & = & \sum_{i_1\dots i_k} 2^k x_{i_1} \dots x_{i_k} \hat\A_{i_1\dots i_k}(x_1,\dots,x_n)\ dx_{i_1}\wedge\dots\wedge dx_{i_k} \\
+    &=& \sum_{i_1\dots i_k} 2^k x_{i_1} \dots x_{i_k} \underline{a}_{i_1\dots i_k}(x_1^2,\dots,x_n^2)\ dx_{i_1}\wedge\dots\wedge dx_{i_k}.
+\end{eqnarray*}
+And,
+on the other hand:
+\begin{eqnarray*}
+    \sq^*(\underline\omega\restriction \K^n) = \sum_{i_1\dots i_k} 2^k x_{i_1} \dots x_{i_k} \underline{a}_{i_1\dots i_k}(x_1^2,\dots,x_n^2)\ dx_{i_1}\wedge\dots\wedge dx_{i_k}.
+\end{eqnarray*}
+Thus,
+$\sq^*(\omega - \underline\omega \restriction \K^n) = 0$.
+Therefore,
+according to the lemma \art{The-Square-Function-Lemma},
+$\omega - \underline\omega \restriction \K^n = 0$.
+And then,
+$\omega$ is the restriction on $\K^n$ of the smooth $k$-form $\underline\omega$ on $\RR^n$.
+
+For the theorem:
+thanks to the lemma,
+we consider a locally finite open cover $\{\U_i\}$ of the boundary of $\M \subset \M'$ where the form $\omega$ has been extended smoothly on each $\U_i$ by $\omega_i$.
+Then,
+there exists a smooth partition of unity $\lambda_j$,
+subordinate to a subcover $\{V_j\}$.
+Let $\omega_j = \omega_i \restriction \V_j$,
+for some index $i$ such that $\V_j \subset \U_i$.
+The smooth form $\bar\omega = \sum_j \lambda_j \omega_j$,
+defined on the neighbourhood $\cup_j \V_j$ of the boundary of $\M$,
+is an extension of $\omega$ on $(\cup_j \V_j) \cap \M $.
+It defines this way an extension of $\omega$ on an open neighbourhood of $\M$ in $\M'$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: article: Other Corners
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{article}\artlabel[Other Corners.]
+\label{Other-Corners}
+The \emph{half-line} $\Delta_k = \RR^k/\O(k)$ is identified to the interval $\mathopen[0,\infty\mathclose[$,
+equipped with the pushforward of the smooth diffeology of $\RR^k$ by the projection $\nu_k \colon \X \mapsto \norm{\X}^2$,
+see \cite{PIZ07}.
+Then,
+with each half-line we can associate a \emph{$n$-corner} $\Delta_k^n$.
+But note that,
+according to definition \art{Manifolds-with-Corners-as-Diffeological-Spaces},
+none of these corners is a manifold with corners.
+Then,
+let $\J_k^n : \Delta_k^n \to \RR^n$ be the natural injection.
+
+\textsc{Proposition.} --- \textit{The pullback ${J_k^n}^* \colon \Omega^*(\RR^n) \to \Omega^*(\Delta_k^n)$ is surjective.
+That is,
+every differential form $\epsilon$ on $\Delta_k^n$ is the pullback by $\J_k^n$ of some smooth form $\alpha \in \Omega^*(\RR^n)$.}
+
+\textsc{Note.} Let $j : \K^n \to \RR^n$ be the natural injection,
+and let $j_k^n \colon \Delta_k^n \to \K^n$ be the injection such that $\J_k^n = j \circ j_k^n$.
+Then,
+thanks to the previous proposition,
+${j_k^n}^*$ is a bijection.
+\end{article}
+
+\begin{proof}
+First,
+we notice that the map $\sq \colon \RR^n \to \Delta_k^n$ is still smooth.
+Then,
+we check that $\J_k^n$ is an embedding,
+that is,
+the pullback of the topology of $\RR^n$ is the D-topology of $\Delta_k^n$.
+We conclude that the lemma \art{The-Square-Function-Lemma} is still true,
+replacing $\K^n$ by $\Delta_k^n$ and $\mathring{\K}^n$ by $\mathring{\Delta}_k^n$.
+Next the proof of \art{Differential-Forms-On-Corners} applies \emph{mutatis mutandis} to $\Delta_k^n$,
+considering ${\J_k^n}^*(\omega)$ instead of $\omega \restriction \K^n$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: article: An Application
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{article}\artlabel[An Application.]
+\label{An-Application}
+We can apply the theorems above to describe the closed $2$-forms on manifolds,
+invariant with respect to some action of a Lie group.
+%As it has been shown in particular in the classification of $\SO(3)$-symplectic manifolds \cite{Igl84,Igl91},
+Roughly speaking,
+a closed $2$-form $\omega$ on a manifold $\M$,
+invariant by the Hamiltonian action of a compact group%
+\footnote{There could a diffeological generalisation possible here to non compact group.}
+$\G$,
+is characterized by its \emph{moment map} $\mu \colon \M \to \cG^*$,
+and for each given moment map,
+a closed $2$-form $\varepsilon \in \Z^2(\M/\G)$.
+Let us be more precise:
+the space of $\G$-invariant closed $2$-forms $\Z^2(\M)^\G$ is a vector space,
+the space of $\G$-equivariant maps from $\M$ to $\cG^*$ is also a vector space,
+and the map associating its moment map%
+\footnote{The manifold $\M$ is supposed to be connected.
+To have a uniqueness of the moment maps we decide to fix their value to $0$ at some base point $m_0 \in \M$,
+for example.}
+$\mu$ with each invariant closed $2$-form $\omega$ is linear.
+What we claim is that the kernel of this map is exactly $\Z^2(\M/\G)$,
+where $\M/\G$ is equipped with the quotient diffeology.
+Denoting by ${\mathcal E\!q}_{\!\bullet}(\M,\cG^*) \subset {\mathcal E\!q}(\M,\cG^*)$ the space of moment maps of $\G$-invariant closed $2$-forms on $\M$,
+as a subset of smooth equivariant maps,
+one has this exact sequence of smooth linear maps:
+$$
+0 \xrightarrow[]{} \Z^2(\M/\G) \xrightarrow[]{} \Z^2(\M)^\G \xrightarrow[]{} {\mathcal E\!q}_{\!\bullet}(\M,\cG^*) \xrightarrow[]{} 0.
+$$
+An equivariant map is easy to conceive,
+but a differential form on the space of orbits,
+which is generally not a manifold,
+is more problematic.
+This is where the above theorem can help:
+$\M/\G$ is a diffeological space which,
+sometimes,
+is not far from being a manifold with boundary or corners,
+as the following example shows.
+
+Consider for example $\M = \RR^{2n}$,
+and the space of closed $2$-forms invariant by $\SO(2)^n$.
+The quotient space $\cQ^n = \RR^{2n}/\SO(2)^n$ is equivalent to the \emph{other corner} $\Delta_2^n$,
+with $\Delta_2 = \RR^2/\O(2)$.
+Let $\omega$ and $\omega'$ be two closed $2$-forms,
+sharing the same moment map $\mu \colon \RR^{2n} \to \RR^n$.
+Then,
+according to the previous sections,
+there exists a closed $2$-form $\epsilon$ defined on an open neighbourhood of $\K^n \subset \RR^n$ (which could be $\RR^n$),
+such that $\omega' = \omega + \pi^*(\epsilon)$,
+with $\pi \colon (z_1,\dots,z_n) \mapsto (||z_1||^2,\dots,||z_n||^2)$,
+$z_i \in \RR^2$.
+Moreover, since $\K^n$ is contractible,
+$\epsilon = d\alpha$,
+where $\alpha$ is a smooth extension of a $1$-form on $\K^n$.
+Therefore,
+$\omega' = \omega + d(\pi^*(\alpha))$.
+\end{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: § Bibliographie
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{ADLH73}
+    
+    \bibitem[Cer61]{Cer61}
+    Jean Cerf.
+    \newblock {\em Topologie de certains espaces de plongements}.
+    \newblock {Bulletin de la SMF}, (89):227--280, 1961.
+    
+    \bibitem[Che77]{Che77}
+    Kuo-Tsai Chen.
+    \newblock {\em Iterated path integrals}.
+    \newblock {Bulletin of AMS}, 83(5):831--879, 1977.
+    
+    \bibitem[Dou62]{Dou62}
+    Adrien Douady.
+    \newblock {\em Vari{\'e}t{\'e}s {\`a} bord anguleux et voisinages tubulaires}.
+    \newblock S{\'e}minaire Henri Cartan, (14):1--11, 1961--1962.
+    
+    \bibitem[ADLH73]{ADLH73}
+    Adrien Douady and Letizia H{\'e}rault.
+    \newblock {\em Arrondissement des vari{\'e}t{\'e}s {\`a} coins --- appendice {\`a} "corners and arithmetic groups"}.
+    \newblock {Commentarii Mathematici Helvetici}, (48):484--491, 1973.
+    
+    \bibitem[GP74]{GP74}
+    Victor Guillemin and Alan Pollack.
+    \newblock {\em Differential Topology}.
+    \newblock Prentice Hall, 1974.
+    
+    \bibitem[GIZ18]{GIZ18}
+    Serap Gürer and Patrick Iglesias-Zemmour.
+    \newblock {\em Differential Forms on Stratified Spaces II}.
+    \newblock Bulletin of the Australian Mathematical Society, 98(2):319-330, 2019.
+    
+    \bibitem[PIZ07]{PIZ07}
+    Patrick Iglesias-Zemmour.
+    \newblock {\em Dimension in diffeology.}
+    \newblock {Indagationes Mathematicae, (18)4:555--560, 2007.}
+    
+    \bibitem[PIZ13]{PIZ13}
+    \newblock{Patrick Iglesias-Zemmour.}
+    \newblock{\em Diffeology.}
+    \newblock{Mathematical Surveys and Monographs. The American Mathematical Society, (185), USA R.I. 2013.}
+    
+    \bibitem[Joy10]{Joy10}
+    \newblock{Dominic Joyce.}
+    \newblock{\em On Manifolds with Corners.}
+    Advanced Lectures in Mathematics series (21):225--258, International Press, Boston, 2012.
+    
+    \bibitem[Lee06]{Lee06}
+    John M. Lee.
+    \newblock {\em Introduction to Smooth Manifolds}.
+    \newblock Graduate Texts in Mathematics. Springer Verlag, New York, 2006.
+    
+    \bibitem[Sik72]{Sik72}
+    Roman Sikorski.
+    \newblock \emph{Differential Modules}.
+    \newblock Colloquium Mathematicum, (24):49--79, 1972.
+    
+    \bibitem[Whi43]{Whi43}
+    Hassler Whitney.
+    \newblock{\em Differentiable even functions.}
+    \newblock{Duke Math. Journal, pp. 159--160, vol. 10, 1943.}
+    
+\end{thebibliography}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fin du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
