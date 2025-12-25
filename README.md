@@ -19,7 +19,7 @@ Diffeology was developed primarily to solve problems in **Symplectic Geometry** 
 
 The TeX source files in this archive are designed to be **autonomous and directly compilable**.
 
-*   **Self-Contained:** Each document is structured to compile without missing dependencies. Figures are provided in local subdirectories.
+*   **Self-Contained:** Each document is structured to compile without missing dependencies. Figures are either generated via code (TikZ) within the source or provided in local subdirectories.
 *   **Tested Environment:** All documents have been modernized, verified, and successfully compiled using the **MacTeX distribution (version 2025)**.
 
 ## Repository Structure
@@ -30,9 +30,12 @@ The works in this archive are organized into three main categories:
 
 This directory contains the official TeX source files for individual research articles, organized chronologically by publication year.
 
--   `/Papers/1985-Groupes-Diffeologiques-Flots-Irrationnels/`
--   `/Papers/2007-Moment-Maps-In-Diffeology/`
--   `/Papers/2025-Conformal-Co-Symplectic-Geodesics/`
+-   `/Papers/1986-Connexions-et-Diffeologie/`
+-   `/Papers/2010-Orbifolds-as-Diffeologies/`
+-   `/Papers/2016-Example-of-Singular-Reduction-in-Symplectic-Diffeology/`
+-   `/Papers/2019-Differential-Forms-On-Manifolds-With-Boundary-and-Corners/`
+-   `/Papers/2021-An-Introduction-To-Diffeology/`
+-   `/Papers/2025-The-Boman-Paradox/`
 
 ### /Monographs/
 
@@ -58,7 +61,6 @@ For a comprehensive introduction to the subject, see the author's book:
 *   **P. Iglesias-Zemmour, *Diffeology*** (Mathematical Surveys and Monographs, Vol. 185, AMS, 2013).
 *   A revised version is also available from Beijing World Publishing Corp. (2022).
 
-
 ## Usage and License
 
 The content of this repository is made available under the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
@@ -71,6 +73,10 @@ Under the following terms:
 -   **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
 
 [Link to the CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/)
+
+## Credits
+
+This archive was realized with the collaboration of **Gemini** (Google).
 
 ## Contact
 
