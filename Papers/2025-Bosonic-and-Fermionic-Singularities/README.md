@@ -30,7 +30,6 @@ This is a born-digital LaTeX document, archived directly from the author's draft
 
 *   **Format:** `amsart` class with "ventilated prose".
 *   **Self-Contained:** The source code is fully autonomous and does not require external figures or custom packages.
-*   **Macros:** Standardized to use AMS fonts for long-term stability.
 
 ## Files in this Directory
 *   `BAFSID.tex`: The complete LaTeX source file.
