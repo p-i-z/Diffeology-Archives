@@ -13,7 +13,7 @@ In Diffeology, we observe that objects traditionally classified as "distribution
 
 2.  **Singular Geometry (Tensors on Corners):**
     As shown in the study of the half-line and quadrant [2], symmetric tensors can support singularities (e.g., $dx^2/x$) that are "regularized" by the plots.
-    *   **Observation:** The tensor behaves like a distribution with a specific "singular capacity" determined by its rank ($\kappa(k) = \lfloor k/2 \rfloor$), yet it remains a smooth section of the tensor bundle in the diffeological sense.
+    *   **Observation:** The tensor behaves like a distribution with a specific "singular capacity" determined by its rank ($\kappa(k) = \lfloor k/2 \rfloor$), yet it remains a smooth tensor (also intepreted if you wish as a section of the tensor bundle in the diffeological sense).
 
 ### The Problem
 
