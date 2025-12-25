@@ -1,0 +1,880 @@
+\documentclass[11pt,a4paper]{amsart}
+
+%--------------------------------------------------------------------------
+% Packages
+%--------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel} % Document is in French
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{tikz-cd}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{subcaption} %side by side diagrams
+\usepackage[margin=0pt, font=small, justification=centering, labelformat=empty]{caption} %customises captions
+\usepackage{floatrow}
+\usepackage{mathrsfs} % fancy maths letters
+
+%--------------------------------------------------------------------------
+% Page Layout & Typography
+%--------------------------------------------------------------------------
+\parindent 0mm
+\parskip .5ex plus 2pt
+\linespread{1.1}
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+\renewcommand{\thesection}{\Roman{section}}
+\numberwithin{equation}{subsection}
+
+\usepackage{microtype}
+\usepackage[cal=scr,uppercase = upright,greekfamily = didot,greeklowercase = upright,utopia]{mathdesign}
+\usepackage[supspaced=.04em]{superiors}
+
+\linespread{1.1}
+
+%--------------------------------------------------------------------------
+% Theorem Styles
+%--------------------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{theoreme}[proposition]{Théorème}
+\newtheorem{lemme}[proposition]{Lemme}
+
+\theoremstyle{definition}
+\newtheorem{definition}[proposition]{Définition}
+\newtheorem{remarque}[proposition]{Remarque}
+
+%--------------------------------------------------------------------------
+% Macros
+%--------------------------------------------------------------------------
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\Cinfty}{C^\infty}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Arc}{\mathrm{Arc}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Mor}{\mathrm{Mor}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\id}{\mathrm{id}}
+
+% Specific to this paper
+\newcommand{\DL}{\mathrm{DL}} % Applications locales
+\newcommand{\ReDomains}{\mathfrak{R}} % The set of domains R
+
+%--------------------------------------------------------------------------
+% Title Data
+%--------------------------------------------------------------------------
+
+\begin{document}
+  
+  \title{Connexions et Difféologie}
+  
+  \author{Patrick Iglesias}
+  \address{Centre de Physique Théorique, CNRS Luminy Case 907, 13288 Marseille Cedex 9, France}
+  \thanks{*) Présenté au Colloque International de Géométrie Symplectique, Lyon, Mai 1986.}
+  \thanks{**) Laboratoire Propre du CNRS.}
+  
+  \date{Octobre 1986}
+  
+  \maketitle
+  
+  \begin{abstract}
+    \textbf{Résumé :} Où il est question de fibrés difféologiques,
+    de connexions et de l'ambiguïté de Gribov.
+    
+    \vspace{0.5em}
+    
+    \noindent \textbf{Abstract:} Where it is question of diffeological fibrations,
+    connections and Gribov's ambiguity.
+  \end{abstract}
+  
+  % ---- Introduction
+  \section*{0 - Introduction}
+  
+  On a été amené,
+  en physique,
+  à étudier l'espace de toutes les connexions d'un fibré principal $\pi: X \to M$ (noté $C(\pi)$) considéré comme un espace de "champs" (théorie de Yang-Mills).
+  En fait cet espace est plutôt un espace de "potentiels",
+  l'action du groupe $J$ des transformations de jauge sur $C(\pi)$ étant inobservable.
+  
+  Ceci amène naturellement à étudier l'espace $C(\pi)/J$ et la projection $\Pi: C(\pi) \to C(\pi)/J$.
+  Des études ont été faites sur cette application qui utilisent les méthodes topologiques (voir [6][5]).
+  La question posée est la suivante :
+  
+  \begin{center}
+    \emph{$\Pi$ est elle une fibration et, dans ces conditions, cette fibration est-elle triviale ?}
+  \end{center}
+  
+  Ce qui physiquement s'interprèterait par l'existence d'une jauge globale.
+  Nous allons voir que la difféologie est particulièrement bien adaptée pour traiter ce genre de question.
+  Nous étudierons ici le cas $M$ non-compact,
+  cas généralement ignoré par la topologie (pour le traitement difféologique du cas $M$ compact voir [3]).
+  Faisons remarquer encore que l'approche traditionnelle qui suppose la variété de base (l'espace-temps) compacte cache des hypothèses de différentiabilité à l'infini qui n'ont aucune raison d'être vérifiées et qui sont en fait liées à un choix particulier de carte.
+  Le traitement difféologique de cette question élimine cet inconvénient.
+  
+  Ce travail est une illustration de la théorie des espaces difféologiques.
+  Cette théorie a été introduite par J.M. Souriau [7] pour aborder l'étude des groupes de dimension infinie.
+  Elle a été ensuite développée par P. Donato en ce qui concerne les espaces homogènes [1],
+  où il a notamment construit des revêtements d'espaces homogènes du groupe des symplectomorphismes de $\RR^{2n}$.
+  Cette théorie a encore été appliquée à l'étude de ce qu'on a coutume d'appeler les "espaces singuliers",
+  ce qui a permis de montrer qu'elle était aussi tout à fait adaptée à ce genre de question.
+  L'étude de l'enroulement irrationnel du tore $T^2$ fait notamment apparaitre le groupe $GL(2,\ZZ)$,
+  met en évidence les irrationnels quadratiques,
+  et même les irrationnels diophantiens [2][3].
+  
+  Afin de répondre à certaines questions posées par la théorie des champs (comme l'ambiguïté de Gribov que nous traitons ici) il fallait développer l'aspect fibration de cette théorie [3].
+  A cet effet nous avons introduit la \emph{micro-trivialité} qui étend la trivialité locale des fibrés de dimension finie.
+  Cette extension préserve la suite exacte d'homotopie qui est un outil puissant en théorie des fibrés et que nous utilisons dans le problème qui nous intéresse.
+  
+  Ce travail contient aussi une ébauche de la théorie des connexions des fibrés difféologiques.
+  Nous avons préféré le point de vue du relèvement des chemin plutôt que celui des sous-espaces horizontaux.
+  
+  Nous donnons au passage quelques résultats sur le groupe des transformations de jauge d'un fibré principal obtenu uniquement à partir de ces méthodes difféologiques,
+  notamment sur la suite $1 \to J \to \text{Auto} \to \Diff$.
+  Ainsi que quelques résultats généraux sur les fibrés difféologiques "connexables".
+  
+  % --- Rappels de difféologie
+  \section{Rappels de difféologie}
+  
+  % --- Principes de difféologie
+  \subsection{Principes de difféologie}
+  
+  Rappelons qu'une difféologie sur un ensemble $X$ est définie par la donnée d'un faisceau d'applications locales $\DL(\ReDomains, X)$ défini sur les ouverts de la réunion disjointe $\ReDomains$ des puissances finies de $\RR$ et à valeurs dans $X$,
+  et vérifiant :
+  \begin{equation} \label{I.1.1}
+    \DL(\ReDomains, X) \text{ est couvrant } \heartsuit
+  \end{equation}
+  \begin{center}
+    $\DL(\ReDomains, X)$ est saturé pour la composition par le faisceau $C^\infty(\ReDomains)$ $\diamondsuit$
+  \end{center}
+  
+  Où \emph{couvrant} signifie que la réunion des images des éléments de $\DL(\ReDomains, X)$ est égal à $X$.
+  Nous renvoyons le lecteur à [7] [1] et [3] pour plus de détails,
+  à la fois pour la définition des espaces difféologiques et pour celles des notions de base comme les subductions,
+  inductions,
+  difféologie image,
+  difféologie réciproque,
+  etc...
+  Nous proposons en annexe une présentation des difféologies basée sur le langage des faisceaux et que le lecteur pourra considérer comme une suite de remarques.
+  
+  % --- Les fibrés difféologiques
+  \subsection{Les fibrés difféologiques}
+  
+  Nous décrivons ici,
+  rapidement,
+  la théorie des \emph{fibrés difféologiques},
+  pour plus de détail le lecteur pourra se reporter à [3].
+  
+  Considérons deux espaces difféologiques $X$ et $M$ et une application différentiable $\pi$ de $X$ à $M$.
+  L'ensemble des difféomorphismes des sous espaces difféologiques de $X$,
+  images réciproques par $\pi$ des points de la base,
+  constitue un groupoïde pour la composition :
+  \begin{equation} \label{I.2.1}
+    \Gamma(\pi) = \{ f \in \Diff(X_m, X_{m'}) \mid (m,m') \in M \times M \}
+  \end{equation}
+  On notera $\chi$ l'\emph{application caractéristique} du groupoïde,
+  c'est à dire :
+  \begin{equation} \label{I.2.2}
+    \chi : \Gamma(\pi) \to M \times M \quad \chi(f) = (m,m') \iff f \in \Diff(X_m, X_{m'})
+  \end{equation}
+  $\Gamma(\pi)$ est muni de la difféologie de groupoïde la moins fine rendant la valuation différentiable :
+  \begin{equation} \label{I.2.3}
+    \text{valuation} : (f,x) \mapsto f(x) \text{ avec } x \in \dom(f)
+  \end{equation}
+  Le domaine de l'application valuation est l'image réciproque de l'application source définie sur $\Gamma(\pi)$ à valeur dans $M$ par :
+  \begin{equation} \label{I.2.4}
+    \text{source}(f) = m \iff \dom(f) = X_m
+  \end{equation}
+  L'application différentiable $\pi$ est appelée alors \emph{fibration difféologique} si l'application caractéristique $\chi$ est une subduction de $\Gamma(\pi)$ sur $M \times M$.
+  
+  Cette définition difféologique des fibrations s'interprète encore en terme de \emph{micro-trivialité} :
+  l'application $\pi$ est une fibration si et seulement si l'image réciproque de $X$ par toute plaque de la base $M$ est localement triviale (au dessus de l'ouvert de $\ReDomains$ domaine de définition de la plaque en question).
+  
+  Il est clair que toutes les fibres d'une fibration sont difféomorphes entre elles,
+  le type $F$ de cet espace difféologique est appelé évidemment \emph{fibre-type} de la fibration.
+  Le groupe des difféomorphismes $\Diff(F)$ de la fibre type est appelé le \emph{groupe structural} de la fibration.
+  Il existe une notion de réduction de fibration difféologique :
+  étant donné un sous-groupoïde difféologique $K$ de $\Gamma(\pi)$ on dit que $\pi$ est réductible à $K$ si la restriction de $\chi$ à $K$ est encore une subduction.
+  Le groupe structural est alors plus petit que $\Diff(F)$,
+  c'est le groupe des difféomorphismes de $F$ dans $K$.
+  
+  La notion de fibration principale s'étend naturellement aux espaces difféologiques grâce à la proposition suivante,
+  dont on trouvera la démonstration dans [3] :
+  
+  \subsubsection*{\emph{I.2.5.} Proposition.}
+  Soit $G$ un groupe difféologique agissant différentiablement sur un espace difféologique $X$.
+  Soit $L$ l'application de $G \times X$ dans $X \times X$ définie par :
+  $$
+    L(g,x) = (x, g(x)) \quad (g,x) \in G \times X \quad \heartsuit
+    $$
+  La projection canonique $\pi$ de $X$ sur $X/G$ est une fibration difféologique de fibre type $G$ si et seulement si $L$ est une induction.
+  On dit dans ce cas que $\pi$ est une \emph{fibration difféologique principale}.
+  
+  On peut démontrer alors qu'au groupoïde structural de toute fibration difféologique est attaché de façon canonique un fibré (difféologique) principal appelé \emph{fibré principal structural} auquel le fibré initial est associé.
+  
+  De nombreuses constructions standards de la théorie classique des fibrés passent aux fibrés difféologiques,
+  par exemple :
+  l'image réciproque d'un fibré difféologique est encore un fibré difféologique etc...
+  Une autre notion passe aux fibrés difféologiques :
+  la suite exacte d'homotopie.
+  
+  % --- Homotopie difféologique
+  \subsection{Homotopie difféologique}
+  
+  La théorie des espaces difféologiques a l'avantage de permettre une présentation synthétique de la théorie de l'homotopie.
+  Cette théorie est l'étude des propriétés de connexité d'espaces de lacets.
+  Il suffit de remarquer que ces espaces sont naturellement des espaces difféologiques.
+  
+  Etant donné un espace difféologique $X$,
+  on appelle partition en composantes de $X$ la plus fine partition qui fait de $X$ la somme (difféologique) de ses parties.
+  Les éléments de cette partition sont appelés \emph{composantes} de $X$,
+  l'ensemble des composantes de $X$ est noté $\pi_0(X)$.
+  Un espace est \emph{connexe} s'il ne possède qu'une composante,
+  composante que l'on note $X$.
+  Un espace difféologique est alors connexe.
+  Cette définition coïncide avec la connexité par arcs différentiables et la connexité de la D-topologie (voir [3]).
+  Considérons un autre espace difféologique $Y$ et soit $\DL(X,Y)$ le faisceau des applications localement différentiables de $X$ à $Y$.
+  Cet espace possède une difféologie canonique que l'on appelle \emph{difféologie fonctionnelle} et définie par :
+  
+  Soit $\Gamma$ l'ensemble des couples $(f,x)$ tels que $f \in \DL(X,Y)$ et $x \in \dom(f)$,
+  $\Gamma \subset \DL(X,Y) \times X$,
+  la difféologie fonctionnelle (ouverte) est définie comme la moins fine difféologie de $\DL(X,Y)$ qui fasse de la valuation :
+  $(f,x) \mapsto f(x)$ une application différentiable locale.
+  
+  Considérons maintenant l'espace $\Arc(X) = \DL(\RR, X)$ des applications différentiables de $\RR$ dans $X$,
+  muni de sa difféologie d'espace fonctionnel.
+  Notons $\chi$ l'application (source, but) définie sur $\Arc(X)$ par :
+  \begin{equation} \label{I.3.1}
+    \chi : c \mapsto (c(0), c(1))
+  \end{equation}
+  $\chi$ partage $\Arc(X)$ en classes d'équivalences (les arcs ayant mêmes origine et extrémité),
+  on munit alors $\Arc(X)$ de la difféologie feuilletée par $\chi$ et on note $\Arc_\chi(X)$ l'espace des composantes connexes de $\Arc(X)$ pour la difféologie feuilletée par $\chi$,
+  muni de la difféologie image de la difféologie fonctionnelle de $\Arc(X)$ (Ouf!).
+  L'application $\chi$ se factorise sur $\Arc_\chi(X)$ et on montre que $\Arc_\chi(X)$ est un groupoïde difféologique de base $X$ pour la juxtaposition des arcs,
+  c'est le \emph{groupoïde fondamental} de $X$,
+  son groupe structural est le \emph{premier groupe d'homotopie} de $X$,
+  il est noté $\pi_1(X)$,
+  tandis que son fibré principal est le \emph{revêtement universel} de $X$.
+  
+  Le groupe $\pi_1(X)$ est isomorphe au groupe $\pi_1(X, x_0)$ des composantes connexes de l'espace des lacets différentiables de $X$ d'origine $x_0$ qui est noté $L(X, x_0)$.
+  On établit sur l'espace des lacets d'origine $x_0$ la récurrence suivante :
+  \begin{equation} \label{I.3.2}
+    L_n(X, x_0) = L(L_{n-1}(X, x_0), x_0^n), \quad x_0^n = [t \mapsto x_0^{n-1}] \quad \spadesuit
+  \end{equation}
+  $$
+    L_1(X, x_0) = L(X, x_0), \quad x_0^1 = x_0 \quad \diamondsuit
+    $$
+  Où l'indice supérieur $0$ dans $L_{n-1}^0(X, x_0)$ signifie la composante connexe de $x_0^{n-1}$.
+  Les groupes d'homotopie supérieurs sont alors évidemment définis par :
+  \begin{equation} \label{I.3.3}
+    \pi_n(X, x_0) = \pi_0(L_n(X, x_0))
+  \end{equation}
+  La définition de l'homotopie relative n'offre pas plus de difficultés (pour plus de précision voir [3]).
+  Un grand nombre de théorèmes classiques de la théorie de l'homotopie ont leur traduction en termes d'homotopie difféologique,
+  notamment la propriété d'exactitude de la suite d'homotopie d'un couple $(X,A)$ où $A$ est un sous-espace difféologique de $X$ :
+  \begin{multline} \label{I.3.4}
+    \dots \to \pi_n(A, x_0) \to \pi_n(X, x_0) \to \pi_n(X, A, x_0) \to \pi_{n-1}(A, x_0) \to \dots \\
+    \dots \to \pi_1(X,A,a) \to \pi_0(A, x_0)  \to \pi_0(X, x_0).
+  \end{multline}
+  Avec $x_0 \in A$.
+  Ainsi, on peut démontrer l'exactitude de la suite d'homotopie des fibrés difféologiques :
+  soit $(X, M, \pi)$ une fibration difféologique de fibre type $F = \pi^{-1}(m_0)$, $m_0 \in M$ et $x_0 \in F$ :
+  \begin{multline} \label{I.3.5}
+    \dots \to \pi_n(F, x_0) \to \pi_n(X, x_0) \to \pi_n(M, m_0) \to \pi_{n-1}(F, x_0) \to \dots\\
+    \dots \to \pi_0(F, x_0) \to \pi_0(X, x_0) \to \pi_0(M, m_0).
+  \end{multline}
+  Comme exemples de fibrés difféologiques il y a évidemment tous les fibrés de variétés,
+  mais aussi tous les quotients de groupes difféologiques par des sous-groupes.
+  Ceci introduit des fibrés de dimension infinie comme des quotients singuliers.
+  
+  En particulier le quotient du tore $T^2$ par le flot irrationnel de pente $\alpha$,
+  que nous notons $T_\alpha$,
+  est un fibré difféologique.
+  Son homotopie est celle de $T^2$ puisque la fibre est contractile,
+  et son revêtement universel est $\RR$ dans lequel son groupe d'homotopie $\ZZ^2$ se réalise par $\ZZ + \alpha\ZZ$ (voir [2][3]).
+  C'est notamment en classifiant les fibrés difféologiques principaux de groupe structural $\RR$ au dessus de $T_\alpha$ qu'apparaît la différence entre les nombres diophantiens et ceux de Liouville [3].
+  
+  % --- Connexions sur les fibrés difféologiques
+  \section{Connexions sur les fibrés difféologiques}
+  
+  % --- Schéma général de connexions
+  \subsection{Schéma général de connexions.}
+  
+  Les connexions ont été introduites initialement comme des procédés de relèvement de chemin.
+  Elles s'identifiaient à la notion de transport parallèle.
+  C'est suivant cette idée que nous allons définir les connexions difféologiques.
+  
+  Soit $\pi$ une application différentiable de $X$ dans $M$,
+  considérons le morphisme $\Arc$ qui à $X$ associe $\Arc(X)$ (resp. à $M$ associe $\Arc(M)$) et à $\pi$ associe $\pi_*$ :
+  \begin{equation} \label{II.1.1}
+    \pi_* : \Arc(X) \to \Arc(M) \text{ avec } \pi_*(c) = \pi \circ c
+  \end{equation}
+  Les espaces $\Arc(X)$ et $\Arc(M)$ sont munis de leur difféologie d'espaces fonctionnels,
+  $\pi_*$ est une application différentiable.
+  Considérons le morphisme source $s = (s_X, s_M)$ qui à tout arc associe son origine :
+  \begin{equation} \label{II.1.2}
+    s_X, s_M : c \to c(0)
+  \end{equation}
+  Nous noterons $\kappa$ le morphisme canonique de l'application $\pi_*$ à l'image réciproque $\pi_*: X_s \to \Arc(M)$ de $\pi$ par $s$ (diagramme II.1),
+  $X_s$ est défini par :
+  \begin{equation} \label{II.1.3}
+    X_s = \{ (c,x) \in \Arc(M) \times X \mid s_X(c) = \pi(x) \} \quad \clubsuit
+  \end{equation}
+  \begin{equation} \label{II.1.4}
+    \pi_s(c,x) = c \quad s_\kappa(c,x) = x \quad \diamondsuit
+  \end{equation}
+  \begin{equation} \label{II.1.5}
+    \forall c \in \Arc(X) \quad \kappa(c) = (\pi_*(c), c(0))
+  \end{equation}
+  Nous noterons $\sigma = (\sigma_X, \sigma_M)$ la section du morphisme $s$ définie par :
+  $$
+    \sigma_X : x \to x = [t \to x], \quad \sigma_M : m \to m = [t \to m]
+    $$
+    
+  \begin{figure}[h!]
+    \tikzset{column sep=small, ampersand replacement=\&}
+\begin{floatrow}
+    \centering
+    \ffigbox{
+    \begin{tikzcd}
+    \Arc(X) \arrow[ddr, swap, "\pi_+"] \arrow[dr, "\kappa"] \arrow[drr, "s_X"]  \&  {}  \& {} \\
+        {} \& X_s \arrow[r, swap, "s_\pi"] \arrow[d, "s_{\pi_s}"] \& X \arrow[d,"\pi"] \\
+        {} \& \Arc(M) \arrow[r,"s_M"] \& M
+    \end{tikzcd}
+    }{\caption{Diagramme II.1.}}
+    \ffigbox{
+    \begin{tikzcd}
+        \Arc(X)  \&  {}  \& X \arrow[ll, "\sigma_X"] \arrow[dl,"\sigma_{X_s}"] \\
+        {} \& X_s \arrow[ul,"\gamma"] \& {}
+    \end{tikzcd}
+    }{\caption{Diagramme II.2.}}
+    \end{floatrow}
+\end{figure}
+
+  Nous appellerons \emph{connexion d'arcs différentiables} ou tout simplement \emph{connexion} toute section (différentiable) du morphisme $\kappa$ qui fait commuter le diagramme II.2,
+  où $\sigma_{X_s}$ est la section de $\pi_s$ déduite de $\sigma$.
+  En clair une connexion $\gamma$ est une application différentiable de $X_s$ dans $\Arc(X)$ telle que :
+  \begin{equation} \label{II.1.6}
+    \forall (c,x) \in X_s, \quad \pi \circ \gamma(c,x) = c, \quad \gamma(c,x)(0) = x \quad \diamondsuit
+  \end{equation}
+  $$
+    \forall m \in M \quad \forall x \in \pi^{-1}(m) \quad \gamma(m,x) = x \quad \heartsuit
+    $$
+  $\gamma$ sera encore appelé \emph{relèvement des arcs} (ou chemins) de la base,
+  nous dirons que $\gamma(c,x)$ est le \emph{relevé horizontal} de $c$ au point $x$.
+  
+  On peut évidemment définir des connexions aux propriétés particulières,
+  par exemple des connexions locales définies alors à partir du faisceau $\DL(\RR, X)$ et telles que le relevé en un point ne dépende que du germe du chemin en ce point.
+  La définition des connexions peut s'interpréter comme un procédé catégorique d'inversion de flèches dans les catégories possédant des images réciproques pour les couples de flèches du type $\bullet \rightarrow \bullet \leftarrow \bullet$.
+  
+  Les connexions auxquelles on a affaire d'habitude sont des connexions d'ordre 1,
+  le relevé d'un chemin en tout point ne dépendant que du jet d'ordre 1 du chemin au point image de la base.
+  Il est clair que toutes les situations particulières sont envisageables :
+  connexion non linéaire d'ordre 1,
+  connexions d'ordre 2 etc... .
+  
+  % --- Connexion sur un fibré difféologique principal
+  \subsection{Connexion sur un fibré difféologique principal.}
+  
+  Dans le cas particulier où le fibré de départ est un fibré principal de groupe structural $G$,
+  on impose en plus au relèvement $\gamma$ de vérifier la propriété d'équivariance suivante :
+  \begin{equation} \label{II.2.1}
+    \forall g \in G \quad \forall (c,x) \in X_s \quad \gamma(c, g(x)) = g(\gamma(c,x))
+  \end{equation}
+  Où la notation $g(\gamma(c,x))$ signifie pour tout $t \in \RR : g(\gamma(c,x)(t)) = g(\gamma(c,x)(t))$,
+  nous noterons d'ailleurs $g(c)$ l'action de $g \in G$ sur les courbes de $X$,
+  elle consiste à translater tous les points de $c$ par $g$.
+  Cette hypothèse supplémentaire se justifie lorsqu'on considère la catégorie des fibrés principaux.
+  
+  Comme nous venons de le voir le groupe $G$ agit naturellement sur $\Arc(X)$,
+  il agit en fait par l'intermédiaire de $\Arc(G)$ dans lequel il s'induit $G \to \Arc(G)$ :
+  \begin{equation} \label{II.2.2}
+    \forall \xi \in \Arc(G) \quad \forall c \in \Arc(X) \quad \xi(c) = [t \to \xi(t)(c(t))]
+  \end{equation}
+  Le lecteur pourra vérifier que le quotient $\Arc(X)/\Arc(G)$ est égal (difféologiquement) à $\Arc(M)$ et que la projection $\pi_*$ est une fibration principale.
+  
+  L'existence d'une connexion principale de $\pi$ s'interprète comme une section du fibré quotient $\pi/G$ d'espace total $\Arc(X)/G$ et de base $\Arc(M)$.
+  Cette section définit encore une application différentiable $\psi$ de $\Arc(X)$ dans $\Arc(G)/G$ vérifiant les propriétés suivantes :
+  \begin{equation} \label{II.2.3}
+    \forall \xi \in \Arc(G) \quad \forall c \in \Arc(X) \quad \psi(\xi(c)) = \xi(\psi(c)) \quad \heartsuit
+  \end{equation}
+  $$
+    \forall x \in X \quad \psi(x) = 1_G \quad \diamondsuit
+    $$
+  Où $\xi(\psi(c))$ désigne l'action à gauche de $\xi \in \Arc(G)$ sur le quotient à droite $\Arc(G)/G$.
+  Si on identifie $\Arc(G)/G$ avec $\Arc(G, 1_G)$ l'espace des arcs de $G$ d'origine l'identité,
+  l'équation II.2.3 $\heartsuit$ s'écrit alors :
+  \begin{equation} \label{II.2.4}
+    \forall \xi \in \Arc(G) \quad \forall c \in \Arc(X) \quad \psi(\xi(c)) = \xi \cdot \psi(c) \cdot \xi(0)^{-1}
+  \end{equation}
+  Le fibré réduit est alors égal à $\psi^{-1}(1_G)$.
+  Les éléments de ce sous-fibré seront appelés les \emph{arcs horizontaux} (relativement à $\psi$).
+  
+  Nous définirons donc l'espace des connexions de la fibration $\pi$ comme l'espace des applications différentiables $\psi$ vérifiant II.2.3,
+  nous le noterons $C(\pi)$.
+  Cet espace peut évidemment être muni de sa difféologie d'espace fonctionnel mais nous verrons plus loin qu'il peut posséder d'autres difféologies toutes aussi utiles.
+  
+  Supposons que l'ensemble $C(\pi)$ soit non-vide et soit $\psi_0 \in C(\pi)$,
+  considérons alors l'application $T$ définie par :
+  \begin{equation} \label{II.2.5}
+    \forall \psi \in C(\pi) \quad T(\psi) = \psi_0^{-1} \cdot \psi
+  \end{equation}
+  $T(\psi)$ appartient alors au groupe $H(\pi)$ défini comme l'ensemble des applications différentiables $\phi$ de $\Arc(X)$ dans $\Arc(G, 1_G)$ vérifiant les propriétés suivantes :
+  \begin{equation} \label{II.2.6}
+    \forall \xi \in \Arc(G) \quad \forall c \in \Arc(X) \quad \phi(\xi(c)) = \xi(0) \cdot \phi(c) \cdot \xi(0)^{-1} \quad \heartsuit
+  \end{equation}
+  $$
+    \forall x \in X \quad \phi(x) = 1_G \quad \diamondsuit
+    $$
+  Il est alors facile de vérifier que $T$ est une bijection.
+  Si $C(\pi)$ a été muni d'une difféologie celle-ci se transporte naturellement sur $H(\pi)$ par image directe.
+  
+  % --- Quelques propriétés des fibrations difféologiques connexables
+  \subsection{Quelques propriétés des fibrations difféologiques connexables.}
+  
+  L'adjectif \emph{connexable} s'appliquera évidemment aux fibrés dont l'espace des connexions est non-vide.
+  Considérons maintenant deux fibrations (non principales) $\pi: X \to M$ et $p: Y \to N$.
+  Notons $\Mor(\pi, p)$ l'espace des morphismes de $\pi$ vers $p$,
+  c'est à dire l'espace des couples $(F, f)$ où $F \in D(X, Y)$ et $f \in D(M, N)$ tel que $p \circ F = f \circ \pi$.
+  $\Mor(\pi, p)$ sera muni de la difféologie de partie du produit $D(X, Y) \times D(M, N)$.
+  Il est immédiat de constater que l'application $\Pr: \Mor(\pi, p) \to D(M, N)$ définie par $\Pr(F, f) = f$ est différentiable.
+  $\Pr$ n'est pas à priori surjective.
+  En étendant la définition,
+  que nous avons donné,
+  des connexions aux applications qui ne sont pas nécessairement des fibrations et qui ne sont pas nécessairement surjectives,
+  nous allons associer à toute connexion $\gamma$ de $p$ une connexion naturelle de $\Pr$.
+  
+  Soit $\phi$ un arc (différentiable) de $D(M, N)$ d'origine $f$,
+  et soit $F$ un point de $D(X, Y)$ se projetant sur $f$.
+  Nous pouvons associer à tout $x \in X$ un arc $\phi_x$ défini par :
+  \begin{equation} \label{II.3.1}
+    \phi_x = [t \to \phi(t)(\pi(x))]
+  \end{equation}
+  Cet arc est évidemment différentiable.
+  Il a pour origine $p \circ F(x)$,
+  nous pouvons associer alors à tout $t \in \RR$ et à tout $x \in X$ la valeur au point $t$ du relevé par $\gamma$ de l'arc $\phi_x$ d'origine $F(x)$.
+  Ce qui nous permet de construire l'arc $\Phi$ par :
+  \begin{equation} \label{II.3.2}
+    \forall t \in \RR \quad \Phi(t) = [x \to \gamma([s \to \phi(s)(\pi(x))], F(x))(t)]
+  \end{equation}
+  On peut alors vérifier que l'application $\Gamma: (\phi, F) \mapsto \Phi$ que nous venons de construire est une connexion de la projection $\Pr$.
+  
+  On vérifie que cette construction s'adapte au cas des fibrés difféologiques principaux.
+  On suppose maintenant que $p = \pi$ et que $\pi$ est un fibré difféologique principal de groupe structural $G$.
+  On peut montrer dans ce cas que si on se restreint aux automorphismes de fibrés ($F$ est alors un difféomorphisme équivariant de $X$ et $f$ un difféomorphisme de la base) l'arc $\Phi$ que nous avons construit par la formule II.4.2 est entièrement contenu dans $\text{Auto}(\pi)$.
+  C'est à dire $\Gamma$ est en fait une connexion de la projection $\Pr^*: \text{Auto}(\pi) \to \Diff(M)$.
+  En remarquant alors que $1_X$ se projette sur $1_M$ on déduit alors que la composante connexe $\Diff(M)^0$ de l'identité de $\Diff(M)$ est entièrement couverte par la projection $\Pr^*$.
+  En notant alors $\text{Auto}(\pi)^* = \Pr^{*-1}(\Diff(M)^0)$ et $J$ le groupe des transformations de jauge du fibré,
+  on a la suite exacte d'homomorphismes :
+  \begin{equation} \label{II.3.3}
+    1_X \to J \to \text{Auto}(\pi)^* \to \Diff(M)^0 \to 1_M
+  \end{equation}
+  En appliquant cette construction à l'image réciproque d'un fibré $\pi: X \to M$ par une application différentiable $f \in D(N, M)$,
+  on peut montrer que si $A \subset M$ est une rétraction stricte de $M$ alors $\pi^{-1}(A) \subset X$ est une rétraction stricte de $X$.
+  De façon générale on montre que si $[t \to f_t]$ est une homotopie différentiable entre $f_0$ et $f_1$ les images réciproques de $\pi$ par $f_0$ et $f_1$ sont isomorphes,
+  il s'ensuit que tout fibré difféologique connexable dont la base est contractile est trivial.
+  Ce théorème est classique dans la théorie des variétés,
+  l'hypothèse connexable n'étant pas utile puisque dans le cas des variétés tout fibré est connexable.
+  
+  % --- Structure fibrée de l'espace des connexions
+  \section{Structure fibrée de l'espace des connexions}
+  
+  Nous allons maintenant étudier la question posée par l'ambiguïté de Gribov.
+  L'invariance de certaines théories de jauge par les transformations de jauge amène à penser que dans certains cas qu'il appelle une jauge globale pour effectuer ses calculs.
+  Or Gribov a montré que pour certains cas le choix généralement effectué conduisait à une ambiguïté de la définition de la jauge.
+  La question se trouvait posée :
+  existe-t-il de telles jauges ?
+  Pour pouvoir répondre à une telle question il fallait d'abord définir le cadre mathématique dans lequel elle se pose.
+  Des tentatives ont été faites dans le cadre de la topologie $C^\infty$ [5] [6].
+  Les choix sont toujours délicats lorsqu'il s'agit d'espaces de dimension infinie,
+  nous proposons d'utiliser la théorie des fibrés difféologiques.
+  Il apparaitra dans le traitement du sujet que nous devons faire nous aussi un choix de difféologie,
+  plus adapté au problème que nous traitons que la simple difféologie fonctionnelle usuelle.
+  
+  Nous supposerons donc par la suite que $X$ et $M$ sont des variétés,
+  que $\pi$ est un fibré principal de groupe structural de Lie $G$ et que $M$ est non compacte.
+  Nous noterons $B(\pi)$ le quotient $C(\pi)/J$.
+  
+  % --- Difféologie compacte et groupe des transformations de jauge à support compact
+  \subsection{Difféologie compacte et groupe des transformations de jauge à support compact.}
+  
+  Considérons une transformation de jauge $A$, $A \in \Diff(X)$ et vérifie pour tout $g \in G$ :
+  $A(g(x)) = g(A(x))$ où $x \in X$.
+  On peut donc définir une application $\alpha$ de $X$ dans $G$ telle que $A(x) = \alpha(x)(x)$,
+  $\alpha$ vérifie alors la propriété d'équivariance suivante
+  \begin{equation} \label{III.1.1}
+    \forall g \in G \quad \forall x \in X \quad \alpha(g(x)) = g \cdot \alpha(x) \cdot g^{-1}
+  \end{equation}
+  Réciproquement tout application $\alpha$ vérifiant III.1.1 définit une transformation de jauge de $\pi$.
+  Nous identifierons donc $J$ avec les applications de ce type.
+  
+  Afin d'éviter les problèmes du comportement à l'infini nous nous restreindrons aux groupe $J_K$ des transformations de jauge à support compact,
+  c'est à dire :
+  $\alpha$ est constante et vaut $1_G$ en dehors de l'image réciproque $\pi^{-1}(S)$ d'un compact $S$ de la base $M$,
+  appelé support de $\alpha$ et noté $\text{Supp}(\alpha)$ (en fait le plus petit compact en dehors duquel $\alpha$ est l'élément neutre).
+  
+  L'étude de ce problème montre que nous sommes forcé de faire un choix particulier quant à la difféologie de l'espace des connexion $C(\pi)_K$ ainsi qu'à celle de $J_K$.
+  Cette difféologie que nous avons appelé \emph{difféologie compacte controlée} est obtenue comme limite inductive de difféologies indexées par des compacts,
+  procédé que nous allons rapidement décrire.
+  
+  Soit $I$ une famille d'indices filtrants croissants et soit $X_i$, $i \in I$, une famille d'espaces difféologiques.
+  Soit $\{f_j^i\}_{j<i}$ une famille d'applications différentiables de $X_j$ dans $X_i$, vérifiant les propriétés :
+  \begin{equation} \label{III.1.2}
+    \forall i \in I \quad f_i^i = 1_{X_i} \quad \heartsuit
+  \end{equation}
+  $$
+    \forall k < j < i \quad f_j^i \circ f_k^j = f_k^i \quad \diamondsuit
+    $$
+  Définissons sur la somme difféologique des $X_i$ la relation d'équivalence suivante :
+  \begin{equation} \label{III.1.3}
+    (j,x) \equiv (i,y) \iff \exists k \in I \ j < k \ i < k \ f_j^k(y) = f_i^k(x)
+  \end{equation}
+  Le quotient difféologique de la somme des $X_i$ par cette relation d'équivalence est la \emph{limite inductive} de la famille $X_i$,
+  cet espace est généralement noté $\varinjlim X_i$.
+  
+  Considérons alors la famille d'indices définie par les compacts de $M$ pour la relation d'ordre naturelle de l'inclusion et posons $J_S$ le groupe des transformations de jauge à support compact $S$.
+  Munissons $J_S$ de sa difféologie fonctionnelle,
+  il est facile de vérifier,
+  qu'en tant qu'ensemble,
+  la limite inductive des $J_S$ est égale au groupe des transformations de jauge à support compact.
+  La difféologie dont est alors munie sera appelée \emph{difféologie compacte controlée}.
+  Muni de cette difféologie ce groupe sera noté $J_K^\infty$.
+  Ses plaques vérifient la propriété suivante :
+  \begin{multline} \label{III.1.4}
+    \forall \phi \in \DL(\ReDomains,\ J_K^\infty),\ \forall r_0 \in \dom(\phi),\ \exists \text{Vois}(r_0), \\
+    \exists S \text{ compact tel que : } \forall r \in V \quad \text{Supp}(\phi(r)) \subset S
+\end{multline}
+  Où $\text{Vois}(r_0)$ désigne l'ensemble des voisinages de $r_0$.
+  En d'autres termes le support de la famille de transformations de jauge $\phi(r)$ est borné au voisinage de tout $r$.
+  
+  % --- Difféologie compacte et espace des connexions
+  \subsection{Difféologie compacte et espace des connexions}
+  
+  La difféologie compacte controlée se définit aussi sur l'espace des connexions $C(\pi)$,
+  il faut tout d'abord feuilleter cet espace par une relation d'équivalence dont les classes sont définies par le comportement à l'infini des connexions.
+  Définissons donc,
+  pour tout compact $S$ de $M$ la relation d'équivalence $\approx_S$ :
+  
+  Deux connexions $\psi$ et $\psi'$ seront $\approx_S$-équivalentes si les relevés par $\psi$ et $\psi'$ de tout arc de $M$ entièrement situés à l'extérieur de $S$ coïncident.
+  Nous dirons alors que $\psi$ et $\psi'$ coïncident à l'extérieur de $S$.
+  
+  Etant données deux connexions $\approx_S$-équivalentes $\psi$ et $\psi'$,
+  le produit $\psi^{-1} \cdot \psi'$,
+  élément du groupe $H(\pi)$ défini au paragraphe II.2,
+  est à support compact.
+  C'est à dire $\psi^{-1} \cdot \psi'$ est constant et égal à l'identité pour tout arc $c$ de $X$ dont la projection par $\pi$ est entièrement à l'extérieur de $S$.
+  
+  Notons $C(\pi)_S$ l'espace $C(\pi)$ muni de la difféologie feuilletée par $\approx_S$.
+  La limite inductive des espaces $C(\pi)_S$ sera noté $C(\pi)_K^\infty$.
+  En tant qu'ensemble cet espace est égal à $C(\pi)$,
+  il est par contre partagé en classes caractérisées par le comportement à l'infini des connexions,
+  ces classes sont celles de la relation d'équivalence $\approx$ définie par :
+  
+  Deux connexions sont $\approx$-équivalente si elles coïncident à l'extérieur d'un compact.
+  
+  Les plaques de $C(\pi)_K^\infty$ vérifient la propriété suivante :
+  \begin{multline} \label{III.2.1}
+    \forall \phi \in \DL(\ReDomains,\ C(\pi)_K^\infty),\ \forall r_0 \in \dom(\phi) : \exists S \text{ compact de } M,\\
+     \exists V \in \text{Vois}(r_0) \text{ tel que:}
+    \forall r \in V \quad \phi(r_0) \approx_S \phi(r)
+  \end{multline}
+  Si on choisit,
+  pour chaque classe d'équivalence $\sigma$ de la relation $\approx$,
+  un représentant $\psi_\sigma$,
+  les applications $T_\sigma$ définies sur les classes $\sigma$ par :
+  $T_\sigma(\psi) = (\psi_\sigma)^{-1} \cdot \psi$,
+  sont des bijection sur le groupe $H(\pi)_K$ des éléments de $H(\pi)$ à support compact.
+  Le lecteur pourra vérifier que les images directes de la difféologie de chaque classe $\sigma$ par $T_\sigma$ coïncident avec la difféologie compacte controlée de $H(\pi)_K$,
+  définie de façon analogue à celle de $J_K^\infty$.
+  En somme l'espace des connexions $C(\pi)_K^\infty$ est partagé en classes qui sont des réunions de composantes connexes,
+  chacune difféomorphe au groupe $H(\pi)_K^\infty$ (c'est à dire $H(\pi)_K$ muni de la difféologie compacte controlée).
+  Chaque classe représentant un comportement à l'infini de connexion (le germe à l'infini).
+  
+  Avec ces difféologies,
+  le lecteur vérifiera que l'action du groupe des transformations de jauges à support compact sur l'espace des connexions est différentiable :
+  l'application de $C(\pi)_K^\infty \times J(\pi)_K^\infty$ dans $C(\pi)_K^\infty$ définie par
+  \begin{multline} \label{III.2.2}
+    \forall (\psi, \alpha) \in C(\pi)_K^\infty \times J(\pi)_K^\infty \quad \alpha(\psi) = [c \to \alpha(c) \cdot \psi(c) \cdot \alpha(c(0))^{-1}] \\
+    \alpha(c) \cdot \psi(c) \cdot \alpha(c(0))^{-1}(t) = \alpha(c(t)) \cdot \psi(c(t)) \cdot \alpha(c(0))^{-1}
+  \end{multline}
+  est différentiable.
+  De plus l'action de $J(\pi)_K^\infty$ se fait à l'intérieur de chacune des classes de la relation d'équivalence $\approx$,
+  c'est à dire $\alpha(\psi) \approx \psi$.
+  Donc le quotient $C(\pi)_K^\infty / J(\pi)_K^\infty$ est égal à la somme (difféologique) des quotients de chaque classe de $\approx$ par $J(\pi)_K^\infty$.
+  
+  % --- Fibration de l'espace des connexions
+  \subsection{Fibration de l'espace des connexions}
+  
+  Il ne nous reste plus qu'à démontrer que la projection :
+  \begin{equation} \label{III.3.3}
+    \Pi : C(\pi)_K^\infty \to B(\pi)_K^\infty = C(\pi)_K^\infty / J(\pi)_K^\infty
+  \end{equation}
+  est une fibration difféologique.
+  Considérons alors l'application $F$ définie sur $C(\pi)_K^\infty \times J(\pi)_K^\infty$ dans $C(\pi)_K^\infty \times C(\pi)_K^\infty$ par :
+  \begin{equation} \label{III.3.4}
+    F(\psi, \alpha) = (\alpha(\psi), \psi)
+  \end{equation}
+  Nous allons montrer que $F$ est une induction,
+  ce qui prouvera que $\Pi$ est une fibration principale (I.2.5).
+  Commençons par l'injectivité :
+  
+  Supposons $F(\psi, \alpha) = F(\psi', \alpha')$ ceci implique $\psi = \psi'$ et $\alpha(\psi) = \alpha'(\psi)$,
+  c'est à dire :
+  \begin{multline} \label{III.3.5}
+    \forall c \in \Arc(X) \quad \forall t \in \RR : \alpha(c(t)) \cdot \psi(c)(t) \cdot \alpha(c(0))^{-1}
+    \\ = \alpha'(c(t)) \cdot \psi(c)(t) \cdot \alpha'(c(0))^{-1}
+  \end{multline}
+  Puisque $\alpha$ et $\alpha'$ sont à support compact choisissons un point $m_0 \in M$ à l'extérieur de la réunion des supports,
+  puisque $M$ est connexe choisissons pour tout $x \in X$ un arc $c$ dans $M$ d'origine $m_0$ et d'extrémité $\pi(x)$ et soit $c$ son relevé par la connexion $\psi$,
+  en appliquant III.3.5 on obtient $\alpha(x) = \alpha'(x)$,
+  ce qui prouve l'injectivité de $F$.
+  
+  Montrons maintenant que $F$ est une induction :
+  
+  Soit $r \to (\psi_r, \alpha_r)$ une application définie sur un ouvert $\Omega$ de $\ReDomains$ à valeurs dans $C(\pi)_K^\infty \times J(\pi)_K^\infty$ telle que la composition par $F$ soit différentiable.
+  On déduit alors évidemment que $[r \to \psi_r]$ est différentiable et que $[r \to \alpha_r(\psi_r)]$ est différentiable.
+  Considérons alors un point $r_0 \in \dom([r \to \alpha_r])$,
+  on a par raison de différentiabilité :
+  \begin{multline} \label{III.3.6}
+    \exists V \in \text{Vois}(r_0) \text{ et } S \text{ compact de } M \text{ tel que :} \\
+    \forall r \in V \quad \forall c \in \Arc(X) : \im(\pi \circ c) \subset M-S \implies \psi_r(c) = \psi_{r_0}(c)
+  \end{multline}
+    
+  \begin{multline} \label{III.3.7}
+    \exists V' \in \text{Vois}(r_0) \text{ et } S' \text{ compact de } M \text{ tel que :} \\
+    \forall r \in V' \quad \forall c \in \Arc(X) : \text{codom}(\pi \circ c) \subset M-S \\
+    \implies \alpha_r(c) \cdot \psi_r(c) \cdot \alpha_r(c(0))^{-1} = \alpha_{r_0}(c) \cdot \psi_{r_0}(c) \cdot \alpha_{r_0}(c(0))^{-1}
+    \end{multline}
+  Posons alors $V'' = V \cap V'$ et $S'' = S \cap S'$,
+  III.3.6 et III.3.7 peuvent s'écrire en remplaçant $V$ et $V'$ par $V''$.
+  Ceci implique alors en posant $\beta_r(x) = \alpha_{r_0}(x)^{-1} \cdot \alpha_r(x)$ et en conservant les hypothèses des formules précédentes :
+  \begin{equation} \label{III.3.8}
+    \psi_r(c) = \psi_{r_0}(c) \text{ et } \beta_r(c) \cdot \psi_{r_0}(c) \cdot \beta_r(c(0))^{-1} = \psi_{r_0}(c)
+  \end{equation}
+  Mais $\beta_r$ est une transformation de jauge à support compact,
+  son support est contenu dans $\text{Supp}(\alpha_{r_0}) \cup \text{Supp}(\alpha_r)$.
+  Soit $r \in V''$ et soit $m_0 \in M - (\text{Supp}(\beta_r) \cup S'')$,
+  Puisque $M$ est connexe et $S''$ compact il existe un arc $c$ dans $M$ joignant $m_0$ à $m$ et entièrement contenu dans $M-S''$.
+  Notons alors $c$ un relevé par $\psi_{r_0}$ ($\psi_{r_0}(c) = 1_G$),
+  grâce à ce que nous venons de voir on a $\beta_r(c(1)) = 1_G$,
+  on déduit donc que $\forall x \in \pi^{-1}(M-S'') \ \beta_r(x) = 1_G$.
+  Ce qui permet donc d'écrire :
+  \begin{equation} \label{III.3.9}
+    \forall r_0 \in \dom([r \to \alpha_r]) \exists V \in \text{Vois}(r_0) \text{ et } S \text{ compact de } M \text{ tel que }
+  \end{equation}
+  $$
+    \forall r \in V \quad \text{Supp}(\alpha_r) \subset S
+    $$
+  Nous venons donc de démontrer une partie de la différentiabilité de l'application $[r \to \alpha_r]$,
+  il s'agit maintenant de montrer qu'elle est différentiable pour la difféologie fonctionnelle.
+  Pour ceci nous nous plaçons dans un voisinage $V$ de $r_0$ pour lequel on a $\forall r \in V \ \text{Supp}(\alpha_r) \subset S$,
+  $S$ compact de $M$.
+  Soit $m_0$ un point de $S$,
+  le lecteur pourra vérifier la proposition suivante :
+  
+  $\forall [r \to x_r]$ définie sur $V$ et à valeurs dans $X$,
+  il existe une application différentiable $[r \to c_r]$ définie sur $V$ et à valeurs dans $\Arc(X)$ telle que :
+  $\psi_r(c_r) = 1_G$, $c_r(0) \in X_{m_0}$ et $c_r(1) = x_r$.
+  
+  D'où on déduit que $[r \to \alpha_r]$ est localement différentiable donc différentiable.
+  En conclusion nous venons de montrer que l'application $F$ définie en III.3.4 est une induction et donc :
+  
+  \subsubsection*{\emph{III.3.8} Théorème}
+  L'application $\Pi: C(\pi)_K^\infty \to B(\pi)_K^\infty = C(\pi)_K^\infty / J(\pi)_K^\infty$ est une fibration difféologique principale de groupe structural $J(\pi)_K^\infty$.
+  
+  % --- Conséquences homotopiques
+  \subsection{Conséquences homotopiques}
+  
+  Nous avons vu au paragraphe III.2 que l'espace des connexions $C(\pi)_K^\infty$ est une somme de composantes chacune difféomorphe au groupe $H(\pi)_K^\infty$ (définition II.2.6).
+  Chaque composante étant caractérisée par le germe à l'infini d'un de ses éléments.
+  L'arc défini par
+  \begin{equation} \label{III.4.1}
+    \forall \eta \in H(\pi)_K^\infty \quad [s \to \eta_s] \text{ avec } \eta_s(c)(t) = \eta(c)(st) \quad \forall t \in \RR
+  \end{equation}
+  est une rétraction du groupe sur l'identité.
+  Le lecteur pourra vérifier que,
+  grâce à la compacité du segment $[0,1]$ cette rétraction est différentiable au sens de la difféologie compacte controlée.
+  Donc chaque classe en question est une composante connexe de $C(\pi)_K^\infty$ chaque composante étant contractile.
+  Nous avons vu d'autre part que le quotient de $C(\pi)_K^\infty$ par $J(\pi)_K^\infty$ est égal à la somme difféologique du quotient de chacune de ces composantes par $J(\pi)_K^\infty$.
+  Soit $\Sigma$ une composante de $C(\pi)_K^\infty$,
+  si la fibration était triviale nous devrions avoir $\pi_n(J(\pi)_K^\infty) \oplus \pi_n(B(\pi)_K^\infty) = 0$ or l'application de la suite exacte d'homotopie indique que $\pi_{n+1}(B(\pi)_K^\infty) \simeq \pi_n(J(\pi)_K^\infty)$ donc on déduit la proposition suivante :
+  
+  % ---
+  \subsubsection*{\emph{III.4.2.} Proposition}
+  Pour que le fibré $\Pi: C(\pi)_K^\infty \to B(\pi)_K^\infty = C(\pi)_K^\infty / J(\pi)_K^\infty$ soit non trivial il suffit qu'un des groupes d'homotopie du groupe $J(\pi)_K^\infty$ soit non nul.
+  
+  Considérons alors l'exemple particulier de $M = \RR^4$,
+  le groupe $J(\pi)_K^\infty$ s'identifie avec le groupe de courant $D(\RR^4, \infty; G, 1_G)_K^\infty$.
+  On peut montrer que cet espace est homotopiquement équivalent à l'espace $D(S^4, N; G, 1_G)$.
+  On en déduit $\pi_n(J(\pi)_K^\infty) = \pi_{n+4}(G)$.
+  On voit alors que pour $G = SU(2)$ le fibré ne peut pas être trivial,
+  puisque $\pi_4(SU(2)) = \ZZ_2$.
+  
+  % --- Annexe
+  \section{Annexe}
+  
+  \numberwithin{equation}{section}
+  \renewcommand{\thesection}{A}
+  
+  Nous présentons ici une série de remarques sur la définition des difféologies,
+  inspirée du vocabulaire de la théorie des faisceaux.
+  Bien que ce ne soit pas absolument nécessaire,
+  nous nous sommes placé à priori dans la catégorie des espaces topologiques,
+  simplement pour faciliter l'exposé.
+  
+  Définissons d'abord le vocabulaire utilisé :
+  
+  Nous appellerons \emph{application locale} continue de $X$ à $Y$ (ou simplement application locale) toute application continue définie sur un ouvert d'un espace topologique $X$ à valeur dans un espace topologique $Y$.
+  Nous noterons $\dom(f)$ le domaine de définition de l'application locale $f$ et $\im(f)$ son domaine de valeurs.
+  Un ensemble d'applications locales sera appelé : \emph{une famille d'applications locales}.
+  Nous dirons que la famille d'applications $F$ de $X$ vers $Y$ est \emph{couvrante} si :
+  \begin{equation} \label{A.1}
+    \bigcup_{f \in F} \im(f) = F
+  \end{equation}
+  Etant donnés trois ensembles $X$, $Y$ et $Z$,
+  deux applications :
+  $f$ de $X$ vers $Y$ et $g$ de $Y$ vers $Z$,
+  le domaine de définition de $g \circ f$ est défini par :
+  \begin{equation} \label{A.2}
+    \dom(g \circ f) = f^{-1}(\dom(g))
+  \end{equation}
+  Si $f^{-1}(\dom(g)) = \varnothing$ nous écrirons $g \circ f = 1_\varnothing$ où $1_\varnothing$ est l'application vide.
+  
+  Etant données deux familles $F$ et $G$ d'applications locales,
+  respectivement de $X$ vers $Y$ et de $Y$ vers $Z$,
+  nous noterons $G \circ F$ la famille d'applications locales :
+  \begin{equation} \label{A.3}
+    G \circ F = \{ g \circ f \mid g \in G \text{ et } f \in F \}
+  \end{equation}
+  D'autre part nous définirons la \emph{famille unité} associé à tout espace topologique $X$ par :
+  \begin{equation} \label{A.4}
+    \mathfrak{I}_X = \{ 1_U \mid U \in \text{Ouv}(X) \}
+  \end{equation}
+  Où $\text{Ouv}(X)$ désigne l'ensemble des ouverts de la topologie de $X$.
+  Nous rappelons que les \emph{pré-faisceaux} et \emph{faisceaux} d'applications locales sont des familles $F$ d'applications locales vérifiant les propriétés suivantes ($\spadesuit$ pour les pré-faisceaux, $\spadesuit$ et $\heartsuit$ pour les faisceaux) :
+  \begin{equation} \label{A.5}
+    \forall f \in F \quad \forall U \in \text{Top}(A) \quad f|_U \in F \quad \spadesuit
+  \end{equation}
+  $$
+    \forall f \quad \forall r \in A : \exists V \in \text{Vois}(r) \text{ tel que } f|_V \in F \implies f \in F \quad \heartsuit
+    $$
+  Il existe sur les familles d'applications locales définies dans un même espace topologique une relation d'ordre que nous notons $\le$,
+  définie naturellement par :
+  \begin{equation} \label{A.6}
+    F \le F' \iff F \subset F'
+  \end{equation}
+  Nous dirons alors que $F$ est \emph{plus fine} que $F'$.
+  Il est facile de vérifier que toute famille d'applications locales $F$ définie dans un espace topologique $X$ est contenue dans un pré-faisceau le plus fin $F^\circ$.
+  Nous dirons que c'est le \emph{pré-faisceau engendré} par $F$.
+  Il est clair que si $F$ est déjà un pré-faisceau $F^\circ = F$.
+  $F^\circ$ est défini par :
+  \begin{equation} \label{A.7}
+    F^\circ = F \circ \mathfrak{I}_X
+  \end{equation}
+  De même tout pré-faisceau $F$ engendre un faisceau (le faisceau le plus fin contenant $F$),
+  que nous noterons $*(F)$,
+  obtenu par un procédé que nous pourrions appeler :
+  procédé de faisceautisation et qui consiste à construire toutes les bornes supérieures des familles compatibles d'éléments de $F$.
+  Rappelons à cette occasion qu'une \emph{famille compatible} d'éléments de $F$ est un ensemble d'applications $\{f_i \mid f_i \in F, i \in I\}$,
+  tel que deux éléments quelconques de cette famille coïncident sur l'intersection de leur domaine de définition.
+  Le Sup désigne le plus petit prolongement commun.
+  \begin{equation} \label{A.8}
+    *(F) = \{ \text{Sup}(f_i) \mid \{f_i\} \text{ famille compatible} \}
+  \end{equation}
+  Soient deux faisceaux d'applications locales $F: X \to Y$ et $G: Y \to Z$,
+  le produit $G \circ F$ n'est pas à priori un faisceau,
+  il en engendre un grâce à la construction précédente,
+  nous noterons $G * F$ le faisceau ainsi obtenu.
+  \begin{equation} \label{A.9}
+    G * F = *(G \circ F)
+  \end{equation}
+  Lorsque la famille $G$ est réduite à un seul élément $g$ nous noterons $g \circ F$ et $g * F$ à la place,
+  respectivement de $G \circ F$ et $G * F$.
+  Compte tenu de ces définitions nous avons la propriété suivante,
+  dont nous laisserons la démonstration aux soins du lecteur :
+  
+  \subsubsection*{\emph{A.10} Proposition :} \setcounter{equation}{10}
+  L'opération $*$ est associative.
+  Soient $X$ et $Y$ deux espaces topologiques et $F$ un faisceau d'applications locales définie de $X$ vers $Y$,
+  soit $\mathfrak{I}_X$ et $\mathfrak{I}_Y$ les faisceaux unités (A.4) associé respectivement à $X$ et $Y$.
+  Nous avons :
+  \begin{equation} \label{A.11}
+    F * \mathfrak{I}_X = \mathfrak{I}_Y * F = F
+  \end{equation}
+  Grâce aux définitions précédentes et à la proposition A.10,
+  nous sommes en mesure de définir la catégorie (plutôt "métacatégorie" au sens de S.MacLane [4]) des \emph{faisceaux d'applications locales} que nous noterons $\mathfrak{I}$,
+  dont les objets sont les espaces topologiques et les flèches (ou morphismes) sont les faisceaux d'application locales pour la loi de composition $*$ définie en A.8.
+  
+  Le lecteur vérifiera que l'opération $*$ définie en A.8 définit un foncteur de la catégorie Top des espaces topologiques dans la catégorie $\mathfrak{I}$.
+  A chaque espace topologique $X$,
+  objet de Top,
+  est associé $X$ objet de $\mathfrak{I}$ et à chaque application continue $f: X \to Y$ est associée le faisceau $*(f) = f \circ \mathfrak{I}_X$.
+  
+  Nous notons $\ReDomains$ la somme topologique des puissances finies de $\RR$ :
+  Nous noterons $\DL(\ReDomains)$ le faisceau des applications $C^\infty$ défini sur $\ReDomains$ et à valeurs dans $\ReDomains$.
+  Considérons alors un espace topologique $X$ et un faisceau $D$ d'application locales définies de $\ReDomains$ dans $X$.
+  Nous dirons que $D$ est une \emph{difféologie} de $X$ si les conditions (A.13) sont vérifiées.
+  Muni d'une difféologie $D$ un espace $X$ sera appelé espace difféologique.
+  \begin{equation} \label{A.13}
+    D \text{ est couvrante (A.1)} \spadesuit
+  \end{equation}
+  $$
+    D * \DL(\ReDomains) = D \diamondsuit
+    $$
+  C'est ici que cette présentation des espaces difféologiques diffère de la définition standard dans la mesure où il n'est pas nécessaire de supposer $X$ espace topologique (Voir[7]).
+  Il existe de toute façon sur $X$ une topologie la plus fine rendant tous les éléments de $D$ continus,
+  elle est appelée la D-Topologie.
+  Pour rester en accord avec les notations usuelles $D$ sera aussi noté $\DL(\ReDomains, X)$.
+  Les éléments de $\DL(\ReDomains, X)$ sont appelés les \emph{plaques de la difféologie} de $X$ ou plus simplement les plaques de $X$.
+  
+  La catégorie des espaces difféologiques peut être décrite en adaptant à nos besoins la construction de la théorie générale des "Comma Catégorie" (Catégories virgules) (voir [4]) :
+  
+  Soit $*: \text{Top} \to \mathfrak{I}$ le foncteur en question,
+  $\ReDomains$ étant un objet de $\mathfrak{I}$,
+  nous noterons $(\ReDomains \le *)$ la catégorie qui a pour objets les couples $<\DL(\ReDomains, X), X>$ où $\DL(\ReDomains, X)$ est une difféologie de $X$ et pour flèches de $\DL(\ReDomains, X)$ dans $\DL(\ReDomains, Y)$ les applications $h: X \to Y$ telles que $*(h) * \DL(\ReDomains, X) \le \DL(\ReDomains, Y)$.
+  Nous dirons que $h$ est \emph{différentiable}.
+  La catégorie standard $(\ReDomains \downarrow *)$ des "objets *-sous $\ReDomains$" (voir [4]) étant définie en remplaçant dans ce qui précède :
+  $*(h) * \DL(\ReDomains, X) \le \DL(\ReDomains, Y)$ par $*(h) * \DL(\ReDomains, X) = \DL(\ReDomains, Y)$.
+  
+  En clair : une application $h$ d'un espace difféologique $X$ dans un espace difféologique $Y$ est différentiable, si :
+  \begin{equation} \label{A.14}
+    f * \DL(\ReDomains, X) \le \DL(\ReDomains, Y)
+  \end{equation}
+  La catégorie $(\ReDomains \downarrow *)$ s'interprète en fait comme la catégorie des subductions (voir [7]).
+  Etant donné un espace difféologique $X$ et une application continue $h$ de $X$ dans un espace topologique $Y$,
+  il est facile de vérifier que $h * \DL(\ReDomains, X)$ est une difféologie,
+  c'est la difféologie image de $X$ par $h$.
+  Si $Y$ possède une difféologie $\DL(\ReDomains, Y)$ et si elle coïncide avec $h * \DL(\ReDomains, X)$ on dit que $h$ est une subduction,
+  ceci revient à dire que $h$ est une flèche de la catégorie $(\ReDomains \downarrow *)$.
+  
+  Les notions d'images réciproques et d'inductions sont les notions duales de celles-ci.
+  Pour le reste des notions de bases des difféologies nous renvoyons le lecteur à [7] [1] [3].
+  
+  \section{BIBLIOGRAPHIE}
+  
+  \begin{enumerate}
+    \item[1] P.Donato -Thèse doctorat, Université de Provence, Octobre 1984
+    \item[2] P.Donato P.Iglesias- Exemple de groupes difféologiques: Flots irrationnels sur le tore. C.R. Acad. Sc. Paris, t. 301, Série I, N° 4, 1985.
+    \item[3] P.Iglesias
+    \begin{itemize}
+      \item[i)] Classification des fibrés différentiels principaux de groupe structural $(\RR,+)$ sur les tores de Denjoy-Poincarré, Preprint, CPT-84/P.1690 (1984)
+      \item[ii)] Fibrés difféologiques et Homotopie. Thèse doctorat, Université de Provence, Nov 1985.
+    \end{itemize}
+    \item[4] S.M.Lane -Catégories for the working mathemetician, Graduate texts in Math. 5,Springer Verlag (1971)
+    \item[5] M.Daniel C.M.Viallet-Geometrical fetting of gauge theory of Yang-Mills type. Preprint LPTHE 7903
+    \item[6] I.MSinger-Some remarks on the Gribov Ambiguity, Comm. in Math. Phys., 60, pp 7-12 (1978)
+    \item[7] J.M.Souriau
+    \begin{itemize}
+      \item[i)] Groupes différentiels, Lect. notes in Math., Spinger Verlag, 836 (1981)
+      \item[ii)] Un algorithme générateur de structures quantiques, Preprint, CPT-84/PE.1694 (1984)
+      \item[iii)] Groupes différentiels et physique mathématique in "Feuilletage et quantification géométrique", pp75-79, Colection Travaux en cours, Hermann, Paris (1984)
+    \end{itemize}
+  \end{enumerate}
+  
+\end{document}
