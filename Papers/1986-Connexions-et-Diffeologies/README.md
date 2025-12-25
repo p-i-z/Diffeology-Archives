@@ -12,6 +12,8 @@
 
 ## Status and Historical Context
 
+## Status and Historical Context
+
 **This paper is an unpublished preprint.**
 
 It represents an excerpt and adaptation of the author's State Doctorate thesis, *Fibrations difféologiques et Homotopie*, defended in November 1985.
@@ -19,7 +21,7 @@ It represents an excerpt and adaptation of the author's State Doctorate thesis, 
 **The "Sorites" Incident:**
 Following the defense, the author intended to publish the thesis in the collection *Travaux en Cours* (Hermann). The proposal was rejected by the director of the collection, Jean Dieudonné, who dismissed the foundational work on Diffeology as mere "sorites" (a derogatory term implying a heap of trivial deductions).
 
-As a result, these foundational results (fibrations, homotopy, connections) remained unpublished in journal form for decades, circulating only as preprints until they were finally canonized in the author's comprehensive textbook *Diffeology* (AMS, 2013). This archive restores the original 1986 text to the public record.
+As a result, these foundational results (fibrations, homotopy, connections) remained unpublished in journal form for decades. They circulated only as preprints until the author, encouraged by colleagues, finally canonized them in the comprehensive textbook *Diffeology* (AMS, 2013). This archive restores the original 1986 text to the public record.
 
 ## Significance: The Foundations
 
