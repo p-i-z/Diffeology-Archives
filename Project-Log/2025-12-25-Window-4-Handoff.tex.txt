@@ -67,10 +67,6 @@ The \textbf{Diffeology Archives} project has reached a significant level of matu
 \end{enumerate}
 
 \section{Next Steps}
-The archive is growing well. Future sessions should focus on:
-\begin{itemize}
-    \item Archiving the monograph \textbf{"The Moment Maps in Diffeology"} (source file \texttt{TMMID.tex.txt} is available).
-    \item Continuing to identify key papers that illustrate the breadth of the theory.
-\end{itemize}
+The archive is growing well. Future sessions should focus on Continuing to identify key papers that illustrate the breadth of the theory
 
 \end{document}
