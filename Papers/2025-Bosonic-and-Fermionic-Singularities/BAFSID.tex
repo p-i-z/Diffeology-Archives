@@ -1,0 +1,499 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  PROJECT: Bosonic and Fermionic Singularities
+%%
+%%  Created by Patrick Iglesias-Zemmour
+%%  Date: December 2025
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: Macros
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Page display
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+% Packages
+\usepackage{amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Caligraphy
+\usepackage{microtype}
+\usepackage[cal=scr,frenchmath, uppercase = upright,greekfamily = didot,greeklowercase = upright,utopia]{mathdesign}
+\usepackage[supspaced=.04em]{superiors}
+
+\linespread{1.1}
+
+% Standard Diffeology Macros
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\Ci}{\mathrm{C}^\infty}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\C}{\mathrm{C}}
+\renewcommand{\P}{\mathrm{P}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\V}{\mathrm{V}}
+\newcommand{\X}{\mathrm{X}}
+\newcommand{\Z}{\mathrm{Z}}
+\newcommand{\dx}{d\!x}
+\newcommand{\dy}{d\!y}
+\newcommand{\dt}{d\!t}
+\newcommand{\du}{d\!u}
+\newcommand{\dv}{d\!v}
+\newcommand{\dr}{d\!r}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\val}{\mathrm{val}}
+\newcommand{\sq}{\mathrm{sq}}
+\newcommand{\reg}{\mathrm{reg}}
+\newcommand{\sing}{\mathrm{sing}}
+\newcommand{\Hess}{\mathrm{Hess}}
+
+% Environments
+
+\newtheoremstyle{article}% ⟨name⟩
+{7pt}%  ⟨Space above⟩
+{7pt}%  ⟨Space below⟩
+{}%      ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩
+{.\ }%  ⟨Punctuation after theorem head⟩
+{0pt}%  ⟨Space after theorem head⟩
+{}%     ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{article}
+\newtheorem{article}{}
+\newtheorem{theorem}{Theorem}
+
+\newcommand{\artlabel}[1]{{\textbf{#1}}.}
+
+\renewenvironment{proof}{\noindent \textit{Proof.}} {\nolinebreak\hfill $\square$}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{thm}{Theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  \title[Bosonic and Fermionic Singularities]{Bosonic and Fermionic Singularities\\ in Diffeology}
+  \author{Patrick Iglesias-Zemmour}
+  \date{\today}
+  
+  \address{Einstein Institute of Mathematics,
+  The Hebrew University of Jerusalem,
+  Campus Givat Ram,
+  9190401 Israel.}
+  \email{piz@math.huji.ac.il}
+  \urladdr{http://math.huji.ac.il/~piz}
+  
+  \thanks{The author thanks the Hebrew University of Jerusalem, Israel, for his continuous academic support. He is also grateful for the stimulating discussions and assistance provided by the AI assistant Gemini (Google).}
+  
+    \subjclass[2020]{Primary 58A40; Secondary 58A10, 58A32, 53A45, 58K70.}
+  \keywords{Diffeology, Differential spaces, Manifolds with corners, Differential forms, Symmetric tensors, Singularities, Singular capacity.}
+
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Abstract
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    We explore the differential geometry of the quadrant $\C_2 = [0,\infty[^2$,
+    equipped with the subset diffeology of $\RR^2$.
+    We show a striking dichotomy between differential forms and symmetric tensors.
+    While differential forms on $\C_2$ are simply restrictions of smooth forms on $\RR^2$ (a ``fermionic'' behavior where singularities are hidden),
+    symmetric tensors exhibit a ``bosonic'' behavior where singularities accumulate.
+    We prove a decomposition theorem identifying exactly the singular parts:
+    they are purely axial.
+    Surprisingly,
+    the mixed interaction term is forced to be regular by the symmetries of the corner.
+    Finally,
+    we introduce the notion of \emph{singular capacity} to quantify the order of singularity a tensor can support.
+  \end{abstract}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Introduction
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Introduction}
+  
+  Diffeology offers a change of paradigm regarding singularities.
+  Instead of defining smoothness via charts to a fixed local model,
+  diffeology tests the space via smooth parametrizations (plots).
+  A geometric object is smooth if its pullback by any smooth plot is smooth.
+  
+  In this note,
+  we investigate how this definition interacts with the simplest singularities:
+  boundaries and corners.
+  We focus on two spaces:
+  the half-line $\Delta = [0,\infty[$ and the quadrant $\C_2 = [0,\infty[^2$,
+  both embedded in their respective Euclidean spaces.
+  
+  We find that the algebraic nature of the geometric object determines its ability to ``see'' the singularity.
+  We use the terminology ``Fermionic'' and ``Bosonic'' to highlight the contrast between the antisymmetric nature of forms (akin to the Pauli exclusion principle) and the symmetric nature of tensors (akin to Bose-Einstein accumulation).
+  \begin{enumerate}
+    \item \textbf{Fermionic behavior:} Differential forms are blind to the boundary.
+    The antisymmetry forces them to vanish on singular strata in a way that makes them indistinguishable from restrictions of ambient forms.
+    \item \textbf{Bosonic behavior:} Symmetric tensors detect the boundary.
+    The symmetry allows singular terms to survive.
+    However,
+    we show that this accumulation is strictly limited to the diagonal terms of the tensor.
+  \end{enumerate}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: The Half-Line
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{The Case of the Half-Line}
+  
+  Let $\Delta = [0,\infty[ \subset \RR$ equipped with the subset diffeology.
+  Let $x$ be the coordinate.
+  
+  \begin{article}\artlabel{Differential Forms}
+    It is a known result \cite{GIZ16} that the injection $j \colon \Delta \hookrightarrow \RR$ induces a surjection on differential forms.
+    Any $1$-form $\alpha$ on $\Delta$ is of the form $\alpha = f(x) \dx$ where $f$ is the restriction of a smooth function on $\RR$.
+    The boundary condition is handled by the ``fermionic'' nature of the form:
+    if a plot $\P(t)$ touches the boundary at $t_0$ (i.e., $\P(t_0)=0$),
+    then $\P'(t_0)=0$.
+    The pullback $\P^*(\alpha) = f(\P(t)) \P'(t) \dt$ vanishes naturally,
+    hiding any potential singularity.
+  \end{article}
+  
+  \begin{article}\artlabel{Symmetric Tensors}
+    The situation is different for $\cS^2(\Delta)$.
+    We define the \emph{polar tensor}:
+    $$
+      \tau_\sing = \frac{\dx \otimes \dx}{x}.
+      $$
+    We first establish that $\tau_\sing$ is indeed a smooth diffeological tensor.
+    Let $\P \colon \U \to \Delta$ be a plot.
+    We must verify that $\P^*(\tau_\sing) = (\P'(t)^2/\P(t)) \dt \otimes \dt$ is smooth.
+    If $\P(t_0) > 0$,
+    smoothness is trivial.
+    If $\P(t_0) = 0$,
+    we rely on the following classical inequality.
+    
+    \begin{lemma}[Glaeser-Landau Inequality]
+      Let $f \colon \RR \to \RR$ be a smooth non-negative function.
+      For any compact interval $I$,
+      there exists a constant $C$ (depending on $\sup_I |f''|$) such that for all $t \in I$:
+      $$
+        f'(t)^2 \le 2 \, C \, f(t).
+        $$
+    \end{lemma}
+    
+    \begin{proof}
+      By Taylor expansion with Lagrange remainder,
+      $f(t+h) = f(t) + h f'(t) + \frac{h^2}{2} f''(\xi)$.
+      Since $f(t+h) \ge 0$ for all $h$,
+      the discriminant of this quadratic polynomial in $h$ must be non-positive:
+      $f'(t)^2 - 2 f(t) f''(\xi) \le 0$.
+      Taking the supremum of $|f''|$ yields the result.
+    \end{proof}
+    
+    Applying this to our plot $\P$,
+    we have $|\P'(t)^2/\P(t)| \le 2 \sup |\P''|$.
+    If $\P$ is flat at $t_0$,
+    then $\P''$ vanishes as we approach $t_0$,
+    so the ratio tends to $0$.
+    Differentiation of the ratio leads to similar expressions involving higher derivatives,
+    which also vanish.
+    Thus,
+    the pullback is smooth everywhere.
+    
+    Now,
+    we prove that this is the \emph{only} type of singularity.
+    
+    \begin{thm}[Decomposition on the Half-Line]
+      The space of differential symmetric $2$-tensors on $\Delta$ decomposes uniquely as:
+      $$
+        \cS^2(\Delta) = \RR \cdot \tau_\sing \oplus j^*(\cS^2(\RR)).
+        $$
+      That is,
+      every tensor $\tau$ can be written uniquely as $\tau = c \tau_\sing + \tau_\reg$,
+      where $c \in \RR$ and $\tau_\reg$ is the restriction of a smooth tensor on $\RR$.
+    \end{thm}
+    
+    \begin{proof}
+      Let $\tau \in \cS^2(\Delta)$.
+      On the interior $]0,\infty[$,
+      $\tau = f(x) \dx \otimes \dx$ for some smooth function $f$.
+      Consider the parametrization $\sq \colon \RR \to \Delta$ defined by $\sq(t) = t^2$.
+      Since $\sq$ is a subduction from $\RR$ to $\Delta$,
+      checking the smoothness of the pullback by $\sq$ is sufficient to characterize the tensor.
+      We have:
+      $$
+        \sq^*(\tau) = f(t^2) \, d(t^2) \otimes d(t^2) = 4 t^2 f(t^2) \, \dt \otimes \dt.
+        $$
+      Let $g(t) = 4 t^2 f(t^2)$.
+      Since $\sq^*(\tau)$ is smooth,
+      $g \in \Ci(\RR)$.
+      Furthermore,
+      since $t \mapsto t^2$ is an even map,
+      the pullback tensor must be invariant under $t \mapsto -t$.
+      Since $\dt \otimes \dt$ is invariant,
+      $g(t)$ must be an even function.
+      According to Whitney's theorem on even functions \cite{Whi43},
+      there exists $h \in \Ci(\RR)$ such that $g(t) = h(t^2)$.
+      Restricting to $t \ge 0$ and setting $u = t^2$,
+      we have $h(u) = 4 u f(u)$ for $u > 0$.
+      We apply the Taylor expansion to $h$ at $0$:
+      $$
+        h(u) = h(0) + u k(u),
+        $$
+      where $k \in \Ci(\RR)$.
+      Substituting back:
+      $$
+        4 u f(u) = h(0) + u k(u) \implies f(u) = \frac{h(0)}{4u} + \frac{k(u)}{4}.
+        $$
+      This equality holds on $]0,\infty[$.
+      Thus:
+      $$
+        \tau = \frac{h(0)}{4} \frac{\dx \otimes \dx}{x} + \frac{k(x)}{4} \dx \otimes \dx.
+        $$
+      The first term is a multiple of $\tau_\sing$.
+      The second term is the restriction of the smooth tensor $\frac{k}{4} \dx \otimes \dx$ defined on $\RR$.
+      Uniqueness follows from the fact that $\tau_\sing$ is unbounded at the origin,
+      while any regular tensor is bounded.
+    \end{proof}
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: The Quadrant
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{The Case of the Quadrant}
+  
+  Let $\C_2 = [0,\infty[^2 \subset \RR^2$ with coordinates $(x,y)$.
+  This space represents a ``corner'' in the classical sense.
+  We are interested in the structure of the space of symmetric $2$-tensors $\cS^2(\C_2)$.
+  
+  \begin{thm}
+    Every differential symmetric $2$-tensor $\tau$ on the quadrant $\C_2$ decomposes uniquely as:
+    $$
+      \tau = \tau_\reg + \frac{A(y)}{x} \dx^2 + \frac{B(x)}{y} \dy^2,
+      $$
+    where $\tau_\reg$ is the restriction of a smooth tensor on $\RR^2$,
+    and $A, B \in \Ci([0,\infty[)$.
+  \end{thm}
+  
+  \begin{proof}
+    Let $\tau$ be a symmetric $2$-tensor on $\C_2$.
+    Restricted to the interior $\mathopen]0,\infty[^2$,
+    it is a standard smooth tensor:
+    $$
+      \tau = \alpha(x,y) \dx^2 + \beta(x,y) \dy^2 + 2\gamma(x,y) \dx \dy.
+      $$
+    Consider the square map $\sq \colon \RR^2 \to \C_2$ defined by $\sq(u,v) = (u^2, v^2)$.
+    Since $\sq$ is a subduction onto $\C_2$,
+    the pullback $\sq^*(\tau)$ must be a smooth tensor on $\RR^2$.
+    We compute:
+    $$
+      \sq^*(\tau) = \alpha(u^2,v^2) (2u\du)^2 + \beta(u^2,v^2) (2v\dv)^2 + 2\gamma(u^2,v^2) (2u\du)(2v\dv).
+      $$
+    Let us denote the coefficients of $\sq^*(\tau)$ on the basis $(\du^2, \dv^2, 2\du\dv)$ by $\tilde\alpha, \tilde\beta, \tilde\gamma$.
+    They are smooth functions on $\RR^2$:
+    \begin{align*}
+      \tilde\alpha(u,v) &= 4u^2 \alpha(u^2, v^2), \\
+      \tilde\beta(u,v) &= 4v^2 \beta(u^2, v^2), \\
+      \tilde\gamma(u,v) &= 4uv \gamma(u^2, v^2).
+    \end{align*}
+    The map $\sq$ is invariant under the group $\Gamma = \Z_2 \times \Z_2$ acting by sign changes on $u$ and $v$.
+    Consequently,
+    the tensor $\sq^*(\tau)$ must be invariant under the action of $\Gamma$.
+    
+    \textbf{1. The Axial Terms.}
+    Consider the invariance under $(u,v) \mapsto (-u,v)$.
+    We have $\du \to -\du$ and $\dv \to \dv$.
+    Thus $\du^2$ is invariant.
+    The coefficient $\tilde\alpha(u,v)$ must be even in $u$.
+    Similarly,
+    invariance under $(u,v) \mapsto (u,-v)$ implies $\tilde\alpha$ is even in $v$.
+    By Whitney's theorem on even functions,
+    there exists a smooth function $K_\alpha$ on $\RR^2$ such that:
+    $$
+      \tilde\alpha(u,v) = K_\alpha(u^2, v^2).
+      $$
+    Substituting back,
+    we have for $x=u^2, y=v^2$:
+    $$
+      4x \alpha(x,y) = K_\alpha(x,y).
+      $$
+    We apply the Taylor expansion with remainder to $K_\alpha$ with respect to its first variable $x$:
+    $$
+      K_\alpha(x,y) = K_\alpha(0,y) + x \, Q_\alpha(x,y),
+      $$
+    where $Q_\alpha$ is smooth.
+    Thus:
+    $$
+      \alpha(x,y) = \frac{K_\alpha(0,y)}{4x} + \frac{Q_\alpha(x,y)}{4}.
+      $$
+    The first term corresponds to the singular tensor $\frac{A(y)}{x} \dx^2$ with $A(y) = K_\alpha(0,y)/4$.
+    The second term is regular.
+    The same logic applies to $\beta(x,y)$,
+    yielding the term $\frac{B(x)}{y} \dy^2$.
+    
+    \textbf{2. The Cross Term.}
+    This is the subtle part.
+    The term $2\tilde\gamma \du \dv$ must be invariant.
+    Under $(u,v) \mapsto (-u,v)$,
+    the form $\du \dv$ changes sign ($\to -\du \dv$).
+    Therefore,
+    the coefficient $\tilde\gamma(u,v)$ must be \emph{odd} in $u$ to compensate.
+    This contrasts with the diagonal terms:
+    the invariance of $\du^2$ allows an even coefficient (and thus a singularity),
+    whereas the anti-invariance of $\du$ forces the coefficient to vanish at the origin.
+    Similarly,
+    under $(u,v) \mapsto (u,-v)$,
+    $\tilde\gamma$ must be \emph{odd} in $v$.
+    
+    A smooth function $\tilde\gamma(u,v)$ that is odd in both variables can be written as:
+    $$
+      \tilde\gamma(u,v) = uv \, K_\gamma(u^2, v^2),
+      $$
+    where $K_\gamma$ is a smooth function on $\RR^2$.
+    Comparing this with the expression from the pullback:
+    $$
+      4uv \gamma(u^2, v^2) = uv K_\gamma(u^2, v^2).
+      $$
+    For $u,v \neq 0$,
+    we can divide by $uv$:
+    $$
+      4 \gamma(x,y) = K_\gamma(x,y).
+      $$
+    Since $K_\gamma$ is smooth on $\RR^2$,
+    the function $\gamma$ extends to a smooth function on the whole quadrant $\C_2$.
+    
+    Therefore,
+    contrary to the axial terms,
+    the cross term $\gamma(x,y) \dx \dy$ cannot support a singularity of type $1/\sqrt{xy}$ or $1/xy$.
+    The symmetries of the corner enforce regularity for the mixed terms.
+  \end{proof}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Singular Capacity
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Singular Capacity}
+  
+  \begin{article}\artlabel{A Distributional Interpretation}
+    This result illustrates a specific feature of Diffeology regarding singularities.
+    Classically,
+    an object like $1/x$ requires the theory of distributions to be handled rigorously,
+    defined as a functional on a space of smooth test functions.
+    
+    Here,
+    Diffeology provides an alternative approach.
+    According to the definition of covariant tensors \cite[art. 6.28]{PIZ13},
+    the tensor is defined by its pullbacks by the plots of the space.
+    The plots act as ``geometric test curves.''
+    The condition that a plot $\P$ takes its values in $\Delta$ (i.e., $\P(t) \ge 0$) imposes constraints on its derivatives at the boundary.
+    Specifically,
+    if $\P(t_0)=0$,
+    then $\P(t)$ behaves locally like $(t-t_0)^2$ (or higher even order).
+    Consequently,
+    the derivative $\P'(t)$ vanishes linearly as $(t-t_0)$.
+    
+    This vanishing acts as a built-in regularization,
+    but its power depends on the degree $k$ of the tensor.
+    The pullback of a $k$-tensor involves the factor $(\P'(t))^k$,
+    which vanishes to the order $t^k$.
+    To absorb a singularity of type $1/x^p$ (which behaves like $1/t^{2p}$),
+    we need the ``cushion'' to be strong enough:
+    $$
+      k \ge 2p.
+      $$
+    This motivates the following definition.
+    
+    \textsc{Definition.} --- \textit{We call \emph{singular capacity} of a tensor of degree $k$ on the half-line (or a boundary of codimension 1),
+    the maximum order of the pole $1/x^p$ that the tensor can support while remaining smooth in the diffeological sense.
+    It is given by:}
+    $$
+      \kappa(k) = \left\lfloor \frac{k}{2} \right\rfloor.
+      $$
+    
+    This explains the hierarchy we observe:
+    \begin{itemize}
+      \item For $k=0$ (functions) and $k=1$ (1-forms),
+      the capacity is $\kappa=0$.
+      No poles are allowed;
+      the objects must be regular.
+      \item For $k=2$ (metrics),
+      the capacity is $\kappa=1$.
+      A simple pole $1/x$ is allowed.
+      \item For higher degrees,
+      stronger singularities (like $1/x^2$ for $k=4$) become admissible.
+    \end{itemize}
+    Thus,
+    Diffeology implements a ``theory of distributions'' that is intrinsic to the geometry of the plots,
+    where the rank of the tensor determines its singular capacity.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Conclusion
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Conclusion}
+  
+  The quadrant $\C_2$ exhibits a rich diffeological structure.
+  While differential forms behave ``fermionically'' (blind to the corner),
+  symmetric tensors behave ``bosonically'' but with a selection rule.
+  The diagonal components of the metric can blow up at the boundary (creating a geometry that opens up like a horn),
+  but the off-diagonal terms must remain regular.
+  This suggests that Diffeology imposes a specific orthogonality constraint on singular metrics at the corner.
+  
+  %************************************************
+  %***** Bibliographie
+  %************************************************
+  
+  \begin{thebibliography}{IZW13}
+    
+    \bibitem[GIZ16]{GIZ16}
+    Serap Gürer and Patrick Iglesias-Zemmour.
+    \newblock {\em $p$-Forms on Half-Spaces}.
+    Web publication, August 19, 2016.
+    \newline
+    \newblock \verb|http://math.huji.ac.il/~piz/documents/DBlog-Rmk-kFOHS.pdf|.
+    
+    \bibitem[GIZ17]{GIZ17}
+    Serap Gürer and Patrick Iglesias-Zemmour.
+    \newblock {\em Differential Forms on Corners}.
+    Preprint, May 2017.
+    \newline
+    \newblock \verb|http://math.huji.ac.il/~piz/documents/DFOC.pdf|.
+    
+    \bibitem[PIZ07]{PIZ07}
+    Patrick Iglesias-Zemmour.
+    \newblock {\em Dimension in diffeology}.
+    \newblock {Indagationes Mathematicae}, 18(4), 2007.
+    
+    \bibitem[PIZ13]{PIZ13}
+    \newblock{Patrick Iglesias-Zemmour.}
+    \newblock{\em Diffeology.}
+    \newblock{Mathematical Surveys and Monographs. The American Mathematical Society, vol. 185, USA R.I. 2013.}
+    
+    \bibitem[IZW13]{IZW13}
+    Patrick Iglesias-Zemmour and Enxin Wu.
+    \newblock {\em A Few Half-Lines}.
+    Web publication, April 21, 2013.
+    \newline
+    \newblock \verb|http://math.huji.ac.il/~piz/documents/DBlog-Rmk-AFHL.pdf|.
+    
+    \bibitem[Sou80]{Sou80}
+    Jean-Marie Souriau.
+    \newblock Groupes diff{\'e}rentiels.
+    \newblock {\em Lecture notes in mathematics}, 836:91--128, 1980.
+    
+    \bibitem[Whi43]{Whi43}
+    Hassler Whitney.
+    \newblock{\em Differentiable even functions.}
+    \newblock{Duke Math. Journal, pp. 159--160, vol. 10, 1943.}
+    
+  \end{thebibliography}
+  
+\end{document}
