@@ -12,8 +12,6 @@
 
 ## Status and Historical Context
 
-## Status and Historical Context
-
 **This paper is an unpublished preprint.**
 
 It represents an excerpt and adaptation of the author's State Doctorate thesis, *Fibrations difféologiques et Homotopie*, defended in November 1985.
