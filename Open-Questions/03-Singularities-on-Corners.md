@@ -1,14 +1,14 @@
-# 03-Singularities-on-Corners
-
-> **Date Added:** December 26, 2025
+**Date:** December 26, 2025  
 
 **Related Work:** [Bosonic and Fermionic Singularities in Diffeology](../Papers/2025-Bosonic-and-Fermionic-Singularities-in-Diffeology/)
 
 ## Statement of the Problem
 
-Let $\mathcal{C}_n = [0,\infty[^n \subset \mathbb{R}^n$ be the standard $n$-corner equipped with the subset diffeology. Let $\mathcal{S}^k(\mathcal{C}_n)$ be the space of smooth symmetric covariant $k$-tensors on $\mathcal{C}_n$.
+Let $\mathcal{C}_n = [0,\infty[^n \subset \mathbb{R}^n$ be the standard $n$-corner equipped with the subset diffeology.
 
-In a recent work (Iglesias-Zemmour, 2025), we established the structure of $\mathcal{S}^2(\mathcal{C}_2)$ (the quadrant). We showed that while the diagonal terms (e.g., $dx_1 \otimes dx_1$) can support singularities of the type $1/x_1$, the cross terms (e.g., $dx_1 \otimes dx_2$) must be regular.
+Recall that $\mathcal{C}_n$ carries a natural stratification defined by the action of local diffeomorphisms (the **Klein stratification**). The strata correspond to the various faces of the corner. Specifically, a stratum is defined by the set of points having exactly $d$ non-zero coordinates; this integer $d$ is the dimension of the stratum as a diffeological subspace.
+
+Let $\mathcal{S}^k(\mathcal{C}_n)$ be the space of smooth symmetric covariant $k$-tensors on $\mathcal{C}_n$. In a recent work (Iglesias-Zemmour, 2025), we established the structure of $\mathcal{S}^2(\mathcal{C}_2)$ (the quadrant). We showed that while the diagonal terms (e.g., $dx_1 \otimes dx_1$) can support singularities of the type $1/x_1$ as they approach the 1-dimensional strata (the axes), the cross terms (e.g., $dx_1 \otimes dx_2$) must be regular.
 
 **The question is to generalize this decomposition to arbitrary degree $k$ and dimension $n$.**
 
@@ -49,3 +49,4 @@ Proving this general combinatorial rule would provide a complete classification 
 
 1.  P. Iglesias-Zemmour, *Bosonic and Fermionic Singularities in Diffeology*, Preprint, 2025.
 2.  S. Gürer and P. Iglesias-Zemmour, *Differential Forms on Manifolds with Boundary and Corners*, Indagationes Mathematicae, 30(5), 2019.
+3.  S. Gürer and P. Iglesias-Zemmour, *Orbifolds As Stratified Diffeologies*, Differential Geometry and its Applications, 86, 2023.
