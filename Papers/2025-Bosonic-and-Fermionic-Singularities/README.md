@@ -17,7 +17,7 @@ Key contributions include:
 1.  **The Polar Tensor:** The identification of $\tau_{\text{sing}} = \frac{dx \otimes dx}{x}$ as a smooth diffeological tensor on the half-line.
 2.  **Riemannian Metrics:** The paper establishes that while singular tensors exist, they cannot be **Riemannian metrics**. By adopting the *pointwise* definition of a metric (as defined in *Lectures on Diffeology*, 2025), the author proves that the non-degeneracy condition forces the singular coefficient to vanish.
 3.  **Singular Capacity:** The formula $\kappa(k) = \lfloor k/2 \rfloor$, which quantifies the "strength" of singularity a tensor of degree $k$ can support.
-4.  **Foundations:** The paper explicitly addresses the choice to define tensors via plots rather than tangent bundles. Citing recent work by M. Taho (2025) on the non-uniqueness of tangent functors, the author argues that the functional definition on plots is the only unambiguous path.
+4.  **Foundations:** The paper explicitly addresses the choice to define tensors via plots rather than "tangent vectors" or bundles. Citing recent work by M. Taho (2025) on the non-uniqueness of tangent functors, the author argues that the functional definition on plots is the only unambiguous path.
 
 ## Archival Notes (2025)
 
