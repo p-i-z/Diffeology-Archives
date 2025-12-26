@@ -1,4 +1,5 @@
-**Date:** December 26, 2025  
+# Open Question 3: Singularities of Symmetric Tensors on Corners
+> **Date:** December 26, 2025  
 
 **Related Work:** [Bosonic and Fermionic Singularities in Diffeology](../Papers/2025-Bosonic-and-Fermionic-Singularities-in-Diffeology/)
 
