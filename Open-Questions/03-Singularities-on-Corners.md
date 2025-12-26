@@ -1,8 +1,7 @@
 # 03-Singularities-on-Corners
 
-**Proposer:** Patrick Iglesias-Zemmour  
-**Date:** December 26, 2025  
-**Status:** Open  
+> **Date Added:** December 26, 2025
+
 **Related Work:** [Bosonic and Fermionic Singularities in Diffeology](../Papers/2025-Bosonic-and-Fermionic-Singularities-in-Diffeology/)
 
 ## Statement of the Problem
