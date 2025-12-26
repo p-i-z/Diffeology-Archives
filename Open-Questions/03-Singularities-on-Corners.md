@@ -7,7 +7,7 @@
 
 Let $\mathcal{C}_n = [0,\infty[^n \subset \mathbb{R}^n$ be the standard $n$-corner equipped with the subset diffeology.
 
-Recall that $\mathcal{C}_n$ carries a natural stratification defined by the action of local diffeomorphisms (the **Klein stratification**). The strata correspond to the various faces of the corner. Specifically, a stratum is defined by the set of points having exactly $d$ non-zero coordinates; this integer $d$ is the dimension of the stratum as a diffeological subspace.
+Recall that $\mathcal{C}_n$ carries a natural stratification defined by the action of local diffeomorphisms (the **Klein stratification**). The strata correspond to the various faces of the corner. Specifically, a stratum is defined by the set of points having exactly $d$ non-zero coordinates (coonected components); this integer $d$ is the dimension of the stratum as a diffeological subspace.
 
 Let $\mathcal{S}^k(\mathcal{C}_n)$ be the space of smooth symmetric covariant $k$-tensors on $\mathcal{C}_n$. In a recent work (Iglesias-Zemmour, 2025), we established the structure of $\mathcal{S}^2(\mathcal{C}_2)$ (the quadrant). We showed that while the diagonal terms (e.g., $dx_1 \otimes dx_1$) can support singularities of the type $1/x_1$ as they approach the 1-dimensional strata (the axes), the cross terms (e.g., $dx_1 \otimes dx_2$) must be regular.
 
