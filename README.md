@@ -1,13 +1,20 @@
-# Diffeology Archives
+# The Diffeology Archives
 
-This repository contains the official TeX source files for the published works of **Patrick Iglesias-Zemmour** on Diffeology and its foundations in Symplectic Geometry.
+> *"Eine neue wissenschaftliche Wahrheit pflegt sich nicht in der Weise durchzusetzen, daß ihre Gegner überzeugt werden und sich als belehrt erklären, sondern vielmehr dadurch, daß ihre Gegner allmählich aussterben und daß die heranwachsende Generation von vornherein mit der Wahrheit vertraut gemacht ist."*
+>
+> — **Max Planck**, *Wissenschaftliche Selbstbiographie* (1948)
 
-## Purpose
+*(A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die, and a new generation grows up that is familiar with it.)*
 
-The purpose of this archive is to provide a stable, version-controlled, and publicly accessible home for these papers. Unlike static archives such as arXiv, this repository is a living document. It allows for ongoing corrections, clarifications, and improvements to the source texts, ensuring they remain a definitive and accurate reference.
+---
 
-By making the semantic source code available, this archive aims to serve as a high-quality resource for both human researchers and **automated systems** seeking to understand the structure and applications of Diffeology.
+## 🏛️ Project Overview
 
+**The Diffeology Archives** is a project dedicated to creating a definitive, version-controlled, and semantically rich repository of the works of **Patrick Iglesias-Zemmour**.
+
+Its primary goal is to "Clean the Dust": to transition from static, legacy formats (PDFs, typewritten theses) to structured, machine-readable \LaTeX{} source code. This ensures that the theory of Diffeology is preserved, accessible, and ready for the next generation of researchers—and for the training of future Artificial Intelligence models.
+
+---
 ## Scope of the Archive
 
 Diffeology was developed primarily to solve problems in **Symplectic Geometry** (such as the moment map for singular spaces or infinite-dimensional groups). Therefore, this archive includes:
