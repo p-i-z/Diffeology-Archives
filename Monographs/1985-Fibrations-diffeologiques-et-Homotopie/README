@@ -1,0 +1,40 @@
+# Fibrations Difféologiques et Homotopie (1985)
+
+**Author:** Patrick Iglesias-Zemmour
+**Type:** Thèse de Doctorat d'État
+**Institution:** Université de Provence, Marseille
+**Date:** November 29, 1985
+**Jury:** J.-M. Souriau (Advisor), D. Bennequin, J. Breuneval, J. Dixmier (President), P. Donato, J. Pradines, R. Stora.
+
+## 📜 Archival Status
+**STATUS: HISTORICAL ARCHIVE**
+
+This directory contains the **2025 Critical Transcription** of the original 1985 thesis. It has been transcribed from the original typewritten manuscript into modern \LaTeX{} to ensure preservation.
+
+**⚠️ WARNING: This text is a historical document, not a current reference manual.**
+
+## ⚠️ Avertissement / Warning (2025)
+
+The theory of Diffeology has evolved significantly since 1985. Readers and researchers must be aware that this text contains terminology and definitions that are now considered **obsolete** or **imprecise**.
+
+### 1. Obsolete Terminology
+*   **"Groupoïde Parfait" (Perfect Groupoid):** In this text, this term denotes a transitive groupoid where the characteristic map is a subduction (a diffeological fibration). It has **no relation** to the algebraic concept of a "Perfect Group."
+*   **"Valuation":** Used here to denote the **Evaluation map** ($ev(f,x) = f(x)$).
+*   **"Sous-groupoïde Respectueux":** Corresponds to what is now called a **Wide Subgroupoid** (a subgroupoid containing all objects of the parent).
+
+### 2. Mathematical Imprecision
+*   **Groupoid Morphisms:** The definition provided in this thesis (and propagated to the 2013 AMS book) lacks a necessary condition regarding injectivity on objects. This affects the construction of quotient groupoids.
+*   **Micro-triviality:** This condition was an early attempt to define fibrations without topology. While intuitive, the modern definition of Diffeological Fibrations is more robust.
+
+## 📚 Canonical Reference
+For all rigorous mathematical work, citations, and definitions, please refer to the **Revised Edition** of the standard monograph:
+
+> **Patrick Iglesias-Zemmour, *Diffeology*, Beijing World Publishing Corporation.**
+
+(A digital copy of this revised edition is available in the [2013-Diffeology](../2013-Diffeology-AMS/Beijing-2022-Edition/) directory of this archive).
+
+## 🛠️ Archival Notes
+*   **Transcription:** Transcribed in Dec 2025 from the original PDF scans.
+*   **Format:** `amsbook` class, UTF-8 encoding.
+*   **Figures:** Original hand-drawn figures have been preserved or redrawn using TikZ/Python where appropriate.
+*   **Editor Notes:** The source code contains `\editornote{}` tags indicating specific corrections or historical context.
