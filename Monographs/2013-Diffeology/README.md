@@ -18,7 +18,7 @@ Contains the original \LaTeX{} source code used to generate the 2013 AMS edition
 ### 2. [`/Beijing-2022-Edition/`](./Beijing-2022-Edition/)
 Contains the **Revised Edition** (published by Beijing World Publishing Corp) in PDF format.
 *   **Status:** **Canonical Reference.**
-*   **Note:** This version corrects the errors found in the AMS edition. It is provided here as an **Extended Erratum** for research purposes.
+*   **Note:** This version corrects the errors found in the AMS edition. A pdf verison of it is provided in the directory `../AMS-2013-Edition` as an **Extended Erratum** for research purposes.
 
 ## ⚠️ Important Note to Researchers
 For all mathematical citations, definitions, and general study, please refer to the text in the **[`/Beijing-2022-Edition/`](./Beijing-2022-Edition/)** folder. The AMS edition should be treated as a historical snapshot.
