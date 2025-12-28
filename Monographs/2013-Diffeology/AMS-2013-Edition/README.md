@@ -21,4 +21,4 @@ Contains the **Revised Edition** (published by Beijing World Publishing Corp) in
 *   **Note:** This version corrects the errors found in the AMS edition.
 
 ## ⚠️ Important Note to Researchers
-For all mathematical citations, definitions, and general study, please refer to the text in the **`/Erratum-Revised-Edition/`** folder.
+For all mathematical citations, definitions, and general study, please refer to the text in the **[`/Erratum-Revised-Edition/`](./Erratum-Revised-Edition/)** folder.
