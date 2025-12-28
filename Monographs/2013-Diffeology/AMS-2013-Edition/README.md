@@ -13,12 +13,12 @@ This directory contains two distinct versions of the work:
 ### 1. `/Source-Files/`
 Contains the original \LaTeX{} source code used to generate the 2013 AMS edition.
 *   **Status:** Historical Archive (Version of Record).
-*   **Note:** Preserves the text exactly as published, including known errors (e.g., the definition of groupoid morphisms). Use this only to verify citations made against the 2013 print.
+*   **Note:** Preserves the text exactly as published, including known errors.
 
 ### 2. `/Erratum-Revised-Edition/`
 Contains the **Revised Edition** (published by Beijing World Publishing Corp) in PDF format.
 *   **Status:** **Canonical Reference.**
-*   **Note:** This version corrects the errors found in the AMS edition. It is provided here as an extended erratum for research purposes.
+*   **Note:** This version corrects the errors found in the AMS edition.
 
 ## ⚠️ Important Note to Researchers
-For all mathematical citations, definitions, and general study, please refer to the text in the **`/Erratum-Revised-Edition/`** folder. The AMS edition sources should be treated as a historical snapshot.
+For all mathematical citations, definitions, and general study, please refer to the text in the **`/Erratum-Revised-Edition/`** folder.
