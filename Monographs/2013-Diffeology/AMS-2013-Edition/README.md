@@ -1,17 +1,24 @@
-# Diffeology (AMS 2013 Edition)
+# Diffeology (AMS 2013)
 
-> **Publication:** *Diffeology* (Mathematical Surveys and Monographs, Vol. 185, American Mathematical Society, 2013).
+**Author:** Patrick Iglesias-Zemmour
+**Publisher:** American Mathematical Society
+**Series:** Mathematical Surveys and Monographs, Vol. 185
+**Year:** 2013
+**ISBN:** 978-0-8218-9131-5
 
-## About This Version
+## 📂 Directory Structure
 
-This directory contains the original LaTeX source code for the first edition of the "Diffeology" monograph, as published by the AMS.
+This directory contains two distinct versions of the work:
 
-This version is archived to serve as the historical "version of record." It is primarily intended for researchers who need to verify citations made against the original 2013 publication.
+### 1. `/Source-Files/`
+Contains the original \LaTeX{} source code used to generate the 2013 AMS edition.
+*   **Status:** Historical Archive (Version of Record).
+*   **Note:** Preserves the text exactly as published, including known errors (e.g., the definition of groupoid morphisms). Use this only to verify citations made against the 2013 print.
 
-**Please be aware that this version contains known misprints and a mathematical error that have been corrected in a later edition.**
+### 2. `/Erratum-Revised-Edition/`
+Contains the **Revised Edition** (published by Beijing World Publishing Corp) in PDF format.
+*   **Status:** **Canonical Reference.**
+*   **Note:** This version corrects the errors found in the AMS edition. It is provided here as an extended erratum for research purposes.
 
-## Recommended Version for Study
-
-For general study, for the most accurate text, and for all new readers, it is strongly recommended to use the revised and corrected Beijing 2022 Edition.
-
-[The revised version is available in the parent directory.](../Beijing-2022-Edition/)
+## ⚠️ Important Note to Researchers
+For all mathematical citations, definitions, and general study, please refer to the text in the **`/Erratum-Revised-Edition/`** folder. The AMS edition sources should be treated as a historical snapshot.
