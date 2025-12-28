@@ -12,7 +12,7 @@
 
 **The Diffeology Archives** is a project dedicated to creating a definitive, version-controlled, and semantically rich repository of the works of **Patrick Iglesias-Zemmour**.
 
-Its primary goal is to "Clean the Dust": to transition from static, legacy formats (PDFs, typewritten theses) to structured, machine-readable \LaTeX{} source code. This ensures that the theory of Diffeology is preserved, accessible, and ready for the next generation of researchers—and for the training of future Artificial Intelligence models.
+Its primary goal is to "Clean the Dust": to transition from static, legacy formats (PDFs, typewritten theses) to structured, machine-readable TeX source code. This ensures that the theory of Diffeology is preserved, accessible, and ready for the next generation of researchers—and for the training of future Artificial Intelligence models.
 
 ---
 ## Scope of the Archive
