@@ -122,6 +122,13 @@
 
 \begin{document}
   
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Draft Watermark
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  {
+  \tikz[overlay,remember picture]{\node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \pdfcreationdate}}}
+  }
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% MARK: Title & Data
@@ -142,7 +149,7 @@
   \\
   The \TeX\ source of this paper is available at the GitHub PIZ-Diffeology Archive: \url{https://github.com/p-i-z/Diffeology-Archives}.}
   
-  \date{Mon. Dec. 29 2025}
+  \date{\today}
   
   \subjclass[2020]{Primary 53D50, 58A05; Secondary 22A22, 55R65, 58A10}
   \keywords{Diffeology, Geometric Quantization, Prequantum Groupoid, Closed 2-forms, Parasymplectic Spaces, Paths, Loops}
@@ -628,22 +635,21 @@
       $$
     where $\delta$ is any path connecting the base point $x_0$ to the starting point $\gamma(0)$.
     
-    \textbf{Independence of $\delta$.}
-    Since $\Tomega$ is an abelian group (as a quotient of $\RR$),
-    the function $\psi$ is invariant under conjugation.
-    For any loop $L$ and path $\delta$:
-    $$
-      \psi(\delta \vee L \vee \bar\delta) = \psi(\delta) + \psi(L) - \psi(\delta) = \psi(L).
-      $$
-    This abelian property is guaranteed because $\Pomega$ contains the symplectic areas of the commutators of $\pi_1(X)$,
-    forcing them to vanish in the quotient $\Tomega$.
-    Thus,
-    the value $\Phi(\gamma, \gamma')$ is intrinsic and independent of the choice of $\delta$.
+\textbf{Independence of $\delta$.}
+    Let $L = \gamma \vee \bar\gamma'$. Let $\delta$ and $\delta'$ be two paths connecting $x_0$ to $\gamma(0)$.
+    Let $\sigma = \delta' \vee \bar\delta$, which is a loop based at $x_0$.
+    Consider the concatenation $\sigma \vee \delta = (\delta' \vee \bar\delta) \vee \delta$.
+    The homotopy from $\sigma \vee \delta$ to $\delta'$ consists of retracting the segment $\bar\delta \vee \delta$ to a point that sweeps no area.
+    Consequently, we have the strict equality of integrals (not just modulo periods), allowing us to write:
+    \begin{align*}
+      \psi(\delta' \vee L \vee \bar\delta')
+      &= \psi\big( (\sigma \vee \delta) \vee L \vee \overline{(\sigma \vee \delta)} \big) \\
+      &= \psi\big( \sigma \vee (\delta \vee L \vee \bar\delta) \vee \bar\sigma \big) \\
+      &= \psi(\sigma) + \psi(\delta \vee L \vee \bar\delta) - \psi(\sigma) \\
+      &= \psi(\delta \vee L \vee \bar\delta).
+    \end{align*}
+    Thus, the value $\Phi(\gamma, \gamma')$ is intrinsic.
     
-    This function satisfies the Chasles relation for any triple of paths with matching endpoints:
-    $$
-      \Phi(\gamma, \gamma') + \Phi(\gamma', \gamma'') + \Phi(\gamma'', \gamma) = 0.
-      $$
   \end{article}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
