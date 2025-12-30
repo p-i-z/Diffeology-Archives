@@ -628,19 +628,24 @@
     where $\delta$ is any path connecting the base point $x_0$ to the starting point $\gamma(0)$.
     
 \textbf{Independence of $\delta$.}
-    Let $L = \gamma \vee \bar\gamma'$. Let $\delta$ and $\delta'$ be two paths connecting $x_0$ to $\gamma(0)$.
-    Let $\sigma = \delta' \vee \bar\delta$, which is a loop based at $x_0$.
-    Consider the concatenation $\sigma \vee \delta = (\delta' \vee \bar\delta) \vee \delta$.
-    The homotopy from $\sigma \vee \delta$ to $\delta'$ consists of retracting the segment $\bar\delta \vee \delta$ to a point that sweeps no area.
-    Consequently, we have the strict equality of integrals (not just modulo periods), allowing us to write:
-    \begin{align*}
-      \psi(\delta' \vee L \vee \bar\delta')
-      &= \psi\big( (\sigma \vee \delta) \vee L \vee \overline{(\sigma \vee \delta)} \big) \\
-      &= \psi\big( \sigma \vee (\delta \vee L \vee \bar\delta) \vee \bar\sigma \big) \\
-      &= \psi(\sigma) + \psi(\delta \vee L \vee \bar\delta) - \psi(\sigma) \\
-      &= \psi(\delta \vee L \vee \bar\delta).
-    \end{align*}
-    Thus, the value $\Phi(\gamma, \gamma')$ is intrinsic.
+    The function $\psi$ is defined on the space of free loops $\Loops(X)$.
+    Consider the loop $\Lambda = \delta \vee L \vee \bar\delta$ based at $x_0$, and the loop $L$ based at $x = \gamma(0)$.
+    Let $\delta_s$ be the path $t \mapsto \delta(s + t(1-s))$, which retracts $\delta$ to $x$.
+    Consider the homotopy $\sigma: s \mapsto \delta_s \vee L \vee \bar\delta_s$ in $\Loops(X)$, which connects $\Lambda$ to $L$.
+    The integral of $\Komega$ along $\sigma$ decomposes into three terms:
+    $$
+      \int_\sigma \Komega = \int_{s \mapsto \delta_s} \Komega + \int_{s \mapsto L} \Komega + \int_{s \mapsto \bar\delta_s} \Komega.
+    $$
+    The term for $L$ vanishes because the plot is constant.
+    The term for $\delta_s$ involves integrating $\omega$ over the map $(s,t) \mapsto \delta_s(t)$.
+    This map factors through the 1-plot $\delta$.
+    Since the pullback of a 2-form by a 1-plot is identically zero, this integral vanishes.
+    The same applies to $\bar\delta_s$, thus $\int_\sigma \Komega = 0$.
+    
+    Since $\psi$ is defined by integrating $\Komega$ (modulo $\Pomega$) from a reference loop,
+    and the integral along the path $\sigma$ connecting $\Lambda$ to $L$ is zero,
+    it follows that $\psi(\Lambda) = \psi(L)$.
+    Therefore, the value $\Phi(\gamma, \gamma')$ is intrinsic.
     
   \end{article}
   
