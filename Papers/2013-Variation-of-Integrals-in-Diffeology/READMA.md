@@ -33,3 +33,6 @@ By formalizing these tools, this work demonstrates the power and simplicity of t
 *   **Source:** Author's final LaTeX manuscript for the Canadian Journal of Mathematics.
 *   **Date:** Published 2013.
 *   **Context:** This paper should be read as a technical companion to the author's major works on the Moment Map and Symplectic Diffeology.
+
+## Files in this Directory
+*   `VOIID.tex`: The complete, self-contained LaTeX source file.
