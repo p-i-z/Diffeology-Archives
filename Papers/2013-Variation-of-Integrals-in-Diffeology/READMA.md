@@ -23,7 +23,7 @@ By formalizing these tools, this work demonstrates the power and simplicity of t
 
 ## 🔑 Key Definitions & Results
 
-*   **Variation of an Integral:** The formula $\delta \int_c \alpha = \int_{\id_p} d\alpha \rfloor \delta c + \int_{\partial \id_p} \alpha \rfloor \delta c + \int_{\id_p} c^*(\delta \alpha)$.
+*   **Variation of an Integral:** The formula $\delta \int_c \alpha = \int_{id_p} d\alpha \rfloor \delta c + \int_{\partial id_p} \alpha \rfloor \delta c + \int_{id_p} c^*(\delta \alpha)$.
 *   **Chain-Homotopy Operator ($\mathbf{K}$):** The operator satisfying $\mathbf{K} \circ d + d \circ \mathbf{K} = \mathbf{1}^* - \mathbf{0}^*$.
 *   **Cartan-Lie Formula:** The diffeological proof of $\mathcal{L}_h(\alpha) = i_h(d\alpha) + d(i_h(\alpha))$.
 *   **Homotopy Invariance:** Proof that the De Rham cohomology of diffeological spaces is invariant under homotopy.
