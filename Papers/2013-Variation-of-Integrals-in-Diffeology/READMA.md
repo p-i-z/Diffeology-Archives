@@ -16,7 +16,7 @@ This paper is a foundational "toolkit" for differential calculus in the category
 **Key Contributions:**
 
 1.  **The Variation Formula:** The central technical result is the formula for the variation of an integral, $\delta \int_c \alpha$, which elegantly relates the change in the integral to the exterior derivative, the variation of the form, and the contraction of the form with the variation of the chain.
-2.  **The Chain-Homotopy Operator ($\mathbf{K}$):** The paper constructs the operator $\mathbf{K}$ which maps $p$-forms on a space $X$ to $(p-1)$-forms on its path space $\Paths(X)$. This operator is the cornerstone of the diffeological proof of the homotopy invariance of De Rham cohomology.
+2.  **The Chain-Homotopy Operator ($\mathbf{K}$):** The paper constructs the operator $\mathbf{K}$ which maps $p$-forms on a space $X$ to $(p-1)$-forms on its path space $\mathrm{Paths}(X)$. This operator is the cornerstone of the diffeological proof of the homotopy invariance of De Rham cohomology.
 3.  **Foundations for the Moment Map:** The operator $\mathbf{K}$ defined here is precisely the tool used in the author's major work on the Moment Map (Memoirs of the AMS, 2010). This paper provides the essential, peer-reviewed underpinnings for that construction.
 
 By formalizing these tools, this work demonstrates the power and simplicity of the diffeological framework, allowing complex operations on spaces like `Paths(X)` to be handled with the same elegance as on finite-dimensional manifolds.
