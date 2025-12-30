@@ -25,7 +25,7 @@
 \tikzcdset{arrow style=tikz, diagrams={>={Straight Barb[scale=0.8]}}}
 
 \usepackage[hidelinks]{hyperref}
-\usepackage[margin=10pt,font=small,labelfont=bf, labelformat=empty, labelsep=endash]{caption}
+\usepackage[margin=10pt,font=small,labelfont=bf, labelformat=simple, labelsep=endash]{caption}
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
@@ -121,7 +121,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-    
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Draft Watermark
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  {
+  \tikz[overlay,remember picture]{\node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \pdfcreationdate}}}
+  }
+  
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% MARK: Title & Data
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -160,7 +168,7 @@
     \noindent By defining a \emph{Total Group of Periods} $\Pomega$ directly on the space of paths, which absorbs the periods arising from the algebraic relations of the fundamental group, we construct a prequantum groupoid $\TT_\omega$ with connected isotropy isomorphic to the torus of periods $T_\omega = \RR/\Pomega$.
     
     \noindent Furthermore, we propose that this groupoid $\TT_\omega$ constitutes the \emph{Quantum System} itself.
-    The classical space $X$ is embedded as the \emph{skeleton} of units, surrounded by a \emph{quantum fog} of morphisms.
+    The classical space $X$ is embedded as the \emph{Skeleton} of units, surrounded by a \emph{Quantum Fog} of non-identity morphisms.
     We prove that the group of automorphisms of the Quantum System is isomorphic to the group of symmetries of the Dynamical System, $\Diff(X, \omega)$.
   \end{abstract}
   
@@ -205,8 +213,8 @@
   
   This generalization leads us to a broader conceptual proposal.
   We suggest that the prequantum groupoid $\TT_\omega$ constitutes the \emph{Quantum System} itself.
-  The classical space $X$ sits inside it as the \emph{skeleton} of units,
-  surrounded by a \emph{quantum fog} of non-unit morphisms.
+  The classical space $X$ sits inside it as the \emph{Skeleton} of units,
+  surrounded by a \emph{Quantum Fog} of non-unit morphisms.
   We show that the symmetries of the classical system lift fully and faithfully to this structure,
   satisfying the Dirac axioms for quantization naturally.
   
@@ -627,7 +635,7 @@
       $$
     where $\delta$ is any path connecting the base point $x_0$ to the starting point $\gamma(0)$.
     
-\textbf{Independence of $\delta$.}
+    \textbf{Independence of $\delta$.}
     The function $\psi$ is defined on the space of free loops $\Loops(X)$.
     Consider the loop $\Lambda = \delta \vee L \vee \bar\delta$ based at $x_0$, and the loop $L$ based at $x = \gamma(0)$.
     Let $\delta_s$ be the path $t \mapsto \delta(s + t(1-s))$, which retracts $\delta$ to $x$.
@@ -635,14 +643,15 @@
     The integral of $\Komega$ along $\sigma$ decomposes into three terms:
     $$
       \int_\sigma \Komega = \int_{s \mapsto \delta_s} \Komega + \int_{s \mapsto L} \Komega + \int_{s \mapsto \bar\delta_s} \Komega.
-    $$
-    The term for $L$ vanishes because the plot is constant.
-    The term for $\delta_s$ involves integrating $\omega$ over the map $(s,t) \mapsto \delta_s(t)$.
-    This map factors through the 1-plot $\delta$.
-    Since the pullback of a 2-form by a 1-plot is identically zero, this integral vanishes.
-    The same applies to $\bar\delta_s$, thus $\int_\sigma \Komega = 0$.
+      $$
+    The term for $L$ vanishes because the loop is constant with respect to $s$.
+    The term for $\delta_s$ involves integrating $\omega$ over the map $\Phi(s,t) = \delta_s(t)$.
+    Since $\Phi$ factors through the smooth curve $\delta$,
+    its pullback $\Phi^*\omega$ vanishes identically.
+    The same applies to $\bar\delta_s$.
+    Thus, $\int_\sigma \Komega = 0$.
     
-    Since $\psi$ is defined by integrating $\Komega$ (modulo $\Pomega$) from a reference loop,
+    Since $\psi$ is defined by integrating $\Komega$ along paths in loop space,
     and the integral along the path $\sigma$ connecting $\Lambda$ to $L$ is zero,
     it follows that $\psi(\Lambda) = \psi(L)$.
     Therefore, the value $\Phi(\gamma, \gamma')$ is intrinsic.
@@ -687,16 +696,24 @@
   
   \begin{article}\artlabel[Definition of the Groupoid]
     The quotient space defines the morphisms of our structure.
-    
+        
     \begin{definition}{~(The Prequantum Groupoid)}
       The \emph{Prequantum Groupoid} $\TT_\omega$ is the quotient of the space of paths by this relation:
       $$
         \Obj(\TT_\omega) = X, \quad \Mor(\TT_\omega) = \cY = \Paths(X) / \sim_\omega.
         $$
-      The composition is induced by the concatenation of paths: $[\gamma]_\omega \cdot [\gamma']_\omega = [\gamma \vee \gamma']_\omega$.
+      The composition is induced by the concatenation of paths:
+      $$
+      [\gamma]_\omega \cdot [\gamma']_\omega = [\gamma \vee \gamma']_\omega.
+      $$
     \end{definition}
-    
-    This object unifies the prequantum geometry, as illustrated below.
+        
+    This object unifies the prequantum geometry.
+    The relationship between the primordial Quantum Broth,
+    the distilled groupoid, and the classical \emph{Skeleton} is illustrated by the diagram of Figure \ref{fig:reduction}.
+    This triptych represents "geometric quantization by paths" in its entirety.
+    The groupoid $(\cY, \blambda)$ emerges from the Quantum Broth $(\Paths(X), \Komega)$ as a structure containing both the classical Skeleton of identity morphisms and the \emph{Quantum Fog} of non-identity morphisms.
+    All three levels participate as diffeological spaces in the description of the quantum system; none is left behind.
     
     \begin{figure}[h]
       \centering
@@ -708,8 +725,7 @@
       This structure identifies $\TT_\omega$ as the geometric object capturing the quantum phase information distilled from the paths.}
       \label{fig:reduction}
     \end{figure}
-  \end{article}
-  
+  \end{article}  
   \begin{article}\artlabel[Structural Properties]
     The resulting object is a bona fide diffeological groupoid equipped with a connection.
     
@@ -911,16 +927,17 @@
       descends to the prequantum groupoid $\cY$.
       The map $\Psi_\omega$ represents the intrinsic moment map of the Quantum System.
       The further descent to the classical space of motions $X \times X$ is obstructed by the holonomy group $\Gamma_\omega$.
-      The projection $\pr_\Gamma$ indicates that on the classical skeleton,
+      The projection $\pr_\Gamma$ indicates that on the classical Skeleton,
       the moment map is only defined modulo the quantum holonomy $\Gamma_\omega$,
       recovering Souriau's multivaluedness for "non-true" physical systems.}
     \end{figure}
+    
     
     Systems with $\Gamma \neq \{0\}$,
     such as the Aharonov-Bohm effect,
     violate this classical principle:
     their dynamical quantities (momenta) are well-defined only on the prequantum groupoid $\TT_\omega$,
-    not on the classical skeleton $X$.
+    not on the classical Skeleton $X$.
     The groupoid framework resolves this paradox:
     the moment map $\Psi_\omega$ exists and is single-valued,
     but its domain is the Quantum System $\TT_\omega$,
@@ -928,6 +945,7 @@
     The Aharonov-Bohm effect is thus identified as a strictly quantum phenomenon captured by the intrinsic geometry of the groupoid,
     vindicating Souriau's principle by lifting it to the correct geometric arena
   \end{article}
+  
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% MARK: Section V: A Reconstruction of the Dirac Program
@@ -953,8 +971,8 @@
   \begin{article}\artlabel[The Quantum System]
     We propose to define the \emph{Quantum System} as the pair $(\TT_\omega, \blambda)$,
     unique as the quotient of $(\Paths(X),\Komega)$.
-    The space $X$ is embedded as the \emph{skeleton} of units $\Obj(\TT_\omega) \subset \Mor(\TT_\omega)$.
-    The non-unit morphisms appear as a \emph{quantum fog} surrounding the skeleton of classical motions,
+    The space $X$ is embedded as the Skeleton of units $\Obj(\TT_\omega) \subset \Mor(\TT_\omega)$.
+    The non-unit morphisms appear as a Quantum Fog surrounding the Skeleton of classical motions,
     if we regard $X$ as the space of motions of a dynamical system.
     A remarkable benefit of this path-based construction is that the symmetries of the classical system become,
     exactly and without modification,
@@ -1300,8 +1318,8 @@
   
   The reduced system is thus immediately "clothed" in its own prequantum structure.
   The unit map $x \mapsto \id_x$ embeds the classical space $X$ strictly into the space of morphisms of $\TT_\omega$.
-  The classical space sits inside the prequantum groupoid like a sharp skeleton,
-  enveloped by the "quantum fog" of non-identity morphisms.
+  The classical space sits inside the prequantum groupoid like a sharp Skeleton,
+  enveloped by the Quantum Fog of non-identity morphisms.
   In this view,
   quantization does not need to commute with reduction;
   rather,
