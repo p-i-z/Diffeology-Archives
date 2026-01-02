@@ -20,3 +20,7 @@ This leads to a powerful neuro-geometric hypothesis: the brain's motor cortex ma
 
 *   `ITBA1DDS.tex`: The complete, self-contained LaTeX source file for the paper.
 *   `The-wire.png` the figure for the paper.
+
+## 🛠️ Archival Notes
+*   **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/2025-Brain-Power-Law)
+  
