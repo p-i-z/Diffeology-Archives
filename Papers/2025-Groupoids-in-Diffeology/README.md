@@ -1,7 +1,7 @@
 # Groupoids in Diffeology (2025)
 
 > **Author:** Patrick Iglesias-Zemmour
-> **Status:** Preprint (Expository Paper, 2025)
+> **Status:**  [Expository Paper, 2025](https://www.aimspress.com/article/doi/10.3934/era.2025350)
 
 ## Abstract
 
