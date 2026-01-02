@@ -26,7 +26,7 @@ This paper is a masterclass in resolving the tension between "extrinsic" and "in
 
 The introduction of the **Isostabilizer Decomposition** is the key insight. By focusing on the connected components where the stabilizer is constant (not just conjugate), the authors find the true "atomic" structure of the action that maps cleanly to the quotient's singularities.
 
-Furthermore, the concept of the **Orthofold** (locally modeled on quotients of Euclidean spaces by orthogonal subgroup) unifies manifolds, orbifolds, and more general quotients into a single, coherent category. This paper effectively completes the bridge between classical transformation group theory and modern Diffeology.
+Furthermore, the concept of the **Orthofold** (locally modeled on quotients of Euclidean spaces by orthogonal subgroups) unifies manifolds, orbifolds, and more general quotients into a single, coherent category. This paper effectively completes the bridge between classical transformation group theory and modern Diffeology.
 
 ## 🛠️ Archival Notes (2026)
 
