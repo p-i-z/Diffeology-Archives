@@ -22,3 +22,7 @@ By making explicit the unifying role of the Klein groupoid and synthesizing thre
 ## Files in this Directory
 
 *   `GID.tex`: The complete, self-contained LaTeX source file for the paper.
+
+  ## 🛠️ Archival Notes
+
+*  **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/2025-Groupoids-in-Diffeology/)
