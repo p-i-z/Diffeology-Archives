@@ -19,7 +19,6 @@ jobs:
 
       - name: Clean Line Endings (Fix legacy Mac/Windows)
         run: |
-          # dos2unix converts \r to \n correctly without merging lines
           find . -name "*.tex" -exec dos2unix {} +
 
       - name: Commit Cleaned Files
@@ -30,8 +29,8 @@ jobs:
 
       - name: Find and Compile Master Files
         run: |
-          # Find all standalone documents
-          MASTERS=$(grep -rl "\\documentclass" . --include="*.tex" | sed 's|^\./||')
+          # --exclude-dir=Project-Log tells grep to ignore your logs
+          MASTERS=$(grep -rl --exclude-dir=Project-Log "\\documentclass" . --include="*.tex" | sed 's|^\./||')
           
           for file in $MASTERS; do
             echo "--------------------------------------------------"
@@ -41,8 +40,6 @@ jobs:
             dir=$(dirname "$file")
             base=$(basename "$file")
             
-            # We pass buf_size as an environment variable (-e)
-            # This is the standard way to override texmf.cnf settings
             docker run --rm \
               -e buf_size=1000000 \
               -v "$(pwd):/workdir" \
