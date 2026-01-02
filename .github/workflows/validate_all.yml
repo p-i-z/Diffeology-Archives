@@ -1,4 +1,4 @@
-name: Validate Standalone Diffeology Sources
+name: Validate Diffeology Archive
 on:
   push:
     branches: [ main ]
@@ -11,17 +11,31 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Compile all standalone TeX files
+      - name: Find Master Files
+        id: find_masters
+        run: |
+          # 1. Find all .tex files containing \documentclass
+          # 2. Remove the './' from the start of the paths
+          # 3. Join them into a single line separated by spaces
+          MASTERS=$(grep -rl "\\documentclass" . --include="*.tex" | sed 's|^\./||' | xargs)
+          
+          if [ -z "$MASTERS" ]; then
+            echo "No master LaTeX files found."
+            exit 1
+          fi
+          
+          echo "Found Master files: $MASTERS"
+          echo "masters=$MASTERS" >> $GITHUB_OUTPUT
+
+      - name: Compile Master Documents
         uses: xu-cheng/latex-action@v3
         with:
-          # This looks for standalone files specifically
-          root_file: |
-            $(grep -l "\\documentclass" **/*.tex)
-          # This ensures one failure doesn't stop the whole process
+          # This now correctly receives the list of files from the step above
+          root_file: ${{ steps.find_masters.outputs.masters }}
+          # This ensures that if one paper has a typo, the others still get tested
           continue_on_error: true
-          # This uses the "Full" distribution to match your MacTeX
-          texlive_version: 2025 
+          texlive_version: latest
 
-      - name: Quality Report
+      - name: Final Quality Report
         run: |
-          echo "Validation cycle complete. If a file failed, it is likely missing a local dependency or macro."
+          echo "The validation of the Diffeology Archive is complete."
