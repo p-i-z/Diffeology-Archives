@@ -11,13 +11,16 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Clean Line Endings (Remove ^^M)
+      - name: Install dos2unix
+        run: sudo apt-get install -y dos2unix
+
+      - name: Clean Line Endings Safely
         run: |
-          find . -name "*.tex" -exec sed -i 's/\r//g' {} +
+          # dos2unix is much safer than sed for converting line endings
+          find . -name "*.tex" -exec dos2unix {} +
 
       - name: Find and Compile Master Files
         run: |
-          # Find all files with \documentclass
           MASTERS=$(grep -rl "\\documentclass" . --include="*.tex" | sed 's|^\./||')
           
           for file in $MASTERS; do
@@ -28,11 +31,10 @@ jobs:
             dir=$(dirname "$file")
             base=$(basename "$file")
             
-            # -bibtex-  : Tells latexmk NOT to run bibtex
-            # -pdf      : Generates PDF
-            # -f        : Force continuation even if there are minor warnings
+            # We modify the texmf.cnf inside the container to increase buf_size to 1,000,000
             docker run --rm -v "$(pwd):/workdir" -w "/workdir/$dir" ghcr.io/xu-cheng/texlive-full \
-              latexmk -pdf -bibtex- -f -interaction=nonstopmode "$base"
+              /bin/sh -c "sed -i 's/buf_size = .*/buf_size = 1000000/' /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf && \
+              latexmk -pdf -bibtex- -f -interaction=nonstopmode $base"
           done
 
       - name: Quality Report
