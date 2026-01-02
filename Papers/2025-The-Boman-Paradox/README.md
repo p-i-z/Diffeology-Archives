@@ -29,5 +29,7 @@ The paper concludes that the local smooth structure (the diffeology) is a primar
 *   `TBP.tex`: The complete, self-contained LaTeX source file for the paper.
 *   `/figures`: A directory containing the images used in the paper.
 
-* **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/2025-The-Boman-Paradox/)
+## 🛠️ Archival Notes
+
+*  **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/2025-The-Boman-Paradox/)
 
