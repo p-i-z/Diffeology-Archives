@@ -24,3 +24,6 @@ This paper is the ideal entry point for mathematicians and physicists seeking to
 
 *   `WD.tex`: The complete, self-contained LaTeX source file for the paper.
 *   `/Figures/`: Contains the figures for the paper.
+
+## Arhcival Notes
+*   **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/2025-Why-Diffeology)
