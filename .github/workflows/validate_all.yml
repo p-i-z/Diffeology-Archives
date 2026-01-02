@@ -11,18 +11,30 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Clean Line Endings (Remove ^^M)
+        run: |
+          # This finds all .tex files and removes Carriage Returns (\r)
+          # ensuring they are in pure Linux/Unix format.
+          find . -name "*.tex" -exec sed -i 's/\r//g' {} +
+
       - name: Find and Compile Master Files
         run: |
-          # This script finds every file with \documentclass and compiles it one by one
-          # It handles subfolders and filenames perfectly.
-          find . -name "*.tex" -exec grep -l "\\documentclass" {} + | while read -r file; do
+          # 1. Find all files with \documentclass
+          MASTERS=$(grep -rl "\\documentclass" . --include="*.tex" | sed 's|^\./||')
+          
+          for file in $MASTERS; do
             echo "--------------------------------------------------"
             echo "Compiling: $file"
             echo "--------------------------------------------------"
-            # We use docker to run the latest TeX Live (MacTeX equivalent)
-            docker run --rm -v "$(pwd):/workdir" -w "/workdir" ghcr.io/xu-cheng/texlive-full \
-              latexmk -pdf -interaction=nonstopmode "$file"
+            
+            # Get the directory and filename
+            dir=$(dirname "$file")
+            base=$(basename "$file")
+            
+            # Run the compiler inside the specific folder so it finds local macros
+            docker run --rm -v "$(pwd):/workdir" -w "/workdir/$dir" ghcr.io/xu-cheng/texlive-full \
+              latexmk -pdf -interaction=nonstopmode "$base"
           done
 
       - name: Quality Report
-        run: echo "All standalone Diffeology sources have been verified."
+        run: echo "All standalone Diffeology sources have been verified and cleaned."
