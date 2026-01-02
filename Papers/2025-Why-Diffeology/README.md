@@ -28,7 +28,7 @@ The paper effectively deconstructs the artificial barriers of classical geometry
 
 Particularly striking is the section on **Geometric Quantization**, where the author uses Diffeology to resolve the "central extension mystery" of the prequantum bundle, showing it to be an artifact of restricting the natural symmetries of the **prequantum groupoid**. This paper positions Diffeology not just as a tool for singularities, but as the "basal metabolism" of differential geometry itself.
 
-## Archival Notes (2026)
+## 🛠️ Archival Notes (2026)
 
 This document has been archived from the author's LaTeX source.
 
