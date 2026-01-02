@@ -1,4 +1,4 @@
-name: Validate Diffeology Archive
+name: Validate and Clean Diffeology Archive
 on:
   push:
     branches: [ main ]
@@ -7,6 +7,10 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    # We need write permissions to save the cleaned files back to the repo
+    permissions:
+      contents: write
+      
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -16,26 +20,23 @@ jobs:
 
       - name: Clean Line Endings Safely
         run: |
-          # dos2unix is much safer than sed for converting line endings
+          # This fixes the legacy Mac CR and Windows CRLF issues
           find . -name "*.tex" -exec dos2unix {} +
+
+      - name: Commit Cleaned Files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: normalize line endings for AI-readiness (remove ^^M)"
+          file_pattern: "*.tex"
 
       - name: Find and Compile Master Files
         run: |
           MASTERS=$(grep -rl "\\documentclass" . --include="*.tex" | sed 's|^\./||')
-          
           for file in $MASTERS; do
-            echo "--------------------------------------------------"
             echo "Compiling: $file"
-            echo "--------------------------------------------------"
-            
             dir=$(dirname "$file")
             base=$(basename "$file")
-            
-            # We modify the texmf.cnf inside the container to increase buf_size to 1,000,000
             docker run --rm -v "$(pwd):/workdir" -w "/workdir/$dir" ghcr.io/xu-cheng/texlive-full \
               /bin/sh -c "sed -i 's/buf_size = .*/buf_size = 1000000/' /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf && \
               latexmk -pdf -bibtex- -f -interaction=nonstopmode $base"
           done
-
-      - name: Quality Report
-        run: echo "All standalone Diffeology sources have been verified."
