@@ -34,6 +34,8 @@ This work represents a definitive maturation of the "Path Approach" to quantizat
 *   **Source:** Transcribed from the author's LaTeX manuscript.
 *   **Date:** January 2026.
 *   **Figures:** Contains illustrations of the Surfacic Cocycle and the Prequantum Reduction.
+*   **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/2026-Geometric-Quantization-by-Paths-Part-II)
+
 
 ---
 *To the memory of Jean-Marie Souriau.*
