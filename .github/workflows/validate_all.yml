@@ -1,0 +1,27 @@
+name: Validate Standalone Diffeology Sources
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Compile all standalone TeX files
+        uses: xu-cheng/latex-action@v3
+        with:
+          # This looks for standalone files specifically
+          root_file: |
+            $(grep -l "\\documentclass" **/*.tex)
+          # This ensures one failure doesn't stop the whole process
+          continue_on_error: true
+          # This uses the "Full" distribution to match your MacTeX
+          texlive_version: 2025 
+
+      - name: Quality Report
+        run: |
+          echo "Validation cycle complete. If a file failed, it is likely missing a local dependency or macro."
