@@ -24,23 +24,6 @@
 \parindent 0mm
 \parskip .5ex plus 2pt
 
-%\oddsidemargin 45mm
-%\evensidemargin 18mm
-
-%\topmargin 15mm
-
-%\headheight 15mm
-%\headsep 15mm
-
-%\paperwidth 210mm
-%\paperheight 297mm
-
-%\textwidth 120mm
-%\textheight 180mm
-
-%\footheight 0pt
-%\footskip 10mm
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: MACROS Packages
@@ -104,10 +87,6 @@
 
 \usepackage{url}
 
-%\usepackage[mathbf, mathcal,text-hat-accent]{euler}
-
-%\usepackage{cjhebrew}
-
 \usepackage{pifont}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -153,11 +132,9 @@
 
 \newenvironment{remark}{\textbf{Remark.}}{}
 
-%\renewenvironment{proof}{\noindent \textit{Proof.}} {\nolinebreak\hfill $\square$}
 \newenvironment{proof*}{\noindent \textbf{Proof}} {\nolinebreak $\blacktriangleright$}
 \renewenvironment{proof}{\noindent \textbf{Proof.}} {\nolinebreak $\blacktriangleright$}
 \newenvironment{sketchproof}{\noindent \textbf{Sketch of Proof.}} {\nolinebreak$\blacktriangleright$}
-%\renewenvironment{proof}{\noindent \raisebox{-3pt}{\nib} \textbf{Solution:}} {\nolinebreak\hfill $\square$}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -483,18 +460,6 @@
 
 \usepackage[greek,english]{babel}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%
-%% MARK: MACROS DraftWarning
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%Place a Warnining on the left if the parameter is "Y"
-\def\draftwarning#1{
-\if#1Y \tikz[overlay,remember picture]{\node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{red}{Draft Version -- \pdfcreationdate}}}%
-\else  {} \fi}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: MACROS General Layout
@@ -724,9 +689,9 @@ I am also grateful to Professors Hillel Furstenberg and Benjamin Weiss for spend
   representing the scaling symmetries of the frequencies $\E_\balpha$.
   
   \begin{figure}[bt]
-    \includegraphics[width=.4\textwidth]{Algebraic-field-1.pdf}
+    \includegraphics[width=.4\textwidth]{Figures/Algebraic-field-1.pdf}
     \quad
-    \includegraphics[width=.4\textwidth]{Algebraic-field-2.pdf}
+    \includegraphics[width=.4\textwidth]{Figures/Algebraic-field-2.pdf}
     \caption{The two cases of characteristic field $\KK_\balpha$ when $n=3$.}
     \label{Algebraic-fields} % Keep the label if you reference the figure    \label{Algebraic-fields}
   \end{figure}
@@ -1160,7 +1125,7 @@ I am also grateful to Professors Hillel Furstenberg and Benjamin Weiss for spend
   \end{article} % The-Group-FbT
   
   \begin{figure}[bt]
-    \includegraphics[width=.80\textwidth]{T-alpha.pdf}
+    \includegraphics[width=.80\textwidth]{Figures/T-alpha.pdf}
     \caption{The Construction of $\T_\alpha$.}
     \label{T-alpha}
   \end{figure}
