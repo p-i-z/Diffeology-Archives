@@ -7,7 +7,6 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    # We need write permissions to save the cleaned files back to the repo
     permissions:
       contents: write
       
@@ -18,25 +17,39 @@ jobs:
       - name: Install dos2unix
         run: sudo apt-get install -y dos2unix
 
-      - name: Clean Line Endings Safely
+      - name: Clean Line Endings (Fix legacy Mac/Windows)
         run: |
-          # This fixes the legacy Mac CR and Windows CRLF issues
+          # dos2unix converts \r to \n correctly without merging lines
           find . -name "*.tex" -exec dos2unix {} +
 
       - name: Commit Cleaned Files
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "style: normalize line endings for AI-readiness (remove ^^M)"
+          commit_message: "style: normalize line endings for AI-readiness"
           file_pattern: "*.tex"
 
       - name: Find and Compile Master Files
         run: |
+          # Find all standalone documents
           MASTERS=$(grep -rl "\\documentclass" . --include="*.tex" | sed 's|^\./||')
+          
           for file in $MASTERS; do
+            echo "--------------------------------------------------"
             echo "Compiling: $file"
+            echo "--------------------------------------------------"
+            
             dir=$(dirname "$file")
             base=$(basename "$file")
-            docker run --rm -v "$(pwd):/workdir" -w "/workdir/$dir" ghcr.io/xu-cheng/texlive-full \
-              /bin/sh -c "sed -i 's/buf_size = .*/buf_size = 1000000/' /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf && \
-              latexmk -pdf -bibtex- -f -interaction=nonstopmode $base"
+            
+            # We pass buf_size as an environment variable (-e)
+            # This is the standard way to override texmf.cnf settings
+            docker run --rm \
+              -e buf_size=1000000 \
+              -v "$(pwd):/workdir" \
+              -w "/workdir/$dir" \
+              ghcr.io/xu-cheng/texlive-full \
+              latexmk -pdf -bibtex- -f -interaction=nonstopmode "$base"
           done
+
+      - name: Quality Report
+        run: echo "All standalone Diffeology sources have been verified."
