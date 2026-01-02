@@ -19,3 +19,7 @@ This theorem provides an exact "dictionary" between the action's local data (sta
 ## Files in this Directory
 
 *   `ODOOS.tex`: The complete, self-contained LaTeX source file for the paper.
+
+## 🛠️ Archival Notes
+
+*  **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/2025-On-Diffeology-of-Orbit-Spaces/)
