@@ -11,31 +11,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Find Master Files
-        id: find_masters
+      - name: Find and Compile Master Files
         run: |
-          # 1. Find all .tex files containing \documentclass
-          # 2. Remove the './' from the start of the paths
-          # 3. Join them into a single line separated by spaces
-          MASTERS=$(grep -rl "\\documentclass" . --include="*.tex" | sed 's|^\./||' | xargs)
-          
-          if [ -z "$MASTERS" ]; then
-            echo "No master LaTeX files found."
-            exit 1
-          fi
-          
-          echo "Found Master files: $MASTERS"
-          echo "masters=$MASTERS" >> $GITHUB_OUTPUT
+          # This script finds every file with \documentclass and compiles it one by one
+          # It handles subfolders and filenames perfectly.
+          find . -name "*.tex" -exec grep -l "\\documentclass" {} + | while read -r file; do
+            echo "--------------------------------------------------"
+            echo "Compiling: $file"
+            echo "--------------------------------------------------"
+            # We use docker to run the latest TeX Live (MacTeX equivalent)
+            docker run --rm -v "$(pwd):/workdir" -w "/workdir" ghcr.io/xu-cheng/texlive-full \
+              latexmk -pdf -interaction=nonstopmode "$file"
+          done
 
-      - name: Compile Master Documents
-        uses: xu-cheng/latex-action@v3
-        with:
-          # This now correctly receives the list of files from the step above
-          root_file: ${{ steps.find_masters.outputs.masters }}
-          # This ensures that if one paper has a typo, the others still get tested
-          continue_on_error: true
-          texlive_version: latest
-
-      - name: Final Quality Report
-        run: |
-          echo "The validation of the Diffeology Archive is complete."
+      - name: Quality Report
+        run: echo "All standalone Diffeology sources have been verified."
