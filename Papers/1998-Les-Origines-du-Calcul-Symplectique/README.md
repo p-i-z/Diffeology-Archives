@@ -42,4 +42,4 @@ Just as Lagrange replaced a single static orbit with a trajectory through the sp
 *   **Date:** January 2026.
 *   **Format:** Converted to `amsart` class with **Ventilated Prose** and UTF-8 encoding.
 *   **Figures:** Images updated to PDF format.
-*   **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/Lagrange-Symplectic-Origins)
+*   **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/1998-Les-Origines-du-Calcul-Symplectique)
