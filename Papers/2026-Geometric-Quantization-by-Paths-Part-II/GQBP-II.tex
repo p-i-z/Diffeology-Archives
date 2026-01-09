@@ -3,6 +3,8 @@
 %%      Prequantum Groupoid in Diffeology
 %%      Part II: The General Case
 %%
+%%      Dec. 31, 2025
+%%
 %%      Patrick Iglesias-Zemmour
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,6 +69,8 @@
 \newcommand{\cY}{{\mathcal Y}}
 \newcommand{\cG}{{\mathcal G}}
 \newcommand{\blambda}{{\pmb{\lambda}}}
+
+\newcommand{\fS}{{\frak S}}
 
 \DeclareMathOperator{\PeriodsOf}{Periods}
 \DeclareMathOperator{\comp}{comp}
@@ -158,7 +162,7 @@
   \\
   The \TeX\ source of this paper is available at the GitHub PIZ-Diffeology Archive: \url{https://github.com/p-i-z/Diffeology-Archives}.}
   
-  \date{Dec. 31, 2025}
+  \date{Typeset Jan. Sun. 4, 2026 (Added "Elementary vs composite systems", "The Intrinsic Action Principle")}
   
   \subjclass[2020]{Primary 53D50, 58A05; Secondary 22A22, 55R65, 58A10}
   \keywords{Diffeology, Geometric Quantization, Prequantum Groupoid, Closed 2-forms, Parasymplectic Spaces, Paths, Loops}
@@ -764,7 +768,7 @@
       This structure identifies $\TT_\omega$ as the geometric object capturing the quantum phase information distilled from the paths.}
       \label{fig:reduction}
     \end{figure}
-  \end{article}  
+  \end{article}
   \begin{article}\artlabel[Structural Properties]
     The resulting object is a bona fide diffeological groupoid equipped with a connection.
     
@@ -959,7 +963,7 @@
       \newcommand{\TL}{\Paths(X) \arrow[rr,"\Psi_\paths"] \arrow[dr, "\class_\omega"] \arrow[ddr, swap, "\ends"]}
       \newcommand{\TR}{\cG_\omega^* \arrow[dd,"\pr_\Gamma"]}
       \newcommand{\DM}{\cY \arrow[d,"\ends"] \arrow[ur,"\Psi_\omega"]}
-      \newcommand{\BM}{X \times X \arrow[r, swap, "\psi_X"]}
+      \newcommand{\BM}{X \times X \arrow[r, swap, "\psi_\omega"]}
       \newcommand{\BR}{\cG_\omega^*/\Gamma_\omega}
       \begin{center}
         \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
@@ -1017,7 +1021,7 @@
   
   \begin{article}\artlabel[The Quantum System]
     We propose to define the \emph{Quantum System} as the pair $(\TT_\omega, \blambda)$,
-    unique as the quotient of $(\Paths(X),\Komega)$.
+    unique as the reduction of $(\Paths(X),\Komega)$.
     The space $X$ is embedded as the Skeleton of units $\Obj(\TT_\omega) \subset \Mor(\TT_\omega)$.
     The non-unit morphisms appear as a Quantum Fog surrounding the Skeleton of classical motions,
     if we regard $X$ as the space of motions of a dynamical system.
@@ -1271,6 +1275,7 @@
   and infinite-dimensional spaces such as loop spaces or connections.
   This generality invites a re-evaluation of several standard concepts in geometric quantization.
   
+  % ----- The Topological Blind Spot -----
   \subsection*{The Topological Blind Spot}
   This construction highlights a fundamental epistemological rupture with standard geometric quantization.
   Historically,
@@ -1293,6 +1298,57 @@
   the condition for quantization is not topological non-triviality,
   but \emph{diffeological discreteness} of the group of periods.
   
+  % ----- The Geometric Alternative to Path Integration -----
+  \subsection*{The Geometric Alternative to Path Integration}
+  The path-based nature of our construction suggests a deep connection to Feynman's path integral formulation,
+  but with a radical shift in perspective.
+  In the Feynman approach,
+  one sums amplitudes over all paths,
+  relying on the principle that paths with action differences in $h\ZZ$ interfere constructively.
+  
+  In our diffeological framework,
+  we replace this analytic summation with a geometric quotient.
+  The equivalence relation $\sim_\omega$ identifies precisely those paths that would interfere constructively.
+  By taking the quotient,
+  we do not destroy the quantum information;
+  we \emph{distill} it.
+  This process eliminates the redundant "history" of the motion,
+  leaving only the \emph{freedom for interference}:
+  the quantum phase itself.
+  
+  The Prequantum Groupoid $\TT_\omega$ can thus be viewed as the \emph{geometric crystallization} of the path integral:
+  it is the structure that remains once the constructive interference has been geometrically resolved.
+  
+  \subsection*{Lagrangian Perturbations and Quantum Fluctuations}
+  To fully understand the physical meaning of paths in the space of motions,
+  we must revisit the origins of symplectic calculus by Lagrange \cite{PIZ98}.
+  Lagrange described the motion of a perturbed system as a curve in the space of unperturbed motions
+  (originally, the space of Keplerian elements).
+  
+  In the language of Souriau,
+  consider a system defined by an "analytical system" associated with identified forces.
+  The evolution space $Y$ is equipped with a presymplectic form $\varpi$,
+  and the space of motions is the quotient $X = Y/\ker(\varpi)$.
+  Any virtual path of the particle $t \mapsto r(t)$ in configuration space lifts to a path $t \mapsto y(t) = (r(t), \dot r(t), t)$ in $Y$,
+  which in turn projects to a path $\gamma: t \mapsto x(t)$ in the space of motions $X$.
+  
+  Following Lagrange,
+  this path $\gamma$ represents a \emph{perturbed motion}:
+  a continuous variation of the constants of motion.
+  In our framework,
+  we interpret quantum phenomena as subtle,
+  non-analytical,
+  fuzzy perturbations that manifest as finite variations in the space of motions.
+  The prequantum groupoid $\TT_\omega$ acts as a filter for these variations.
+  It retains only the symplectic phase information defined by $\omega$.
+  
+  Thus,
+  each arrow in the groupoid represents a possible transition from one regular motion to another under this indescribable,
+  fuzzy perturbation that we call \emph{quantum fluctuation}.
+  This reconciles Feynman's original consideration of virtual paths with the symplectic geometry of Lagrange,
+  condensing unpredictable perturbations into precise quantum transitions.
+  
+  % ----- Relation to Other Frameworks -----
   \subsection*{Relation to Other Frameworks}
   The use of groupoids and path spaces in quantization has a rich history,
   and it is useful to situate our construction within this landscape.
@@ -1311,6 +1367,7 @@
   or infinite-dimensional) as valid geometric spaces,
   incorporating non-integral periods as intrinsic features of the geometry rather than obstructions requiring a change of category.
   
+  % ----- The Intrinsic Decomposition of Periods -----
   \subsection*{The Intrinsic Decomposition of Periods}
   The definition of the Total Group of Periods $\Pomega$ offers an intrinsic decomposition of the symplectic action, independent of external homological machinery.
   Standard quantization often imports the second homology group $H_2(X, \ZZ)$ as a topological datum to define periods.
@@ -1322,18 +1379,20 @@
   \end{enumerate}
   By generating $\Pomega$ from these sources, the path space reveals the "homological" constraints of the system without ever leaving the realm of smooth paths, adhering to the diffeological principle of minimal external construction.
   
+  % ----- The Universality of the Quantum Unit -----
   \subsection*{The Universality of the Quantum Unit}
   This perspective extends naturally to the interaction between distinct systems.
   If we accept as a fundamental principle that any two quantum systems can interact to form a composite system,
   then their respective period groups must be commensurable.
   This requires a universal quantum unit of action,
   $h$ (Planck's constant),
-  such that $\Pomega \subseteq h\ZZ$ for all physically realizable systems.
+  such that $Pomega \subseteq h\ZZ$ for all physically realizable systems.
   
   In this view,
   the "Universal Quantum Torus" is $\TT_{\quant} = \RR / h\ZZ$.
-  The isomorphism between the geometric isotropy group $T_\omega = \RR/\Pomega$ and the group of phases $\U(1)$ is mediated by the Planck constant $\hbar = h/2\pi$.
+  The isomorphism between the geometric isotropy group $T_\omega = \RR/Pomega$ and the group of phases $\U(1)$ is mediated by the Planck constant $\hbar = h/2\pi$.
   
+  % ----- The Wave Function as a Multiplicative Map -----
   \subsection*{The Wave Function as a Multiplicative Map}
   The identification of the groupoid as the quantum system suggests a natural,
   intrinsic definition for the wave function.
@@ -1355,6 +1414,7 @@
   requires no auxiliary choices (like open covers),
   and naturally accommodates the action of the symmetry group $\Diff(X, \omega)$ via pullback.
   
+  % ----- Intrinsic Quantization of Reduced Spaces -----
   \subsection*{Intrinsic Quantization of Reduced Spaces}
   The diffeological framework resolves the debate regarding whether "quantization commutes with reduction."
   Our approach grants the reduced space an autonomous status.
@@ -1373,6 +1433,53 @@
   \emph{reduction defines the physical system,
   and quantization renders it quantum}.
   
+  % ----- Elementary vs. Composite Systems -----
+  \subsection*{Elementary vs. Composite Systems}
+  The construction of the prequantum groupoid invites a re-evaluation of the notion of an ``elementary system.''
+  Following the program of Souriau and Kostant,
+  an elementary particle is traditionally defined as a symplectic manifold upon which a specific symmetry group (such as the Galilean or Poincaré group) acts transitively.
+  However,
+  as shown in \cite{DIZ22},
+  every connected symplectic manifold is a coadjoint orbit of its own group of quantomorphisms (a central extension of the Hamiltonian group).
+  Thus,
+  transitivity alone,
+  without specifying a restricted group \emph{a priori},
+  is not a sufficient discriminator.
+  
+  The diffeological framework,
+  particularly through the lens of the prequantum groupoid,
+  suggests an intrinsic definition based on the \emph{natural} symmetries of the system.
+  We have established that the group of automorphisms of the quantum system is isomorphic to $\Diff(X, \omega)$.
+  We propose the following classification:
+  
+  \begin{enumerate}
+    \item \textbf{Elementary Systems:} A parasymplectic space $(X, \omega)$ is elementary if the group $\Diff(X, \omega)$ acts transitively on $X$.
+    In the language of the groupoid,
+    the subspace of units (the Skeleton) constitutes a single orbit under the action of the automorphism group.
+    This implies that the space $X$ consists of a single Klein stratum%
+    \footnote{Klein stratum with respect to local automorphisms of the structure $(X,\omega)$.}
+    (locally homogeneous).
+    Examples include the sphere $S^2$,
+    the projective plane $P^2(\CC)$,
+    and affine symplectic spaces.
+    
+    \item \textbf{Composite Systems:} A system is composite if the action of $\Diff(X, \omega)$ is not transitive.
+    This typically occurs when $X$ possesses a non-trivial Klein stratification.
+    Since diffeomorphisms must preserve the local diffeological type,
+    they cannot map points from one stratum to another.
+    The Skeleton of the quantum system is thus partitioned into disjoint invariant sectors.
+  \end{enumerate}
+  
+  This distinction resolves the ambiguity in the modeling of the Deuteron discussed in Part I.
+  The smooth model $P^2(\CC)$ is elementary;
+  its symmetry group acts transitively.
+  The singular model $\Sigma_4 = (S^2 \times S^2)/\fS_2$ is composite;
+  it possesses a singular stratum (the diagonal) distinct from the principal stratum.
+  The group $\Diff(\Sigma_4, \omega_s)$ preserves this stratification and is therefore not transitive.
+  The singularity is thus the geometric signature of the composite nature of the system,
+  a feature that is lost in the smooth approximation.
+  
+  % ----- Singularities and the Constancy of the Phase -----
   \subsection*{Singularities and the Constancy of the Phase}
   This intrinsic construction clarifies the treatment of singularities.
   Alternative approaches often model prequantization on stratified spaces by allowing the fiber to degenerate.
@@ -1400,6 +1507,7 @@
   ensuring that the quantum phase---the "extra floor" required by Groenewold and Van Hove---remains a universal constant of the theory,
   rather than a variable dependent on the stratification.
   
+  % ----- The Source and the Screen -----
   \subsection*{The Source and the Screen}
   We propose that the prequantum groupoid $\TT_\omega$ \emph{is} the Quantum System in its objective state.
   Polarization is analogous to placing a \emph{screen} or \emph{lens} on this Quantum Source.
@@ -1420,6 +1528,20 @@
   This suggests a geometric factorization of the path integral,
   separating the universal geometric phase (captured by the finite-dimensional groupoid) from the dynamical amplitude.
   
+  % ----- The Intrinsic Action Principle -----
+  \subsection*{The Intrinsic Action Principle}
+  Souriau famously emphasized that not all dynamical systems admit a global Lagrangian or Action functional on the space of motions; the sphere $S^2$ is the archetypal example where the symplectic form is closed but not exact.
+  Standard geometric quantization resolves this by constructing a prequantum bundle, effectively creating a space where a global potential exists.
+  However, this construction can feel like an artificial addition of external data to the classical system.
+  
+  Our framework reveals that the "missing" action is actually present and intrinsic, provided one looks in the correct space.
+  While $\omega$ may not admit a global primitive $\theta$ on $X$ (i.e., $\omega \neq d\theta$), the $1$-form $\Komega$ is \emph{always} globally defined on $\Paths(X)$.
+  It serves as a canonical, intrinsic "action form" for any parasymplectic space.
+  
+  Thus, the pair $(\Paths(X), \Komega)$ recovers the universality of the action principle without the need to postulate a Lagrangian or construct an external bundle.
+  The geometry of $\omega$ generates its own action automatically when lifted to the path space, reconciling Souriau's primacy of the symplectic form with the physicist's need for a global action principle.
+  
+  % ----- Quantization as Transmutation -----
   \subsection*{Quantization as Transmutation}
   Ultimately,
   this framework suggests that geometric quantization is the revelation of intrinsic relational geometry.
@@ -1433,6 +1555,7 @@
   the quantum phase is not an external variable;
   it is the measure of the symplectic area swept by these nerves during the transmutation.
   
+  % ----- Mutual Relativity and the Groupoid -----
   \subsection*{Mutual Relativity and the Groupoid}
   The groupoid construction over $X \times X$ reflects \emph{mutual relativity}.
   Quantities like action or phase are relational,
@@ -1487,6 +1610,11 @@
     Michael K. Murray.
     \newblock Bundle gerbes.
     \newblock {\em Journal of the London Mathematical Society}, 54(2):403--416, 1996.
+    
+    \bibitem[PIZ98]{PIZ98}
+    Patrick Iglesias-Zemmour.
+    \emph{Les origines du calcul symplectique chez Lagrange}.
+    L'Enseignement Math\'ematique (2) \textbf{44} (1998), no. 3-4, 257--277.
     
     \bibitem[PIZ85]{PIZ85}
     Patrick Iglesias,
@@ -1567,4 +1695,10 @@
     
   \end{thebibliography}
   
-\end{document}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - End Document
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \end{document}
