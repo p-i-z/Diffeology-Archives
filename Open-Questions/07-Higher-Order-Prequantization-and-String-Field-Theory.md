@@ -4,15 +4,15 @@
 
 ### Context
 
-Geometric Quantization typically focuses on particles, where the fundamental object is a path $\gamma: \mathbb{R} \to X$. String Field Theory requires defining physics on the free loop space $LX$, treating loops as the fundamental points.
-*   **Fact:** The Prequantum Groupoid $\TT_\omega$ is constructed by quotienting the space of paths (1-dimensional objects) by the kernel of the symplectic action.
-*   **Fact:** The free loop space $LX$ is a native diffeological space, and Diffeology handles functional spaces of maps from surfaces $\Sigma \to X$ naturally.
+Geometric Quantization typically focuses on particles, where the fundamental object is a path $\gamma: \mathbb{R} \to X$. String Field Theory requires defining physics on the free loop space $\mathrm{Loops}(X)$, treating loops as the fundamental points.
+*   **Fact:** The Prequantum Groupoid $\mathbf{T}_\omega$ is constructed by quotienting the space of paths (1-dimensional objects) by the kernel of the symplectic action.
+*   **Fact:** The free loop space $\mathrm{Loops}(X)$ is a native diffeological space, and Diffeology handles functional spaces of maps from surfaces $\Sigma \to X$ naturally.
 
 ### The Problem
 
 We have successfully quantized particles by lifting the geometry to the path space. It is unknown if this process iterates to higher dimensions to describe strings non-perturbatively.
 
-*   **Question:** Can the "Prequantum Groupoid" construction be iterated? If $\TT_\omega$ quantizes particles, does a "Groupoid of Surfaces" (quotient of maps $\Sigma \to X$) quantize strings? Does this lead to a non-perturbative definition of String Field Theory where "Stringy" symmetries are automorphisms of a higher-order diffeological groupoid?
+*   **Question:** Can the "Prequantum Groupoid" construction be iterated? If $\mathbf{T}_\omega$ quantizes particles, does a "Groupoid of Surfaces" (quotient of maps $\Sigma \to X$) quantize strings? Does this lead to a non-perturbative definition of String Field Theory where "Stringy" symmetries are automorphisms of a higher-order diffeological groupoid?
 
 ### References
 
