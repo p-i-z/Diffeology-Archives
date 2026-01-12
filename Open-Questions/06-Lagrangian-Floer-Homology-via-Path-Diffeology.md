@@ -1,4 +1,4 @@
-# Open Question 3: Lagrangian Floer Homology via Path Diffeology
+# Open Question 6: Lagrangian Floer Homology via Path Diffeology
 
 > **Date Added:** January 12, 2026
 
