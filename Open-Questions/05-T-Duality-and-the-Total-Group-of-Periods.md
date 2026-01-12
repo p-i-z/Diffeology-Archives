@@ -1,4 +1,4 @@
-# Open Question 2: T-Duality and the Total Group of Periods
+# Open Question 5: T-Duality and the Total Group of Periods
 
 > **Date Added:** January 12, 2026
 
