@@ -1,4 +1,4 @@
-# Open Question 4: Higher-Order Prequantization and String Field Theory
+# Open Question 7: Higher-Order Prequantization and String Field Theory
 
 > **Date Added:** January 12, 2026
 
