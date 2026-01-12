@@ -10,9 +10,9 @@ Homological Mirror Symmetry posits an equivalence involving the Fukaya category,
 
 ### The Problem
 
-The standard definition of the Floer complex relies on the Morse theory of the action functional on the path space. Diffeology provides the space and the functional (via $\Komega$), but we lack a "Diffeological Morse Theory" that can handle the singular intersections without artificial perturbations.
+The standard definition of the Floer complex relies on the Morse theory of the action functional on the path space. Diffeology provides the space and the functional (via $\mathbf{K}\omega$), but we lack a "Diffeological Morse Theory" that can handle the singular intersections without artificial perturbations.
 
-*   **Question:** Can we define **Floer Homology** purely within Diffeology? Can the "Quantum Fog" (the space of morphisms of the prequantum groupoid $\TT_\omega$) provide the necessary smoothing for intersection theory? Specifically, can the cohomology of the path space diffeology replace the perturbative methods of standard Floer theory?
+*   **Question:** Can we define **Floer Homology** purely within Diffeology? Can the "Quantum Fog" (the space of morphisms of the prequantum groupoid $\mathbf{T}_\omega$) provide the necessary smoothing for intersection theory? Specifically, can the cohomology of the path space diffeology replace the perturbative methods of standard Floer theory?
 
 ### References
 
