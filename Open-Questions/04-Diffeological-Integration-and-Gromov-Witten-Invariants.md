@@ -1,4 +1,4 @@
-# Open Question 1: Diffeological Integration and Gromov-Witten Invariants
+# Open Question 4: Diffeological Integration and Gromov-Witten Invariants
 
 > **Date Added:** January 12, 2026
 
