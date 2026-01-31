@@ -1,0 +1,751 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%      Prequantum Groupoid in Diffeology
+%%      Part III: The Metaplectic Anomaly
+%%
+%%      Patrick Iglesias-Zemmour
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno,letterpaper,twoside]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: - Macro file
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+\usepackage{amsmath}
+\usepackage{amsbsy}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{arrow style=tikz, diagrams={>={Straight Barb[scale=0.8]}}}
+
+\usepackage{url}
+\usepackage[margin=10pt,font=small,labelfont=bf, labelformat=simple, labelsep=endash]{caption}
+
+\newtheoremstyle{articlestyle}% ⟨name⟩
+{7pt}%  ⟨Space above⟩
+{7pt}%  ⟨Space below⟩
+{}%     ⟨Body font⟩
+{0pt}%  ⟨Indent amount⟩
+{\bf}%  ⟨Theorem head font⟩
+{.\ }%  ⟨Punctuation after theorem head⟩
+{0pt}%  ⟨Space after theorem head⟩
+{}%     ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{articlestyle}
+\newtheorem{article}{}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+
+\def\artlabel[#1]{\textbf{#1.}}
+\newcommand{\widetext}[1]{\ \text{ #1 } \ }
+\newcommand{\qtext}[1]{\quad\text{#1}\quad}
+
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\TT}{\mathbf{T}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\HH}{\mathbf{H}}
+
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cC}{{\mathcal C}}
+\newcommand{\cI}{{\mathcal I}}
+\newcommand{\cY}{{\mathcal Y}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cM}{{\mathcal M}}
+\newcommand{\blambda}{{\pmb{\lambda}}}
+
+\newcommand{\fS}{{\frak S}}
+
+\DeclareMathOperator{\PeriodsOf}{Periods}
+\DeclareMathOperator{\comp}{comp}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\Paths}{Paths}
+\DeclareMathOperator{\Loops}{Loops}
+\DeclareMathOperator{\Maps}{Maps}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\pr}{pr}
+\DeclareMathOperator{\src}{src}
+\DeclareMathOperator{\trg}{trg}
+
+% Fix for \ends conflict
+\def\ends{\operatorname{ends}}
+
+\DeclareMathOperator{\Ham}{Ham}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\class}{class}
+\DeclareMathOperator{\supp}{supp}
+
+\DeclareMathOperator{\CHO}{\boldsymbol{\mathsf{K}}}
+\newcommand{\Komega}{\CHO\!\omega}
+\DeclareMathOperator{\Mid}{\big|}
+
+\newcommand{\0}{\hat{0}}
+\newcommand{\1}{\hat{1}}
+\newcommand{\id}{\mathbf 1}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\D}{\mathrm{D}}
+\newcommand{\dt}{d\!t}
+\newcommand{\ds}{d\!s}
+\newcommand{\df}{d\!f}
+\newcommand{\cl}{\mathrm{cl}}
+
+\newcommand{\Pomega}{\mathrm{P}_\omega}
+\newcommand{\Tomega}{\mathrm{T}_\omega}
+\newcommand{\Ttor}{\mathrm{T}_{\mathrm{tor}}}
+\newcommand{\Psph}{\mathrm{P}_{\mathrm{sph}}}
+\newcommand{\antihol}{\mathrm{anti-hol}}
+\newcommand{\hol}{\mathrm{hol}}
+\newcommand{\Phol}{\mathrm{P}_{\hol}}
+\newcommand{\Ptor}{\mathrm{P}_{\mathrm{tor}}}
+\newcommand{\paths}{\mathrm{paths}}
+\newcommand{\quant}{\mathrm{quant}}
+\newcommand{\tor}{\mathrm{tor}}
+\newcommand{\sph}{\mathrm{sph}}
+\newcommand{\surf}{\mathrm{surf}}
+\newcommand{\Vol}{\mathrm{Vol}}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\loc}{\mathrm{loc}}
+
+\newcommand{\vect}[1]{\begin{pmatrix}#1\end{pmatrix}} % usage : \vect{a \\ b \\...}
+
+\usepackage{cfr-lm}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[cal=scr,uppercase = upright, greekfamily = didot, greeklowercase = upright, utopia]{mathdesign}
+
+\linespread{1.1}
+
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: - Begin Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Title & Data
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \title[Geometric Quantization by Paths III]{Geometric Quantization by Paths \\ {\scriptsize Part III: The Metaplectic Anomaly}}
+  
+  \author{Patrick Iglesias-Zemmour}
+  
+  \address{Einstein Institute of Mathematics,
+  The Hebrew University of Jerusalem,
+  Campus Givat Ram,
+  9190401 Israel.}
+  \email{piz@math.huji.ac.il}
+  \urladdr{http://math.huji.ac.il/~piz}
+  \urladdr{https://github.com/p-i-z/Diffeology-Archives}
+  
+  \date{Preprint update \today}
+  
+  \thanks{The author thanks the Hebrew University of Jerusalem, Israel, for his continuous academic support.
+  He is also grateful for the assistance provided by the AI assistant Gemini (Google).}
+  
+  \subjclass[2020]{Primary 53D50, 58A05; Secondary 22A22, 81S10}
+  \keywords{Diffeology, Geometric Quantization, Prequantum Groupoid, Metaplectic Group, Half-Densities, Harmonic Oscillator, Lie Derivative, Moment Map}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Abstract
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    In the previous parts of this work,
+    we established the Prequantum Groupoid $\TT_\omega$ as the universal geometric container for quantum mechanics.
+    This approach,
+    which we call the \emph{Geometric Quantization by Paths} (GQbP) framework,
+    replaces the traditional construction of principal bundles with the distillation of the space of histories.
+    In this third part,
+    we cross the "Threshold of Analysis" by constructing the intrinsic observable algebra of the system.
+    The harmonic oscillator is treated here as a validation case,
+    demonstrating that the standard resolution via complex polarization and half-forms 
+    is naturally integrated into the GQbP framework.
+    Starting from the complexified groupoid,
+    we define the algebra using symplectic half-densities to ensure a canonical convolution product.
+    We then show that the transition to a polarized representation forces a factorization of these densities.
+    The action of the symmetry group on the polarized half-forms generates a divergence term,
+    which we identify as the source of the zero-point energy of the harmonic oscillator,
+    $E_0 = n\hbar/2$.
+    This derivation resolves the "Metaplectic Anomaly" as a necessary geometric consequence of the intrinsic quantization process.
+  \end{abstract}
+  
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Make Title
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Introduction
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{{\textbf{Introduction}}}
+  
+  In Parts I and II,
+  we constructed the prequantum groupoid $\TT_\omega$ as a quotient of the space of paths.
+  This object captures the full geometry of the quantum system,
+  including its symmetries and its phase structure.
+  This approach,
+  which we call the \emph{Geometric Quantization by Paths} (GQbP) framework,
+  replaces the traditional construction of principal bundles 
+  with the distillation of the space of histories.
+  However,
+  geometry alone does not yield spectra.
+  To compute the energy levels of a system,
+  such as the harmonic oscillator,
+  we must transition from the geometric picture to the analytical one.
+  
+  This transition occurs at the "Threshold of Analysis,"
+  where we define the algebra of observables.
+  A naive approach,
+  representing the groupoid on a space of scalar functions,
+  fails to reproduce the correct quantum spectrum.
+  Specifically,
+  it misses the zero-point energy,
+  the $\hbar/2$ shift characteristic of the harmonic oscillator.
+  This discrepancy is a well-known feature of geometric quantization,
+  traditionally addressed by introducing a "metaplectic correction" \cite{Sou70, Kos70}
+  or by modifying the pairing of polarizations \cite{Woo92}.
+  
+  It should be emphasized that the purpose of this application 
+  is not to propose a new method for solving the harmonic oscillator.
+  Instead,
+  it serves as a calibration of the GQbP framework,
+  showing how the standard analytical derivation 
+  using complex polarization and half-forms 
+  is naturally accommodated within the groupoid structure.
+  This validation confirms that the prequantum groupoid 
+  is an operative geometric container 
+  that remains faithful to the physical results of the Dirac-Souriau program.
+  
+  In this paper,
+  we show that this correction is not ad-hoc.
+  It is a necessary consequence of defining the algebra of the groupoid \emph{intrinsically}.
+  By demanding that the convolution product be defined without reference to an external measure,
+  we are forced to define the elements of the algebra as \emph{half-densities}.
+  This approach,
+  pioneered by Kostant and Souriau to define the intrinsic Hilbert space \cite{GS77},
+  finds its natural home in the groupoid framework.
+  
+  \smallskip
+  \textbf{Note on the Framework.}
+  It is important to note that,
+  even if it is not immediately visible in the specific calculations presented here,
+  the theoretical background of this entire construction is the framework of diffeology \cite{PIZ13, PIZ22}.
+  The prequantum groupoid,
+  the space of morphisms,
+  and the intrinsic algebra are all defined and manipulated as diffeological objects
+  that have been generated in the space of all paths of the space of motions \cite{PIZ25a, PIZ25b}.
+  This framework provides the necessary rigor to handle the infinite-dimensional path space and its quotients
+  without requiring local Euclidean charts or losing geometric information.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Section I: The Complexified Groupoid
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textbf{The Complexified Groupoid}}
+  \label{sec:ComplexifiedGroupoid}
+  
+  We begin by establishing the geometric arena for the harmonic oscillator.
+  To accommodate the quantum phase and the polarization,
+  we work directly with the complexified structure of the phase space.
+  
+  \begin{article}\artlabel[The Base Space]
+    Let $X = \CC^n$ be the complexified phase space.
+    The coordinates are $z = (z_1, \dots, z_n)$ and $\bar{z} = (\bar{z}_1, \dots, \bar{z}_n)$.
+    The symplectic form is given by the standard area form:
+    $$
+      \omega = \frac{i}{2} \sum_{k=1}^n dz_k \wedge d\bar{z}_k.
+      $$
+    Since $\omega$ is exact,
+    we choose the symmetric primitive $\alpha$ which is invariant under rotations:
+    $$
+      \alpha = \frac{i}{4} \sum_{k=1}^n (\bar{z}_k dz_k - z_k d\bar{z}_k).
+      $$
+    This 1-form satisfies $d\alpha = \omega$.
+  \end{article}
+  
+  \begin{article}\artlabel[The Symmetry Group]
+    The group of automorphisms of the prequantum groupoid,
+    $\Aut(\TT_\omega, \blambda)$,
+    is isomorphic to the group of symplectic diffeomorphisms $\Diff(X, \omega)$.
+    Since the symplectic space $X$ is an affine coadjoint orbit of the Affine Symplectic Group $\mathrm{ASp}(2n)$,
+    we focus on the action of this finite-dimensional subgroup,
+    in a true spirit of the orbit method \cite{Kir62}.
+    For the harmonic oscillator,
+    we consider the rotation subgroup $R_t \in \mathrm{U}(n) \subset \mathrm{ASp}(2n)$.
+    The Hamiltonian $H$ is the moment map associated with this symmetry action.
+    
+    Because the symmetric primitive $\alpha$ is strictly invariant under rotations ($R_t^* \alpha = \alpha$),
+    the lift of the flow to the groupoid $\cY$ is trivial on the action variable $t$:
+    $$
+      \hat{R}_t(z, \tau, z') = (R_t z, \tau, R_t z').
+      $$
+    This choice of gauge simplifies the analysis,
+    as the quantum dynamics is generated entirely by the transport of the half-densities,
+    without any additional phase contribution from the action variable.
+  \end{article}
+  
+  \begin{article}\artlabel[The Groupoid Structure]
+    Since $X$ is simply connected,
+    the group of periods is trivial, $\Pomega = \{0\}$.
+    However,
+    following the principle of the \emph{Universality of the Quantum Unit} (Part II, \textsection 7),
+    we impose the universal period $h$ (Planck's constant) on the action variable.
+    
+    The prequantum groupoid $\TT_\omega$ is the additive groupoid over $X$,
+    quotiented by the discrete subgroup $h\ZZ$ in the fiber.
+    Its space of morphisms is:
+    $$
+      \cY \simeq X \times (\RR/h\ZZ) \times X \simeq \CC^n \times S^1 \times \CC^n.
+      $$
+    An arrow is a triple $y = (z, t, z')$,
+    representing a path from $z$ to $z'$ with relative action $t \in \RR/h\ZZ$.
+    The composition is additive in $t$:
+    $$
+      (z, t, z') \cdot (z', t', z'') = (z, t + t', z'').
+      $$
+    The prequantum 1-form $\blambda$ on $\cY$ is given by:
+    $$
+      \blambda = \pr_3^*(\alpha) - \pr_1^*(\alpha) - \pr_2^*(dt).
+      $$
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Section II: The Intrinsic Algebra
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textbf{The Intrinsic Algebra}}
+  \label{sec:IntrinsicAlgebra}
+  
+  We now construct the algebra of observables.
+  The key requirement is that the convolution product must be defined intrinsically,
+  without choosing an arbitrary measure on $X$.
+  
+  \begin{article}\artlabel[Symplectic Half-Densities]
+    To satisfy the intrinsic condition,
+    the elements of the algebra must be \emph{half-densities}.
+    Following the standard construction for groupoid algebras 
+    and coordinate-independent kernels \cite{Con94, Hor71},
+    we define the elements of $\cA_\omega$ as sections of the bundle 
+    $\src^*(\Vol^{1/2}(X)) \otimes \trg^*(\Vol^{1/2}(X))$.
+    
+    Locally, an element $\Psi \in \cA_\omega$ is written as:
+    $$
+      \Psi(z, t, z') = \psi(z, t, z') \, \sqrt{\vol_\omega}_z \otimes \sqrt{\vol_\omega}_{z'}.
+      $$
+    Here, $\psi$ is a scalar function satisfying the equivariance condition $\psi(z, t+h, z') = \psi(z, t, z')$.
+    Using the Fourier decomposition for the fundamental mode, we write:
+    $$
+      \psi(z, t, z') = e^{it/\hbar} K(z, z'),
+      $$
+    where $K(z, z')$ is the kernel on the base space.
+  \end{article}
+  
+  \begin{article}\artlabel[The Explicit Convolution Formula]
+    The convolution product $\Psi_1 * \Psi_2$ at an arrow $y = (z, t, z')$
+    is defined by integrating over the intermediate point $w \in X$.
+    
+    Let $\Psi_1$ and $\Psi_2$ be two elements:
+    $$
+      \Psi_1 = \psi_1 \sqrt{\vol_\omega}_z \otimes \sqrt{\vol_\omega}_w, \quad
+      \Psi_2 = \psi_2 \sqrt{\vol_\omega}_w \otimes \sqrt{\vol_\omega}_{z'}.
+      $$
+    At the junction point $w$,
+    we have the tensor product of two half-densities:
+    $$
+      \sqrt{\vol_\omega}_w \otimes \sqrt{\vol_\omega}_w \cong \vol_\omega(w).
+      $$
+    This product yields a canonical 1-density $\vol_\omega(w)$ on $X$,
+    which serves as the measure for the integration.
+    The explicit formula for the convolution is:
+    $$
+      (\Psi_1 * \Psi_2)(z, t, z') =
+      h \, e^{it/\hbar} \left( \int_{w \in X} K_1(z, w) K_2(w, z') \, \vol_\omega(w) \right)
+      \sqrt{\vol_\omega}_z \otimes \sqrt{\vol_\omega}_{z'}.
+      $$
+    This formula shows that the algebra is closed and well-defined
+    strictly from the geometry of the groupoid.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Section III: The Polarization Step
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textbf{The Polarization Step}}
+  \label{sec:Polarization}
+  
+  The intrinsic algebra $\cA_\omega$ is "too big" for quantum mechanics;
+  it corresponds to functions on the full phase space.
+  To obtain the correct spectrum,
+  we must reduce the representation space by choosing a \emph{polarization}.
+  
+  \begin{article}\artlabel[The Factorization of the Density]
+    We choose the \emph{holomorphic polarization}.
+    This corresponds to selecting the sub-bundle of $(n,0)$-forms generated by $dz_1 \wedge \dots \wedge dz_n$.
+    
+    Geometrically,
+    this choice forces a factorization of the symplectic volume form.
+    Recall that $\vol_\omega = (\frac{i}{2})^n dz_1 \wedge d\bar{z}_1 \wedge \dots \wedge dz_n \wedge d\bar{z}_n$.
+    Formally, we can split the half-density into a holomorphic and an anti-holomorphic part:
+    $$
+      \sqrt{\vol_\omega} \sim \sqrt{\vol_{\hol}} \otimes \sqrt{\vol_{\antihol}}.
+      $$
+    A "polarized state" is a section that depends only on the holomorphic geometry.
+    This means we effectively discard the anti-holomorphic factor $\sqrt{\vol_{\antihol}}$
+    and retain only the holomorphic half-form:
+    $$
+      \sigma = \sqrt{dz_1 \wedge \dots \wedge dz_n}.
+      $$
+    The Hilbert space of the quantum system consists of sections of this holomorphic half-form bundle.
+  \end{article}
+  
+  \begin{article}\artlabel[The Origin of the Anomaly]
+    The "Metaplectic Anomaly" arises from the action of the symmetry group on this polarized factor.
+    
+    Let $\phi$ be a symplectic transformation (e.g., a rotation).
+    Since $\phi$ preserves the symplectic form,
+    it preserves the total half-density:
+    $\phi^*(\sqrt{\vol_\omega}) = \sqrt{\vol_\omega}$.
+    However,
+    $\phi$ does \emph{not} necessarily preserve the factors individually.
+    It may rotate the holomorphic frame $\vol_{\hol}$ by a phase,
+    compensated by an opposite phase in $\vol_{\antihol}$.
+    
+    By selecting the polarization,
+    we break this symmetry.
+    We force the quantum state to transform as $\sqrt{\vol_{\hol}}$ alone.
+    The "anomaly" is simply the phase picked up by this specific factor under the rotation.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Section IV: The Spectral Derivation
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textbf{The Spectral Derivation}}
+  \label{sec:Spectrum}
+  
+  We now compute the spectrum of the harmonic oscillator by calculating the generator of the rotation group on the polarized half-forms.
+  
+  \begin{article}\artlabel[The Hamiltonian Moment Map]
+    The harmonic oscillator Hamiltonian is $H = \frac{1}{2} \sum z_k \bar{z}_k$.
+    This function is the moment map of the rotation action $z \mapsto e^{-it}z$.
+    The corresponding Hamiltonian vector field $\xi_H$ generates this flow.
+    In complex coordinates,
+    this vector field is:
+    $$
+      \xi_H = -i \sum_{k=1}^n \left( z_k \frac{\partial}{\partial z_k} - \bar{z}_k \frac{\partial}{\partial \bar{z}_k} \right).
+      $$
+  \end{article}
+  
+  \begin{article}\artlabel[The Lie Derivative Calculation]
+    \label{art:The Lie Derivative of a Half-Form}
+    The quantum operator $\hat{H}$ is given by the Lie derivative of the half-form, scaled by $i\hbar$:
+    $\hat{H} = i\hbar \mathcal{L}_{\xi_H}$.
+    We apply the Lie derivative to the polarized basis $\sqrt{\vol_{\hol}}$.
+    First, we compute the action on the volume form $\vol_{\hol} = dz_1 \wedge \dots \wedge dz_n$:
+    $$
+      \mathcal{L}_{\xi_H} \vol_{\hol} = \sum_{k=1}^n dz_1 \wedge \dots \wedge d(-i z_k) \wedge \dots \wedge dz_n = -in \vol_{\hol}.
+      $$
+    The divergence of the vector field with respect to the holomorphic volume is thus $\mathrm{Div}_{\vol_{\hol}}(\xi_H) = -in$.
+    
+    Now, we apply the formula for half-densities \cite{Woo92, GS77}:
+    $$
+      \mathcal{L}_{\xi_H} \sqrt{\vol_{\hol}} = \frac{1}{2} \mathrm{Div}_{\vol_{\hol}}(\xi_H) \sqrt{\vol_{\hol}} = -\frac{in}{2} \sqrt{\vol_{\hol}}.
+      $$
+  \end{article}
+  
+  \begin{article}\artlabel[The Spectrum]
+    We act with the operator $\hat{H}$ on a state $\Psi = \psi(z) \sqrt{\vol_{\hol}}$.
+    $$
+      \hat{H} \Psi = i\hbar \mathcal{L}_{\xi_H} (\psi \sqrt{\vol_{\hol}}) = i\hbar \left( \xi_H(\psi) \sqrt{\vol_{\hol}} + \psi \mathcal{L}_{\xi_H} \sqrt{\vol_{\hol}} \right).
+      $$
+    Substituting the result from the previous article:
+    $$
+      \hat{H} \Psi = i\hbar (-i \sum z_k \partial_{z_k} \psi) \sqrt{\vol_{\hol}} + i\hbar \left( -\frac{in}{2} \psi \right) \sqrt{\vol_{\hol}}.
+      $$
+    The first term yields the classical energy levels $E_{\cl} = \hbar \sum n_k$.
+    The second term is the geometric correction:
+    $i\hbar(-in/2) = n\hbar/2$.
+    The total energy is:
+    $$
+      E = \hbar \left( \sum_{k=1}^n n_k + \frac{n}{2} \right).
+      $$
+  \end{article}
+  
+  \begin{article}\artlabel[The Multidimensional Scaling]
+    This result confirms that the zero-point energy is an extensive property
+    of the quantum system,
+    scaling linearly with the number of degrees of freedom $n$.
+    The "Quantum Fog" carries a fixed energy density of $\hbar/2$ per mode.
+    This scaling is a direct consequence of the additive nature of the divergence 
+    acting on the multidimensional holomorphic volume form.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Section V: The Ground State and Propagator
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{\textbf{The Ground State and Propagator}}
+  \label{sec:GroundState}
+  
+  \begin{article}\artlabel[The Ground State]
+    The ground state is the section that is annihilated by the anti-holomorphic derivative.
+    Using the symmetric primitive $\alpha$, the condition $\nabla_{\bar{z}_k} \Psi_0 = 0$ yields:
+    $$
+      \left( \frac{\partial}{\partial \bar{z}_k} + \frac{z_k}{2\hbar} \right) \psi_0 = 0.
+      $$
+    The solution is the Gaussian:
+    $$
+      \Psi_0 = e^{-\sum |z_k|^2/2\hbar} \sqrt{\vol_{\hol}}.
+      $$
+    This state has energy $n\hbar/2$, representing the cost of maintaining this Gaussian profile 
+    against the rotation of the frame.
+  \end{article}
+  
+  \begin{article}\artlabel[The Maslov Phase]
+    The global evolution of the state is given by the transport along the groupoid.
+    Because the half-form $\sqrt{\vol_{\hol}}$ scales by $e^{-int/2}$ under the rotation,
+    the time-dependent wave function is:
+    $$
+      \Psi(z, t) = e^{-int/2} \, \psi_0(e^{it} z) \sqrt{\vol_{\hol}}.
+      $$
+    After a full period $T=2\pi$, the state picks up a phase of $(-1)^n$.
+    This sign change is the global manifestation of the Metaplectic Anomaly.
+    It confirms that the quantum groupoid is a double cover of the classical space of motions.
+  \end{article}
+  
+  \begin{article}\artlabel[The Synthesis of Feynman and Dirac]
+    The success of this derivation confirms the robustness of the GQBP program.
+    By distilling the infinite-dimensional path space into the groupoid,
+    we remain faithful to the physical intuition of Feynman's sum-over-histories.
+    Simultaneously,
+    by constructing the intrinsic algebra of half-densities
+    and deriving the spectrum via the Lie derivative,
+    we satisfy the rigorous operator-based requirements of the Dirac program.
+    The prequantum groupoid thus emerges as the geometric bridge
+    between the two pillars of quantization.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Conclusion
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{\textbf{Conclusion}}
+  
+  We have shown that the zero-point energy of the harmonic oscillator is not an arbitrary constant added to the theory.
+  It is the spectral signature of the intrinsic geometry of the Prequantum Groupoid.
+  
+  By refusing to fix an external measure on the space of motions,
+  we were compelled to define the quantum algebra using half-densities.
+  The transition to a polarized representation forces a factorization of these densities,
+  isolating the holomorphic component.
+  The action of the symmetry group on this component generates a divergence term,
+  which is exactly the zero-point energy.
+  
+  This derivation resolves the "Metaplectic Anomaly" as a necessary geometric consequence of the intrinsic quantization process.
+  It validates the GQBP framework as a rigorous and operative bridge between the path integral and the operator algebra.
+  
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Appendix: The Algebraic Path to the Spectrum
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{\textbf{\textsc{Appendix} \\ \smallskip The Algebraic Character and the Fixed Point Index}}
+  \label{sec:AlgebraicPath}
+  
+  We now abandon the "polarized screen" to look directly at the internal structure of the algebra $\cA_\omega$.
+  We show that the spectrum of the harmonic oscillator is encoded in the \emph{Character}
+  of the symmetry group acting on the intrinsic half-densities.
+  
+  \begin{article}\artlabel[The Intrinsic Trace]
+    The algebra $\cA_\omega$ possesses a canonical linear functional:
+    the \emph{Trace}.
+    Because the elements are half-densities on $\cY$ with values in the bundle
+    $\src^*(\Vol^{1/2}(X)) \otimes \trg^*(\Vol^{1/2}(X))$,
+    we can define the trace of an element $\Psi$ by restricting it to the diagonal of the groupoid.
+    
+    The trace is a well-defined integral of a 1-density on $X$:
+    $$
+      \mathrm{Tr}(\Psi) = \int_X \int_0^h \Psi(x, \tau, x) \, d\tau.
+      $$
+  \end{article}
+  
+  \begin{article}\artlabel[The Character of the Flow]
+    The Hamiltonian $H$ generates a one-parameter group of automorphisms $\alpha_t$ of the algebra.
+    The \emph{Quantum Spectrum} is the set of frequencies $\{\nu_n\}$ such that the character of the flow,
+    $\chi(t) = \mathrm{Tr}(U_t)$,
+    decomposes as a sum of phases:
+    $$
+      \chi(t) = \sum_n e^{-i \nu_n t}.
+      $$
+  \end{article}
+  
+  \begin{article}\artlabel[The Fixed Point Formula]
+    To compute $\mathrm{Tr}(U_t)$,
+    we use the \emph{Atiyah-Bott Fixed Point Formula} \cite{AB67, AB68} 
+    adapted to the bundle of half-densities.
+    For the harmonic oscillator,
+    the rotation $R_t$ has a unique fixed point in $X$:
+    the origin $0$.
+    The contribution of this fixed point to the trace is given by the ratio:
+    $$
+      \chi(t) = \frac{\mathrm{trace}(R_t^* |_{\mathcal{H}_0})}{\det_{\CC}(I - dR_t)}.
+      $$
+  \end{article}
+  
+  \begin{article}\artlabel[The Multidimensional Partition Function]
+    In the $n$-dimensional case,
+    the character $\chi(t)$ is the product of the characters of each mode.
+    The fixed-point formula yields:
+    $$
+      \chi(t) = \prod_{k=1}^n \frac{e^{-it/2}}{1 - e^{-it}} = \frac{e^{-int/2}}{\prod_{k=1}^n (1 - e^{-it})}.
+      $$
+    Expanding this product as a multidimensional geometric series:
+    $$
+      \chi(t) = \sum_{n_1, \dots, n_k = 0}^\infty e^{-i(n_1 + \dots + n_k + n/2)t}.
+      $$
+    This expansion identifies the energy levels as $E = \hbar \sum (n_k + 1/2)$.
+    The algebraic trace thus provides the most efficient route
+    to the complete spectrum of the multidimensional system,
+    revealing the zero-point energy as the global metaplectic weight 
+    of the $n$-dimensional vacuum.
+  \end{article}
+  
+  \begin{article}\artlabel[Conclusion of the Algebraic Path]
+    The $1/2$ shift has emerged without any choice of polarization.
+    It appeared as the \emph{ratio between the metaplectic phase of the half-density 
+    and the symplectic volume of the fixed point displacement}.
+    This derivation proves that the zero-point energy is an \emph{Intrinsic Algebraic Index}
+    of the prequantum groupoid.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% MARK: Bibliography
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{thebibliography}{PIZ25c}
+    
+    \bibitem[AB67]{AB67}
+    M. F. Atiyah and R. Bott.
+    A Lefschetz fixed point formula for elliptic complexes. I.
+    {\em Annals of Mathematics}, 86:374--407, 1967.
+    
+    \bibitem[AB68]{AB68}
+    M. F. Atiyah and R. Bott.
+    A Lefschetz fixed point formula for elliptic complexes. II. Applications.
+    {\em Annals of Mathematics}, 88:451--491, 1968.
+    
+    \bibitem[Con94]{Con94}
+    Alain Connes.
+    {\em Noncommutative Geometry}.
+    Academic Press, San Diego, 1994.
+    
+    \bibitem[GS77]{GS77}
+    Victor Guillemin and Shlomo Sternberg.
+    \emph{Geometric Asymptotics}.
+    Mathematical Surveys, 14, Amer. Math. Soc., 1977.
+    
+    \bibitem[Hor71]{Hor71}
+    Lars H\"ormander.
+    Fourier integral operators. I.
+    {\em Acta Mathematica}, 127:79--183, 1971.
+    
+    \bibitem[PIZ13]{PIZ13}
+    Patrick Iglesias-Zemmour.
+    {\em Diffeology}.
+    Mathematical Surveys and Monographs, 185, Am. Math. Soc., 2013.
+    
+    \bibitem[PIZ22]{PIZ22}
+    \bysame %Patrick Iglesias-Zemmour,
+    \emph{Diffeology},
+    Revised version by Beijing World Publishing Corp., Beijing, 2022.
+    
+    \bibitem[PIZ25a]{PIZ25a}
+    \bysame %Patrick Iglesias-Zemmour,
+    \emph{Geometric Quantization by Paths, Part I: The Simply Connected Case},
+    (Preprint, 2025).
+    
+    \bibitem[PIZ25b]{PIZ25b}
+    \bysame %Patrick Iglesias-Zemmour,
+    \emph{Geometric Quantization by Paths, Part II: The General Case},
+    (Preprint, 2025).
+    
+    \bibitem[Kir62]{Kir62}
+    Alexandre A. Kirillov.
+    Unitary representations of nilpotent Lie groups.
+    {\em Uspekhi Mat. Nauk}, 17(4):57--110, 1962.
+    
+    \bibitem[Kos70]{Kos70}
+    Bertram Kostant.
+    Quantization and unitary representations.
+    In: {\em Lectures in Modern Analysis and Applications III},
+    Lecture Notes in Mathematics, Vol. 170,
+    Springer, Berlin, 1970, pp. 87--208.
+    
+    \bibitem[Mas65]{Mas65}
+    V. P. Maslov.
+    {\em Teoriya vozmushchenii i asimptoticheskie metody}.
+    Izdat. Moskov. Univ., Moscow, 1965.
+    (French translation: {\em Th\'eorie des perturbations et m\'ethodes asymptotiques}, Dunod, Paris, 1972.)
+    
+    \bibitem[Sou70]{Sou70}
+    Jean-Marie Souriau.
+    {\em Structure des syst\`emes dynamiques}.
+    Dunod, Paris, 1970.
+    
+    \bibitem[Sou75]{Sou75}
+    Jean-Marie Souriau.
+    \newblock \emph{Construction explicite de l'indice de Maslov. Applications}.
+    \newblock In: Group theoretical methods in physics (Fourth Internat. Colloq., Nijmegen, 1975), Lecture Notes in Phys., Vol. 50, Springer, Berlin, 1976, pp. 117--148.
+    
+    \bibitem[Wei74]{Wei74}
+    Alan Weinstein.
+    Fourier integral operators, quantization, and the Maslov index.
+    In: {\em G\'eom\'etrie symplectique et physique math\'ematique}
+    (Colloq. Internat. CNRS, No. 237, Aix-en-Provence, 1974),
+    \'Editions du CNRS, Paris, 1976, pp. 235--246.
+    
+    \bibitem[Wei77]{Wei77}
+    Alan Weinstein.
+    \emph{Lectures on Symplectic Manifolds}.
+    CBMS Regional Conf. Series in Math., 29, Amer. Math. Soc., 1977.
+    
+    \bibitem[Woo92]{Woo92}
+    Nicholas M.J. Woodhouse.
+    \emph{Geometric Quantization}.
+    Clarendon Press, Oxford, Second Edition, 1992.
+    
+  \end{thebibliography}
+  
+\end{document}
