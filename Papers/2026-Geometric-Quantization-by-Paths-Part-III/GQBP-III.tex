@@ -316,30 +316,45 @@
     without any additional phase contribution from the action variable.
   \end{article}
   
-  \begin{article}\artlabel[The Groupoid Structure]
+\begin{article}\artlabel[The Groupoid Structure]
     Since $X$ is simply connected,
     the group of periods is trivial, $\Pomega = \{0\}$.
     However,
-    following the principle of the \emph{Universality of the Quantum Unit} (Part II, \textsection 7),
-    we impose the universal period $h$ (Planck's constant) on the action variable.
+    to align this geometric construction with the physical requirement of the \emph{Universality of the Quantum Unit} (Part II, \textsection 7),
+    we consider a reduced groupoid.
+    This reduction is a further quotient of the space of paths,
+    where the period group is identified with the universal group $h\ZZ$.
+    This process,
+    which corresponds to what Souriau called ``quantization by fusion'' \cite[\textsection 18]{Sou70},
+    ensures that the quantum phase is a single-valued character of the universal isotropy group $\TT_{\text{quant}} \simeq \RR/h\ZZ$.
     
-    The prequantum groupoid $\TT_\omega$ is the additive groupoid over $X$,
+    The resulting prequantum groupoid $\TT_\omega$ is the additive groupoid over $X$,
     quotiented by the discrete subgroup $h\ZZ$ in the fiber.
     Its space of morphisms is:
     $$
       \cY \simeq X \times (\RR/h\ZZ) \times X \simeq \CC^n \times S^1 \times \CC^n.
-      $$
+    $$
     An arrow is a triple $y = (z, t, z')$,
     representing a path from $z$ to $z'$ with relative action $t \in \RR/h\ZZ$.
     The composition is additive in $t$:
     $$
       (z, t, z') \cdot (z', t', z'') = (z, t + t', z'').
-      $$
+    $$
     The prequantum 1-form $\blambda$ on $\cY$ is given by:
     $$
       \blambda = \pr_3^*(\alpha) - \pr_1^*(\alpha) - \pr_2^*(dt).
-      $$
+    $$
+    The elements of the algebra $\cA_\omega$ must transform according to the characters of the universal isotropy group.
+    This requirement implies that the functions $\psi(x, t, x')$ must be periodic in $t$ with period $h$.
+    Using the Fourier decomposition,
+    we isolate the fundamental mode:
+    $$
+      \psi(x, t, x') = e^{2\pi i t / h} \phi(x, x') = e^{i t / \hbar} \phi(x, x').
+    $$
+    This periodicity condition is the algebraic manifestation of the geometric quantization condition.
+    It ensures that the phase factor $e^{it/\hbar}$ is single-valued on the universal quantum torus.
   \end{article}
+
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% MARK: Section II: The Intrinsic Algebra
