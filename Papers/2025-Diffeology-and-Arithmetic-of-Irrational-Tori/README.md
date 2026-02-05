@@ -5,7 +5,7 @@
 
 ## Abstract
 
-The irrational torus, $T_\alpha$, originally introduced as a geometric model for quasicrystals, is a foundational object in the theory of diffeology. This paper, after recalling its main algebraic properties, provides a comprehensive analysis of a new geometric invariant for this singular space: the group of flows, ${\frak{Fl}}(T_\alpha, \mathbf{R})$. This invariant, which is trivial for all manifolds, arises as the core of the obstruction to the de Rham theorem in the diffeological setting. We provide a complete computation and geometric interpretation of this group, proving the isomorphism ${\frak{Fl}}(T_\alpha, \mathbf{R}) \simeq \mathbf{R} \times \mathrm{coker}(\Delta_\alpha)$. This result establishes a direct link between the intrinsic geometry of the irrational torus and the deep arithmetic (Diophantine) properties of its defining slope.
+The irrational torus, $T_\alpha$, originally introduced as a geometric model for quasicrystals, is a foundational object in the theory of diffeology. This paper, after recalling its main algebraic properties, provides a comprehensive analysis of a new geometric invariant for this singular space: the group of flows, ${\frak{Fl}}(T_\alpha, \mathbf{R})$. This invariant, which is trivial for all manifolds, arises as the core of the obstruction to the de Rham theorem in the diffeological setting. We provide a complete computation and geometric interpretation of this group, proving the isomorphism ${\frak{Fl}}(T_\alpha, \mathbf{R}) \simeq \mathbf{R} \times \mathrm{coker}(\Delta_\alpha).$ This result establishes a direct link between the intrinsic geometry of the irrational torus and the deep arithmetic (Diophantine) properties of its defining slope.
 
 ## Significance of the Paper
 
@@ -27,10 +27,10 @@ This work solidifies the principle that diffeology provides the necessary tools 
 This directory contains two versions of the work, serving different purposes:
 
 ### 1. The Comprehensive Reference (`DAAOIT`)
-*   `DAAOIT.pdf` & `DAAOIT.tex`: The full 25-page paper. It contains the complete theoretical foundation, the detailed analysis of the cohomological equation using Fourier series, and the proofs of the infinite-dimensionality of the cokernel. **This is the definitive reference.**
+*  `DAAOIT.tex`: The full 25-page paper. It contains the complete theoretical foundation, the detailed analysis of the cohomological equation using Fourier series, and the proofs of the infinite-dimensionality of the cokernel. **This is the definitive reference.**
 
 ### 2. The Research Announcement (`AGMOI`)
-*   `AGMOI.pdf` & `AGMOI.tex`: A concise 6-page note titled *"A Geometric Measure of Irrationality"*. This version focuses on the conceptual narrative, moving from the physical motivation of quasicrystals directly to the arithmetic dichotomy. It serves as an executive summary of the main results.
+*  `AGMOI.tex`: A concise 6-page note titled *"A Geometric Measure of Irrationality"*. This version focuses on the conceptual narrative, moving from the physical motivation of quasicrystals directly to the arithmetic dichotomy. It serves as an executive summary of the main results.
 
 ### Other
 *   `/figures`: A directory containing the images used in the papers.
