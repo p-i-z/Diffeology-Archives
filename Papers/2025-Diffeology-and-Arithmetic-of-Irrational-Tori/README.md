@@ -22,6 +22,12 @@ The operator $\Delta_\alpha$ is at the heart of the classical cohomological equa
 
 This work solidifies the principle that diffeology provides the necessary tools to see how singular spaces retain a precise memory of the arithmetic data used to construct them.
 
+## Author's Note
+
+Although this paper provides the complete diffeological classification of the group of flows ${\frak{Fl}}(T_\alpha, \mathbf{R})$, it was not accepted for publication in a traditional journal. However, the result is essential for the diffeological point of view: it demonstrates how the theory captures arithmetic properties where classical geometry is silent. 
+
+Therefore, I have decided to publish it directly in this repository to ensure it remains accessible to the community. This material is intended to be incorporated into a future revised edition of the book *Lectures on Diffeology*.
+
 ## Files in this Directory
 
 This directory contains two versions of the work, serving different purposes:
