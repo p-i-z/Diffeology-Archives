@@ -24,9 +24,16 @@ This work solidifies the principle that diffeology provides the necessary tools 
 
 ## Files in this Directory
 
-*   `DAAOIT.tex`: The complete, self-contained LaTeX source file for the paper.
-*   `/figures`: A directory containing the images used in the paper.
+This directory contains two versions of the work, serving different purposes:
+
+### 1. The Comprehensive Reference (`DAAOIT`)
+*   `DAAOIT.pdf` & `DAAOIT.tex`: The full 25-page paper. It contains the complete theoretical foundation, the detailed analysis of the cohomological equation using Fourier series, and the proofs of the infinite-dimensionality of the cokernel. **This is the definitive reference.**
+
+### 2. The Research Announcement (`AGMOI`)
+*   `AGMOI.pdf` & `AGMOI.tex`: A concise 6-page note titled *"A Geometric Measure of Irrationality"*. This version focuses on the conceptual narrative, moving from the physical motivation of quasicrystals directly to the arithmetic dichotomy. It serves as an executive summary of the main results.
+
+### Other
+*   `/figures`: A directory containing the images used in the papers.
 
 ## 🛠️ Archival Notes
 *   **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/2025-Diffeology-and-Arithmetic-of-Irrational-Tori)
-  

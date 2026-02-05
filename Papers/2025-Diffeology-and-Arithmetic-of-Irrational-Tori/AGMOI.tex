@@ -1,0 +1,402 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  PROJECT: A Geometric Measure of Irrationality
+%%
+%%  Final Polished Version
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,letterpaper,reqno]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: MACROS File
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+% For diagrams
+\usepackage{tikz-cd}
+\usetikzlibrary{calc}
+\tikzcdset{arrow style=tikz, diagrams={>={Straight Barb[scale=0.8]}}}
+
+% Basic style
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+% Font style
+\usepackage{microtype}
+\usepackage[cal=scr,uppercase = upright,greekfamily = didot,greeklowercase = upright,expert,utopia]{mathdesign}
+\usepackage[supspaced=.04em]{superiors}
+\linespread{1.1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: MACROS (Custom Environments & Commands)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{definition}[1]%
+{\noindent\textbf{Definition#1.} \it}%
+{}
+
+\newenvironment{proposition}[1]%
+{\noindent\textbf{Proposition#1.} \it}%
+{}
+
+\newenvironment{theorem}[1]%
+{\noindent\textbf{Theorem#1.} \it}%
+{}
+
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\T}{\mathrm{T}}
+\newcommand{\SOne}{\mathrm{S}^1}
+\newcommand{\D}{\mathrm{D}}
+\renewcommand{\H}{\mathrm{H}}
+\newcommand{\M}{\mathrm{M}}
+\renewcommand{\L}{\mathrm{L}}
+\newcommand{\R}{\mathrm{R}}
+\newcommand{\W}{\mathrm{W}}
+\newcommand{\X}{\mathrm{X}}
+\newcommand{\Y}{\mathrm{Y}}
+\newcommand{\Cinfty}{\mathcal{C}^\infty}
+\DeclareMathOperator{\Fb}{\boldsymbol{\mathsf{Fl}}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\cl}[1]{\left[ #1 \right]}
+\newcommand{\Hdr}{\mathrm{H}_{\mathrm{dR}}}
+\newcommand{\vH}{\check{\mathrm{H}}}
+\newcommand{\Diff}{\mathrm{Diff}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Article Data
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{A Geometric Measure of Irrationality}
+\author{Patrick Iglesias-Zemmour}
+\thanks{I thank the Hebrew University of Jerusalem, Israel, for its continuous academic support.
+I am also grateful for the stimulating discussions and assistance provided by the AI assistant Gemini (Google). \\
+Data sharing is not applicable to this article as no new data were created or analyzed in this study.}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Campus Givat Ram, $9190401$ Israel}
+\email{piz@math.huji.ac.il}
+\date{\today}
+\subjclass[2020]{58A40, 57R30, 37E10, 11J71, 82D25}
+\keywords{Quasicrystals, Diffeology, Singular geometry, Characteristic classes, Irrational tori, Diophantine approximation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Begin Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Abstract
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{abstract}
+    The irrational torus,
+    $\T_\alpha$,
+    was introduced in the 1980s as a foundational geometric model for the internal spaces of quasicrystals,
+    a response to the challenge they posed to classical geometry.
+    This letter revisits this object using new tools from diffeological cohomology.
+    We introduce a new geometric invariant,
+    the group of flows $\Fb(\X, \RR)$,
+    which arises as the core of the obstruction to the de Rham theorem in this singular setting.
+    This invariant is a key characteristic of this new geometry,
+    and its computation for $\T_\alpha$ reveals a direct and intrinsic link to the arithmetic of the slope $\alpha$.
+  \end{abstract}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Introduction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Introduction}
+    
+  The discovery of quasicrystals in the early 1980s presented a profound challenge to the geometric foundations of mathematical physics \cite{She84}. The classical tools of crystallography, built on periodic lattices and Lie groups, were insufficient to describe these new materials exhibiting long-range aperiodic order. This challenge demanded new geometric frameworks.
+  
+  The classical geometric models for crystals are regular tori, $\RR^k/\L$, where $\L$ is a discrete lattice. The physical properties of the crystal, such as its diffraction pattern, can be extracted directly from the harmonic analysis on this well-understood manifold. This powerful correspondence between the geometry of a regular torus and the physics of a periodic crystal broke down completely with the discovery of quasicrystals.
+  
+  The cut-and-project method models these new structures using quotients of the form $\RR^n/\H$, where the hyperplane $\H$ is "irrational" with respect to the underlying lattice.%
+  \footnote{See \cite{IZL90}.}
+  The resulting quotient space is no longer a regular torus but a strange new object---the irrational torus---with a trivial topology but a rich, non-trivial smooth structure. It is precisely here that diffeology provided the necessary response. It gives a coherent geometry to these singular quotients, from which, once again, the physical properties of the aperiodic system can be extracted.
+  
+  Our work on diffeology, beginning with the 1983 study of what we named the "irrational torus," was a direct response to this challenge \cite{DIZ83}. The goal was to develop a geometry capable of handling the singular quotient spaces that arise as the "internal spaces" in the cut-and-project models of quasicrystals.
+  
+  The appearance of a new object like the irrational torus---a space with a trivial topology but a highly non-trivial diffeology---creates a scientific obligation to explore the new domain it opens. Recent developments in the theory, particularly the construction of the Čech-de Rham bicomplex for diffeological spaces \cite{PIZ24}, have provided the necessary tools to revisit this foundational object and analyze its deeper properties.
+  
+  This letter announces a new result in this long-term program:
+  a new geometric invariant,
+  the group of flows $\Fb(\X, \RR)$,
+  that warrants attention due to its central role in the classification of singular structures.
+  This invariant is trivial for manifolds but is designed to be sensitive to the fine smooth structure of singular spaces like $\T_\alpha$;
+  it is the very object that lies at the core of the de Rham obstruction in this new geometry.
+  
+  We compute this invariant for the irrational torus and reveal a direct link between its structure and the fine arithmetic properties of the irrational slope $\alpha$ that governs the aperiodic order. This result brings the original motivation full circle, demonstrating that the diffeological framework is powerful enough to detect the deep arithmetic that lies at the heart of these aperiodic structures. Detailed proofs are available in the preprint \cite{PIZ25a}.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The de Rham Obstruction as a Characteristic Class
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The de Rham Obstruction as a Characteristic Class}
+  
+  For a general diffeological space $\X$, the low-degree five-term exact sequence from the Čech-de Rham spectral sequence is \cite{PIZ24}:
+  $$
+    \begin{tikzcd}[column sep=1.2em, every label/.append style = {font = \small}]
+    0 \arrow[r] & \Hdr^1(\X) \arrow[r] & \vH^1(\X,\RR) \arrow[r] & {}^dE_2^{1,0} \arrow[r, "c_1"] & \Hdr^2(\X) \arrow[r] & \vH^2(\X,\RR)
+    \end{tikzcd}
+    $$
+  The term ${}^dE_2^{1,0}$ is the first obstruction to the de Rham theorem. It can be identified with $\Fb^\bullet(\X, \RR)$, the group of isomorphism classes of $(\RR,+)$-principal bundles (or \emph{flows}) over $\X$ that admit a smooth connection 1-form. The map $c_1: \Fb^\bullet(\X, \RR) \to \Hdr^2(\X)$ is then interpreted as a \emph{characteristic class}: it associates to a bundle with connection the de Rham class of its curvature 2-form.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The Group of Flows: An Invariant for Singular Geometry
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The Group of Flows: An Invariant for Singular Geometry}
+  
+  The appearance of $\Fb^\bullet(\X, \RR)$ as a natural obstruction motivates the study of the larger group containing all flows.
+  
+  \begin{definition}{~(The Group of Flows)}
+    Let $\X$ be a diffeological space. The \emph{group of flows} $\Fb(\X, \RR)$ is the set of isomorphism classes of $(\RR,+)$-principal bundles over $\X$. The group operation is defined by taking the quotient of the fiber product of two bundles by the anti-diagonal action of $\RR$ \cite{PIZ25a}.
+  \end{definition}
+  
+  This invariant is native to singular geometry. It vanishes precisely where classical geometry applies.
+  
+  \begin{proposition}{~(Vanishing on Manifolds)}
+    The set $\Fb(\X, \RR)$ is an abelian group. For any differentiable manifold $\M$, this group is trivial, $\Fb(\M, \RR) = \{0\}$.
+  \end{proposition}
+  
+  Its non-triviality is therefore a direct measure of geometric structure unique to non-manifold spaces, such as that arising from "dynamical singularities."
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The Irrational Torus: Classification and Arithmetic
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The Irrational Torus: Classification and Arithmetic}
+  
+  We apply this invariant to the canonical example of a space with a dynamical singularity:
+  the irrational torus $\T_\alpha = \T/\langle \R_\alpha \rangle$, where $\T = \SOne$ and $\R_\alpha$ is the rotation by an irrational angle $\alpha$.
+  
+  \begin{theorem}{~(The Cohomological Equation)}
+    The group of flows over the irrational torus is canonically isomorphic to the quotient of the space of smooth functions on the circle by the image of the cohomological operator $\Delta_\alpha(g) = g \circ \R_\alpha - g$.
+    This yields the decomposition:
+    $$
+      \Fb(\T_\alpha, \RR) \simeq \RR \times \coker(\Delta_\alpha).
+      $$
+  \end{theorem}
+  
+  The components of this group have a direct geometric origin.
+  Any flow over $\T_\alpha$ is generated by a diffeomorphism of $\SOne \times \RR$ of the form $(z,t) \mapsto (z e^{i2\pi\alpha}, t + f(z))$ for some $f \in \Cinfty(\SOne, \RR)$.
+  
+  \begin{definition}{~(Drift and Fluctuation)}
+    The function $f$ can be uniquely decomposed as $f = c + \delta$, where:
+    \begin{enumerate}
+      \item $c = \int_0^1 f(x) dx \in \RR$ is the mean value, which we call the \emph{drift}.
+      \item $\delta = f - c$ is the zero-mean part, which we call the \emph{fluctuation}.
+    \end{enumerate}
+    The isomorphism in the theorem maps the class of the flow generated by $f$ to the pair $(c, \cl{\delta})$,
+    where $\cl{\delta}$ is the class of $\delta$ in $\coker(\Delta_\alpha)$.
+  \end{definition}
+  
+  The structure of the group $\Fb(\T_\alpha, \RR)$ is thus controlled by the cokernel of $\Delta_\alpha$.
+  This connects our invariant to classical results in the theory of small divisors and Diophantine approximation \cite{Arn65, Her79}.
+  
+  \begin{theorem}{~(Arithmetic Dichotomy)}
+    The group of flows $\Fb(\T_\alpha, \RR)$ provides a geometric measure of the irrationality of $\alpha$:
+    \begin{enumerate}
+      \item If $\alpha$ is a Diophantine number, then $\coker(\Delta_\alpha) = \{0\}$ and
+      $$
+        \Fb(\T_\alpha, \RR) \simeq \RR.
+        $$
+      \item If $\alpha$ is not Diophantine (e.g., a Liouville number),
+      then $\coker(\Delta_\alpha)$ is an infinite-dimensional vector space,
+      and
+      $$
+        \dim(\Fb(\T_\alpha, \RR)) = 1 + \infty.
+        $$
+    \end{enumerate}
+  \end{theorem}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: The Irrational Torus: Geometric Realizations
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{The Irrational Torus: Geometric Realizations}
+  
+  This result highlights a key feature of singular geometry within the diffeological framework.
+  The group $\Fb(\T_\alpha, \RR)$ is a true geometric invariant in the spirit of Klein's Erlangen Program:
+  it is an intrinsic property of the space $\T_\alpha$,
+  preserved by its group of diffeomorphisms,
+  $\Diff(\T_\alpha)$.
+  Remarkably,
+  this geometric invariant is shown to capture a purely dynamical property
+  ---the Diophantine nature of the rotation $\alpha$ that defines the space's ``dynamical singularity.''
+  The geometry of the quotient space thus retains a precise memory of the dynamics that created it.
+  
+  This algebraic decomposition into drift and fluctuation has a deep geometric meaning.
+  Since $\Fb(\T_\alpha, \RR)$ is an invariant of the geometry $(\T_\alpha, \Diff(\T_\alpha))$,
+  its components are not merely algebraic artifacts but are themselves intrinsic geometric invariants.
+  The geometry of the total space $\Y$ is therefore directly characterized by the values of these two invariants:
+  the drift determines whether the space is a manifold,
+  while the fluctuation distinguishes its specific smooth structure.
+  The following proposition makes this explicit.
+  
+  \begin{proposition}{~(The Geometry of the Total Space)}
+    Let $\Y$ be the total space of the bundle corresponding to the class $(c, \cl{\delta})$.
+    \begin{enumerate}
+      \item If the drift $c \neq 0$,
+      the space $\Y$ is a manifold diffeomorphic to the 2-torus $\T^2$.
+      \item If the drift $c = 0$:
+      \begin{enumerate}
+        \item If the fluctuation class $\cl{\delta}=0$,
+        the bundle is trivial, $\Y = \T_\alpha \times \RR$.
+        \item If $\cl{\delta} \neq 0$, the space $\Y$ is not a manifold.
+        It is bijective to the set $\T_\alpha \times \RR$ but carries a distinct, \textbf{non-product} diffeology.
+        While the projection is smooth, the canonical zero-section $s_0: \cl{z} \mapsto (\cl{z}, 0)$ is \textbf{nowhere smooth}, revealing the twisting of the structure.
+      \end{enumerate}
+    \end{enumerate}
+    \end{proposition}
+    
+    This proposition highlights the unique contribution of the diffeological framework.
+    A fiber-preserving bijection between the torus $\T^2$ and the product $\T_\alpha \times \RR$ can be constructed using the Axiom of Choice.
+    This profound insight reveals that all the total spaces we are considering
+    ---the manifold $\T^2$, the trivial bundle $\T_\alpha \times \RR$,
+    and all the exotic spaces---
+    are isomorphic as principal bundles in the category of sets.
+    They are different realizations of the same underlying "principal projection."%
+    \footnote{A free action of a group on a set makes the set a product of its quotient by the group,
+    the only question is: Is this compatible with the structure (here the diffeology)?}
+    
+    The geometric distinctions between them are therefore not about the points or the set-theoretic fibration,
+    but purely about the \emph{smooth structure} (the diffeology) imposed upon them.
+    The group $\Fb(\T_\alpha, \RR)$ is thus revealed to be a classification of these distinct smooth structures that can be placed on a single,
+    common underlying principal projection.
+    \begin{itemize}
+      \item[--] The zero element $(0, 0)$ corresponds to the standard product diffeology.
+      \item[--] The drift component $(c, 0)$ for $c \neq 0$ corresponds to the unique \emph{manifold} structures that can be placed on this set,
+      yielding the tori $\T^2$.
+      \item[--] The fluctuation component $(0, [\delta])$ for $[\delta] \neq 0$ corresponds to the infinite family of "exotic,"
+      non-manifold diffeologies.
+    \end{itemize}
+    Diffeology gives concrete geometric embodiment to each of these algebraic classes.
+    It provides the language and tools to distinguish between these structures
+    ---a distinction made tangible by properties like the smoothness of the zero-section---
+    even when they are indistinguishable at the level of sets and their fibrations.
+        
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%
+    %% MARK: Conclusion
+    %%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%
+    %% MARK: Conclusion
+    %%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    \section{Conclusion}
+    
+    The diffeological geometry of the irrational torus,
+    an object intrinsically linked to the structure of the quasicrystals it models,
+    has consistently revealed a deep connection to algebraic and arithmetic properties.
+    This progression of insights began with the discovery of its non-trivial homotopy groups, which are purely algebraic.
+    It continued with the finding that the group of components of its diffeomorphism group,
+    $\pi_0(\Diff(\T_\alpha))$,
+    is a subtle algebraic invariant that depends on the algebraic nature of the slope $\alpha$.%
+    \footnote{For these aspects see \cite{DIZ83, IZL90}.}
+    
+    The results of this paper represent the latest and perhaps deepest step in this program. The group of flows, $\Fb(\T_\alpha, \RR)$, a purely geometric invariant, is shown to exhibit a sharp dichotomy, its dimension directly reflecting the arithmetic classification of $\alpha$ as Diophantine or not.
+    
+    This consistent pattern---from homotopy, to diffeomorphism groups, and now to the group of flows---demonstrates the profound benefit of a geometric approach to these singular objects. The strangeness of the physical systems they represent is mirrored by the strange, yet mathematically rich, properties of their geometric counterparts. Diffeology provides the language and tools to show that what might seem like a "pathological" quotient space is, in fact, a sophisticated geometric object that retains a precise memory of the algebraic and arithmetic data used to construct it.
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%
+    %% MARK: Bibliography
+    %%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    \begin{thebibliography}{SBGC84}
+      
+      \bibitem[Arn65]{Arn65}
+      V. I. Arnold, \emph{Small denominators and problems of stability of motion in classical and celestial mechanics}, Russ. Math. Surv. \textbf{18} (1963), 85--191.
+      
+      \bibitem[DIZ83]{DIZ83}
+      Paul Donato and Patrick Iglesias,
+      \emph{Exemple de groupes différentiels : flots irrationnels sur le tore},
+      Preprint CPT-83/P.1524, Centre de Physique Théorique, Marseille, 1983; published in \emph{C. R. Acad. Sci. Paris Sér. I Math.} \textbf{301} (1985), no. 4, 127--130. Available at \url{http://math.huji.ac.il/~piz/documents/EDGDFISLT.pdf}.
+      
+      \bibitem[Her79]{Her79}
+      M. R. Herman, \emph{Sur la conjugaison différentiable des difféomorphismes du cercle à des rotations}, Publ. Math. IHES \textbf{49} (1979), 5--233.
+      
+      \bibitem[PIZ85]{PIZ85}
+      Patrick Iglesias,
+      \emph{Fibrations difféologiques et homotopie},
+      D.Sc. Thesis (Thèse d'État es Science), Université de Provence, Marseille, 1985.
+      
+      \bibitem[IZL90]{IZL90}
+      Patrick Iglesias and Gilles Lachaud,
+      \emph{Espaces différentiables singuliers et corps de nombres algébriques},
+      Ann. Inst. Fourier (Grenoble) \textbf{40} (1990), no. 1, 723--737.
+      
+      \bibitem[PIZ13]{PIZ13}
+      P. Iglesias-Zemmour,
+      \emph{Diffeology}, Math. Surveys and Monographs, vol. 185, AMS, Providence, RI, 2013.
+      
+      \bibitem[PIZ24]{PIZ24}
+      \bysame,
+      \emph{{\v C}ech-de Rham bicomplex in diffeology}, Israel J. Math. \textbf{259} (2024), 239--276.
+      
+      \bibitem[PIZ25a]{PIZ25a}
+      \bysame,
+      \emph{Diffeology and Arithmetic of Irrational Tori},
+      preprint (2025), \href{https://arxiv.org/abs/2508.07460}{arXiv:2508.07460}. Also available at \url{http://math.huji.ac.il/~piz/documents/DAAOIT.pdf}.
+      
+      \bibitem[SBGC84]{She84}
+      D. Shechtman, I. Blech, D. Gratias, and J. W. Cahn,
+      \emph{Metallic Phase with Long-Range Orientational Order and No Translational Symmetry},
+      Phys. Rev. Lett. \textbf{53} (1984), 1951--1953.
+      
+      \bibitem[Sou80]{Sou80}
+      J.-M. Souriau,
+      \emph{Groupes différentiels}, in: Differential Geometrical Methods in Mathematical Physics, LNM, vol. 836, Springer, Berlin, 1980, pp. 91--128.
+    \end{thebibliography}
+    
+  \end{document}
