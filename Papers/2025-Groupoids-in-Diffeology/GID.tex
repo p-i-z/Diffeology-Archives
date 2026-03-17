@@ -215,7 +215,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
 
 
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc} %%% MR: utf8x is generally not recommended over utf8. Changed to utf8. If utf8x is specifically needed, can revert.
+\usepackage[utf8]{inputenc}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%<<< Begin - Garamond style or Charter style ?
@@ -276,11 +276,6 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
   \subjclass[2020]{Primary 58H05; Secondary 58A05, 22A22, 55R65, 57R18, 58B34, 53D50}
   
   \keywords{Diffeology, Diffeological Groupoid, Stratification, Klein Groupoid, Orbifolds, Quasifolds, Noncommutative Geometry, Geometric Quantization}
-  
-%  \tikz[overlay,remember picture]\n
-%  {\n
-%  \node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \today}}; %%% MR: Changed \pdfcreationdate to \today for more common usage, can be reverted.\n
-%  }\n
   
   \maketitle
   
@@ -457,7 +452,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
   The most economic and significant way to define a diffeological fiber bundle was through the concept of a \emph{diffeological groupoid}
   ---a groupoid internal to the category of diffeological spaces.
   
-At the heart of this story is the diffeological groupoid,
+  At the heart of this story is the diffeological groupoid,
   but it appears in several distinct guises,
   each tailored to a specific geometric purpose.
   We will encounter \emph{the structure groupoid},
@@ -487,7 +482,10 @@ At the heart of this story is the diffeological groupoid,
   An induction is a smooth map that is a diffeomorphism onto its image equipped with the subset diffeology.
   This definition ensures that all the structural maps of the groupoid respect the underlying diffeologies.
   A crucial consequence is that the space of objects $\Obj(\KK)$ can be identified diffeologically with the subspace of identity morphisms,
-  meaning a diffeological groupoid is uniquely characterized by the diffeological space of its morphisms and the groupoid operation.
+  meaning a diffeological groupoid is uniquely characterized by the diffeological space of its morphisms and the groupoid operation.%
+  \footnote{Actually,
+  given that the source and target maps are smooth,
+  it suffices for the identity injection to be smooth in order to be an induction.}
   
   \subsection{A New Definition for Fiber Bundles}
   
@@ -573,8 +571,8 @@ At the heart of this story is the diffeological groupoid,
   The codomain $\X \times \X$ is essential,
   as the diffeological property of $\eF$ being an \emph{induction} is the central condition of the theorem.}
   \[
-    \eF : \X \times \G \to \X \times \X, \quad \text{defined by} \quad \eF(x,g) = (x, g \cdot x).
-    \]
+  \eF : \X \times \G \to \X \times \X, \quad \text{defined by} \quad \eF(x,g) = (x, g \cdot x).
+  \]
   The central result is the following theorem~\cite{PIZ85, PIZ13}:
   
   \begin{theorem}{}
@@ -636,8 +634,8 @@ At the heart of this story is the diffeological groupoid,
   For a connected space $\X$ with a chosen basepoint $x_0$,
   the \textbf{universal covering space} $\tilde\X$ is defined as the space of morphisms of the Poincaré groupoid starting at $x_0$:
   \[
-    \tilde\X = \Mor_{\Pi(\X)}(\X, x_0, \star)
-    \]
+  \tilde\X = \Mor_{\Pi(\X)}(\X, x_0, \star)
+  \]
   The projection $\pi: \tilde\X \to \X$ is given by the target map,
   $\pi([\gamma]) = \gamma(1)$.
   This construction yields a principal fiber bundle with the fundamental group $\pi_1(\X, x_0)$ as its structure group.
@@ -699,8 +697,8 @@ At the heart of this story is the diffeological groupoid,
   \end{enumerate}
   The \textbf{structure groupoid} $\GG$ associated with the atlas $\cA$ is then defined. Its objects are the points of the nebula, $\Obj(\GG) = \cN$. Its morphisms are the germs of local diffeomorphisms of the nebula that are ``invisible'' at the level of the orbifold; that is, they project to the identity via the evaluation map:
   \[
-    \Mor(\GG) = \{ \germ(\Phi)_\nu \mid \Phi \in \Diff_\loc(\cN) \text{ and } \ev \circ \Phi = \ev \restriction \dom(\Phi) \}.
-    \]
+  \Mor(\GG) = \{ \germ(\Phi)_\nu \mid \Phi \in \Diff_\loc(\cN) \text{ and } \ev \circ \Phi = \ev \restriction \dom(\Phi) \}.
+  \]
   This groupoid captures the internal symmetries of the atlas presentation. The crucial link between this abstract construction and the geometry of the orbifold is the following fundamental lifting property~\cite{IKZ10}:
   
   \begin{theorem}{~(Lifting of Local Diffeomorphisms)}
@@ -899,7 +897,7 @@ At the heart of this story is the diffeological groupoid,
   This concept,
   which has been implicit in much of the preceding analysis, we now make explicit.
   
-\subsection{Formal Definition}
+  \subsection{Formal Definition}
   
   The local geometry of a diffeological space is characterized by its pseudogroup of local diffeomorphisms.
   It is natural to formalize this structure into a groupoid.
@@ -1052,11 +1050,11 @@ At the heart of this story is the diffeological groupoid,
   That is,
   a morphism $\germ(\Phi)_\nu$ belongs to $\GG_{\ev}$ if there exists a local diffeomorphism $\varphi$ of $\X$ such that the following diagram commutes locally:
   \[
-    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+  \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
     \cN \arrow[d, swap, "\ev"] \arrow[r, "\Phi"] & \cN \arrow[d, "\ev"] \\
     \X \arrow[r, swap, "\varphi"] & \X
-    \end{tikzcd}
-    \]
+  \end{tikzcd}
+  \]
   This construction naturally defines a functor of groupoids,
   $\ev_*: \GG_{\ev} \to \Kl(\X)$.
   The fundamental Lifting Theorem for orbifolds and quasifolds~\cite{IKZ10, IZP21} states precisely that this functor is surjective on morphisms.
@@ -1116,11 +1114,14 @@ At the heart of this story is the diffeological groupoid,
   a "prequantum line bundle" only exists if the symplectic form is integral.
   The following construction,
   introduced in a forthcoming work~\cite{PIZ25b},
-  bypasses this obstruction entirely for any connected and simply connected parasymplectic space $(\X, \omega)$.
+  bypasses this obstruction entirely for any connected parasymplectic space $(\X, \omega)$ with discrete periods.
   The new structure is not a bundle,
   but a \textbf{prequantum groupoid},
   $\TT_\omega$,
   built as a diffeological quotient of the space of paths on $\X$.
+  In the simply connected case,
+  the structure simplifies considerably,
+  as the isotropy groups are purely spherical.
   
   This construction is best understood as a "quantization" à la Poincaré.
   
@@ -1198,7 +1199,7 @@ At the heart of this story is the diffeological groupoid,
   this approach offers a compelling geometric realization of the physical intuition behind the path integral.
   
   \subsection {Note on the general case}
-
+  
   The construction presented here for simply connected spaces serves as the foundation for the general case.
   In a subsequent work,
   the theory should extend to arbitrary connected diffeological spaces by incorporating the non toric \emph{surfacic periods} arising from non-commutative homotopic obstructions.
