@@ -10,7 +10,8 @@
 
 ## 🏛️ Project Overview
 
-**The Diffeology Archives** is a project dedicated to creating a definitive, version-controlled, and semantically rich repository of the works of **Patrick Iglesias-Zemmour**.
+**The Diffeology Archives** is a definitive, version-controlled, and semantically rich repository of the foundational works in diffeology—papers, monographs, and open problems—collected here for the next generation.
+*This is my effort to preserve the work and make it ready for the next generation*.
 
 Its primary goal is to "Clean the Dust": to transition from static, legacy formats (PDFs, typewritten theses) to structured, machine-readable TeX source code. This ensures that the theory of Diffeology is preserved, accessible, and ready for the next generation of researchers—and for the training of future Artificial Intelligence models.
 
@@ -64,10 +65,16 @@ Diffeology is best defined by its true foundation: the category of Euclidean dom
 
 The philosophy of this work is to provide geometers, physicists, and other scientists with a rigorous, simple, and flexible framework in which to develop their ideas and constructions, without the burden of the heavy machinery of functional analysis often required to solve geometric problems on non-manifold spaces.
 
-For a comprehensive introduction to the subject, see the author's book:
-*   **P. Iglesias-Zemmour, *Diffeology*** (Mathematical Surveys and Monographs, Vol. 185, AMS, 2013).
-*   A revised version is also available from Beijing World Publishing Corp. (2022).
+### A Brief History of Modern Diffeology
 
+This archive contains the foundational works of modern diffeology. The category of *espaces différentiels* (now diffeology) was introduced by Paul Donato and myself in our 1983 preprint *Exemple de groupes différentiels: flots irrationnels sur le tore*, building on the axiomatic framework of Jean-Marie Souriau. The framework was developed to support our respective theses: Donato's *Homotopie et revêtements des espaces homogènes différentiels* (1985) and my *Fibrations difféologiques et homotopie* (1985).
+
+The subsequent development—fiber bundles, homotopy theory, the chain homotopy operator, the moment map in diffeology, the connection to noncommutative geometry, and the path-based approach to geometric quantization—is documented in the papers and monographs collected here.
+
+For a comprehensive introduction to the subject, see the author's book:
+- **P. Iglesias-Zemmour, *Diffeology*** (Mathematical Surveys and Monographs, Vol. 185, AMS, 2013).
+- A revised version is also available from Beijing World Publishing Corp. (2022).
+  
 ## Usage and License
 
 The content of this repository is made available under the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
