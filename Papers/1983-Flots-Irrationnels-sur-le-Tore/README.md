@@ -18,7 +18,7 @@ Its key contributions to the development of the theory are:
 
 2.  **The Birth of "Espaces Différentiels":** This paper marks the beginning of the generalization from "diffeological groups" to "diffeological spaces." A key moment is the introduction of smooth maps between these new kinds of spaces. The authors themselves signal the novelty of this concept by placing the term "espace différentiel" in quotes and giving the definition explicitly:
 
-> Les applications différentiables de $\mathcal{T}_\alpha$ à valeurs dans un "espace différentiel" $E$, sont les applications $\varphi : \mathcal{T}_\alpha \to E$ telles que pour tout $f$ élément de $D(\mathbf{R}^n,\mathcal{T}_\alpha)$, $\varphi \circ f$ est un élément de $D(\mathbf{R}^n,E)$. En particulier les difféomorphismes de $\mathcal{T}_\alpha$ à $E$ sont les bijections bi-différentiables.
+>  Les applications différentiables de $\mathcal{T}\_\alpha$ à valeurs dans un "espace différentiel" $E$, sont les applications $\varphi : \mathcal{T}\_\alpha \to E$ telles que pour tout $f$ élément de $D(\mathbf{R}^n,\mathcal{T}\_\alpha)$, $\varphi \circ f$ est un élément de $D(\mathbf{R}^n,E)$. En particulier les difféomorphismes de $\mathcal{T}\_\alpha$ à $E$ sont les bijections bi-différentiables.
 
 This conceptual step—defining a category of spaces with a plot-based smooth structure—was essential for building the broader theory of diffeology as it is known today.
 
@@ -26,10 +26,10 @@ This conceptual step—defining a category of spaces with a plot-based smooth st
 
 The paper establishes several fundamental results about the irrational torus $\mathcal{T}_\alpha$ as a diffeological space:
 
-*   **Universal Covering:** The universal covering of $\mathcal{T}_\alpha$ is shown to be the real line, $\mathbf{R}$.
-*   **First Homotopy Group:** The fundamental group, $\Pi_1(\mathcal{T}_\alpha)$, is computed to be $\mathbf{Z} \times \mathbf{Z}$.
-*   **Classification:** It is proven that two irrational tori, $\mathcal{T}_\alpha$ and $\mathcal{T}_\beta$, are diffeomorphic if and only if $\alpha$ and $\beta$ are equivalent modulo the action of the modular group $\text{GL}(2, \mathbf{Z})$.
-*   **Diffeomorphism Group:** The group of diffeomorphisms, $\text{Diff}(\mathcal{T}_\alpha)$, is fully characterized. A significant distinction emerges: the group of connected components is $\mathbb{Z}_2$ for non-quadratic irrationals, but $\mathbf{Z}_2 \times \mathbf{Z}$ for quadratic irrationals.
+*   **Universal Covering:** The universal covering of $\mathcal{T}\_\alpha$ is shown to be the real line, $\mathbf{R}$.
+*   **First Homotopy Group:** The fundamental group, $\pi\_1(\mathcal{T}\_\alpha)$, is computed to be $\mathbf{Z} \times \mathbf{Z}$.
+*   **Classification:** It is proven that two irrational tori, $\mathcal{T}\_\alpha$ and $\mathcal{T}\_\beta$, are diffeomorphic if and only if $\alpha$ and $\beta$ are equivalent modulo the action of the modular group $\mathrm{GL}(2,\mathbf{Z})$.
+*   **Diffeomorphism Group:** The group of diffeomorphisms, $\text{Diff}(\mathcal{T}\_\alpha)$, is fully characterized. A significant distinction emerges: the group of connected components is $\mathbf{Z}\_2$ for non-quadratic irrationals, but $\mathbf{Z}\_2 \times \mathbf{Z}$ for quadratic irrationals.
 
 ## Files in this Directory
 
