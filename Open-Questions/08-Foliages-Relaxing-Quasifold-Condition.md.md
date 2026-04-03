@@ -21,7 +21,7 @@ However, a broader class of spaces satisfies the same discrete preimage conditio
 
 ### References
 
-[1] Iglesias-Zemmour, P. "Lectures on Diffeology", Chapter B1 and Chapter B31: Foliation and Diffeology.
+[1] Iglesias-Zemmour, P. "Lectures on Diffeology", Chapter B1: Diffeology and NCG and Chapter B31: Foliation and Diffeology.
 
 [2] Iglesias-Zemmour, P. & Karshon, Y. "Orbifolds as Diffeologies", *Transactions of the AMS*, 362.6 (2010): 2811–2831.
 
