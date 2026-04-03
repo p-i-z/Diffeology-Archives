@@ -10,7 +10,7 @@ However, a broader class of spaces satisfies the same discrete preimage conditio
 
 ### The Problem
 
-- **Definition:** Call a diffeological space $X$ a *foliage* (from the French *feuillage*, space of leaves) if it admits a generating family $\mathcal F$ such that for every $x \in X$, the set $\mathrm{ev}^{-1}(x) \subset \mathcal N$ is discrete (where $\mathcal N = \coprod_{F \in \mathcal F} \mathrm{dom}(F)$ and $\mathrm{ev}: \mathcal N \to X$ is the evaluation map).
+- **Definition:** Call a diffeological space $X$ a *foliage* (from the French *feuillage*, set of leaves) if it admits a generating family $\mathcal F$ such that for every $x \in X$, the set $\mathrm{ev}^{-1}(x) \subset \mathcal N$ is discrete (where $\mathcal N = \coprod_{F \in \mathcal F} \mathrm{dom}(F)$ and $\mathrm{ev}: \mathcal N \to X$ is the evaluation map).
 
 - **Observation:** Every leaf space of a foliation on a manifold is a foliage. Thus, the class of foliages includes all orbifolds, all quasifolds, and all leaf spaces of foliations.
 
