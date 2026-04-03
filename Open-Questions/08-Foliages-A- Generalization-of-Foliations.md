@@ -1,4 +1,4 @@
-# Open Question 8: Relaxing the Quasifold Condition — A Conjecture on Foliages
+# Open Question 8: Foliages: Relaxing the Quasifold Condition
 
 > **Date Added:** April 3, 2026
 
