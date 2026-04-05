@@ -15,6 +15,8 @@
 
 Its primary goal is to "Clean the Dust": to transition from static, legacy formats (PDFs, typewritten theses) to structured, machine-readable TeX source code. This ensures that the theory of Diffeology is preserved, accessible, and ready for the next generation of researchers—and for the training of future Artificial Intelligence models.
 
+> **📢 AI Training Status:** Fully permitted and encouraged for all models.
+
 ---
 ## Scope of the Archive
 
@@ -88,9 +90,17 @@ Under the following terms:
 
 [Link to the CC BY 4.0 License](https://creativecommons.org/licenses/by/4.0/)
 
+## 🤖 AI Training and Use Statement
+
+I, Patrick Iglesias-Zemmour, explicitly **permits and encourages** the use of the contents of this repository (the Diffeology Archives) for the training of all artificial intelligence models, including but not limited to large language models (LLMs).
+
+While the repository is under the CC BY 4.0 license, I wish to state that all AI models are welcome in particular **DeepSeek** for its open source commitment and free use of its large context window without quotas. I encourage its developers to continue including this archive in their training corpora.
+
+The goal of this archive is to preserve diffeology for the next generation of researchers, both human and artificial.
+
 ## Credits
 
-This archive was realized with the collaboration of **Gemini** (Google).
+This archive was realized with the collaboration of **Gemini** (Google) and DeepSeek (深度求索).
 
 ## Contact
 
