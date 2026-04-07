@@ -1,0 +1,209 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Title
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{\S B2. Functional Diffeology on Fourier Coefficients}
+\setcounter{footnote}{0}
+
+\begin{abstract}
+  In this exercise we transfer the functional diffeology defined on smooth complex periodic
+  functions to the space of Fourier coefficients of smooth complex periodic functions.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Exercise 1
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+We denote by $\Cinfty_{\rm per}(\RR,\CC)$ the space of 1-periodic complex valued real functions,
+$$
+  \Cinfty_{\rm per}(\RR,\CC) = \{f \in \Cinfty(\RR,\CC) \mid f(x+1) = f(x) \}.
+  $$
+This space is then equipped with the functional diffeology.
+Let $f \in \Cinfty_{\rm per}(\RR,\CC)$, and $(f_n)_{n\in \ZZ}$ be its sequence of Fourier coefficients
+$$
+  f_n = \int_0^1 f(x) e^{-2i\pi n x} \, dx, \ n \in \ZZ.
+  $$
+We know that the Fourier series converges to $f$, uniformly on $[0,1]$
+(see for example \cite[\textsection\,2 Thm. 1]{Vil68}). We note
+$$
+  f(x) = \lim_{N \to \infty} \sum_{n=-N}^{+N} f_n\,e^{2i\pi n x} \SpacedText{or} f(x)=\sum_{n \in \ZZ} f_n\,e^{2i\pi n x}.
+  $$
+The set of Fourier coefficients of the smooth periodic real functions with values in $\CC$
+is a vector subspace $\cE$ of $\Maps(\ZZ,\CC)$. Let
+$$
+  j : \Cinfty_{\rm per}(\RR,\CC) \to \Maps(\ZZ,\CC) \SpacedText{with} j(f) = (f_n)_{n\in \ZZ}.
+  $$
+The map $j$ is injective. We denote by $\cE$ the subspace of $\Maps(\ZZ,\CC)$ made of the Fourier coefficients of
+the smooth periodic functions, that is,
+$$
+  \cE = \bigg\{ (f_n)_{n\in\ZZ} = j(f) \mid f \in \Cinfty_{\rm per}(\RR,\CC)\bigg\}.
+  $$
+We know that the subspace $\cE$ is made exactly of all rapidly decreasing sequences of complex numbers (op.\,cit.),
+$$
+  \mbox{for all $p \in \NN$}, \quad n^p f_n \xrightarrow[\Modulus{n} \to \infty]{} 0.
+  $$
+
+\begin{Article}{Exercise: Pushforward functional diffeology.}{}
+  Let $\cE$ be the vector space of rapidly decreasing sequences of complex numbers,
+  defined above.
+  
+  \Question{\bf Q1.}~Show that the parametrizations $P : r \mapsto (f_n(r))_{n\in\ZZ}$ in $\cE$ satisfying the following
+  conditions define a diffeology.
+  \begin{enumerate}
+    \item The functions $f_n : \Domain(P) \to \CC$ are smooth.
+    \item For every closed ball $\bar\cB\subset \Domain(P)$ with interior $\cB$,
+    for all $k,p \in \NN$,
+    there exists
+    a positive number $M_{k,p}$ such that for all integer $n$
+    \begin{equation}
+      \renewcommand{\theequation}{$\clubsuit$}
+      \left| {\partial^k f_n(r) \over \partial r^k} \right| \leq {M_{k,p} \over \Modulus{n}^p} \quad \mbox{for all $r\in \cB$}.
+    \end{equation}
+  \end{enumerate}
+  
+  \Question{\bf Q2.}~Show that the diffeology defined by ($\clubsuit$) is the pushforward on $\cE$, by $j$,
+  of the functional diffeology on $\Cinfty_{\rm per}(\RR,\CC)$.
+  
+  \Note{1.}~In other words, the parametrization $r \mapsto (f_n(r))_{n\in \ZZ}$  is a plot of the pushed forward functional
+  diffeology if the functions $f_n$ are smooth and their derivatives are uniformly rapidly decreasing,
+  what we denote (rather imprecisely) by
+  $$
+    n^p {\partial^k f_n(r) \over \partial r^k} \xrightarrow[\Modulus{n} \to \infty]{} 0.
+    $$
+  \Note{2.}~Thanks to paracompacity, it is enough that, for every point $r_0\in\Domain(P)$, there exists a ball $\cB'$
+  centered at $r_0$ such that ($\clubsuit$) holds to ensure that ($\clubsuit$) holds on  every ball $\bar\cB\subset\Domain(P)$.
+\end{Article}
+
+\begin{proof}
+  We verify, first of all, that the condition $(\clubsuit)$ defines a diffeology on the space $\cE$ of
+  rapidly decreasing sequences of complex numbers.
+  
+  {A1~(Covering axiom).} If $f_n(r)$ is constant in $r$, for all $n$,
+  then the condition $(\clubsuit)$ is trivially satisfied for $k>0$, and for $k=0$ it means that
+  the series is rapidly decreasing, which is expected.
+  
+  {A2~(Locality axiom).} According to Note 2, the condition $(\clubsuit)$ is local.
+  
+  {A3~(Smooth compatibility axiom).} Let $P : r \mapsto (f_n(r))_{n\in\ZZ}$
+  satisfying $(\clubsuit)$ and $F : s \mapsto r$
+  be a smooth parametrization in the domain of $P$.
+  We have, for all $k>0$,
+  $$
+    {\partial^k f_n(s) \over \partial s^k} = \sum_{\ell = 1}^{k}
+    {\partial^\ell f_n(r) \over \partial r^\ell} \cdot
+    Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right),
+    $$
+  where the $Q_{k,\ell}$ are polynomials. Now, since the function $s\mapsto r$ is smooth,
+  the operators $Q_{k,\ell}$ are bounded on every ball.
+  Let then $s_0\in \Domain(F)$, $r_0=F(s_0)$ and $\cB$ be a ball
+  centered at $r_0$ such that the condition $(\clubsuit)$ is satisfied. Let $\cB' \subset F^{-1}(\cB)$ be a ball centered
+  at $s_0$, we have for all $s \in \cB'$,
+  \begin{eqnarray*}
+    \left|{\partial^k f_n(s) \over \partial s^k}\right| & \leq & \sum_{\ell = 1}^{k}
+    \left| {\partial^\ell f_n(r) \over \partial r^\ell} \right|
+    \left| \vphantom{{\partial^\ell f_n(s) \over \partial s^k}}  Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right)\right|\\
+    & \leq & \sum_{\ell = 1}^{k} {M_{\ell,p} \over \Modulus{n}^p} \, \Sup_{s \in \cB'} \left| Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right)\right|,
+  \end{eqnarray*}
+  where the $M_{\ell,p}$ are the constants of the inequality $(\clubsuit)$ for the ball $\cB$.
+  Let then
+  $$
+    m_{k,\ell} = \Sup_{s \in \cB'} \left| Q_{k,\ell}\left({\partial r \over \partial s},\ldots,{\partial^k r \over \partial s^k}\right)\right|
+    \mbox{ and } M'_{k,p} = \sum_{\ell = 1}^{k}  m_{k,\ell} \, M_{\ell,p} \, ,
+    $$
+  we get, for all $s\in \cB'$,
+  $$
+    \left|{\partial^k f_n(s) \over \partial s^k}\right|
+    \leq {M'_{k,p} \over \Modulus{n}^p}.
+    $$
+  Hence, thanks to Note 2, $P \circ F$ still satisfies the condition $(\clubsuit)$.
+  Therefore, this condition defines a diffeology on the set $\cE$ of
+  rapidly decreasing sequences of complex numbers.
+  
+  Let us show now that the diffeology defined on $\cE$ by ($\clubsuit$) is the pushforward by $j$
+  of the functional diffeology of $\Cinfty_{\rm per}(\RR,\CC)$.
+  
+  {1.}~Let us prove, first of all, that $j$ is smooth, where $\Cinfty_{\rm per}(\RR,\CC)$ is
+  equipped with the functional diffeology and $\cE$ with the diffeology defined by ($\clubsuit$).
+  Let $P : r \to f_r$ be a plot of $\Cinfty_{\rm per}(\RR,\CC)$ defined on some real domain $\U$,
+  the composite $j \circ P$ writes
+  $$
+    j\circ P : r \mapsto (f_n(r))_{n\in\ZZ} \SpacedText{with} f_n(r) = \int_0^1 f_r(x) e^{-2i\pi n x}\, dx.
+    $$
+  Since $(r,x) \mapsto f_r(x)$ is smooth,
+  the $f_n : r \mapsto f_n(r)$ are smooth,
+  and:
+  $$
+    {\partial^k f_n(r) \over \partial r^k} = \int_0^1 {\partial^k f_r(x) \over \partial r^k} e^{-2i\pi n x}\,dx.
+    $$
+  For all nonzero integer $n$,
+  after $p$ integrations by parts,
+  we get
+  $$
+    {\partial^k f_n(r) \over \partial r^k} =  {1 \over (2i\pi n)^{p}} \int_0^1 {\partial^{p} \over \partial x^{p}}
+    \left( {\partial^k f_r(x) \over \partial r^k}\right)\, e^{-2i\pi n x}\,dx.
+    $$
+  Therefore,
+  defining for every ball $\cB\subset\Domain(P)$ the number
+  $$
+    M_{k,p} = {1 \over (2\pi)^p} \Sup_{r \in \cB} \Sup_{x \in [0,1]}
+    \left| {\partial^{p} \over \partial x^{p}} {\partial^k  \over \partial r^k}f_r(x) \right|,
+    $$
+  we have
+  $$
+    \left| {\partial^k f_n(r) \over \partial r^k} \right| \leq {M_{k,p} \over \Modulus{n}^p}\quad \mbox{for all $r\in \cB$.}
+    $$
+  Hence, $j \circ P$ is a plot of $\cE$. Therefore $j$ is smooth.
+  
+  {2.}~Conversely, remember that $j$ is injective, then
+  let us show that $j^{-1}: \cE \to \Cinfty_{\rm per}(\RR,\CC)$ is smooth.
+  Let $P: r \mapsto (f_n(r))_{n\in\ZZ}$ be a parametrization in $\cE$ satisfying the condition $(\clubsuit)$, and let
+  $$
+    j^{-1}\circ P : r \mapsto [x \mapsto f_r(x)].
+    $$
+  The parametrization $r \mapsto f_r$ is given by
+  $$
+    f_r(x) = \lim_{N \to \infty} S_N(r,x) \SpacedText{with} S_N(r,x) = \sum_{n=-N}^{+N} f_n(r)e^{2i\pi n x}.
+    $$
+  The $S_N$ are smooth for all $N$, we want to show that the limit $(r,x) \mapsto f_r(x)$ is smooth too.
+  For all $k,p,N \in \NN$, let us introduce the series
+  of partial derivatives
+  $$
+    S_N^{k,p}(r,x) = {\partial^p \over \partial x^p}{\partial^k \over \partial r^k}S_N(r,x) =
+    \sum_{-N}^{+N} (2i\pi n)^p {\partial^k f_n(r) \over \partial r^k} e^{2i\pi n x}.
+    $$
+  The functions $S_N^{k,p}$ are smooth, with respect to $(r,x)$,
+  for all $N,k,p$.
+  Let $\Modulus{S}_N^{k,p}(r,x)$ be the series of moduli of the terms of $S_N^{k,p}$:
+  $$
+    \Modulus{S}_N^{k,p}(r,x) = \sum_{-N}^{+N} \Modulus{2\pi n}^p \left|{\partial^k f_n(r) \over \partial r^k}\right|.
+    $$
+  Then, let $\bar\cB \subset \Domain(P)$ be some ball.
+  Thanks to the hypothesis, applying (2) of {\bf Q1} to $p+2$, we have, for all $r\in \cB$,
+  \begin{eqnarray*}
+    \sum_{n=-N}^{+N} \Modulus{2\pi n}^p \left| {\partial^k f_n(r) \over \partial r^k} \right| & \leq &
+    c + 2\sum_{n=1}^N (2\pi)^p {M_{k,p+2} \over n^2},
+  \end{eqnarray*}
+  where $c$, corresponding to $n=0$, is some constant. Hence, for all $r\in\cB$, $x\in[0,1]$ and $N\in\NN$
+  $$
+    \Modulus{S}_N^{k,p}(r,x) \leq K
+    $$
+  where $K= c + 2(2\pi)^p M_{k,p+2}(\pi^2/6)$. Next, since the series $\Modulus{S}_N^{k,p}(r,x)$
+  is increasing and upper bounded, it
+  is convergent, and therefore the series $S_N^{k,p}(r,x)$ is also convergent. Moreover, according to what preceded:
+  the sequence of smooth functions $S_N^{k,p}$
+  converges uniformly on $\cB \times [0,1]$ to some function $S_\infty^{k,p}$ when $N \to \infty$.
+  Now, according to (an obvious improvement of) \cite[Thm. 3.10]{Don00} the map $(r,x) \mapsto f_r(x) = \lim_{N\to\infty}S_N(r,x)$ is smooth,
+  and the $S_\infty^{k,p}$ are the partial derivatives
+  $$
+    S_\infty^{k,p}(r,x) = {\partial^p \over \partial x^p}{\partial^k \over \partial r^k}f_r(x).
+    $$
+  Thus, the parametrization $r \mapsto [x \mapsto f_r(x)]$ is a plot of $\Cinfty_{\rm per}(\RR,\CC)$
+  such that $j(r\mapsto f_r) = (f_n(r))_{n\in\ZZ}$.
+  Therefore, $j$ is a diffeomorphism from $\Cinfty_{\rm per}(\RR,\CC)$, equipped with the functional diffeology, to
+  $\cE$, equipped with the diffeology defined by $(\clubsuit)$. In other words, the diffeology defined on $\cE$ by $(\clubsuit)$
+  is the pushforward of the functional diffeology on $\Cinfty_{\rm per}(\RR,\CC)$.
+\end{proof}

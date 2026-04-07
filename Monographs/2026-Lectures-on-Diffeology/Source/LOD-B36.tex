@@ -1,0 +1,479 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Title
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtocontents{toc}{\SkipTocEntry}
+\chapter*{\sf Symplectic Spaces Without \\ Hamiltonian Diffeomorphisms}
+\chaptermark{Symplectic spaces without Hamiltonian diffeomorphisms}
+\addcontentsline{toc}{chapter}{Symplectic spaces without Hamiltonian diffeomorphisms}
+
+\newcommand{\bargamma}{\raisebox{-2.5pt}{--}\hspace{-6pt}\gamma}
+
+\setcounter{footnote}{0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  We consider the $2$-dimensional irrational torus $\Torus^2_{\alpha,\beta} = \Torus_\alpha \times \Torus_\beta$,
+  where $\Torus_\alpha = \RR/(\ZZ+\alpha\ZZ)$ and $\Torus_\beta = \RR/(\ZZ+\beta\ZZ$),
+  with $\alpha,\beta \in \RR-\QQ$.
+  We check that $2$-form $\omega = \theta_\alpha \wedge \theta_\beta$,
+  where $\theta_\alpha$ and $\theta_\beta$ are the projection of $dt$ on $\Torus_\alpha$ and $\Torus_\beta$,
+  is symplectic,
+  according to the definition of a symplectic form in diffeology.
+  Then,
+  we show that the group of symplectic transformations $\Diff(\Torus^2_{\alpha,\beta},\omega)$ has no Hamiltonian transformation.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Diffeomorphisms Of An Irrational 2-Torus
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Diffeomorphisms of an irrational $2$-Torus}
+
+Let  $\Torus^2_{\alpha,\beta} = \Torus_\alpha \times \Torus_\beta$,
+where $\Torus_\alpha = \RR/(\ZZ+\alpha\ZZ)$ and $\Torus_\beta = \RR/(\ZZ+\beta\ZZ)$,
+with $\alpha,\beta \in \RR-\QQ$.
+Let $\omega = \theta_\alpha \wedge \theta_\beta$,
+where $\theta_\alpha$ and $\theta_\beta$ are the projection of $dt$ on $\Torus_\alpha$ and $\Torus_\beta$.
+That is,
+$\pi_\alpha^*(\theta_\alpha) = \pi_\beta^*(\theta_\beta)=dt$,
+where $\pi_\alpha:\RR \to \Torus_\alpha$ and $\pi_\beta:\RR \to \Torus_\beta$ are the projections.
+
+\begin{Article}{The diffeomorphisms.}{}
+  Let $\Delta : \Phi \mapsto \big((\tau,\tau'),\pphi\big)$ be the map,
+  defined on $\Diff(\Torus^2_{\alpha,\beta})$ by
+  $$%
+    (\tau,\tau') = \Phi(1,1) \SpacedText{and} \pphi(z,z') = (\bar\tau,\bar\tau') \cdot \Phi(z,z').
+    $$%
+  The pair $(\tau,\tau')$ belongs to $\Torus^2_{\alpha,\beta}$,
+  the bar $\bar\tau$ denotes the inverse $\tau^{-1}$,
+  the dot $\cdot$ denotes the group multiplication on $\Torus^2_{\alpha,\beta}$,
+  and $\pphi$ belongs to the subgroup $\Diff(\Torus^2_{\alpha,\beta},\Id)$ of diffeomorphisms fixing $\Id = (1,1)$.
+  
+  \begin{enumerate}
+    \item The map $\Delta$ is a diffeomorphism from $\Diff(\Torus^2_{\alpha,\beta})$ to the product $\Torus^2_{\alpha,\beta} \times \Diff(\Torus^2_{\alpha,\beta},\Id)$,
+    where $\Torus^2_{\alpha,\beta}$ is equipped with its diffeology and $\Diff(\Torus^2_{\alpha,\beta},\Id)$ with the functional diffeology.
+    \item Acting by multiplication,
+    the group $\Torus^2_{\alpha,\beta}$ is naturally contained in $\Diff(\Torus^2_{\alpha,\beta})$.
+    It is its neutral component:
+    $$%
+      \Diff(\Torus^2_{\alpha,\beta},\Id)^\circ=\Torus^2_{\alpha,\beta}.
+      $$%
+    \item The subgroup $\Diff(\Torus^2_{\alpha,\beta},\Id)$ is discrete and identifies with the group of components of $\Diff(\Torus^2_{\alpha,\beta})$:
+    $$%
+      \pi_0(\Diff(\Torus^2_{\alpha,\beta})) \simeq \Diff(\Torus^2_{\alpha,\beta},\Id).
+      $$%
+  \end{enumerate}
+\end{Article}
+
+\begin{proof}
+  Since $\Torus^2_{\alpha,\beta}$ is a diffeological group (multiplication and inversion smooth),
+  the map $\Delta$ is smooth.
+  Its inverse is given by
+  $$%
+    \Delta^{-1} : \big((\tau,\tau'),\pphi\big) \mapsto [\Phi:(z,z') \mapsto (\tau,\tau') \cdot \pphi(z,z')].
+    $$%
+  And for the same reasons,
+  $\Delta^{-1}$ is  smooth too.
+  Therefore, $\Delta$ is a diffeomorphism.
+  
+  Now,
+  let us prove that $\Diff(\Torus^2_{\alpha,\beta},\Id)$ is discrete,
+  for the functional diffeology.
+  Let $\pphi \in \Diff(\Torus^2_{\alpha,\beta},\Id)$, and consider the composite $\pphi \circ \pi : \RR^2 \to \Torus^2_{\alpha,\beta}$,
+  where $\pi : \RR^2 \to \Torus^2_{\alpha,\beta}$ is the projection.
+  Since $\RR^2$ is simply connected,
+  and since $\pphi(1,1)=(1,1)$,
+  there exists a unique smooth map $\Phi: \RR^2 \to \RR^2$ such that $\Phi(0,0)=(0,0)$ and $\pi \circ \Phi = \pphi \circ \pi$.
+  \[
+  \begin{tikzcd}
+    \RR^2 \arrow{r}{\Phi} \arrow[swap]{d}{\pi} & \RR^2 \arrow{d}{\pi}      \\
+    \Torus^2_{\alpha,\beta} \arrow{r}[swap]{\pphi}  & \Torus^2_{\alpha,\beta}
+  \end{tikzcd}
+  \]
+  Now,
+  let us denote by $\KK$ the group $(\ZZ+\alpha\ZZ) \times (\ZZ+\beta\ZZ) \subset \RR^2$.
+  The group $\Torus^2_{\alpha,\beta}$ is just the quotient $\RR^2/\KK$.
+  The map $\Phi$ satisfies then
+  $$%
+    \Phi(u + K) = \Psi(u) + K'.
+    $$%
+  Where $K'$ depends {\em a priori} on $u \in \RR^2$ and $K$.
+  But since $u \mapsto \Phi(u + K) - \Phi(u)$ is smooth,
+  and since $\KK \subset \RR^2$ is discrete,
+  $K'$ depends only on $K$.
+  Thus,
+  the tangent linear map satisfies
+  $$%
+    \Der(\Phi)(u+K) = \Der(\Phi)(u),
+    $$%
+  for all $u$ and all $K$.
+  Choosing $u=0$,
+  we have,
+  for all $K \in \KK$,
+  $\Der(\Phi)(K) = M$,
+  with $M = \Der(\Phi)(0) \in \Lin(\RR^2)$.
+  But since $u \mapsto \Der(\Phi)(u)$ is smooth and $\KK$ is dense in $\RR^2$,
+  $\Der(\Phi)(u) = M$ for all $u$.
+  But that gives the expression of $\Phi$,
+  which is a linear map:
+  $$%
+    \Phi(u) = Mu \SpacedText{with} M \in \GL(\RR^2).
+    $$%
+  Remark that {\em a priori} $M$ is just linear,
+  but if it has a non-zero kernel then its image by $\pi$ in $\Torus^2_{\alpha,\beta}$ is (at least) a whole $1$-dimensional subspace mapped into $(1,1)$ by $\pphi$.
+  But $\pphi$ is a diffeomorphism and that cannot happen.
+  Therefore,
+  $M$ is non degenerate,
+  and $\Diff(\Torus^2_{\alpha,\beta},\Id)^\circ$ is naturally identified to a subgroup of $\GL(\RR^2)$.
+  Now,
+  since $\pi \circ \Phi = \pphi \circ \pi$ and $\pphi(\Id)=\Id$,
+  $M\KK \subset \KK$.
+  Actually,
+  since $M$ is the lifting on the universal covering of a diffeomorphism,
+  $M\KK = \KK$.
+  Thus,
+  for all $n,m,n',m'$ in $\ZZ$,
+  there exist $n'',m'',n''',m'''$ in $\ZZ$ such that
+  $$%
+    \begin{pmatrix}
+    a & b \\
+    c & d
+    \end{pmatrix}
+    \begin{pmatrix}
+    n+\alpha m \\
+    n'+\beta m'
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    n''+\alpha m'' \\
+    n'''+\beta m'''
+    \end{pmatrix}
+    \SpacedText{with}
+    M =
+    \begin{pmatrix}
+    a & b \\
+    c & d
+    \end{pmatrix}
+    $$%
+  We shall not solve this equation because it is not the purpose of this exercise,
+  but let us just notice that:
+  $$%
+    \begin{array}{l}
+    a,b \in \ZZ + \alpha \ZZ \\
+    c,d \in \ZZ + \beta \ZZ
+    \end{array}
+    \quad \& \quad
+    \begin{array}{l}
+    \alpha a,\beta b \in \ZZ + \alpha \ZZ \\
+    \alpha c,\beta d \in \ZZ + \beta \ZZ
+    \end{array}.
+    $$%
+  From these conditions,
+  we get immediately that the subgroup in $\GL(\RR^2)$ identified to $\Diff(\Torus^2_{\alpha,\beta},\Id)$ is discrete (diffeologically).
+  Hence,
+  since $\Diff(\Torus^2_{\alpha,\beta}) \simeq \Torus^2_{\alpha,\beta} \times \Diff(\Torus^2_{\alpha,\beta},\Id)$,
+  where $\Torus^2_{\alpha,\beta}$ is connected and $\Diff(\Torus^2_{\alpha,\beta},\Id)$ is discrete,
+  the group $\Diff(\Torus^2_{\alpha,\beta},\Id)$,
+  identifies naturally with $\pi_0(\Diff(\Torus^2_{\alpha,\beta}))$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: The Moment Map Of The Torus Action Onto Itself
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The moment map of the torus action onto itself}
+
+We consider now the action of $\RR^2$ on $\Torus^2_{\alpha,\beta}$ defined by
+$$%
+  (a,b)_{\Torus^2_{\alpha,\beta}}(z,z') = \pi \circ (a,b)_{\RR^2}(x,x') = (\pi_\alpha(x+a),\pi_\beta(x'+b)),
+  $$%
+with
+$$%
+  (z,z')=\pi(x,x'), \mbox{ that is, } z=\pi_\alpha(x) \mbox{ and } z'=\pi_\beta(x').
+  $$%
+
+The paths moment map of this action of $\RR^2$ on $(\Torus^2_{\alpha,\beta},\omega)$ is defined by
+$$%
+  \Psi(\gamma) = \hat\gamma^*(\cK\omega),
+  $$%
+where $\cK$ is the Chain-Homotopy Operator,
+$\gamma \in \Paths(\Torus^2_{\alpha,\beta})$ and $\hat\gamma$ is the orbit map $\hat\gamma : \RR^2 \to \Paths(\Torus^2_{\alpha,\beta})$,
+defined by
+$$%
+  \hat\gamma : (a,b) \mapsto [t \mapsto (a,b)_{\Torus^2_{\alpha,\beta}}\gamma(t)].
+  $$%
+Let $\gamma : t \mapsto (z(t),z'(t))$ be a path in $\Torus^2_{\alpha,\beta}$.
+Thanks to the Monodromy Theorem, there always exists a lift $\bargamma : t \mapsto (x(t),x'(t))$ of $\gamma$ into $\RR^2$,
+$$%
+  \gamma(t) = \pi(\bargamma(t)) = (\pi_\alpha(x(t)),\pi_\beta(x'(t))).
+  $$%
+It is uniquely defined by $\gamma$ and the image of $0$.
+We denote by
+$$%
+  \pi_* : \Paths(\RR^2) \to \Paths(\Torus^2_{\alpha,\beta}), \mbox{ with } \pi_*(\bargamma) = \pi\circ\bargamma,
+  $$%
+the projection defined by the composite.
+
+\begin{Article}{Exercise.}{}{\upshape(The moment map)}
+  Let $\gamma$ be a path in $\Torus^2_{\alpha,\beta}$ and $\bargamma$ be a lift of $\gamma$ into $\RR^2$.
+  Show that
+  $$%
+    \Psi(\gamma) = \Psi(\bargamma),
+    $$%
+  where $\Psi$ denotes the paths moment map of $\RR^2$ acting on $\Torus^2_{\alpha,\beta}$ for the left-hand side,
+  and acting on $\RR^2$ on the right-hand side.
+\end{Article}
+
+\begin{proof}
+  We have:
+  \begin{eqnarray*}
+    \hat\gamma(a,b) & = & [t \mapsto (a,b)_{\Torus^2_{\alpha,\beta}}(z(t),z'(t))] \\
+    & = & [t \mapsto (\pi_\alpha(x(t)+a),\pi_\alpha(x'(t)+b))] \\
+    & = & [t \mapsto \pi(x(t)+a,x'(t)+b)]\\
+    & = & \pi \circ (a,b)_{\RR^2} \circ \bargamma\\
+    & = & \pi_*(\hat\bargamma(a,b)) \\
+    & = & \pi_* \circ \hat \bargamma(a,b),
+  \end{eqnarray*}
+  and then,
+  $$%
+    \hat\gamma = \pi_* \circ \hat \bargamma.
+    $$%
+  And we note that that apply to any lift $\bargamma$ of $\gamma$.
+  Injecting that into the expression of the paths moment map above, we get
+  $$%
+    \Psi(\gamma) = \widehat{\pi_* \circ \hat\bargamma}^*(\cK\omega) = \hat\bargamma^* \big( (\pi_*)^*(\cK\omega)\big).
+    $$%
+  But,
+  according to the variance of the paths moment map,
+  $$%
+    (\pi_*)^* \circ \cK = \cK \circ \pi^*.
+    $$%
+  Thus
+  $$%
+    \Psi(\gamma) = \hat\bargamma^*(\cK(\pi^*(\omega))) = \hat\bargamma^*(\cK(dx \wedge dy)) = \Psi(\bargamma),
+    $$%
+  And that is what had to be proven.
+\end{proof}
+
+\begin{Article}{Exercise: The universal path moment map.}{}
+  Let $\gamma$ be a path in $\Torus^2_{\alpha,\beta}$ and $\bargamma$ be a lift of $\gamma$ in $\RR^2$.
+  Let $\bargamma(0)=(a,b)$ and $\bargamma(1)=(a',b')$.
+  Show that the path moment map relatively to $\RR^2$ is given by
+  $$%
+    \Psi(\gamma) = (a'-a)dy - (b'-b)dx.
+    $$%
+  And that the universal moment map is then
+  $$%
+    \Psi_\omega(\gamma) = (a'-a)\theta_\beta - (b'-b)\theta_\alpha.
+    $$%
+\end{Article}
+
+\begin{proof}
+  According to the previous exercise,
+  $\Psi(\gamma) = \Psi(\bargamma)$.
+  Next,
+  since $\Psi(\bargamma)$ is invariant under fixed-ends homotopy,
+  we can always choose $\bargamma$ to be the affine path connecting its start to its end:
+  $$%
+    \Psi(\bargamma) = \Psi\big([t \mapsto t(a',b') + (1-t)(a,b)]\big).
+  $$%
+  The expression for the moment map in this case is simply given by
+  $$%
+    \Psi(\bargamma)(P)_r(\delta r) = \int_0^1 (dx \wedge dy)_{\bargamma(t)}(\dot\bargamma(t), \delta\bargamma(t)) \, dt,
+  $$%
+  with
+  $$%
+    \dot\bargamma(t) = \Vector{a'-a \\ b'-b}
+    \quad \text{and} \quad
+    \delta\bargamma(t) = [\Der(P(r))(\bargamma(t))]^{-1}{\partial P(r)(\bargamma(t)) \over \partial r}(\delta r),
+  $$%
+  where $P$ is a plot of $\RR^2$.
+  
+  Now,
+  the moment map $\Psi(\bargamma)$ is an invariant $1$-form on $\RR^2$,
+  so $\Psi(\bargamma) = A\,dx + B\,dy$.
+  The coefficients $A$ and $B$ are given by $\Psi(\bargamma)[s \mapsto \Trsl_{(s,0)}]_s(1)$ and $\Psi(\bargamma)[s \mapsto \Trsl_{(0,s)}]_s(1)$,
+  where $\Trsl_{(a,b)}$ denotes translation by $(a,b)$,
+  that is,
+  $\Trsl_{(a,b)}(x,y) = (x+a, y+b)$.
+    In our case $[\Der(P(r))(\bargamma(t))] = \Id$,
+  $$%
+    {\partial \Trsl_{(s,0)}(x,y) \over \partial s}(1) = (1,0) \quad \text{and} \quad
+    {\partial \Trsl_{(0,s)}(x,y) \over \partial s}(1) = (0,1).
+  $$%
+  Hence,
+  $$%
+    A = \int_0^1 (dx \wedge dy)\Vector{a'-a \\ b'-b}\Vector{1 \\ 0} \, dt = -(b'-b)
+  $$%
+  and
+  $$%
+    B = \int_0^1 (dx \wedge dy)\Vector{a'-a \\ b'-b}\Vector{0 \\ 1} \, dt = a'-a.
+  $$%
+  Thus,
+  $\Psi(\gamma) = (a'-a)\,dy - (b'-b)\,dx$.
+  
+  Now, since $\Diff(\Torus^2_{\alpha,\beta})^\circ = \Torus^2_{\alpha,\beta}$,
+  and $\Torus^2_{\alpha,\beta} = \RR^2/(\ZZ+\alpha\ZZ) \times (\ZZ+\beta\ZZ)$,
+  $\Psi_\omega$ is the pushforward of $\Psi$,
+  that is,
+  $\Psi_\omega(\gamma) = (a'-a)\,\theta_\beta - (b'-b)\,\theta_\alpha$.
+\end{proof}
+
+\begin{Article}{Exercise: The holonomy.}{}
+  Let $\Gamma_\omega$ be the universal holonomy of $\omega$.
+  We know that the neutral component of $\Diff(\Torus^2_{\alpha,\beta},\omega)$ is isomorphic to $\Torus^2_{\alpha,\beta}$ acting on itself by multiplication.
+  Show that
+  $$%
+    \Gamma_\omega = \{k\theta_\alpha + k' \theta_\beta \mid k \in \ZZ + \beta\ZZ \mbox{ and } k' \in \ZZ + \alpha \ZZ \}.
+    $$%
+\end{Article}
+
+\begin{proof}
+  By definition
+  $$%
+    \Gamma_\omega = \{ \Psi_\omega(\ell) \mid \ell \in \Loops(\Torus^2_{\alpha,\beta})\}.
+    $$%
+  We can choose the loops $\ell$ pointed at the origin.
+  Every loop pointed at the origin is the projection of a path $\bargamma = [t \mapsto t(k,k')]$,
+  where $k \in \ZZ+\alpha \ZZ$ and $k' \in \ZZ + \beta \ZZ$.
+  Now,
+  according to the previous exercise we get immediately $\Psi_\omega(\gamma) = k\theta_\beta  -k'\theta_\alpha$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: The Symplectic Irrational Torus
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The symplectic irrational torus}
+
+We already proposed,
+in a few papers,
+a definition of a {\em symplectic diffeological space}.
+The objects and constructions used here can be found in \cite{PIZ10}
+
+\begin{Article}{Definition.}{\it} A closed $2$-form $\omega$ defined on a diffeological space $X$ is \emph{symplectic} if it satisfies the following two conditions:
+  \begin{enumerate}
+    \item The space $X$ is locally homogenous under the action of local automorphisms.
+    Precisely,
+    that means that for every pair of points $x,x'$ in $X$,
+    there exists a local diffeomorphism $\pphi$ of $X$ such that:
+    $$%
+      \pphi^*(\omega) = \omega \restriction \Domain(\pphi) \SpacedText{and} \pphi(x) = x'.
+      $$%
+    \item The universal moment map $\mu_\omega : X \to \cG^*_\omega/\Gamma_\omega$ is injective.%
+    \footnote{It is safer to ask for a covering onto its image.}
+  \end{enumerate}
+\end{Article}
+
+The first condition%
+\footnote{There is an alternative between local transitivity or local homogeneity actually.}
+describes a \emph{presymplectic space}.
+The second condition mimics what happens for symplectic manifolds.
+This definition could be possibly modified if the development of ``Symplectic Diffeology'' requires it,
+but it captures already quite well the spirit of what we regard as symplectic.
+
+Note however that the second condition has a better formulation using the $2$-points moment map $\psi_\omega$,
+with values in $\cG_\omega^*/\Gamma_\omega$,
+that is,
+\begin{enumerate}
+  \item[(2')] The diagonal $\Delta X = \{(x,x)\}_{x\in X}$ is the zero locus of the $2$-points moment map $\psi$.
+\end{enumerate}
+This condition has an expression involving only the paths moment map:
+\begin{enumerate}
+  \item[(2'')] For all $\gamma \in \Paths(X)$, $\Psi(\gamma) \in \Gamma_\omega$ if and only if $\gamma \in \Loops(X)$.
+\end{enumerate}
+
+\begin{Article}{Exercise: Symplectic irrational $2$-torus.}{}
+  Show that the irrational $2$-torus $\Torus^2_{\alpha,\beta}$,
+  equipped with the $2$-form $\omega$,
+  is symplectic.
+\end{Article}
+
+\begin{proof}
+  We know already that the neutral component of $\Diff(\Torus^2_{\alpha,\beta},\omega)$ is $\Torus^2_{\alpha,\beta}$ itself.
+  Then $\Diff(\Torus^2_{\alpha,\beta},\omega)$ is transitive and $\omega$ is presymplectic.
+  Now,
+  the paths moment map for a path $\gamma$ connecting $z=\pi(a,b)$ to $z'=\pi(a',b')$ is given by
+  $$%
+    \Psi_\omega(\gamma) = (a'-a)\theta_\beta-(b'-b)\theta_\alpha.
+    $$%
+  Then,
+  $\Psi_\omega(\gamma) \in \Gamma_\omega$ if and only if $a'-a \in \ZZ+\alpha\ZZ$ and $b'-b \in \ZZ+\beta\ZZ$,
+  that is,
+  $a'=a + k$ and $b'=b+k'$,
+  with $k \in \ZZ+\alpha\ZZ$ and $k' \in \ZZ+\beta\ZZ$.
+  Thus,
+  $z'=\pi(a+k,b+k')= \pi(a,b)=z$
+  and $\gamma$ is a loop,
+  and the condition (2'') is satisfied.
+  Since both condition (1) and (2'') are satisfied,
+  $(\Torus^2_{\alpha,\beta},\omega)$ is a symplectic diffeological space.
+\end{proof}
+
+There are two equivalent ways of considering Hamiltonian diffeomorphisms,
+described in \cite[\textsection\,9.15]{PIZ13} and \cite[\textsection\,9.16]{PIZ13}.
+Use both of them in the next exercise.
+
+\begin{Article}{Exercise: Hamiltonian diffeomorphisms.}{}
+  Show that the group of Hamiltonian diffeomorphisms of $(\Torus^2_{\alpha,\beta},\omega)$ is trivial.
+\end{Article}
+
+\begin{proof}
+  Considering the definition \cite[\textsection\,9.15]{PIZ13},
+  we first construct the group $\widehat\cH_\omega$ as the intersection of the morphisms $f_\epsilon$,
+  from the covering of the neutral component of $\Diff(\Torus^2_{\alpha,\beta},\omega)$ to $\RR$,
+  integrating the closed $1$-forms $\epsilon \in \Gamma_\omega$.
+  And then,
+  the group $\Ham(\Torus^2_{\alpha,\beta},\omega)$ is the projection of $\widehat\cH_\omega$ in $\Diff(\Torus^2_{\alpha,\beta},\omega)$.
+  In our case $\epsilon$ writes $k\theta_\alpha + h\theta_\beta$,
+  where $k\in \ZZ+\beta\ZZ$ and $h\in \ZZ+\alpha\ZZ$.
+  Its integration function is $f_\epsilon :(x,y) \mapsto kx+hy$.
+  Its kernel is the line $\ker(\epsilon)=\{t(-h,k)\}_{t\in \RR}$.
+  Therefore the intersection $\widehat\cH_\omega$ is reduced to $\{(0,0)\}$,
+  and $\Ham(\Torus^2_{\alpha,\beta},\omega)=\{\Id\}$.
+  
+  The second way describes the element of $\Ham(\Torus^2_{\alpha,\beta},\omega)$ as the endpoint of paths $t\mapsto f_t$ in $\Diff(\Torus^2_{\alpha,\beta},\omega)$,
+  centered at the identity,
+  for which there exists a path $t\mapsto \Phi_t$ in $\Cinfty(\Torus^2_{\alpha,\beta},\RR)$ such that $i_{F_t}(\omega) = - d\Phi_t$,
+  where $F_t=[s \mapsto f_t^{-1}\circ f_{t+s}]$ \cite[\textsection\,9.16]{PIZ13}.
+  But in our case,
+  $\Cinfty(\Torus^2_{\alpha,\beta},\RR)$ is reduced to the constant maps,
+  then for all $t$,
+  $d\Phi_t=0$,
+  that is,
+  $i_{F_t}(\omega) = 0$.
+  Let $p \in \Paths(\Torus^2_{\alpha,\beta})$ and let $[t \mapsto f_t]$ be a path in $\Ham(\Torus^2_{\alpha,\beta}, \omega) \subset \Diff(\Torus^2_{\alpha,\beta}, \omega)$.
+  Thanks to formula \cite[\textsection\,9.2 $(\clubsuit)$]{PIZ13}, we have
+  $$%
+    \Psi_\omega(p)([t \mapsto f_t])_t(1) = - \int_p i_{F_t}(\omega) = 0,
+    $$%
+  for all path $[t \mapsto f_t]$ in $\Ham(\Torus^2_{\alpha,\beta}, \omega)$.
+  Now,
+  on the one hand,
+  $\Psi_\omega(p)=(a'-a)\theta_\beta - (b'-b)\theta_\alpha$,
+  where $p(0)=\pi(a,b)$ and $p(1)=\pi(a',b')$.
+  On the other hand,
+  $t \mapsto f_t$ has a lifting in $\RR^2$,
+  $f_t= (\pi_\alpha(x(t)),\pi_\beta(y(t)))$.
+  Then,
+  $\Psi_\omega(p)([t \mapsto f_t])_t(1)=(a'-a)\dot y(t) - (b'-b)\dot x(t) = 0$,
+  for all $a'-a$ and $b'-b$.
+  Thus,
+  $\dot x(t)=0$ and $\dot y(t)=0$.
+  Therefore $f_t=\Id$ for all $t$,
+  and $\Ham(\Torus^2_{\alpha,\beta}, \omega)=\{\Id\}$.
+\end{proof}

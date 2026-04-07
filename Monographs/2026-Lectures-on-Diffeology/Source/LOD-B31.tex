@@ -1,0 +1,99 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Title
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{\S B31. Foliations and Diffeology}
+\setcounter{footnote}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  Spaces of leaves of foliations on manifolds are among the first examples we can think of when it comes to diffeology.
+  Paradoxically,
+  with the exception of Kronecker's foliation of a torus by an irrational line,
+  I have not delved into this class of examples in the textbook.
+  In \cite{IL90} we treated the particular case of the foliation of an $n$-dimensional torus $\Torus^n$ by an irrational hyperplane.
+  In this note we go a little further into what diffeology can say about the space of leaves of a foliated manifold.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Content
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let us begin by recalling what a foliation is \cite{Law74}.
+Let $M$ be an $n$-manifold \cite[4.1]{PIZ13}.
+We say that a partition $\cL$ of $M$ into connected subspaces
+is a {\em foliation} if there exists an atlas of charts
+$$
+  \pphi : \RR^k \times \RR^m \supset \U \to M, \quad \text{with } k = n-m,
+$$
+such that for every $L \in \cL$,
+the preimage under $\pphi$ of each connected component of $L \cap \pphi(\U)$ is a vertical slice $\U_r = \U \cap [\{r\} \times \RR^m]$,
+for some $r \in \RR^k$,
+see \cite[1.33, 5.7]{PIZ13}.
+In simple words,
+a foliation is a partition that locally looks like a product of Euclidean spaces.
+
+The elements $L$ of $\cL$ are called the {\em leaves} of the foliation.
+The charts $\pphi$ above are called {\em adapted} to the foliation $\cL$.
+Note that the leaves,
+equipped with the subset diffeology,
+are $m$-dimensional submanifolds \cite[4.4]{PIZ13}.
+Indeed,
+with the notations above,
+the restrictions $\pphi \restriction \U_r$ are local diffeomorphisms
+from $\RR^m$ to $L$.
+
+\begin{Article}{Transversals.}{}
+  We call a {\em transversal} of $\cL$ any $k$-plot $Q : V \to M$ such that there exists an adapted chart $\pphi : V \to M$ for which $Q(r) = \pphi(r,0)$.
+  A plot $P$ in $M$ is said to be {\em transversal} if it takes its values in the image of a transversal $Q$.
+\end{Article}
+
+\begin{figure}[htb]
+  \includegraphics[width=0.7\textwidth]{Figures/foliation.jpg}
+  %\vspace{-1.0\baselineskip}\n
+  \caption{Rectification of the flow.}
+  \label{Rectification of the flow}
+\end{figure}
+
+Now,
+let $\cL$ be equipped with the quotient diffeology \cite[1.50]{PIZ13},
+and let $\pi : M \to \cL$ be the projection,
+that is,
+$\pi(x) = L$ if and only if $x \in L \in \cL$.
+
+\begin{Article}{The space of leaves.}{}
+  Let $M$ be a second countable Hausdorff manifold,
+  and let $\cL$ be a foliation on $M$.
+  \begin{enumerate}
+    \item Let $Q : V \to M$ be a transversal.
+      Then for every $L \in \cL$,
+      the set $L \cap Q(V)$ (or equivalently $\{r \in V \mid Q(r) \in L\}$)
+      is at most countable,
+      hence either empty or (diffeologically) discrete.
+    \item There exist generating families of $\cL$,
+      equipped with the quotient diffeology,
+      consisting of parametrizations $\cQ = \pi \circ Q$,
+      where $Q$ is a transversal plot.
+    \item The dimension \cite[2.22]{PIZ13} of the quotient $\cL$ is constant and equal to $k = n-m$.
+  \end{enumerate}
+\end{Article}
+
+\begin{proof}
+  Since $Q$ is the restriction of an adapted chart $\pphi$,
+  we have $Q(r) = \pphi(r,0)$.
+  A leaf $L$ is locally given by fixing the first $k$ coordinates.
+  The set $\{r \in V \mid Q(r) \in L\}$ consists of those $r$ for which the leaf through $\pphi(r,0)$ is exactly $L$.
+  Because leaves are transverse to the transversal,
+  this set is discrete in $V$,
+  hence at most countable.
+  The other statements follow directly from the definition of the quotient diffeology and the local product structure.
+\end{proof}

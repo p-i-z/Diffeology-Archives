@@ -1,0 +1,337 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Appendix.tex
+%%  A Categorical Approach to Diffeology
+%%  By Enxin Wu
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Macros Enxin
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\uA}{\underline{A}}
+
+\newtheorem{definition}{Definition}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{theorem}[definition]{Theorem}
+
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{example}[definition]{Example}
+
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\CCov}{\mathrm{Cov}}
+
+\newcommand{\Set}{\mathfrak{Set}}
+\newcommand{\sSet}{\mathfrak{sSet}}
+\newcommand{\CCh}{\mathfrak{Ch}}
+
+\renewcommand{\Top}{\mathfrak{Top}}
+\renewcommand{\Diff}{\mathfrak{Diff}}
+
+\newcommand{\Vect}{\mathfrak{Vect}}
+\newcommand{\DVPB}{\mathfrak{Dvpb}}
+\newcommand{\Pre}{\mathfrak{Pre}}
+\newcommand{\Sh}{\mathfrak{Sh}}
+\newcommand{\CCSh}{\mathfrak{CSh}}
+
+\renewenvironment{proof}{\textit{proof}.}{~$\square$}
+
+\def \infty{\inftyreg}
+
+\newcommand{\colim}{\mathrm{colim}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Appendix
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\markright{\ }
+\
+\newpage
+
+%% Specific display for Enxin Wu Appendix
+\MTversion{palatino}
+\setcounter{footnote}{0}
+
+\chapter*{Appendix: A Categorical Approach to Diffeology}
+\vspace{-3ex}
+\begin{center}
+  Enxin Wu \\
+  Department of Mathematics \\
+  Shantou University, Guangdong \\
+  P.R. China
+\end{center}
+
+\bigskip
+From the very beginning,
+diffeology was introduced from a geometric point of view.
+But one can take an abstract categorical approach to understand and study this subject.
+In this short appendix,
+we briefly discuss this alternative aspect,
+and see how to organize the basic theory of diffeology,
+especially the categorical viewpoint of some geometric constructions and homotopy theory in diffeology.
+
+A bit of category theory is needed to understand this appendix,
+as the standard terminologies are not defined here.
+The first section requires the basics of categories,
+functors,
+natural transformations,
+limits,
+colimits and cartesian closedness;
+The next two sections use adjunctions and (left) Kan extensions.
+Some familiarity with the corresponding contents in~\cite{McL71} suffices.
+
+\section*{Diffeological spaces versus concrete sheaves}
+
+The classical sheaf theory can be viewed as making the mathematical formalism of the local-to-global principle with underlying topological spaces.
+For example, to define a suitable continuous map from a complicated topological space to $\RR$,
+one could first decompose the space into simpler pieces (e.g., an open cover),
+and define suitable continuous maps from these pieces to $\RR$.
+Then one could try to patch them together to get a global one if it is possible.
+This idea can be formalized rigorously using category theory as follows:
+
+\begin{definition}
+  For a topological space $X$,
+  write $\cO_X$ for all open subsets of $X$,
+  ordered by inclusions.
+  A (set-valued) \textbf{presheaf} on $X$ is a functor $\cO_X^{\op} \to \Set$ from the opposite category of $\cO_X$ to the category $\Set$ of sets and functions.
+  A (set-valued) \textbf{sheaf} on $X$ is a (set-valued) presheaf $\cF$ on $X$ such that for any $U \in \cO_X$ and any open covering $U = \bigcup_i U_i$,
+  we have an equalizer diagram in $\Set$:
+  \begin{center}
+    \begin{tikzcd}[column sep=normal, row sep=normal, every label/.append style = {font = \small}]
+      \cF(U) \arrow[r]  & \prod_i \cF(U_i) \arrow[r,shift left] \arrow[r, shift right] & \prod_{j,k} \cF(U_j \cap U_k)
+    \end{tikzcd}
+  \end{center}
+  where the two parallel arrows are induced by the inclusions $U_j \cap U_k \to U_j$ and $U_j \cap U_k \to U_k$,
+  respectively.
+\end{definition}
+
+It is easy to observe that if one abstracts the essential properties of $\cO_X$ out of the above definition,
+one could define sheaves over other nice categories:
+
+\begin{definition}
+  A \textbf{presheaf} on an arbitrary category $\cA$ is a functor%
+  \linebreak $\cA^{\op} \to \Set$.
+  %  Write $\Pre(\cA)$ for the category of presheaves on $\cA$ and natural transformations between them.
+
+  A \textbf{Grothendieck topology} $\CCov$ on a category $\cA$ is an assignment of a collection $\CCov(A)$ of collections of morphisms with the common codomain $A$ for each object $A$ of $\cA$ such that
+  \begin{itemize}
+    \item[*] $\{1_A:A \to A\} \in \CCov(A)$;
+    \item[*] If $A' \to A$ is a morphism in $\cA$ and $\{A_i \to A\}_i \in \CCov(A)$,
+    then each pullback $A' \times_A A_i$ exists in $\cA$,
+    and $\{A' \times_A A_i \to A'\}_i \in \CCov(A')$;
+    \item[*] If $\{A_i \to A\}_i \in \CCov(A)$,
+    and $\{A_{ij} \to A_i\}_j \in \CCov(A_i)$ for each $i$,
+    then $\{A_{ij} \to A_i \to A\}_{i,j} \in \CCov(A)$.
+  \end{itemize}
+  An element in $\CCov(A)$ is called a \textbf{covering} of $A$.
+
+  A \textbf{site} is a category with a Grothendieck topology.
+
+  A \textbf{sheaf} on a site $(\cA,\CCov)$ is a presheaf $\cF:\cA^{\op} \to \Set$ on $\cA$ such that for each covering $\{A_i \to A\}_{i \in I}$ of $A$,
+  we have an equalizer diagram in $\Set$:
+  \begin{center}
+    \begin{tikzcd}[column sep=normal, row sep=normal, every label/.append style = {font = \small}]
+      \cF(A) \arrow[r]  & \prod_{i \in I} \cF(A_i) \arrow[r,shift left] \arrow[r, shift right] & \prod_{j,k \in I} \cF(A_j \times_A A_k)
+    \end{tikzcd}
+  \end{center}
+  where the two parallel arrows are induced by the canonical maps $A_j \times_A A_k \to A_j$ and $A_j \times_A A_k \to A_k$,
+  respectively.
+  %  We simply write $\Sh(\cA)$ for the category of sheaves over the site $(\cA,\CCov)$ and natural transformations between them.
+\end{definition}
+
+\begin{example}
+  Let $X$ be a topological space,
+  and let $\cO_X$ be the poset of all open subsets of $X$ together with inclusions.
+  For any open subset $U$ of $X$,
+  write $\CCov(U)$ for the collection of the usual open coverings of $U$.
+  This gives rise to a Grothendieck topology on $\cO_X$,
+  and the above two definitions of sheaves on $\cO_X$ coincide.
+\end{example}
+
+\begin{example}
+  First example: Let $\cE^\infty$ be the category of all open subsets of $\RR^n$ for all $n \in \NN=\{0,1,2,3,\ldots\}$ and smooth (i.e., infinitely differentiable) maps between them.
+  For any object $U$ of $\cE^\infty$,
+  write $\CCov(U)$ for the collection of the usual open coverings of $U$.
+  This gives rise to a Grothendieck topology on $\cE^\infty$.
+
+  Second example: In a similar manner,
+  if we only change the morphisms of $\cE^\infty$ to be $C^k$ (i.e., $k$-times continuously differentiable) for $k \in \NN$ or $C^\omega$ (i.e., analytic), then we again get sites denoted $\cE^k$ and $\cE^\omega$, respectively.
+
+  Third example: Similarly, all open subsets of $\CC^n$ for all $n \in \NN$,
+  all holomorphic maps between them,
+  and the usual open coverings together form a site,
+  denoted $\cC^\omega$.
+\end{example}
+
+From a differential geometer's point of view,
+the general sheaves are abstract to work with.
+It would be nice if there is an underlying set which dominates all the structures.
+This leads to the following definition:
+
+\begin{definition}
+  A \textbf{concrete site} $(\cA,\CCov)$ is a site with a terminal object $1$ such that
+  \begin{itemize}
+    \item[*] the functor $\Hom_\cA(1,\cdot):\cA \to \Set$ is faithful;
+    \item[*] for every object $A$ in $\cA$ and every covering $\{A_i \to A\}_i \in \CCov(A)$,
+    the induced map $\coprod_i \Hom_\cA(1,A_i) \to \Hom_{\cA}(1,A)$ is surjective.
+  \end{itemize}
+  %
+  A \textbf{concrete sheaf} $\cF$ over a concrete site $(\cA,\CCov)$ with a terminal object $1$ is a sheaf over $(\cA,\CCov)$ such that the natural map
+  $$
+    \cF(A) \to \Hom_{\Set}(\Hom_{\cA}(1,A),\cF(1))
+  $$
+  defined by $a \in \cF(A) \mapsto (f \in \Hom_{\cA}(1,A) \mapsto f^*(a) \in \cF(1))$,
+  is injective for every object $A$ of $\cA$.
+
+  We simply write $\CCSh(\cA)$ for the category of concrete sheaves over the concrete site $(\cA,\CCov)$ and natural transformations between them.
+\end{definition}
+
+\begin{example}
+  All of the sites $\cE^\infty,\cE^k,\cE^\omega,\cC^\omega$ are concrete.
+  They share a common terminal object which consists of a single point.
+  The rest axioms for the concreteness are clear since every object (resp. morphism, covering) in each of these sites has a set-theoretical meaning.
+\end{example}
+
+\begin{example}
+  The site $\cO_X$ is concrete if and only if every covering of any object $U$ in $\cO_X$ is essentially the trivial covering $1_U:U \to U$.
+\end{example}
+
+Here are some analogous definitions to that of a diffeological space and a smooth map between diffeological spaces:
+
+\begin{definition}
+  Given a concrete site $(\cA,\CCov)$ with a terminal object $1$,
+  write $\uA$ for the set $\Hom_{\cA}(1,A)$ for each object $A$ of $\cA$.
+  An \textbf{$\cA$-space} is a set $X$ together with a collection $\cS$ of maps (called the \textbf{structure maps}) $\uA \to X$ of sets for all objects $A$ of $\cA$ such that the following three axioms hold:
+  \begin{itemize}
+    \item[*] Every constant map $\uA \to X$ is in $\cS$;
+    \item[*] If $\uA \to X \in \cS$ and $A' \to A$ is a morphism in $\cA$,
+    then the composite $\uA' \to \uA \to X$ is in $\cS$;
+    \item[*] Given a map $f:\uA \to X$,
+    if there is a covering $\{A_i \to A\}_i$ of $A$ in $\CCov(A)$ such that each composite $\uA_i \to \uA \to X$ is in $\cS$,
+    then so is the map $f$.
+  \end{itemize}
+  %
+  A map $X \to Y$ between two $\cA$-spaces is called an \textbf{$\cA$-map},
+  if it is a function of the two underlying sets,
+  which sends every structure map of $X$ to a structure map of $Y$.
+  $\cA$-spaces and $\cA$-maps form a category,
+  denoted $\cA$-Spaces.
+\end{definition}
+
+\begin{theorem}
+  For a concrete site $(\cA,\CCov)$,
+  the two categories $\CCSh(\cA)$ and $\cA$-Spaces are equivalent.
+\end{theorem}
+
+\begin{proof}
+  Let $1$ be a terminal object of the site.
+  Define $F:\CCSh(\cA) \to \cA$-Spaces by sending a concrete sheaf $\cF$ over $\cA$ to $\cF(1)$;
+  the structure maps on $\cF(1)$ consist of all $\cF(A)$ (viewed as a subset of $\Hom_{\Set}(\uA,\cF(1))$ from the definition of a concrete sheaf) for all objects $A$ in $\cA$;
+  a morphism $\cF \to \cG$ is sent to the induced map $\cF(1) \to \cG(1)$.
+
+  Define $G:\cA$-Spaces $\to \CCSh(\cA)$ by sending an $\cA$-space $X$ to a concrete sheaf $\cF_X$ such that $\cF_X(A) = $ the collection of structure maps of $X$ of the form $\uA \to X$,
+  for every object $A$ of $\cA$; an $\cA$-map $f:X \to Y$ in $\cA$-Spaces is sent to a natural transformation $\cF_X \to \cF_Y$ induced by post-composition with $f$.
+
+  By unraveling the definitions of a concrete sheaf and a natural transformations between two concrete sheaves,
+  and the definitions of an $\cA$-space and an $\cA$-map between two $\cA$-spaces,
+  one sees that $F$ and $G$ are functors which give rise to the equivalence of the two categories.%
+  \footnote{We will need to use the fact that $\underline{A' \times_A A''} \cong \uA' \times_{\uA} \uA''$ in $\Set$ in the proof,
+  and this fact can be easily verified by the universal property of pullback.}
+\end{proof}
+
+\begin{theorem}
+  Let $(\cA,\CCov)$ be a concrete site.
+  Then
+  \begin{itemize}
+    \item[*] $\cA$ is canonically a fully faithful subcategory of $\CCSh(\cA)$.
+    \item[*] The category $\CCSh(\cA)$ is bicomplete and cartesian closed.
+    \item[*] Every concrete sheaf over a concrete site $\cA$ is a colimit of a diagram of $\cA$ in $\CCSh(\cA)$.
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  We can replace $\CCSh(\cA)$ by the category $\cA$-Spaces.
+
+  (1) Define $e:\cA \to \cA$-Spaces by sending an object $A$ of $\cA$ to an $\cA$-space $e(A)$ with the underlying set $\uA$. And $\uA' \to \uA$ is defined to be a structure map if and only if it is induced by a morphism $A' \to A$ in $\cA$.
+  A morphism $A \to A''$ in $\cA$ then induces an $\cA$-map $\uA \to \uA''$.
+  Therefore,
+  $e$ is a functor.
+  Moreover,
+  two distinct morphisms $A \to A''$ in $\cA$ induces two distinct $\cA$-maps $e(A) \to e(A'')$ since $1_A:A \to A$ can distinguish them.
+  Furthermore,
+  every $\cA$-map $e(A) \to e(A'')$ is induced from a morphism $A \to A''$ in $\cA$,
+  again by using the structure map of $e(A)$ induced by $1_A:A \to A$.
+  These prove the first result.
+
+  (2) Let $F:\cI \to \cA$-Spaces be a functor from a small category $\cI$.
+  Write $U:\cA$-Spaces $\to \Set$ for the forgetful functor.
+  Then $\lim F$ is an $\cA$-space which has $\lim (U \circ F)$ as the underlying set,
+  and $\uA \to \lim F$ is a structure map if and only if each composite $\uA \to \lim F \to F(i)$ is a structure map of $F(i)$ for each object $i$ of $\cI$.
+  Similarly, $\colim F$ is an $\cA$-space which has $\colim (U \circ F)$ as the underlying set.
+  And $\uA \to \colim F$ is a structure map if and only if there is a covering $\{A_j \to A\}_j$ of $A$ in $\CCov(A)$ such that for each $j$ there is an object $i$ in $\cI$ and a structure map $\uA_j \to F(i)$ making the following diagram commutative:
+  \begin{center}
+    \begin{tikzcd}[column sep=normal, row sep=normal, every label/.append style = {font = \small}]
+      {}              & {}                & F(i) \arrow[d] \\
+      \uA_j \arrow[r] \arrow[urr] & \uA \arrow[r] & \colim F
+    \end{tikzcd}
+  \end{center}
+  Given two $\cA$-spaces $X$ and $Y$,
+  simply write $\cA(X,Y)$ for the collection of all morphisms $X \to Y$.
+  Define $f:\uA \to \cA(X,Y)$ to be a structure map if and only if the adjoint $\tilde{f}:e(A) \times X \to Y$ is an $\cA$-map,
+  where the domain is the product of two $\cA$-spaces and hence again an $\cA$-space as we have just proved that the category $\cA$-Spaces is complete.
+  It is straightforward to check that $\cA(X,Y)$ with these structure maps is an $\cA$-space,
+  and moreover,
+  there is an adjoint pair of functors
+  $$
+    \cdot \times Y:\cA\text{-Spaces} \rightleftharpoons \cA\text{-Spaces}:\cA(Y,\cdot),
+  $$
+  for any fixed $\cA$-space $Y$.
+
+  (3) Given an $\cA$-space $X$,
+  write $\cA/X$ for the category whose objects are structure maps $\uA \to X$ and whose morphisms are commutative triangles
+  \begin{center}
+    \begin{tikzcd}[column sep=normal, row sep=normal, every label/.append style = {font = \small}]
+      \uA' \arrow[rr,"\tilde f"] \arrow[dr, swap, "p"] & {} & \uA \arrow[dl,"q"] \\
+      {}                & X &        {}
+    \end{tikzcd}
+  \end{center}
+  where $p,q$ are structure maps of $X$ and $\tilde{f}$ is induced from a morphism $f:A' \to A$ in $\cA$.
+  Let $\cA/X \to \cA$-Spaces be the functor sending the above commutative triangle to the $\cA$-map $e(A') \to e(A)$ induced by $f$.
+  In other words, this functor is a composition $\cA/X \to \cA \to \cA$-Spaces. It is straightforward to check that the colimit of this functor is isomorphic to $X$ as $\cA$-spaces.
+\end{proof}
+
+\begin{corollary}
+  First of all,
+  $\CCSh(\cE^\infty)$ is equivalent to the category $\Diff$ of diffeological spaces.
+
+  Then,
+  $\Diff$ is bicomplete and cartesian closed.
+
+  Next,
+  every smooth manifold%
+  \footnote{By a smooth manifold, we always require it to be finite-dimensional, Hausdorff, second-countable and without boundary.}
+  is a gluing of Euclidean domains via diffeomorphisms,
+  while every diffeological space is a gluing of Euclidean domains via smooth maps.
+\end{corollary}
+A bit more about concrete sheaves is discussed in~\cite{BH09}.
+
+\section*{Constructions in diffeology revisited}
+
+The general slogan is,
+some structures of $\cE^\infty$ can be compatibly (hence functorially) pushed to diffeological spaces.
+This slogan will be realized via Kan extension of a functor $\cE^\infty \to \cC$ (resp. $(\cE^\infty)^{\op} \to \cC$) to some category $\cC$ along the embedding $\cE^\infty \to \Diff$ (resp. $(\cE^\infty)^{\op} \to (\Diff)^{\op}$) as follows.
+
+\textbf{D-topology.}
+There is an adjoint pair of functors
+$$
+  D:\Diff \rightleftharpoons \Top:C
+$$
+where the functor $D$ sends a diffeological space $X$ to a topological space $D(X)$ with the same underlying set.
+The topology (called the \textbf{D-topology}) on $D(X)$ consists of all subsets $A$ of $X$ such that $p^{-1}(A)$ is open in $U$ wi

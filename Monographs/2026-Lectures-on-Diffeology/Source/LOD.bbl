@@ -1,0 +1,534 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  LOD.bbl (Bibliography)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+\renewcommand\bibname{\sf Bibliography}
+\markboth{\sf Bibliography}{\sf Bibliography}
+\pagestyle{headings}
+
+\begin{thebibliography}{BBCP06}
+  
+  {\advance\baselineskip -.17pt %% To fit the bibliography on the page
+  
+  \bibitem[Arn76]{Arnold0}
+  Vladimir I. Arnold,
+  \textit{M\'ethodes math\'e\-ma\-tiques de la m\'ecanique classique},
+  \'Editions MIR, Moscou, 1976.
+  
+  \bibitem[Arn80]{Arnold1}
+  \bysame,
+  \textit{Chapitres suppl\'ementaires \`a la th\'eorie des \'equations diff\'e\-ren\-tielles},
+  MIR, Moscou, 1980.
+  
+  \bibitem{Bom67}
+  \textbf{J. Boman},
+  \textit{Differentiability of a function and of its compositions with functions of one variable}.
+  {Mathematica Scandinavica},
+  \textbf{20} (1967),
+  p.~{249--268}.
+  
+  \bibitem[BBCP06]{BBCP06}
+  Jean-Michel Bony, Fabrizio Broglia, Ferruccio Colombini, Ludovico Pernazza,
+  \textit{Nonnegative functions as squares or sums of squares},
+  Journal of functional analysis, \textbf{232}, pp.\,137--147, Elsevier, 2006.
+  
+  \bibitem[BC67]{BC67}
+  Zenon Borevitch et Igor Chafarevitch,
+  \textit{Th\'eorie des nombres},
+  Monographies Internationales de math\'e\-ma\-tiques Modernes, Gauthier-Villars, Paris, 1967.
+  
+  \bibitem[BH09]{BH09}
+  John Baez and Alexander Hoffnung,
+  \textit{Convenient Categories of Smooth Spaces},
+  Transactions of the AMS, \textbf{363}(11), pp.\,5789--5825, 2011.
+  
+  \bibitem[Bom67]{Bom67}
+  Jan Boman,
+  \textit{Differentiability of a function and of its compositions with functions of one variable},
+  Mathematica Scandinavica, \textbf{20}, pp.\,249--268, 1967.
+  
+  \bibitem[Boo69]{Boo69}
+  William Boothby,
+  \textit{Transitivity of the automorphisms of certain geometric structures},
+  Transactions of the AMS, \textbf{137}, pp.\,93--100, 1969.
+  
+  \bibitem[Bou82]{Bou82}
+  Nicolas Bourbaki,
+  \textit{Vari{\'e}t{\'e}s diff{\'e}rentielles et analytiques},
+  El\'ements de ma\-th\'e\-ma\-ti\-ques, Diffusion CCLS, Paris, 1982.
+  
+  \bibitem[Bre72]{Bre72}
+  Glen Bredon,
+  \textit{Introduction to compact transformation groups},
+  Academic Press, New-York, 1972.
+  
+  \bibitem[BS85]{BoSi85}
+  Fran{\c c}ois Bonahon and Laurent Siebenmann,
+  \textit{The classification of seifert fibred 3-orbifold},
+  In Low Dimension Topology, London Mathematical Society Lecture Notes Series, \textbf{95}, pp.\,19--85, Cambridge University Press, 1985.
+  
+  \bibitem[Car22]{Car22}
+  Elie Cartan,
+  \textit{Le\c{c}ons sur les invariants int{\'e}graux},
+  Hermann, Paris, 1922.
+  
+  \bibitem[Cer61]{Cer61}
+  Jean Cerf,
+  \textit{Topologie de certains espaces de plongements},
+  Bulletin de la SMF, \textbf{89}, pp.\,227--280, 1961.
+  
+  \bibitem[Che77]{Che77}
+  Kuo-Tsai Chen,
+  \textit{Iterated path integrals},
+  Bulletin of the AMS, \textbf{83}(5), pp.\,831--879, 1977.
+  
+  \bibitem[CSW14]{CSW14}
+  Daniel Christensen, Gord Sinnamon and Enxin Wu,
+  \textit{The D-topology for diffeological spaces},
+  Pacific Journal of Mathematics, \textbf{272}(1), pp.\,87--110, 2014.
+  
+  \bibitem[CW14]{CW14}
+  Daniel Christensen and Enxin Wu,
+  \textit{The homotopy theory Of diffeological spaces},
+  New York Journal of Mathematics, \textbf{20}, pp.\,1269--1303, 2020.
+  
+  \bibitem[CW16]{CW16}
+  \bysame,
+  \textit{Tangent spaces and tangent bundles for diffeological spaces},
+  Cahiers de Topologie et Geom\'etrie Diff\'erentielle Cat\'egoriques, \textbf{57}(1), pp.\,3--50, 2016.
+  
+  \bibitem[CW19]{CW19}
+  \bysame,
+  \textit{Diffeological vector spaces},
+  Pacific Journal of Mathematics, \textbf{303}(1), pp.\,73--92, 2019.
+  
+  \bibitem[CW23]{CW23}
+  \bysame,
+  \textit{Exterior bundles in diffeology},
+  Israel Journal of Mathematics, \textbf{253}(2), pp.\,673--713, 2023.
+  
+  \bibitem[dG87]{deGandt1}
+  Fran\c cois de Gandt,
+  \textit{Force et g\'eom\'etrie},
+  Th\`ese de doctorat, Paris I, 1987.
+  
+  \bibitem[DI83]{DI83}
+  Paul Donato and Patrick Iglesias-Zemmour,
+  \textit{Exemple de groupes diff\'erentiels : flots irrationnels sur le tore},
+  Preprint CPT-83/P.1524, Centre de Physique Th\'eorique, Marseille, July 1983.\\
+  \url{http://math.huji.ac.il/~piz/documents/EDGDFISLT.pdf}
+  
+  \bibitem[DI85]{DI85}
+  \bysame,
+  \textit{Exemple de groupes diff\'eo\-lo\-gi\-ques~: flots irrationnels sur le tore},
+  Comptes Rendus de l'Académie des Sciences Paris, \textbf{301}(4), 1985.
+  
+  \bibitem[Die70a]{Die70a}
+  Jean Dieudonn\'e,
+  \textit{El\'ements d'analyse}, Vol. I,
+  Gauthiers-Villars, Paris, 1970.
+  
+  \bibitem[DIZ22]{DIZ22}
+  Paul Donato and Patrick Iglesias-Zemmour,
+  \textit{Every symplectic manifold is a (linear) coadjoint orbit},
+  Canadian Mathematical Bulletin, \textbf{65}(2), pp.\,345-360, 2022.
+  
+  \bibitem[Don81]{Don81}
+  Paul Donato,
+  \textit{Caractérisation du groupe fondamental d’une variété par l’action transitive de son groupe de difféomorphismes},
+  Comptes Rendus de l'Académie des Sciences, \textbf{293}, Paris, July 1981.
+  
+  \bibitem[Don84]{Don84}
+  \bysame,
+  \textit{Rev\^etement et groupe fondamental des espaces diff\'e\-rentiels homog\`enes},
+  Th\`ese de doctorat d'\'etat, Universit\'e de Provence, Marseille, 1984.
+  
+  \bibitem[Don00]{Don00}
+  \bysame,
+  \textit{Calcul diff\'erentiel pour la licence},
+  Dunod, Paris, 2000.
+  
+  \bibitem[Dou62]{Dou62}
+  Adrien Douady,
+  \textit{Vari{\'e}t{\'e}s {\`a} bord anguleux et voisinages tubulaires},
+  S{\'e}minaire Henri Cartan, (14), pp.\,1--11, 1961-1962.
+  
+  \bibitem[EP01]{EP01}
+  Elisa Prato,
+  \textit{Simple Non--Rational Convex Polytopes via Symplectic Geometry},
+  Topology, \textbf{40}, pp.\,961--975, 2001.
+  
+  \bibitem[Gal52]{Gal52}
+  Fran{\c c}ois Galissot,
+  \textit{Les formes ext{\'e}rieures en m{\'e}canique},
+  Annales de l'institut Fourier, \textbf{4}, pp.\,145--297, 1952.
+  
+  \bibitem[GIZ19]{GIZ19}
+  Serap G{\"u}rer and Patrick Iglesias-Zemmour,
+  \textit{Differential forms on manifolds with boundary and corners},
+  Indagationes Mathematicae, \textbf{30}(5), pp.\,920--929, 2019.
+  
+  \bibitem[GIZ22]{GIZ22}
+  \bysame,
+  \textit{Orbifolds as stratified diffeologies},
+  Differential Geometry and its Applications, \textbf{86}, 2023.
+  
+  \bibitem[GP74]{GP74}
+  Victor Guillemin and Alan Pollack,
+  \textit{Differential topology},
+  Prentice Hall, New Jersey, 1974.
+  
+  \bibitem[Hec94]{Hec94}
+  Gilbert Hector,
+  \textit{G\'eom\'etrie et topologie des espaces diff\'eologiques},
+  Analysis and geometry in foliated manifolds (Santiago de Compostela, 1994), pp.\,55--80, World Sciences Publications, River Edge, NJ, 1995.
+  
+  \bibitem[HY61]{HY61}
+  John Hocking and Gail Young,
+  \textit{Topology},
+  Dover Publication, 1961.
+  
+  \bibitem[Igl84]{Igl84}
+  Patrick Iglesias-Zemmour,
+  \textit{Classification des {$SO(3)$}-vari{\'e}t{\'e}s symplectiques de dimension 4},
+  Preprint CPT-84/PE.1673, Centre de Physique Th{\'e}orique, Marseille Luminy, France, 1984.\\
+  \newblock{\verb|http://math.huji.ac.il/~piz/documents/SO3VSCD4-Word.pdf|}
+  
+  \bibitem[Igl85]{Igl85}
+  \bysame,
+  \textit{Fibrations diff\'eologiques et homotopie},
+  Th\`ese de doctorat d'\'Etat, Universit\'e de Provence, Marseille, 1985.
+  
+  \bibitem[Igl87]{Igl87}
+  \bysame,
+  \textit{Connexions et diff\'eologie},
+  In Aspects dynamiques et topologiques des groupes infinis de transformation de la m\'ecanique, Hermann, Paris, \textbf{25}, pp.\,61--78, 1987.
+  
+  \bibitem[Igl91]{Igl91}
+  \bysame,
+  \textit{Les $\SO(3)$-vari{\'e}t{\'e}s symplectiques et leur classification en dimension 4},
+  Bulletin de la Société Mathématique de France, \textbf{119}(4), pp.\,371--396, 1991. First publication \cite{Igl84}.
+  
+  \bibitem[IKZ10]{IKZ10}
+  Patrick Iglesias, Yael Karshon and Moshe Zadka,
+  \textit{Orbifolds as diffeologies},
+  Transactions of the AMS, \textbf{362}(6), pp.\,2811--2831, 2010.
+  
+  \bibitem[IL90]{IL90}
+  Patrick Iglesias and Gilles Lachaud,
+  \textit{Espaces diff\'erentiables singuliers et corps de nombres alg\'ebriques},
+  Annales de l'Istitut Fourier Grenoble, \textbf{40}(1), pp.\,723--737, 1990.
+  
+  \bibitem[IZK12]{IZK12}
+  Patrick Iglesias-Zemmour and Yael Karshon,
+  \textit{Smooth Lie groups actions are diffeological subgroups},
+  Proceedings of the AMS, \textbf{140}(6), pp.\,731--739, 2012.
+  
+  \bibitem[IZL18]{IZL18}
+  Patrick Iglesias-Zemmour and Jean-Pierre Laffineur,
+  \textit{Noncommutative geometry and diffeology: The case of orbifolds},
+  Journal of Noncommutative Geometry, \textbf{12}(4), pp.\,1551--1572, 2018.
+  
+  \bibitem[IZP21]{IZP21}
+  Patrick Iglesias-Zemmour and Elisa Prato,
+  \textit{Quasifolds, diffeology and noncommutative geometry},
+  Journal of Noncommutative Geometry, \textbf{15}(2), pp.\,735--759, 2021.
+  
+  \bibitem[Jor82]{Jor82}
+  Henri Joris,
+  \textit{Une application $\Cinfty$ non-immersive qui poss\`ede la propri\'et\'e universelle des immersions},
+  Archiv der Mathematik, \textbf{39}, pp.\,269--277, 1982.
+  
+  \bibitem[JR80]{JR80}
+  Jean Renault,
+  \textit{A groupoid approach to $\CC^*$--Algebras},
+  Lecture notes in Mathematics, \textbf{793}, Springer-Verlag Berlin Heidelberg New-York, 1980.
+  
+  \bibitem[Kih19]{Kih19}
+  Hiroshi Kihara,
+  \textit{Model category of diffeological spaces},
+  Journal of Homotopy and Related Structures, \textbf{14}(1), pp.\,51--90, 2019.
+  
+  \bibitem[Kih23]{Kih23}
+  \bysame,
+  \textit{Smooth homotopy of infinite-dimensional $\Cinfty$-manifolds},
+  Memoirs of the AMS, \textbf{289}(1436), 2023.
+  
+  \bibitem[Kle72]{Kle72}
+  Felix Klein,
+  \textit{Vergleichende Betrachtungen über neuere geometrische Forschungen},
+  Verlag von Andreas Deichert, 1872. \url{http://www.deutschestextarchiv.de/book/view/klein_geometrische_1872}
+  
+  \bibitem[Kle74]{Kle74}
+  \bysame,
+  \textit{Le programme d'Erlangen},
+  Discours de la m\'ethode, Gauthier-Villars, Paris, 1974.
+  
+  \bibitem[KM97]{KM97}
+  Andreas Kriegl and Peter Michor,
+  \textit{The convenient setting of global analysis},
+  Mathematical Surveys and Monographs AMS, \textbf{53}, 1997.
+  
+  \bibitem[KMW22]{KMW22}
+  Yael Karshon, David Miyamoto and Jordan Watts,
+  \textit{Diffeological submanifolds and their friends},
+  Preprint, 2022. \url{https://arxiv.org/pdf/2204.10381.pdf}
+  
+  \bibitem[Kur20]{Kur20}
+  Katsuhiko Kuribayashi,
+  \textit{Simplicial cochain algebras for diffeological spaces},
+  Indagationes Mathematicae, \textbf{31}(6), pp.\,934-967, 2020.
+  
+  \bibitem[Lag08]{Lag08}
+  Joseph-Louis Lagrange,
+  \textit{Sur la th\'eorie des variations des \'el\'ements des plan\`etes et en particulier des variations des grands axes de leurs orbites},
+  \OE uvres de Lagrange, Gauthier-Villars, \textbf{VI}, pp.\,713--768, Paris, 1877. Lu le 22 ao\^{u}t 1808 \`a l'Institut de France.
+  
+  \bibitem[Lag09]{Lag09}
+  \bysame,
+  \textit{Sur la th\'eorie g\'en\'erale de la variation des constantes arbitraires dans tous les probl\`emes de la m\'ecanique},
+  \OE uvres de Lagrange, Gauthier-Villars, \textbf{VI}, pp.\,771--805, Paris, 1877. Lu le 13 mars 1809 \`a l'Institut de France.
+  
+  \bibitem[Lag10]{Lag10}
+  \bysame,
+  \textit{Second m\'emoire sur la th\'eorie g\'en\'erale de la variation des constantes arbitraires dans tous les probl\`emes de la m\'ecanique},
+  \OE uvres de Lagrange, Gauthier-Villars, \textbf{VI}, pp.\,809--816, Paris, 1877. Lu le 19 f\'evrier 1810 \`a l'Institut de France.
+  
+  \bibitem[Lag11]{Lag11}
+  \bysame,
+  \textit{M\'ecanique analytique},
+  Librairie Albert Blanchard, Paris, 1965. Fac-simil\'e de la troisi\`eme \'edition.
+  
+  \bibitem[Law74]{Law74}
+  Herbert Lawson,
+  \textit{Foliations},
+  Bulletin of the AMS, \textbf{80}(3), 1974.
+  
+  \bibitem[Lee06]{Lee06}
+  John M. Lee,
+  \textit{Introduction to Smooth Manifolds},
+  Graduate Texts in Mathematics, Springer Verlag, New York, 2006.
+  
+  \bibitem[McL71]{McL71}
+  Saunders Mac Lane,
+  \textit{Categories for the working mathematician},
+  Graduate Texts in Mathematics, Springer Verlag, New-York Heidelberg Berlin, 1971.
+  
+  \bibitem[McL75]{McL75}
+  \bysame,
+  \textit{Homology},
+  Springer-Verlag, New York, 1975.
+  
+  \bibitem[MR81]{MR81}
+  Marc A. Rieffel,
+  \textit{$\CC^*$--Algebras Associated With Irrational Rotations},
+  Pacific Journal of Mathematics, \textbf{93}(2), 1981.
+  
+  \bibitem[MRW87]{MRW87}
+  Paul Muhly, Jean Renault and Dana Williams,
+  \textit{Equivalence And Isomorphism For Groupoid $\CC^*$-Algebras},
+  Journal of Operator Theory, \textbf{17}(1), pp.\,3--22, 1987.
+  
+  \bibitem[Pav22]{Pav22}
+  Dmitri Pavlov,
+  \textit{Projective model structures on diffeological spaces and smooth sets and the smooth Oka principle},
+  Preprint, 2022. \url{https://arxiv.org/abs/2210.12845}
+  
+  \bibitem[PIZ95]{PIZ95}
+  Patrick Iglesias-Zemmour,
+  \textit{La trilogie du Moment},
+  Annales de l'Institut Fourier, \textbf{45}, 1995.
+  
+  \bibitem[PIZ98]{PIZ98}
+  \bysame,
+  \textit{Les origines du calcul symplectique chez Lagrange},
+  L'en\-sei\-gne\-ment math{\'e}matique, \textbf{44}, pp.\,257--277, 1998. \url{http://math.huji.ac.il/~piz/documents/OCSCL-EM.pdf}
+  
+  \bibitem[PIZ02]{PIZ02}
+  \bysame,
+  \textit{Aper\c cu des origines de la g\'eom\'etrie symplectique},
+  Colloque Histoire des G\'eom\'etries, \textbf{1}, Maison des Sciences de l'Homme, Paris, 2004. \url{http://math.huji.ac.il/~piz/documents/AOGS-MSH.pdf}
+  
+  \bibitem[PIZ07]{PIZ07}
+  \bysame,
+  \textit{Dimension in diffeology},
+  Indagationes Mathematicae, \textbf{18}(4), 2007.
+  
+  \bibitem[PIZ10]{PIZ10}
+  \bysame,
+  \textit{The Moment Maps in Diffeology},
+  Memoirs of the AMS, \textbf{972}, 2010.
+  
+  \bibitem[PIZ13]{PIZ13}
+  \bysame,
+  \textit{Diffeology},
+  Mathematical Surveys and Monographs AMS, \textbf{185}, 2013. Revised print as \textit{Diffeology} (\begin{CJK}{UTF8}{gbsn}广义微分几何\end{CJK}), Beijing: Beijing World Publishing Corp. \& Amer. Math. Soc., 2022.
+  
+  \bibitem[PIZ15]{PIZ15}
+  \bysame,
+  \textit{Example of singular reduction in symplectic diffeology},
+  Proceedings of the AMS, \textbf{144}(3), pp.\,1309--1324, 2016.
+  
+  \bibitem[PIZ16]{PIZ16}
+  \bysame,
+  \textit{Every symplectic manifold is a coadjoint orbit},
+  In Frontiers of Fundamental Physics 14 (FFP14) -- Mathematical Physics, (224), pp.\,1--17, 2016.
+  
+  \bibitem[PIZ18]{PIZ18}
+  \bysame,
+  \textit{La Géométrie des Mouvements: I - Les Mécaniques Comme Géométries},
+  Amazon Deskop Publishing, 2018.
+  
+  \bibitem[PIZ19]{PIZ19}
+  \bysame,
+  \textit{Refraction and reflexion according to the principle of general covariance},
+  Journal of Geometry and Physics, \textbf{142}, pp.\,1--8, 2019.
+  
+  \bibitem[PIZ23]{PIZ23}
+  \bysame,
+  \textit{\v{C}ech-de-Rham Bicomplex in Diffeology},
+  Israeli Journal of Mathematics, 2023. \url{https://doi.org/10.1007/s11856-023-2486-8}
+  
+  \bibitem[PIZ26a]{PIZ26a}
+  \bysame,
+  \textit{Geometric Quantization by Paths -- Part I: The Simply Connected Case},
+  Preprint, 2026. arXiv:2508.11337
+  
+  \bibitem[PIZ26b]{PIZ26b}
+  \bysame,
+  \textit{Geometric Quantization by Paths Part II: The General Case},
+  Preprint, 2026. arXiv:2512.24627
+  
+  \bibitem[Poi92]{Poincare1}
+  Henri Poincar\'e,
+  \textit{Les nouvelles m\'ethodes de la m\'ecanique c\'eleste},
+  Gauthier-Villars, Paris, 1892.
+  
+  \bibitem[Qui67]{Qui67}
+  Daniel Quillen,
+  \textit{Homotopical algebra},
+  Lecture Notes in Mathematics, \textbf{43}, Springer-Verlag, Berlin-New York, 1967.
+  
+  \bibitem[Sat56]{Sat56}
+  Ichiro Satake,
+  \textit{On a generalization of the notion of manifold},
+  Proceedings of the National Academy of Sciences, \textbf{42}, pp.\,359--363, 1956.
+  
+  \bibitem[Sat57]{Sat57}
+  \bysame,
+  \textit{The Gauss-Bonnet theorem for V-manifolds},
+  Journal of the Mathematical Society of Japan, \textbf{9}(4), pp.\,464--492, 1957.
+  
+  \bibitem[Sch75]{Sch75}
+  Gerald~W. Schwarz,
+  \textit{Smooth functions invariant under the action of a compact Lie group},
+  Topology, \textbf{14}, pp.\,63--68, 1975.
+  
+  \bibitem[Sco83]{Sco83}
+  Peter Scott,
+  \textit{The geometries of 3-manifolds},
+  Bulletin of the London Mathematical Society, \textbf{15}, pp.\,401--487, 1983.
+  
+  \bibitem[Sou70]{Sou70}
+  Jean-Marie Souriau,
+  \textit{Structure des syst\`emes dynamiques},
+  Dunod, Paris, 1970.
+  
+  \bibitem[Sou70a]{Sou70a}
+  \bysame,
+  \textit{Sur le mouvement des particules à spin en relativité générale},
+  Comptes Rendus de l'Académie des Sciences, Paris, Série A, \textbf{271}, pp.\,751--753, 1970.
+  
+  \bibitem[Sou70b]{Sou70b}
+  \bysame,
+  \textit{Sur le mouvement des particules dans le champs életromagnétique},
+  Comptes Rendus de l'Académie des Sciences, Paris, Série A, \textbf{271}, pp.\,1086–-1088, 1970.
+  
+  \bibitem[Sou74]{Sou74}
+  \bysame,
+  \textit{Mod{\`e}le de particule {\`a} spin dans le champ {\'e}lectromagn{\'e}tique et gravitationnel},
+  Annales de l'Institut Henri Poincar{\'e}, \textbf{XX A}, 1974.
+  
+  \bibitem[Sou75]{Sou75}
+  \bysame,
+  \textit{Construction explicited de l'indice de maslov, applications},
+  In: Group Theoretical Methods in Physics. Lecture Notes in Physics, \textbf{50}, Springer Berlin Heidelberg 1976. \url{http://doi.org/10.1007/3-540-07789-8_13}
+  
+  \bibitem[Sou80]{Sou80}
+  \bysame,
+  \textit{Groupes diff\'erentiels},
+  Lect. Notes in Math., Springer Verlag, New-York, \textbf{836}, pp.\,91--128, 1980.
+  
+  \bibitem[Sou84]{Sou84}
+  \bysame,
+  \textit{Groupes différentiels et physique mathématique},
+  In Pierre Dazord and Nicole Desolneux-Moulis (Eds.), Feuilletages et quantification géométrique (Journées lyonnaises de la S.M.F., 14-17 juin 1983), Travaux en Cours, \textbf{6}, pp.\,73–119, Hermann, Paris, 1984.
+  
+  \bibitem[Sou03]{Sou03}
+  \bysame,
+  \textit{Les groupes comme universaux},
+  In Dominique Flament, editor, Histoires de g{\'e}om{\'e}tries, Documents de travail ({\'E}quipe F2DS), Fondation Maison des Sciences de l'Homme, 2003. \url{http://semioweb.msh-paris.fr/f2ds/docs/geo_2002/Document02_Souriau1.pdf}
+  
+  \bibitem[Ste12]{Ste12}
+  Shlomo Sternberg,
+  \textit{General Covariance and the Passive Equations of Physics},
+  In Albert Einstein Memorial Lectures. Edited By: Jacob Bekenstein and Raphael Mechoulam, The Hebrew University of Jerusalem, Israel, 2012. \url{https://www.worldscientific.com/doi/abs/10.1142/9789814329446_0002}
+  
+  \bibitem[SY19]{SY19}
+  Shoji Yokura,
+  \textit{Decomposition Spaces and POSet-Stratified Spaces},
+  Preprint, 2019. \url{https://arxiv.org/abs/1912.00339v1}
+  
+  \bibitem[SYH18]{SYH18}
+  Kazuhisa Shimakawa, Kohei Yoshida, Tadayuki Haragushi,
+  \textit{Homology and cohomology via enriched bifunctors},
+  Kyushu Journal of Mathematics, \textbf{72}, pp.\,239--52, 2018.
+  
+  \bibitem[Thu78]{Thu78}
+  William Thurston,
+  \textit{The Geometry and Topology of Three-Manifolds} (Chap. 13),
+  Princeton University lecture notes, 1978--1981. \url{http://library.msri.org/books/gt3m/PDF/13.pdf}
+  
+  \bibitem[Vil68]{Vil68}
+  Naum Vilenkin,
+  \textit{Special Functions and the Theory of Group Representations},
+  Translations of Mathematical Mo\-no\-graphs AMS, 1968.
+  
+  \bibitem[Vin08]{Vin08}
+  Martin Vincent,
+  \textit{Diffeological differential geometry},
+  Master's Thesis, University of Copenhagen, 2008.
+  
+  \bibitem[Wey46]{Weyl1}
+  Hermann Weyl,
+  \textit{The Clasical Groups, their Invariants and Representations},
+  Princeton University Press, New-Jersey, Princeton, 1946.
+  
+  \bibitem[Whi43]{Whi43}
+  Hassler Whitney,
+  \textit{Differentiable even functions},
+  Duke Mathematical Journal, \textbf{10}, pp.\,159--160, 1943.
+  
+  \bibitem[Wu12]{Wu12}
+  Enxin Wu,
+  \textit{A homotopy theory for diffeological spaces},
+  Ph.D. thesis. The University of Western Ontario, 2012.
+  
+  \bibitem[WZ22]{WZ22}
+  Enxin Wu and Zhongqiang Yang,
+  \textit{Topology of diffeological vector spaces},
+  Preprint, 2022.\\
+  \newblock{\verb|https://arxiv.org/abs/2205.09562|}
+  
+  \bibitem[Zie96]{Zie96}
+  Fran\c cois Ziegler,
+  \textit{Th\'eorie de Mackey symplectique, in M\'ethode des orbites et repr\'esentations quantiques},
+  Th\`ese de doctorat d'Uni\-ver\-sit\'e, Universit\'e de Provence, Marseille, 1996.\\
+  \newblock{\verb|http://arxiv.org/pdf/1011.5056v1.pdf|}
+  
+  \par}
+  
+\end{thebibliography}

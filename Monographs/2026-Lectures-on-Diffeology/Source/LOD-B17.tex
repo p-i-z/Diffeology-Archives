@@ -1,0 +1,124 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Title
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{\S B17. Differential Forms on the Cross}
+\setcounter{footnote}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  We describe the differential forms on the diffeological space consisting of the union of the two axes $ox \cup oy$ in $\RR^2$.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Introduction
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This question was raised by Professor Jedrzej Sniatycki:
+describe the differential forms on the space $X$,
+the union of the two axes in $\RR^2$
+$$
+  X = \{ (x,0) \mid x \in \RR\} \cup \{ (0,y) \mid y \in \RR\},
+  $$
+equipped with the subset diffeology.
+
+\begin{Article}{The forms on the cross.}{}
+  Every differential $1$-form $\alpha$ on $X$
+  is the restriction of a $1$-form on $\RR^2$ of the type $A = a(x) dx + b(y) dy$.
+  In other words,
+  for all plots $P \colon r \mapsto (x_r,y_r)$ in $X$,
+  $$
+    \alpha(P)_r(\delta r) = a(x_r){\partial x_r \over \partial r}(\delta r) +  b(y_r){\partial y_r \over \partial r}(\delta r).
+  $$
+  The $1$-forms $a$ and $b$ are the restrictions of $\alpha$ to the axes:
+  $$
+    a(x) dx = \alpha \restriction ox \quad \text{and} \quad b(y) dy = \alpha \restriction oy.
+  $$
+  \Note According to the definition \cite[\textsection\,6.40]{PIZ13},
+  the value of $\alpha$ at $(0,0)$ is zero if and only if $a(0)=b(0)=0$.
+  Indeed, evaluated on the plots $t \mapsto (t,0)$
+  and $t \mapsto (0,t)$ at $t=0$,
+  $\alpha$ is equal to $a(0)dx$ or $b(0)dy$,
+  which are not zero
+  unless both are $0$.
+\end{Article}
+
+\begin{proof}
+  First of all, notice that the four semi-axes:
+  $ox^-$,
+  $ox^+$,
+  $oy^-$ and $oy^+$,
+  are D-open in $X$.
+  That is,
+  open for the D-topology \cite[\textsection\,2.8]{PIZ13}.
+  Indeed,
+  for example,
+  for any plot $P$ in $X$,
+  $P^{-1}(ox^+) = P^{-1}\{(x,y) \mid x>0\}$,
+  which is open because it is the pullback of an open subset by a continuous map.
+  And \textit{mutatis mutandis} for $ox^-$,
+  $oy^-$ and $oy^+$.
+  
+  Let $P$ be defined on $\U \subset \RR^n$,
+  and let
+  $$
+    \cO = P^{-1}(ox^- \cup ox^+ \cup oy^- \cup oy^+).
+  $$
+  The subset $\cO$ is open.
+  Let us prove first that
+  $$
+    \alpha - A \restriction \cO = 0.
+  $$
+  That is,
+  for all $r \in \cO$ and all $\delta r \in \RR^n$
+  $$
+    \alpha(P)_r(\delta r) - a(x_r) \delta x_r - b(y_r)\delta y_r = 0.
+  $$
+  We denote
+  $$
+    \delta x_r = {\partial x_r \over \partial r}(\delta r)
+    \quad \text{and} \quad
+    \delta y_r = {\partial y_r \over \partial r}(\delta r).
+  $$
+  Let $r \in \cO$ and suppose $P(r) \in ox^+$,
+  for example.
+  Then,
+  there exists an open neighbourhood $V$ of $r$ such that $P \restriction V$ takes its values in $ox^+$.
+  Thus,
+  on $V$,
+  by definition $\alpha(P)_r(\delta r) = a(x_r)\delta x_r$.
+  And since $y_r = 0$ on $V$,
+  $\alpha(P)_r(\delta r) = a(x_r)\delta x_r + b(y_r)\delta y_r$.
+  \textit{Mutatis mutandis} for all other values of $P(r)$ when $r \in \cO$.
+  We eventually obtain that on $\cO$,
+  $(\alpha - A)(P) \restriction \cO = 0$.
+  
+  Now, for all $\delta r \in \RR^n$,
+  $(\alpha - A)(P)_r(\delta r)$ is a smooth function in $r$.
+  This function vanishes on $\cO$;
+  by continuity it vanishes on the closure $\overline\cO$.
+  Let $\U' = \U \setminus \overline\cO$,
+  which is an open subset of $\RR^n$.
+  Then $P \restriction \U'$ is a plot in $X$ taking only the value $(0,0)$.
+  Hence,
+  for all $r \in U'$,
+  $(\alpha - A)(P)_r(\delta r) = 0$,
+  since a differential form evaluated on a constant plot is zero (as it factors through $\RR^0$).
+  Thus,
+  for all $r \in U$,
+  $(\alpha - A)(P)_r(\delta r) = 0$.
+  Hence $\alpha(P)_r(\delta r) = a(x_r) \delta x_r + b(y_r) \delta y_r$,
+  and $\alpha = A \restriction X$.
+\end{proof}
+
+\vfill
+\includegraphics[width=\textwidth]{Figures/Thecross.pdf}

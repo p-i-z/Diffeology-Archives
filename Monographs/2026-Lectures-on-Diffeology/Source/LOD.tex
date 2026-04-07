@@ -1,0 +1,226 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Lectures on Diffeology
+%%
+%%  Patrick Iglesias-Zemmour //  2019-23
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt,reqno,openany]{surv-l}
+
+\input{LOD-display-macros.tex}
+
+%% override mathbf for LOD
+\newcommand{\NumberSetBold}[1]{\pmb{#1}}
+\input{LOD-dflg-macros.tex}
+
+\let\setminus\relax   % Undefine the existing command. Put here to avoid override
+\def\setminus{-}
+
+\begin{document}
+  
+  \MTversion{mathtt}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Front cover page
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \thispagestyle{empty}
+  \includepdf[pages={1}]{Covers/LOD-front-cover.pdf}
+  \cleardoublepage
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Front matter
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \frontmatter
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Exergue
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \thispagestyle{empty}
+  
+  \null
+  \vfill
+  
+  \begin{center}
+    \includegraphics[]{Quote/LOD-quote.pdf}
+  \end{center}
+  
+  \vfill
+  
+  \cleardoublepage
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Table of Contents
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \frontmatter
+  
+  \setcounter{page}{1}
+  
+  \makeatletter
+  \def\@makechapterhead#1{%
+  %% change the value of \topskip from 7.5pc to the desired value
+  \global\topskip 7.5pc\relax %% Here
+  \begingroup
+  \fontsize{\@xivpt}{18}\bfseries\centering
+  \ifnum\c@secnumdepth>\m@ne
+  \leavevmode \hskip-\leftskip
+  \rlap{\vbox to\z@{\vss
+  \centerline{\normalsize\mdseries
+  \uppercase\@xp{\chaptername}\enspace\thechapter}
+  %% change the value of \topskip from 3pc to the desired value
+  \vskip 3pc}}\hskip\leftskip\fi %% Here
+  #1\par \endgroup
+  \skip@34\p@ \advance\skip@-\normalbaselineskip
+  \vskip\skip@ }
+  \def\@makeschapterhead#1{%
+  %% change the value of \topskip from 7.5pc to the desired value
+  \global\topskip 7.5pc\relax  %% Here
+  \begingroup
+  \fontsize{\@xivpt}{18}\bfseries\centering
+  #1\par \endgroup
+  \skip@34\p@ \advance\skip@-\normalbaselineskip
+  \vskip\skip@ }
+  %% change the value of \topskip from 8pt to the desired value
+  \def\l@chapter{\@tocline{0}{6pt plus 1pt}{0pt}{}{}} %% Here
+  \makeatother
+  
+  \renewcommand{\contentsname}{Contents}
+  \tableofcontents
+  
+  \newpage\null\thispagestyle{empty}\newpage
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: - Foreword, Thanks
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{LOD-Preface-Rev.tex}
+  \input{LOD-Preface.tex}
+  \input{LOD-thanks.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Main matter
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \mainmatter
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %%  MARK: Chapters
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \input{LOD-L1.tex}
+  \input{LOD-L2.tex}
+  \input{LOD-L3.tex}
+  \input{LOD-L4.tex}
+  \input{LOD-L5.tex}
+  \input{LOD-L6.tex}
+  \input{LOD-L7.tex}
+  \input{LOD-L8.tex}
+  \input{LOD-L9.tex}
+  \input{LOD-L10.tex}
+  \input{LOD-L11.tex}
+  
+    \input{LOD-B1.tex}
+    \input{LOD-B2.tex}
+    \input{LOD-B3.tex}
+    \input{LOD-B4.tex}
+    \input{LOD-B5.tex}
+    \input{LOD-B6.tex}
+    \input{LOD-B7.tex}
+    \input{LOD-B8.tex}
+    \input{LOD-B9.tex}
+    \input{LOD-B10.tex}
+    \input{LOD-B11.tex}
+    \input{LOD-B12.tex}
+    \input{LOD-B13.tex}
+    \input{LOD-B14.tex}
+    \input{LOD-B15.tex}
+    \input{LOD-B16.tex}
+    \input{LOD-B17.tex}
+    \input{LOD-B18.tex}
+    \input{LOD-B19.tex}
+    \input{LOD-B20.tex}
+    \input{LOD-B21.tex}
+    \input{LOD-B22.tex}
+    \input{LOD-B23.tex}
+    \input{LOD-B24.tex}
+    \input{LOD-B25.tex}
+    \input{LOD-B26.tex}
+    \input{LOD-B27.tex}
+    \input{LOD-B28.tex}
+    \input{LOD-B29.tex}
+    \input{LOD-B30.tex}
+    \input{LOD-B31.tex}
+    \input{LOD-B32.tex}
+    \input{LOD-B33.tex}
+    \input{LOD-B34.tex}
+    \input{LOD-B35.tex}
+    \input{LOD-B36.tex}
+    \input{LOD-B37.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Back matter
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \backmatter
+  
+  \input{LOD-Postface.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Appendix
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \include{Appendix.tex}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Bibliography
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \MTversion{mathtt}
+  
+  \input{LOD.bbl}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Back cover page
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \newpage
+  \thispagestyle{empty}
+  \includepdf[pages={1}]{LOD-copyright.pdf}
+  
+  \newpage
+  \thispagestyle{empty}
+  \null
+  
+  \newpage
+  \thispagestyle{empty}
+  \null
+  
+  \newpage
+  \thispagestyle{empty}
+  \includepdf[pages={1}]{Covers/LOD-back-cover.pdf}
+  
+\end{document}

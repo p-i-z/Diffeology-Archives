@@ -1,0 +1,415 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Title
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addtocontents{toc}{\SkipTocEntry}
+\chapter*{\S B4. Symplectic Diffeology on the Space of \\ Smooth Periodic Functions}
+\addcontentsline{toc}{chapter}{Symplectic Diffeology on Smooth Periodic Functions}
+\chaptermark{Symplectic Diffeology on Smooth Periodic Functions}
+\setcounter{footnote}{0}
+
+\begin{abstract}
+  We consider a symplectic structure on the space of smooth periodic functions and the action of the infinite torus
+  as we have seen in previous notes ``Functional Diffeology on Fourier Coefficients'' and ``Infinite Torus Action on Smooth Periodic Functions''.
+  We study the action of the irrational solenoid and we show a reduction process for its moment map levels,
+  extending a diffeological version of Elisa Prato's quasispheres construction \cite{EP01} to infinite dimension,%
+  \footnote{This exercise has been inspired by a few and very interesting exchanges I have had with Elisa Prato and Fiametta Battaglia in January 2014 at Firenze where I stayed at the invitation of Elisa.
+  Let me take this opportunity to thank them sincerely.}
+  using the diffeology tools.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Exercise 1
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{A primitive of the symplectic form}
+
+We consider the space $\Cinfty_{\rm per}(\RR,\CC)$ of 1-periodic complex valued real functions
+equipped with the functional diffeology. We denote by $\cE$ the space of Fourier coefficients of
+smooth periodic functions and by $j : \Cinfty_{\rm per}(\RR,\CC) \to \cE$ the mapping
+$$
+  j(f) = (f_n)_{n\in \ZZ} \SpacedText{with} f_n = \int_0^1 f(x)e^{-2i\pi n x}dx,
+  $$
+and $\cE$ is equipped with the pushforward by $j$ of the functional diffeology on $\Cinfty_{\rm per}(\RR,\CC)$ from ``Functional Diffeology on Fourier Coefficients''.
+
+\begin{Article}{Exercise I.}{}
+  For all plots $P : U \to \Cinfty_{\rm per}(\RR,\CC)$ let
+  $$
+    \varepsilon(P)_r(\delta r) = {1 \over 2i\pi} \int_0^1
+    \overline{f_r(x)} \, {\partial f_r(x) \over \partial r}(\delta r) \, dx.
+    $$
+  \Question {\bf Q1.} Check that $\varepsilon$ defines a differential $1$-form on $\Cinfty_{\rm per}(\RR,\CC)$.
+  
+  \Question {\bf Q2.} Develop $\varepsilon$ and $\omega = d\varepsilon$ also in terms of the real and imaginary parts $f(x) = a(x) + ib(x)$.
+  
+  \Question {\bf Q3.} Develop $\varepsilon$ and $\omega$ in terms of Fourier coefficients.
+\end{Article}
+
+\begin{proof}
+  Let us check first that $\varepsilon$ is a well defined form. Let $P : r \mapsto f_r$ be a plot in $\Cinfty_{\rm per}(\RR,\CC)$, let $Q: s \mapsto r$ be a plot in $\Domain(P)$. We want to
+  check that $\varepsilon(P \circ Q) = Q^*(\varepsilon(P))$, that is,
+  $$
+    \varepsilon(P \circ Q)_s(\delta s) = \varepsilon(P)_r(\delta r) \SpacedText{with} r=Q(s) \SpacedText{and}
+    \delta r = {\partial r \over \partial s}(\delta s),
+    $$
+  where $\delta r$ is a tangent vector at $r$ to $\Domain(P)$. But
+  \begin{eqnarray*}
+    \varepsilon(P \circ Q)_s(\delta s) & = & {1 \over 2i\pi} \int_0^1
+    \overline{P \circ Q(s)(x)} \, {\partial P \circ Q(s)(x) \over \partial s}(\delta s) \, dx \\
+    &=& {1 \over 2i\pi} \int_0^1
+    \overline{P (r)(x)} \, {\partial P (r)(x) \over \partial r}{\partial r \over \partial s}(\delta s) \, dx,
+    \mbox{with $r=Q(s)$} \\
+    &=& {1 \over 2i\pi} \int_0^1
+    \overline{f_r(x)} \, {\partial f_r(x) \over \partial r}(\delta r) \, dx,
+    \mbox{with } \delta r = {\partial r \over \partial s}(\delta s) \\
+    &=& \varepsilon(P)_r(\delta r), \mbox{with } r=Q(s) \mbox{and } \delta r = {\partial r \over \partial s}(\delta s).
+  \end{eqnarray*}
+  Therefore, $\varepsilon(P \circ Q)= Q^*(\varepsilon(P))$ and $\varepsilon$
+  is a well defined differential $1$-form on $\Cinfty_{\rm per}(\RR,\CC)$.
+  
+  For Question 2. The exterior derivative of
+  $\varepsilon$ is given by an immediate application of the definition
+  $$
+    d\varepsilon(P)_r(\delta_r,\delta'r) = \delta(\varepsilon(P)_r(\delta'r)) - \delta'(\varepsilon(P)_r(\delta r)),
+    $$
+  for two independent variations $\delta$ and $\delta'$. Then,
+  \begin{eqnarray*}
+    \omega(P)_r(\delta_r,\delta'r) &= &{1 \over 2i\pi} \int_0^1 \overline{\partial f_r(x) \over \partial r}(\delta r)
+    {\partial f_r(x) \over \partial r}(\delta' r) \\
+    & - & \overline{\partial f_r(x) \over \partial r}(\delta' r)
+    {\partial f_r(x) \over \partial r}(\delta r) \, dx.
+  \end{eqnarray*}
+  Now let $f_r(x) = a_r(x) + ib_r(x)$ and let us denote
+  simply
+  $$
+    a = a_r(x),\ b = b_r(x),\ \delta a = {\partial a \over \partial r}(\delta r),\
+    \mbox{and}\ \delta b = {\partial b \over \partial r}(\delta r).
+    $$
+  Then,
+  \begin{eqnarray*}
+    \varepsilon(P)_r(\delta r) & = & {1 \over 2i\pi} \int_0^1
+    \overline{f_r(x)} \, {\partial f_r(x) \over \partial r}(\delta r) \, dx \\
+    &=& {1 \over 2i\pi} \int_0^1
+    (a -ib) (\delta a + i \delta b) \, dx \\
+    &=& {1 \over 2\pi} \int_0^1 (a \delta b - b \delta a) \, dx + {1 \over 2i\pi} \int_0^1 (a \delta a + b \delta b) \, dx \\
+    &=& {1 \over 2\pi} \int_0^1 (a \delta b - b \delta a) \, dx + {1 \over 4i\pi} d\left[\int_0^1 (a^2 + b^2) \, dx\right](\delta r)
+  \end{eqnarray*}
+  Therefore, since $d\circ d = 0$, the exterior derivative is
+  $$
+    \omega(P)_r(\delta r,\delta'r) = {1\over \pi}\int_0^1(\delta a\, \delta'b-\delta'a\, \delta b) \, dx.
+    $$
+  
+  For Question 3. Since everything is smooth we can exchange limits and integrals. Let
+  $$
+    f_n(r) = \int_0^1 f_r(x) e^{-2i\pi n x} dx,
+    $$
+  we have then:
+  \begin{eqnarray*}
+    \varepsilon(P)_r(\delta r) & = & {1 \over 2i\pi} \int_0^1
+    \overline{f_r(x)} \, {\partial f_r(x) \over \partial r}(\delta r) \, dx. \\
+    &=& {1 \over 2i\pi} \int_0^1 \left(\sum_{n\in\ZZ} \overline{f_n(r)} e^{-2i\pi n x}\right)
+    \left(\sum_{m\in\ZZ}{\partial f_m(r) \over \partial r}(\delta r) e^{2i\pi m x}\right)\, dx \\
+    &=& {1 \over 2i\pi} \sum_{n,m\in\ZZ}\overline{f_n(r)}\, {\partial f_m(r) \over \partial r}(\delta r)
+    \int_0^1 e^{2i\pi (m-n) x}\, dx \\
+    &=& {1 \over 2i\pi}\sum_{n\in\ZZ} \overline{f_n(r)} \, {\partial f_n(r) \over \partial r}(\delta r).
+  \end{eqnarray*}
+  And therefore, for the exterior derivative,
+  \begin{eqnarray*}
+    \omega(P)_r(\delta r, \delta'r) &=& {1 \over 2i\pi}\sum_{n\in\ZZ} \overline{\partial f_n(r) \over \partial r}(\delta r)
+    {\partial f_n(r) \over \partial r}(\delta'r) \\
+    & - & \overline{\partial f_n(r) \over \partial r}(\delta'r)
+    {\partial f_n(r) \over \partial r}(\delta r).
+  \end{eqnarray*}
+  Let us notice that if $\hat x : \Cinfty_{\rm per}(\RR,\CC) \to \CC$
+  denotes the {\em evaluation map} $\hat x(f) = f(x)$, then the $2$-form
+  $\omega$ is the mean value of the pullbacks
+  $$
+    \omega = {1\over \pi}\int_0^1 \hat x^*(\omega_0) \, dx,
+    $$
+  where $\omega_0$ is the canonical symplectic form on $\CC$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Exercise II
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Hamiltonian action of the infinite torus}
+
+\begin{Article}{Exercise II.}{}
+  We consider the $2$-form $\omega = d \varepsilon$ defined on the space of Fourier coefficients $\cE$,
+  equipped with the pushforward of the functional diffeology.
+  We consider then the action of the infinite torus $\Torus^\infty$ on $\cE$,
+  described in ``Infinite Torus Action on Smooth Periodic Functions''.
+  $$
+    (\tau_n)_{n\in\ZZ}\cdot(Z_n)_{n\in\ZZ} = (\tau_n Z_n)_{n\in\ZZ}.
+    $$
+  
+  \Question {\bf Q1.} Verify that the action of $\Torus^\infty$ on $\cE$ is Hamiltonian and exact.%
+  \footnote{See \cite[Chapter 9]{PIZ13}}
+  
+  \Question {\bf Q2.} Show that the moment maps of the action of $\Torus^\infty$ on $\cE$ are given by
+  $$
+    \mu (Z) = {1\over 2i\pi} \sum_{n\in\ZZ} \Modulus{Z_n}^2 \, \pi_n^*(\theta) + \sigma,
+    $$
+  where $Z= (Z_n)_{n\in\ZZ} \in \cE$, $\pi_n : \Torus^\infty \to \U(1)$ is the $n$-th projection $\pi_n (Z) =  Z_n$,
+  $\theta$ is the canonical invariant $1$-form on $\U(1)$, and $\sigma$ is a constant momentum of $\Torus^\infty$, that is,
+  a constant invariant $1$-form.
+  
+  \Question {\bf Q3.} Let $(\alpha_n)_{n\in\ZZ}$ be a sequence of irrational numbers independent over $\QQ$,
+  see Exercise II of ``Infinite Torus Action on Smooth Periodic Functions''.
+  Consider the induction
+  $$
+    \iota : \RR \to \Torus^\infty \SpacedText{with} \iota(t) = \bigg(e^{2i\pi \alpha_n t}\bigg)_{n\in\ZZ},
+    $$
+  and the induced action of $\RR$ on $\cE$
+  $$
+    \underline{t}(Z_n)_{n\in\ZZ} = \bigg(e^{2i\pi \alpha_n t}  Z_n\bigg)_{n\in\ZZ}.
+    $$
+  Show that the $1$-point moment maps are given by
+  $$
+    \nu (Z) = h (Z) \, dt \SpacedText{with} h (Z) = \sum_{n\in\ZZ} \alpha_n \Modulus{Z_n}^2 + c,
+    $$
+  where $c$ is some constant.
+\end{Article}
+
+\begin{proof}
+  For Question 1. The primitive $\varepsilon$ is invariant by the action of $\Torus^\infty$. Let us recall that
+  $$
+    \varepsilon(P)_r(\delta r)  = {1 \over 2i\pi}\sum_{n\in\ZZ} \overline{Z_n(r)} \, {\partial  Z_n(r) \over \partial r}(\delta r),
+    $$
+  for all plots $P : r \mapsto (Z_n(r))_{n\in\ZZ}$ in $\cE$.
+  Then, let $\tau=(\tau_n)_{n\in\ZZ} \in \Torus^\infty$, we have
+  \begin{eqnarray*}
+    \underline{\tau}^*(\varepsilon)(P)_r(\delta r)&  =& \varepsilon(\underline{\tau} \circ P)_r(\delta r) \\
+    & = &  {1 \over 2i\pi}\sum_{n\in\ZZ} \overline{\tau_n\,  Z_n(r)} \, {\partial \tau_n\,  Z_n(r) \over \partial r}(\delta r)\\
+    & = &  {1 \over 2i\pi}\sum_{n\in\ZZ} \overline{Z_n(r)}\, \bar \tau_n \tau_n \, {\partial   Z_n(r) \over \partial r}(\delta r) \\
+    & = &  {1 \over 2i\pi}\sum_{n\in\ZZ} \overline{Z_n(r)}\,{\partial   Z_n(r) \over \partial r}(\delta r)\\
+    & = & \varepsilon(P)_r(\delta r).
+  \end{eqnarray*}
+  Therefore, the action is Hamiltonian and equivariant \cite[\textsection\,9.11]{PIZ13}.
+  
+  For Question 2.
+  Let $\theta$ be the canonical $1$-form on $\U(1)$ defined by
+  $$
+    \Class^*(\theta) = dt,
+    \SpacedText{with}
+    \Class : \RR \to \Torus = \RR/\ZZ.
+    $$
+  Let $\pi_n : \Torus^\infty \to \U(1)$ be the $n$-th projection $Z \mapsto  Z_n$, for all
+  $Z= (Z_n)_{n\in\ZZ} \in \cE$. Let $\zeta : r \mapsto(\zeta_n(r))_{n\in\ZZ}$ be a plot in $\Torus^\infty$,
+  the $1$-point moment map $\mu$ of the action of $\Torus^\infty$ on $\cE$ is given, up to a constant, by
+  \begin{eqnarray*}
+    \mu (Z)(\zeta)_r(\delta r) & = & \hat Z^*(\varepsilon)(\zeta)_r(\delta r) \\
+    & = & \varepsilon(\hat Z \circ \zeta)_r(\delta r) \\
+    & = &  {1 \over 2i\pi}\sum_{n\in\ZZ} \overline{Z_n \zeta_n(r)}\,{\partial  Z_n  \zeta_n(r) \over \partial r}(\delta r) \\
+    & = &  {1 \over 2i\pi}\sum_{n\in\ZZ} \Modulus{Z_n}^2 \, \bar \zeta_n(r)\,{\partial \zeta_n(r) \over \partial r}(\delta r) \\
+    & = &  {1 \over 2i\pi}\sum_{n\in\ZZ} \Modulus{Z_n}^2 \, \pi_n^*(\theta)(\zeta)_r(\delta r).
+  \end{eqnarray*}
+  Therefore, a general $1$-point moment map writes
+  $$
+    \mu (Z) =  {1 \over 2i\pi}\sum_{n\in\ZZ} \Modulus{Z_n}^2 \, \pi_n^*(\theta) + \sigma.
+    $$
+  Remark that on any ball, for all $n\in\ZZ$, $\zeta_n(r) = \exp(2i\pi\, t_n(r))$ for some smooth real functions $t_n$.
+  Then, the moment map is also given, modulo a constant, by
+  $$
+    \mu (Z)(\zeta)_r(\delta r) = \sum_{n\in\ZZ} \Modulus{Z_n}^2 \, {\partial t_n(r) \over \partial r}(\delta r).
+    $$
+  Note also that, since $\zeta$ is a plot in $\Torus^\infty$ for the tempered diffeology,
+  the norm of the derivatives $\partial \zeta_n(r) / \partial r$, that is,
+  $\partial t_n(r) / \partial r$, are dominated by a polynomial in $n$ what insures the convergence of the series
+  defining the moment map just above.
+  
+  For Question 3. The induction $\iota : \RR \to \Torus^\infty$
+  $$
+    \iota : t \mapsto \bigg(e^{2i\pi\alpha_n t}\bigg)_{n\in\ZZ}
+    $$
+  induces a projection $\iota^* : \cTorus_\infty^* \to \RR^*$,
+  where $\cTorus_\infty^*$ is the space of momenta of $\Torus^\infty$.
+  The moment maps with respect to the group $\RR$ are then the composites $\nu = \iota^* \circ \mu$, that is,
+  \begin{eqnarray*}
+    \nu & = & \iota^*\bigg\{ {1 \over 2i\pi}\sum_{n\in\ZZ} \Modulus{Z_n}^2 \, \pi_n^*(\theta) + \sigma \bigg\} \\
+    & = & {1 \over 2i\pi}\sum_{n\in\ZZ} \Modulus{Z_n}^2 \, (\pi_n\circ\iota)^*(\theta) + \iota^*(\sigma).
+  \end{eqnarray*}
+  But
+  $$
+    \pi_n\circ \iota : t \mapsto \exp(2i\pi \alpha_n t), \SpacedText{then} (\pi_n\circ\iota)^*(\theta) = 2i\pi \alpha_n\, dt.
+    $$
+  Thus,
+  $$
+    \nu (Z) = h (Z) \, dt \SpacedText{with} h (Z) = \sum_{n\in\ZZ} \alpha_n \Modulus{Z_n}^2 + c,
+    $$
+  where $\iota^*(\sigma) = c\, dt$, $c \in \RR$.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Exercise III
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Orbits of the Hamiltonian flow}
+
+\begin{Article}{Exercise III.}{}
+  We continue with the data of previous exercise.
+  Let $Y$ be a level of the moment map $\nu$ of the action of $\RR$, that is,
+  $$
+    Y = \bigg\{Z = (Z_n)_{n\in\ZZ} \in \cE \mid \sum_{n\in\ZZ} \alpha_n \Modulus{Z_n}^2 = c \bigg\} \SpacedText{with $c>0$.}
+    $$
+  \Question{\bf Q1.} Verify that, for all $Z \in Y$, if there exists $ Z_n \neq 0$ and $ Z_m \neq 0$,
+  then the stabilizer of $Z$ is reduced to $\{0\}$ and the orbit of $Z$ by $\RR$, equipped with the subset diffeology,
+  is diffeomorphic to $\RR$. Such orbits are called {\em principal orbits}.
+  
+  \Question{\bf Q2.}  Verify that the non principal orbits, that is, the {\em singular orbits}, are the
+  subspaces
+  $$
+    \Sph^1_n = \{Z \in Y \mid  Z_m = 0 \mbox{if } m \neq n \}, \SpacedText{with} n\in \NN,
+    $$
+  each diffeomorphic to the circle $\Sph^1$.
+  
+  \Question{\bf Q3.}  Show that the union
+  $$
+    \cS = \bigcup_{n\in\ZZ} \Sph^1_n \subset Y,
+    $$
+  equipped with the subset diffeology is actually the sum of the $\Sph^1_n$ \cite[\textsection\,1.39]{PIZ13}, that is,
+  $$
+    \cS = \coprod_{n\in\ZZ} \Sph^1_n \SpacedText{and then} \dim(\cS) = 1.
+    $$
+  \Question{\bf Q4.}  Show that $Y - \cS$ is  open for the D-topology (D-open) \cite[\textsection\,2.8]{PIZ13}.
+  
+\end{Article}
+
+\begin{proof}
+  For Question 1. Let $Z\in Y$ with $ Z_n \neq 0$ and  $ Z_m \neq 0$, the map
+  $$
+    t \mapsto (e^{2i\pi \alpha_n t}\tau_n, e^{2i\pi \alpha_m t}\tau_m)
+    \SpacedText{with}
+    \left\{\begin{split} \tau_n &= {Z_n \over \Modulus{Z_n}} \\ % \SpacedText{and}
+    \tau_m &= {Z_m \over \Modulus{Z_m}}
+    \end{split}
+    \right.
+    $$
+  is an induction from $\RR$ into $\Torus^2$,
+  because $\alpha_n$ and $\alpha_m$ are independent over $\QQ$,
+  see \cite[Exercise 31]{PIZ13}.
+  Therefore,
+   the orbit map $t \mapsto \underline{t} (Z)$ is an induction.
+  
+  For Question 2. There exists $n$ such that for all $m \neq n$, $ Z_m = 0$
+  but $ Z_n\neq 0$, since $\sum_{n\in\ZZ} \alpha_n \Modulus{Z_n}^2>0$.
+  The orbit map is a covering onto the circle $\Sph^1_n$ induced in $Y$.
+  
+  For Question 3. Let $P : U \to \cS$ be a plot. For every $n \in \ZZ$ let
+  $\cO_n = (\pi_n\circ P)^{-1}(\CC-\{0\})$, where $\pi_n : Y \to \CC$ is the projection
+  $\pi_n((Z_m)_{m\in \ZZ}) =  Z_n$.
+  Since $\pi_n \circ P$ is smooth, then continuous, every $\cO_n\subset U$ is open. Moreover, let $n\neq m$,
+  assume $r \in \cO_n\cap\cO_m$, that is, $ Z_n(r)\neq 0$ and $ Z_m(r)\neq 0$,
+  but $P$ takes its values in
+  the union of the $\Sph^1_m$, $m \in \ZZ$, hence
+  $ Z_n(r)\neq 0$ implies $ Z_m(r) = 0$ for all $m\neq n$ thus $\cO_n\cap\cO_m = \varnothing$.
+  Therefore,
+  $$
+    U = \bigcup_{n\in \ZZ} \cO_n \SpacedText{and} \cO_n \cap \cO_m = \varnothing,
+    $$
+  for all $n\neq m$.
+  
+  That means that the $\cO_n$ are the connected components of $U$. Thus, $P$ takes locally its values in the $\Sph^1_n$,
+  $n\in \ZZ$, that means that $\cS$ is the diffeological sum of the circles $\Sph^1_n$, $n\in \ZZ$, see \cite[\textsection\,1.39]{PIZ13}.
+  
+  For Question 4.
+  Let $P:U \to Y$ be a plot, $P (r)=(Z_n(r))_{n \in \ZZ}$.
+  For all $r_0 \in P^{-1}(Y - \cS)$ there exist at least two different indices $n$ and $m$ such that $ Z_n(r_0)\neq 0$ and $ Z_m(r_0)\neq 0$.
+  Since $ Z_n$ and $ Z_m$ are smooth there exists an open neighborhood $V$ of $r_0$ such that $ Z_n(r)\neq 0$ and $ Z_m(r)\neq 0$,
+  for all $r \in V$,
+  that is,
+  $V \subset P^{-1}(Y - \cS)$.
+  Thus, $P^{-1}(Y - \cS)$ is a union of open domains,
+  it is then an open domain,
+  and consequently $Y - \cS$ is D-open.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Exercise IV
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Reduction of a moment map level}
+
+\begin{Article}{Exercise IV.}{}
+  \label{quasiprojective-space-reduction}
+  We denote by $X$ the space of orbits of the action of $\RR$ on $Y$.
+  We equip $Y$ with the quotient diffeology,
+  and denote by $\Proj : Y \to X$ the
+  projection.
+  
+  \Question{\bf Q1.} Why could we call the space $X$, an {\em infinite quasiprojective space}?
+  
+  \Question{\bf Q2.} Show that there exists a closed $2$-form $\varpi$ on $X$ (We say that $\varpi$ is parasymplectic) such that
+  $$
+    \omega \restriction Y = \Proj^*(\varpi).
+    $$
+  This is a particular case of symplectic reduction with singularities.
+\end{Article}
+
+\begin{proof}
+  For Question 1. Let $Z = (Z_n)_{n\in \ZZ} \in Y$, by the change $ Z_n \mapsto \sqrt{\alpha_n} Z_n/\sqrt{c}$ the subspace
+  $Y$ is mapped into $\Sph^\infty \in \cE$, the unit sphere in $\cE$. Now, if all $\alpha_n$ were equal to $1$
+  then the action of $\RR$ would be the action of $\Sph^1$ and
+  $X$ would be diffeomorphic to $\CC\PP^\infty$, the infinite projective space,
+  and the projection $\Proj : Y \to X$ would be the infinite Hopf fibration, see \cite[\textsection\,4.11]{PIZ13}
+  for the same infinite projective space with another diffeology. That
+  explains the choice of vocabulary.
+  
+  For Question 2. We shall apply the general criterion for a differential form to be the pullback of another one.
+  Let $P : U \to Y$ and $P ' : U \to Y$ be two plots
+  $$
+    \begin{array}{ccc}
+    \begin{array}{c}
+    \begin{tikzpicture}
+    \matrix[matrix of math nodes, row sep=1cm, column sep=1cm]
+    {
+    |(A)|  U & |(B)| Y  \\
+    |(C)|     & |(D)| X \\
+    };
+    \begin{scope}[every node/.style={pos=0.5,font=\normalsize}]
+    \draw[->] ([yshift = 3pt] A.east) -- ([yshift = 3pt] B.west) node[midway,above] {\mbox{$P$}};
+    \draw[->] ([yshift = -3pt] A.east) -- ([yshift = -3pt] B.west) node[midway,below] {\mbox{$P '$}};
+    \draw[->] (B) -- (D) node[auto=left] {\mbox{$\Proj$}} ;
+    \end{scope}
+    \end{tikzpicture}
+    \end{array}
+    & \mbox{such that } & \Proj \circ P = \Proj \circ P '.
+    \end{array}
+    $$
+  We want to check if, in these conditions, $\omega(P) = \omega(P ')$. That would insure the existence of
+  $\varpi$, a (necessarily closed) $2$-form on $X$ such that $\omega = \Proj^*(\varpi)$ \cite[\textsection\,6.38]{PIZ13}.
+  We consider first of all what happens on the open subset
+  $$
+    U_0 = P^{-1}(Y - \cS).
+    $$
+  Since $\Proj \circ P = \Proj \circ P '$,
+  $P^{-1}(Y - \cS) = P '^{-1}(Y - \cS) = U_0$.
+  Now, the restrictions of $P$ and $P '$ on $U_0$ take their values in the subset of $Y$
+  made of principal orbits of $\RR$,
+  for which the stabilizer of the action of $\RR$ is $\{0\}$. Therefore, for each $r \in U_0$ there is a unique $\tau(r) \in \RR$
+  such that, for all $n$, $Z'_n(r) = e^{2i\pi \alpha_n \tau(r)} Z_n(r)$. Now, $\omega = d\varepsilon$, and
+  \begin{eqnarray*}
+    \varepsilon(P ')_r(\delta r) &=& {1 \over 2i\pi} \sum_{n\in\ZZ} \bar Z'_n(r){\partial Z'_n(r) \over \partial r}(\delta r) \\
+    & = & {1 \over 2i\pi} \sum_{n\in\ZZ} \bar Z_n(r){\partial  Z_n(r) \over \partial r}(\delta r) \\
+    & + & \bigg(\sum_{n\in\ZZ} \alpha_n \bar Z_n(r)   Z_n(r)\bigg) {\partial \tau(r) \over \partial r}(\delta r) \\
+    & = & \varepsilon(P)_r(\delta r) + c\, \tau^*(dt).
+  \end{eqnarray*}
+  Therefore, $[\omega(P ') - \omega(P)] \restriction U_0 = 0$.
+  Thus, by continuity, $[\omega(P ') - \omega(P)] \restriction \bar U_0 = 0$, where $\bar U_0$ is the closure of $U_0$.
+  It remains to check what happens on the complementary $V = \U-\bar U_0$. The subset $V$ is open,
+  thus $P \restriction V$ and  $P '\restriction V$ are two plots of $Y$ but with values in the subset of singular orbits
+  $\cS$. Since $\cS$ has dimension $1$ and $\omega$ is a $2$-form,
+  $\omega(P \restriction V) = \omega(P '\restriction V) = 0$. In conclusion $\omega(P ') = \omega(P)$ everywhere on $U$.
+  That proves that there exists a $2$-form $\varpi$ on $X=Y/\RR$ such that $\Proj^*(\varpi) = \omega$.
+\end{proof}
+
+\vfill
+\centerline{\includegraphics[width=.6\textwidth]{Figures/music.png}}

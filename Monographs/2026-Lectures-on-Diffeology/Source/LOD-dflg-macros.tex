@@ -1,0 +1,609 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  LOD-macro.tex --- Macro File for the Lectures on Diffeology
+%%
+%%  Patrick Iglesias-Zemmour 2019-23
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Text Shortcut
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Implement text inside a display math block to make space around the text
+\newcommand{\SpacedText}[1]{\ \text{#1}\ }
+\newcommand{\QuadText}[1]{\quad\text{#1}\quad}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Hyphenation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hyphenation{pa-ra-me-t-ri-za-tion}
+\hyphenation{pa-ra-me-t-ri-za-tions}
+\hyphenation{dif-feo-lo-gi-cal}
+\hyphenation{dif-feo-lo-gy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Latin shortcuts
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\cf}{{\em cf.\/}}
+\newcommand{\ie}{{\em i.e.\/}}
+\newcommand{\resp}{{\em resp.\/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Define *** MARK: -
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Numbers Sets
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ \providecommand{\NumberSetBold}[1]{\mathbf{#1}} %% Set the numbers set bold face
+
+\newcommand{\RR}{\NumberSetBold{R}} %% Real numbers field
+\newcommand{\CC}{\NumberSetBold{C}} %% Complex numbers field
+\newcommand{\ZZ}{\NumberSetBold{Z}} %% Relative integers ring
+\newcommand{\NN}{\NumberSetBold{N}} %% Natural integers
+\newcommand{\QQ}{\NumberSetBold{Q}} %% Rational numbers field
+
+%\newcommand{\fRR}{\boldsymbol{\mathsf R}} %% This command if we want to use a bold R sans-serif
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Various Arrows
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Attention ne pas toucher la longueur, affecte les diagrames / Changer le code pour utiliser tikz
+\newcommand{\rfl}[1]{{\buildrel{\displaystyle #1}\over{\hbox to 9mm{\ \rightarrowfill \ }}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Define *** MARK: -
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Categories
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Category}[1]{\{\text{#1}\}}  %% Display the name of the category between braces
+
+\newcommand{\Obj}{{\operatorname{Obj}}}  %% The set of objects of a category
+\newcommand{\Mor}{{\operatorname{Mor}}}  %% The set of Morphisms of a category
+ 
+\newcommand{\Top}{\{\operatorname{Top}\}}         %% The sets of topologies of a set as in $\Top(\RR^n)$
+\newcommand{\Difflg}{\operatorname{Diffeologies}} %% The set of all diffeologies on a set
+
+%% Maps in categories
+\newcommand{\Hom}{\mathrm{Hom}} %% Homomorphisms
+\newcommand{\DHom}{\Hom^\infty} %% Smooth homomorphisms
+
+\newcommand{\Isom}{\mathrm{Isom}} %% Isomorphisms
+\newcommand{\DIsom}{\Isom^\infty} %% Smooth isomorphisms
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Intervals
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\OpenInterval}[1]{\mathopen] #1 \mathclose[}        %% An open interval both sides
+\newcommand{\ClosedInterval}[1]{\mathopen[ #1 \mathclose]}      %% A closed interval both sides
+\newcommand{\LeftClosedInterval}[1]{\mathopen[ #1 \mathclose[}  %% An interval closed left open right
+\newcommand{\RightClosedInterval}[1]{\mathopen] #1 \mathclose]} %% An interval open left closed right
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Pseudo Groups
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\loc}{\mathrm{loc}}          %% Shortcut for "local". Used in $\Diff_\loc$ to denote th local diffeomorphisms etc.
+
+\newcommand{\germ}{\operatorname{germ}}  %% The germ of a function
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Linear Forms
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\LinearForm}{\Lambda}                 %% Linear forms on Euclidean spaces, use as $\Form^p(E)
+\newcommand{\SmoothForms}{{\pmb{\Lambda}}}        %% Smooth form space: on Euclidean domains
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Differential Calculus
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Czero}{{\cC}^0}        %% Set of continuous maps
+\newcommand{\Ck}[1]{{\cC}^{#1}}     %% Set of k-continuously differentiable maps
+\newcommand{\Cinfty}{{\cC}^\infty}  %% Set of infinitely continuously differentiable maps
+
+\newcommand{\Der}{\operatorname{D}}   %% Tangent linear map, use $\Der(F)_x(v)$ the tangent linear map of $F$ at a point $x$ applied to a vector $v$
+
+\newcommand{\DForms}{\Omega} %% Differential forms, use as $\DForms^p(X)$
+
+\newcommand{\Surf}{{\operatorname{Surf}}} %% Surface element - Volume element on a 2-dimensional manifold
+\newcommand{\Vol}{\operatorname{Vol}}     %% Volume element
+
+\newcommand{\CHO}{\mathsf{K}}                %% Chain-Homotopy operator
+\newcommand{\Komega}{\CHO\omega}             %% SHortcut for the Action 1-form on the space of paths
+\newcommand{\bfCHO}{\boldsymbol{\mathsf K}}  %% alternative to Chain-Homotopy operator
+
+\newcommand{\dt}{\mathrm{dt}}  %% Differential symbol
+\newcommand{\ds}{\mathrm{ds}}  %% Differential symbol
+\newcommand{\du}{\mathrm{du}}  %% Differential symbol
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Fiber Bundles
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The set or space of section of any projection map
+\newcommand{\Sections}{\operatorname{Sec}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Functions and Operators
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Acos}{\mathop\mathrm{acos}\nolimits}  %% Function arc-cosinus
+\newcommand{\Asin}{\mathop\mathrm{asin}\nolimits}  %% Function arc-sinus
+
+\newcommand{\Const}{\mathrm{Const.}}               %% A constant function for a undefined constant
+
+\newcommand{\Modulus}[1]{\vert #1 \vert}           %% The modulus of a complex number
+\newcommand{\Norm}[1]{\Vert #1 \Vert}              %% The Euclidean norm of a vector
+
+\newcommand{\Proj}{\operatorname{pr}}              %% Generic name for a projection
+
+\newcommand{\Sign}{\operatorname{sgn}}             %% The function 'sign"
+
+\renewcommand{\det}{\mathrm{det}}                   %% Determinant
+
+\newcommand{\Value}{\operatorname{value}}           %% The value of something
+
+\newcommand{\SquareRoot}{\operatorname{sqrt}}       %% Square root function
+
+\newcommand{\Sup}{\operatorname{Sup}}               %% The supremum of a function
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Generating families
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Gen}{\operatorname{Gen}}
+\newcommand{\gen}[1]{\mathop\langle#1\mathop\rangle}
+
+\newcommand{\vecspan}[1]{{\rm span}(#1)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Groups Names
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\GL}{\mathrm{GL}}     %% Linear group
+\newcommand{\Sp}{{\rm Sp}}        %% Symplectic group
+\newcommand{\SO}{\mathrm{SO}}     %% Special Orthogonal group
+\newcommand{\SL}{\mathrm{SL}}     %% Special Linear group
+\newcommand{\U}{\mathrm{U}}       %% Unitary group
+\newcommand{\Perm}{\mathrm{Perm}} %% The group of permutations of a set
+\newcommand{\SU}{\mathrm{SU}}
+
+\let\O\relax
+\newcommand{\O}{\mathrm{O}}       %% Orthogonal group
+
+\newcommand{\Aff}{\operatorname{Aff}}   %% Affine group as in $\Aff(\RR)$
+\newcommand{\Aut}{\operatorname{Aut}}   %% Automorphisms group
+\newcommand{\Diff}{\operatorname{Diff}} %% Diffeomorphism group
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Groups Operators
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\coker}{\operatorname{coker}}   %% co-kernel
+\newcommand{\Ad}{\mathrm{Ad}}               %% Adjoint action $\Ag(g)(k) = gkg^{-1}$
+
+\DeclareMathOperator{\Lm}{L}    %% Left-multiplication in $\Lm(g)(k) = gk$
+\DeclareMathOperator{\Rm}{R}    %% Right-multiplication in $\Rm(g)(k) = kg$
+
+\newcommand{\OrbitMap}[1]{\hat{#1}}        %% Orbit map $\OrbitMap{x} : g \mapsto g(x)$
+
+\newcommand{\Ab}[1]{#1^{\mathrm{Ab}}}      %% Abelianized, use as $\Ab{\pi_1}(X)$
+
+\newcommand{\Stab}{\mathrm{St}}             %% Stabilizer
+
+\DeclareMathOperator{\Trsl}{Tr} %% Translation operation, use as $\Trsl_a(x) = x + a$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Lie Algebras
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Input the name of the group and it produces the name of the Lie algebra
+%% as lower-case fracture font
+\newcommand{\LieAlgebra}[1]{\mathfrak{\MakeLowercase{#1}}}
+
+\newcommand{\DLie}{\mbox{\pounds}} %% Lie derivative
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Groupoids
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The source map
+\newcommand{\Src}{\mathrm{src}}
+
+%% The target map
+\newcommand{\Trg}{\mathrm{trg}}
+
+%% Transitivity component, also called orbit, in a groupoid. They are the largest subsets of objects connected by arrows
+\newcommand{\TransComp}{\operatorname{Comp}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Homology - Cohomology
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The boundary operator in homology or anything realted
+\DeclareMathOperator{\Boundary}{\partial}
+
+\newcommand{\cub}[1]{\operatorname{I}^{#1}}      %% A cube, that is a product $I^p$ where $I$ is the interval $[0,1]$
+\newcommand{\DCubes}[1]{\operatorname{Cub}_{#1}} %% The space of smooth cubes: $\DCubes{p}(X)$ is the space of smooth maps from $\RR^n$ to $X$.
+
+\newcommand{\DChains}[1]{\operatorname{C}_{#1}}   %% Smooth chains in cubic homology: linear combination of smooth cubes.
+\newcommand{\DCochains}[1]{\operatorname{C}^{#1}} %% Smooth cochains in cubic homology.
+
+\newcommand{\QDChains}[1]{\operatorname{\textbf{\textsf C}}_{#1}}   %% Reduced smooth chain groups: quotient of the group of cubic chains by the subgroup of degenerate cubic chains.
+\newcommand{\QDCochains}[1]{\operatorname{\textbf{\textsf C}}^{#1}} %% Smooth Cochains defined as morphisms from Reduced smooth chains (the first letter 'Q' is for 'Quotient').
+
+\newcommand{\QDZ}{\operatorname{\textbf{\textsf Z}}} %% Cycle/cocycle notation depending of the place of the index: $\QDZ_p(X)$ cycles in the reduced cubic homology.
+%% $\QDZ^p(X,\RR)$ cocycles in the reduced cubic cohomology with values in $\RR$.
+\newcommand{\QDB}{\operatorname{\textbf{\textsf B}}} %% Boundary/coboundary notation depending of the place of the index: $\QDB_p(X)$ boundaries in the reduced cubic homology.
+%% $\QDB^p(X,\RR)$ coboundaries in the reduced cubic cohomology with values in $\RR$.
+\newcommand{\QDH}{\operatorname{\textbf{\textsf H}}} %% The reduced cubic homology or cohomology groups $\QDH = \QDZ/\QDB$.
+
+\newcommand{\ZG}{Z} % generic Homology/Cohomology cycles.
+\newcommand{\BG}{B} % generic Homology/Cohomology boundaries.
+\newcommand{\HG}{H} % generic Homology/Cohomology groups $\HG= \ZG/\BG$.
+
+\newcommand{\ZDR}{Z_\mathrm{dR}} %% De Rham Cocycles
+\newcommand{\BDR}{B_\mathrm{dR}} %% De Rham Coboundaries
+\newcommand{\HDR}{H_\mathrm{dR}} %% De Rham cohomology groups
+
+\newcommand{\hdR}{h_{\mathrm{dR}}} %% De Rham homomorphism, takes the degree as exponent.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Metric definitions and Covariant calculus
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\hdiv}{{\hat{\mathrm d}}\text{iv}} %% Covariant divergence with respect to some metric
+
+\newcommand{\Length}{\mathrm{Length}}          %% The length od a path in the sense $\Length(\gamma) = \int_0^1 \sqrt{g(\gamma)_t(1)(1)} \dt$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Homotopy
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Poinc}[1]{\boldsymbol{#1}} %% The Poincaré groupod for any space in parameter.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Linear maps and vector spaces
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Lin}{\operatorname{L}} %% The set of linear maps between two vector spaces as in $\Lin(E,F)$
+\newcommand{\DLin}{\Lin^\infty}     %% The set of smooth linear maps between two diffeological vector spaces
+
+\newcommand{\Vector}[1]{\begin{pmatrix}#1\end{pmatrix}}              %% A vector as column with curve parentheis, usage : \Vector{a \\ b \\...}
+                                                                    %% Can be used to form a matrix by $\Vector{a & b \\ c & d }$
+\newcommand{\SqVect}[1]{\left[\begin{matrix}#1\end{matrix} \right]}  %% The same but between square brackets
+
+\DeclareMathOperator{\Matrix}{Mat}   %% the set of matrices, use as $\Matrix_p$ the space of p x p matrices
+
+\renewcommand{\ker}{\mathrm{ker}}    %% The kernel of a linear map $\ker(M)$
+
+%% Some special operators
+\newcommand{\J}{\operatorname{J}}    %% The $\pi/2$ rotation matrix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Curves, Lines, Geodesics etc.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Geod}{\operatorname{Geod}}
+
+\newcommand{\Traj}{\operatorname{Traj}} %% The space of trajectories
+\newcommand{\traj}{\mathrm{traj}}       %% Subscript to identify the space of trajectories of curves
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Paths, Homotopy...
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Paths}{\operatorname{Paths}}     %% Space of smooth paths in a diffeological space, use $\Paths(X).
+\newcommand{\Loops}{\operatorname{Loops}}     %% The space of loops $\ell$, $\ell(0) = \ell(1)$
+
+\newcommand{\stPaths}{\operatorname{stPaths}} %% Space of stationary paths in a diffeological space, use $st\Paths(X).
+\newcommand{\stLoops}{\operatorname{stLoops}} %% Space of stationary loops in a diffeological space, use $\stLoops(X).
+
+\newcommand{\0}{\hat 0}                       %% Origin of a path $\0(\gamma) = \gamma(0)$
+\newcommand{\1}{\hat 1}                       %% End of a path $\1(\gamma) = \gamma(1)$
+
+\def\Ends{\operatorname{ends}}                %% Ends of a path $\Ends(\gamma) = (\0(\gamma), \1(\gamma))$
+
+\def\Rev{\operatorname{rev}}                  %% The reverse paths $\Rev(\gamma) = \bar\gamma = [t \mapsto \gamma(1-t)]$.
+
+\newcommand{\Comp}{\operatorname{comp}}       %% Connected component map $\Comp(x)$ is the connected component containing $x$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Diffeology
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Domain}{\mathrm{dom}}       %% The domain of a parametrization
+\newcommand{\Domains}{\mathrm{Domains}}  %% The set of Domains of an Euclidean space $\Domains(\RR^n)$
+
+\newcommand{\Params}{\mathrm{Params}}  %% The set of parametrizations in a set
+\newcommand{\Plots}{\mathrm{Plots}}    %% The set of plots in a diffeoogical space, the diffeology
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Various Maps
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Def}{\mathrm{def}}          %% Set of definition of a map partially defined in a set
+
+\newcommand{\Val}{\operatorname{Val}}     %% The space of values of a map/function
+
+\newcommand{\Maps}{\mathrm{Maps}}         %% The set of all maps from a set to another $\Maps(A,B)$
+
+\newcommand{\Id}{{\mathbf{1}}}            %% The identity map
+
+\newcommand{\Supp}{\operatorname{Supp}}   %% The support of a function as in $\Supp(f) ± \{ x \mid f(x) \neq 0 \}$
+
+\newcommand{\emptymap}{{\Id_\varnothing}} %% The empty map: a map being a subset of a product the empty map is the empty subset of the product
+
+\newcommand{\Eval}{{\operatorname{ev}}}   %% Evaluation map : $\Eval(f,x) = f(x)$
+
+\newcommand{\Rank}{\operatorname{rank}}   %% The rank of a linear map
+
+\newcommand{\Sq}{{\operatorname{sq}}}     %% The square norm operator $\Sq(x) = \Norm{x}^2$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Standard spaces
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Sph}{\mathrm{S}}      %% Sphere, use $\Sph^n$ for n-sphere
+\newcommand{\Torus}{\mathrm{T}}    %% Name of the torus $\RR/\ZZ$ with an index $\Torus_\alpha$ when describing an irratonal torus,
+                                   %% or $\Torus_u$ when it is the space of geodesics of the torus with director vector $u \in \Sph^1$.
+\newcommand{\HalfLine}{\Delta}     %% Half-line [0,∞[
+\newcommand{\Corner}{\mathrm{K}}   %% Corner
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Symplectic Diffeology
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Ham}{\operatorname{Ham}}   %% Hamiltonian diffeomorphisms
+\newcommand{\grad}{\operatorname{grad}} %% Gradient vector
+
+\newcommand{\Can}{\operatorname{Can}}   %% Canonical transformation — Also \Sympl
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Tangents space
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Tgt}{T}             % Tangent space For $\T_x(X)$ the tangent space at $x$ to the space $X$
+\newcommand{\TgtBundle}{T}       % Use as $\TgtBundle M$ or \TgtBundle{(X \times Y)} more letters  — tangent bundle
+\newcommand{\UnitBundle}{U}      % Use as $\UnitBundle M$ (one letter) or \UnitBundle{(X \times Y)} more letters  — unit bundle
+
+\newcommand{\VectorField}{\operatorname{Vect}}  %% The vector space of vector fields on a manifold
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Torus & Group of Periods
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Periods}{\operatorname{P}} %% The group of periods, use $\Periods_\omega$
+
+\newcommand{\cTorus}{\cT} %% Calligraphic letter T for disctinctive infinite torus.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Classes and equivalence relations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Class}{\operatorname{class}}  %% Canonical projection from a set to its set of equivalence classes
+\newcommand{\Cl}[1]{\left[ #1 \right]}     %% Short for the class of an element: $\Cl[x] = \Class(x)$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% Typography MARK: -
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Bold characters
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% All bold characters here except the number sets describe in a differfent place
+
+\renewcommand{\AA}{{\mathbf A}}
+\newcommand{\BB}{{\mathbf B}}
+\newcommand{\DD}{{\mathbf D}}
+\newcommand{\EE}{{\mathbf E}}
+\newcommand{\FF}{{\mathbf F}}
+\newcommand{\GG}{{\mathbf G}}
+\newcommand{\HH}{{\mathbf H}}
+\newcommand{\II}{{\mathbf I}}
+\newcommand{\JJ}{{\mathbf J}}
+\newcommand{\KK}{{\mathbf K}}
+\newcommand{\LL}{{\mathbf L}}
+\newcommand{\MM}{{\mathbf M}}
+\newcommand{\OO}{{\mathbf O}}
+\newcommand{\PP}{{\mathbf P}}
+\renewcommand{\SS}{{\mathbf S}}
+\newcommand{\TT}{{\mathbf T}}
+\newcommand{\UU}{{\mathbf U}}
+\newcommand{\VV}{{\mathbf V}}
+\newcommand{\WW}{{\mathbf W}}
+\newcommand{\XX}{{\mathbf X}}
+\newcommand{\YY}{{\mathbf Y}}
+
+\newcommand{\bmP}{\boldsymbol P}
+
+\newcommand{\bmG}{{\mbox{\boldmath $G$}}}
+
+\newcommand{\bPhi}{{\mbox{\boldmath $\Phi$}}}
+
+\newcommand{\bS}{\fontshape{n}\textsf{\textbf S}}
+
+\renewcommand{\aa}{{\bf a}}
+\newcommand{\bb}{{\bf b}}
+\newcommand{\ff}{{\bf f}}
+\newcommand{\jj}{{\bf j}}
+\newcommand{\rr}{{\bf r}}
+\newcommand{\pp}{{\bf p}}
+\renewcommand{\ss}{{\bf s}}
+\newcommand{\uu}{{\bf u}}
+\newcommand{\vv}{{\bf v}}
+\newcommand{\xx}{{\bf x}}
+\newcommand{\yy}{{\bf y}}
+\newcommand{\ee}{{\bf e}}
+
+\newcommand{\balpha}{\boldsymbol \alpha}
+\newcommand{\bbeta}{\boldsymbol \beta}
+\newcommand{\bomega}{\boldsymbol \omega}
+\newcommand{\bOmega}{\boldsymbol \Omega}
+
+\newcommand{\bgamma}{\boldsymbol \gamma}
+\newcommand{\bvarphi}{\boldsymbol \varphi}
+\newcommand{\blambda}{\boldsymbol \lambda}
+\newcommand{\bsigma}{\boldsymbol \sigma}
+\newcommand{\bpi}{\boldsymbol \pi}
+\newcommand{\btau}{\boldsymbol \tau}
+
+\newcommand{\bma}{{\boldsymbol a}}
+\newcommand{\bmb}{{\boldsymbol b}}
+\newcommand{\bmc}{{\boldsymbol c}}
+\newcommand{\bme}{{\boldsymbol e}}
+\newcommand{\bmf}{{\boldsymbol f}}
+\newcommand{\bmg}{{\boldsymbol g}}
+\newcommand{\bmo}{{\boldsymbol o}}
+\newcommand{\bmp}{{\boldsymbol p}}
+\newcommand{\bmr}{{\boldsymbol r}}
+\newcommand{\bms}{{\boldsymbol s}}
+\newcommand{\bmt}{{\boldsymbol t}}
+\newcommand{\bmv}{{\boldsymbol v}}
+\newcommand{\bmx}{{\boldsymbol x}}
+\newcommand{\bmy}{{\boldsymbol y}}
+\newcommand{\bmz}{{\boldsymbol z}}
+
+\newcommand{\bmZero}{\boldsymbol 0}
+
+\newcommand{\sbmx}{{\mbox{\boldmath $\scriptstyle x$}}}
+
+\newcommand{\sbgamma}{{\mbox{\boldmath $\scriptstyle \gamma$}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Math calligraphy
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Math frak
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\fA}{{\mathfrak A}}
+\newcommand{\fB}{{\mathfrak B}}
+\newcommand{\fC}{{\mathfrak C}}
+\newcommand{\fD}{{\mathfrak D}}
+\newcommand{\fF}{{\mathfrak F}}
+\newcommand{\fG}{{\mathfrak G}}
+\newcommand{\fK}{{\mathfrak K}}
+\newcommand{\fI}{{\mathfrak I}}
+\newcommand{\fL}{{\mathfrak L}}
+\newcommand{\fP}{{\mathfrak P}}
+\newcommand{\fR}{{\mathfrak R}}
+\newcommand{\fS}{{\mathfrak S}}
+\newcommand{\fU}{{\mathfrak U}}
+\newcommand{\fX}{{\mathfrak X}}
+\newcommand{\fY}{{\mathfrak Y}}
+\newcommand{\fZ}{{\mathfrak Z}}
+
+\newcommand{\fu}{{\mathfrak u}}
+

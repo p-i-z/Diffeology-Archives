@@ -1,0 +1,696 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  LOD-L1.tex
+%%  Lecture 1: At the Beginning...
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\cleardoublepage
+
+\chapter*{\S L1. At the Beginning\dots}
+\setcounter{footnote}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  This lecture presents the prerequisites for the study of diffeology.
+  As we shall see,
+  a good understanding of infinitely differentiable maps on Euclidean domains,
+  and a few fundamental theorems of calculus,
+  will be a good start.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Introduction
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let us introduce some vocabulary.
+First of all,
+we call \emph{Euclidean space} any real vector space $\RR^n$ for some $n$.
+
+The Euclidean structure of $\RR^n$,
+defined by the inner product
+$$%
+  x \cdot y = \sum_{i=1}^n x^i y^i
+  \quad \text{with} \quad
+  \Norm{x} = \sqrt{\sum_{i=1}^n(x^i)^2},
+  $$%
+is used to define its (standard) topology:
+an open subset $\cO$ in $\RR^n$ is any \emph{union of open balls},
+like:
+$$%
+  \cO = \bigcup_{i \in \cI} \cB(r_i,\epsilon_i),
+  $$%
+where $\cI$ is any set of indices,
+$r_i$ is any point in $\RR^n$,
+and $\epsilon_i$ is any (strictly) positive number.
+
+Therefore,
+a subset $U \in \RR^n$ is open for the standard topology if (and only if):
+for each $r \in U$ there exists an open ball $\cB(r,\epsilon)$ included in $U$,
+$\cB(r,\epsilon) \subset U$.
+
+Next,
+we call \emph{Euclidean domain} any open subset of a Euclidean space.
+We generally denote them by a capital letter $U, V, W$, etc.,
+and also by cursive letters $\cO$, etc.
+
+We also denote by $\Domains(\RR^n)$ the set of all Euclidean domains in $\RR^n$.
+We call them simply \emph{$n$-domains}.
+
+Note that this is just the topology of $\RR^n$,
+sometimes denoted by $\Top(\RR^n)$.
+
+A domain in $\RR^n$ is said to be of dimension $n$,
+or be an $n$-domain.
+
+Now,
+about \emph{continuity}.
+A map $F \colon U \to V$,
+where $U$ and $V$ are Euclidean domains,
+is said to be \emph{continuous} if (and only if):
+the pullback $f^{-1}(\cO)$ of any open subset $\cO \subset V$ is an open subset in $U$.
+
+That is equivalent to saying that for any open ball $\cB \subset V$,
+there exists a family of open balls $\cB_i \subset U$ such that $f^{-1}(\cB) = \cup_i \cB_i$,
+for some family of indices $\cI$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Differentiable and smooth paths
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Differentiable and smooth paths}
+
+Consider a \emph{path}
+$$%
+  \gamma \colon \OpenInterval{a,b} \to \RR^n.
+  $$%
+
+Assume that $\gamma$ is continuous.
+Then,
+consider the map
+$$%
+  \Delta\gamma \colon (t,t') \mapsto \frac{\gamma(t') - \gamma(t)}{t'-t}, \\
+  $$%
+defined on
+$$%
+  \OpenInterval{a,b}^2 \ - \ \{(t,t)\}_{a<t<b},
+  $$%
+with values in $\RR^n$.
+The closed subset $\{(t,t)\}_{a<t<b}$ is called the \emph{diagonal}.
+The function $\Delta \gamma$ is continuous,
+but:
+
+\begin{Article}{Definition.}{\itshape}
+  If $\Delta\gamma$ extends continuously on the diagonal,
+  we say that $\gamma$ is \smuline{continuously differentiable} or of \underline{class $\Ck{1}$}.
+\end{Article}
+
+We denote by
+$$%
+  \dot\gamma(t)
+  \quad \text{or} \quad
+  \frac{d\gamma(t)}{dt}
+  \quad \text{the value} \quad \Delta\gamma(t,t) = \lim_{t' \to t} \Delta\gamma(t',t).
+  $$%
+The function $\dot\gamma \colon \OpenInterval{a,b} \to \RR^n$ is then called the \emph{derivative} of $\gamma$.
+The value $\dot\gamma(t)$ is the derivative of $\gamma$ at the point $t$,
+or {\itshape at time} $t$.
+
+Now,
+if $\gamma$ is of class $\Ck{1}$,
+then $\dot\gamma$,
+which is defined on the same interval,
+is continuous.
+One can ask if $\dot\gamma$ is also $\Ck{1}$?
+If this is the case,
+we generally denote by $\ddot\gamma$ the derivative of $\dot\gamma$.
+We say that $\gamma$ is of class $\Ck{2}$.
+
+That leads to the definition:
+
+\begin{Article}{Definition.}{\itshape}
+  We say that $\gamma$ is of \underline{class $\Ck{k}$},
+  $k>1$,
+  if (and only if):
+  $$%
+    \gamma \text{ is of class } \Ck{k-1} \text{ and } \frac{d^{k-1}\gamma(t)}{dt^{k-1}} \text{ is of class } \Ck{1}.
+    $$%
+  And we say that $\gamma$ is \underline{smooth},
+  or of \underline{class $\Cinfty$},
+  if $\gamma$ is of class $\Ck{k}$ for all $k \in \NN$.
+\end{Article}
+%
+Note that continuous paths are said to be of \underline{class $\Czero$}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Smooth Maps, the Holistic Approach
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Smooth maps, the holistic approach}
+
+In diffeology we are interested principally in {\itshape smooth maps},
+or {\itshape infinitely differentiable maps}.
+Precisely,
+diffeology consists in extending the concept of smooth maps from Euclidean domains to arbitrary sets.
+That is why we have the choice in the definitions of smooth maps between Euclidean domains.
+We will present them here,
+not in their historic order but according to what we feel is more intuitive.
+The first definition is actually a theorem.
+
+\begin{Article}{Definition-Theorem.}{\itshape}{\upshape (Boman 1967)}\label{Boman-theorem}
+  Let $F \colon U \to V$ be a continuous map between two Euclidean domains.
+  The map $F$ is \smuline{infinitely diffe}- \smuline{rentiable}, %% PIZ Adjustement
+  or \underline{smooth},
+  if (and only if) the composite $F \circ \gamma$,
+  where $\gamma$ is any smooth path in $U$,
+  is a smooth path in $V$.
+\end{Article}
+
+As we have seen,
+smooth paths have been defined previously,
+independently.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Differentiable Maps, the Pedestrian Approach
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Differentiable maps, the pedestrian approach}
+
+Now,
+the classical definition of differentiable map begins with the definition of \emph{tangent maps}.
+
+\begin{Article}{Definition.}{\itshape}
+  Let $f$ and $g$ be two maps defined on a same Euclidean domain $U$ to some $\RR^m$.
+  Let $r_0$ be some point in $U$.
+  We say that $f$ and $g$ are \smuline{tangent} in $r_0$ if:
+  $$%
+    \lim_{r \to r_0} \frac{f(r) - g(r)}{\Norm{r-r_0}} = 0.
+    $$%
+  Of course,
+  that implies in particular that $f(r_0) = g(r_0)$.
+\end{Article}
+
+\begin{Article}{Definition.}{\itshape}
+  Let $f$ be a map defined on some domain $U \in \RR^n$ with values in $\RR^m$.
+  We say that $f$ is \underline{differentiable},
+  or \underline{derivable},%
+  \footnote{The words {\itshape differentiable} and {\itshape derivable} are here completely equivalent.}
+  at the point $r_0 \in U$ if it is tangent,
+  at this point,
+  to an \emph{affine map}
+  $$%
+    r \mapsto f(r_0) + M(r-r_0),
+    $$%
+  where $M \in \Lin(\RR^n,\RR^m)$ is a linear map from $\RR^n$ to $\RR^m$.
+  That condition means precisely that,
+  \begin{equation}\tag{$\clubsuit$}
+    \lim_{r \to r_0} \frac{f(r)- f(r_0)- M(r-r_0)}{\Norm{r-r_0}} = 0.
+  \end{equation}
+  We say that $f$ is \emph{differentiable on $U$},
+  or simply differentiable,
+  without more precision,
+  if $f$ is tangent to an affine map everywhere.
+\end{Article}
+
+\begin{Article}{Remark.}{}\label{continuously-differentiable}
+  The condition ($\clubsuit$) implies that $f(r)$ converges to $f(r_0)$ when $r$ tends to $r_0$.
+  That is,
+  $f$ is continuous in $r_0$:
+  to be tangent to an affine map implies to be continuous:
+  \emph{a differentiable map is necessarily continuous}.
+\end{Article}
+
+\begin{proof}
+  Since $\lim_{r \to r_0} \frac{f(r)- f(r_0)- M(r-r_0)}{\Norm{r-r_0}} = 0$,
+  $\lim_{r \to r_0} (f(r)- f(r_0)- M(r-r_0)) = 0$.
+  Thus,
+  since $\lim_{r \to r_0}M(r-r_0)=0$,
+  $\lim_{r \to r_0} (f(r)- f(r_0)) = 0$.
+  That is $f(r) \xrightarrow[r \to r_0]{} f(r_0)$,
+  and $f$ is continuous at $r_0$.
+  That is the logic of the situation.
+  More formally,
+  %since $\lim_{r \to r_0} \frac{f(r)- f(r_0)- M(r-r_0)}{\Norm{r-r_0}} = 0$,
+  since $\lim_{r \to r_0} (f(r)- f(r_0)- M(r-r_0))/\Norm{r-r_0} = 0$,
+  for all $\epsilon > 0$,
+  there exists $\eta >0$ such that $\Norm{r-r_0}<\eta$ implies $\Norm{f(r)- f(r_0) - M(r-r_0)} < \epsilon \Norm{r-r_0} < \epsilon \eta$.
+  On the other hand,
+  let $m$ be $\Norm{M} = \Sup_{\Norm{u}=1} \Norm{M(u)}$ (remember, the sphere $\Sph^{n-1}$ is compact).
+  Thus,
+  for all $r$,
+  $\Norm{M(r-r_0)} \leq m \Norm{r-r_0}$.
+  That is,
+  for all $\epsilon >0$ there is $\eta'>0$ such that $\Norm{r-r_0}<\eta'$ implies $\Norm{M(r-r_0)} < \epsilon$;
+  actually $\eta'$ can be chosen equal to $\epsilon/m$.
+  Now,
+  the inequality on a triangle $u + v = w$ says that $\Norm{w} \leq \Norm{u} + \Norm{v}$,
+  or $\Norm{w} - \Norm{u} \leq \Norm{v}$.
+  Applied to $u = M(r-r_0)$,
+  $w = f(r)-f(r_0)$ and $v = w-u = f(r)-f(r_0) - M(r-r_0)$,
+  that gives:
+  $\Norm{f(r)-f(r_0)} - \Norm{M(r-r_0)} \leq \Norm{f(r)- f(r_0) - M(r-r_0)} \leq \epsilon$.
+  Then,
+  $\Norm{f(r)-f(r_0)} \leq \epsilon + \Norm{M(r-r_0)}$.
+  Now,
+  choosing $\eta'' < \inf(\eta, \eta')$,
+  we get $\Norm{f(r)-f(r_0)} \leq \epsilon + \epsilon$.
+  Changing $\epsilon$ to $\epsilon/2$,
+  we get:
+  for all $\epsilon > 0$,
+  there exists $\eta'' > 0$ such that $\Norm{r-r_0} < \eta''$ implies $\Norm{f(r)-f(r_0)} \leq \epsilon$.
+  Therefore,
+  $f$ is continuous at $r_0$.
+\end{proof}
+
+Now let us describe more precisely the linear part of the affine tangent map.
+Pick a vector $v \in \RR^n$,
+$v \neq 0$,
+and let $r = r_0 + tv$,
+where $t >0$ is small enough for $r$ to be in the domain $U$.
+The last condition writes:
+$$%
+  \lim_{t \to 0} {f(r_0 + tv)- f(r_0)- M(tv) \over t \Norm{v}} = 0.
+  $$%
+And then,
+$$%
+  M(v) = \lim_{t \to 0} {f(r_0 + tv)- f(r_0) \over t}.
+  $$%
+The linear map $M$ is then called the \emph{tangent linear map} and it is denoted by
+$$%
+  \Der(f)_{r_0}(v) \text{ or } \Der(f)(r_0)(v) \text{ or } \Der(f)(r_0)(v) = \lim_{t \to 0} {f(r_0 + tv)- f(r_0) \over t}.
+  $$%
+So,
+$f$ is differentiable on $U$ if it admits a tangent linear map at every point in $U$,
+$$%
+  f' \text{ or } \Der(f) \text{ or } \Der(F) \colon U \to \Lin(\RR^n,\RR^m).
+  $$%
+The \emph{affine tangent map} at the point $r_0$ then writes
+$$%
+  r \mapsto f(r_0) + \Der(f)(r_0)(r-r_0).
+  $$%
+Note that there is another way to express the approximation of the function $f$ by its affine tangent map around $r_0$:
+$$%
+  f(r) = f(r_0) + \Der(f)(r_0)(r-r_0) + o(\Norm{r-r_0}),
+  $$%
+where Landau's \emph{Little-O} notation $o(x)$ means $\underset{x \to 0}{\lim} o(x)/x = 0$.
+
+As we know,
+the set of linear maps $\Lin(\RR^n,\RR^m)$ is a real vector space of dimension $n \times m$,
+equivalent to $\RR^{n\times m}$.
+As such:
+
+\begin{Article}{Definition.}{\itshape}
+  We say that $f \colon U \to \RR^m$ is of \underline{class $\Ck{1}$} if $f$ is differentiable on $U$,
+  and if the map that associates its tangent linear map with each point in $U$ is continuous.
+  That is,
+  if the map $r \mapsto \Der(f)(r)$,
+  defined on $U$ with values in $\Lin(\RR^n,\RR^m)$,
+  is continuous.
+\end{Article}
+
+\begin{Article}{Remark.}{}
+  An affine map from $\RR^n$ to $\RR^m$ writes $x \mapsto Ax + b$,
+  where $A \in \Lin(\RR^n,\RR^m)$ and $b \in \RR^m$.
+  The set of these affine maps is denoted by $\Aff(\RR^n,\RR^m)$;
+  it is naturally a vector space of dimension $m + n \times m$,
+  equivalent to the space of matrices
+  $$%
+    \Vector{A & b \\ 0 & 1}
+    \quad \text{such that} \quad
+    \Vector{A & b \\ 0 & 1} \Vector{x \\ 1} = \Vector{A x + b \\ 1},
+    $$%
+  and inherits the standard topology of $\RR^{m + n \times m}$.
+  The affine tangent map writes, for all $r \in U$:
+  $$%
+    \Vector{\Der(f)_{r} & f(r) - \Der(f)_{r}(r) \\ 0 & 1}.
+    $$%
+  We can notice that,
+  to be $\Ck{1}$,
+  it is equivalent to request that the maps that associate the linear tangent map in $\Lin(\RR^n,\RR^m)$,
+  or the affine tangent map in $\Aff(\RR^n,\RR^m)$,
+  with every point $r$ in $U$,
+  are continuous.
+  However,
+  on a conceptual level:
+  to be differentiable implies to be continuous;
+  then,
+  having a \emph{first local affine approximation}
+  ---~which is exactly what the affine tangent map is~---
+  continuous everywhere is a natural request.
+  And that is the meaning of being $\Ck{1}$.
+\end{Article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Higher Order Derivatives and Smooth Maps
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Higher order derivatives and smooth maps}
+
+Now,
+we can look for \emph{higher order derivatives}.
+Let us begin by the second order.
+Assume that $f$ is derivable,
+then its derivative $\Der(F)$ is defined on $U$ with values in $\Lin(\RR^n,\RR^m)$.
+The second derivative of $f$ is then defined by
+$$%
+  \Der^2(f)(r) = \Der\big(r \mapsto \Der(f)(r)\big)(r) \in \L\big(\RR^n, \Lin(\RR^n, \RR^m)\big).
+  $$%
+Note that if $f$ is derivable and if its derivative $\Der(f)$ is derivable,
+that implies that $\Der(f)$ is continuous and $f$ is $\Ck{1}$.
+
+So,
+we get a recursive definition of higher derivatives of $f$ and then a recursive definition of class $\Ck{k}$:
+
+\begin{Article}{Definition.}{\itshape}\label{Higher-derivatives}
+  The $k$th-derivative of $f$,
+  if it exists,
+  is the derivative denoted and defined recursively by
+  $$%
+    \Der^k(f) = \Der\big(r \mapsto \Der^{k-1}(f)(r)\big).
+    $$%
+\end{Article}
+%
+Note that,
+if $f$ is differentiable up to order $k$,
+then $\Der^{\ell}(f)$ is continuous up to $\ell = k-1$,
+thanks to Remark \ref{continuously-differentiable}.
+Therefore,
+if $f$ admits a $k$th-derivative,
+then $f$ is $\Ck{k-1}$,
+with the definition:
+
+\begin{Article}{Definition.}{\itshape}
+  A \emph{function $f$ is $\Ck{k}$},
+  or of \emph{class $\Ck{k}$},
+  if $f$ is derivable up to order $k$ and its $k$-derivative is continuous.
+  
+  We say that $f$ is \emph{infinitely differentiable},
+  or \emph{infinitely derivable},
+  or \emph{smooth},
+  if $f$ is of class $\Ck{k}$ for all integer $k$.
+\end{Article}
+
+\begin{Article}{Remark.}{}
+  Boman's theorem cited previously says exactly that Definition \ref{Higher-derivatives} and Definition-Theorem \ref{Boman-theorem} are coherent.
+  Beware,
+  it is a subtle and non-trivial theorem.
+\end{Article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: The Tangent Linear Map
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The tangent linear map}
+
+We consider a differentiable map $f \colon U \to \RR^m$,
+with $U \subset \RR^n$ an open subset.
+
+Let us denote by $x$ and $y$ the source and target variables involved in $f$,
+that is,
+$f \colon x \mapsto y$ with $x = (x_1,\dots,x_n) \in U$ and $y = (y_1,\dots,y_m) \in \RR^m$.
+The tangent linear map can be written indifferently
+$$%
+  \Der(f)(x) \text{ or } \Der(x \mapsto y)(x),
+  $$%
+depending on what we want to focus on.
+For example,
+if you denote the square root function by $\SquareRoot$,
+you can write its derivative as $\Der(\SquareRoot)(x)$,
+or $\Der(x \mapsto \sqrt{x}\,)(x)$.
+
+Now,
+decompose $x$, $v$ and $y$ on the canonical basis,
+$$%
+  x = \sum_{i=1}^n x^i \bme_i,
+  \quad  v = \sum_{j=1}^m v^i \bme_i
+  \quad \text{and} \quad
+  y = \sum_{j=1}^m y^j \bme_j
+  \quad \text{with} \quad y^j = f^j(x).
+  $$%
+Now,
+the tangent linear map writes
+\begin{eqnarray*}\allowdisplaybreaks
+  \Der(x \mapsto y)(x)(v) & = & \Der(x \mapsto y)(x)\left(\sum_{i=1}^n v^i \bme_i\right) \\
+  & = & \sum_{i=1}^n v^i \Der(x \mapsto y)(x)(\bme_i) \\
+  & = & \sum_{i=1}^n v^i \Der\left(x \mapsto \sum_{j=1}^m y^j \bme_j\right)(x)(\bme_i)\\
+  & = & \sum_{i=1}^n \sum_{j=1}^m v^i \Der\left(x \mapsto y^j \right)(x)(\bme_i) \cdot \bme_j
+\end{eqnarray*}
+In other words,
+the tangent linear map $\Der(x \mapsto y)(x)$ is represented by the matrix $(\Der_i^j)_{i = 1}^n{}_{j=1}^m$,
+where
+$$%
+  \Der_i^j = \Der\left(x \mapsto y^j \right)(x)(\bme_i).
+  $$%
+Now,
+what does $\Der\left(x \mapsto y^j \right)(x)(\bme_i)$ represent exactly?
+$$%
+  \Der\left(x \mapsto y^j \right)(x)(\bme_i) =
+  \lim_{t\to 0} {f^j(x_1,\ldots,x_i + t,\ldots,x_n) - f^j(x_1,\ldots,x_i,\ldots,x_n) \over t},
+  $$%
+which is,
+by definition,
+the partial derivative
+$$%
+  \Der_i^j = {\partial y^j \over \partial x^i}
+  \quad \text{also denoted by} \quad \partial_i y^j.
+  $$%
+
+\underline{Notations:} For convenience we will denote also
+$$%
+  \begin{array}{lll}
+  \Der(x\mapsto y)(x) & \text{by}  &  {\partial y \over \partial x}, \text{ the derivative}; \\[0.1cm]
+  \text{and}        &            & \\[0.0cm]
+  \Der(x\mapsto y)(a) & \text{by} &  \left.{\partial y \over \partial x}\right|_{x=a}, \text{ the value of the derivative}.
+  \end{array}
+  $$%
+Eventually,
+the tangent linear map can be written as the matrix of partial derivatives
+$$%
+  \Der(x\mapsto y)(x) = \Der\left(\Vector{x^1 \\ \vdots \\ x^n} \mapsto \Vector{y^1 \\ \vdots \\ y^m}\right)(x)
+  = \Vector{\partial_1 y^1 & \cdots & \partial_n y^1 \\
+  \vdots & \ddots & \vdots \\
+  \partial_1 y^m & \cdots & \partial_n y^m
+  }
+  $$%
+such that
+$$%
+  \Der(x\mapsto y)(x)(v) = \Vector{\partial_1 y^1 & \cdots & \partial_n y^1 \\
+  \vdots & \ddots & \vdots \\
+  \partial_1 y^m & \cdots & \partial_n y^m
+  }\Vector{v^1 \\ \vdots \\ v^n}
+  = \Vector{\sum_{i=1}^n v^i \partial_i y^1 \\ \vdots \\ \sum_{i=1}^n v^i \partial_i y^m}.
+  $$%
+\begin{Article}{Proposition.}{\itshape}
+  Let $f \colon  U \to V$ and $g \colon V \to W$ be two $\Ck{1}$ maps,
+  with $U \subset \RR^n$,
+  $V \subset \RR^m$ and $W \subset \RR^\ell$.
+  The derivative of the composite,
+  which is also $\Ck{1}$,
+  satisfies the so-called \emph{chain-rule}:
+  $$%
+    \Der(g \circ f)(r) = \Der(g)(f(r)) \circ \Der(f)(r).
+    $$%
+  Note also that the derivation $\Der$ is linear.
+  If $f_1$ and $f_2$ are defined from $U$ to $V$ and $\lambda, \mu \in \RR$,
+  then:
+  $$%
+    \Der(\lambda f_1 + \mu f_2)) = \lambda \Der(f_1) + \mu \Der(f_2).
+    $$%
+\end{Article}
+%
+\begin{Article}{Note.}{}
+  The chain-rule writes in terms of partial derivatives:
+  $$%
+    {\partial z \over \partial x} = {\partial z \over \partial y} {\partial y \over \partial x},
+    $$%
+  and the value at the point $x=a$,
+  where $b = f(a)$:
+  $$%
+    \left.{\partial z \over \partial x}\right|_{x=a} =
+    \left.{\partial z \over \partial y}\right|_{y=b} \left.{\partial y \over \partial x}\right|_{x=a}.
+    $$%
+  In terms of coordinates:
+  $$%
+    \partial_i z^j = \sum_{k=1}^m \partial_i y^k \partial_k z^j
+    \quad \text{that is} \quad
+    {\partial z^j \over \partial x^i} = \sum_{k=1}^m {\partial z^j \over \partial y^k} {\partial y^k \over \partial x^i},
+    $$%
+  where $i = 1 \dots n$,
+  $k = 1 \dots m$ and $j = 1 \dots \ell$.
+\end{Article}
+%
+\begin{Article}{Note.}{}
+  In particular,
+  for $\gamma \colon \cI \to U$,
+  a smooth path in $U$,
+  $$%
+    \Der(f \circ \gamma)(t)(1) = \Der(f)(\gamma(t)) \circ \Der(\gamma)(t)(1),
+    $$%
+  but
+  $$%
+    \Der(\gamma)(t)(1) = \lim_{\epsilon \to 0} {\gamma(t+\epsilon \times 1) - \gamma(t) \over \epsilon} = {d\gamma(t) \over dt} = \dot\gamma(t).
+    $$%
+  Therefore:
+  $$%
+    \Der(f \circ \gamma)(t)(1) = \Der(f)(\gamma(t))\big(\dot\gamma(t)\big).
+    $$%
+\end{Article}
+%
+\begin{Article}{Notation.}{}
+  It happens that a tangent vector $v \in \RR^n$ would be denoted by a variational notation $\delta x$,
+  meaning that $v$ is regarded as a \emph{variation} of the point $x$.
+  Write $\gamma \colon t \mapsto x$ and $f \colon x \mapsto y$,
+  then $f \circ \gamma \colon t \mapsto y$,
+  meaning $t \mapsto x \mapsto y$.
+  Using the partial derivative notation introduced previously,
+  the formula above writes:
+  $$%
+    \delta y = {\partial y \over \partial x}(\delta x),
+    $$%
+  with
+  $$%
+    x = \gamma(t),\ y = f(x),\ \delta x = {dx \over dt},\ \delta y = {dy \over dt},
+    $$%
+  to which we can add:
+  $$%
+    \delta x = {\partial x \over \partial t} (\delta t)
+    \quad \text{and} \quad
+    \delta t = 1 \ \Rightarrow \ \delta x = {dx \over dt}.
+    $$%
+  Of course,
+  every vector $v$ can be realized as a variation of the point $x$ by considering $\gamma(t) = x +tv$.
+\end{Article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Higher Derivatives Components
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Higher derivatives components}
+
+What has been done for the tangent linear map can be done for higher derivatives.
+For example,
+let $f \colon x \mapsto y$.
+The second derivative
+$$%
+  \Der^2(f)(x) = \Der\big(x \mapsto \Der(f)(x)\big)(x)
+  $$%
+is represented itself by the bilinear form:
+$$%
+  \Der^2(f)(x)(v)(w) = \Der\big(x \mapsto \Der(f)(x)(v)\big)(x)(w),
+  $$%
+for all $v, w \in \RR^n$.
+Let us decompose $v = \sum_{i=1}^n v^i \bme_i$ and $w = \sum_{j=1}^n w^j \bme_j$.
+We get:
+\begin{eqnarray*}
+  \Der^2(f)(x)(v)(w) & = & \Der\bigg(x \mapsto \Der(f)(x)\bigg(\sum_{i=1}^n v^i \bme_i\bigg)\bigg)(x)\bigg(\sum_{j=1}^n w^j \bme_j\bigg) \\
+  & = & \sum_{j=1}^n w^j \Der\big(x \mapsto \sum_{i=1}^n v^i \Der(f)(x)(\bme_i)\big)(x)(\bme_j) \\
+  & = & \sum_{j=1}^n w^j \sum_{i=1}^n v^i  \Der\big(x \mapsto \Der(f)(x)(\bme_i)\big)(x)(\bme_j) \\
+  & = & \sum_{j,i=1}^n w^j v^i {\partial \over \partial x^j}\left({\partial y \over \partial x^i}\right).
+\end{eqnarray*}
+And since $y = (y^1, \dots, y^m)$,
+$$%
+  \Der^2(f)(x)(v)(w) = \sum_{j,i=1}^n w^j v^i \Vector{
+  {\partial^2 y^1 \over \partial x^j \partial x^i} \\[.1em] \vdots \\[.1em] {\partial^2 y^m \over \partial x^j \partial x^i}
+  }
+  = \sum_{j,i=1}^n w^j v^i \Vector{
+  \partial^2_{ji} y^1 \\[.1em] \vdots \\[.1em] \partial^2_{ji} y^m
+  }
+  $$%
+The partial derivatives $\partial_{ij} y^k$ are the components of the bilinear map $\Der^2(f)(x)$.
+
+A main property of continuously differentiable functions is the commutativity of the partial derivatives:
+
+\begin{Article}{Theorem (Schwarz).}{\itshape}
+  Let $f \colon U \to \RR^m$,
+  with $U$ a $n$-domain,
+  be a $\Ck{2}$ map.
+  Then,
+  the second derivative $\Der^2(f)(x)$ is symmetric.
+  In other words,
+  the partial derivatives commute:
+  $$%
+    {\partial \over \partial x^i}\left({\partial y^k \over \partial x^j}\right) =
+    {\partial \over \partial x^j}\left({\partial y^k \over \partial x^i}\right)
+    \quad \text{i.e.} \quad \partial^2_{ij}y^k = \partial^2_{ji}y^k.
+    $$%
+\end{Article}
+For $\Ck{k}$ maps,
+the $k$-derivative $\Der^k(f)(x)$ is a $k$-linear map,
+with components the partial derivatives:
+$$%
+  \partial^k_{i_1 \dots i_k} y^\ell  = \partial_{i_1} \big(\partial_{i_2 \dots i_k}^{k-1} y^\ell\big)
+  $$%
+And,
+thanks to the last proposition,
+this multilinear map is symmetric:
+the order of the indices does not matter.
+
+\begin{Article}{Theorem.}{\itshape}
+  Let $f\colon U \to \RR^m$ be a map,
+  where $U$ is an $n$-domain.
+  The map $f$ is smooth if and only if $f$ admits partial derivatives at any order.
+\end{Article}
+
+\begin{proof}
+  Indeed,
+  and that is the main point:
+  if all the partial derivatives at any order exist,
+  that implies in particular that they are continuous,
+  thanks to \textsection\,\ref{continuously-differentiable},
+  and then the map $f$ is \emph{continuously infinitely differentiable}.
+\end{proof}
+
+This theorem is a practical criterion to check if a map is smooth.
+
+That is everything we need to know to introduce and study diffeology.
+That is what makes diffeology a good alternative to the usual teaching of differential geometry.
+And we shall see in the future how it could be understood formally as a \emph{geometry in the sense of Felix Klein}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: The Category of Euclidean Domains
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The category of Euclidean domains}
+
+Euclidean domains are the objects of a category for which the arrows are the smooth maps.
+We denote it by \{Euclidean Domains\}.
+
+The goal of diffeology is to transfer some properties of the category of Euclidean domains to arbitrary sets.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Some Theorems We Should Know
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Some theorems we should know}
+
+There are a few important theorems of differential calculus in $\RR^n$ we will need in future development of diffeology,
+for example the implicit function theorem or the rectification of vector fields and some others.
+However,
+they are not necessary for now to learn diffeology.
+That is why it is better to introduce them only when they will be used.
+
+\vfill
+\centerline{\includegraphics{Figures/Notes-Beginning.pdf}}

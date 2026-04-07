@@ -1,0 +1,137 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Title
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{\S B6. Basic $1$-Forms on Principal Fiber Bundles}
+\setcounter{footnote}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace{-1ex}\begin{abstract} % <- PIZ adjust
+  We give a criterion for basic $1$-forms on general principal bundles.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Content
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace{-1ex}This is a specialization of the general criterion of paragraph 6.38 in the textbook, % <- PIZ adjust
+for basic $1$-forms on principal fiber bundles \cite[\textsection\,8.11]{PIZ13}.
+
+\begin{Article}{Exercise.}{}
+  Let $\pi : X \to B$ be a principal fibration with structure group $G$.
+  Let $\alpha$ be a $1$-form on $X$.
+  Prove that $\alpha$ is {\em basic},
+  that is, is the pullback $\pi^*(\beta)$ of a $1$-form
+  on $B$,
+  if and only if:
+  \begin{enumerate}
+    \item $\alpha$  vanishes on ``vertical plots'', that is, the preimages
+    by $\pi$ of the points of $B$.
+    In short, $\alpha \restriction \pi^{-1}(b) = 0$,
+    for all $b \in B$.
+    \item $\alpha$  is invariant by the structure group,
+    that is,
+    $g_X^*(\alpha) = \alpha$,
+    for all $g \in G$,
+    where $g_X$ denotes the action of $g$ on $X$.
+  \end{enumerate}
+  Give a simple example showing that this criterion is then no longer valid even for a
+  $2$-form.
+\end{Article}
+
+\begin{proof}
+  Assume that $\alpha = \pi^*(\beta)$.
+  Let $P : U \to X$ be a vertical plot,
+  then $\alpha(P) = [\pi^*(\beta)](P) = \beta(\pi \circ P)$,
+  but $\pi \circ P = \Const$,
+  thus $\beta(\pi \circ P) = 0$,
+  that is,
+  $\alpha(P) = 0$,
+  see \cite[Exercise 96]{PIZ13}.
+  Now,
+  let $g \in G$,
+  then $g_X^*(\alpha) = g_X^*(\pi^*(\beta)) = (\pi \circ g_X)^*(\beta)$,
+  but $\pi \circ g_X = \pi$,
+  thus $g_X^*(\alpha) = \alpha$.
+  Therefore,
+  the two conditions above are satisfied.
+  
+  Conversely,
+  assume that the two conditions above are satisfied,
+  and let $P : U \to X$ and $P' : U \to X$ be two plots such that $\pi \circ P = \pi \circ P'$.
+  Since $\pi$ is a principal diffeological fibration,
+  there exists, around every point of $U$,
+  a subdomain $V \subset U$ and a plot $r \mapsto \gamma(r)$ in $G$,
+  defined on $V$,
+  such that
+  $P'(r) = \gamma(r)_X(P(r))$,
+  for all $r \in V$ \cite[8.13, Note 1]{PIZ13}.
+  Hence,
+  \vspace{-.33\baselineskip} % <- PIZ adjust
+  $$%
+    \alpha(P') = \alpha[r \mapsto \gamma(r)_X(P(r))].
+    $$%
+  Now we need the following formula,
+  which is a generalization of
+  \cite[8.37 $(\clubsuit)$]{PIZ13}.
+  Let $\Rm(x) : G \to X$ be
+  the orbit map $\Rm(x)(g) = g_X(x)$, let $\gamma$ be a plot in $G$
+  defined on some domain $U$ and let $P$ be a plot
+  in $X$ defined on some domain $V$,
+  then
+  \begin{multline*}
+    \alpha[(r,s) \mapsto \gamma(r)_X(P(s))]_{r \choose s}\Vector{\delta r \\ \delta s} = \alpha[(r,s) \mapsto \gamma(r)_X(P(s))]_{r \choose s}\Vector{\delta r \\ 0} \\
+    + \alpha[(r,s) \mapsto \gamma(r)_X(P(s))]_{r \choose s}\Vector{0 \\ \delta s}  = \alpha[r \mapsto \gamma(r)_X(P(s))]_r (\delta r) \\
+    + \alpha[s \mapsto \gamma(r)_X(P(s))]_s(\delta s) =  [\Rm(P(s))^*(\alpha)](\gamma)_r(\delta r) +  [\gamma(r)_X^*(\alpha)](P)_s(\delta s).
+  \end{multline*}
+  Now,
+  since $\Rm(P(s))$ is the orbit map of the point $x = P(s)$,
+  $$
+    [\Rm(P(s))^*(\alpha)](\gamma) = [\Rm(P(s))^*(\alpha \restriction \pi^{-1}(b))](\gamma),
+    $$
+  with $b = \pi(x)$. But, according to the hypothesis, $\alpha \restriction \pi^{-1}(b) = 0$, thus
+  $$
+    [\Rm(P(s))^*(\alpha)](\gamma)_r(\delta r) = 0.
+    $$
+  Next,
+  since,
+  by assumption,
+  $\alpha$ is invariant by the action of $G$,
+  $[\gamma(r)_X^*(\alpha)](P) = \alpha(P)$.
+  Therefore,
+  $$
+    \alpha[(r,s) \mapsto \gamma(r)_X(P(s))]_{r \choose s}\Vector{\delta r \\ \delta s}
+    = \alpha(P)_r(\delta r).
+    $$
+  This implies in particular $\alpha(P') = \alpha[r \mapsto \gamma(r)_X(P(r))] =
+  \alpha(P)$.
+  Hence,
+  according to the criterion \cite[6.38]{PIZ13},
+  there exists a $1$-form
+  $\beta$ on $B$ such that $\alpha = \pi^*(\beta)$.
+  
+  For the second question, consider the $2$-form $\omega = dx \wedge dy$ on the plane $\RR^2$.
+  We can consider the first projection $\Proj_1 : (x,y) \mapsto x$.
+  It is a
+  principal fibration with group $(\RR,+)$ for the action
+  $t_{\RR^2}(x,y) = (x, y+t)$.
+   The $2$-form $\omega$ is,
+  in particular,
+  invariant by this action.
+  Moreover,
+  the restriction of $\omega$ on a fiber of $\Proj_1$ is a linear $2$-form
+  on $\RR$,
+  thus vanishes.
+  This example satisfies the two conditions above,
+  but since $\omega \neq 0$, $\omega$ is not the pullback by $\Proj_1$ of a $2$-form on $\RR$
+  (which is necessarily $0$).
+\end{proof}

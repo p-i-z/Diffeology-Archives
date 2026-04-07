@@ -21,3 +21,9 @@ This directory contains the long-form works of Patrick Iglesias-Zemmour: publish
 *   **Type:** Monograph (AMS, Mathematical Surveys and Monographs, Vol. 185).
 *   **Status:** **Canonical Reference (via Erratum).**
 *   **Note:** This directory contains the original AMS source files (Historical) **AND** the **Beijing Revised Edition** (Canonical). The Beijing edition serves as an extended erratum and is the definitive mathematical reference for the theory.
+
+### [2026-Lectures-on-Diffeology](./2026-Lectures-on-Diffeology/)
+*   **Title:** *Lectures in Diffeology*
+*   **Type:** Lecture Notes (Beijing World Publishing Corp., 2025).
+*   **Status:** **Revised Edition (2026).**
+*   **Note:** A companion volume to the textbook *Diffeology*, based on lectures given at Shantou University. The first half presents a structured, example-driven tour of diffeology; the second half consists of blog notes and exercises. The revised edition includes new chapters on the Boman Paradox, the Wire Plane, and a refined philosophical perspective on the Kleinian program.

@@ -1,0 +1,207 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  MARK: Packages declarations
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% AMS package
+\usepackage{amssymb} %% AMS Symbols
+\usepackage{amsmath} %% AMS Math Macros
+
+%% Graphic package
+\usepackage{graphicx} %% Include Drawings
+\usepackage[innercaption]{sidecap} %% For caption on the side of the figure
+
+%% Increase length page package
+\usepackage{needspace} %% Enhance page space
+
+%% Smart fonts for \mathcal replacement
+%\usepackage{bickham}
+%\usepackage{boondox-cal}
+%\usepackage{dutchcal}
+\usepackage[mathcal,mathbf,text-hat-accent]{euler} %% For Math Script
+
+%ù Add PDF page package
+\usepackage{pdfpages} %% Include PDF pages
+
+%% tikz Package
+\usepackage{tikz-cd} %% Include Diagrams  http://texdoc.net/texmf-dist/doc/latex/tikz-cd/tikz-cd-doc.pdf
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+
+\tikzcdset{
+arrow style=tikz,
+diagrams={>={Straight Barb[scale=0.8]}}
+}
+
+%% Include Dingbat fonts
+\usepackage{pifont}
+
+% For strike out
+\usepackage[normalem]{ulem}
+
+% For inteernet reference
+\usepackage{url}
+
+% For book name in Chinese
+\usepackage{CJKutf8}
+\usepackage[utf8]{inputenc} % optional
+
+% To underline cleanly letters that go under the base line
+\usepackage{contour}
+\setlength{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+
+\newcommand{\smuline}[1]{
+\uline{\phantom{#1}}%
+\llap{\contour{white}{#1}}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Redefinition of Abstract only for Lectures on Diffeology
+\renewenvironment{abstract}[1]{\noindent\rule{\linewidth}{0.4mm}\vspace{1mm}
+\newline\noindent\ #1}
+{\newline\noindent\rule{\linewidth}{0.4mm}\bigskip}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Dingbat characters
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\pencil{\raisebox{-.5pt}{\Large\ding{46}}} %% A pencil picture to mark exercise
+
+\def\nib{\raisebox{-2.5pt}{\huge\ding{49}}} %% A nib of a pen to mark the solution of an exercise
+
+\def\blacksnow{\raisebox{-.5pt}{\ding{81}}} %% A bold black asterisc
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Paragraphs: Article, Note, Question
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{art}
+\setcounter{art}{0}
+
+\newenvironment{Article}[2]{\refstepcounter{art}\par\noindent{\textbf{\smuline{\theart.~#1}}} #2}{}
+
+\renewenvironment{proof}{\noindent \raisebox{-1.5pt}{\nib} {Proof.}} {\nolinebreak $\blacktriangleright$}
+
+\chardef\atcode=\catcode`\@  % save catcode of at sign
+\catcode `\@ = 11
+
+\let\bgroup={%
+\newcommand{\Note}{\@ifnextchar\bgroup\@numnote\@nonumnote}
+\def\@numnote#1{\ifnum\lastskip=0\vskip .15\baselineskip\fi\noindent\uline{Note #1}}
+\def\@nonumnote{\ifnum\lastskip=0\vskip .15\baselineskip\fi\noindent\uline{Note.}\ }
+
+\catcode`\@=\atcode    % restore original catcode of at sign
+
+\def \Question #1{\vskip-\lastskip\vspace{.25\baselineskip plus 2pt minus 2pt} \noindent{\bf #1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Exercices Environment Implementation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Exercices Environment
+\newtheoremstyle{exercise} %  ⟨name⟩
+{7pt}                      %  ⟨Space above⟩
+{7pt}                      %  ⟨Space below⟩
+{}                         %  ⟨Body font⟩
+{0pt}                      %  ⟨Indent amount⟩
+{}                         %  ⟨Theorem head font⟩
+{.\ }                      %  ⟨Punctuation after theorem head⟩
+{0pt}                      %  ⟨Space after theorem head⟩
+{}                         %  ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\newtheorem*{exercise}{\mbox{\pencil} {\sc Exercise}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Page layout
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+%% For Beijing WPC Lectures on Diffeology
+\paperheight 225mm
+\paperwidth 170mm
+
+\marginparwidth = 0pt
+
+%% For Beijing WPC Lectures on Diffeology
+\setlength{\textheight}{180mm}
+\setlength{\textwidth}{120mm}
+
+%% For Beijing WPC
+%\ usepackage[width=170mm, height=225mm, cam, noinfo, center]{crop} %% Not used now
+
+\calclayout
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Font encoding and display
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% This font configuration for keeping the main text in the typewriter/draft style
+
+\usepackage[T1]{fontenc}
+
+\usepackage[activate]{microtype}
+\usepackage[supspaced=.04em]{superiors}
+
+\usepackage[variablett,nomath]{lmodern}
+\renewcommand{\familydefault}{\ttdefault}
+\usepackage[LGRgreek,frenchmath,symbolmisc]{mathastext} %% https://jfbu.github.io/mathastext/showcase.html
+\MTgreekfont{lmtt}
+\Mathastext[mathtt]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Font for Enxin Wu's Appendix
+%% The Appendix must be in Charter (bch). Placing this configuration here,
+%% after all other font settings, is the only reliable way to achieve this
+%% without breaking the main document's font.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{palatino} % For Enxin Appendix
+\renewcommand{\familydefault}{bch} % ppl bch ugm put
+\MTgreekfont{eulergreek}
+\Mathastext[palatino]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Redefinition of letters and symbols
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\infty{\inftypsy}
+\DeclareMathSymbol{\inftyreg}{\mathord}{symbols}{49}
+
+\def \epsilon{\varepsilon}
+
+\DeclareMathSymbol{\pphi}{\mathord}{mtpsymbol}{"66}
+\def \varphi{\phi}
+
+\linespread{1.08}
+
+%%% Look for regulare expression \\begin\{article\}\{.*?\.\} beginning wih '\begin{Article}{' and ending with '.}'
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: General Display
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareRobustCommand{\SkipTocEntry}[4]{}
+
+\allowdisplaybreaks

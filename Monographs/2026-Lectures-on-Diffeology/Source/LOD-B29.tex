@@ -1,0 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Title & Data
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{\S B29. Vague Adjunction of a Point to a Space}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  We add a point to a diffeological space,
+  counting for nothing,
+  and we look at the consequences.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Content
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Consider a diffeological space $X$ and let $\cD$ be its diffeology.
+Let
+$$
+  \bar X = X \cup \{\omega\},
+$$
+where $\omega$ is an arbitrary point not contained in $X$.
+We define on $\bar X$ the following set $\cD'$ of parametrizations:
+
+\begin{Article}{Definition.}{}
+  A parametrization $P : U \to \bar X$ belongs to $\cD'$ if for all $r_0$ such that $P(r_0) \in X$,
+  there exists an open neighborhood $V$ of $r_0$ such that $P \restriction V \in \cD$.
+  No condition is required when $P(r_0) = \omega$.
+\end{Article}
+
+\begin{Article}{Proposition 1.}{}
+  A parametrization $P : U \to \bar X$ belongs to $\cD'$ if and only if its restriction to $P^{-1}(X)$ is a plot in $X$.
+  This implies in particular that $P^{-1}(X) \subset U$ is an open subset.
+  As a corollary,
+  $\cD'$ is a diffeology on $\bar X$.
+\end{Article}
+
+\begin{proof}
+  If $P \restriction P^{-1}(X)$ is a plot in $X$ then it satisfies the condition above and therefore belongs to $\cD'$.
+  Conversely,
+  let $P \in \cD'$ and $\cO = P^{-1}(X)$.
+  Since $P \in \cD'$,
+  for every $r \in \cO$ there exists a neighborhood $V$ of $r$ such that $P \restriction V$ belongs to $\cD$.
+  This implies $P(V) \subset X$ and hence $V \subset \cO$.
+  Thus $\cO$ is a union of open subsets of a Euclidean domain,
+  hence it is open and $P \restriction P^{-1}(X)$ is a plot in $X$.
+\end{proof}
+
+\begin{Article}{Proposition 2.}{}
+  $\bar X$ is connected.
+  More precisely,
+  let $P : \cB \to \bar X$ be the parametrization defined by:
+  \begin{itemize}
+    \item $\cB$ is an open ball in $\RR^n$ (for instance $\cB = \RR$).
+    \item $P(0) = \omega$.
+    \item $P(\cB \setminus \{0\}) = x$, where $x \in X$ is any point.
+  \end{itemize}
+  Then $P$ is a plot connecting any point $x \in X$ to $\omega$.
+\end{Article}
+
+\begin{proof}
+  Indeed $\cB \setminus \{0\}$ is open,
+  and $P \restriction \cB \setminus \{0\}$ is constant,
+  hence a plot.
+  Since it takes its values in $X$,
+  $P$ is a plot in $\bar X$.
+  Because $\cB$ is connected,
+  $x$ and $\omega$ lie in the same connected component,
+  for any $x \in X$.
+  Therefore $\bar X$ is connected.
+\end{proof}
+
+\begin{Article}{Proposition 3.}{}
+  The point $\omega$ is closed in $\bar X$.
+\end{Article}
+
+\begin{proof}
+  The set $\{\omega\}$ is closed if and only if $X \subset \bar X$ is D-open.
+  Now $X \subset \bar X$ is D-open if and only if for every plot $P$ in $\bar X$,
+  $P^{-1}(X)$ is open.
+  But this is exactly what we have shown in the proof of Proposition 1.
+  Therefore $X \subset \bar X$ is D-open and $\{\omega\} \subset \bar X$ is D-closed.
+\end{proof}
+
+\begin{Article}{Proposition 4.}{}
+  Every point $x \in X$ is in the neighborhood of $\omega$.
+  In other words,
+  $\omega$ has only one neighborhood:
+  the whole space $\bar X$ itself.
+\end{Article}
+
+\begin{proof}
+  Let $\Omega$ be an open neighborhood of $\omega$.
+  By definition,
+  for every plot $P$ in $\bar X$,
+  $P^{-1}(\Omega)$ is open.
+  Let $x \in X$ and let $P : \cB \to \bar X$ be the special plot defined in Proposition 2,
+  which sends $0$ to $\omega$ and the rest of the ball to $x$.
+  Since $P^{-1}(\Omega)$ is open and $0$ is sent to $\omega$,
+  there exists a small open ball $\cB'$ centered at $0$ such that $P(\cB') \subset \Omega$.
+  By construction $P(\cB' \setminus \{0\}) = x \in \Omega$.
+  Therefore $\Omega$ contains every point of $X$.
+  That is,
+  $\Omega = \bar X$.
+\end{proof}
+
+\begin{Article}{Remark.}{}
+  This kind of situation is not unique to diffeology.
+  Consider for example the quotient of $\RR^n$ by the action of $]0,\infty[$,
+  $(\alpha, x) \mapsto \alpha x$,
+  where $(\alpha, x) \in ]0,\infty[ \times \RR^n$.
+  In the quotient topology of $\RR^n/]0,\infty[$,
+  every neighborhood of $\Class(0)$ contains the whole quotient.
+  Set-theoretically,
+  the quotient is the union of $\Sph^{n-1} = (\RR^n \setminus \{0\})/]0,\infty[$ together with $\Class(0)$.
+\end{Article}
+
+\vfill
+\centerline{\includegraphics[width=.5\textwidth]{Figures/separator.png}}
+\vfill

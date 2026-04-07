@@ -1,0 +1,241 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Title & Data
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\addtocontents{toc}{\SkipTocEntry}
+\chapter*{\S B34. Smooth Embeddings and \hbox{Smoothly Embedded Subsets}}
+\chaptermark{Smooth embeddings and smoothly embedded subsets}
+\addcontentsline{toc}{chapter}{Smooth embeddings and smoothly embedded subsets}
+\setcounter{footnote}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  Since Henri Joris's paper we have known that,
+  paradoxically,
+  the semi-cubic $y^2 - x^3 = 0$ is an embedded submanifold of $\RR^2$.
+  So,
+  how are we to understand the singularity of the cusp?
+  The answer is that,
+  although the cusp is embedded,
+  it is not smoothly embedded.
+  This note will detail this aspect.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Smooth Embeddings
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Smooth embeddings}
+
+The semi-cubic is the subset $\fS \subset \RR^2$ defined by the equation $y^2 - x^3 = 0$.
+It is represented in Figure \ref{fig-semi-cubic}.
+It is the image of the map
+$$
+  j : \RR \to \RR^2, \quad j(t) = \Vector{t^2 \\ t^3}.
+  $$
+The map $j$ is not an immersion since $j'(0) = 0$,
+where $j'$ denotes the derivative of $j$.
+But a long-standing question is:
+is $j$ an induction?
+
+Recall that a map $j$ is an induction \cite[\textsection\,1.29]{PIZ13} if and only if
+$j$ is smooth,
+injective,
+and the inverse $j^{-1} : \fS \to \RR$ is smooth,
+where $\fS = \Val(j)$ is equipped with the subset diffeology.
+
+In this case,
+this is equivalent to the following:
+
+\Question{Question.} For any smooth parametrization $P : r \mapsto (x(r),y(r))$ with values in $\fS$,
+that is,
+$y(r)^2 - x(r)^3 = 0$ for all $r$,
+is the following map smooth?
+$$
+  t(r) = {y(r) \over x(r)}.
+  $$
+The solution to this question comes from a theorem due to Henri Joris \cite{Jor82},
+which was pointed out to me by Yael Karshon.%
+\footnote{In a private discussion,
+but since commented on in \cite{KMW22}.}
+In a simple version:
+
+\begin{Article}{Theorem (H. Joris).}{\itshape
+  If a real map $f$ is such that $t \mapsto f(t)^2$ and $t \mapsto f(t)^3$ are smooth,
+  then $f$ is smooth.
+  }
+\end{Article}
+
+\begin{figure}[htb]
+  \centerline{\includegraphics[width=0.33\textwidth]{Figures/fig-semi-cubic}}
+  \caption{The semi-cubic $y^2 = x^3$.}
+  \label{fig-semi-cubic}
+\end{figure}
+
+\begin{Article}{Corollary.}{\itshape
+  The map $j : t \mapsto (t^2,t^3)$ is an induction from $\RR$ into $\RR^2$.
+  The semi-cubic $\fS$, the image of $j$, is an embedded submanifold of $\RR^2$.
+  }
+\end{Article}
+
+\begin{proof}
+  Clearly $j : t \mapsto (x = t^2, y = t^3)$ is smooth and injective:
+  $t = \sqrt[3]{y}$.
+  Let $r \mapsto P(r) = (x(r),y(r))$ be a plot in $\RR^2$ with values in $\fS$.
+  Then $j^{-1} \circ P(r) = t(r)$ is such that $r \mapsto t(r)^2$ and $r \mapsto t(r)^3$ are smooth.
+  To apply Joris's theorem we need to return to a map from $\RR$ to $\RR$.
+  We can use Boman's theorem \cite{Bom67}:
+  
+  \begin{Article}{Theorem (J. Boman).}{\itshape
+    A parametrization $P : U \to \RR^m$ is smooth if and only if,
+    for every smooth path $\gamma$ in $U$,
+    the composite $P \circ \gamma$ is smooth.
+    }
+  \end{Article}
+  
+  For each such smooth path,
+  the composite $s \mapsto t(r(s))$ is smooth,
+  thanks indeed to Joris's theorem.
+  Thus $r \mapsto t(r)$ is smooth.
+  Finally, $j$ is an embedding because $y \mapsto \sqrt[3]{y}$ is a homeomorphism of $\RR$.
+\end{proof}
+
+Thus,
+we have a figure,
+the semi-cubic,
+the image of $\RR$ by an induction,
+which is by construction a submanifold of $\RR^2$ because its subset diffeology is equivalent to that of $\RR$.
+
+There is clearly something strange about this situation:
+the cusp at $(0,0)$ is obviously a singularity.
+But since it is transparent to the subset diffeology,
+how are we to capture it?
+That is the question.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Smoothly Embedded Subsets
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Smoothly embedded subsets}
+
+The answer lies in the relationship between the ambient space $\RR^2$ and the subspace $\fS$.
+Consider the pseudogroup of local diffeomorphisms of $\RR^2$ that preserve $\fS$,
+that is,
+that globally fix $\fS$:
+$$
+  \Diff_\loc(\RR^2,\fS) = \{\pphi \in \Diff_\loc(\RR^2) \mid \pphi(\fS) \subset \fS \}.
+  $$
+Since $\pphi$ is a local diffeomorphism, $\pphi(\fS) = \pphi(\fS \cap \Domain(\pphi))$.
+If $\fS \cap \Domain(\pphi)$ is empty,
+there is nothing to check.
+Then,
+
+\begin{Article}{Proposition.}{}
+  Every local diffeomorphism $\pphi \in \Diff_\loc(\RR^2,\fS)$ fixes the point $(0,0)$:
+  $$
+    \forall \pphi \in \Diff_\loc(\RR^2,\fS),\ \pphi(0,0) = (0,0).
+    $$
+\end{Article}
+
+\begin{proof}
+  Let $\pphi \in \Diff_\loc(\RR^2,\fS)$ be such that $\pphi(0,0) = (x,y)$ with $(x,y) \neq (0,0)$.
+  The restriction $\pphi \restriction \fS$ belongs to $\Diff_\loc(\fS)$.
+  Thus $\varphi = j^{-1} \circ (\pphi \restriction \fS) \circ j$ belongs to $\Diff_\loc(\RR)$.
+  \begin{center}
+    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+      \RR \arrow[r,"j"]  &  \fS \subset \RR^2  \\
+      \RR \arrow[u, dashed, "\varphi"] \arrow[r, swap, "j"] & \fS \subset \RR^2 \arrow[u, swap, dashed, "\pphi \restriction\fS"]
+    \end{tikzcd}
+  \end{center}
+  Differentiate $j \circ \varphi = (\pphi \restriction \fS) \circ j$ at $0$,
+  and set $j(t) = (x,y) = \pphi(0,0)$:
+  \begin{eqnarray*}
+    \Der(j \circ \varphi)(0) & = & \Der((\pphi \restriction \fS) \circ j)(0) \\
+    \Der(j)(t) \circ \Der(\varphi)(0) & = & \Der(\pphi \restriction \fS)(0,0) \circ \Der(j)(0) \\
+    \Der(j)(t) \circ \Der(\varphi)(0)  & = & 0.
+  \end{eqnarray*}
+  But $t \neq 0$ implies $\Rank(\Der(j)(t)) = 1$,
+  and $\Der(\varphi)(0)$ is a non-zero number,
+  so the composite $\Der(j)(t) \circ \Der(\varphi)(0)$ cannot be zero.
+  This contradiction shows that $(x,y) = (0,0)$.
+\end{proof}
+
+Thus,
+although the local diffeomorphisms are transitive on $\fS$,
+the local diffeomorphisms of $\RR^2$ that preserve $\fS$ are not.
+It is this gap that captures the singularity at $0$.
+
+This observation leads to a refinement of the concept of embedding.
+Let $X$ be a diffeological space and $\fS \subset X$ an embedded subset \cite[\textsection\,2.13]{PIZ13}.
+
+Let us begin by defining two groupoids:
+
+\begin{itemize}
+  \item[(A)] Let $\KK_{\fS}$ be the groupoid of germs of local diffeomorphisms of $\fS$:
+  $$
+    \left\{
+    \begin{aligned}
+    \Obj(\KK_{\fS})  & = \fS \\
+    \Mor_{\fS}(x,x') & = \{\germ(\pphi)_x \mid \pphi \in \Diff_\loc(\fS), \ \pphi(x) = x'\}
+    \end{aligned}
+    \right.
+    $$
+  \item[(B)] Let $\KK_{X,\fS}$ be the groupoid of germs of local diffeomorphisms of $X$ that preserve $\fS$:
+  $$
+    \left\{
+    \begin{aligned}
+    \Obj(\KK_{X,\fS})  & = \fS \\
+    \Mor_{X,\fS}(x,x') & = \{\germ(\pphi)_x \mid \pphi \in \Diff_\loc(X,\fS), \ \pphi(x) = x'\}
+    \end{aligned}
+    \right.
+    $$
+\end{itemize}
+
+There is a natural restriction morphism $\Phi$ from $\KK_{X,\fS}$ to $\KK_{\fS}$:
+$$
+  \Phi_{\Obj} = \Id_{\fS}
+  \quad \text{and} \quad
+  \Phi_{\Mor} : \germ(\pphi)_x \mapsto \germ(\pphi\restriction \fS)_x.
+  $$
+This leads to the following definition:
+
+\begin{Article}{Definition 1.}{}
+  We shall say that an embedded subset $\fS \subset X$ is \emph{smoothly embedded} if the morphism $\Phi$,
+  from $\KK_{X,\fS}$ to $\KK_{\fS}$, is surjective on arrows.
+  That is,
+  if $\Phi$ is a full functor.
+\end{Article}
+
+In other words,
+the embedded subset $\fS$ is smoothly embedded if it is embedded and the germ of any local diffeomorphism of $\fS$ can be extended to a local diffeomorphism of $X$;
+or, equivalently, if the germ of any local diffeomorphism of $\fS$ is the imprint
+(or trace)
+of a local diffeomorphism of $X$.
+
+Thus,
+the semi-cubic is indeed an embedded submanifold,
+but it is not smoothly embedded.
+
+This notion of embedded subsets naturally leads to a definition of smooth embeddings.
+
+\begin{Article}{Definition 2.}{}
+  Let $j : \Sigma \to X$ be an embedding.
+  We shall say that $j$ is a \emph{smooth embedding} if $\fS = j(\Sigma)$ is smoothly embedded in $X$.
+\end{Article}
+
+\textbf{Conclusion:} The injection $j : t \mapsto (t^2, t^3)$ is an embedding,
+but not a smooth embedding.
+
+\vfill
+\centerline{\includegraphics[width=\textwidth]{Figures/Notes-semi-cubic.pdf}}

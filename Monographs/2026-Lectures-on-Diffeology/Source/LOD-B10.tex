@@ -1,0 +1,153 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Title
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{\S B10. A Few Half-Lines}
+\setcounter{footnote}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Abstract
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+  In this note we shall talk about a few diffeologies that appear,
+  equipping the half-line $\LeftClosedInterval{0,\infty}$.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Content
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+As you may know, the half-line $\LeftClosedInterval{0,\infty} \subset \RR$ can be equipped with the subset diffeology \cite[\textsection\,1.33]{PIZ13},
+that is,
+a plot in $\LeftClosedInterval{0,\infty}$ is just a smooth parametrization in $\RR$ taking its values in $\LeftClosedInterval{0,\infty}$.
+Let us denote this space by $\Delta$.
+Actually,
+$\Delta$ is a {\em manifold with boundary} according to (op.\,cit. \textsection\,4.12, 4.16),
+the boundary being the point $\{0\}$.
+Now the set $[0, \infty[$ appears in many other places,
+as the underlying set for the quotients $\Delta_n = \RR^n/\O(n)$ (op.\,cit. \textsection\,1.50, Ex. 50).
+Indeed,
+the quotient space%
+\footnote{Actually $\Delta_1 = \RR/\{\pm 1\}$ is an orbifold (op.\,cit. \textsection\,4.17).}
+$\Delta_n$ can be realized as the set $\LeftClosedInterval{0,\infty}$ equipped with the pushforward of the usual diffeology of $\RR^n$ by the norm-square map $\Sq_n : x \mapsto \Norm{x}^2$.
+Now,
+for every integer $n$,
+ thanks to the inclusion
+$$
+  J_n^{n+1} : \RR^n \to \RR^{n+1}, \SpacedText{defined by} J_n^{n+1}(x) = \Vector{x \\ 0},
+  $$
+we obtain a family of smooth injections on the quotient spaces, denoted by $j_n^{n+1}$.
+
+These definitions give a {\em direct system} $\{\Delta_n,j_n^m\}_{n,m \in \NN}$ indexed by the integers,
+where the $j_n^m$, with $m = n + k$,
+are defined by
+$$
+  j_n^{n+k} : \Delta_n \to \Delta_{n+k},
+  \SpacedText{and}
+  j_n^{n+k} = j_{n+k-1}^{n+k} \circ j_{n+k-2}^{n+k-1} \circ \cdots \circ j_{n+1}^n.
+  $$
+
+This is summarized by the commutative diagram:
+
+\begin{center}
+  \begin{tikzcd}[column sep=large, row sep=normal, every label/.append style = {font = \small}]
+    \RR^n \arrow[r, "J_n^{n+1}"] \arrow[d, "\pi_n"'] & \RR^{n+1} \arrow[d, "\pi_{n+1}"] \\
+    \Delta_n \arrow[r, "j_n^{n+1}"'] & \Delta_{n+1}
+  \end{tikzcd}
+\end{center}
+
+Since the category \Category{Diffeology} is stable under the operations of sum (op.\,cit. \textsection\,1.39) and quotient (op.\,cit. \textsection\,1.50),
+it is possible to define the direct limit (or inductive limit or colimit) of a direct system $\{X_i,f_i^j\}_{i,j \in \I}$,
+where $\I$ is an upward-directed set of indices,%
+\footnote{In French: un ensemble filtrant croissant d'indices.}
+the $X_i$ are diffeological spaces,
+and the $f_i^j : X_i \to X_j$ are smooth maps such that $f_k^j \circ f_i^k = f_i^j$ and $f_i^i = \Id_{X_i}$.
+By definition
+$$
+  \varinjlim X_i = \left(\coprod_{i \in \I} X_i\right) / \raisebox{-5pt}{\scalebox{2}[2]{$\sim$}},
+  $$
+where the equivalence relation is defined by
+$$
+  (m,x) \sim (n,y) \Leftrightarrow \exists\, k,\ k \geq m,
+  k \geq n \mbox{ and } j_m^k(x) = j_n^k(y).
+  $$
+Then,
+a plot in $\varinjlim X_i$ is any parametrization $P : U \to \varinjlim X_i$ such that there exists everywhere in $U$,
+locally,
+a plot $Q : V \to \coprod_{i \in \I} X_i$ satisfying $\Class(Q(r)) = P(r)$ for all $r \in V$,
+where $\Class$ is the projection from $\coprod_{i \in \I} X_i$ onto its quotient $\varinjlim X_i$.
+Now,
+thanks to the definition of the sum of diffeological spaces,
+this means that everywhere in $V$,
+there exists an index $i$ and a domain $W \subset V$ such that $\Val(Q \restriction W) \subset X_i$.
+In other words,
+there exists everywhere in $U$,
+an index $i$,
+a domain $W \subset U$,
+and a plot $Q : W \to X_i$,
+such that $P(r) = \Class_i(Q(r))$,
+where $\Class_i = \Class \restriction X_i$ and $r \in W$.
+Thus,
+that is the natural diffeological construction of limits inherited from the standard definition of sums and quotients.%
+\footnote{I did not include this definition in the book because I did not use this construction explicitly,
+and it follows naturally from the definition of sums and quotients.
+But thanks to this note,
+I have been able to include a paragraph on the definitions of limits,
+inductive and projective.}
+
+Now,
+applied to our system above,
+and after identifying each $\Delta_n$ with $\LeftClosedInterval{0,\infty}$ equipped with the pushforward of the smooth diffeology of $\RR^n$ by the square map $\Sq: x \mapsto \Norm{x}^2$,
+the maps $j_n^m$ reduce to $\Id_{\LeftClosedInterval{0,\infty}}$,
+and the plots in $\Delta_\infty = \varinjlim (\Delta_n)$ are the parametrizations $P : U \to \LeftClosedInterval{0,\infty}$ such that everywhere in $U$,
+there exists an integer $N$,
+a domain $V \subset U$,
+and a smooth map $Q : V \to \RR^N$ such that $P(r) = \Norm{Q(r)}^2$ for all $r \in V$.
+In other words,
+there exist $N$ smooth real functions $Q_i$,
+defined on $V$,
+such that
+$$
+  P(r) = \sum_{i = 1}^N Q_i(r)^2.
+  $$
+And that is all for the description of the diffeology of $\Delta_\infty$.
+The plots are the non-negative parametrizations of $\RR$ which can be written locally as a finite sum of squares of smooth real functions.
+
+Now: one day in June,
+a few years ago,
+during the Conference in honor of Souriau,
+I was drinking a Coke on the Cours Mirabeau in Aix-en-Provence with Enxin Wu when he asked whether $\Delta_\infty$ and $\Delta$ could coincide as diffeological spaces.
+In other words,
+whether any non-negative parametrization of $\RR$ could be locally written as a sum of squares of smooth real functions.
+A good question\dots
+We consulted Google:
+``non negative function as sums of squares'',
+and unexpectedly the first link that appeared on the screen was the paper of Bony et al. \cite{BBCP06},
+which states in its very abstract that:
+%
+\begin{quote} ``{\em For $n \geq 4$, there are $\Cinfty$
+  nonnegative functions $f$ of $n$ variables (...)
+  which are not a finite sum of squares of $\Ck{2}$ functions.}''
+\end{quote}
+%
+That settled it.
+In our words:
+there exist $4$-plots in $\Delta$ that cannot be locally lifted smoothly in $\coprod_{n \in \NN} \Delta_n$,
+or:
+there are plots in $\Delta$ which are not plots in $\Delta_\infty$.
+Therefore,
+while clearly the diffeology of the limit $\Delta_\infty$ is finer than the diffeology of $\Delta$,
+the converse is not true,
+and these two diffeologies on $\LeftClosedInterval{0,\infty}$ do not coincide.
+We thus have the chain of strictly ordered diffeological spaces on the same underlying set
+$\LeftClosedInterval{0,\infty}$,
+$$
+  \Delta_1 \prec \Delta_2 \prec \cdots \prec \Delta_\infty \prec \Delta.
+  $$%
