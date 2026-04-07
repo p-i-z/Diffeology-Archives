@@ -68,7 +68,7 @@ Contains long-form works by Patrick Iglesias-Zemmour: published books, revised e
 - **Title:** *Symétries et Moment*
 - **Type:** Monograph (Hermann, 2000)
 - **Status:** Revised Edition
-- **Note:** A comprehensive treatment of diffeological mechanics, symplectic geometry, and moment maps.
+- **Note:** A monograph on mechanics, symplectic geometry, and moment maps using the diffeology Chain-Homotopy operator.
 
 #### [2013-Diffeology-AMS](./Monographs/2013-Diffeology-AMS/)
 - **Title:** *Diffeology*

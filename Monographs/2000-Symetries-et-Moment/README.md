@@ -14,20 +14,26 @@ The purpose of this new edition is to create a definitive and corrected referenc
 
 ## Compilation
 
-This book is written in LaTeX and is designed to be compiled with **pdfLaTeX**. The main file is `SMBook.tex`. This archive contains the files:
+This book is written in LaTeX and is designed to be compiled with **pdfLaTeX**. The main file is `SMBook.tex`.
 
-*   `the SMBook.tex`             The main file
-*   `the SMBook-macro.tex`       The macro file
-*   `the SMBook-Preface.tex`     The Revised Printing Preface
-*   `the SMBook-Chap0.tex`       The Introduction
-*   `the SMBook-Chap1.tex`       The Chapter 1 "Lagrange et les origines du calcul symplectique"
-*   `the SMBook-Chap2.tex`       The Chapter 2 "Les principes de la mécanique analytique"
-*   `the SMBook-Chap3.tex`       The Chapter 3 "Quelques exemples"
-*   `the SMBook-Chap4.tex`       The Chapter 4 "Invariance du lagrangien et théorème de Nœther"
-*   `the SMBook-Chap5.tex`       The Chapter 5 "L'application moment"
-*   `the SMBook-Appendices.tex`  The Appendices
-*   `the SMBook.bbl`             The Bibliography
-*   `the README.md`              The Monigraph README file 
-*   `the figures`                Directory of figures
-*   `the couverure`              Directory of cover pages
+## Inventory
 
+The archive contains the following files:
+
+| File | Description |
+|------|-------------|
+| `SMBook.tex` | Main LaTeX file |
+| `SMBook-macro.tex` | Macro definitions |
+| `SMBook-Preface.tex` | Revised Printing Preface |
+| `SMBook-Chap0.tex` | Introduction |
+| `SMBook-Chap1.tex` | Chapter 1 — *Lagrange et les origines du calcul symplectique* |
+| `SMBook-Chap2.tex` | Chapter 2 — *Les principes de la mécanique analytique* |
+| `SMBook-Chap3.tex` | Chapter 3 — *Quelques exemples* |
+| `SMBook-Chap4.tex` | Chapter 4 — *Invariance du lagrangien et théorème de Nœther* |
+| `SMBook-Chap5.tex` | Chapter 5 — *L'application moment* |
+| `SMBook-Appendices.tex` | Appendices |
+| `SMBook.bbl` | Bibliography |
+| `README.md` | This file |
+| `figures/` | Directory of figures |
+| `couverure/` | Directory of cover pages |
+| `PDF/Symetries-et-Moment.pdf` | Compiled PDF of the revised 2025 edition |
