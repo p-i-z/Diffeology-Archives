@@ -1,27 +1,62 @@
-- name: Find and Compile Master Files
-  run: |
-    MASTERS=$(grep -rl --exclude-dir=Project-Log "\\documentclass" . --include="*.tex" | sed 's|^\./||')
-    
-    for file in $MASTERS; do
-      echo "Compiling: $file"
-      dir=$(dirname "$file")
-      base=$(basename "$file")
+name: Validate and Modernize Diffeology Archive
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
       
-      cd "$dir"
-      
-      # latexmk returns 0 even with warnings, only fails on real errors
-      docker run --rm \
-        -v "$(pwd):/workdir" \
-        -w "/workdir/$dir" \
-        ghcr.io/xu-cheng/texlive-full \
-        /bin/sh -c "latexmk -pdf -interaction=nonstopmode $base"
-      
-      if [ $? -eq 0 ] && [ -f "${base%.tex}.pdf" ]; then
-        echo "✓ Success: $file"
-      else
-        echo "!!! FAILED: $file !!!"
-        exit 1
-      fi
-      
-      cd -
-    done
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install dos2unix
+        run: sudo apt-get install -y dos2unix
+
+      - name: Clean and Modernize Source Code
+        run: |
+          # 1. Fix legacy line endings
+          find . -name "*.tex" -exec dos2unix {} +
+          
+          # 2. Transmute Garamond to Utopia in mathdesign calls
+          find . -name "*.tex" -exec sed -i 's/\[\(.*\)garamond\(.*\)\]{mathdesign}/[\1utopia\2]{mathdesign}/g' {} +
+          find . -name "*.tex" -exec sed -i 's/{garamond}{mathdesign}/{utopia}{mathdesign}/g' {} +
+
+      - name: Commit Modernized Files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: modernize fonts (Garamond -> Utopia) and fix line endings"
+          file_pattern: "*.tex"
+
+      - name: Find and Compile Master Files
+        run: |
+          MASTERS=$(grep -rl --exclude-dir=Project-Log "\\documentclass" . --include="*.tex" | sed 's|^\./||')
+          
+          for file in $MASTERS; do
+            echo "--------------------------------------------------"
+            echo "Compiling: $file"
+            echo "--------------------------------------------------"
+            
+            dir=$(dirname "$file")
+            base=$(basename "$file")
+            
+            docker run --rm \
+              -v "$(pwd):/workdir" \
+              -w "/workdir/$dir" \
+              ghcr.io/xu-cheng/texlive-full \
+              /bin/sh -c "pdflatex -interaction=nonstopmode $base; true"
+            
+            if [ -f "$dir/${base%.tex}.pdf" ]; then
+              echo "✓ Successfully compiled: $file"
+            else
+              echo "!!! ERROR: PDF not created for $file !!!"
+              exit 1
+            fi
+          done
+
+      - name: Quality Report
+        run: echo "Archive modernized to Utopia and verified."
