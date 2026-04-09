@@ -6,9 +6,15 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Input Packages
 \usepackage[hidelinks]{hyperref}
 \usepackage{graphicx}
-\usepackage[innercaption]{sidecap}
+\usepackage[innercaption]{sidecap} %% For caption on the side of the figure
+
+\usepackage{fourier-orns} % Package for floral ornaments
+\newcommand{\flowerline}{%
+\par\noindent\hfill\floweroneleft \ \floweroneright\hfill\null\par
+}
 
 % manage captions
 \usepackage[margin=10pt,font=small,labelfont=bf, labelformat=empty, labelsep=endash]{caption}
@@ -49,7 +55,7 @@
 
 % Font style
 \usepackage{microtype}
-\usepackage[cal=scr,uppercase = upright,greekfamily = didot,greeklowercase = upright,expert,utopia]{mathdesign}
+\usepackage[cal=scr, uppercase = upright, greekfamily = didot, greeklowercase = upright, utopia]{mathdesign}
 \usepackage[supspaced=.04em]{superiors}
 \linespread{1.1}
 
@@ -66,10 +72,12 @@
 
 \thanks{I thank the Hebrew University of Jerusalem for its continuous academic support.}
 
-\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Campus Givat Ram, $9190401$ Israel}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Campus Givat Ram, 9190401 Israel}
 \email{piz@math.huji.ac.il}
 
-\date{\today}
+\date{December 11, 2025}
+
+\thanks{ Typeset \today.}
 
 \subjclass[2020]{Primary 58A40; Secondary 58D05, 57R50}
 \keywords{Diffeology, Wire Diffeology, Boman's Theorem, Diffeomorphism Groups, Diffeological Dimension, Foundations of Geometry}
@@ -81,7 +89,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-    
+  
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
   %% MARK: Make Title
@@ -176,7 +184,7 @@
   
   However,
   by introducing this structure,
-  Souriau unwillingly provided the tool that would undermine his own radical thesis.
+  Souriau unwittingly provided the tool that would undermine his own radical thesis.
   While the abstract group captures the symmetries,
   it fails to capture crucial geometric invariants---such as dimension---which belong strictly to the structure of the space.
   
@@ -237,16 +245,16 @@
   \end{definition}
   
   \begin{figure}[htb]
-    \centerline{\includegraphics[width=0.6\textwidth]{Figures/Wire-plot.pdf}}
+    \centerline{\includegraphics[width=0.6\textwidth]{Wire-plot.pdf}}
     \vspace{0ex}
     \caption{\textbf{ Figure \ref{wire-plot}---The factorization property.} Every plot $P$ in $\cW$ is locally of the form $\gamma \circ q$, where $\gamma$ is a smooth curve and $q$ is a smooth real-valued function.}
     \label{wire-plot}
   \end{figure}
   
   This definition satisfies the axioms of a diffeology:
-  it covers the set,
-  it is local by definition,
-  and it is stable under smooth composition.
+  the plots cover the set,
+  they are local by definition,
+  and stable under smooth composition.
   
   \textbf{Example.}
   The map $P(u,v) = (\sin(u^2+v^2), \cos(u^2+v^2))$ is a valid plot of $\cW$,
@@ -299,7 +307,7 @@
   Let $\tau_{\text{std}}$ denote the standard Euclidean topology on $\RR^2$,
   and $\tau_{\cW}$ denote the D-topology of the Wire Plane.
   
-  \begin{proposition}
+  \begin{proposition}\label{prop:Topology}
     The D-topology of the Wire Plane coincides with the standard Euclidean topology:
     $$\tau_{\cW} = \tau_{\text{std}}.$$
   \end{proposition}
@@ -321,7 +329,7 @@
     
     To derive a contradiction,
     we construct a plot of $\cW$ (a smooth curve $\gamma$) that passes through a subsequence of these points and converges to $x$.
-    We use a standard ``smashing'' technique (see Figure \ref{fig:plateau}).
+    We use a standard ``smashing'' technique (see Figure \ref{fig:plateau} and the detailed construction in the Appendix).
     
     Let $\lambda: \RR \to [0,1]$ be a smooth transition function such that $\lambda(t) = 0$ for $t \le 0$ and $\lambda(t) = 1$ for $t \ge 1$.
     Let $\{t_k\}$ be a sequence of times strictly decreasing to $0$.
@@ -331,7 +339,7 @@
     making $\gamma$ a smooth curve in $\RR^2$.
     
     \begin{figure}[thb]
-      \centerline{\includegraphics[width=0.33\textwidth]{Figures/Smashing-function.pdf}}
+      \centerline{\includegraphics[width=0.33\textwidth]{Smashing-function.pdf}}
       \vspace{0ex}
       \caption{\textbf{Figure \ref{fig:plateau}---A smooth transition function.} The function $\lambda$ used to connect points smoothly.}
       \label{fig:plateau}
@@ -531,8 +539,8 @@
   In classical Lie theory,
   a transitive action of a group $G$ on a space $X$ allows us to identify $X$ with the quotient $G/H$,
   where $H$ is the stabilizer of a point.%
-    \footnote{When a group $G$ acts on a set $X$,
-  the stabilizer (or isotropy) of a point $x$ is the subgroup of $G$ that fix $x$.
+  \footnote{When a group $G$ acts on a set $X$,
+  the stabilizer (or isotropy) of a point $x$ is the subgroup of $G$ that fixes $x$.
   Formally denoted by $\stab_G(x) = \{ h \in G \mid h(x) = x \}$.}
   In diffeology,
   this identification corresponds to the notion of a \emph{subduction}.%
@@ -553,22 +561,23 @@
     
     For $P$ to be a plot of $\Diff(\cW)$,
     the evaluation map $\text{ev}_P: \RR \times \cW \to \cW$ must be smooth.
-    Let us test this with the vertical wire $c(s) = (0, s)$.
+    Let $\phi_0 = P(0)$. Since $\phi_0 \in \Diff(\cW) = \Diff(\RR^2)$, its differential at the origin, $D\phi_0(0)$, is an invertible $2 \times 2$ matrix.
+    Therefore, there exists a vector $v \in \RR^2$ such that $D\phi_0(0) \cdot v$ is not proportional to the horizontal vector $(1,0)$.
+    
+    Let us test the evaluation map with the straight wire $c(s) = s v$.
     We define the map $\Phi: \RR^2 \to \cW$ by evaluating the path $P$ on the wire $c$:
     $$
       \Phi(t, s) = P(t)(c(s)).
       $$
     Let us compute the rank of this map at $(0,0)$.
-    We may assume $P(0) = \id$.
     \begin{itemize}
-      \item The partial derivative with respect to $s$ is determined by the curve $c$:
-      $\partial_s \Phi(0,0) = (0, 1)$.
+      \item The partial derivative with respect to $s$ is:
+      $\partial_s \Phi(0,0) = \left. \frac{d}{ds} \right|_{s=0} P(0)(s v) = D\phi_0(0) \cdot v$.
       \item The partial derivative with respect to $t$ is determined by the curve $\gamma$:
-      $\partial_t \Phi(0,0) = (1, 0)$.
+      $\partial_t \Phi(0,0) = \left. \frac{d}{dt} \right|_{t=0} P(t)(0) = \gamma'(0) = (1, 0)$.
     \end{itemize}
-    The Jacobian matrix is the identity.
-    Thus,
-    $\Phi$ has rank 2.
+    By our choice of $v$, these two partial derivatives are linearly independent.
+    Thus, the Jacobian matrix of $\Phi$ at $(0,0)$ has rank 2.
     
     However,
     every plot of $\cW$ must locally factor through a smooth curve,
@@ -576,11 +585,11 @@
     Therefore,
     $\Phi$ is not a plot of $\cW$.
     This contradiction implies that the path $P$ cannot exist in $\Diff(\cW)$.
-    The curve $\gamma$ cannot be lifted.
+    The curve $\gamma$ cannot be lifted, and $\hat{0}$ is not a subduction.
   \end{proof}
   
   \begin{SCfigure}[50][htbp]
-    \includegraphics[width=0.5\textwidth]{Figures/The-wire.pdf}
+    \includegraphics[width=0.5\textwidth]{The-wire.pdf}
     \caption{\small\textbf{Figure~\ref{fig:The-wire} ---~The Forbidden Trans\-versa\-lity.}
     An artistic representation of the \emph{Wire Diffeology}.
     The space comprises the entire continuum of points in the plane (the background),
@@ -611,7 +620,7 @@
   %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
-\section{Conclusion}
+  \section{Conclusion}
   
   The Boman Paradox serves as a cautionary tale for the foundations of geometry.
   It demonstrates that the classical invariants
@@ -653,6 +662,110 @@
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
+  %% MARK: Appendix – Construction of a Smooth Curve
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \bigskip
+  \flowerline
+  
+  \appendix
+  
+  \section{Construction of a smooth curve through a convergent sequence}
+  
+  In the proof of Proposition~\ref{prop:Topology}, we needed to construct a smooth curve \(\gamma:\mathbf{R}\to\mathbf{R}^2\) that passes through a subsequence of points \(x_{n_k}\to x\) at times \(t_k\to0^+\) and satisfies \(\gamma(0)=x\). This appendix gives a detailed, self‑contained construction of such a curve.
+  
+  \subsection*{Setup and Auxiliary Function}
+  Let \(\{x_n\}_{n\in\mathbf{N}}\) be a sequence in \(\mathbf{R}^2\) converging to \(x\).
+  We fix the sequence of times \(t_k = 1/k\). Note that \(t_1 > t_2 > t_3 > \cdots\) and \(t_k \to 0^+\). The interval lengths are \(\Delta t_k := t_k - t_{k+1} = \frac{1}{k(k+1)}\). Observe that \(0 < \Delta t_{k+1} < \Delta t_k < 1\) for all \(k \ge 1\).
+  
+  Let \(\lambda:\mathbf{R}\to[0,1]\) be a fixed smooth step function with the following properties:
+  \begin{itemize}
+    \item \(\lambda(s)=0\) for \(s\le 0\),
+    \item \(\lambda(s)=1\) for \(s\ge 1\),
+    \item \(\lambda\) is strictly increasing on \([0,1]\).
+  \end{itemize}
+  Because \(\lambda\) is smooth and constant outside \((0,1)\), all its derivatives are bounded. For each integer \(m\ge1\), define the constant:
+  \[
+  C_m = \max_{s\in[0,1]} |\lambda^{(m)}(s)| < \infty.
+  \]
+  
+  \subsection*{Choosing a rapidly converging subsequence}
+  Because \(x_n\to x\), we can extract a subsequence \(\{x_{n_k}\}\) that converges to \(x\) extremely fast. Specifically, we choose indices \(n_1 < n_2 < n_3 < \cdots\) such that for every \(k\ge1\):
+  \[
+  \|x_{n_k} - x\| \;\le\; \frac{1}{2^k}(\Delta t_k)^k. \tag{1}
+  \]
+  (This is always possible by induction: for each \(k\), the right-hand side is a positive constant, and the tail of the sequence converges to \(0\).)
+  
+  \subsection*{Definition of \(\gamma\)}
+  For each \(k\ge1\), define \(\gamma\) on the interval \([t_{k+1},t_k]\) by:
+  \[
+  \gamma(t)=x_{n_{k+1}} + \bigl(x_{n_k}-x_{n_{k+1}}\bigr)\,
+  \lambda\!\left(\frac{t-t_{k+1}}{\Delta t_k}\right). \tag{2}
+  \]
+  Equivalently, letting \(s = (t-t_{k+1})/\Delta t_k \in [0,1]\),
+  \[
+  \gamma(t) = (1-\lambda(s))\,x_{n_{k+1}} + \lambda(s)\,x_{n_k},
+  \]
+  which is a convex combination because \(0 \le \lambda(s) \le 1\).
+  
+  For \(t \ge t_1\), set \(\gamma(t)=x_{n_1}\); for \(t \le 0\), set \(\gamma(t)=x\).
+  
+  Because \(\lambda(0)=0\) and \(\lambda(1)=1\), we have \(\gamma(t_{k+1}) = x_{n_{k+1}}\) and \(\gamma(t_k) = x_{n_k}\), so the curve is continuous. Furthermore, since \(\lambda^{(m)}(0) = \lambda^{(m)}(1) = 0\) for all \(m \ge 1\), all one-sided derivatives of \(\gamma\) vanish at the endpoints \(t_k\). Thus, the piecewise definitions patch together smoothly, making \(\gamma\) infinitely differentiable on \(\mathbf{R} \setminus \{0\}\).
+  
+  \subsection*{Smoothness at \(0\)}
+  It remains to show that \(\gamma\) is smooth at \(t=0\) with all derivatives equal to zero.
+  
+  \paragraph{Continuity at \(0\).}
+  For \(t \in [t_{k+1}, t_k]\), \(\gamma(t)\) is a convex combination of \(x_{n_k}\) and \(x_{n_{k+1}}\). Therefore:
+  \[
+  \|\gamma(t) - x\| \le \max\bigl(\|x_{n_k}-x\|, \|x_{n_{k+1}}-x\|\bigr) \le \frac{1}{2^k}(\Delta t_k)^k.
+  \]
+  As \(t \to 0^+\), \(k \to \infty\), so \(\gamma(t) \to x = \gamma(0)\). Hence \(\gamma\) is continuous at \(0\).
+  
+  \paragraph{Bounding the derivatives.}
+  Differentiating (2) for \(t \in (t_{k+1}, t_k)\) and \(m \ge 1\) gives:
+  \[
+  \gamma^{(m)}(t)=\bigl(x_{n_k}-x_{n_{k+1}}\bigr)\,
+  \frac{1}{(\Delta t_k)^m}\,
+  \lambda^{(m)}\!\left(\frac{t-t_{k+1}}{\Delta t_k}\right).
+  \]
+  Using the triangle inequality and (1):
+  \[
+  \|x_{n_k}-x_{n_{k+1}}\| \le \|x_{n_k}-x\| + \|x_{n_{k+1}}-x\|
+  \le \frac{1}{2^k}(\Delta t_k)^k + \frac{1}{2^{k+1}}(\Delta t_{k+1})^{k+1}
+  \le \frac{1}{2^{k-1}}(\Delta t_k)^k,
+  \]
+  where the last inequality uses \(\Delta t_{k+1} < \Delta t_k\) and \(\Delta t_k < 1\).
+  
+  Substituting this and \(|\lambda^{(m)}| \le C_m\) yields, for all \(t \in (t_{k+1}, t_k)\):
+  \[
+  \|\gamma^{(m)}(t)\| \le \frac{1}{2^{k-1}}(\Delta t_k)^k \cdot \frac{C_m}{(\Delta t_k)^m}
+  = \frac{C_m}{2^{k-1}} (\Delta t_k)^{k-m}. \tag{3}
+  \]
+  
+  Now fix any integer \(m \ge 1\). For all sufficiently small \(t > 0\), we have \(k \ge m\) (since \(k \to \infty\) as \(t \to 0^+\)). When \(k \ge m\), the exponent \(k-m \ge 0\) and \(\Delta t_k < 1\), so \((\Delta t_k)^{k-m} \le 1\). Consequently, for all such \(t\):
+  \[
+  \|\gamma^{(m)}(t)\| \le \frac{C_m}{2^{k-1}}.
+  \]
+  As \(t \to 0^+\), \(k \to \infty\), and therefore \(\lim_{t\to0^+} \|\gamma^{(m)}(t)\| = 0\) for every \(m \ge 1\).
+  
+  \paragraph{Existence of derivatives at \(0\).}
+  We prove by induction on \(m\) that \(\gamma^{(m)}(0)\) exists and equals \(0\).
+  
+  \begin{itemize}
+    \item \textbf{Base case \(m=1\):} The function \(\gamma\) is continuous at \(0\) and differentiable on \((0,\varepsilon)\) with \(\lim_{t\to0^+} \gamma'(t) = 0\). Applying the Mean Value Theorem componentwise to \(\gamma : \mathbf{R} \to \mathbf{R}^2\) shows that the right derivative \(\gamma'_+(0)\) exists and equals \(0\). The left derivative is \(0\) because \(\gamma(t)=x\) for \(t<0\). Hence \(\gamma'(0)=0\).
+    \item \textbf{Inductive step:} Assume \(\gamma^{(m-1)}\) is continuous at \(0\) and differentiable on \((0,\varepsilon)\) with \(\gamma^{(m)}\) existing on \((0,\varepsilon)\) and \(\lim_{t\to0^+} \gamma^{(m)}(t) = 0\). Applying the same componentwise MVT argument to \(\gamma^{(m-1)}\) gives \(\gamma^{(m)}(0)=0\).
+  \end{itemize}
+  
+  Thus \(\gamma^{(m)}(0)=0\) for all \(m \ge 1\), and each \(\gamma^{(m)}\) is continuous at \(0\) because its limit from the right equals its value and the left side is constant zero.
+  
+  \subsection*{Conclusion}
+  Therefore \(\gamma:\mathbf{R}\to\mathbf{R}^2\) is a globally smooth curve, passes through the chosen subsequence at the prescribed times (\(\gamma(t_k)=x_{n_k}\)), and satisfies \(\gamma(0)=x\). By definition of the wire diffeology, \(\gamma\) is a plot of \(\cW\).
+  
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
   %% MARK: Acknowledgements
   %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -677,25 +790,14 @@
     \textbf{20} (1967),
     p.~{249--268}.
     
-    \bibitem{Don84}
-    \textbf{P. Donato},
-    \textit{Revêtements de groupes différentiels},
-    Thèse de doctorat d'État,
-    Université de Provence, Marseille, 1984.
-    
     \bibitem{Fil82}
     \textbf{R. P. Filipkiewicz},
     \textit{Isomorphisms between diffeomorphism groups},
     Ergodic Theory Dynam. Systems,
     \textbf{2} (1982), no. 2, p.~159--171.
     
-    \bibitem{PIZdim}
-    \textbf{P. Iglesias-Zemmour},
-    \textit{Dimension in Diffeology},
-    Preprint, The Hebrew University of Jerusalem (2006).
-    
     \bibitem{PIZ13}
-    \bysame %\textbf{P. Iglesias-Zemmour},
+    \textbf{P. Iglesias-Zemmour},
     \textit{Diffeology},
     Mathematical Surveys and Monographs,
     \textbf{185},
@@ -720,4 +822,6 @@
     \textbf{11} (2006), p.~162--298.
     
   \end{thebibliography}
+  
+  
 \end{document}
