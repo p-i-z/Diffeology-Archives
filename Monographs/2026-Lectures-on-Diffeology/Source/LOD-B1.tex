@@ -48,8 +48,8 @@ By this inclusive diffeological approach it is obvious that the Elisa Prato quas
 which is not necessarily obvious with the specific definitions.
 We have then this particular series of full subcategories:
 \[
-\text{\{Manifolds\} $\preceq$ \{Orbifolds\} $\preceq$ \{Quasifolds\} $\preceq$ \{Diffeology\}}.
-\]
+  \text{\{Manifolds\} $\preceq$ \{Orbifolds\} $\preceq$ \{Quasifolds\} $\preceq$ \{Diffeology\}}.
+  \]
 Then,
 we associate a $C^*$-algebra to the orbifold,
 or quasifold,
@@ -238,7 +238,7 @@ at least for now.
 %% MARK:  Structure Groupoids
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Structure groupoids}
+\section{Structure Groupoids}
 
 \begin{Article}{Lifting the identity.}{}
   \label{Lifting-the-identity}
@@ -279,7 +279,7 @@ at least for now.
   and the union $\mathring{\Delta}_\Gamma = \cup_{\gamma \in \Gamma} \mathring{\Delta}_\gamma$ is an open dense subset of $\cB$.
   
   $\blacktriangleleft$~The proof of this lemma is identical to that for orbifolds.~$\blacktriangleright$
-
+  
   The following is a bit different and deserves to be developed:
   There exists a subset of $\Gamma$,
   indexed by a family $\cI$,
@@ -329,7 +329,7 @@ at least for now.
   \[
     \left\{
     \begin{aligned}
-    \Obj(\GG) & =  \cN, \\ 
+    \Obj(\GG) & =  \cN, \\
     \Mor(\GG) & =  \{\ \germ(\Phi)_\nu \mid \Phi \in \Diff_\loc(\cN) \mbox{ and } \Eval \circ \Phi = \Eval \restriction \Domain(\Phi) \}.
     \end{aligned}
     \right.
@@ -410,10 +410,106 @@ at least for now.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
+%% MARK: Homotopy: The Dilemma
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Homotopy: The Dilemma}
+
+The inclusion of orbifolds and quasifolds into \{Diffeology\} reveals a conceptual phenomenon regarding homotopy.
+While the ``groupoid school'' identifies an orbifold with its representation
+---~an algebraic approach for topological questions~---
+the diffeological perspective distinguishes the space from its structure groupoid.
+This distinction is not a contradiction but a refinement, splitting the concept of the fundamental group into two distinct invariants.
+
+\begin{Article}{The groupoid fundamental group.}{}
+  For the Moerdijk--Haefliger school \cite{Moe02},
+  the fundamental group of an orbifold is defined as a fundamental group of its structure groupoid $\GG$.
+  
+  \uline{Definition.} Let $\GG$ be an \'etale groupoid.
+  The \emph{groupoid fundamental group} $\pi_1^{\text{grp}}(\GG, x)$ is the group of homotopy classes of \emph{groupoid loops} based at $x \in \Obj(\GG)$.
+  
+  A groupoid loop based at $x$ is a sequence $\alpha = (g_0, \gamma_1, g_1, \gamma_2, \dots, \gamma_k, g_k)$ where:
+  Each $\gamma_i: [0,1] \to \Obj(\GG)$ is a smooth path in the nebula.
+  Each $g_i \in \Mor(\GG)$ is an arrow that satisfy:
+  $\Src(g_0) = x$,
+  $\Trg(g_{i-1}) = \gamma_i(0)$ \& $\Src(g_i) = \gamma_i(1)$ for $i = 1,\dots,k$,
+  and finally $\Trg(g_k) = x$.
+  Two such loops are homotopic if one can be deformed into the other by smoothly varying the paths $\gamma_i$ and the morphisms $g_i$.
+  
+  \uline{Note.} This is equivalent to the topological fundamental group of the \emph{classifying space} $B\GG$.
+  For the cone orbifold $\cQ_m$\,:
+  $\pi_1^{\text{grp}}(\GG) \cong \ZZ_m$.
+\end{Article}
+
+\begin{Article}{The Zeeman splitting.}{}
+  Diffeology acts here like a constant magnetic field in the Zeeman effect.
+  In classical manifold theory, homotopy is a single spectral line.
+  In the diffeological study of orbifolds, this line splits:
+  
+  1) \textbf{The Geometric Line:} $\pi_1^{\text{diff}}(X)$.
+  This measures the smooth connectivity of the quotient space.
+  For example, the cone $\cQ_m$ is smoothly contractible
+  (the contraction $H(s,[x]) = [sx]$ lifts to $(s,x) \mapsto sx$ on $\CC$),
+  hence $\pi_1^{\text{diff}}(\cQ_m) = 0$.
+  
+  2) \textbf{The Structural Line:} $\pi_1^{\text{grp}}(\GG)$.
+  This measures the complexity of the symmetries encoded in the atlas.
+  For the cone $\cQ_m$, one has $\pi_1^{\text{grp}}(\GG) = \ZZ_m$.
+  
+  To the geometer, the structure groupoid is not the space;
+  it is a separate object in \{Diffeology\}.
+  The ``overload'' of the term \emph{fundamental group} is resolved by assigning each invariant to its proper object.
+\end{Article}
+
+\begin{Article}{Consistency of integration of closed $1$-forms.}{}
+  This splitting is not me\-rely philosophical;
+  it is a requirement for the consistency of differential calculus.
+  In diffeology,
+  we have a robust de Rham complex where a closed 1-form is exact if the space is simply connected.
+  
+  Consider the cone $\cQ_m$.
+  Every $\cU_m$-invariant closed 1-form on $\CC$ is the derivative of a $\cU_m$-invariant smooth function.
+  Thus, every closed 1-form on $\cQ_m$ is exact.
+  
+  \uline{Remark.} If we were to insist that the ``true'' fundamental group of the cone is $\ZZ_m$,
+  we would face a conceptual tension:
+  a ``non-simply connected'' space where every closed 1-form is nevertheless exact,
+  contradicting the classical relationship between homotopy and cohomology.
+  We would have to abandon the classical theorem of integration of closed $1$-forms or redefine the nature of differential forms to match the algebra.
+  
+  By maintaining $\pi_1^{\text{diff}}(\cQ_m) = 0$,
+  we preserve the fundamental link between \emph{calculus} and \emph{geometry}.
+  The groupoid $\pi_1^{\text{grp}}$ is left to describe the \emph{algebra} (noncommutative geometry)
+  without disrupting the geometric analysis of the space.
+\end{Article}
+
+\uline{Note.} Diffeology is a ``big tent''
+--- a universal extension of the category of manifolds ---
+built to shelter coherently in a unique logic its various subcategories:
+manifolds but also orbifolds, quasifolds, manifolds with boundary and corners,
+groups of diffeomorphisms, specific quotients like the space of geodesics of the torus (see Sec.\ref{Geodesic trajectories of the 2-torus}), etc.
+It must behave like a unified ecosystem.
+In a unified ecosystem,
+the foundational theorems of differential calculus
+(the monodromy theorem, the definition of a smooth loop, the properties of subductions etc.)
+cannot change just because you move from a ``manifold province'' to an ``orbifold province.''
+This is why the groupoid fundamental group of orbifolds,
+and more generally quasifolds,
+must be restricted to the domain of the structure groupoid.
+As we shall see,
+this restriction does not diminish the importance of $\pi_1^{\text{grp}}$;
+on the contrary,
+it situates it precisely where it belongs:
+as an invariant of the \emph{algebra} associated with the space,
+not of the space itself.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 %% MARK:  The C*-Algebra
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The $C^*$-algebra}
+\section{The $C^*$-Algebra}
 
 We use the construction of the $C^*$-algebra associated with an arbitrary locally compact groupoid $\GG$,
 equipped with a Haar system,
@@ -720,7 +816,7 @@ is the $C^*$-algebra associated with the groupoid $\GG$.
   everywhere from $\RR$ to $\Sph^1$.
   Therefore,
   their associated $C^*$-algebras are Morita equivalent.
-  The algebra associated with $\bS_\alpha$ has been computed numerous times and it is called \emph{irrational rotation algebra} \cite{MR81}.
+  The algebra associated with $\bS_\alpha$ has been computed numerous times and it is called \emph{irrational rotation algebra} \cite{Rie81}.
   It is the universal $C^*$-algebra generated by two unitary elements $U$ and $V$,
   satisfying the relation
   \[
@@ -732,7 +828,7 @@ is the $C^*$-algebra associated with the groupoid $\GG$.
   we get the corollary that,
   if $\alpha$ and $\beta$ are conjugate modulo $\GL(2,\ZZ)$,
   then the algebra $\fA_\alpha$ and $\fA_\beta$ are Morita equivalent,
-  which is the direct sense of Rieffel's theorem \cite[Thm 4]{MR81}.
+  which is the direct sense of Rieffel's theorem \cite[Thm 4]{Rie81}.
   
   \uline{Remark 2.}~The converse of Rieffel's theorem is a different matter altogether.
   We should recover a diffeological groupoid $\GG_\alpha$ from the algebra $\fA_\alpha$.
@@ -836,4 +932,4 @@ is the $C^*$-algebra associated with the groupoid $\GG$.
 \end{Article}
 
 \vfill
-\centerline{\includegraphics[width=.9\textwidth]{Figures/Commuting.pdf}}
+\centerline{\includegraphics[width=.65\textwidth]{Figures/Commuting.pdf}}
