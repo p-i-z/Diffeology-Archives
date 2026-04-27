@@ -47,4 +47,5 @@ Building on this new foundation, the memoir develops a complete suite of tools f
 ## Files in this Directory
 
 *   `TMMID.tex` The original LaTeX source file for the memoir.
-*   `/Figures/` Contains the figures for the paper.
+*   `/Figures/` Contains the figures for the memoir.
+*   `/PDF/` Contains the PDF file of the memoir.

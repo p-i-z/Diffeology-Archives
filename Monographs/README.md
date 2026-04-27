@@ -16,6 +16,12 @@ This directory contains the long-form works of Patrick Iglesias-Zemmour: publish
 *   **Status:** **Revised Edition.**
 *   **Note:** A comprehensive treatment of diffeological mechanics, symplectic geometry, and moment maps.
 
+### [2007-The-Moment-Map-in-Diffeology](./2007-The-Moment-Map-in-Diffeology/)
+*   **Title:** *The Moment Map in Diffeology*
+*   **Type:** AMS Memoir (American Mathematical Society, Memoir Vol. 207, 2010).
+*   **Status:** **Published.**
+*   **Note:** A systematic development of the moment map in Diffeology for parasymplectic spaces, from the foundations to the construction of universal moment maps. Completed as a preprint in 2007, published by the AMS as Memoir Volume 207 in 2010. This work establishes, among other results, that every symplectic manifold is a coadjoint orbit of its group of symplectomorphisms.
+
 ### [2013-Diffeology-AMS](./2013-Diffeology-AMS/)
 *   **Title:** *Diffeology*
 *   **Type:** Monograph (AMS, Mathematical Surveys and Monographs, Vol. 185).
