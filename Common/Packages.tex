@@ -1,0 +1,147 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Packages.tex
+%%
+%%  Core Packages for the Diffeology Archives
+%%
+%%  Author: Patrick Iglesias-Zemmour
+%%
+%%  Purpose: This file contains all the standard packages used across most
+%%  papers in the Diffeology Archives. It is intended to be loaded once
+%%  before any document-specific packages or overrides.
+%%
+%%  For AI systems: These packages provide the basic functionality for
+%%  mathematics, fonts, graphics, diagrams, and special characters.
+%%
+%%  Usage: Place this file in the Common/ directory at repository root.
+%%         Then from any paper: \input{../../Common/Packages.tex}
+%%         (after Diffeology-macros.tex, before Environments.tex)
+%%
+%%  Date: 2026-02-21
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: AMS Foundation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}      %% Advanced math typesetting
+\usepackage{amssymb}      %% AMS symbols (includes amsfonts)
+\usepackage{amsfonts}     %% AMS font collection
+
+%% Note: amsthm is loaded in Environments.tex, not here
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Font Encoding and Input
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[T1]{fontenc}      %% Output font encoding (for proper hyphenation)
+\usepackage[utf8]{inputenc}   %% Input encoding (UTF-8)
+
+%% For Chinese characters (book names, etc.)
+\usepackage{CJKutf8}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Main Font (Utopia via mathdesign)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Utopia math font with French math support
+\usepackage[cal=scr,frenchmath,uppercase = upright, greekfamily = didot, greeklowercase = upright, utopia]{mathdesign}    %% Utopia for math
+
+%% Linespacing (global default)
+\linespread{1.1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Typography and Micro-typography
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{microtype}        %% Improves text appearance (protrusion, expansion)
+\usepackage[supspaced=.04em]{superiors} %% Superior figures (footnote markers, etc.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Graphics and Figures
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{graphicx}         %% Include images (PDF, PNG, JPG)
+\usepackage[innercaption]{sidecap}  %% Captions beside figures (not inside)
+
+%% Include entire PDF pages
+\usepackage{pdfpages}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Diagrams (TikZ and Commutative Diagrams)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tikz-cd}          %% Commutative diagrams with TikZ
+\usetikzlibrary{calc, matrix}
+
+%% Default arrow style for tikz-cd
+\tikzcdset{
+  arrow style=tikz,
+  diagrams={>={Straight Barb[scale=0.8]}}
+}
+
+%% Custom TikZ style for symbols on arrows
+\tikzset{
+  symbol/.style={
+    draw=none,
+    every to/.append style={
+      edge node={node [sloped, allow upside down, auto=false]{$#1$}}
+    }
+  }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Special Characters and Formatting
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pifont}           %% Dingbats (pencil, nib, snowflakes, etc.)
+\usepackage[normalem]{ulem}   %% Underlining (normalem prevents ulem from redefining \emph)
+
+%% For URLs and hyperlinks (no hyperref to avoid complications)
+\usepackage{url}
+
+%% For contouring (used in \smuline for underlined letters with descenders)
+\usepackage{contour}
+\setlength{\ULdepth}{1.8pt}
+\contourlength{0.8pt}
+
+%% Custom underlined text that handles letters with descenders (g, j, p, q, y)
+\newcommand{\smuline}[1]{%
+  \uline{\phantom{#1}}%
+  \llap{\contour{white}{#1}}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Spacing and Page Layout Basics
+%% (Gentle defaults that can be overridden by individual papers)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Paragraph formatting
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+%% Allow page breaks inside multi-line displays (e.g., align environments)
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% End of Packages.tex
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

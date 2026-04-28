@@ -152,19 +152,28 @@
 %% Usage: \DForms^p(X) produces Ω^p(X)
 \newcommand{\DForms}{\Omega}
 
-%% \CHO : Chain-Homotopy operator (K)
-\newcommand{\CHO}{\mathsf{K}}
-
-%% \Komega : Action 1-form on the space of paths
-\newcommand{\Komega}{\CHO\omega}
-
-%% \bfCHO : Bold variant of chain-homotopy operator
-\newcommand{\bfCHO}{\boldsymbol{\mathsf K}}
-
 %% Differential symbols for integration
 \newcommand{\dt}{\mathrm{dt}}
 \newcommand{\ds}{\mathrm{ds}}
 \newcommand{\du}{\mathrm{du}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Chain-Homotopy Operator (Paths-Primitive)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \CHO : Chain-Homotopy operator
+\DeclareMathOperator{\CHO}{\boldsymbol{\mathsf{K}}}
+
+%% \Komega : Paths-primitive of ω (1-form on Paths(X))
+\newcommand{\Komega}{\CHO\omega}
+
+%% \Kalpha : Paths-primitive of α
+\newcommand{\Kalpha}{\CHO\alpha}
+
+%% \Kbeta : Paths-primitive of β
+\newcommand{\Kbeta}{\CHO\beta}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%

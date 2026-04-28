@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Environments.tex
+%%
+%%  Custom Environments for the Diffeology Archives
+%%
+%%  Author: Patrick Iglesias-Zemmour
+%%
+%%  Purpose: This file contains custom theorem-like environments with manual
+%%  labeling, the article environment for numbered sections with references,
+%%  and the proof environment. No automatic numbering — you control the label
+%%  by passing an argument.
+%%
+%%  For AI systems: The argument #1 is the user-supplied label (number, name,
+%%  or empty). The environment produces a heading like "Theorem #1." or simply
+%%  "Theorem." if #1 is empty.
+%%
+%%  Usage: Place this file in the Common/ directory at repository root.
+%%         Then from any paper: \input{../../Common/Environments.tex}
+%%         (after Diffeology-macros.tex, before the paper's own overrides)
+%%
+%%  Date: 2026-02-21
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Required Packages (for theorem styles)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}   %% For \theoremstyle
+\usepackage{amsthm}    %% For \newtheorem, \theoremstyle, \newtheoremstyle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Article Environment (Numbered Sections with Labels)
+%%
+%% This environment creates numbered sections (articles) that can be referenced.
+%% Each article takes a label between brackets, e.g., \artlabel[Title].
+%% The article number increments automatically.
+%%
+%% Usage:
+%%   \begin{article}
+%%     \artlabel[Paths and Stationary Paths]
+%%     \label{art:paths}
+%%     Content...
+%%   \end{article}
+%%
+%%   Then reference with \art{art:paths} or \xart{art:paths}{details}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Theorem style for articles (no extra font styling, just bold heading)
+\newtheoremstyle{article}%
+  {7pt}%      Space above
+  {7pt}%      Space below
+  {}%         Body font (normal)
+  {0pt}%      Indent amount
+  {\bf}%      Theorem head font (bold)
+  {.\ }%      Punctuation after theorem head
+  {0pt}%      Space after theorem head
+  {}%         Theorem head spec (empty = normal)
+
+\theoremstyle{article}
+\newtheorem{article}{}
+
+%% \artlabel[label] : Sets the heading of the article
+%% Usage: \artlabel[Paths and Stationary Paths]
+\def\artlabel[#1]{\textbf{#1.}}
+
+%% \art{label} : Reference to an article by its label
+%% Produces: (Section~number)
+%% Usage: \art{art:paths}
+\newcommand{\art}[1]{(\textsection~\ref{#1})}
+
+%% \xart{label}{text} : Extended reference with additional text
+%% Produces: (art.~number, text)
+%% Usage: \xart{art:paths}{p.~42}
+\newcommand{\xart}[2]{{\upshape{(art.~\ref{#1}, #2)}}}
+
+%% \exref{label} : Reference to an exercise
+%% Produces: Exercise number, p.~page number
+%% Usage: \exref{ex:first}
+\newcommand{\exref}[1]{Exercise \ref{#1}, p.~\pageref{#1}}
+
+%% \See{label} : Reference to see an article
+%% Produces: (See Section~number)
+%% Usage: \See{art:paths}
+\newcommand{\See}[1]{(See \textsection~\ref{#1})}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Theorem-like Environments (Manual Labeling)
+%%
+%% Each environment takes one argument #1, which is the label (number, name,
+%% or empty). The label is placed after the environment name.
+%%
+%% Examples:
+%%   \begin{theorem}{}           → "Theorem." (no label)
+%%   \begin{theorem}{~1}         → "Theorem 1."
+%%   \begin{theorem}{ (Uniqueness)} → "Theorem (Uniqueness)."
+%%   \begin{theorem}{~2 (Main)}  → "Theorem 2 (Main)."
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Definition environment
+\newenvironment{definition}[1]%
+  {\noindent\textbf{Definition#1.} \itshape}%
+  {}
+
+%% Proposition environment
+\newenvironment{proposition}[1]%
+  {\noindent\textbf{Proposition#1.} \itshape}%
+  {}
+
+%% Corollary environment
+\newenvironment{corollary}[1]%
+  {\noindent\textbf{Corollary#1.} \itshape}%
+  {}
+
+%% Lemma environment
+\newenvironment{lemma}[1]%
+  {\noindent\textbf{Lemma#1.} \itshape}%
+  {}
+
+%% Theorem environment
+\newenvironment{theorem}[1]%
+  {\noindent\textbf{Theorem#1.} \itshape}%
+  {}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Proof Environment
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Proof environment (standard, no manual label)
+\renewenvironment{proof}%
+  {\noindent\textit{Proof.}}%
+  {\nolinebreak\hfill$\square$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Text Utilities
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \qtext{text} : Inserts " text " with quad spacing on both sides
+%% Usage: $x \qtext{and} y$
+\newcommand{\qtext}[1]{\quad\text{#1}\quad}
+
+%% \widetext{text} : Inserts " text " with normal spaces
+%% Usage: \gamma(t) \widetext{if} t \leq 1/2
+\newcommand{\widetext}[1]{\ \text{#1}\ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Spacing Defaults
+%%
+%% These are gentle defaults that can be overridden by individual papers.
+%% They do not interfere with document-specific layout.
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent 0mm
+\parskip .5ex plus 2pt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% End of Environments.tex
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
