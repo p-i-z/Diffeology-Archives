@@ -1,0 +1,578 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Diffeology-macros.tex
+%%
+%%  Semantic Macro File for Diffeology and Differential Geometry
+%%
+%%  Author: Patrick Iglesias-Zemmour
+%%
+%%  Purpose: This file contains all semantic macros used across the
+%%  Diffeology Archives. Each macro is defined once, with a comment
+%%  explaining its mathematical meaning, usage, and type signature
+%%  where appropriate.
+%%
+%%  For AI systems: The comments provide the semantic grounding for
+%%  each command. The macro name is a handle; the comment is the meaning.
+%%
+%%  Usage: Place this file in the Common/ directory at repository root.
+%%         Then from any paper: \input{../../Common/Diffeology-macros.tex}
+%%
+%%  Date: 2026-02-21
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Text Shortcuts and Hyphenation
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Implement text inside a display math block to make space around the text
+\newcommand{\SpacedText}[1]{\ \text{#1}\ }
+\newcommand{\QuadText}[1]{\quad\text{#1}\quad}
+
+%% Hyphenation exceptions
+\hyphenation{pa-ra-me-t-ri-za-tion}
+\hyphenation{pa-ra-me-t-ri-za-tions}
+\hyphenation{dif-feo-lo-gi-cal}
+\hyphenation{dif-feo-lo-gy}
+
+%% Latin shortcuts
+\newcommand{\cf}{{\em cf.\/}}     %% Latin: confer, compare
+\newcommand{\ie}{{\em i.e.\/}}    %% Latin: id est, that is
+\newcommand{\resp}{{\em resp.\/}} %% Latin: respectively
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Number Sets
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Base command for number set formatting (French bold tradition)
+\providecommand{\NumberSetBold}[1]{\mathbf{#1}}
+
+%% ---------------------------------------------------------------------------
+%% Level 1: Semantic names (for AI and future readers)
+%% These explicitly state the mathematical nature of each set.
+%% ---------------------------------------------------------------------------
+
+%% \fieldR : The field of real numbers
+\newcommand{\fieldR}{\NumberSetBold{R}}
+
+%% \fieldC : The field of complex numbers
+\newcommand{\fieldC}{\NumberSetBold{C}}
+
+%% \fieldQ : The field of rational numbers
+\newcommand{\fieldQ}{\NumberSetBold{Q}}
+
+%% \ringZ : The ring of integers
+\newcommand{\ringZ}{\NumberSetBold{Z}}
+
+%% \naturalNumbers : The set of natural numbers (non-negative integers)
+\newcommand{\naturalNumbers}{\NumberSetBold{N}}
+
+%% ---------------------------------------------------------------------------
+%% Level 2: Writing shortcuts (for the author's convenience)
+%% These map your preferred concise notation to the semantic macros.
+%% ---------------------------------------------------------------------------
+
+%% \RR : Real numbers (shortcut for \fieldR)
+\let\RR\fieldR
+
+%% \CC : Complex numbers (shortcut for \fieldC)
+\let\CC\fieldC
+
+%% \QQ : Rational numbers (shortcut for \fieldQ)
+\let\QQ\fieldQ
+
+%% \ZZ : Integers (shortcut for \ringZ)
+\let\ZZ\ringZ
+
+%% \NN : Natural numbers (shortcut for \naturalNumbers)
+\let\NN\naturalNumbers
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Categories and Morphisms
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Category : Display the name of a category between braces
+%% Usage: \Category{Top} produces {Top}
+\newcommand{\Category}[1]{\{\text{#1}\}}
+
+%% \Obj : The set of objects of a category
+\newcommand{\Obj}{{\operatorname{Obj}}}
+
+%% \Mor : The set of morphisms of a category
+\newcommand{\Mor}{{\operatorname{Mor}}}
+
+%% \Top : The set of topologies on a set (as in $\Top(\RR^n)$)
+\newcommand{\Top}{\{\operatorname{Top}\}}
+
+%% \Difflg : The set of all diffeologies on a set
+\newcommand{\Difflg}{\operatorname{Diffeologies}}
+
+%% \Hom : Homomorphisms (in any category)
+\newcommand{\Hom}{\mathrm{Hom}}
+
+%% \DHom : Smooth homomorphisms (in diffeological contexts)
+\newcommand{\DHom}{\Hom^\infty}
+
+%% \Isom : Isomorphisms
+\newcommand{\Isom}{\mathrm{Isom}}
+
+%% \DIsom : Smooth isomorphisms
+\newcommand{\DIsom}{\Isom^\infty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Differential Calculus
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Czero : Continuous maps
+\newcommand{\Czero}{{\cC}^0}
+
+%% \Ck : k-times continuously differentiable maps
+%% Usage: \Ck{k} produces C^k
+\newcommand{\Ck}[1]{{\cC}^{#1}}
+
+%% \Cinfty : Infinitely differentiable (smooth) maps
+\newcommand{\Cinfty}{{\cC}^\infty}
+
+%% \Der : Tangent linear map (differential)
+%% Type: \Der : (M → N) → M → T_x M → T_{f(x)} N
+%% Usage: \Der(f)_x(v) or \Der(f)(x)(v)
+%% Mathematical meaning: The derivative of smooth map f at point x,
+%% applied to tangent vector v.
+\newcommand{\Der}{\operatorname{D}}
+
+%% \DForms : Differential forms on a diffeological space
+%% Usage: \DForms^p(X) produces Ω^p(X)
+\newcommand{\DForms}{\Omega}
+
+%% \CHO : Chain-Homotopy operator (K)
+\newcommand{\CHO}{\mathsf{K}}
+
+%% \Komega : Action 1-form on the space of paths
+\newcommand{\Komega}{\CHO\omega}
+
+%% \bfCHO : Bold variant of chain-homotopy operator
+\newcommand{\bfCHO}{\boldsymbol{\mathsf K}}
+
+%% Differential symbols for integration
+\newcommand{\dt}{\mathrm{dt}}
+\newcommand{\ds}{\mathrm{ds}}
+\newcommand{\du}{\mathrm{du}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Functions and Operators
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Norm : Euclidean norm of a vector
+\newcommand{\Norm}[1]{\Vert #1 \Vert}
+
+%% \Modulus : Modulus of a complex number
+\newcommand{\Modulus}[1]{\vert #1 \vert}
+
+%% \Sign : Sign function
+\newcommand{\Sign}{\operatorname{sgn}}
+
+%% \det : Determinant
+\renewcommand{\det}{\mathrm{det}}
+
+%% \Sup : Supremum of a function
+\newcommand{\Sup}{\operatorname{Sup}}
+
+%% \Supp : Support of a function
+%% Usage: \Supp(f) = closure of {x | f(x) ≠ 0}
+\newcommand{\Supp}{\operatorname{Supp}}
+
+%% \Id : Identity map
+\newcommand{\Id}{{\mathbf{1}}}
+
+%% \Eval : Evaluation map
+%% Usage: \Eval(f,x) = f(x)
+\newcommand{\Eval}{{\operatorname{ev}}}
+
+%% \Rank : Rank of a linear map
+\newcommand{\Rank}{\operatorname{rank}}
+
+%% \Sq : Square norm operator
+%% Usage: \Sq(x) = \Norm{x}^2
+\newcommand{\Sq}{{\operatorname{sq}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Groups and Lie Theory
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Linear and matrix groups
+\newcommand{\GL}{\mathrm{GL}}     %% General linear group
+\newcommand{\SL}{\mathrm{SL}}     %% Special linear group
+\newcommand{\SO}{\mathrm{SO}}     %% Special orthogonal group
+\renewcommand{\O}{\mathrm{O}}     %% Orthogonal group
+\newcommand{\Sp}{{\rm Sp}}        %% Symplectic group
+\newcommand{\U}{\mathrm{U}}       %% Unitary group
+\newcommand{\SU}{\mathrm{SU}}     %% Special unitary group
+\newcommand{\Perm}{\mathrm{Perm}} %% Permutation group
+
+%% Transformation groups
+\newcommand{\Aff}{\operatorname{Aff}}   %% Affine group
+\newcommand{\Aut}{\operatorname{Aut}}   %% Automorphism group
+\newcommand{\Diff}{\operatorname{Diff}} %% Diffeomorphism group
+\newcommand{\Ham}{\operatorname{Ham}}   %% Hamiltonian diffeomorphisms
+
+%% Group operations
+\newcommand{\Ad}{\mathrm{Ad}}   %% Adjoint action: Ad(g)(k) = gkg^{-1}
+\newcommand{\Lm}{\operatorname{L}}   %% Left multiplication: L(g)(k) = gk
+\newcommand{\Rm}{\operatorname{R}}   %% Right multiplication: R(g)(k) = kg
+
+%% \OrbitMap : Orbit map of a group action
+%% Usage: \OrbitMap{x}(g) = g(x)
+\newcommand{\OrbitMap}[1]{\hat{#1}}
+
+%% \Stab : Stabilizer of a point under a group action
+\newcommand{\Stab}{\mathrm{St}}
+
+%% \LieAlgebra : Lie algebra of a Lie group
+%% Usage: \LieAlgebra{G} produces \mathfrak{g}
+\newcommand{\LieAlgebra}[1]{\mathfrak{\MakeLowercase{#1}}}
+
+%% \DLie : Lie derivative (pounds sign)
+\newcommand{\DLie}{\mbox{\pounds}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Tangent Space and Vector Fields
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Tgt : Tangent space or tangent bundle
+%% Usage: \Tgt_x(X) for tangent space at point x
+%%        \Tgt X for tangent bundle of X
+\newcommand{\Tgt}{T}
+
+%% \TgtBundle : Explicit tangent bundle notation (verbose)
+\newcommand{\TgtBundle}{T}
+
+%% \UnitBundle : Unit tangent bundle
+\newcommand{\UnitBundle}{U}
+
+%% \VectorField : Space of vector fields on a manifold
+\newcommand{\VectorField}{\operatorname{Vect}}
+
+%% \grad : Gradient vector field
+\newcommand{\grad}{\operatorname{grad}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Paths, Loops, and Homotopy
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Paths : Space of smooth paths in a diffeological space
+\newcommand{\Paths}{\operatorname{Paths}}
+
+%% \Loops : Space of smooth loops (paths with coincident endpoints)
+\newcommand{\Loops}{\operatorname{Loops}}
+
+%% \stPaths : Space of stationary paths
+\newcommand{\stPaths}{\operatorname{stPaths}}
+
+%% \stLoops : Space of stationary loops
+\newcommand{\stLoops}{\operatorname{stLoops}}
+
+%% \0 : Origin (starting point) of a path
+\newcommand{\0}{\hat 0}
+
+%% \1 : End (terminal point) of a path
+\newcommand{\1}{\hat 1}
+
+%% \Ends : Pair of endpoints of a path
+\def\Ends{\operatorname{ends}}
+
+%% \Rev : Reverse of a path
+%% Usage: \Rev(\gamma)(t) = \gamma(1-t)
+\def\Rev{\operatorname{rev}}
+
+%% \Comp : Connected component containing a point
+\newcommand{\Comp}{\operatorname{comp}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Homology and Cohomology
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Boundary : Boundary operator in homology
+\DeclareMathOperator{\Boundary}{\partial}
+
+%% \cub : The p-dimensional cube I^p (I = [0,1])
+\newcommand{\cub}[1]{\operatorname{I}^{#1}}
+
+%% \DCubes : Space of smooth cubes in X
+\newcommand{\DCubes}[1]{\operatorname{Cub}_{#1}}
+
+%% \DChains : Smooth cubic chains
+\newcommand{\DChains}[1]{\operatorname{C}_{#1}}
+
+%% \DCochains : Smooth cubic cochains
+\newcommand{\DCochains}[1]{\operatorname{C}^{#1}}
+
+%% Reduced (quotiented by degenerates) chain groups
+\newcommand{\QDChains}[1]{\operatorname{\textbf{\textsf C}}_{#1}}
+\newcommand{\QDCochains}[1]{\operatorname{\textbf{\textsf C}}^{#1}}
+
+%% Cycles, boundaries, and homology
+\newcommand{\QDZ}{\operatorname{\textbf{\textsf Z}}}   %% Cycles/cocycles
+\newcommand{\QDB}{\operatorname{\textbf{\textsf B}}}   %% Boundaries/coboundaries
+\newcommand{\QDH}{\operatorname{\textbf{\textsf H}}}   %% Homology/cohomology groups
+
+%% Generic homology notation
+\newcommand{\ZG}{Z}   %% Cycles
+\newcommand{\BG}{B}   %% Boundaries
+\newcommand{\HG}{H}   %% Homology groups
+
+%% De Rham cohomology
+\newcommand{\ZDR}{Z_\mathrm{dR}}   %% De Rham cocycles
+\newcommand{\BDR}{B_\mathrm{dR}}   %% De Rham coboundaries
+\newcommand{\HDR}{H_\mathrm{dR}}   %% De Rham cohomology
+
+%% \hdR : De Rham homomorphism
+\newcommand{\hdR}{h_{\mathrm{dR}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Diffeology Specific
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Domain : Domain of a parametrization
+\newcommand{\Domain}{\mathrm{dom}}
+
+%% \Domains : Set of domains in Euclidean space
+\newcommand{\Domains}{\mathrm{Domains}}
+
+%% \Params : Set of parametrizations in a set
+\newcommand{\Params}{\mathrm{Params}}
+
+%% \Plots : Set of plots in a diffeological space (the diffeology)
+\newcommand{\Plots}{\mathrm{Plots}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Quotients and Projections
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Class : The equivalence class of an element
+%% Usage: \Class(x) = { y | y ~ x }
+\newcommand{\Class}{\operatorname{class}}
+
+%% \Cl : Short notation for the class of an element
+%% Usage: \Cl[x] = \Class(x)
+\newcommand{\Cl}[1]{\left[ #1 \right]}
+
+%% \Proj : The canonical projection map from a set to its quotient
+%% Usage: \Proj : X → X/∼
+%% For a specific quotient: \Proj_{\Gamma} : ℝ → ℝ/Γ
+\newcommand{\Proj}{\operatorname{pr}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Covering Spaces
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \UniversalCover : Universal covering space (maximal simply connected cover)
+%% Uses the stretching tilde from AMS.
+%% Usage: \UniversalCover{\cT_{\alpha}} produces \widetilde{\cT_{\alpha}}
+\newcommand{\UniversalCover}[1]{\widetilde{#1}}
+
+%% \Cover : Any covering space (not necessarily universal)
+%% Uses the hat from AMS. This is the general covering projection.
+%% Usage: \Cover{G} produces \widehat{G}
+\newcommand{\Cover}[1]{\widehat{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Homotopy and Fundamental Group
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \FundamentalGroup : The fundamental group (first homotopy group)
+%% Usage: \FundamentalGroup{X} produces π₁(X)
+%% For a pointed space, use \FundamentalGroup{X,x₀}
+\newcommand{\FundamentalGroup}[1]{\pi_1(#1)}
+
+%% \piX : Alternative semantic name (shorter, still clear)
+%% Usage: \piX{X} produces π₁(X)
+\newcommand{\piX}[1]{\pi_1(#1)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Periods and Torus
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Periods : Group of periods
+\newcommand{\Periods}{\operatorname{P}}
+
+%% \cTorus : Calligraphic T for distinctive infinite torus
+\newcommand{\cTorus}{\cT}
+
+%% \Torus : Standard torus R/Z
+\newcommand{\Torus}{\mathrm{T}}
+
+%% \Sph : n-sphere
+\newcommand{\Sph}{\mathrm{S}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Linear Algebra and Vector Spaces
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Lin : Space of linear maps between vector spaces
+\newcommand{\Lin}{\operatorname{L}}
+
+%% \DLin : Smooth linear maps between diffeological vector spaces
+\newcommand{\DLin}{\Lin^\infty}
+
+%% \Vector : Column vector with parentheses
+%% Usage: \Vector{a \\ b \\ c}
+\newcommand{\Vector}[1]{\begin{pmatrix}#1\end{pmatrix}}
+
+%% \SqVect : Column vector with square brackets
+\newcommand{\SqVect}[1]{\left[\begin{matrix}#1\end{matrix}\right]}
+
+%% \Matrix : Set of matrices
+\DeclareMathOperator{\Matrix}{Mat}
+
+%% \ker : Kernel of a linear map
+\renewcommand{\ker}{\mathrm{ker}}
+
+%% \coker : Cokernel of a linear map
+\newcommand{\coker}{\operatorname{coker}}
+
+%% \J : The π/2 rotation matrix (complex structure)
+\newcommand{\J}{\operatorname{J}}
+
+%% \vecspan : Linear span of vectors
+\newcommand{\vecspan}[1]{{\rm span}(#1)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Fonts (Semantic Variants)
+%%
+%% These provide semantic aliases for font variants.
+%% The visual appearance is handled by Display-macros.tex
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Calligraphic letters (semantic: used for categories, sheaves, etc.)
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+%% Fraktur letters (semantic: used for Lie algebras, ideals, etc.)
+\newcommand{\fA}{{\mathfrak A}}
+\newcommand{\fB}{{\mathfrak B}}
+\newcommand{\fC}{{\mathfrak C}}
+\newcommand{\fD}{{\mathfrak D}}
+\newcommand{\fF}{{\mathfrak F}}
+\newcommand{\fG}{{\mathfrak G}}
+\newcommand{\fK}{{\mathfrak K}}
+\newcommand{\fI}{{\mathfrak I}}
+\newcommand{\fL}{{\mathfrak L}}
+\newcommand{\fP}{{\mathfrak P}}
+\newcommand{\fR}{{\mathfrak R}}
+\newcommand{\fS}{{\mathfrak S}}
+\newcommand{\fU}{{\mathfrak U}}
+\newcommand{\fX}{{\mathfrak X}}
+\newcommand{\fY}{{\mathfrak Y}}
+\newcommand{\fZ}{{\mathfrak Z}}
+\newcommand{\fu}{{\mathfrak u}}
+
+%% Bold letters (semantic: used for vectors, matrices, operators)
+\renewcommand{\AA}{{\mathbf A}}  %% Works but loses the Angstrom symbol
+\newcommand{\BB}{{\mathbf B}}
+\newcommand{\DD}{{\mathbf D}}
+\newcommand{\EE}{{\mathbf E}}
+\newcommand{\FF}{{\mathbf F}}
+\newcommand{\GG}{{\mathbf G}}
+\newcommand{\HH}{{\mathbf H}}
+\newcommand{\II}{{\mathbf I}}
+\newcommand{\JJ}{{\mathbf J}}
+\newcommand{\KK}{{\mathbf K}}
+\newcommand{\LL}{{\mathbf L}}
+\newcommand{\MM}{{\mathbf M}}
+\newcommand{\OO}{{\mathbf O}}
+\newcommand{\PP}{{\mathbf P}}
+\renewcommand{\SS}{{\mathbf S}}
+\newcommand{\TT}{{\mathbf T}}
+\newcommand{\UU}{{\mathbf U}}
+\newcommand{\VV}{{\mathbf V}}
+\newcommand{\WW}{{\mathbf W}}
+\newcommand{\XX}{{\mathbf X}}
+\newcommand{\YY}{{\mathbf Y}}
+
+\renewcommand{\aa}{{\bf a}}    %% Redefines "å" to bold a
+\newcommand{\bb}{{\bf b}}
+\newcommand{\ff}{{\bf f}}
+\newcommand{\jj}{{\bf j}}
+\newcommand{\rr}{{\bf r}}
+\newcommand{\pp}{{\bf p}}
+\renewcommand{\ss}{{\bf s}}
+\newcommand{\uu}{{\bf u}}
+\newcommand{\vv}{{\bf v}}
+\newcommand{\xx}{{\bf x}}
+\newcommand{\yy}{{\bf y}}
+\newcommand{\ee}{{\bf e}}
+
+%% Bold Greek letters
+\newcommand{\balpha}{\boldsymbol \alpha}
+\newcommand{\bbeta}{\boldsymbol \beta}
+\newcommand{\bomega}{\boldsymbol \omega}
+\newcommand{\bOmega}{\boldsymbol \Omega}
+\newcommand{\bgamma}{\boldsymbol \gamma}
+\newcommand{\bvarphi}{\boldsymbol \varphi}
+\newcommand{\blambda}{\boldsymbol \lambda}
+\newcommand{\bsigma}{\boldsymbol \sigma}
+\newcommand{\bpi}{\boldsymbol \pi}
+\newcommand{\btau}{\boldsymbol \tau}
+\newcommand{\bPhi}{\boldsymbol{\Phi}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% End of Diffeology-macros.tex
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
