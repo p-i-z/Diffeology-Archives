@@ -1,6 +1,7 @@
 # Open Question 8: Foliages: Relaxing the Quasifold Condition
 
 > **Date Added:** April 3, 2026
+> — **Status:** Open
 
 ### Context
 
