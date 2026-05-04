@@ -27,7 +27,7 @@ Questions:
 ### References
 
 [1] Iglesias-Zemmour, P. "Does the motor cortex draw on a wire plane? A diffeological model of the Two-Thirds Power Law." Preprint, 2026.
-📄[Paper in repository](../../Papers/2025-Brain-Power-Law/ITBA1DDS.pdf)
+📄[Paper in repository](https://github.com/p-i-z/Diffeology-Archives/blob/main/Papers/2025-Brain-Power-Law/DTMCDOTWP.tex)
 
 [2] Flash, T. and Hochner, B. "Motor primitives in vertebrates and invertebrates." Current Opinion in Neurobiology, 15(6):660–666, 2005.
 
