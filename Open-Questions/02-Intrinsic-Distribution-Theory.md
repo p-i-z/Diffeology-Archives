@@ -1,6 +1,7 @@
 # Open Question 2: Is Distribution Theory Intrinsic to Diffeology?
 
 > **Date Added:** December 26, 2025
+> — **Status:** Open
 
 ### Context
 
