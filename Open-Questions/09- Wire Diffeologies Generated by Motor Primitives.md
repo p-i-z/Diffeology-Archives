@@ -32,4 +32,4 @@ Questions:
 [2] Flash, T. and Hochner, B. "Motor primitives in vertebrates and invertebrates." Current Opinion in Neurobiology, 15(6):660–666, 2005.
 
 [3] Iglesias-Zemmour, P. "Fibrations Difféologiques et Homotopie." Thèse de doctorat, Université de Provence, 1985.
-📄[PDF in repository](../../Monographs/1985-Fibrations-diffeologiques-et-Homotopie/TheseEtatPI.pdf)
+📄[PDF in repository](https://github.com/p-i-z/Diffeology-Archives/blob/main/Monographs/1985-Fibrations-diffeologiques-et-Homotopie/TheseEtatPI.pdf)
