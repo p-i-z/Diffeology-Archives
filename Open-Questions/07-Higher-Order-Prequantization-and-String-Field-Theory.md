@@ -1,6 +1,7 @@
 # Open Question 7: Higher-Order Prequantization and String Field Theory
 
 > **Date Added:** January 12, 2026
+> — **Status:** Open
 
 ### Context
 
