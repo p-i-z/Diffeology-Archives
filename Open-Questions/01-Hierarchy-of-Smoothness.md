@@ -1,6 +1,8 @@
 # Open Question 1: The Hierarchy of Smoothness in Singular Spaces
 
 > **Date Added:** December 21, 2025
+> — **Status:** Open
+
 
 ### Context
 
