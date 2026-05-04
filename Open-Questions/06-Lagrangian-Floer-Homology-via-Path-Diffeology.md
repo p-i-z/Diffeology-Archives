@@ -1,6 +1,7 @@
 # Open Question 6: Lagrangian Floer Homology via Path Diffeology
 
 > **Date Added:** January 12, 2026
+> — **Status:** Open
 
 ### Context
 
