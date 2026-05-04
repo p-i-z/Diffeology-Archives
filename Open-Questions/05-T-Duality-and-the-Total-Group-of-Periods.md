@@ -1,6 +1,7 @@
 # Open Question 5: Geometric T-Duality via Prequantum Groupoids
 
 > **Date Added:** January 12, 2026
+> — **Status:** Open
 
 ### Context
 
