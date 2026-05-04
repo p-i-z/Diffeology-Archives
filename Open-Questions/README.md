@@ -18,8 +18,14 @@ Each question is presented in its own Markdown file, formatted to provide:
 
 ### Claiming a Question
 
-If you are actively working on one of these questions and wish to signal your interest to avoid duplication of effort, please contact the repository owner at piz@math.huji.ac.il. Your name, date, and (optionally) affiliation will be added to the **Status** field of the question file.
-
+If you are actively working on one of these questions and wish to signal your
+interest to avoid duplication of effort:
+1. Open a GitHub Issue with the title "Claiming [Question Number]: [Your Name]"
+2. In the body, state which question (or sub-question) you are working on, your
+   contact information, and whether you are open to collaboration.
+3. The repository owner will update the **Status** field in the question file
+   and close the issue.
+   
 ### Status Fields
 
 Each question file includes a status block at or near the top:
