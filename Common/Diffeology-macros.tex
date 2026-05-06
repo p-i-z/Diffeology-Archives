@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%%  Diffeology-macros.tex
+%%  MARK: Diffeology-macros.tex
 %%
 %%  Semantic Macro File for Diffeology and Differential Geometry
 %%
@@ -157,6 +157,21 @@
 \newcommand{\ds}{\mathrm{ds}}
 \newcommand{\du}{\mathrm{du}}
 
+%% Exterior differential \der : \DForms^k(X) \to \DForms^{k+1}(X)
+\newcommand{\der}{\operatorname{d}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Volumes and Surface forms
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The volume form of a manifold of any dimension
+\newcommand{\Vol}{\operatorname{vol}}
+
+%% The surface form of a 2-dimensional manifold
+\newcommand{\Surf}{\operatorname{surf}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Chain-Homotopy Operator (Paths-Primitive)
@@ -174,6 +189,9 @@
 
 %% \Kbeta : Paths-primitive of β
 \newcommand{\Kbeta}{\CHO\beta}
+
+%% \\KVol : Paths-primitive of \Vol
+\newcommand{\KVol}{\CHO\!\Vol}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -237,13 +255,18 @@
 \newcommand{\Ham}{\operatorname{Ham}}   %% Hamiltonian diffeomorphisms
 
 %% Group operations
-\newcommand{\Ad}{\mathrm{Ad}}   %% Adjoint action: Ad(g)(k) = gkg^{-1}
+\newcommand{\Ad}{\mathrm{Ad}}        %% Adjoint action: Ad(g)(k) = gkg^{-1}
 \newcommand{\Lm}{\operatorname{L}}   %% Left multiplication: L(g)(k) = gk
 \newcommand{\Rm}{\operatorname{R}}   %% Right multiplication: R(g)(k) = kg
+\newcommand{\Tr}{\operatorname{tr}}  %% Trace of a matrix or an operator
 
 %% \OrbitMap : Orbit map of a group action
 %% Usage: \OrbitMap{x}(g) = g(x)
 \newcommand{\OrbitMap}[1]{\hat{#1}}
+
+%% The identity of a group
+%% Usage: \id_G, the identity of the group G
+\newcommand{\id}{\boldsymbol{1}}
 
 %% \Stab : Stabilizer of a point under a group action
 \newcommand{\Stab}{\mathrm{St}}
@@ -254,6 +277,30 @@
 
 %% \DLie : Lie derivative (pounds sign)
 \newcommand{\DLie}{\mbox{\pounds}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Groupoids
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Groupoid : Typesets the name of a diffeological groupoid in bold
+%% Usage: \Groupoid{T} produces \mathbf{T}
+%%        \Groupoid{G} produces \mathbf{G}
+%% Mathematical meaning: A diffeological groupoid, typically
+%%   - \Groupoid{T}_\omega : the prequantum groupoid
+%%   - \Groupoid{H} : the homotopy groupoid
+%%   - \Groupoid{G} : a generic groupoid
+%%
+%% For calligraphic groupoids (e.g., \mathcal{G} for a category),
+%% use \cG, \cH, etc.
+\newcommand{\Groupoid}[1]{\mathbf{#1}}
+
+%% The source map of a groupoid
+\newcommand{\Src}{\operatorname{src}}
+
+%% The target map of a groupoid
+\newcommand{\Trg}{\operatorname{trg}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -302,8 +349,23 @@
 %% \1 : End (terminal point) of a path
 \newcommand{\1}{\hat 1}
 
-%% \Ends : Pair of endpoints of a path
-\def\Ends{\operatorname{ends}}
+%% \EndsPath : The pair of endpoints of a path (a value in X × X)
+%% Usage: \EndsPath(\gamma) = (\0(\gamma), \1(\gamma))
+%% This is a function \Paths(X) → X × X.
+%% For the map as a morphism, use \EndsMap.
+\def\EndsPath(#1){(\0(#1),\1(#1))}
+
+%% \EndsMap : The ends map as a smooth morphism between diffeological spaces
+%% Usage: \EndsMap : \Paths(X) → X × X is a subduction
+%% Semantically the same as \EndsPath, but emphasizes the map as an object
+%% in the category of diffeological spaces.
+\newcommand{\EndsMap}{\operatorname{ends}}
+
+%% [Deprecated] \Ends : Old notation, replaced by \EndsPath and \EndsMap
+ \def\Ends{\operatorname{ends}}
+
+%% The values of a path at time $t$: \tValue{\gamma}
+\newcommand{\tValue}{\hat{t}} % \time(\gamma)  = \gamma(t)
 
 %% \Rev : Reverse of a path
 %% Usage: \Rev(\gamma)(t) = \gamma(1-t)
@@ -362,13 +424,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% \Domain : Domain of a parametrization
-\newcommand{\Domain}{\mathrm{dom}}
+\newcommand{\Domain}{\operatorname{dom}}
 
 %% \Domains : Set of domains in Euclidean space
-\newcommand{\Domains}{\mathrm{Domains}}
+\newcommand{\Domains}{\operatorname{Domains}}
 
 %% \Params : Set of parametrizations in a set
-\newcommand{\Params}{\mathrm{Params}}
+\newcommand{\Params}{\operatorname{Params}}
 
 %% \Plots : Set of plots in a diffeological space (the diffeology)
 \newcommand{\Plots}{\mathrm{Plots}}
@@ -440,6 +502,12 @@
 
 %% \Sph : n-sphere
 \newcommand{\Sph}{\mathrm{S}}
+
+%% Specific periods for a closed 2-form \omega
+\newcommand{\Pomega}{\Periods_\omega}
+
+%% Specific torus of periods for a closed 2-form \omega
+\newcommand{\Tomega}{\Torus_\omega}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
