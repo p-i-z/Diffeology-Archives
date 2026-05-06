@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%%  Packages.tex
+%%  MARK: Packages.tex
 %%
 %%  Core Packages for the Diffeology Archives
 %%
@@ -53,6 +53,11 @@
 
 %% Utopia math font with French math support
 \usepackage[cal=scr,frenchmath,uppercase = upright, greekfamily = didot, greeklowercase = upright, utopia]{mathdesign}    %% Utopia for math
+
+%% Note on epsilon:
+%% The Utopia math font lacks a lunate epsilon glyph (\epsilon).
+%% mathdesign maps it to \varepsilon by default, but we make this explicit:
+\let\epsilon\varepsilon
 
 %% Linespacing (global default)
 \linespread{1.1}
@@ -125,6 +130,14 @@
   \uline{\phantom{#1}}%
   \llap{\contour{white}{#1}}%
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Improving list environments
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{enumitem} %This package provides user control over the layout of the three basic list environments: enumerate, itemize and description
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
