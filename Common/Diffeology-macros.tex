@@ -162,15 +162,21 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% MARK: Volumes and Surface forms
+%% MARK: Volume and Surface forms
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% The volume form of a manifold of any dimension
+%% A chosen volume form of a manifold $M$ of any dimension.
+%% If $\dim(M) = n$ then $\Vol \in \DForms^n(M)$.
 \newcommand{\Vol}{\operatorname{vol}}
 
-%% The surface form of a 2-dimensional manifold
+%% The surface form of a 2-dimensional manifold.
+%% This is a specific name for the volume form of a surface.
 \newcommand{\Surf}{\operatorname{surf}}
+
+%% The total area of a 2-dimensional manifold.
+%% Usage $\Area(\Sigma) = \int_\Sigma \Surf$ where $\Sigma$ is a oriented surface.
+\newcommand{\Area}{\operatorname{Area}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
