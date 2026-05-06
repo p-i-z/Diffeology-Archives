@@ -349,23 +349,20 @@
 %% \1 : End (terminal point) of a path
 \newcommand{\1}{\hat 1}
 
-%% \EndsPath : The pair of endpoints of a path (a value in X × X)
+%% \EndsPath : The pair of endpoints of a path (value in X × X)
 %% Usage: \EndsPath(\gamma) = (\0(\gamma), \1(\gamma))
-%% This is a function \Paths(X) → X × X.
-%% For the map as a morphism, use \EndsMap.
 \def\EndsPath(#1){(\0(#1),\1(#1))}
 
-%% \EndsMap : The ends map as a smooth morphism between diffeological spaces
+%% \Ends : Short alias for \EndsPath
+\let\Ends\EndsPath
+
+%% \EndsMap : The ends map as a smooth morphism
 %% Usage: \EndsMap : \Paths(X) → X × X is a subduction
-%% Semantically the same as \EndsPath, but emphasizes the map as an object
-%% in the category of diffeological spaces.
 \newcommand{\EndsMap}{\operatorname{ends}}
 
-%% [Deprecated] \Ends : Old notation, replaced by \EndsPath and \EndsMap
- \def\Ends{\operatorname{ends}}
-
-%% The values of a path at time $t$: \tValue{\gamma}
-\newcommand{\tValue}{\hat{t}} % \time(\gamma)  = \gamma(t)
+%% \tValue : Evaluation at time t
+%% Usage: \tValue(\gamma) = \gamma(t) for t \in \RR
+\newcommand{\tValue}{\hat{t}}
 
 %% \Rev : Reverse of a path
 %% Usage: \Rev(\gamma)(t) = \gamma(1-t)
