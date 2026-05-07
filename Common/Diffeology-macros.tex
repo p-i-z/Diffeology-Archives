@@ -21,6 +21,17 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% ---------------------------------------------------------------------------
+%% Naming Convention for Semantic Macros:
+%% ---------------------------------------------------------------------------
+%% - Number fields/rings: \fieldX, \ringX (lowercase prefix)
+%% - Groups: \GL, \Diff, \Hom (all caps)
+%% - Operators: \Proj, \Id, \Der (capitalized)
+%% - Spaces: \Torus, \Sph (capitalized)
+%% - Calligraphic variants: \cTorus, \cM (lowercase 'c' prefix)
+%% - Parentheses macros: \FundamentalGroup(...) for natural reading
+%% ---------------------------------------------------------------------------
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Text Shortcuts and Hyphenation
@@ -482,7 +493,7 @@
 %% \FundamentalGroup : The fundamental group (first homotopy group)
 %% Usage: \FundamentalGroup{X} produces π₁(X)
 %% For a pointed space, use \FundamentalGroup{X,x₀}
-\newcommand{\FundamentalGroup}[1]{\pi_1(#1)}
+\def\FundamentalGroup(#1){\pi_1(#1)}
 
 %% \piX : Alternative semantic name (shorter, still clear)
 %% Usage: \piX{X} produces π₁(X)
@@ -528,23 +539,28 @@
 %% Usage: \Vector{a \\ b \\ c}
 \newcommand{\Vector}[1]{\begin{pmatrix}#1\end{pmatrix}}
 
+%%  Custom Matrix Command equivalent to Vector but semantically specific
+\newcommand{\Matrix}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+
 %% \SqVect : Column vector with square brackets
 \newcommand{\SqVect}[1]{\left[\begin{matrix}#1\end{matrix}\right]}
 
-%% \Matrix : Set of matrices
-\DeclareMathOperator{\Matrix}{Mat}
+%% \Matrices : Set of matrices
+\DeclareMathOperator{\Matrices}{Mat}
 
 %% \ker : Kernel of a linear map
-\renewcommand{\ker}{\mathrm{ker}}
+\newcommand{\Ker}{\mathrm{ker}}
+\let\ker\Ker
 
 %% \coker : Cokernel of a linear map
-\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\Coker}{\operatorname{coker}}
+\let\coker\Coker
 
 %% \J : The π/2 rotation matrix (complex structure)
 \newcommand{\J}{\operatorname{J}}
 
 %% \vecspan : Linear span of vectors
-\newcommand{\vecspan}[1]{{\rm span}(#1)}
+\newcommand{\VectSpan}[1]{\operatorname{span}(#1)}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
