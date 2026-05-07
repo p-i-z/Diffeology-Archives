@@ -1,15 +1,28 @@
 \documentclass[10pt]{amsart}
 
-%% --- Semantic Macros ---
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Semantic Macros
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \input{../../Common/Diffeology-macros.tex}
 \input{../../Common/Packages.tex}
 
-%% --- Override macros for specific transcription from original
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Override macros for specific transcription from original
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \renewcommand{\Torus}{\cT}
 \renewcommand{\UniversalCover}[1]{\widehat{#1}}
 
 
-%% --- Historical Note ---
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Historical Note
+%%
 %% This is a late .tex transcription of the original 1983 machine-typeset file.
 %% The original PDF is available in the same folder as DIZ83.pdf.
 %%
@@ -20,9 +33,15 @@
 %%         projection onto \Torus_{\alpha}. This transcription replaces it
 %%         with \Proj_{\alpha} to avoid confusion with the fundamental group
 %%         \FundamentalGroup(\Torus_{\alpha}) = \pi_1(\Torus_{\alpha}).
-%% --- End Historical Note ---
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% --- Metadata ---
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Metadata
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \title{Exemple de Groupes Différentiels : Flots Irrationnels sur le Tore}
 
 \author{Paul Donato}
@@ -33,7 +52,13 @@
 \address{Centre de Physique Théorique, CNRS - Luminy - Case 907, F-13288 MARSEILLE CEDEX 9 (FRANCE)}
 
 \date{July 1983}
-%% --- End Metadata ---
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Begin Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
   
@@ -88,7 +113,7 @@
   $\UniversalCover{H}^{\circ}$ la composante neutre de $\UniversalCover{H}$ alors on a le diagramme :
   
   \begin{center}
-      \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
       \UniversalCover{G} \arrow[r]  \arrow[d] & \UniversalCover{G}/\UniversalCover{H}^0 \arrow[d] \\
       G \arrow[r] & G/H
     \end{tikzcd}
@@ -129,7 +154,7 @@
   Il existe un isomorphisme de revêtement universel $f$ qui relève $\bar{f}$ [1] :
   
   \begin{center}
-      \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
+    \begin{tikzcd}[column sep=large, row sep=large, every label/.append style = {font = \small}]
       \fieldR \arrow[r,"f"]  \arrow[d,swap,"\Proj_\alpha"] & \fieldR \arrow[d,"\Proj_\beta"] \\
       \Torus_\alpha \arrow[r,swap,"\bar f"] & \Torus_\beta
     \end{tikzcd}
@@ -229,6 +254,12 @@
   Les discussions que nous avons eues avec J. Bellissard et J.M. Souriau nous ont été précieuses ;
   nous les en remercions.
   
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Bibliography
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
   \begin{thebibliography}{9}
     
     \bibitem{Donato}
@@ -244,5 +275,11 @@
     \textit{An Introduction to Number Theory}, Markham Publish., Chicago 1970.
     
   \end{thebibliography}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: End Document
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
 \end{document}
