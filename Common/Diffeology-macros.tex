@@ -463,10 +463,26 @@
 %% Usage: \Cl[x] = \Class(x)
 \newcommand{\Cl}[1]{\left[ #1 \right]}
 
-%% \Proj : The canonical projection map from a set to its quotient
-%% Usage: \Proj : X → X/∼
-%% For a specific quotient: \Proj_{\Gamma} : ℝ → ℝ/Γ
-\newcommand{\Proj}{\operatorname{pr}}
+%% \Proj : Projection map with optional custom symbol
+%%
+%% SEMANTICS: Canonical projection map from a space to its quotient.
+%%
+%% USAGE:
+%%   \Proj               → pr
+%%   \Proj[\pi]          → π
+%%   \Proj[p]            → p
+%%   \Proj[\Pi]          → Π
+%%   \Proj[\pi]_\alpha   → π_α
+%%
+%% EXAMPLES:
+%%   $\Proj : X \to X/{\sim}$          produces "pr : X → X/∼"
+%%   $\Proj[\pi]_\alpha : T^2 \to \cT_\alpha$   produces "π_α : T² → T_α"
+%% or
+%%   $\Proj[\pi_\alpha] : T^2 \to \cT_\alpha$   produces "π_α : T² → T_α"
+\makeatletter
+\def\Proj{\@ifnextchar[{\@Proj}{\@Proj[\operatorname{pr}]}}
+\def\@Proj[#1]{#1}
+\makeatother
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
