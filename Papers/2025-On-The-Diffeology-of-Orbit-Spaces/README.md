@@ -1,4 +1,4 @@
-# On Diffeology of Orbit Spaces
+# On The Diffeology of Orbit Spaces
 
 **Authors:** Serap Gürer, Patrick Iglesias-Zemmour  
 **Date:** 2025 (Preprint)  

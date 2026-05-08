@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%%  PROJECT: On Diffeology of Orbit Spaces
+%%  PROJECT: On the Diffeology of Orbit Spaces
 %%
 %%  Created by Patrick Iglesias-Zemmour on May 2024
 %%
@@ -182,7 +182,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
 
 \newcommand{\scal}[2]{\langle #1,#2\rangle}
 
-\newcommand{\Xsim}{{\X/\hspace{-1ex}\sim}}
+\newcommand{\Xsim}{{\X/\!\!\sim}}
 
 \def\Clos(#1){\overline{#1}}
 
@@ -248,14 +248,13 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
   Israel.
   }
   \thanks{P.I-Z thanks the Hebrew University of Jerusalem, Israel, for its continuous academic support.
-  He would also like to acknowledge the assistance provided by the AI assistants Gemini (Google) and DeepSeek (\begin{CJK}{UTF8}{gbsn}深度求索\end{CJK}) for their help.} % Added a thank you to Gemini
+  He would also like to acknowledge the assistance provided by the AI assistants Gemini (Google) and DeepSeek (\begin{CJK}{UTF8}{gbsn}深度求索\end{CJK}).} % Added a thank you to Gemini
   \email{piz@math.huji.ac.il}
   \urladdr{http://math.huji.ac.il/~piz}
   
   %\fi %---> End anonymity
   
   \date{\today}
-  %\date{August 2022 --- January 2023}
   
   \keywords{Diffeology, Orbit Space, Isostabilizer Decomposition, Klein Stratification, Orthofold}
   \subjclass{57S15, 58A40, 58A35}
@@ -269,10 +268,11 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
     to the theory of transformation groups, which form the essential framework of this paper.
   \end{center}
   
-  \tikz[overlay,remember picture]
-  {
-  \node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \today}}; %%% MR: Changed \pdfcreationdate to \today for more common usage, can be reverted.
-  }
+  %% Watermark
+  %  \tikz[overlay,remember picture]\n
+  %  {\n
+  %  \node at ($(current page.west)+(1.5,0)$) [rotate=90] {\Huge\textcolor{gray}{Draft Version -- \today}}; %%% MR: Changed \pdfcreationdate to \today for more common usage, can be reverted.\n
+  %  }\n
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
@@ -281,18 +281,17 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
   \begin{abstract}
-    We investigate the correspondence between the geometry of a smooth action of a compact Lie group on a manifold $\M$ and the intrinsic smooth structure of the orbit space $\M/\G$.
-    The latter is captured by the \emph{Klein stratification},
-    which partitions $\M/\G$ into orbits of local diffeomorphisms,
-    thereby classifying the space according to its intrinsic singularity types.
-    We show that the geometry of the action maps coherently to this stratification through a finer partition of $\M$,
-    the \emph{isostabilizer decomposition},
-    whose elements are the connected components of submanifolds where the stabilizer subgroup is constant.
-    Our main result establishes that the canonical projection induces a surjective map from the components of this decomposition to the Klein strata of $\M/\G$.
-    As a corollary,
-    we define by pullback a new canonical stratification on $\M$,
-    the \emph{Inverse Klein Stratification},
-    and clarify its precise relationship with the intrinsic geometry of the quotient.
+    We investigate the correspondence between the geometry of a smooth action
+    of a compact Lie group on a manifold $\M$ and the intrinsic smooth structure
+    of the orbit space $\M/\G$. The latter is captured by the \emph{Klein stratification},
+    which partitions $\M/\G$ into orbits of local diffeomorphisms, classifying the space
+    by its intrinsic singularity types. We show that this geometry maps coherently to
+    the quotient through the \emph{isostabilizer decomposition} of $\M$, whose elements
+    are the connected components of submanifolds where the stabilizer is constant.
+    Our main result, the \emph{Correspondence Theorem}, establishes that the canonical
+    projection induces a surjective map from this decomposition to the Klein strata.
+    As a corollary, we define the \emph{Inverse Klein Stratification} on $\M$ by pullback,
+    clarifying its relationship with the intrinsic geometry of the quotient.
   \end{abstract}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -336,7 +335,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
   points with different stabilizers may nevertheless produce locally diffeomorphic quotient models.
   Thus,
   neither the stabilizer subgroup alone nor its conjugacy class fully captures the intrinsic geometry of the quotient.
-    
+  
   We show in this paper that to map the smooth structure of $\M$ coherently to the quotient via the projection $\orbit : \M \to \M/\G$,
   the natural tool is the finer \emph{isostabilizer decomposition},
   whose elements are the connected components of submanifolds where the stabilizer subgroup is constant.
@@ -362,6 +361,19 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
   which we term an \emph{orthofold},
   can be independent of the specific global action that created it.
   
+  As we will see,
+  the intrinsic geometry of the quotient $\M/\G$ is assembled naturally according to three kinds of points,
+  characterized by their local diffeological models:
+  \begin{itemize}
+    \item \textbf{Manifold points}, whose local model is a Euclidean space $\E$ (i.e., the effective stabilizer is trivial).
+    These correspond to principal orbits.
+    \item \textbf{Orbifold points}, whose local model is $\E/\Gamma$ where $\Gamma$ is a non-trivial finite group.
+    These correspond to exceptional orbits.
+    \item \textbf{Orthofold points}, whose local model is $\E/\H$ where $\H$ is a non-discrete compact Lie group.
+    These correspond to non-exceptional singular orbits.
+  \end{itemize}
+  This classification provides a hierarchy of singularities that is intrinsic to the quotient and independent of the original action.
+  
   The paper is organized as follows:
   Section \ref{sec:Preliminaries} provides preliminaries on diffeology.
   Section \ref{sec:Structure_of_Orbit_Spaces} discusses the diffeological structure of $\M/\G$.
@@ -372,7 +384,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
   constructs the Inverse Klein Stratification.
   Finally,
   Section \ref{sec:Concluding_Remarks} provides concluding remarks.
-    
+  
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
   %% MARK: - Preliminaries on Diffeology
@@ -487,12 +499,11 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
     
     \begin{definition}{~(Stratification)}
       \label{def:Stratification}
-      A \emph{stratification} of a diffeological space $\X$ is a partition into disjoint subsets (strata) satisfying the \emph{frontier condition} with respect to the D-topology.
-      This is a \emph{basic} condition:
+      A \emph{stratification} of a diffeological space $\X$ is a partition into disjoint subsets (strata) satisfying the \emph{Frontier Condition} with respect to the D-topology.
+      This is the minimal requirement for a partition to be called a stratification;
+      we therefore call it a \emph{basic stratification} and label it with the condition:
       \begin{itemize}
-        \item[{[B]}] The closure of every stratum $\S \in \cS$,
-        in the D-topology,
-        is a union of strata.
+        \item[{[B]}] The closure of every stratum $\S \in \cS$ is a union of strata.
       \end{itemize}
     \end{definition}
     
@@ -577,7 +588,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
     \begin{proposition}{~(Diffeological Local Model)}
       \label{loc}
       As a diffeological space,
-      the quotient space $\M/\G$ is locally diffeomorphic to some quotient $\E/\H$ where $\E$ is an Euclidean space and $\H$ is a compact subgroup of $\O(\E)$ acting orthogonally.
+      the quotient space $\M/\G$ is locally diffeomorphic to some quotient $\E/\H$ where $\E$ is a Euclidean space and $\H$ is a compact subgroup of $\O(\E)$ acting orthogonally.
       Precisely,
       if $\V \subset \M$ is a $\G$-invariant open neighborhood of an orbit $\cO = \G \cdot x$ and $\V$ is $\G$-equivariantly diffeomorphic to $\G \times_\H \E$ (where $\H = \Stab_\G(x)$),
       then the quotient space $\V/\G$ (with the subset diffeology from $\M/\G$) is diffeomorphic to $\E/\H$ (with the quotient diffeology).
@@ -630,7 +641,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
       A diffeological space $\X$ is called an \emph{orthofold} if $\X$ is locally diffeomorphic,
       at each point $x$,
       to some quotient $\E/\H$,
-      where $\E$ is an Euclidean vector space and $\H$ a subgroup of the orthogonal group $\O(\E)$.
+      where $\E$ is a Euclidean vector space and $\H$ a subgroup of the orthogonal group $\O(\E)$.
       The pair $(\E, \H)$ is called a \emph{local model} for the orthofold at $x$.
     \end{definition}
     
@@ -812,8 +823,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
     \textbf{(a)} The set of principal orbits $(\M/\G)_{\mathrm{pr}} = \orbit(\M_{\mathrm{pr}})$ is the \emph{principal Klein stratum} of $\M/\G$.
     It is an open dense subset of $\M/\G$
     (in the D-topology, which coincides with the standard quotient topology for $\M/\G$)
-    and consists of manifold points.
-    (By a manifold point we mean a point whose local model is a Euclidean space.)
+    and consists of manifold points (i.e., points whose local model is a Euclidean space).
     All principal orbits $\cO_{\mathrm{pr}}$ have the same dimension.
     Thus,
     the dimension map is constant on $(\M/\G)_{\mathrm{pr}}$,
@@ -1107,12 +1117,14 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
     
     This phenomenon—where points with identical stabilizers are separated by the projection into distinct Klein strata of the quotient—illustrates a central principle of our work:
     the quotient space is not merely a shadow of the action, but a new geometric object whose intrinsic structure actively organizes the original manifold.
-    This is precisely why the isostabilizer decomposition — which records not just the stabilizer but also the slice representation via its connected components — is necessary to understand the quotient's intrinsic structure.
+    This is precisely why this decomposition — which records not just the stabilizer but also the slice representation via its connected components — is necessary to understand the quotient's intrinsic structure.
     Understanding this structure requires looking beyond stabilizers to the full local geometry encoded in slice representations.
     
-    These examples collectively motivate the need for a partition of $\M$ that is sensitive not only to the stabilizer of a point,
+    These examples collectively motivate the need for a partition of $\M$,
+    which will be defined in the following article,
+    that is sensitive not only to the stabilizer of a point,
     but also to the specific slice representation.
-    This is precisely what the isostabilizer decomposition captures,
+    This is precisely what this decomposition captures,
     and it will be defined and analyzed in the following sections.
     
   \end{article}
@@ -1151,7 +1163,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
     In those cases,
     the intrinsic geometry of the quotient encodes information beyond stabilizer data alone,
     captured by the slice representation.
-    This motivates the need for a finer partition of $\M$—the isostabilizer decomposition—that is sensitive to this additional local structure.
+    This motivates the need for a finer partition of $\M$ that is sensitive to this additional local structure.
   \end{article}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1410,16 +1422,11 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
       Let $\cO = \orbit(x) \in \M/\G$ be a point in the orbit space, with stabilizer $\K = \Stab_\G(x)$.
       \begin{itemize}
         \item[$\ast$] If $x$ is a principal point,
-        then $\cO$ is a \textbf{manifold point}.
-        Its local model is a Euclidean space.
-        \item[$\ast$] If $x$ is an exceptional singular point
-        (i.e., $\dim(\K) = \dim(\K_{\pr})$ but $\K$ is not conjugate to $\K_{\pr}$),
-        then $\cO$ is a non-trivial \textbf{orbifold point}.
-        Its local model is $\E/\Gamma$ where $\Gamma$ is a non-trivial finite group.
-        \item[$\ast$] If $x$ is a non-exceptional singular point
-        (i.e., $\dim(\K) > \dim(\K_{\pr})$),
-        then $\cO$ is a \textbf{general orthofold point}.
-        Its local model is $\E/\K$ where the effective action of $\K$ is by a non-finite compact Lie group.
+        then $\cO$ is a \textbf{manifold point} (i.e., its local model is a Euclidean space).
+        \item[$\ast$] If $x$ is an exceptional singular point (i.e., $\dim(\K) = \dim(\K_{\pr})$ but $\K$ is not conjugate to $\K_{\pr}$),
+        then $\cO$ is a non-trivial \textbf{orbifold point} (i.e., its local model is $\E/\Gamma$ where $\Gamma$ is a non-trivial finite group).
+        \item[$\ast$] If $x$ is a non-exceptional singular point (i.e., $\dim(\K) > \dim(\K_{\pr})$),
+        then $\cO$ is a \textbf{general orthofold point} (i.e., its local model is $\E/\K$ where the effective action of $\K$ is by a non-discrete compact Lie group).
       \end{itemize}
     \end{proposition}
     
@@ -1537,7 +1544,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
   diffeology provides essential tools for analyzing the intrinsic smooth structure of a wide range of singular spaces
   (not limited to quotients of manifolds by compact Lie groups)
   where traditional differential geometry may lack a suitable global language and tools.
-    
+  
   These results underscore the utility of diffeology in providing a consistent and nuanced framework for the study of singular spaces.
   By capturing the complete smooth structure that remains after reduction,
   the diffeological approach offers a richer understanding of a quotient's geometry than its topology alone.
@@ -1560,11 +1567,11 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
   %% MARK: AI Tools decalarations
   %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
- \subsection*{Acknowledgement of AI Assistance}
- During the preparation of this work,
- the authors acknowledge the linguistic and organizational assistance provided by the AI assistants Gemini (Google) and DeepSeek (\begin{CJK}{UTF8}{gbsn}深度求索\end{CJK}).
- The authors take full responsibility for the content of the published article.
+  
+  \subsection*{Acknowledgement of AI Assistance}
+  During the preparation of this work,
+  the authors acknowledge the linguistic and organizational assistance provided by the AI assistants Gemini (Google) and DeepSeek (\begin{CJK}{UTF8}{gbsn}深度求索\end{CJK}).
+  The authors take full responsibility for the content of the published article.
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
@@ -1597,7 +1604,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
     Serap G{\"u}rer and Patrick Iglesias-Zemmour,
     \emph{Orbifolds as stratified diffeologies},
     Differential Geometry and its Applications \textbf{86} (2023), 101959, 20 pp.
-        
+    
     \bibitem[PI91]{PI91}
     \bysame,
     \emph{Les $\mathrm{SO}(3)$-vari{\'e}t{\'e}s symplectiques et leur classification en dimension 4},
@@ -1623,7 +1630,7 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
     Patrick Iglesias-Zemmour, Yael Karshon, and Moshe Zadka,
     \emph{Orbifolds as diffeologies},
     Transactions of the American Mathematical Society \textbf{362} (2010), no. 6, 2811--2831.
-        
+    
     \bibitem[IZP21]{IZP21}
     Patrick Iglesias-Zemmour and Elisa Prato,
     \emph{Quasifolds, diffeology and noncommutative geometry},
@@ -1631,15 +1638,15 @@ edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
     
     \bibitem[KS]{KS}
     Yael Karshon and Shintar{\^o} Kuroki,
-    \emph{Classification of Locally Standard Torus Actions},
-    Preprint, (Unpublished manuscript).
+    \emph{Classification of Locally Standard Torus Actions}.
+    Preprint arXiv:2507.15004.
     
     \bibitem[Pal60]{Pal60}
     Richard S. Palais,
     \emph{Slices and equivariant embeddings},
     Chapter VIII in: \emph{Seminar on Transformation Groups} (A. Borel, ed.),
     Annals of Mathematics Studies, no. 46, Princeton University Press, Princeton, NJ, 1960, pp. 101--115.
-
+    
   \end{thebibliography}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
