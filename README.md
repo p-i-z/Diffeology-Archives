@@ -139,6 +139,15 @@ This archive was realized with the collaboration of **Gemini** (Google) and **De
 
 ---
 
+## Curriculum Vitae
+
+The official CV of Patrick Iglesias-Zemmour is available in PDF format:
+
+- [Download CV (PDF)](./CV-2026/CV-2026.pdf)
+- [Source (LaTeX)](./CV-2026/CV-2026.tex)
+
+---
+
 ## 📬 Contact
 
 For more information, please visit the author's professional website:  
