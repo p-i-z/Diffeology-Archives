@@ -461,11 +461,15 @@
 
 %% \Interior : Topological interior of a set
 %% Usage: \Interior{A} = \operatorname{int}(A)
-\newcommand{\Interior}[1]{\operatorname{int}(#1)}
+\def\Interior(#1){\operatorname{int}(#1)}
+
+%% \Exterior : Topological exterior of a set
+%% Usage: \Exterior{A} = \operatorname{ext}(A)
+\def\Exterior(#1){\operatorname{ext}(#1)}
 
 %% \Frontier : Topological frontier (boundary) of a set
 %% Usage: \Frontier{A} = \partial A
-\newcommand{\Frontier}[1]{\partial #1}
+\newcommand{\Frontier}{\partial}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
