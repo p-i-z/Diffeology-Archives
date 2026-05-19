@@ -1,0 +1,1248 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%      Geometric Quantization by Path  Memoir
+%%
+%%      Patrick Iglesias-Zemmour Feb. 2026
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,reqno,letterpaper,twoside]{amsart}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Semantic Macros
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{../Common/Diffeology-macros.tex}
+\input{../Common/Environments.tex}
+\input{../Common/Packages.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% MARK: - Title Page Metadata
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Geometric Quantization by Paths}
+
+\author{Patrick Iglesias-Zemmour}
+
+\address{Einstein Institute of Mathematics \\
+The Hebrew University of Jerusalem \\
+Givat Ram, 9190401 Jerusalem, Israel}
+
+\email{piz@math.huji.ac.il}
+\urladdr{http://math.huji.ac.il/~piz}
+
+%\thanks{Thanks to the Hebrew University of Jerusalem, Israel, for its continuous academic support.\n
+%  I am also grateful for the stimulating discussions and assistance provided by the AI assistant DeepSeek (深度求索).}\n
+
+\date{February 2026}
+
+\subjclass[2020]{Primary 53D50, 58A05; Secondary 22A22, 81S10}
+
+\keywords{Diffeology, Geometric Quantization, Prequantum Groupoid,
+Closed 2-forms, Paths, Loops, Metaplectic Anomaly}
+
+\dedicatory{To the memory of Jean-Marie Souriau, \\
+who once asked me: \\
+\emph{``Quoi de neuf en diffeology ?''}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: - Begin Document
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Make Title
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  
+  \maketitle
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Override
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \renewcommand \thesection{\Roman{section}}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Chain-Homotopy Operator (Paths-Primitive)
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  %% \Komega : Paths-primitive of ω (1-form on Paths(X))
+  \renewcommand{\Komega}{\CHO\!\omega}
+  \!
+  %% \Kalpha : Paths-primitive of α
+  \renewcommand{\Kalpha}{\CHO\!\alpha}
+  
+  %% \Kbeta : Paths-primitive of β
+  \renewcommand{\Kbeta}{\CHO\!\beta}
+  
+  %% \\KVol : Paths-primitive of \Vol
+  \renewcommand{\KVol}{\CHO\!\Vol}
+  
+  %% \Ktheta : Paths-primitive of \theta
+  \renewcommand{\Ktheta}{\CHO\!\theta}
+  
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: - Part: Preface
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section*{Preface}
+  
+  For nearly a century,
+  quantum mechanics has rested upon two distinct conceptual pillars.
+  The first,
+  erected by Dirac and refined by Kostant and Souriau,
+  is the pillar of operators acting on a Hilbert space.
+  The second,
+  envisioned by Feynman,
+  is the pillar of the ``sum-over-histories,''
+  where the quantum amplitude is distilled from the space of all paths in configuration space.
+  
+  While both approaches have achieved unparalleled empirical success,
+  the geometric bridge between them has remained elusive.
+  Standard geometric quantization has largely followed the Dirac program,
+  constructing principal bundles over the classical space of motions.
+  Yet these bundles often feel like external additions to the classical geometry,
+  their connection forms chosen by gauge rather than given by the physics.
+  On the other hand,
+  the Feynman path integral,
+  despite its profound physical intuition,
+  has remained a mathematical ghost,
+  trapped by the impossibility of defining a translation-invariant measure on the space of all paths.
+  
+  This Memoir proposes a fundamental shift of perspective.
+  We do not sum over paths in configuration space;
+  we filter the space of \emph{finite fluctuations between complete classical motions}.
+  In the language of Souriau,
+  the classical system is described not by instantaneous snapshots
+  but by the symplectic space $(X,\omega)$ of entire dynamical trajectories.
+  A point in $X$ is not a state at an instant;
+  it is a complete motion.
+  Our ``paths'' are not trajectories of a particle;
+  they are \emph{deformations} connecting one classical dynamical history to another.
+  A path $\gamma \in \Paths(X)$ with endpoints $\gamma(0) = x$ and $\gamma(1) = x'$
+  represents a finite fluctuation from the motion $x$ to the motion $x'$.
+  
+  The source of all quantum information is the space of these fluctuations.
+  By working within the framework of \emph{Diffeology},
+  we can treat the infinite dimensional space $\Paths(X)$ of all smooth fluctuations as a geometrically sound object.
+  Diffeology allows us to take quotients without losing smoothness,
+  and to handle spaces---such as irrational tori or leaf spaces of foliations---that lie beyond the reach of traditional manifolds.
+  We show that the quantum system is not a bundle to be added to the classical space,
+  but a groupoid to be distilled from the fluctuations of classical motions.
+  
+  The core of our approach,
+  which we call \emph{Geometric Quantization by Paths} (GQbP),
+  consists of a rigorous filtration of this space of fluctuations.
+  We call $\Paths(X)$ the \emph{Quantum Broth}.
+  It is a primary geometric object,
+  equipped with a canonical $1$-form,
+  the \emph{Action Form} $\Komega$,
+  which serves as a universal,
+  intrinsic Lagrangian.
+  Even when the classical symplectic form $\omega$ is not exact on $X$---as it is for the sphere $S^2$, for example---it is always exact on the space of fluctuations.
+  The Action Form is its canonical primitive.
+  
+  The process of quantization is then revealed to be a distillation.
+  The principal mathematical contribution of this Memoir is the construction of the prequantum groupoid $\TT_\omega$ as the quotient:
+  \[
+    \TT_\omega = \Paths(X)/\!\sim_\omega,
+    \]
+  where the equivalence relation $\sim_\omega$ identifies two fluctuations $\gamma$ and $\gamma'$
+  with the same endpoints whose concatenation encloses a symplectic area belonging to the period group $\Pomega$.%
+  \footnote{More precisely,
+  the equivalence relation is defined by the vanishing of the Chasles cocycle $\Phi$,
+  derived from the \emph{paths-primitive} $1$-form $\Komega$.}
+  The symplectic area enclosed by the concatenated fluctuation is its \emph{quantum phase}.
+  The filtration discards those fluctuations whose relative quantum phase vanishes modulo the periods,
+  isolating the constructive interference.
+  The result is the prequantum groupoid $\TT_\omega$,
+  whose space of morphisms $\cY$ carries the \emph{Prequantum $1$-form} $\blambda$,
+  which is left and right invariant and whose curvature encodes the classical form $\omega$.
+  
+  A critical feature of this construction is its absolute canonicity.
+  From the classical form $\omega$ to the Action Form $\Komega$ on the Broth,
+  and finally to the prequantum $1$-form $\blambda$ on the groupoid,
+  every step is geometrically determined.
+  There is no arbitrary choice of primitive;
+  the prequantum structure is an inherent property of the parasymplectic geometry,%
+  \footnote{A \emph{parasymplectic} form is,
+  by definition,
+  any closed $2$-form.
+  No non-degeneracy condition is assumed.}
+  not a structure to be assembled through gauge choices.
+  
+  We interpret this groupoid,
+  the pair $(\cY,\blambda)$,
+  as the \emph{Space of Quantum Motions}.
+  In this geometry,
+  the classical space $X$ survives as the \emph{Skeleton} of identity morphisms,
+  representing the ``null'' fluctuations.
+  Surrounding this skeleton is the \emph{Quantum Fog} of non-unit morphisms,
+  which constitute the channels of quantum transition.
+  These morphisms encode the physically meaningful fluctuations:
+  they are the geometric reification of Feynman's interfering alternatives,
+  transposed from configuration space to the space of motions.
+  
+  This construction establishes a rigorous parallel between classical and quantum mechanics.
+  Just as the pair $(X, \omega)$ constitutes the classical space of motions,
+  the pair $(\cY, \blambda)$ constitutes the space of quantum motions.
+  The prequantum $1$-form $\blambda$ is the quantum counterpart to the symplectic form,
+  encoding the transition phases between classical histories.
+  This symmetry reveals that quantization is not a departure from the geometry of motions,
+  but its natural extension into the relational domain of the groupoid.
+  
+  The construction yields two fundamental structural results:
+  \begin{enumerate}
+    \item \emph{The Intrinsic Phase}:
+    The quantum phase is not an external structure added to the classical space.
+    It emerges intrinsically as the isotropy group of the groupoid,
+    isomorphic to the \emph{Torus of Periods} $\Tomega = \RR/\Pomega$.
+    This torus captures the symplectic area of loops and the geometry of the fundamental group.
+    \item \emph{Faithful Symmetries}:
+    The group of automorphisms of the quantum system,
+    $\Aut(\cY,\blambda)$,
+    is naturally isomorphic to the group of symmetries of the classical system,
+    $\Diff(X, \omega)$.
+    The symmetries lift fully and faithfully to the groupoid without the need for central extensions at the geometric level.
+  \end{enumerate}
+  
+  The Memoir is structured to follow the logical maturation of this framework.
+  
+  \textbf{Part I} establishes the construction for connected and simply connected spaces.
+  We show how the quantum phase emerges naturally as the isotropy group.
+  All fundamental constructions are exposed in detail and can be appreciated for their internal logic without the clutter of homotopic technicalities.
+  
+  \textbf{Part II} extends the theory to arbitrary connected spaces.
+  We identify the obstructions arising from non-trivial homotopy and resolve them by defining the \emph{Total Group of Periods}.
+  This allows the GQbP framework to handle systems with complex homotopy,
+  such as the Aharonov-Bohm effect or irrational tori,
+  with the same geometric ease as the simply connected case.
+  
+  \textbf{Part III} crosses the ``Threshold of Analysis.''
+  We transition from the geometry of the groupoid to the analysis of its observables by constructing the intrinsic convolution algebra of half-densities.
+  Through the \emph{Experimentum Crucis} of the harmonic oscillator,
+  we demonstrate that this framework is not a cosmetic re-description but an operative machine.
+  We derive the exact quantum spectrum,
+  including the zero-point energy $n\hbar/2$,
+  strictly from the transformation laws of the filtered Broth.
+  The Metaplectic Anomaly appears not as a correction to be made,
+  but as a geometric inevitability to be revealed.
+  
+  \textbf{Part IV} applies the framework to quantum field theory.
+  We treat the Wess-Zumino-Witten model,
+  the $O(3)$ non-linear sigma model on loop space,
+  and the Virasoro model.
+  These examples demonstrate that the GQbP framework scales from finite-dimensional systems to the infinite-dimensional geometry of loop spaces and conformal field theory,
+  providing a unified geometric language for quantum phenomena across scales.
+  
+  This framework demonstrates that geometric quantization,
+  when properly understood,
+  is not incompatible with Feynman's path integral;
+  it is its direct geometric descendant---transposed to the space of motions and refined by the language of diffeology.
+  Diffeology does not force a choice between the two pillars of quantum mechanics.
+  Instead,
+  it preserves both within a single \emph{triptych} of spaces:
+  the \emph{Quantum Broth} of fluctuations,
+  the \emph{Prequantum Groupoid} of distilled quantum motions,
+  and the classical \emph{Skeleton} of complete histories.
+  Each level of this hierarchy is a rigorously structured diffeological space,
+  ensuring that the transition from fluctuations to operators remains geometrically transparent.
+  
+  Why this filtration should recover the correct quantum system is a question geometry alone cannot answer.
+  What geometry provides is the canonical mechanism:
+  given the classical space of motions and its symplectic form,
+  the prequantum groupoid is the unique object that emerges from identifying fluctuations whose relative quantum phase belongs to the period group.
+  That this groupoid coincides with the Kostant-Souriau framework for manifolds,
+  and extends it faithfully to singular and infinite-dimensional spaces,
+  is the mathematical content of this Memoir.
+  
+  Ultimately,
+  this work shows that geometric quantization is the logical conclusion of the Feynman vision---when that vision is lifted from configuration space to the space of motions and expressed in the precise language of diffeology.
+  The prequantum groupoid stands as the bridge,
+  poised exactly at the point where the geometry of fluctuations yields the analysis of quantum states.
+  
+  \vspace{2em}
+  \begin{flushright}
+    \emph{``Quoi de neuf en diffeolog'y ?''} \\
+    --- Jean-Marie Souriau
+  \end{flushright}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: A Primer on Diffeology
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{A Primer on Diffeology}
+  \label{sec:A Primer on Diffeology}
+  
+  The first part of this Memoir is dedicated to the construction of the \emph{Quantum Broth}.
+  Before the distillation of the prequantum groupoid can occur,
+  we must establish the geometric reality of the space of dynamical fluctuations.
+  This stage is \emph{primordial} because it deals with the raw,
+  unfiltered material of the quantum system:
+  the infinite-dimensional space of all smooth paths.
+  
+  We begin by providing the foundational grammar of \emph{Diffeology}.
+  This language is essential to treat the space of paths not as a formal limit or a measure-theoretic ghost,
+  but as a rigorous,
+  smooth geometric object.
+  Once this language is established,
+  we endow the broth with its canonical \emph{Action Form} $\Komega$.
+  This form,
+  derived from the classical parasymplectic structure,
+  serves as the universal potential that will eventually guide the filtration into the space of quantum motions.
+  
+  Classical differential geometry,
+  for all its power,
+  lives in constant fear of a self-inflicted nightmare:
+  the \emph{singularity}.
+  The rigid requirement that every point in a space must look locally like a Euclidean space forces any object that violates this rule to be treated as a "pathology."
+  This has led to the creation of a host of complex,
+  bespoke theories designed to handle these exceptions:
+  the intricate gluing rules of \emph{orbifolds},
+  the axiomatic frameworks of \emph{stratifications},
+  the elaborate classifications of the \emph{singularities of differentiable maps},
+  and the dramatic bestiary of \emph{catastrophe theory}.
+  Each is a testament to the immense effort required to study singular phenomena when one's foundational tools are designed to forbid them.
+  
+  Diffeology proposes a simpler,
+  more direct path.
+  It suggests that the nightmare is not a feature of the world,
+  but an artifact of our tools.
+  Instead of building a geometry that excludes singularities and then struggling to add them back in,
+  diffeology begins with a more fundamental and flexible definition of smoothness.
+  
+  The result is a framework where singularities are not a problem to be solved,
+  but a natural and integral part of the geometry itself.
+  \emph{Once a diffeology is defined,
+  it comes with its singularities already incrusted in its structure},
+  revealed by the action of its group of local symmetries.
+  
+  This is not a mere desire for mathematical generalization.
+  It is a direct response to the demands of physics.
+  As we see in this Memoir,
+  singularities appear,
+  uninvited,
+  when we ask the most basic physical questions:
+  
+  \begin{itemize}
+    \item What is the space of all possible trajectories for a particle in a periodic universe?
+    The answer,
+    the space of geodesics on a torus,
+    is a singular space.
+    \item What is the true space of states in a theory with symmetries?
+    The answer,
+    a quotient space,
+    is often singular.
+    \item How do we describe the structure of a \emph{quasicrystal}\,?
+    The answer requires a geometry that can handle the dense,
+    non-periodic symmetries of an irrational torus.
+  \end{itemize}
+  
+  Classical differential geometry is not equipped to speak about these objects in a unified,
+  intrinsic way.
+  Diffeology is.
+  This chapter provides the foundational grammar of this new,
+  more powerful language.
+  It is built on the Kleinian principle that a geometry is the study of a space and its group of symmetries%
+  \footnote{A Kleinian principle that does not reduce the geometry to "Topology plus Algebra" as it is the case in ordinary differential geometry,
+  but defines it as the pair formed by the diffeological space and its diffeological symmetries,
+  which is deduced from it but cannot be separated from it.}
+  ---a principle that,
+  as we will see,
+  applies with equal force to the smooth and the singular alike.
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Section 1: The Language of Plots
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{The Language of Plots}
+  
+  The fundamental idea of diffeology is to define the smoothness of a space not by charts mapping \emph{out} to $\RR^n$,
+  but by test curves (or surfaces, or volumes etc.) mapping \emph{in} from Euclidean domains.
+  
+  Let $X$ be a set.
+  A \emph{parametrization} in $X$ is any map $P: U \to X$,
+  where $U$ is an open domain of some Euclidean space $\RR^n$.
+  A \emph{diffeology} on $X$ is a chosen set $\cD$ of these parametrizations,
+  which satisfies three axioms that formalize the intuitive notion of "smooth consistency."
+  
+  \begin{itemize}
+    \item[D1.]\textbf{Covering.}
+    The set $\cD$ contains all constant parametrizations.
+    This ensures that every point of the space is "touched" by the diffeology.
+    \item[D2.] \textbf{Locality.}
+    Smoothness is a local property.
+    If a parametrization $P: U \to X$ is such that every point in $U$ has a neighborhood restricted to which $P$ belongs to $\cD$,
+    then $P$ itself belongs to $\cD$.
+    \item[D3.] \textbf{Smooth Compatibility.}
+    Smoothness is stable under smooth re\-pa\-ra\-me\-tri\-za\-tion.
+    If $P: U \to X$ is in $\cD$,
+    and $F: V \to U$ is a standard smooth map ($\Cinfty$) between Euclidean domains,
+    then the composition $P \circ F$ is in $\cD$.
+  \end{itemize}
+  
+  %----- Article
+  \begin{article}\artlabel[Comparing diffeologies]
+    We say that a diffeology $\cD$ on a set $X$ is \emph{finest} than a diffeology $\cD'$ if $\cD \subset \cD'$.
+    In this case we say that $\cD'$ is \emph{coarser} than $\cD$.
+    For this partial order the set of diffeologies on a set is a \emph{complete lattice}.
+    
+    \textbf{Note.}~Every set has a minimum: the \emph{discrete diffeology} whose plots are locally constant parametrizations,
+    and a maximum: the \emph{coarse diffeology} whose plots are all parametrizations
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Diffeological spaces]
+    A set $X$ equipped with a diffeology $\cD$ is called a \emph{diffeological space}.
+    The elements of $\cD$ are called the \emph{plots} of the space.
+    They are the "probes" we use to explore the geometry.
+    A space equipped with the discrete diffeology is said to be \emph{discrete},
+    and a set equipped with the coarse diffeology is said to be \emph{trivial} or \emph{coarse}.
+  \end{article}
+  
+  The category of diffeological spaces is closed under four fundamental operations:
+  sums,
+  products, subset and quotient.
+  These constructions are essential for building global objects from
+  local data and for defining functional spaces later.
+  
+  %----- Article
+  \begin{article}\artlabel[Sum of diffeological spaces]
+    \label{subsec:sums}
+    Let $\{X_i\}_{i \in \cI}$ be any family of diffeological spaces.
+    There exists a finest diffeology on the sum $X = \coprod_{X_i \in \cI} X_i$ such that each injection $j_i = x \mapsto (i,x)$,
+    from $X_i$ to $X$,
+    is smooth.
+    We call this the \emph{sum diffeology}.
+    The plots of $X$ are the parameterization $r \mapsto (i_r,x_r)$ such that $r \mapsto i_r$ is locally constant.
+    
+    Technically,
+    a parametrization $P : U \to X$ is a plot if and only if for all points $r \in U$ there exist an index $i$ and a neighborhood $V$ of $r$ such that $P \restriction V$ is a plot in $X_i$.
+    
+    \noindent
+    \textit{Intuition.} A smoothly parametrized family in a disjoint union
+    must stay within a single component on each connected component of the domain.
+    It cannot jump between different $X_i$'s wildly.
+    This condition ensures that the sum diffeology is the natural one:
+    it satisfies the universal property of the categorical coproduct.
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Product of diffeological spaces]
+    \label{subsec:product}
+    Let $\{X_i\}_{i \in \cI}$ be any family of diffeological spaces.
+    There exists on the product $X = \prod_{i \in \cI} X_i$ a coarsest diffeology such that every projection $\pi_i \colon X \to X_i$ is smooth.
+    (Note that the discrete diffeology,
+    though finest,
+    also makes the projections smooth;
+    the product diffeology is the \emph{coarsest} among all diffeologies with this property.)
+    It is called the \emph{product diffeology}.
+    A parametrization $P: U \to \prod_{i\in I} X_i$ is a plot if and only if
+    for every index $i\in I$, the composition
+    $\pr_i \circ P : U \to X_i$ is a plot of $X_i$,
+    where $\pr_i$ denotes the projection onto the $i$-th factor.
+    This condition characterizes the product diffeology uniquely.
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Subsets and discrete subsets]
+    Every subset $A \subset X$ inherits a natural structure called the \emph{subset diffeology}.
+    It is the coarsest diffeology on $A$ such that the injection $j : A \to X$ is smooth.
+    The plots of $A$ are simply the plots of $X$ that take their values entirely within $A$.
+    
+    A particularly important case is the \emph{discrete diffeology}.
+    As we say above,
+    a space is discrete if its only plots are the locally constant maps.
+    This is the structure naturally inherited by the group of periods:
+    $\Pomega \subset \RR$ is discrete if and only if $\Pomega \neq \RR$,
+    that is,
+    even when $\Pomega$ is dense which the general case.
+    In the special case $\Pomega = a \ZZ$,
+    $\Pomega$ is not just \emph{induced} in $\RR$ but \emph{embedded},
+    see below.
+  \end{article}
+  
+  
+  %----- Article
+  \begin{article}\artlabel[Quotient diffeology and quotient spaces]
+    Let $X$ be a diffeological space and $\sim$ an equivalent relation.
+    There exist a finest diffeology on the quotient space $X' = X/\!\!\sim$ such that the projection $\pi : X \to X'$ is smooth.
+    We call it the \emph{quotient diffeology}.
+    A plot in $X'$ is any parametrization $P : U \to X'$ such that for all $r \in U$,
+    there exist an open neighborhood $V$ of $r$ and a plot $Q : V \to X$ such that $P \restriction V = \pi \circ Q$.
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Generating Families]
+    In practice,
+    we rarely define a diffeology by listing every possible plot.
+    Instead,
+    we provide a \emph{generating family} $\cF$.
+    The diffeology generated by $\cF$ is the finest (smallest) diffeology containing $\cF$.
+    Its plots are those parametrizations that locally factor through elements of $\cF$ via standard smooth maps.
+    This concept is the smooth analogue of a basis for a topology.
+    
+    In particular,
+    let $\cF$ a generating family of $X$,
+    we call \emph{nebula} of $\cF$ the sum of the domains of the elements of $\cF$
+    $$
+      \cN = \sum_{F \in \cF} \Domain(F).
+      $$
+    Then $X$ is equivalent to the diffeological quotient of the nebula $\cF$ for the equivalent relation:
+    $(F,r) \sim (F',r')$ if $F(r) = F'(r')$.
+    
+    In particular applying this to the nebula of the diffeology,
+    we get that every diffeological space can be reconstruct using the two operations sum and quotient applied to the domains of the plots.
+    And since any Euclidean domain is a subset of some multiple product of the real line,
+    every diffeological space is the result of these four operations applied in some way to the real line.
+    
+    \begin{proposition}\textup{(Universality of Diffeology)}
+      Every diffeological space can be obtained from the real line $\RR$ by
+      repeatedly applying the operations of sum, product, subset, and quotient.
+      The real line is the primordial geometric atom of diffeology.
+    \end{proposition}
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[The Diffeological Dimension]
+    \label{subsec:The Diffeological Dimension}
+    
+    We now turn to a structural invariant that distinguishes diffeological spaces from one another: \emph{dimension}.
+    In diffeology,
+    dimension is not a topological property but a measure of the \emph{degrees of freedom} inherent in the smooth structure.
+    
+    We define the dimension of a diffeological space $X$ using the concept of generating families \cite{PIZ06}.
+    Let $\cF$ be a generating family of plots for $X$.
+    We define the dimension of a plot $P: U \to X$ as the dimension of its domain,
+    $\dim(P) := \dim(U)$.
+    The dimension of the family $\cF$ is the supremum of the dimensions of its elements:
+    \[
+      \dim(\cF) = \sup_{P \in \cF} \dim(P).
+      \]
+    The global dimension of $X$ is the infimum of the dimensions of all possible generating families:
+    \[
+      \dim(X) := \inf_{\cF \in \GenFam(X)} \dim(\cF).
+      \]
+    A space is infinite-dimensional if $\dim(\cF) = \infty$ for all generating families $\cF$.
+    
+    Intuitively,
+    dimension measures the "thickness" of the smooth structure.
+    It corresponds to the smallest integer $n$ such that every plot of $X$,
+    locally around a point,
+    can be factored through a plot defined on an open domain of $\RR^n$.
+    
+    \begin{remark} \textup{(Cartography vs. Navigation)}
+      \label{subsec:Cartography vs. Navigation}
+      The classical manifold approach is like \emph{Cartography},
+      requiring a pre-existing grid (a chart) that maps the world to $\RR^n$.
+      The diffeological approach is like \emph{Navigation}.
+      You define the location by a path,
+      mapping a curve \emph{in} from time.
+      The geometry is defined not by coordinates,
+      but by the collection of all valid itineraries.
+      
+      This difference of approach has a profound consequance as shows the \emph{Boman Paradox}:
+      Consider the set $\RR^2$ equipped with the diffeology generated by all smooth curves $\Cinfty(\RR, \RR^2)$.
+      This \emph{Wire Plane} $\cW$ is topologically identical to $\RR^2$ and has the same symmetry group $\Diff(\RR^2)$.
+      Yet its diffeological dimension is $1$, not $2$.
+      This demonstrates that the local smooth structure is a primary geometric ingredient,
+      independent of topology or algebra.
+      For a full discussion of the Boman paradox and its implications for the foundations of geometry,
+      see \cite{PIZ25c}.
+      
+    \end{remark}
+    
+  \end{article}
+  
+  
+  %----- Article
+  \begin{article}\ [The D-Topology]
+    A diffeological space carries a natural topology,
+    the \emph{D-topology},
+    which is the finest topology making all the plots continuous.
+    A subset $A \subset X$ is \emph{open} if and only if for every plot $P: U \to X$,
+    the preimage $P^{-1}(A)$ is open in $U$.
+    The D-topology is a byproduct of the diffeology;
+    it cannot be a substitute for it.
+    
+    The D-Topology is used in particular to distinguish \emph{embedding} from \emph{inductions}.
+    Equipped with the subset diffeology,
+    the injection $j: A \to X$ is always an induction.
+    When the D-Topolgy of $A$ coincides with the restriction on $A$ of the D-Topology of $X$,
+    we have what we call an \emph{embedding}.
+    
+    For instance, the inclusion $\ZZ \hookrightarrow \RR$ is an embedding because
+    the D-topology on $\ZZ$ (discrete) coincides with the subspace topology from $\RR$.
+    In contrast, a dense subgroup $G \subset \RR$ (such as $\ZZ + \alpha\ZZ$) is 
+    induced but not embedded: its D-topology is discrete, but the subspace topology 
+    from $\RR$ is not.
+    Actually,
+    the only strict sugroup embedded in $\RR$ are the subgroup $a\ZZ$ for some $a \in \RR$.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Subsection 2: Morphisms and Functional Spaces
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Morphisms and Functional Spaces.}
+  
+  A map $f: X \to Y$ between two diffeological spaces is \emph{smooth} if it takes plots to plots.
+  That is,
+  for every plot $P$ of $X$,
+  the composition $f \circ P$ is a plot of $Y$.
+  A \emph{diffeomorphism} is a smooth bijection with a smooth inverse.
+  
+  %----- Article
+  \begin{article}\artlabel[Inductions and Subductions]
+    A smooth map $f: X \to Y$ is an \emph{induction} if it is an isomorphism from $X$ onto its image $f(X)$ equipped with the subset diffeology.
+    In our construction,
+    the classical space $X$ is embedded as the \emph{Skeleton} of the prequantum groupoid via an induction.
+    Conversely,
+    a map $\pi: X \to Q$ is a \emph{subduction} if its plots are exactly the local push-forwards of plots of $X$.
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Functional Diffeology]
+    \label{subsec:Functional Diffeology}
+    The set of smooth maps $\Cinfty(X, Y)$ carries the \emph{functional diffeology}.
+    A parametrization $P: U \to \Cinfty(X, Y)$ is a plot if and only if the associated evaluation map $(u, x) \mapsto P(u)(x)$ is smooth.
+    This allows us to do differential geometry directly on the space $\Paths(X)$.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Subsection 2: Paths, Loops, and Homotopy
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Paths, Loops, and Homotopy.}
+  
+  Homotopy in diffeology is the study of smooth deformations.
+  It is built directly upon the functional structure of the space of paths.
+  
+  %----- Article
+  \begin{article}\artlabel[General Definitions]
+    Let $X$ be a diffeological space.
+    We denote by
+    $$
+      \Paths(X) = \Cinfty(\RR,X)
+      $$
+    the space of smooth paths in $X$,
+    equipped with the functional diffeology.
+    For all $t \in \RR$,
+    we define the evaluation map $\hat t$ by:
+    $$
+      \hat t \in \Cinfty(\Paths(X), X),
+      \quad
+      \hat t(\gamma) = \gamma(t).
+      $$
+    We denote by $\0$ and $\1$ the source and target maps.
+    We denote by $\EndsMap$ the \emph{ends} map $\0 \times \1$ from $\Paths(X)$ to $X \times X$:
+    $$
+      \EndsMap \in \Cinfty(\Paths(X), X \times X),
+      \quad
+      \EndsMap : \gamma \mapsto (\gamma(0),\gamma(1)).
+      $$
+    We denote by $\Paths(X,x,\ast)$,
+    $\Paths(X,\ast,x)$,
+    and $\Paths(X,x,x')$ the subspaces defined by fixing endpoints:
+    \begin{align*}
+      \Paths(X,x,\ast) &= \{ \gamma \in \Paths(X) \mid \0(\gamma) = x \},\\
+      \Paths(X,\ast,x) &= \{ \gamma \in \Paths(X) \mid \1(\gamma) = x \},\\
+      \Paths(X,x,x') &= \{ \gamma \in \Paths(X) \mid \EndsMap(\gamma) = (x,x'). \}
+    \end{align*}
+    We denote by $\Loops(X)$ the space of free loops of $X$,
+    $$
+      \Loops(X) = \{ \ell \in \Paths(X) \mid \1(\ell)=\0(\ell) \},
+      $$
+    and we denote by $\Loops(X,x)$ the set of loops based at $x$,
+    $$
+      \Loops(X,x) = \Paths(X,x,x) = \{ \ell \in \Loops(X) \mid \0(\ell) = x \}.
+      $$
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Stationary Paths]
+    Many constructions in homotopy involve concatenating paths.
+    For $\gamma$ and $\gamma'$ such that $\1(\gamma) = \0(\gamma')$,
+    the standard concatenation $\gamma \vee \gamma'$ is defined by:
+    $$
+      \gamma \vee \gamma': t \mapsto
+      \begin{cases}
+      \gamma(2t) \widetext{if} t \leq 1/2, \\
+      \gamma'(2t-1) \widetext{if} t \geq 1/2.
+      \end{cases}
+      $$
+    However,
+    this concatenation is not necessarily smooth at $t=1/2$.
+    This is why we consider the concatenation on the subspace of \emph{stationary paths} \cite[\textsection 5.4]{PIZ13}.
+    A path $\gamma \in \Paths(X)$ is (strongly) stationary if there exists an $\epsilon > 0$ such that:
+    $$
+      \gamma \restriction \left]-\infty, +\epsilon\right[ = \gamma(0)
+      \widetext{and}
+      \gamma \restriction \left]1 -\epsilon, + \infty \right[ = \gamma(1).
+      $$
+    Every path is fixed-ends homotopic to a stationary path by composing with the \emph{smashing function} $\lambda$,
+    $\gamma \mapsto \gamma^* = \gamma \circ \lambda$ (see Figure \ref{fig:smashing-function}).
+    This is sufficient to ensure that many operations in diffeology involving the concatenation of paths,
+    and depending only on their homotopy class,
+    are justified.
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{figure}[tb]\renewcommand{\thefigure}{$1$}
+      \smallskip  \centerline{\includegraphics[width=.25\textwidth]{Figures/fig-smashing-function}}
+      \vspace{-.5ex}
+      \caption{The smashing function $\lambda$.}
+      \label{fig:smashing-function}
+    \end{figure}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \textbf{Convention.}
+    To avoid unnecessary complications in the following,
+    we shall consider only stationary paths without explicitly mentioning them.
+    We will not change the notations so as not to make the text more cumbersome.
+    That is,
+    $\Paths(X)$ will denote the set of stationary paths,
+    $\Loops(X)$ the space of stationary loops,
+    etc.
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Homotopy and Connectivity]
+    Two points $x, x' \in X$ are \emph{connected} if there exists a smooth path $\gamma \in \Paths(X)$ such that $\gamma(0) = x$ and $\gamma(1) = x'$.
+    The set of connected components $\pi_0(X)$ is the quotient of $X$ by this smooth connectivity.
+    We denote by $\Comp$ the projection:
+    $$
+      \Comp: \Loops(X) \to \pi_0(\Loops(X)).
+      $$
+    Similarly,
+    two smooth maps $f, g: X \to Y$ are \emph{homotopic} if there exists a smooth path in the functional space $\Cinfty(X, Y)$ connecting them.
+    This is equivalent to the existence of a smooth map $H: \RR \times X \to Y$ such that $H(0, \cdot) = f$ and $H(1, \cdot) = g$.
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Recursive Homotopy Groups]
+    The recursive nature of homotopy groups is particularly transparent in diffeology.
+    Since the space of based loops $\Loops(X, x)$ is itself a diffeological space,
+    we can define higher homotopy groups by iteration.
+    For any $k \geq 1$,
+    we have the recursive relation:
+    $$
+      \pi_k(X, x) = \pi_{k-1}(\Loops(X, x), \hat{x}),
+      $$
+    where $\hat{x}$ is the constant loop at $x$.
+    By induction,
+    this identifies the $k$-th homotopy group with the set of connected components of the $k$-th iterated loop space:
+    $$
+      \pi_k(X, x) = \pi_0(\Loops_k(X,x), \hat{x}_k).
+      $$
+    This approach treats higher homotopy not as a separate topological construction,
+    but as the connectivity of increasingly complex functional spaces.
+    In this Memoir,
+    the group $\pi_2(X, x)$ is essential for capturing the \emph{spherical periods} of the action form,
+    which arise from the integration of $\omega$ over smooth $2$-spheres.
+    For most spaces of interest,
+    these groups are \emph{discrete},
+    meaning their plots are locally constant.
+    This reflects the fact that smooth deformations cannot jump between distinct homotopy classes.
+    
+    The power of this definition is revealed in singular spaces.
+    For the \emph{irrational torus} $T_\alpha$,
+    the D-topology is coarse and the topological fundamental group is trivial.
+    However,
+    the diffeological fundamental group is $\pi_1(T_\alpha) \simeq \ZZ^2$,
+    capturing the dense windings that topology misses.
+    In this Memoir,
+    this homotopic precision allows us to define the quantum phase even in systems where the classical topology is "blind."
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Subsection: Diffeological Groups
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{Diffeological Groups.}
+  
+  A \emph{diffeological group} is a group $G$ where multiplication and inversion are smooth.
+  Thanks to functional diffeology,
+  the group of diffeomorphisms $\Diff(X)$ is always a diffeological group.
+  This allows us to treat symmetry groups of infinite-dimensional spaces with geometric rigor.
+  
+  %----- Article
+  \begin{article}\artlabel[The Space of Momenta of a Diffeological Group]
+    \label{subsec:Momenta}
+    A fundamental construction in this Memoir is the \emph{space of momenta} of a diffeological group.
+    We call \emph{left momentum} of a diffeological group $G$ any $1$-form on $G$ invariant by the left action of $G$ onto itself.
+    We denote by $\cG^*$ the space of momenta of $G$:
+    \[
+      \cG^* = \{ \alpha \in \Omega^1(G) \mid \text{for all } g \in G, \; \L(g)^*(\alpha) = \alpha \}.
+      \]
+    The space $\cG^*$ is naturally a diffeological vector space equipped with the functional diffeology.
+    
+    Note that,
+    in spite of what the notation $\cG^*$ suggests,
+    the space of momenta of a diffeological group is \emph{not} defined by some duality with a Lie algebra.
+    It is defined intrinsically as the space of left-invariant $1$-forms.
+    This avoids any reference to contravariant objects like vector fields or Lie algebras,
+    which are ill-defined or non-unique in general diffeology.
+    
+    The group $G$ acts smoothly on $\cG^*$ by the \emph{coadjoint action}:
+    \[
+      \Ad_* : (g,\alpha) \mapsto \Ad(g)_*(\alpha) = \Ad(g^{-1})^*(\alpha) = \Rm(g)^*(\alpha).
+      \]
+    The orbit of a momentum under this action is a \emph{coadjoint orbit}.
+    When $G$ is a Lie group,
+    $\cG^*$ coincides with the dual of the Lie algebra,
+    and the coadjoint action coincides with the classical one.
+    
+    A crucial property used throughout this Memoir is the behavior of \emph{closed} momenta.
+    Let $\cZ \subset \cG^*$ denote the subspace of closed left-invariant $1$-forms.
+    If $G$ is connected,
+    every closed momentum is exact and its primitive is a smooth homomorphism from the universal covering $\tilde{G}$ to $\RR$.
+    Moreover,
+    every closed momentum is invariant under the coadjoint action:
+    \[
+      d\zeta = 0 \quad\implies\quad \Ad_*(g)(\zeta) = \zeta \quad \text{for all } g \in G.
+      \]
+    This fact is essential for the construction of the holonomy group in Parts II and IV.
+  \end{article}
+  
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Section 4: The Calculus of Quotients
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section*{The Calculus of Quotients.}
+  
+  In diffeology,
+  the quotient $Q = X/\!\!\sim$ is always well-defined via the subduction $\pi: X \to Q$.
+  This allows us to study spaces like the \emph{irrational torus} $T_\alpha \simeq \RR / (\ZZ + \alpha\ZZ)$,
+  which is topologically coarse but diffeologically rich.
+  
+  %-----
+  \begin{article}\artlabel[Differential Forms]
+    To do physics,
+    we need differential calculus.
+    In diffeology,
+    a differential $k$-form $\alpha$ is defined in the most natural way possible:
+    it is a rule that assigns to every plot $P: U \to X$ a standard smooth $k$-form $\alpha(P)$ on the Euclidean domain $U$.
+    
+    Formally,
+    let $k \geq 0$.
+    A differential $k$-form $\alpha \in \Omega^k(X)$ is a map that associates to each plot $P: U \to X$ (where $U \subset \RR^n$ is a Cartesian domain) a smooth form $\alpha(P) \in \Cinfty(U, \Lambda^k(\RR^n))$.
+    This assignment must satisfy the \emph{compatibility condition} (the chain rule):
+    for any smooth map $F: V \to U$ between Euclidean domains,
+    \[
+      \alpha(P \circ F) = F^*(\alpha(P)).
+      \]
+    The space $\Omega^0(X)$ of $0$-forms coincides with the space of smooth real-valued functions $\Cinfty(X, \RR)$.
+    
+  \end{article}
+  \begin{article}\artlabel[Standard Operations]
+    Because forms are defined by their local behavior on plots,
+    the standard operations of calculus extend immediately to diffeology.
+    They are defined \emph{plot-wise}.
+    
+    \begin{enumerate}
+      \item \textbf{Exterior Derivative.}
+      The operator $\der: \Omega^k(X) \to \Omega^{k+1}(X)$ is defined by:
+      \[
+        (\der\alpha)(P) = \der(\alpha(P)),
+        \]
+      where the $\der$ on the right is the standard exterior derivative on $U$.
+      Since $\der \circ \der = 0$ locally,
+      it holds globally on $X$.
+      This leads to the De Rham cohomology groups $\HDR^k(X) = \ZDR^k(X) / \BDR^k(X)$
+      quotient of closed by exact differential forms.
+      
+      \item \textbf{Wedge Product.}
+      The product $\wedge: \Omega^k(X) \times \Omega^l(X) \to \Omega^{k+l}(X)$ is defined by:
+      \[
+        (\alpha \wedge \beta)(P) = \alpha(P) \wedge \beta(P).
+        \]
+      That makes the de Rham complex a graded algebra.
+      
+      \item \textbf{Pullback.}
+      Let $f: X \to Y$ be a smooth map and $\beta \in \Omega^k(Y)$.
+      The pullback $f^*\beta \in \Omega^k(X)$ is defined by:
+      \[
+        (f^*\beta)(P) = \beta(f \circ P),
+        \]
+      for any plot $P$ of $X$.
+      This definition is well-posed because,
+      by the definition of a smooth map,
+      $f \circ P$ is a plot of $Y$.
+      Also note that,
+      for all differential form $\alpha \in \Omega^k(X)$,
+      $\alpha(P) \simeq P^*(\alpha)$.
+    \end{enumerate}
+    
+    \textbf{Note on Terminology.}
+    In this Memoir,
+    we relax the standard symplectic terminology.
+    A \emph{parasymplectic form} on a diffeological space $X$ is simply a closed $2$-form $\omega \in \Omega^2(X)$ (i.e., $\der\omega = 0$).
+    The pair $(X, \omega)$ is called a \emph{parasymplectic space}.
+    No condition of non-degeneracy is assumed,
+    as such a condition is often too restrictive for the infinite-dimensional or singular spaces we consider (like the Quantum Broth).
+    \end{article}
+    
+    %-----
+    \begin{article}\artlabel[The Descent Criterion]
+      A form $\beta$ on $X$ descends to a unique form $\alpha$ on the quotient $Q$
+      (such that $\pi^*\alpha = \beta$)
+      if and only if for any two plots $P, P'$ in $X$ such that $\pi \circ P = \pi \circ P'$,
+      we have:
+      \[
+        \beta(P) = \beta(P').
+        \]
+      This criterion is the "magic wand" of symplectic diffeology.
+      It allows us to push symplectic forms onto singular spaces,
+      provided the "local data" of the form agrees on the fibers.
+      \end{article}
+      
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      %% Section 5: The Geometry of Paths
+      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \section*{More on The Geometry of Paths.}
+      
+      We conclude this primer by exploring the functional geometry of the space of paths.
+      This section introduces the essential bridge between the static geometry of the base space and the dynamic geometry of paths.
+      The central tool here is the \emph{chain-homotopy operator},
+      which allows us to transgress differential forms from the space of motions to the space of paths.
+      This construction is not merely a technical convenience;
+      it is the geometric engine that generates the action potential of the system.
+      By treating the space of paths as a first-class diffeological object,
+      we prepare the ground for the construction of the \emph{Quantum Broth} and the subsequent distillation of the \emph{Prequantum Groupoid}.
+      
+      %-----
+      \begin{article}\artlabel[The Chain-Homotopy Operator]
+        \label{subsec:The Chain-Homotopy Operator}
+        The bridge between the classical geometry of $X$ and the functional geometry of $\Paths(X)$ is the \emph{chain-homotopy operator} $\CHO$ \cite{PIZ13}.
+        This operator is canonical;
+        it requires no choices of coordinates or gauges.
+        It maps $k$-forms on $X$ to $(k-1)$-forms on $\Paths(X)$:
+        \[
+          \CHO : \Omega^k(X) \to \Omega^{k-1}(\Paths(X)).
+          \]
+        To define $\CHO$ rigorously,
+        we use the plot-based definition of differential forms.
+        Let $P: U \to \Paths(X)$ be a plot of the space of paths.
+        The associated evaluation map $\Phi: \RR \times U \to X$,
+        defined by $\Phi(t,r) = P(r)(t)$,
+        is smooth.
+        It is often intuitive to denote the path $P(r)$ by $\gamma_r$,
+        so that $\Phi(t,r) = \gamma_r(t)$.
+        
+        The form $\CHO\alpha$ is defined by its value on the plot $P$ at a point $r \in U$.
+        For any vectors $v_1, \dots, v_{k-1}$ in the tangent space of $U$ at $r$:
+        \[
+          (\CHO\alpha)(P)_r(v_1, \dots, v_{k-1}) = \int_0^1 \alpha\left(\Vector{t \\ r} \mapsto P(r)(t) \right)_{t \choose r}\Vector{1 \\ 0} \Vector{0 \\ v_1} \dots \Vector{0 \\ v_{k-1}} \dt.
+          \]
+        Note that,
+        for multilinear operators,
+        we use the notations $\epsilon(v_1)\dots(v_k)$ and $\epsilon(v_1,\dots,v_k)$ indifferently.
+        
+        Geometrically,
+        this corresponds to integrating $\alpha$ along the variation of the path.
+        The operator $\CHO$ satisfies the fundamental \emph{chain-homotopy identity}:
+        \[
+          \der \circ \CHO + \CHO \circ \der = \1^* - \0^*,
+          \]
+        where $\0, \1: \Paths(X) \to X$ are the source and target maps defined by $\0(\gamma) = \gamma(0)$ and $\1(\gamma) = \gamma(1)$.
+        This identity is the "fundamental theorem of calculus" for the space of paths,
+        relating the exterior derivative of the transgressed form to the values of the original form at the endpoints.
+        
+        \textbf{Remark.}~If $X$ is a smooth manifold,
+        the tangent space to $\Paths(X)$ at a path $\gamma$ can be identified with the space of vector fields along $\gamma$.
+        Let $\delta\gamma_1, \dots, \delta\gamma_{k-1}$ be $k-1$ such variations.
+        The formula for $\CHO\alpha$ takes the familiar form:%
+        \footnote{In the literature, this is sometimes abbreviated as $\Kalpha = \int_0^1 i_{\dot{\gamma}} \alpha \, dt$, where $i_{\dot{\gamma}}$ denotes the contraction with the velocity vector field along the curve.}
+        \[
+          (\CHO\alpha)_\gamma(\delta\gamma_1, \dots, \delta\gamma_{k-1}) = \int_0^1 \alpha_{\gamma(t)}(\dot{\gamma}(t), \delta\gamma_1(t), \dots, \delta\gamma_{k-1}(t)) \, dt.
+          \]
+        It is important to note that this intuitive formula is not an ad-hoc adaptation;
+        it is the strict evaluation of the general diffeological definition on the specific plots of a manifold.
+        However,
+        we prefer the plot-based definition because it applies universally
+        ---to singular spaces,
+        infinite-dimensional spaces,
+        and quotients---
+        where the classical notion of a tangent vector field may be ill-defined.
+      \end{article}
+      
+      %-----
+      \begin{article}\artlabel[Homotopic Invariance of de Rham Cohomology]
+        The chain-homotopy identity provides a spectacular and immediate proof of the homotopic invariance of de Rham cohomology.
+        Let $f_0, f_1: X \to Y$ be two homotopic smooth maps,
+        and let $\hat{h}: X \to \Paths(Y)$ be the map $x \mapsto [t \mapsto f_t(x)]$,
+        associating to each point $x \in X$ the path of the homotopy starting at $f_0(x)$ and ending at $f_1(x)$.
+        For any closed form $\omega \in \Omega^k(Y)$,
+        the identity $\1^*\omega - \0^*\omega = \der\CHO\omega$ leads to the following three-line proof:
+        \begin{align*}
+          f_1^*\omega - f_0^*\omega &= \hat{h}^*(\1^*\omega - \0^*\omega) \\
+          &= \hat{h}^*(\der\CHO\omega) \\
+          &= \der[\hat{h}^*(\CHO\omega)].
+        \end{align*}
+        This calculation shows that the difference $f_1^*\omega - f_0^*\omega$ is an exact form.
+        Consequently,
+        homotopic maps induce the same homomorphism in de Rham cohomology,
+        proving that $\HDR$ is a homotopic invariant for all diffeological spaces.
+        \end{article}
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%
+        %% MARK: A Note on the Philosophy of the Construction
+        %%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+        \section*{A Note on the Philosophy of the Construction}
+        
+        The construction presented in this Memoir can be read as an exercise
+        in \emph{reverse engineering}.
+        
+        Aristotle famously stated:
+        ``Since nature is a principle of motion and change,
+        and our inquiry is concerning nature,
+        what motion is must not escape us.''
+        Classical mechanics,
+        from Newton to Lagrange to Souriau,
+        gives us the macroscopic description of the world
+        in the language of symplectic geometry.
+        A point in the space of motions is a complete classical history.
+        This is the world as we perceive it directly ---
+        the sharp,
+        deterministic trajectories of the Skeleton.
+        
+        The microscopic world,
+        however,
+        escapes this naive deterministic description.
+        In our historical attempts to correct our macroscopic models to account for atomic behavior,
+        from Dirac and Feynman to Kostant and Souriau,
+        we achieved immense predictive success.
+        Yet,
+        this success came at a severe philosophical cost:
+        we abandoned the very concept of motion that was the foundation of physics,
+        exchanging it for wave functions,
+        Hilbert spaces,
+        and abstract spectra.
+        Quantum mechanics appeared as a set of algebraic rules imposed from above,
+        creating a persistent philosophical discomfort.
+        
+        The Geometric Quantization by Paths (GQbP) framework suggests
+        that this abandonment of motion is unnecessary.
+        It proposes that all we know about the quantum world can ultimately be derived from the macroscopic description,
+        because the macroscopic space of motions is the only objective reality to which our measuring devices have access.
+        
+        Our reverse engineering proceeds as follows.
+        We start with what we have:
+        the classical space of motions $X$.
+        We then posit that at the microscopic level,
+        the world is subjected to a field of anarchic perturbations.
+        These fluctuations cannot be captured by a traditional Newtonian field of forces,
+        which would merely translate into a definite symplectic gradient on the space of motions.
+        Instead,
+        the system fluctuates \emph{between} entire motions.
+        These fluctuations are paths in the space of motions ---
+        an idea that can be seen as Lagrange's method of the variation of constants,
+        extended to a radical,
+        global comprehension.
+        
+        This infinite-dimensional space of fluctuations,
+        $\Paths(X)$,
+        is the \emph{Quantum Broth}:
+        the unfiltered reality behind the macroscopic veil.
+        We impose an equivalence relation,
+        declaring two fluctuations indistinguishable
+        if the symplectic area they enclose differs by an integer multiple of the Planck constant $h$.
+        
+        The quotient of this distillation is the prequantum groupoid $\TT_\omega$.
+        What emerges is striking.
+        The classical space $X$ reappears as the set of identity morphisms ---
+        the \emph{Skeleton}.
+        The non-identity morphisms form the \emph{Quantum Fog}:
+        a set of quantum transitions built directly from the classical macroscopic setup.
+        The quantum phase,
+        far from being an external $U(1)$ imposed by hand,
+        is the isotropy group of this groupoid,
+        isomorphic to the torus of periods $\Tomega = \RR/h\ZZ$.
+        
+        The power of this reverse engineering is that it yields rigorous results.
+        From the Dirac axioms
+        to the Non-Linear Sigma Model and the obstruction in the fusion rules of conformal field theory ---
+        all of these emerge not as external inputs,
+        but as geometric consequences of filtering
+        the anarchic fluctuations of classical motions
+        through the quantum of action.
+        
+        The prequantum groupoid $\TT_\omega$ is the fundamental object of this theory;
+        the classical space $X$ is merely its \emph{Skeleton of units}.
+        The geometric quantization of a classical system
+        is therefore not the addition of quantum information to a classical model,
+        but the revelation of the quantum structure
+        already latent in the geometry of its space of motions.
+        
+        The classical world is the shadow on the wall of Plato's cave;
+        the quantum world is the fire and the dancers,
+        glimpsed only through the fluctuations they cast.
+        The Planck constant is the resolution limit of the shadow play.
+        
+        Whether this interpretation is ``true''
+        in any metaphysical sense is not a question for mathematics.
+        But as a geometric framework,
+        it has the virtue of making the transition
+        from classical to quantum mechanics
+        not a leap of faith,
+        but a controlled descent
+        from the space of paths to its quotient by the periods.
+        
+        \textbf{A Note on Refutability.}
+        The reverse engineering perspective proposed here,
+        which defines the quantum realm as a formal refinement of an underlying classical skeleton $(X, \omega)$,
+        stands as a falsifiable scientific hypothesis.
+        It is vulnerable to refutation:
+        should nature unveil a quantum system whose symmetry and phase structure cannot be derived from such a parasymplectic classical skeleton,
+        then the framework presented here is refuted in its entirety.
+        Until then\dots
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%
+        %% MARK: Bibliography
+        %%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+        \begin{thebibliography}{PIZ25c}
+          
+          \bibitem[AB67]{AB67}
+          M. F. Atiyah and R. Bott.
+          A Lefschetz fixed point formula for elliptic complexes. I.
+          {\em Annals of Mathematics}, 86:374--407, 1967.
+          
+          \bibitem[AB68]{AB68}
+          M. F. Atiyah and R. Bott.
+          A Lefschetz fixed point formula for elliptic complexes. II. Applications.
+          {\em Annals of Mathematics}, 88:451--491, 1968.
+          
+          \bibitem[Con94]{Con94}
+          Alain Connes.
+          {\em Noncommutative Geometry}.
+          Academic Press, San Diego, 1994.
+          
+          \bibitem[Fad69]{Fad69}
+          Ludvig Dmitrievich Faddeev.
+          \emph{The Feynman integral for singular Lagrangians}.
+          Theoretical and Mathematical Physics, 1(1):1--13, 1969.
+          
+          \bibitem[Gar66]{Gar66}
+          Claude Garrod.
+          \emph{Hamiltonian Path-Integral Methods}.
+          Reviews of Modern Physics,
+          38(3):483--494,
+          1966.
+          
+          \bibitem[GS77]{GS77}
+          Victor Guillemin and Shlomo Sternberg.
+          \emph{Geometric Asymptotics}.
+          Mathematical Surveys, 14, Amer. Math. Soc., 1977.
+          
+          \bibitem[Hor71]{Hor71}
+          Lars H\"ormander.
+          Fourier integral operators. I.
+          {\em Acta Mathematica}, 127:79--183, 1971.
+          
+          \bibitem[PIZ06]{PIZ06}
+          Patrick Iglesias-Zemmour,
+          \emph{Dimension in diffeology},
+          Indag. Math. (N.S.) \textbf{18} (2007), no. 3, 417--449. (Preprint available at \url{http://math.huji.ac.il/~piz/DDS/}).
+          
+          \bibitem[PIZ10]{PIZ10}
+          Patrick Iglesias-Zemmour,
+          \emph{The moment maps in diffeology},
+          Mem. Amer. Math. Soc. \textbf{204} (2010), no. 962, viii+101 pp.
+          
+          \bibitem[PIZ13a]{PIZ13a}
+          Patrick Iglesias-Zemmour,
+          \emph{Variantion of Integrals in Diffeology},
+          Canadian Journal of Mathematics , Volume 65 , Issue 6 , 01 December 2013 , pp. 1255 - 1286
+          
+          \bibitem[PIZ13]{PIZ13}
+          Patrick Iglesias-Zemmour.
+          {\em Diffeology}.
+          Mathematical Surveys and Monographs, 185, Am. Math. Soc., 2013.
+          
+          \bibitem[PIZ22]{PIZ22}
+          \bysame %Patrick Iglesias-Zemmour,
+          \emph{Diffeology},
+          Revised version by Beijing World Publishing Corp., Beijing, 2022.
+          
+          \bibitem[PIZ25a]{PIZ25a}
+          \bysame %Patrick Iglesias-Zemmour,
+          \emph{Geometric Quantization by Paths, Part I: The Simply Connected Case},
+          (Preprint, 2025).
+          
+          \bibitem[PIZ25b]{PIZ25b}
+          \bysame %Patrick Iglesias-Zemmour,
+          \emph{Geometric Quantization by Paths, Part II: The General Case},
+          (Preprint, 2025).
+          
+          \bibitem[PIZ25c]{PIZ25c}
+          \bysame,
+          \emph{The Boman Paradox --- When topology plus algebra do not define geometry},
+          To appear in the Mathematical Intelligencer. Preprint 2025. Available at \url{http://math.huji.ac.il/~piz/documents/TBP.pdf}.
+          
+          \bibitem[Kir62]{Kir62}
+          Alexandre A. Kirillov.
+          Unitary representations of nilpotent Lie groups.
+          {\em Uspekhi Mat. Nauk}, 17(4):57--110, 1962.
+          
+          \bibitem[Kos70]{Kos70}
+          Bertram Kostant.
+          Quantization and unitary representations.
+          In: {\em Lectures in Modern Analysis and Applications III},
+          Lecture Notes in Mathematics, Vol. 170,
+          Springer, Berlin, 1970, pp. 87--208.
+          
+          \bibitem[Mas65]{Mas65}
+          V. P. Maslov.
+          {\em Teoriya vozmushchenii i asimptoticheskie metody}.
+          Izdat. Moskov. Univ., Moscow, 1965.
+          (French translation: {\em Th\'eorie des perturbations et m\'ethodes asymptotiques}, Dunod, Paris, 1972.)
+          
+          \bibitem[Sou70]{Sou70}
+          Jean-Marie Souriau.
+          {\em Structure des syst\`emes dynamiques}.
+          Dunod, Paris, 1970.
+          
+          \bibitem[Sou75]{Sou75}
+          Jean-Marie Souriau.
+          \newblock \emph{Construction explicite de l'indice de Maslov. Applications}.
+          \newblock In: Group theoretical methods in physics (Fourth Internat. Colloq., Nijmegen, 1975), Lecture Notes in Phys., Vol. 50, Springer, Berlin, 1976, pp. 117--148.
+          
+          \bibitem[Wei74]{Wei74}
+          Alan Weinstein.
+          Fourier integral operators, quantization, and the Maslov index.
+          In: {\em G\'eom\'etrie symplectique et physique math\'ematique}
+          (Colloq. Internat. CNRS, No. 237, Aix-en-Provence, 1974),
+          \'Editions du CNRS, Paris, 1976, pp. 235--246.
+          
+          \bibitem[Wei77]{Wei77}
+          Alan Weinstein.
+          \emph{Lectures on Symplectic Manifolds}.
+          CBMS Regional Conf. Series in Math., 29, Amer. Math. Soc., 1977.
+          
+          \bibitem[Woo92]{Woo92}
+          Nicholas M.J. Woodhouse.
+          \emph{Geometric Quantization}.
+          Clarendon Press, Oxford, Second Edition, 1992.
+          
+        \end{thebibliography}
+        
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%
+        %% MARK: End ofDocument
+        %%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        
+      \end{document}
