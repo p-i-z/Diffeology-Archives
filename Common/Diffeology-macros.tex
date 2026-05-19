@@ -210,6 +210,9 @@
 %% \\KVol : Paths-primitive of \Vol
 \newcommand{\KVol}{\CHO\!\Vol}
 
+%% \Ktheta : Paths-primitive of \theta
+\newcommand{\Ktheta}{\CHO\!\theta}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Functions and Operators
@@ -506,6 +509,9 @@
 \def\@Proj[#1]{#1}
 \makeatother
 
+%% \pr : Shortcut for \Proj
+\let\pr\Proj
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Covering Spaces
@@ -537,6 +543,11 @@
 %% Usage: \piX{X} produces π₁(X)
 \newcommand{\piX}[1]{\pi_1(#1)}
 
+%% \HomotopyGroup : The i-th homotopy group
+%% Usage: \HomotopyGroup_i produces π_i
+%% \HomotopyGroup_i(,x_0) produces π_i(X,x_0)
+\def\HomotopyGroup{\pi}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Periods and Torus
@@ -560,6 +571,21 @@
 
 %% Specific torus of periods for a closed 2-form \omega
 \newcommand{\Tomega}{\Torus_\omega}
+
+%% Group of spherical periods for a closed 2-form \omega
+\newcommand{\Psph}{\Periods_{\mathrm{sph}}}
+
+%% Group of toric periods for a closed 2-form \omega
+\newcommand{\Ptor}{\Periods_{\mathrm{tor}}}
+
+%% Group of surfacic periods for a closed 2-form \omega
+\newcommand{\Psurf}{\Periods_{\mathrm{surf}}}
+
+%% The torus of spherical periods for a closed 2-form \omega
+\newcommand{\Tsph}{\Torus_{\mathrm{sph}}}
+
+%% The torus of toric periods for a closed 2-form \omega
+\newcommand{\Ttor}{\Torus_{\mathrm{tor}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
