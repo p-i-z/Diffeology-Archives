@@ -596,11 +596,11 @@ who once asked me: \\
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
-  %% MARK:  2: Functional diffeology and the space of paths
+  %% MARK:  2: Functional diffeology
   %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{Functional diffeology and the space of paths.}
-  \label{sec:Functional diffeology and the space of paths}
+  \section{Functional Diffeology .}
+  \label{sec:Functional Diffeology}
   
   The theory of diffeological spaces defines a category for which the morphisms are the \emph{smooth maps} and isomorphisms are called \emph{diffeomorphisms}.
 
@@ -635,145 +635,6 @@ who once asked me: \\
     
     In particular,
     this allows us to do differential geometry directly on the space $\Paths(X)$ without introducing specific more constructions.
-  \end{article}
-
-  %----- Article
-  \begin{article}\artlabel[The Space of Paths]
-    Homotopy in diffeology is the study of smooth deformations.
-  It is built directly upon the functional structure of the space of paths.
-
-    Let $X$ be a diffeological space.
-    We denote by
-    $$
-      \Paths(X) = \Cinfty(\RR,X)
-      $$
-    the space of smooth paths in $X$,
-    equipped with the functional diffeology.
-    For all $t \in \RR$,
-    we define the evaluation map $\hat t$ by:
-    $$
-      \hat t \in \Cinfty(\Paths(X), X),
-      \quad
-      \hat t(\gamma) = \gamma(t).
-      $$
-    We denote by $\0$ and $\1$ the source and target maps.
-    We denote by $\EndsMap$ the \emph{ends} map $\0 \times \1$ from $\Paths(X)$ to $X \times X$:
-    $$
-      \EndsMap \in \Cinfty(\Paths(X), X \times X),
-      \quad
-      \EndsMap : \gamma \mapsto (\gamma(0),\gamma(1)).
-      $$
-    We denote by $\Paths(X,x,\ast)$,
-    $\Paths(X,\ast,x)$,
-    and $\Paths(X,x,x')$ the subspaces defined by fixing endpoints:
-    \begin{align*}
-      \Paths(X,x,\ast) &= \{ \gamma \in \Paths(X) \mid \0(\gamma) = x \},\\
-      \Paths(X,\ast,x) &= \{ \gamma \in \Paths(X) \mid \1(\gamma) = x \},\\
-      \Paths(X,x,x') &= \{ \gamma \in \Paths(X) \mid \EndsMap(\gamma) = (x,x'). \}
-    \end{align*}
-    We denote by $\Loops(X)$ the space of free loops of $X$,
-    $$
-      \Loops(X) = \{ \ell \in \Paths(X) \mid \1(\ell)=\0(\ell) \},
-      $$
-    and we denote by $\Loops(X,x)$ the set of loops based at $x$,
-    $$
-      \Loops(X,x) = \Paths(X,x,x) = \{ \ell \in \Loops(X) \mid \0(\ell) = x \}.
-      $$
-  \end{article}
-  
-  %----- Article
-  \begin{article}\artlabel[Stationary Paths]
-    Many constructions in homotopy involve concatenating paths.
-    For $\gamma$ and $\gamma'$ such that $\1(\gamma) = \0(\gamma')$,
-    the standard concatenation $\gamma \vee \gamma'$ is defined by:
-    $$
-      \gamma \vee \gamma': t \mapsto
-      \begin{cases}
-      \gamma(2t) \widetext{if} t \leq 1/2, \\
-      \gamma'(2t-1) \widetext{if} t \geq 1/2.
-      \end{cases}
-      $$
-    However,
-    this concatenation is not necessarily smooth at $t=1/2$.
-    This is why we consider the concatenation on the subspace of \emph{stationary paths} \cite[\textsection 5.4]{PIZ13}.
-    A path $\gamma \in \Paths(X)$ is (strongly) stationary if there exists an $\epsilon > 0$ such that:
-    $$
-      \gamma \restriction \left]-\infty, +\epsilon\right[ = \gamma(0)
-      \widetext{and}
-      \gamma \restriction \left]1 -\epsilon, + \infty \right[ = \gamma(1).
-      $$
-    Every path is fixed-ends homotopic to a stationary path by composing with the \emph{smashing function} $\lambda$,
-    $\gamma \mapsto \gamma^* = \gamma \circ \lambda$ (see Figure \ref{fig:smashing-function}).
-    This is sufficient to ensure that many operations in diffeology involving the concatenation of paths,
-    and depending only on their homotopy class,
-    are justified.
-    
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \begin{figure}[tb]\renewcommand{\thefigure}{$1$}
-      \smallskip  \centerline{\includegraphics[width=.25\textwidth]{Figures/fig-smashing-function}}
-      \vspace{-.5ex}
-      \caption{The smashing function $\lambda$.}
-      \label{fig:smashing-function}
-    \end{figure}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    \textbf{Convention.}
-    To avoid unnecessary complications in the following,
-    we shall consider only stationary paths without explicitly mentioning them.
-    We will not change the notations so as not to make the text more cumbersome.
-    That is,
-    $\Paths(X)$ will denote the set of stationary paths,
-    $\Loops(X)$ the space of stationary loops,
-    etc.
-  \end{article}
-  
-  %----- Article
-  \begin{article}\artlabel[Homotopy and Connectivity]
-    Two points $x, x' \in X$ are \emph{connected} if there exists a smooth path $\gamma \in \Paths(X)$ such that $\gamma(0) = x$ and $\gamma(1) = x'$.
-    The set of connected components $\pi_0(X)$ is the quotient of $X$ by this smooth connectivity.
-    We denote by $\Comp$ the projection:
-    $$
-      \Comp: \Loops(X) \to \pi_0(\Loops(X)).
-      $$
-    Similarly,
-    two smooth maps $f, g: X \to Y$ are \emph{homotopic} if there exists a smooth path in the functional space $\Cinfty(X, Y)$ connecting them.
-    This is equivalent to the existence of a smooth map $H: \RR \times X \to Y$ such that $H(0, \cdot) = f$ and $H(1, \cdot) = g$.
-  \end{article}
-  
-  %----- Article
-  \begin{article}\artlabel[Recursive Homotopy Groups]
-    The recursive nature of homotopy groups is particularly transparent in diffeology.
-    Since the space of based loops $\Loops(X, x)$ is itself a diffeological space,
-    we can define higher homotopy groups by iteration.
-    For any $k \geq 1$,
-    we have the recursive relation:
-    $$
-      \pi_k(X, x) = \pi_{k-1}(\Loops(X, x), \hat{x}),
-      $$
-    where $\hat{x}$ is the constant loop at $x$.
-    By induction,
-    this identifies the $k$-th homotopy group with the set of connected components of the $k$-th iterated loop space:
-    $$
-      \pi_k(X, x) = \pi_0(\Loops_k(X,x), \hat{x}_k).
-      $$
-    This approach treats higher homotopy not as a separate topological construction,
-    but as the connectivity of increasingly complex functional spaces.
-    In this Memoir,
-    the group $\pi_2(X, x)$ is essential for capturing the \emph{spherical periods} of the action form,
-    which arise from the integration of $\omega$ over smooth $2$-spheres.
-    For most spaces of interest,
-    these groups are \emph{discrete},
-    meaning their plots are locally constant.
-    This reflects the fact that smooth deformations cannot jump between distinct homotopy classes.
-    
-    The power of this definition is revealed in singular spaces.
-    For the \emph{irrational torus} $T_\alpha$,
-    the D-topology is coarse and the topological fundamental group is trivial.
-    However,
-    the diffeological fundamental group is $\pi_1(T_\alpha) \simeq \ZZ^2$,
-    capturing the dense windings that topology misses.
-    In this Memoir,
-    this homotopic precision allows us to define the quantum phase even in systems where the classical topology is "blind."
   \end{article}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1017,6 +878,163 @@ who once asked me: \\
       \]
     This fact is essential for the construction of the holonomy group in Parts II and IV.
   \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: : Paths and Space of Paths
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Paths and Space of Paths.}
+  \label{sec:Paths and Space of Paths}
+
+  The principal ingredient of the Geometric Quantization by Paths is the space of (smooth) paths,
+  which we denote by $\Paths(X)$,
+  for any diffeological space $X$.
+  It is the space of smooth maps from the real line into the diffeological space,
+  but what matters is that happens between $0$,
+   the source,
+   and $1$,
+   the target.
+
+    %----- Article
+  \begin{article}\artlabel[The Space of Paths]
+    Homotopy in diffeology is the study of smooth deformations.
+  It is built directly upon the functional structure of the space of paths.
+
+    Let $X$ be a diffeological space.
+    We denote by
+    $$
+      \Paths(X) = \Cinfty(\RR,X)
+      $$
+    the space of smooth paths in $X$,
+    equipped with the functional diffeology.
+    For all $t \in \RR$,
+    we define the evaluation map $\hat t$ by:
+    $$
+      \hat t \in \Cinfty(\Paths(X), X),
+      \quad
+      \hat t(\gamma) = \gamma(t).
+      $$
+    We denote by $\0$ and $\1$ the source and target maps.
+    We denote by $\EndsMap$ the \emph{ends} map $\0 \times \1$ from $\Paths(X)$ to $X \times X$:
+    $$
+      \EndsMap \in \Cinfty(\Paths(X), X \times X),
+      \quad
+      \EndsMap : \gamma \mapsto (\gamma(0),\gamma(1)).
+      $$
+    We denote by $\Paths(X,x,\ast)$,
+    $\Paths(X,\ast,x)$,
+    and $\Paths(X,x,x')$ the subspaces defined by fixing endpoints:
+    \begin{align*}
+      \Paths(X,x,\ast) &= \{ \gamma \in \Paths(X) \mid \0(\gamma) = x \},\\
+      \Paths(X,\ast,x) &= \{ \gamma \in \Paths(X) \mid \1(\gamma) = x \},\\
+      \Paths(X,x,x') &= \{ \gamma \in \Paths(X) \mid \EndsMap(\gamma) = (x,x'). \}
+    \end{align*}
+    We denote by $\Loops(X)$ the space of free loops of $X$,
+    $$
+      \Loops(X) = \{ \ell \in \Paths(X) \mid \1(\ell)=\0(\ell) \},
+      $$
+    and we denote by $\Loops(X,x)$ the set of loops based at $x$,
+    $$
+      \Loops(X,x) = \Paths(X,x,x) = \{ \ell \in \Loops(X) \mid \0(\ell) = x \}.
+      $$
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Stationary Paths]
+    Many constructions in homotopy involve concatenating paths.
+    For $\gamma$ and $\gamma'$ such that $\1(\gamma) = \0(\gamma')$,
+    the standard concatenation $\gamma \vee \gamma'$ is defined by:
+    $$
+      \gamma \vee \gamma': t \mapsto
+      \begin{cases}
+      \gamma(2t) \widetext{if} t \leq 1/2, \\
+      \gamma'(2t-1) \widetext{if} t \geq 1/2.
+      \end{cases}
+      $$
+    However,
+    this concatenation is not necessarily smooth at $t=1/2$.
+    This is why we consider the concatenation on the subspace of \emph{stationary paths} \cite[\textsection 5.4]{PIZ13}.
+    A path $\gamma \in \Paths(X)$ is (strongly) stationary if there exists an $\epsilon > 0$ such that:
+    $$
+      \gamma \restriction \left]-\infty, +\epsilon\right[ = \gamma(0)
+      \widetext{and}
+      \gamma \restriction \left]1 -\epsilon, + \infty \right[ = \gamma(1).
+      $$
+    Every path is fixed-ends homotopic to a stationary path by composing with the \emph{smashing function} $\lambda$,
+    $\gamma \mapsto \gamma^* = \gamma \circ \lambda$ (see Figure \ref{fig:smashing-function}).
+    This is sufficient to ensure that many operations in diffeology involving the concatenation of paths,
+    and depending only on their homotopy class,
+    are justified.
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \begin{figure}[tb]\renewcommand{\thefigure}{$1$}
+      \smallskip  \centerline{\includegraphics[width=.25\textwidth]{Figures/fig-smashing-function}}
+      \vspace{-.5ex}
+      \caption{The smashing function $\lambda$.}
+      \label{fig:smashing-function}
+    \end{figure}
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    \textbf{Convention.}
+    To avoid unnecessary complications in the following,
+    we shall consider only stationary paths without explicitly mentioning them.
+    We will not change the notations so as not to make the text more cumbersome.
+    That is,
+    $\Paths(X)$ will denote the set of stationary paths,
+    $\Loops(X)$ the space of stationary loops,
+    etc.
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Homotopy and Connectivity]
+    Two points $x, x' \in X$ are \emph{connected} if there exists a smooth path $\gamma \in \Paths(X)$ such that $\gamma(0) = x$ and $\gamma(1) = x'$.
+    The set of connected components $\pi_0(X)$ is the quotient of $X$ by this smooth connectivity.
+    We denote by $\Comp$ the projection:
+    $$
+      \Comp: \Loops(X) \to \pi_0(\Loops(X)).
+      $$
+    Similarly,
+    two smooth maps $f, g: X \to Y$ are \emph{homotopic} if there exists a smooth path in the functional space $\Cinfty(X, Y)$ connecting them.
+    This is equivalent to the existence of a smooth map $H: \RR \times X \to Y$ such that $H(0, \cdot) = f$ and $H(1, \cdot) = g$.
+  \end{article}
+  
+  %----- Article
+  \begin{article}\artlabel[Recursive Homotopy Groups]
+    The recursive nature of homotopy groups is particularly transparent in diffeology.
+    Since the space of based loops $\Loops(X, x)$ is itself a diffeological space,
+    we can define higher homotopy groups by iteration.
+    For any $k \geq 1$,
+    we have the recursive relation:
+    $$
+      \pi_k(X, x) = \pi_{k-1}(\Loops(X, x), \hat{x}),
+      $$
+    where $\hat{x}$ is the constant loop at $x$.
+    By induction,
+    this identifies the $k$-th homotopy group with the set of connected components of the $k$-th iterated loop space:
+    $$
+      \pi_k(X, x) = \pi_0(\Loops_k(X,x), \hat{x}_k).
+      $$
+    This approach treats higher homotopy not as a separate topological construction,
+    but as the connectivity of increasingly complex functional spaces.
+    In this Memoir,
+    the group $\pi_2(X, x)$ is essential for capturing the \emph{spherical periods} of the action form,
+    which arise from the integration of $\omega$ over smooth $2$-spheres.
+    For most spaces of interest,
+    these groups are \emph{discrete},
+    meaning their plots are locally constant.
+    This reflects the fact that smooth deformations cannot jump between distinct homotopy classes.
+    
+    The power of this definition is revealed in singular spaces.
+    For the \emph{irrational torus} $T_\alpha$,
+    the D-topology is coarse and the topological fundamental group is trivial.
+    However,
+    the diffeological fundamental group is $\pi_1(T_\alpha) \simeq \ZZ^2$,
+    capturing the dense windings that topology misses.
+    In this Memoir,
+    this homotopic precision allows us to define the quantum phase even in systems where the classical topology is "blind."
+  \end{article}
+
     
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
