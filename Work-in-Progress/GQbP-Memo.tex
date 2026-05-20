@@ -603,14 +603,14 @@ who once asked me: \\
   \label{sec:Functional Diffeology}
   
   The theory of diffeological spaces defines a category for which the morphisms are the \emph{smooth maps} and isomorphisms are called \emph{diffeomorphisms}.
-
+  
   %----- Smooth maps
   \begin{article}\artlabel[Smooth Maps and the Category $\Difflg$.]
-  A map $f: X \to Y$ between two diffeological spaces is \emph{smooth} if it takes plots to plots.
-  That is,
-  for every plot $P$ of $X$,
-  the composition $f \circ P$ is a plot of $Y$.
-  A \emph{diffeomorphism} is a smooth bijection with a smooth inverse.
+    A map $f: X \to Y$ between two diffeological spaces is \emph{smooth} if it takes plots to plots.
+    That is,
+    for every plot $P$ of $X$,
+    the composition $f \circ P$ is a plot of $Y$.
+    A \emph{diffeomorphism} is a smooth bijection with a smooth inverse.
   \end{article}
   
   %----- Article
@@ -625,11 +625,11 @@ who once asked me: \\
   %----- Article
   \begin{article}\artlabel[Functional Diffeology]
     \label{subsec:Functional Diffeology}
-     The category of diffeological spaces is complete and co-complete,
-  that is,
-  closed for the four set theoretical operations,
-  but moreover Cartesian closed.
-  The set of smooth maps $\Cinfty(X, Y)$ carries the \emph{functional diffeology}.
+    The category of diffeological spaces is complete and co-complete,
+    that is,
+    closed for the four set theoretical operations,
+    but moreover Cartesian closed.
+    The set of smooth maps $\Cinfty(X, Y)$ carries the \emph{functional diffeology}.
     A parametrization $P: U \to \Cinfty(X, Y)$ is a plot if and only if the associated evaluation map $(u, x) \mapsto P(u)(x)$ is smooth.
     And this diffeology satisfies the natural identity $\Cinfty(X,\Cinfty(Y,Z)) \simeq \Cinfty(X \times Y,Z)$.
     
@@ -718,10 +718,10 @@ who once asked me: \\
   %-----
   \begin{article}\artlabel[The Descent Criterion]
     In diffeology,
-  the quotient $Q = X/\!\!\sim$ is always well-defined via the subduction $\pi: X \to Q$.
-  This allows us to study spaces like the \emph{irrational torus} $T_\alpha \simeq \RR / (\ZZ + \alpha\ZZ)$,
-  which is topologically coarse but diffeologically rich.
-
+    the quotient $Q = X/\!\!\sim$ is always well-defined via the subduction $\pi: X \to Q$.
+    This allows us to study spaces like the \emph{irrational torus} $T_\alpha \simeq \RR / (\ZZ + \alpha\ZZ)$,
+    which is topologically coarse but diffeologically rich.
+    
     A form $\beta$ on $X$ descends to a unique form $\alpha$ on the quotient $Q$
     (such that $\pi^*\alpha = \beta$)
     if and only if for any two plots $P, P'$ in $X$ such that $\pi \circ P = \pi \circ P'$,
@@ -825,8 +825,7 @@ who once asked me: \\
     homotopic maps induce the same homomorphism in de Rham cohomology,
     proving that $\HDR$ is a homotopic invariant for all diffeological spaces.
   \end{article}
-
-
+  
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
   %% MARK: : Diffeological Groups
@@ -886,21 +885,21 @@ who once asked me: \\
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \section{Paths and Space of Paths.}
   \label{sec:Paths and Space of Paths}
-
+  
   The principal ingredient of the Geometric Quantization by Paths is the space of (smooth) paths,
   which we denote by $\Paths(X)$,
   for any diffeological space $X$.
   It is the space of smooth maps from the real line into the diffeological space,
   but what matters is that happens between $0$,
-   the source,
-   and $1$,
-   the target.
-
-    %----- Article
+  the source,
+  and $1$,
+  the target.
+  
+  %----- Article
   \begin{article}\artlabel[The Space of Paths]
     Homotopy in diffeology is the study of smooth deformations.
-  It is built directly upon the functional structure of the space of paths.
-
+    It is built directly upon the functional structure of the space of paths.
+    
     Let $X$ be a diffeological space.
     We denote by
     $$
@@ -1034,8 +1033,111 @@ who once asked me: \\
     In this Memoir,
     this homotopic precision allows us to define the quantum phase even in systems where the classical topology is "blind."
   \end{article}
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Groupoids in Diffeology
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Groupoids in Diffeology.}
+\label{sec:Groupoids in Diffeology}
 
-    
+A \emph{diffeological groupoid} is a groupoid internal to the category of diffeological spaces.
+That is, a groupoid $\KK$ for which the set of objects $\Obj(\KK)$ and the set of morphisms $\Mor(\KK)$ are both diffeological spaces,
+and all structural maps are smooth:
+\begin{enumerate}
+  \item The source and target maps $\Src, \Trg: \Mor(\KK) \to \Obj(\KK)$ are smooth.
+  \item The composition $(f,g) \mapsto f \cdot g$,
+  defined on the subset of composable pairs
+  $\Mor(\KK) \times_{\Obj(\KK)} \Mor(\KK) = \{ (f,g) \mid \Trg(f) = \Src(g) \}$,
+  is smooth.
+  \item The inversion $f \mapsto f^{-1}$ is smooth.
+  \item The injection $x \mapsto \id_x$ from $\Obj(\KK)$ to $\Mor(\KK)$ is an \emph{induction}.
+\end{enumerate}
+The last condition ensures that the space of objects is diffeologically identified with the subspace of identity morphisms.
+
+\begin{article}\artlabel[Fibrating Groupoids]
+  A diffeological groupoid $\KK$ is \emph{fibrating} if the \emph{ends map}
+  \[
+    \EndsMap: \Mor(\KK) \to \Obj(\KK) \times \Obj(\KK), \quad
+    \EndsMap(f) = (\Src(f), \Trg(f)),
+  \]
+  is a \emph{subduction}.
+  A subduction is a smooth surjection such that every plot of the target lifts locally to a plot of the source.
+
+  This condition is the diffeological analogue of a groupoid being ``transitive enough''
+  to encode a fibration structure.
+  When $\KK$ is fibrating,
+  the fibers $\Mor_{\KK}(x,x') = \EndsMap^{-1}(x,x')$ are diffeologically homogeneous spaces for the isotropy groups,
+  and the projection $\EndsMap$ behaves like a smooth bundle of torsors.
+\end{article}
+
+\begin{article}\artlabel[The Structure Groupoid of a Projection]
+  For any smooth surjection $\pi: T \to B$,
+  one can define its \emph{structure groupoid} $\KK_\pi$.
+  Its objects are the points of the base $B$,
+  and its morphisms from $b$ to $b'$ are the diffeomorphisms between the fibers $T_b$ and $T_{b'}$:
+  \[
+    \Mor_{\KK_\pi}(b,b') = \Diff(T_b, T_{b'}),
+  \]
+  equipped with the functional diffeology.
+  The composition is the usual composition of maps.
+  The projection $\pi$ is a \emph{diffeological fibration} if and only if its structure groupoid $\KK_\pi$ is fibrating.
+
+  This definition generalizes the classical notion of a fiber bundle to spaces that are not locally trivial in the traditional sense.
+  In particular,
+  the projection $\pi_\alpha: \Torus^2 \to \Torus_\alpha$ onto the irrational torus
+  is a diffeological fibration,
+  even though it is not locally trivial topologically.
+\end{article}
+
+\begin{article}\artlabel[The Poincaré Groupoid]
+  Let $X$ be a diffeological space.
+  The \emph{Poincaré groupoid} (or fundamental groupoid) $\Pi(X)$ has the points of $X$ as objects
+  and the fixed-ends homotopy classes of paths as morphisms:
+  \[
+    \Mor_{\Pi(X)}(x,x') = \{ [\gamma] \mid \gamma \in \Paths(X), \; \gamma(0)=x,\; \gamma(1)=x' \}/\text{homotopy}.
+  \]
+  The concatenation of paths defines the composition,
+  and the constant path at $x$ serves as the identity $\id_x$.
+
+  The Poincaré groupoid is fibrating.
+  Its ends map $\EndsMap: \Mor(\Pi(X)) \to X \times X$ is a subduction because every pair of points $(x,x')$
+  can be connected by a path,
+  and the space of such paths is smoothly parameterized.
+
+  For a connected space $X$ with a chosen basepoint $x_0$,
+  the universal covering space can be constructed as the space of morphisms starting at $x_0$:
+  \[
+    \widetilde X = \Mor_{\Pi(X)}(x_0, \star),
+  \]
+  with projection $\pi([\gamma]) = \gamma(1)$.
+  This construction works for \emph{every} connected diffeological space,
+  without any local niceness conditions.
+\end{article}
+
+\begin{article}\artlabel[Principal Actions and Quotients]
+  A smooth action $(g,x) \mapsto g \cdot x$ of a diffeological group $G$ on a diffeological space $X$ is \emph{principal}
+  if the action graph map
+  \[
+    \mathrm{graph}: X \times G \to X \times X, \quad \mathrm{graph}(x,g) = (x, g \cdot x),
+  \]
+  is an induction.
+  When this holds,
+  the projection $\pi: X \to X/G$ is a principal diffeological fibration with structure group $G$.
+
+  This criterion is remarkably simple and powerful.
+  It replaces the classical requirements of local triviality and free action
+  with a single diffeological condition that can be checked on plots.
+  For example,
+  the action of the dense subgroup $\ZZ + \alpha\ZZ$ on $\RR$ by translation
+  satisfies this condition,
+  and therefore the projection $\RR \to \Torus_\alpha = \RR/(\ZZ + \alpha\ZZ)$
+  is a principal fibration with fiber $\ZZ + \alpha\ZZ$.
+  This is how the irrational torus acquires its rich diffeological structure.
+\end{article}  
+  
+  
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
   %% MARK: A Note on the Philosophy of the Construction
