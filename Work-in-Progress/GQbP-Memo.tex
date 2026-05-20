@@ -7,7 +7,7 @@
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[10pt,reqno,letterpaper,twoside]{amsart}
+\documentclass[10pt,reqno,letterpaper,twoside]{amsbook}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -67,6 +67,8 @@ who once asked me: \\
   %% Override
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
+  % Document-specific numbering
+  \renewcommand \thechapter{\Roman{chapter}}
   \renewcommand \thesection{\Roman{section}}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -97,7 +99,7 @@ who once asked me: \\
   %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
-  \section*{Preface}
+  \chapter*{Preface}
   
   For nearly a century,
   quantum mechanics has rested upon two distinct conceptual pillars.
@@ -284,8 +286,8 @@ who once asked me: \\
   %% MARK: A Primer on Diffeology
   %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{A Primer on Diffeology}
-  \label{sec:A Primer on Diffeology}
+  \chapter{A Primer on Diffeology}
+  \label{chap:A Primer on Diffeology}
   
   The first part of this Memoir is dedicated to the construction of the \emph{Quantum Broth}.
   Before the distillation of the prequantum groupoid can occur,
@@ -367,7 +369,7 @@ who once asked me: \\
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% Section 1: The Language of Plots
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section*{The Language of Plots}
+  \section{The Language of Plots}
   
   The fundamental idea of diffeology is to define the smoothness of a space not by charts mapping \emph{out} to $\RR^n$,
   but by test curves (or surfaces, or volumes etc.) mapping \emph{in} from Euclidean domains.
@@ -568,7 +570,7 @@ who once asked me: \\
   
   
   %----- Article
-  \begin{article}\ [The D-Topology]
+  \begin{article}\artlabel[The D-Topology]
     A diffeological space carries a natural topology,
     the \emph{D-topology},
     which is the finest topology making all the plots continuous.
@@ -585,8 +587,8 @@ who once asked me: \\
     
     For instance, the inclusion $\ZZ \hookrightarrow \RR$ is an embedding because
     the D-topology on $\ZZ$ (discrete) coincides with the subspace topology from $\RR$.
-    In contrast, a dense subgroup $G \subset \RR$ (such as $\ZZ + \alpha\ZZ$) is 
-    induced but not embedded: its D-topology is discrete, but the subspace topology 
+    In contrast, a dense subgroup $G \subset \RR$ (such as $\ZZ + \alpha\ZZ$) is
+    induced but not embedded: its D-topology is discrete, but the subspace topology
     from $\RR$ is not.
     Actually,
     the only strict sugroup embedded in $\RR$ are the subgroup $a\ZZ$ for some $a \in \RR$.
@@ -595,7 +597,7 @@ who once asked me: \\
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% Subsection 2: Morphisms and Functional Spaces
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section*{Morphisms and Functional Spaces.}
+  \section{Morphisms and Functional Spaces.}
   
   A map $f: X \to Y$ between two diffeological spaces is \emph{smooth} if it takes plots to plots.
   That is,
@@ -623,7 +625,7 @@ who once asked me: \\
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% Subsection 2: Paths, Loops, and Homotopy
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section*{Paths, Loops, and Homotopy.}
+  \section{Paths, Loops, and Homotopy.}
   
   Homotopy in diffeology is the study of smooth deformations.
   It is built directly upon the functional structure of the space of paths.
@@ -765,7 +767,7 @@ who once asked me: \\
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% Subsection: Diffeological Groups
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section*{Diffeological Groups.}
+  \section{Diffeological Groups.}
   
   A \emph{diffeological group} is a group $G$ where multiplication and inversion are smooth.
   Thanks to functional diffeology,
@@ -815,7 +817,7 @@ who once asked me: \\
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% Section 4: The Calculus of Quotients
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section*{The Calculus of Quotients.}
+  \section{The Calculus of Quotients.}
   
   In diffeology,
   the quotient $Q = X/\!\!\sim$ is always well-defined via the subduction $\pi: X \to Q$.
@@ -887,362 +889,362 @@ who once asked me: \\
     The pair $(X, \omega)$ is called a \emph{parasymplectic space}.
     No condition of non-degeneracy is assumed,
     as such a condition is often too restrictive for the infinite-dimensional or singular spaces we consider (like the Quantum Broth).
-    \end{article}
+  \end{article}
+  
+  %-----
+  \begin{article}\artlabel[The Descent Criterion]
+    A form $\beta$ on $X$ descends to a unique form $\alpha$ on the quotient $Q$
+    (such that $\pi^*\alpha = \beta$)
+    if and only if for any two plots $P, P'$ in $X$ such that $\pi \circ P = \pi \circ P'$,
+    we have:
+    \[
+      \beta(P) = \beta(P').
+      \]
+    This criterion is the "magic wand" of symplectic diffeology.
+    It allows us to push symplectic forms onto singular spaces,
+    provided the "local data" of the form agrees on the fibers.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %% Section 5: The Geometry of Paths
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{The Geometry of Paths.}
+  
+  We conclude this primer by exploring the functional geometry of the space of paths.
+  This section introduces the essential bridge between the static geometry of the base space and the dynamic geometry of paths.
+  The central tool here is the \emph{chain-homotopy operator},
+  which allows us to transgress differential forms from the space of motions to the space of paths.
+  This construction is not merely a technical convenience;
+  it is the geometric engine that generates the action potential of the system.
+  By treating the space of paths as a first-class diffeological object,
+  we prepare the ground for the construction of the \emph{Quantum Broth} and the subsequent distillation of the \emph{Prequantum Groupoid}.
+  
+  %-----
+  \begin{article}\artlabel[The Chain-Homotopy Operator]
+    \label{subsec:The Chain-Homotopy Operator}
+    The bridge between the classical geometry of $X$ and the functional geometry of $\Paths(X)$ is the \emph{chain-homotopy operator} $\CHO$ \cite{PIZ13}.
+    This operator is canonical;
+    it requires no choices of coordinates or gauges.
+    It maps $k$-forms on $X$ to $(k-1)$-forms on $\Paths(X)$:
+    \[
+      \CHO : \Omega^k(X) \to \Omega^{k-1}(\Paths(X)).
+      \]
+    To define $\CHO$ rigorously,
+    we use the plot-based definition of differential forms.
+    Let $P: U \to \Paths(X)$ be a plot of the space of paths.
+    The associated evaluation map $\Phi: \RR \times U \to X$,
+    defined by $\Phi(t,r) = P(r)(t)$,
+    is smooth.
+    It is often intuitive to denote the path $P(r)$ by $\gamma_r$,
+    so that $\Phi(t,r) = \gamma_r(t)$.
     
-    %-----
-    \begin{article}\artlabel[The Descent Criterion]
-      A form $\beta$ on $X$ descends to a unique form $\alpha$ on the quotient $Q$
-      (such that $\pi^*\alpha = \beta$)
-      if and only if for any two plots $P, P'$ in $X$ such that $\pi \circ P = \pi \circ P'$,
-      we have:
-      \[
-        \beta(P) = \beta(P').
-        \]
-      This criterion is the "magic wand" of symplectic diffeology.
-      It allows us to push symplectic forms onto singular spaces,
-      provided the "local data" of the form agrees on the fibers.
-      \end{article}
-      
-      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      %% Section 5: The Geometry of Paths
-      %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-      \section*{More on The Geometry of Paths.}
-      
-      We conclude this primer by exploring the functional geometry of the space of paths.
-      This section introduces the essential bridge between the static geometry of the base space and the dynamic geometry of paths.
-      The central tool here is the \emph{chain-homotopy operator},
-      which allows us to transgress differential forms from the space of motions to the space of paths.
-      This construction is not merely a technical convenience;
-      it is the geometric engine that generates the action potential of the system.
-      By treating the space of paths as a first-class diffeological object,
-      we prepare the ground for the construction of the \emph{Quantum Broth} and the subsequent distillation of the \emph{Prequantum Groupoid}.
-      
-      %-----
-      \begin{article}\artlabel[The Chain-Homotopy Operator]
-        \label{subsec:The Chain-Homotopy Operator}
-        The bridge between the classical geometry of $X$ and the functional geometry of $\Paths(X)$ is the \emph{chain-homotopy operator} $\CHO$ \cite{PIZ13}.
-        This operator is canonical;
-        it requires no choices of coordinates or gauges.
-        It maps $k$-forms on $X$ to $(k-1)$-forms on $\Paths(X)$:
-        \[
-          \CHO : \Omega^k(X) \to \Omega^{k-1}(\Paths(X)).
-          \]
-        To define $\CHO$ rigorously,
-        we use the plot-based definition of differential forms.
-        Let $P: U \to \Paths(X)$ be a plot of the space of paths.
-        The associated evaluation map $\Phi: \RR \times U \to X$,
-        defined by $\Phi(t,r) = P(r)(t)$,
-        is smooth.
-        It is often intuitive to denote the path $P(r)$ by $\gamma_r$,
-        so that $\Phi(t,r) = \gamma_r(t)$.
-        
-        The form $\CHO\alpha$ is defined by its value on the plot $P$ at a point $r \in U$.
-        For any vectors $v_1, \dots, v_{k-1}$ in the tangent space of $U$ at $r$:
-        \[
-          (\CHO\alpha)(P)_r(v_1, \dots, v_{k-1}) = \int_0^1 \alpha\left(\Vector{t \\ r} \mapsto P(r)(t) \right)_{t \choose r}\Vector{1 \\ 0} \Vector{0 \\ v_1} \dots \Vector{0 \\ v_{k-1}} \dt.
-          \]
-        Note that,
-        for multilinear operators,
-        we use the notations $\epsilon(v_1)\dots(v_k)$ and $\epsilon(v_1,\dots,v_k)$ indifferently.
-        
-        Geometrically,
-        this corresponds to integrating $\alpha$ along the variation of the path.
-        The operator $\CHO$ satisfies the fundamental \emph{chain-homotopy identity}:
-        \[
-          \der \circ \CHO + \CHO \circ \der = \1^* - \0^*,
-          \]
-        where $\0, \1: \Paths(X) \to X$ are the source and target maps defined by $\0(\gamma) = \gamma(0)$ and $\1(\gamma) = \gamma(1)$.
-        This identity is the "fundamental theorem of calculus" for the space of paths,
-        relating the exterior derivative of the transgressed form to the values of the original form at the endpoints.
-        
-        \textbf{Remark.}~If $X$ is a smooth manifold,
-        the tangent space to $\Paths(X)$ at a path $\gamma$ can be identified with the space of vector fields along $\gamma$.
-        Let $\delta\gamma_1, \dots, \delta\gamma_{k-1}$ be $k-1$ such variations.
-        The formula for $\CHO\alpha$ takes the familiar form:%
-        \footnote{In the literature, this is sometimes abbreviated as $\Kalpha = \int_0^1 i_{\dot{\gamma}} \alpha \, dt$, where $i_{\dot{\gamma}}$ denotes the contraction with the velocity vector field along the curve.}
-        \[
-          (\CHO\alpha)_\gamma(\delta\gamma_1, \dots, \delta\gamma_{k-1}) = \int_0^1 \alpha_{\gamma(t)}(\dot{\gamma}(t), \delta\gamma_1(t), \dots, \delta\gamma_{k-1}(t)) \, dt.
-          \]
-        It is important to note that this intuitive formula is not an ad-hoc adaptation;
-        it is the strict evaluation of the general diffeological definition on the specific plots of a manifold.
-        However,
-        we prefer the plot-based definition because it applies universally
-        ---to singular spaces,
-        infinite-dimensional spaces,
-        and quotients---
-        where the classical notion of a tangent vector field may be ill-defined.
-      \end{article}
-      
-      %-----
-      \begin{article}\artlabel[Homotopic Invariance of de Rham Cohomology]
-        The chain-homotopy identity provides a spectacular and immediate proof of the homotopic invariance of de Rham cohomology.
-        Let $f_0, f_1: X \to Y$ be two homotopic smooth maps,
-        and let $\hat{h}: X \to \Paths(Y)$ be the map $x \mapsto [t \mapsto f_t(x)]$,
-        associating to each point $x \in X$ the path of the homotopy starting at $f_0(x)$ and ending at $f_1(x)$.
-        For any closed form $\omega \in \Omega^k(Y)$,
-        the identity $\1^*\omega - \0^*\omega = \der\CHO\omega$ leads to the following three-line proof:
-        \begin{align*}
-          f_1^*\omega - f_0^*\omega &= \hat{h}^*(\1^*\omega - \0^*\omega) \\
-          &= \hat{h}^*(\der\CHO\omega) \\
-          &= \der[\hat{h}^*(\CHO\omega)].
-        \end{align*}
-        This calculation shows that the difference $f_1^*\omega - f_0^*\omega$ is an exact form.
-        Consequently,
-        homotopic maps induce the same homomorphism in de Rham cohomology,
-        proving that $\HDR$ is a homotopic invariant for all diffeological spaces.
-        \end{article}
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %%
-        %% MARK: A Note on the Philosophy of the Construction
-        %%
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
-        \section*{A Note on the Philosophy of the Construction}
-        
-        The construction presented in this Memoir can be read as an exercise
-        in \emph{reverse engineering}.
-        
-        Aristotle famously stated:
-        ``Since nature is a principle of motion and change,
-        and our inquiry is concerning nature,
-        what motion is must not escape us.''
-        Classical mechanics,
-        from Newton to Lagrange to Souriau,
-        gives us the macroscopic description of the world
-        in the language of symplectic geometry.
-        A point in the space of motions is a complete classical history.
-        This is the world as we perceive it directly ---
-        the sharp,
-        deterministic trajectories of the Skeleton.
-        
-        The microscopic world,
-        however,
-        escapes this naive deterministic description.
-        In our historical attempts to correct our macroscopic models to account for atomic behavior,
-        from Dirac and Feynman to Kostant and Souriau,
-        we achieved immense predictive success.
-        Yet,
-        this success came at a severe philosophical cost:
-        we abandoned the very concept of motion that was the foundation of physics,
-        exchanging it for wave functions,
-        Hilbert spaces,
-        and abstract spectra.
-        Quantum mechanics appeared as a set of algebraic rules imposed from above,
-        creating a persistent philosophical discomfort.
-        
-        The Geometric Quantization by Paths (GQbP) framework suggests
-        that this abandonment of motion is unnecessary.
-        It proposes that all we know about the quantum world can ultimately be derived from the macroscopic description,
-        because the macroscopic space of motions is the only objective reality to which our measuring devices have access.
-        
-        Our reverse engineering proceeds as follows.
-        We start with what we have:
-        the classical space of motions $X$.
-        We then posit that at the microscopic level,
-        the world is subjected to a field of anarchic perturbations.
-        These fluctuations cannot be captured by a traditional Newtonian field of forces,
-        which would merely translate into a definite symplectic gradient on the space of motions.
-        Instead,
-        the system fluctuates \emph{between} entire motions.
-        These fluctuations are paths in the space of motions ---
-        an idea that can be seen as Lagrange's method of the variation of constants,
-        extended to a radical,
-        global comprehension.
-        
-        This infinite-dimensional space of fluctuations,
-        $\Paths(X)$,
-        is the \emph{Quantum Broth}:
-        the unfiltered reality behind the macroscopic veil.
-        We impose an equivalence relation,
-        declaring two fluctuations indistinguishable
-        if the symplectic area they enclose differs by an integer multiple of the Planck constant $h$.
-        
-        The quotient of this distillation is the prequantum groupoid $\TT_\omega$.
-        What emerges is striking.
-        The classical space $X$ reappears as the set of identity morphisms ---
-        the \emph{Skeleton}.
-        The non-identity morphisms form the \emph{Quantum Fog}:
-        a set of quantum transitions built directly from the classical macroscopic setup.
-        The quantum phase,
-        far from being an external $U(1)$ imposed by hand,
-        is the isotropy group of this groupoid,
-        isomorphic to the torus of periods $\Tomega = \RR/h\ZZ$.
-        
-        The power of this reverse engineering is that it yields rigorous results.
-        From the Dirac axioms
-        to the Non-Linear Sigma Model and the obstruction in the fusion rules of conformal field theory ---
-        all of these emerge not as external inputs,
-        but as geometric consequences of filtering
-        the anarchic fluctuations of classical motions
-        through the quantum of action.
-        
-        The prequantum groupoid $\TT_\omega$ is the fundamental object of this theory;
-        the classical space $X$ is merely its \emph{Skeleton of units}.
-        The geometric quantization of a classical system
-        is therefore not the addition of quantum information to a classical model,
-        but the revelation of the quantum structure
-        already latent in the geometry of its space of motions.
-        
-        The classical world is the shadow on the wall of Plato's cave;
-        the quantum world is the fire and the dancers,
-        glimpsed only through the fluctuations they cast.
-        The Planck constant is the resolution limit of the shadow play.
-        
-        Whether this interpretation is ``true''
-        in any metaphysical sense is not a question for mathematics.
-        But as a geometric framework,
-        it has the virtue of making the transition
-        from classical to quantum mechanics
-        not a leap of faith,
-        but a controlled descent
-        from the space of paths to its quotient by the periods.
-        
-        \textbf{A Note on Refutability.}
-        The reverse engineering perspective proposed here,
-        which defines the quantum realm as a formal refinement of an underlying classical skeleton $(X, \omega)$,
-        stands as a falsifiable scientific hypothesis.
-        It is vulnerable to refutation:
-        should nature unveil a quantum system whose symmetry and phase structure cannot be derived from such a parasymplectic classical skeleton,
-        then the framework presented here is refuted in its entirety.
-        Until then\dots
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %%
-        %% MARK: Bibliography
-        %%
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
-        \begin{thebibliography}{PIZ25c}
-          
-          \bibitem[AB67]{AB67}
-          M. F. Atiyah and R. Bott.
-          A Lefschetz fixed point formula for elliptic complexes. I.
-          {\em Annals of Mathematics}, 86:374--407, 1967.
-          
-          \bibitem[AB68]{AB68}
-          M. F. Atiyah and R. Bott.
-          A Lefschetz fixed point formula for elliptic complexes. II. Applications.
-          {\em Annals of Mathematics}, 88:451--491, 1968.
-          
-          \bibitem[Con94]{Con94}
-          Alain Connes.
-          {\em Noncommutative Geometry}.
-          Academic Press, San Diego, 1994.
-          
-          \bibitem[Fad69]{Fad69}
-          Ludvig Dmitrievich Faddeev.
-          \emph{The Feynman integral for singular Lagrangians}.
-          Theoretical and Mathematical Physics, 1(1):1--13, 1969.
-          
-          \bibitem[Gar66]{Gar66}
-          Claude Garrod.
-          \emph{Hamiltonian Path-Integral Methods}.
-          Reviews of Modern Physics,
-          38(3):483--494,
-          1966.
-          
-          \bibitem[GS77]{GS77}
-          Victor Guillemin and Shlomo Sternberg.
-          \emph{Geometric Asymptotics}.
-          Mathematical Surveys, 14, Amer. Math. Soc., 1977.
-          
-          \bibitem[Hor71]{Hor71}
-          Lars H\"ormander.
-          Fourier integral operators. I.
-          {\em Acta Mathematica}, 127:79--183, 1971.
-          
-          \bibitem[PIZ06]{PIZ06}
-          Patrick Iglesias-Zemmour,
-          \emph{Dimension in diffeology},
-          Indag. Math. (N.S.) \textbf{18} (2007), no. 3, 417--449. (Preprint available at \url{http://math.huji.ac.il/~piz/DDS/}).
-          
-          \bibitem[PIZ10]{PIZ10}
-          Patrick Iglesias-Zemmour,
-          \emph{The moment maps in diffeology},
-          Mem. Amer. Math. Soc. \textbf{204} (2010), no. 962, viii+101 pp.
-          
-          \bibitem[PIZ13a]{PIZ13a}
-          Patrick Iglesias-Zemmour,
-          \emph{Variantion of Integrals in Diffeology},
-          Canadian Journal of Mathematics , Volume 65 , Issue 6 , 01 December 2013 , pp. 1255 - 1286
-          
-          \bibitem[PIZ13]{PIZ13}
-          Patrick Iglesias-Zemmour.
-          {\em Diffeology}.
-          Mathematical Surveys and Monographs, 185, Am. Math. Soc., 2013.
-          
-          \bibitem[PIZ22]{PIZ22}
-          \bysame %Patrick Iglesias-Zemmour,
-          \emph{Diffeology},
-          Revised version by Beijing World Publishing Corp., Beijing, 2022.
-          
-          \bibitem[PIZ25a]{PIZ25a}
-          \bysame %Patrick Iglesias-Zemmour,
-          \emph{Geometric Quantization by Paths, Part I: The Simply Connected Case},
-          (Preprint, 2025).
-          
-          \bibitem[PIZ25b]{PIZ25b}
-          \bysame %Patrick Iglesias-Zemmour,
-          \emph{Geometric Quantization by Paths, Part II: The General Case},
-          (Preprint, 2025).
-          
-          \bibitem[PIZ25c]{PIZ25c}
-          \bysame,
-          \emph{The Boman Paradox --- When topology plus algebra do not define geometry},
-          To appear in the Mathematical Intelligencer. Preprint 2025. Available at \url{http://math.huji.ac.il/~piz/documents/TBP.pdf}.
-          
-          \bibitem[Kir62]{Kir62}
-          Alexandre A. Kirillov.
-          Unitary representations of nilpotent Lie groups.
-          {\em Uspekhi Mat. Nauk}, 17(4):57--110, 1962.
-          
-          \bibitem[Kos70]{Kos70}
-          Bertram Kostant.
-          Quantization and unitary representations.
-          In: {\em Lectures in Modern Analysis and Applications III},
-          Lecture Notes in Mathematics, Vol. 170,
-          Springer, Berlin, 1970, pp. 87--208.
-          
-          \bibitem[Mas65]{Mas65}
-          V. P. Maslov.
-          {\em Teoriya vozmushchenii i asimptoticheskie metody}.
-          Izdat. Moskov. Univ., Moscow, 1965.
-          (French translation: {\em Th\'eorie des perturbations et m\'ethodes asymptotiques}, Dunod, Paris, 1972.)
-          
-          \bibitem[Sou70]{Sou70}
-          Jean-Marie Souriau.
-          {\em Structure des syst\`emes dynamiques}.
-          Dunod, Paris, 1970.
-          
-          \bibitem[Sou75]{Sou75}
-          Jean-Marie Souriau.
-          \newblock \emph{Construction explicite de l'indice de Maslov. Applications}.
-          \newblock In: Group theoretical methods in physics (Fourth Internat. Colloq., Nijmegen, 1975), Lecture Notes in Phys., Vol. 50, Springer, Berlin, 1976, pp. 117--148.
-          
-          \bibitem[Wei74]{Wei74}
-          Alan Weinstein.
-          Fourier integral operators, quantization, and the Maslov index.
-          In: {\em G\'eom\'etrie symplectique et physique math\'ematique}
-          (Colloq. Internat. CNRS, No. 237, Aix-en-Provence, 1974),
-          \'Editions du CNRS, Paris, 1976, pp. 235--246.
-          
-          \bibitem[Wei77]{Wei77}
-          Alan Weinstein.
-          \emph{Lectures on Symplectic Manifolds}.
-          CBMS Regional Conf. Series in Math., 29, Amer. Math. Soc., 1977.
-          
-          \bibitem[Woo92]{Woo92}
-          Nicholas M.J. Woodhouse.
-          \emph{Geometric Quantization}.
-          Clarendon Press, Oxford, Second Edition, 1992.
-          
-        \end{thebibliography}
-        
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %%
-        %% MARK: End ofDocument
-        %%
-        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        
-      \end{document}
+    The form $\CHO\alpha$ is defined by its value on the plot $P$ at a point $r \in U$.
+    For any vectors $v_1, \dots, v_{k-1}$ in the tangent space of $U$ at $r$:
+    \[
+      (\CHO\alpha)(P)_r(v_1, \dots, v_{k-1}) = \int_0^1 \alpha\left(\Vector{t \\ r} \mapsto P(r)(t) \right)_{t \choose r}\Vector{1 \\ 0} \Vector{0 \\ v_1} \dots \Vector{0 \\ v_{k-1}} \dt.
+      \]
+    Note that,
+    for multilinear operators,
+    we use the notations $\epsilon(v_1)\dots(v_k)$ and $\epsilon(v_1,\dots,v_k)$ indifferently.
+    
+    Geometrically,
+    this corresponds to integrating $\alpha$ along the variation of the path.
+    The operator $\CHO$ satisfies the fundamental \emph{chain-homotopy identity}:
+    \[
+      \der \circ \CHO + \CHO \circ \der = \1^* - \0^*,
+      \]
+    where $\0, \1: \Paths(X) \to X$ are the source and target maps defined by $\0(\gamma) = \gamma(0)$ and $\1(\gamma) = \gamma(1)$.
+    This identity is the "fundamental theorem of calculus" for the space of paths,
+    relating the exterior derivative of the transgressed form to the values of the original form at the endpoints.
+    
+    \textbf{Remark.}~If $X$ is a smooth manifold,
+    the tangent space to $\Paths(X)$ at a path $\gamma$ can be identified with the space of vector fields along $\gamma$.
+    Let $\delta\gamma_1, \dots, \delta\gamma_{k-1}$ be $k-1$ such variations.
+    The formula for $\CHO\alpha$ takes the familiar form:%
+    \footnote{In the literature, this is sometimes abbreviated as $\Kalpha = \int_0^1 i_{\dot{\gamma}} \alpha \, dt$, where $i_{\dot{\gamma}}$ denotes the contraction with the velocity vector field along the curve.}
+    \[
+      (\CHO\alpha)_\gamma(\delta\gamma_1, \dots, \delta\gamma_{k-1}) = \int_0^1 \alpha_{\gamma(t)}(\dot{\gamma}(t), \delta\gamma_1(t), \dots, \delta\gamma_{k-1}(t)) \, dt.
+      \]
+    It is important to note that this intuitive formula is not an ad-hoc adaptation;
+    it is the strict evaluation of the general diffeological definition on the specific plots of a manifold.
+    However,
+    we prefer the plot-based definition because it applies universally
+    ---to singular spaces,
+    infinite-dimensional spaces,
+    and quotients---
+    where the classical notion of a tangent vector field may be ill-defined.
+  \end{article}
+  
+  %-----
+  \begin{article}\artlabel[Homotopic Invariance of de Rham Cohomology]
+    The chain-homotopy identity provides a spectacular and immediate proof of the homotopic invariance of de Rham cohomology.
+    Let $f_0, f_1: X \to Y$ be two homotopic smooth maps,
+    and let $\hat{h}: X \to \Paths(Y)$ be the map $x \mapsto [t \mapsto f_t(x)]$,
+    associating to each point $x \in X$ the path of the homotopy starting at $f_0(x)$ and ending at $f_1(x)$.
+    For any closed form $\omega \in \Omega^k(Y)$,
+    the identity $\1^*\omega - \0^*\omega = \der\CHO\omega$ leads to the following three-line proof:
+    \begin{align*}
+      f_1^*\omega - f_0^*\omega &= \hat{h}^*(\1^*\omega - \0^*\omega) \\
+      &= \hat{h}^*(\der\CHO\omega) \\
+      &= \der[\hat{h}^*(\CHO\omega)].
+    \end{align*}
+    This calculation shows that the difference $f_1^*\omega - f_0^*\omega$ is an exact form.
+    Consequently,
+    homotopic maps induce the same homomorphism in de Rham cohomology,
+    proving that $\HDR$ is a homotopic invariant for all diffeological spaces.
+  \end{article}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: A Note on the Philosophy of the Construction
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \section{A Note on the Philosophy of the Construction}
+  
+  The construction presented in this Memoir can be read as an exercise
+  in \emph{reverse engineering}.
+  
+  Aristotle famously stated:
+  ``Since nature is a principle of motion and change,
+  and our inquiry is concerning nature,
+  what motion is must not escape us.''
+  Classical mechanics,
+  from Newton to Lagrange to Souriau,
+  gives us the macroscopic description of the world
+  in the language of symplectic geometry.
+  A point in the space of motions is a complete classical history.
+  This is the world as we perceive it directly ---
+  the sharp,
+  deterministic trajectories of the Skeleton.
+  
+  The microscopic world,
+  however,
+  escapes this naive deterministic description.
+  In our historical attempts to correct our macroscopic models to account for atomic behavior,
+  from Dirac and Feynman to Kostant and Souriau,
+  we achieved immense predictive success.
+  Yet,
+  this success came at a severe philosophical cost:
+  we abandoned the very concept of motion that was the foundation of physics,
+  exchanging it for wave functions,
+  Hilbert spaces,
+  and abstract spectra.
+  Quantum mechanics appeared as a set of algebraic rules imposed from above,
+  creating a persistent philosophical discomfort.
+  
+  The Geometric Quantization by Paths (GQbP) framework suggests
+  that this abandonment of motion is unnecessary.
+  It proposes that all we know about the quantum world can ultimately be derived from the macroscopic description,
+  because the macroscopic space of motions is the only objective reality to which our measuring devices have access.
+  
+  Our reverse engineering proceeds as follows.
+  We start with what we have:
+  the classical space of motions $X$.
+  We then posit that at the microscopic level,
+  the world is subjected to a field of anarchic perturbations.
+  These fluctuations cannot be captured by a traditional Newtonian field of forces,
+  which would merely translate into a definite symplectic gradient on the space of motions.
+  Instead,
+  the system fluctuates \emph{between} entire motions.
+  These fluctuations are paths in the space of motions ---
+  an idea that can be seen as Lagrange's method of the variation of constants,
+  extended to a radical,
+  global comprehension.
+  
+  This infinite-dimensional space of fluctuations,
+  $\Paths(X)$,
+  is the \emph{Quantum Broth}:
+  the unfiltered reality behind the macroscopic veil.
+  We impose an equivalence relation,
+  declaring two fluctuations indistinguishable
+  if the symplectic area they enclose differs by an integer multiple of the Planck constant $h$.
+  
+  The quotient of this distillation is the prequantum groupoid $\TT_\omega$.
+  What emerges is striking.
+  The classical space $X$ reappears as the set of identity morphisms ---
+  the \emph{Skeleton}.
+  The non-identity morphisms form the \emph{Quantum Fog}:
+  a set of quantum transitions built directly from the classical macroscopic setup.
+  The quantum phase,
+  far from being an external $U(1)$ imposed by hand,
+  is the isotropy group of this groupoid,
+  isomorphic to the torus of periods $\Tomega = \RR/h\ZZ$.
+  
+  The power of this reverse engineering is that it yields rigorous results.
+  From the Dirac axioms
+  to the Non-Linear Sigma Model and the obstruction in the fusion rules of conformal field theory ---
+  all of these emerge not as external inputs,
+  but as geometric consequences of filtering
+  the anarchic fluctuations of classical motions
+  through the quantum of action.
+  
+  The prequantum groupoid $\TT_\omega$ is the fundamental object of this theory;
+  the classical space $X$ is merely its \emph{Skeleton of units}.
+  The geometric quantization of a classical system
+  is therefore not the addition of quantum information to a classical model,
+  but the revelation of the quantum structure
+  already latent in the geometry of its space of motions.
+  
+  The classical world is the shadow on the wall of Plato's cave;
+  the quantum world is the fire and the dancers,
+  glimpsed only through the fluctuations they cast.
+  The Planck constant is the resolution limit of the shadow play.
+  
+  Whether this interpretation is ``true''
+  in any metaphysical sense is not a question for mathematics.
+  But as a geometric framework,
+  it has the virtue of making the transition
+  from classical to quantum mechanics
+  not a leap of faith,
+  but a controlled descent
+  from the space of paths to its quotient by the periods.
+  
+  \textbf{A Note on Refutability.}
+  The reverse engineering perspective proposed here,
+  which defines the quantum realm as a formal refinement of an underlying classical skeleton $(X, \omega)$,
+  stands as a falsifiable scientific hypothesis.
+  It is vulnerable to refutation:
+  should nature unveil a quantum system whose symmetry and phase structure cannot be derived from such a parasymplectic classical skeleton,
+  then the framework presented here is refuted in its entirety.
+  Until then\dots
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: Bibliography
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+  \begin{thebibliography}{PIZ25c}
+    
+    \bibitem[AB67]{AB67}
+    M. F. Atiyah and R. Bott.
+    A Lefschetz fixed point formula for elliptic complexes. I.
+    {\em Annals of Mathematics}, 86:374--407, 1967.
+    
+    \bibitem[AB68]{AB68}
+    M. F. Atiyah and R. Bott.
+    A Lefschetz fixed point formula for elliptic complexes. II. Applications.
+    {\em Annals of Mathematics}, 88:451--491, 1968.
+    
+    \bibitem[Con94]{Con94}
+    Alain Connes.
+    {\em Noncommutative Geometry}.
+    Academic Press, San Diego, 1994.
+    
+    \bibitem[Fad69]{Fad69}
+    Ludvig Dmitrievich Faddeev.
+    \emph{The Feynman integral for singular Lagrangians}.
+    Theoretical and Mathematical Physics, 1(1):1--13, 1969.
+    
+    \bibitem[Gar66]{Gar66}
+    Claude Garrod.
+    \emph{Hamiltonian Path-Integral Methods}.
+    Reviews of Modern Physics,
+    38(3):483--494,
+    1966.
+    
+    \bibitem[GS77]{GS77}
+    Victor Guillemin and Shlomo Sternberg.
+    \emph{Geometric Asymptotics}.
+    Mathematical Surveys, 14, Amer. Math. Soc., 1977.
+    
+    \bibitem[Hor71]{Hor71}
+    Lars H\"ormander.
+    Fourier integral operators. I.
+    {\em Acta Mathematica}, 127:79--183, 1971.
+    
+    \bibitem[PIZ06]{PIZ06}
+    Patrick Iglesias-Zemmour,
+    \emph{Dimension in diffeology},
+    Indag. Math. (N.S.) \textbf{18} (2007), no. 3, 417--449. (Preprint available at \url{http://math.huji.ac.il/~piz/DDS/}).
+    
+    \bibitem[PIZ10]{PIZ10}
+    Patrick Iglesias-Zemmour,
+    \emph{The moment maps in diffeology},
+    Mem. Amer. Math. Soc. \textbf{204} (2010), no. 962, viii+101 pp.
+    
+    \bibitem[PIZ13a]{PIZ13a}
+    Patrick Iglesias-Zemmour,
+    \emph{Variantion of Integrals in Diffeology},
+    Canadian Journal of Mathematics , Volume 65 , Issue 6 , 01 December 2013 , pp. 1255 - 1286
+    
+    \bibitem[PIZ13]{PIZ13}
+    Patrick Iglesias-Zemmour.
+    {\em Diffeology}.
+    Mathematical Surveys and Monographs, 185, Am. Math. Soc., 2013.
+    
+    \bibitem[PIZ22]{PIZ22}
+    \bysame %Patrick Iglesias-Zemmour,
+    \emph{Diffeology},
+    Revised version by Beijing World Publishing Corp., Beijing, 2022.
+    
+    \bibitem[PIZ25a]{PIZ25a}
+    \bysame %Patrick Iglesias-Zemmour,
+    \emph{Geometric Quantization by Paths, Part I: The Simply Connected Case},
+    (Preprint, 2025).
+    
+    \bibitem[PIZ25b]{PIZ25b}
+    \bysame %Patrick Iglesias-Zemmour,
+    \emph{Geometric Quantization by Paths, Part II: The General Case},
+    (Preprint, 2025).
+    
+    \bibitem[PIZ25c]{PIZ25c}
+    \bysame,
+    \emph{The Boman Paradox --- When topology plus algebra do not define geometry},
+    To appear in the Mathematical Intelligencer. Preprint 2025. Available at \url{http://math.huji.ac.il/~piz/documents/TBP.pdf}.
+    
+    \bibitem[Kir62]{Kir62}
+    Alexandre A. Kirillov.
+    Unitary representations of nilpotent Lie groups.
+    {\em Uspekhi Mat. Nauk}, 17(4):57--110, 1962.
+    
+    \bibitem[Kos70]{Kos70}
+    Bertram Kostant.
+    Quantization and unitary representations.
+    In: {\em Lectures in Modern Analysis and Applications III},
+    Lecture Notes in Mathematics, Vol. 170,
+    Springer, Berlin, 1970, pp. 87--208.
+    
+    \bibitem[Mas65]{Mas65}
+    V. P. Maslov.
+    {\em Teoriya vozmushchenii i asimptoticheskie metody}.
+    Izdat. Moskov. Univ., Moscow, 1965.
+    (French translation: {\em Th\'eorie des perturbations et m\'ethodes asymptotiques}, Dunod, Paris, 1972.)
+    
+    \bibitem[Sou70]{Sou70}
+    Jean-Marie Souriau.
+    {\em Structure des syst\`emes dynamiques}.
+    Dunod, Paris, 1970.
+    
+    \bibitem[Sou75]{Sou75}
+    Jean-Marie Souriau.
+    \newblock \emph{Construction explicite de l'indice de Maslov. Applications}.
+    \newblock In: Group theoretical methods in physics (Fourth Internat. Colloq., Nijmegen, 1975), Lecture Notes in Phys., Vol. 50, Springer, Berlin, 1976, pp. 117--148.
+    
+    \bibitem[Wei74]{Wei74}
+    Alan Weinstein.
+    Fourier integral operators, quantization, and the Maslov index.
+    In: {\em G\'eom\'etrie symplectique et physique math\'ematique}
+    (Colloq. Internat. CNRS, No. 237, Aix-en-Provence, 1974),
+    \'Editions du CNRS, Paris, 1976, pp. 235--246.
+    
+    \bibitem[Wei77]{Wei77}
+    Alan Weinstein.
+    \emph{Lectures on Symplectic Manifolds}.
+    CBMS Regional Conf. Series in Math., 29, Amer. Math. Soc., 1977.
+    
+    \bibitem[Woo92]{Woo92}
+    Nicholas M.J. Woodhouse.
+    \emph{Geometric Quantization}.
+    Clarendon Press, Oxford, Second Edition, 1992.
+    
+  \end{thebibliography}
+  
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: End ofDocument
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+\end{document}
