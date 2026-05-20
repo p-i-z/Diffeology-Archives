@@ -95,7 +95,7 @@ who once asked me: \\
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
-  %% MARK: - Part: Preface
+  %% MARK: - Chapter: Preface
   %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
@@ -283,7 +283,7 @@ who once asked me: \\
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
-  %% MARK: A Primer on Diffeology
+  %% MARK: Chapter — A Primer on Diffeology
   %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \chapter{A Primer on Diffeology}
@@ -367,9 +367,12 @@ who once asked me: \\
   applies with equal force to the smooth and the singular alike.
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %% Section 1: The Language of Plots
+  %%
+  %% Mark: Section 1: The Language of Plots
+  %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \section{The Language of Plots}
+  \label{sec:The Language of Plots}
   
   The fundamental idea of diffeology is to define the smoothness of a space not by charts mapping \emph{out} to $\RR^n$,
   but by test curves (or surfaces, or volumes etc.) mapping \emph{in} from Euclidean domains.
@@ -563,11 +566,8 @@ who once asked me: \\
       independent of topology or algebra.
       For a full discussion of the Boman paradox and its implications for the foundations of geometry,
       see \cite{PIZ25c}.
-      
     \end{remark}
-    
   \end{article}
-  
   
   %----- Article
   \begin{article}\artlabel[The D-Topology]
@@ -595,15 +595,23 @@ who once asked me: \\
   \end{article}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %% Subsection 2: Morphisms and Functional Spaces
+  %%
+  %% MARK:  2: Functional diffeology and the space of paths
+  %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{Morphisms and Functional Spaces.}
+  \section{Functional diffeology and the space of paths.}
+  \label{sec:Functional diffeology and the space of paths}
   
+  The theory of diffeological spaces defines a category for which the morphisms are the \emph{smooth maps} and isomorphisms are called \emph{diffeomorphisms}.
+
+  %----- Smooth maps
+  \begin{article}\artlabel[Smooth Maps and the Category $\Difflg$.]
   A map $f: X \to Y$ between two diffeological spaces is \emph{smooth} if it takes plots to plots.
   That is,
   for every plot $P$ of $X$,
   the composition $f \circ P$ is a plot of $Y$.
   A \emph{diffeomorphism} is a smooth bijection with a smooth inverse.
+  \end{article}
   
   %----- Article
   \begin{article}\artlabel[Inductions and Subductions]
@@ -617,21 +625,23 @@ who once asked me: \\
   %----- Article
   \begin{article}\artlabel[Functional Diffeology]
     \label{subsec:Functional Diffeology}
-    The set of smooth maps $\Cinfty(X, Y)$ carries the \emph{functional diffeology}.
+     The category of diffeological spaces is complete and co-complete,
+  that is,
+  closed for the four set theoretical operations,
+  but moreover Cartesian closed.
+  The set of smooth maps $\Cinfty(X, Y)$ carries the \emph{functional diffeology}.
     A parametrization $P: U \to \Cinfty(X, Y)$ is a plot if and only if the associated evaluation map $(u, x) \mapsto P(u)(x)$ is smooth.
-    This allows us to do differential geometry directly on the space $\Paths(X)$.
+    And this diffeology satisfies the natural identity $\Cinfty(X,\Cinfty(Y,Z)) \simeq \Cinfty(X \times Y,Z)$.
+    
+    In particular,
+    this allows us to do differential geometry directly on the space $\Paths(X)$ without introducing specific more constructions.
   \end{article}
-  
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %% Subsection 2: Paths, Loops, and Homotopy
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{Paths, Loops, and Homotopy.}
-  
-  Homotopy in diffeology is the study of smooth deformations.
-  It is built directly upon the functional structure of the space of paths.
-  
+
   %----- Article
-  \begin{article}\artlabel[General Definitions]
+  \begin{article}\artlabel[The Space of Paths]
+    Homotopy in diffeology is the study of smooth deformations.
+  It is built directly upon the functional structure of the space of paths.
+
     Let $X$ be a diffeological space.
     We denote by
     $$
@@ -697,6 +707,7 @@ who once asked me: \\
     This is sufficient to ensure that many operations in diffeology involving the concatenation of paths,
     and depending only on their homotopy class,
     are justified.
+    
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \begin{figure}[tb]\renewcommand{\thefigure}{$1$}
       \smallskip  \centerline{\includegraphics[width=.25\textwidth]{Figures/fig-smashing-function}}
@@ -705,6 +716,7 @@ who once asked me: \\
       \label{fig:smashing-function}
     \end{figure}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
     \textbf{Convention.}
     To avoid unnecessary complications in the following,
     we shall consider only stationary paths without explicitly mentioning them.
@@ -765,64 +777,15 @@ who once asked me: \\
   \end{article}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %% Subsection: Diffeological Groups
+  %%
+  %% MARK: : Differential forms and the de Rham complex in diffeology
+  %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{Diffeological Groups.}
+  \section{Differential forms and the de Rham complex in diffeology.}
+  \label{sec:Differential forms and the de Rham complex in diffeology}
   
-  A \emph{diffeological group} is a group $G$ where multiplication and inversion are smooth.
-  Thanks to functional diffeology,
-  the group of diffeomorphisms $\Diff(X)$ is always a diffeological group.
-  This allows us to treat symmetry groups of infinite-dimensional spaces with geometric rigor.
-  
-  %----- Article
-  \begin{article}\artlabel[The Space of Momenta of a Diffeological Group]
-    \label{subsec:Momenta}
-    A fundamental construction in this Memoir is the \emph{space of momenta} of a diffeological group.
-    We call \emph{left momentum} of a diffeological group $G$ any $1$-form on $G$ invariant by the left action of $G$ onto itself.
-    We denote by $\cG^*$ the space of momenta of $G$:
-    \[
-      \cG^* = \{ \alpha \in \Omega^1(G) \mid \text{for all } g \in G, \; \L(g)^*(\alpha) = \alpha \}.
-      \]
-    The space $\cG^*$ is naturally a diffeological vector space equipped with the functional diffeology.
-    
-    Note that,
-    in spite of what the notation $\cG^*$ suggests,
-    the space of momenta of a diffeological group is \emph{not} defined by some duality with a Lie algebra.
-    It is defined intrinsically as the space of left-invariant $1$-forms.
-    This avoids any reference to contravariant objects like vector fields or Lie algebras,
-    which are ill-defined or non-unique in general diffeology.
-    
-    The group $G$ acts smoothly on $\cG^*$ by the \emph{coadjoint action}:
-    \[
-      \Ad_* : (g,\alpha) \mapsto \Ad(g)_*(\alpha) = \Ad(g^{-1})^*(\alpha) = \Rm(g)^*(\alpha).
-      \]
-    The orbit of a momentum under this action is a \emph{coadjoint orbit}.
-    When $G$ is a Lie group,
-    $\cG^*$ coincides with the dual of the Lie algebra,
-    and the coadjoint action coincides with the classical one.
-    
-    A crucial property used throughout this Memoir is the behavior of \emph{closed} momenta.
-    Let $\cZ \subset \cG^*$ denote the subspace of closed left-invariant $1$-forms.
-    If $G$ is connected,
-    every closed momentum is exact and its primitive is a smooth homomorphism from the universal covering $\tilde{G}$ to $\RR$.
-    Moreover,
-    every closed momentum is invariant under the coadjoint action:
-    \[
-      d\zeta = 0 \quad\implies\quad \Ad_*(g)(\zeta) = \zeta \quad \text{for all } g \in G.
-      \]
-    This fact is essential for the construction of the holonomy group in Parts II and IV.
-  \end{article}
-  
-  
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %% Section 4: The Calculus of Quotients
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{The Calculus of Quotients.}
-  
-  In diffeology,
-  the quotient $Q = X/\!\!\sim$ is always well-defined via the subduction $\pi: X \to Q$.
-  This allows us to study spaces like the \emph{irrational torus} $T_\alpha \simeq \RR / (\ZZ + \alpha\ZZ)$,
-  which is topologically coarse but diffeologically rich.
+  Diffeology support natively a rich exterior differential calculus which we call \emph{Cartan-de-Rham Calculus}.
+  Here are its elementary constructions.
   
   %-----
   \begin{article}\artlabel[Differential Forms]
@@ -893,6 +856,11 @@ who once asked me: \\
   
   %-----
   \begin{article}\artlabel[The Descent Criterion]
+    In diffeology,
+  the quotient $Q = X/\!\!\sim$ is always well-defined via the subduction $\pi: X \to Q$.
+  This allows us to study spaces like the \emph{irrational torus} $T_\alpha \simeq \RR / (\ZZ + \alpha\ZZ)$,
+  which is topologically coarse but diffeologically rich.
+
     A form $\beta$ on $X$ descends to a unique form $\alpha$ on the quotient $Q$
     (such that $\pi^*\alpha = \beta$)
     if and only if for any two plots $P, P'$ in $X$ such that $\pi \circ P = \pi \circ P'$,
@@ -906,9 +874,12 @@ who once asked me: \\
   \end{article}
   
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %% Section 5: The Geometry of Paths
+  %%
+  %% MARK: The Chain-Homotopy Operator
+  %%
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \section{The Geometry of Paths.}
+  \section{The Chain-Homotopy Operator.}
+  \label{sec:The Chain-Homotopy Operator}
   
   We conclude this primer by exploring the functional geometry of the space of paths.
   This section introduces the essential bridge between the static geometry of the base space and the dynamic geometry of paths.
@@ -993,7 +964,60 @@ who once asked me: \\
     homotopic maps induce the same homomorphism in de Rham cohomology,
     proving that $\HDR$ is a homotopic invariant for all diffeological spaces.
   \end{article}
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %%
+  %% MARK: : Diffeological Groups
+  %%
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \section{Diffeological Groups.}
+  \label{sec:Diffeological Groups}
   
+  A \emph{diffeological group} is a group $G$ where multiplication and inversion are smooth.
+  Thanks to functional diffeology,
+  the group of diffeomorphisms $\Diff(X)$ is always a diffeological group.
+  This allows us to treat symmetry groups of infinite-dimensional spaces with geometric rigor.
+  
+  %----- Article
+  \begin{article}\artlabel[The Space of Momenta of a Diffeological Group]
+    \label{subsec:Momenta}
+    A fundamental construction in this Memoir is the \emph{space of momenta} of a diffeological group.
+    We call \emph{left momentum} of a diffeological group $G$ any $1$-form on $G$ invariant by the left action of $G$ onto itself.
+    We denote by $\cG^*$ the space of momenta of $G$:
+    \[
+      \cG^* = \{ \alpha \in \Omega^1(G) \mid \text{for all } g \in G, \; \L(g)^*(\alpha) = \alpha \}.
+      \]
+    The space $\cG^*$ is naturally a diffeological vector space equipped with the functional diffeology.
+    
+    Note that,
+    in spite of what the notation $\cG^*$ suggests,
+    the space of momenta of a diffeological group is \emph{not} defined by some duality with a Lie algebra.
+    It is defined intrinsically as the space of left-invariant $1$-forms.
+    This avoids any reference to contravariant objects like vector fields or Lie algebras,
+    which are ill-defined or non-unique in general diffeology.
+    
+    The group $G$ acts smoothly on $\cG^*$ by the \emph{coadjoint action}:
+    \[
+      \Ad_* : (g,\alpha) \mapsto \Ad(g)_*(\alpha) = \Ad(g^{-1})^*(\alpha) = \Rm(g)^*(\alpha).
+      \]
+    The orbit of a momentum under this action is a \emph{coadjoint orbit}.
+    When $G$ is a Lie group,
+    $\cG^*$ coincides with the dual of the Lie algebra,
+    and the coadjoint action coincides with the classical one.
+    
+    A crucial property used throughout this Memoir is the behavior of \emph{closed} momenta.
+    Let $\cZ \subset \cG^*$ denote the subspace of closed left-invariant $1$-forms.
+    If $G$ is connected,
+    every closed momentum is exact and its primitive is a smooth homomorphism from the universal covering $\tilde{G}$ to $\RR$.
+    Moreover,
+    every closed momentum is invariant under the coadjoint action:
+    \[
+      d\zeta = 0 \quad\implies\quad \Ad_*(g)(\zeta) = \zeta \quad \text{for all } g \in G.
+      \]
+    This fact is essential for the construction of the holonomy group in Parts II and IV.
+  \end{article}
+    
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %%
   %% MARK: A Note on the Philosophy of the Construction
