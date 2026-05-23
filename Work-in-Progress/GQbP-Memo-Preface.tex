@@ -1,0 +1,187 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: - Chapter 0 — Preface
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Preface}
+
+For nearly a century,
+quantum mechanics has rested upon two distinct conceptual pillars.
+The first,
+erected by Dirac and refined by Kostant and Souriau,
+is the pillar of operators acting on a Hilbert space.
+The second,
+envisioned by Feynman,
+is the pillar of the ``sum-over-histories,''
+where the quantum amplitude is distilled from the space of all paths in configuration space.
+
+While both approaches have achieved unparalleled empirical success,
+the geometric bridge between them has remained elusive.
+Standard geometric quantization has largely followed the Dirac program,
+constructing principal bundles over the classical space of motions.
+Yet these bundles often feel like external additions to the classical geometry,
+their connection forms chosen by gauge rather than given by the physics.
+On the other hand,
+the Feynman path integral,
+despite its profound physical intuition,
+has remained a mathematical ghost,
+trapped by the impossibility of defining a translation-invariant measure on the space of all paths.
+
+This Memoir proposes a fundamental shift of perspective.
+We do not sum over paths in configuration space;
+we filter the space of \emph{finite fluctuations between complete classical motions}.
+In the language of Souriau,
+the classical system is described not by instantaneous snapshots
+but by the symplectic space $(X,\omega)$ of entire dynamical trajectories.
+A point in $X$ is not a state at an instant;
+it is a complete motion.
+Our ``paths'' are not trajectories of a particle;
+they are \emph{deformations} connecting one classical dynamical history to another.
+A path $\gamma \in \Paths(X)$ with endpoints $\gamma(0) = x$ and $\gamma(1) = x'$
+represents a finite fluctuation from the motion $x$ to the motion $x'$.
+
+The source of all quantum information is the space of these fluctuations.
+By working within the framework of \emph{Diffeology},
+we can treat the infinite dimensional space $\Paths(X)$ of all smooth fluctuations as a geometrically sound object.
+Diffeology allows us to take quotients without losing smoothness,
+and to handle spaces---such as irrational tori or leaf spaces of foliations---that lie beyond the reach of traditional manifolds.
+We show that the quantum system is not a bundle to be added to the classical space,
+but a groupoid to be distilled from the fluctuations of classical motions.
+
+The core of our approach,
+which we call \emph{Geometric Quantization by Paths} (GQbP),
+consists of a rigorous filtration of this space of fluctuations.
+We call $\Paths(X)$ the \emph{Quantum Broth}.
+It is a primary geometric object,
+equipped with a canonical $1$-form,
+the \emph{Action Form} $\Komega$,
+which serves as a universal,
+intrinsic Lagrangian.
+Even when the classical symplectic form $\omega$ is not exact on $X$---as it is for the sphere $S^2$, for example---it is always exact on the space of fluctuations.
+The Action Form is its canonical primitive.
+
+The process of quantization is then revealed to be a distillation.
+The principal mathematical contribution of this Memoir is the construction of the prequantum groupoid $\Groupoid{T}_\omega$ as the quotient:
+\[
+  \Groupoid{T}_\omega = \Paths(X)/\!\sim_\omega,
+  \]
+where the equivalence relation $\sim_\omega$ identifies two fluctuations $\gamma$ and $\gamma'$
+with the same endpoints whose concatenation encloses a symplectic area belonging to the period group $\Pomega$.%
+\footnote{More precisely,
+the equivalence relation is defined by the vanishing of the Chasles cocycle $\Phi$,
+derived from the \emph{paths-primitive} $1$-form $\Komega$.}
+The symplectic area enclosed by the concatenated fluctuation is its \emph{quantum phase}.
+The filtration discards those fluctuations whose relative quantum phase vanishes modulo the periods,
+isolating the constructive interference.
+The result is the prequantum groupoid $\Groupoid{T}_\omega$,
+whose space of morphisms $\cY$ carries the \emph{Prequantum $1$-form} $\blambda$,
+which is left and right invariant and whose curvature encodes the classical form $\omega$.
+
+A critical feature of this construction is its absolute canonicity.
+From the classical form $\omega$ to the Action Form $\Komega$ on the Broth,
+and finally to the prequantum $1$-form $\blambda$ on the groupoid,
+every step is geometrically determined.
+There is no arbitrary choice of primitive;
+the prequantum structure is an inherent property of the parasymplectic geometry,%
+\footnote{A \emph{parasymplectic} form is,
+by definition,
+any closed $2$-form.
+No non-degeneracy condition is assumed.}
+not a structure to be assembled through gauge choices.
+
+We interpret this groupoid,
+the pair $(\cY,\blambda)$,
+as the \emph{Space of Quantum Motions}.
+In this geometry,
+the classical space $X$ survives as the \emph{Skeleton} of identity morphisms,
+representing the ``null'' fluctuations.
+Surrounding this skeleton is the \emph{Quantum Fog} of non-unit morphisms,
+which constitute the channels of quantum transition.
+These morphisms encode the physically meaningful fluctuations:
+they are the geometric reification of Feynman's interfering alternatives,
+transposed from configuration space to the space of motions.
+
+This construction establishes a rigorous parallel between classical and quantum mechanics.
+Just as the pair $(X, \omega)$ constitutes the classical space of motions,
+the pair $(\cY, \blambda)$ constitutes the space of quantum motions.
+The prequantum $1$-form $\blambda$ is the quantum counterpart to the symplectic form,
+encoding the transition phases between classical histories.
+This symmetry reveals that quantization is not a departure from the geometry of motions,
+but its natural extension into the relational domain of the groupoid.
+
+The construction yields two fundamental structural results:
+\begin{enumerate}
+  \item \emph{The Intrinsic Phase}:
+  The quantum phase is not an external structure added to the classical space.
+  It emerges intrinsically as the isotropy group of the groupoid,
+  isomorphic to the \emph{Torus of Periods} $\Tomega = \fieldR/\Pomega$.
+  This torus captures the symplectic area of loops and the geometry of the fundamental group.
+  \item \emph{Faithful Symmetries}:
+  The group of automorphisms of the quantum system,
+  $\Aut(\cY,\blambda)$,
+  is naturally isomorphic to the group of symmetries of the classical system,
+  $\Diff(X, \omega)$.
+  The symmetries lift fully and faithfully to the groupoid without the need for central extensions at the geometric level.
+\end{enumerate}
+
+The Memoir is structured to follow the logical maturation of this framework.
+
+\textbf{Part I} establishes the construction for connected and simply connected spaces.
+We show how the quantum phase emerges naturally as the isotropy group.
+All fundamental constructions are exposed in detail and can be appreciated for their internal logic without the clutter of homotopic technicalities.
+
+\textbf{Part II} extends the theory to arbitrary connected spaces.
+We identify the obstructions arising from non-trivial homotopy and resolve them by defining the \emph{Total Group of Periods}.
+This allows the GQbP framework to handle systems with complex homotopy,
+such as the Aharonov-Bohm effect or irrational tori,
+with the same geometric ease as the simply connected case.
+
+\textbf{Part III} crosses the ``Threshold of Analysis.''
+We transition from the geometry of the groupoid to the analysis of its observables by constructing the intrinsic convolution algebra of half-densities.
+Through the \emph{Experimentum Crucis} of the harmonic oscillator,
+we demonstrate that this framework is not a cosmetic re-description but an operative machine.
+We derive the exact quantum spectrum,
+including the zero-point energy $n\hbar/2$,
+strictly from the transformation laws of the filtered Broth.
+The Metaplectic Anomaly appears not as a correction to be made,
+but as a geometric inevitability to be revealed.
+
+\textbf{Part IV} applies the framework to quantum field theory.
+We treat the Wess-Zumino-Witten model,
+the $O(3)$ non-linear sigma model on loop space,
+and the Virasoro model.
+These examples demonstrate that the GQbP framework scales from finite-dimensional systems to the infinite-dimensional geometry of loop spaces and conformal field theory,
+providing a unified geometric language for quantum phenomena across scales.
+
+This framework demonstrates that geometric quantization,
+when properly understood,
+is not incompatible with Feynman's path integral;
+it is its direct geometric descendant---transposed to the space of motions and refined by the language of diffeology.
+Diffeology does not force a choice between the two pillars of quantum mechanics.
+Instead,
+it preserves both within a single \emph{triptych} of spaces:
+the \emph{Quantum Broth} of fluctuations,
+the \emph{Prequantum Groupoid} of distilled quantum motions,
+and the classical \emph{Skeleton} of complete histories.
+Each level of this hierarchy is a rigorously structured diffeological space,
+ensuring that the transition from fluctuations to operators remains geometrically transparent.
+
+Why this filtration should recover the correct quantum system is a question geometry alone cannot answer.
+What geometry provides is the canonical mechanism:
+given the classical space of motions and its symplectic form,
+the prequantum groupoid is the unique object that emerges from identifying fluctuations whose relative quantum phase belongs to the period group.
+That this groupoid coincides with the Kostant-Souriau framework for manifolds,
+and extends it faithfully to singular and infinite-dimensional spaces,
+is the mathematical content of this Memoir.
+
+Ultimately,
+this work shows that geometric quantization is the logical conclusion of the Feynman vision---when that vision is lifted from configuration space to the space of motions and expressed in the precise language of diffeology.
+The prequantum groupoid stands as the bridge,
+poised exactly at the point where the geometry of fluctuations yields the analysis of quantum states.
+
+\vspace{2em}
+\begin{flushright}
+  \emph{``Quoi de neuf en diffeolog'y ?''} \\
+  --- Jean-Marie Souriau
+\end{flushright}
