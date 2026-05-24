@@ -55,6 +55,25 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
+%% MARK: Sets and Logic
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \BigMid, \BiggMid : Large "such that" delimiters for set definitions
+%% Usage: $\Periods_\alpha = \left\{ \int_\ell \alpha \BigMid \ell \in \Loops(X) \right\}$
+\def\BigMid{\;\big|\;}
+\def\BiggMid{\;\bigg|\;}
+
+%% \Def : Domain of definition (for a partially defined map)
+%% Usage: \Def(f) = { x ∈ X | f(x) is defined }
+\newcommand{\Def}{\operatorname{def}}
+
+%% \Val : Set of values (image) of a map
+%% Usage: \Val(f) = { f(x) | x ∈ \Def(f) }
+\newcommand{\Val}{\operatorname{val}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
 %% MARK: Number Sets
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -191,26 +210,26 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% MARK: Chain-Homotopy Operator (Paths-Primitive)
+%% MARK: Chain-Homotopy Operator (path-primitive)
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% \CHO : Chain-Homotopy operator
 \DeclareMathOperator{\CHO}{\boldsymbol{\mathsf{K}}}
 
-%% \Komega : Paths-primitive of ω (1-form on Paths(X))
+%% \Komega : path-primitive of ω (1-form on Paths(X))
 \newcommand{\Komega}{\CHO\omega}
 
-%% \Kalpha : Paths-primitive of α
+%% \Kalpha : path-primitive of α
 \newcommand{\Kalpha}{\CHO\alpha}
 
-%% \Kbeta : Paths-primitive of β
+%% \Kbeta : path-primitive of β
 \newcommand{\Kbeta}{\CHO\beta}
 
-%% \\KVol : Paths-primitive of \Vol
+%% \\KVol : path-primitive of \Vol
 \newcommand{\KVol}{\CHO\Vol}
 
-%% \Ktheta : Paths-primitive of \theta
+%% \Ktheta : path-primitive of \theta
 \newcommand{\Ktheta}{\CHO\theta}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -396,6 +415,12 @@
 %% \Comp : Connected component containing a point
 \newcommand{\Comp}{\operatorname{comp}}
 
+%% \ConstPath : The constant path (or constant loop) at a given point
+%% Type: Point → Path
+%% Usage: \ConstPath{x} produces \hat{x} (the constant path t ↦ x)
+%% Semantics: Allows changing the notation of constant paths (e.g., to c_x or \mathbf{x}) globally
+\newcommand{\ConstPath}[1]{\hat{#1}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Homology and Cohomology
@@ -459,7 +484,6 @@
 
 %% \GenFam : Generating family of a diffeology
 \newcommand{\GenFam}{\mathrm{Gen}}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -726,6 +750,12 @@
 \newcommand{\xx}{{\bf x}}
 \newcommand{\yy}{{\bf y}}
 \newcommand{\ee}{{\bf e}}
+
+%% Sans Serif letters (semantic: used for distinguish maps or sets sharing the same lette as name)
+\newcommand{\sF}{\mathsf{F}}
+
+%% Bold math symbols
+\newcommand{\bmx}{{\boldsymbol x}}
 
 %% Bold Greek letters
 \newcommand{\balpha}{\boldsymbol \alpha}

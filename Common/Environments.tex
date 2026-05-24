@@ -110,9 +110,16 @@
   {}
 
 %% Proposition environment
-\newenvironment{proposition}%
-  {\noindent\textbf{Proposition.} \itshape}%
-  {}
+%\newtheorem*{proposition}{Proposition}
+\newenvironment{proposition}[1][]{%
+    \par\noindent
+    \textbf{Proposition%
+        \ifx\relax#1\relax\else\ #1\fi
+    .}\ %
+    \ignorespaces
+}{%
+    \par\medskip
+}
 
 %% Corollary environment
 \newenvironment{corollary}%
@@ -124,12 +131,19 @@
   {\noindent\textbf{Lemma.} \itshape}%
   {}
 
-%% Theorem environment
-\newenvironment{theorem}%
-  {\noindent\textbf{Theorem.} \itshape}%
-  {}
+%% Proposition environment
+%\newtheorem*{theorem}{Theorem}
+\newenvironment{theorem}[1][]{%
+    \par\noindent
+    \textbf{Theorem%
+        \ifx\relax#1\relax\else\ #1\fi
+    .}\ %
+    \ignorespaces
+}{%
+    \par\medskip
+}
 
-%% Theorem environment
+%% Remark environment
 \newenvironment{remark}%
   {\noindent\textbf{Remark.}}%
   {}
