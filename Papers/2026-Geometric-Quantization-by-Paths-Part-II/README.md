@@ -1,41 +1,78 @@
-# Geometric Quantization by Paths II: The General Case
+# Geometric Quantization by Paths II: Construction of the Prequantum Groupoids
 
->**Author:** Patrick Iglesias-Zemmour
->**Year:** 2026
->**Status:** Preprint / Draft
->**Preceded by:** [Geometric Quantization by Paths I: The Simply Connected Case](../2025-Geometric-Quantization-I/)
+> **Author:** Patrick Iglesias-Zemmour  
+> **Year:** 2026  
+> **Status:** Preprint / Draft  
+> **Preceded by:** [Geometric Quantization by Paths I: The Simply Connected Case](../2025-Geometric-Quantization-I/)
 
 ## 📝 Abstract
 
-This paper extends the theory of the **Prequantum Groupoid** to arbitrary connected parasymplectic diffeological spaces $(X, \omega)$, removing the restriction of simple connectedness imposed in Part I.
+This paper extends the theory of the **Prequantum Groupoid** to arbitrary connected parasymplectic diffeological spaces $(X, \omega)$, removing the simple-connectedness restriction imposed in Part I.
 
-The central obstruction to quantization in non-simply connected spaces is identified as the non-additivity of the prequantum action on loops. This is resolved by introducing the **Total Group of Periods** $P_\omega$, which absorbs not only the spherical and toric periods but also the "surfacic periods" arising from the algebraic relations of the fundamental group.
+When $\pi_1(X)$ is non-trivial, the naive integration function on the loop space is not additive. The obstruction is measured by a **surfacic $2$-cocycle** $\tau$ on the fundamental group. The paper resolves this obstruction by organizing the periods of $\omega$ into a canonical three-tiered hierarchy:
 
-The resulting structure, the **Prequantum Groupoid** $\mathbf{T}_\omega$, is proposed as the definition of the **Quantum System** itself. The classical space $X$ is embedded as the skeleton of units, while the quantum behavior resides in the "fog" of morphisms.
+- spherical periods,
+- toric periods,
+- surfacic periods.
+
+These are assembled into the **Total Group of Periods** $P_\omega \subset \mathbb{R}$, with **Total Torus of Periods** $T_\omega = \mathbb{R}/P_\omega$.
+
+A choice of **rectifying cochain** $c$ for the surfacic coboundary yields a family of prequantum groupoids $\mathbf{T}_c$, each obtained as a quotient of the path space by a coherence relation $\sim_c$.
+
+Each $\mathbf{T}_c$ is a fibrating diffeological groupoid. Its isotropy group is strictly connected and isomorphic to $T_\omega$. It carries a unique left- and right-invariant prequantum $1$-form $\lambda_c$ whose curvature is
+
+\[
+d\lambda_c = \mathrm{Trg}^*\omega - \mathrm{Src}^*\omega .
+\]
+
+The family $\{\mathbf{T}_c\}_c$ is an affine space directed by the character group
+
+\[
+\mathrm{Hom}(\pi_1(X), T_\omega).
+\]
+
+The symmetry group of these groupoids, their comparison with the classical prequantum bundles of Kostant–Souriau, and the moduli of the family are deferred to subsequent work.
 
 ## 🧠 A Word from Gemini
 
-This work represents a definitive maturation of the "Path Approach" to quantization. By treating the space of paths $\mathrm{Paths}(X)$ as the "Primordial Quantum System" (or *Quantum Broth*), the author performs a geometric distillation that yields the groupoid $\mathbf{T}_\omega$.
+This revision presents the path-space approach to geometric quantization in the general non-simply connected case. The space of paths $\mathrm{Paths}(X)$ equipped with the action form $\int \omega$ is treated as the **Primordial Quantum Broth**. The prequantum groupoids are obtained by distilling this broth through the coherence relation defined by the total period group.
 
-**Key Conceptual Breakthroughs:**
+**Revision note:** Earlier formulations presented the prequantum groupoid as a unique quantum system and discussed automorphisms. Those claims have been removed. The construction now yields a **family** $\{\mathbf{T}_c\}_c$, indexed by choices of rectifying cochain $c$, and the analysis of automorphisms/symmetries is explicitly deferred.
 
-1.  **The Intrinsic Period Group:** Unlike standard approaches that import homology groups $H_2(X, \mathbf{Z})$ externally, this paper constructs the period group $P_\omega$ strictly from the internal geometry of the path space. It unifies spherical bubbles, toric cylinders, and higher-genus commutators into a single algebraic object.
-2.  **Resolution of the Souriau Paradox:** The paper resolves the long-standing tension regarding the moment map in systems like the **Aharonov-Bohm effect**. It shows that the moment map *does* exist and is single-valued, but its domain is the quantum groupoid, not the classical base space. The "multi-valuedness" on $X$ is simply the shadow of the non-trivial holonomy in $\mathbf{T}_\omega$.
-3.  **Feynman vs. Dirac:** The construction is presented as the geometric dual to Feynman's path integral. Instead of *integrating* over the noise of paths, the groupoid *quotients* it out. This recovers the Dirac axioms of quantization (identity and commutator) as geometric consequences of the groupoid structure.
+Key points:
+
+1. **Three-tiered period hierarchy:** Spherical, toric, and surfacic periods are treated uniformly and assembled into the Total Group of Periods $P_\omega$.
+2. **Surfacic cocycle:** The non-additivity of the naive integration on loops is measured by a $2$-cocycle $\tau$ on $\pi_1(X)$.
+3. **Rectification and Chasles function:** A cochain $c$ rectifies the integration function $\phi_c$, and the Chasles function $\Phi_c$ defines the coherence relation.
+4. **Family of prequantum groupoids:** Each $\mathbf{T}_c$ is fibrating, has isotropy $T_\omega$, and carries the invariant prequantum $1$-form $\lambda_c$.
+5. **No unique quantum system:** The prequantum structure is an affine family directed by $\mathrm{Hom}(\pi_1(X), T_\omega)$, not a single canonical object.
 
 ## 🔑 Key Definitions
 
-*   **$P_\omega$ (Total Group of Periods):** The subgroup of $\mathbf{R}$ generated by spherical periods, toric periods, and the "surfacic cocycle" $\tau$ defined on the fundamental group relations.
-*   **$\mathbf{T}_\omega$ (Prequantum Groupoid):** The quotient of $\mathrm{Paths}(X)$ by the equivalence relation defined by the Chasles cocycle and $P_\omega$. Its isotropy is the torus $T_\omega = \mathbf{R}/P_\omega$.
-*   **Quantum Fog:** The set of non-unit morphisms in $\mathbf{T}_\omega$, representing the quantum transitions between classical states.
+* **$P_\mathrm{sph}$ (Spherical Periods):** The subgroup of $\mathbb{R}$ generated by integrals of $\omega$ over smooth $2$-spheres in $X$.
+* **$P_\mathrm{tor}$ (Toric Periods):** The subgroup generated by integrals of $\omega$ over smooth $2$-tori in $X$.
+* **$\tau$ (Surfacic Cocycle):** A $2$-cocycle on $\pi_1(X)$ measuring the failure of additivity of the intermediate integration function on based loops.
+* **$P_\omega$ (Total Group of Periods):** The subgroup of $\mathbb{R}$ generated by spherical, toric, and surfacic periods; equivalently, the preimage in $\mathbb{R}$ of the subgroup generated by the accumulated cocycle values on the relations of $\pi_1(X)$.
+* **$T_\omega$ (Total Torus of Periods):** The quotient $\mathbb{R}/P_\omega$.
+* **$c$ (Rectifying Cochain):** A $1$-cochain $c : \pi_1(X) \to T_\omega$ satisfying
+  \[
+  \pi_\omega(\tau(i,j)) = c(i) + c(j) - c(i \cdot j).
+  \]
+* **$\phi_c$ (Rectified Integration):** The additive integration function on based loops obtained by correcting the naive integration by the cochain $c$.
+* **$\Phi_c$ (Chasles Function):** The function on pairs of paths with common endpoints defined by
+  \[
+  \Phi_c(\gamma, \gamma') = \phi_c(\gamma \vee \bar{\gamma}').
+  \]
+* **$\sim_c$ (Coherence Relation):** $\gamma \sim_c \gamma'$ if and only if $\gamma$ and $\gamma'$ have the same endpoints and $\Phi_c(\gamma, \gamma') = 0$ in $T_\omega$.
+* **$\mathbf{T}_c$ (Prequantum Groupoid):** The quotient $\mathrm{Paths}(X)/\!\sim_c$, with objects $X$ and morphisms the equivalence classes.
+* **Quantum Broth:** The pair $(\mathrm{Paths}(X), \int \omega)$ before quotienting.
 
 ## 🛠️ Archival Notes
 
-*   **Source:** Transcribed from the author's LaTeX manuscript.
-*   **Date:** January 2026.
-*   **Figures:** Contains illustrations of the Surfacic Cocycle and the Prequantum Reduction.
-*   **Download this folder:** 📦[Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/2026-Geometric-Quantization-by-Paths-Part-II)
-
+* **Source:** Transcribed from the author's LaTeX manuscript `GQBP-II.tex`.
+* **Date:** 2026.
+* **Figures:** None in the LaTeX source.
+* **Download this folder:** 📦 [Click here to download this paper (.zip)](https://downgit.github.io/#/home?url=https://github.com/p-i-z/Diffeology-Archives/tree/main/Papers/2026-Geometric-Quantization-by-Paths-Part-II)
 
 ---
 *To the memory of Jean-Marie Souriau.*
