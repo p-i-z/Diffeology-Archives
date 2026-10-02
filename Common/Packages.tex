@@ -29,7 +29,7 @@
 
 \usepackage{amsmath}      %% Advanced math typesetting
 \usepackage{amssymb}      %% AMS symbols (includes amsfonts)
-\usepackage{amsfonts}     %% AMS font collection
+%\usepackage{amsfonts}     %% AMS font collection
 
 %% Note: amsthm is loaded in Environments.tex, not here
 
@@ -47,17 +47,12 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
-%% MARK: Main Font (Utopia via mathdesign)
+%% MARK: Main Font (Utopia via fourier)
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Utopia math font with French math support
-\usepackage[cal=scr,frenchmath,uppercase = upright, greekfamily = didot, greeklowercase = upright, utopia]{mathdesign}    %% Utopia for math
-
-%% Note on epsilon:
-%% The Utopia math font lacks a lunate epsilon glyph (\epsilon).
-%% mathdesign maps it to \varepsilon by default, but we make this explicit:
-\let\epsilon\varepsilon
+%% Use the package fourier for Utopia and French style
+\usepackage[upright]{fourier}
 
 %% Linespacing (global default)
 \linespread{1.1}
