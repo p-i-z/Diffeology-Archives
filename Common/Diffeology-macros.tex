@@ -32,6 +32,34 @@
 %% - Parentheses macros: \FundamentalGroup(...) for natural reading
 %% ---------------------------------------------------------------------------
 
+%% ------------------------------------------------------------------------
+%% Regex search/replace in Xcode (ICU regex) — manual, per-command control
+%%
+%% Example 1: Convert temporary set name \M → plain M
+%%   Find:    \\M(?![a-zA-Z])
+%%   Replace: M
+%%
+%% Example 2: Convert \T → \Torus (keeping it as a command)
+%%   Find:    \\T(?![a-zA-Z])
+%%   Replace: \\Torus
+%%
+%% Example 3: Convert \X → something else (decide per letter)
+%%   Find:    \\X(?![a-zA-Z])
+%%   Replace: (your choice: X, \Xyz, etc.)
+%%
+%% The negative lookahead (?![a-zA-Z]) ensures we don't match longer commands
+%% like \Manifolds, \Torus, \Xyz, etc.
+%%
+%% Why per-letter? Because each old command has its own semantic meaning.
+%% ------------------------------------------------------------------------
+
+%% To be sure that these packages are loaded
+\RequirePackage{amsmath, amssymb}
+
+%% For use of colors for \textcolor{red}{...}
+\RequirePackage{xcolor}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Text Shortcuts and Hyphenation
@@ -66,11 +94,15 @@
 
 %% \Def : Domain of definition (for a partially defined map)
 %% Usage: \Def(f) = { x ∈ X | f(x) is defined }
-\newcommand{\Def}{\operatorname{def}}
+\DeclareMathOperator{\Def}{def}
 
 %% \Val : Set of values (image) of a map
 %% Usage: \Val(f) = { f(x) | x ∈ \Def(f) }
-\newcommand{\Val}{\operatorname{val}}
+\DeclareMathOperator{\Val}{val}
+
+%% \Image : Set of images (values) of a map
+%% Usage: \Image(f) = { f(x) | x ∈ \Def(f) }
+\DeclareMathOperator{\Image}{im}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -87,19 +119,19 @@
 %% ---------------------------------------------------------------------------
 
 %% \fieldR : The field of real numbers
-\newcommand{\fieldR}{\NumberSetBold{R}}
+\newcommand{\fieldR}{{\NumberSetBold{R}}}
 
 %% \fieldC : The field of complex numbers
-\newcommand{\fieldC}{\NumberSetBold{C}}
+\newcommand{\fieldC}{{\NumberSetBold{C}}}
 
 %% \fieldQ : The field of rational numbers
-\newcommand{\fieldQ}{\NumberSetBold{Q}}
+\newcommand{\fieldQ}{{\NumberSetBold{Q}}}
 
 %% \ringZ : The ring of integers
-\newcommand{\ringZ}{\NumberSetBold{Z}}
+\newcommand{\ringZ}{{\NumberSetBold{Z}}}
 
 %% \naturalNumbers : The set of natural numbers (non-negative integers)
-\newcommand{\naturalNumbers}{\NumberSetBold{N}}
+\newcommand{\naturalNumbers}{{\NumberSetBold{N}}}
 
 %% ---------------------------------------------------------------------------
 %% Level 2: Writing shortcuts (for the author's convenience)
@@ -146,6 +178,9 @@
 %% \Hom : Homomorphisms (in any category)
 \newcommand{\Hom}{\mathrm{Hom}}
 
+%% \Ext : Extension functor (in any category)
+\newcommand{\Ext}{\mathrm{Ext}}
+
 %% \DHom : Smooth homomorphisms (in diffeological contexts)
 \newcommand{\DHom}{\Hom^\infty}
 
@@ -182,13 +217,22 @@
 %% Usage: \DForms^p(X) produces Ω^p(X)
 \newcommand{\DForms}{\Omega}
 
-%% Differential symbols for integration
+%% Differential symbols for integration or 1-forms
+\newcommand{\da}{\mathrm{da}}
+\newcommand{\db}{\mathrm{db}}
 \newcommand{\dt}{\mathrm{dt}}
 \newcommand{\ds}{\mathrm{ds}}
 \newcommand{\du}{\mathrm{du}}
+\newcommand{\dv}{\mathrm{dv}}
+\newcommand{\dx}{\mathrm{dx}}
+\newcommand{\dy}{\mathrm{dy}}
+\newcommand{\dz}{\mathrm{dz}}
 
 %% Exterior differential \der : \DForms^k(X) \to \DForms^{k+1}(X)
-\newcommand{\der}{\operatorname{d}}
+\newcommand{\der}{\mathrm{d}}
+
+%% Subscript to indicate local construction for example to denote the pseudo group of local diffeomorphiss \Diff_\loc(X)
+\newcommand{\loc}{\mathrm{loc}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -198,7 +242,7 @@
 
 %% A chosen volume form of a manifold $M$ of any dimension.
 %% If $\dim(M) = n$ then $\Vol \in \DForms^n(M)$.
-\newcommand{\Vol}{\operatorname{vol}}
+\newcommand{\Vol}{\mathrm{vol}}
 
 %% The surface form of a 2-dimensional manifold.
 %% This is a specific name for the volume form of a surface.
@@ -206,7 +250,7 @@
 
 %% The total area of a 2-dimensional manifold.
 %% Usage $\Area(\Sigma) = \int_\Sigma \Surf$ where $\Sigma$ is a oriented surface.
-\newcommand{\Area}{\operatorname{Area}}
+\newcommand{\Area}{\mathrm{Area}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -215,22 +259,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% \CHO : Chain-Homotopy operator
-\DeclareMathOperator{\CHO}{\boldsymbol{\mathsf{K}}}
-
-%% \Komega : path-primitive of ω (1-form on Paths(X))
-\newcommand{\Komega}{\CHO\omega}
-
-%% \Kalpha : path-primitive of α
-\newcommand{\Kalpha}{\CHO\alpha}
-
-%% \Kbeta : path-primitive of β
-\newcommand{\Kbeta}{\CHO\beta}
-
-%% \\KVol : path-primitive of \Vol
-\newcommand{\KVol}{\CHO\Vol}
-
-%% \Ktheta : path-primitive of \theta
-\newcommand{\Ktheta}{\CHO\theta}
+\newcommand{\CHO}{\boldsymbol{\mathsf{K}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -239,16 +268,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% \Norm : Euclidean norm of a vector
-\newcommand{\Norm}[1]{\Vert #1 \Vert}
+\newcommand{\Norm}[1]{\left\Vert #1 \right\Vert}
 
 %% \Modulus : Modulus of a complex number
 \newcommand{\Modulus}[1]{\vert #1 \vert}
 
 %% \Sign : Sign function
 \newcommand{\Sign}{\operatorname{sgn}}
-
-%% \det : Determinant
-\renewcommand{\det}{\mathrm{det}}
 
 %% \Sup : Supremum of a function
 \newcommand{\Sup}{\operatorname{Sup}}
@@ -271,6 +297,20 @@
 %% Usage: \Sq(x) = \Norm{x}^2
 \newcommand{\Sq}{{\operatorname{sq}}}
 
+%% \Const : A constant
+\newcommand{\Const}{\mathrm{const}}
+
+%% \\Maps : The set of maps set-theoretic
+\newcommand{\Maps}{\operatorname{Maps}}
+
+%% \Imm : The space of immersions
+\newcommand{\Imm}{\operatorname{Imm}}
+
+%% \hol and \antihol : serves as an index to denote the holomorphic part of something
+%% use \Vol_{\hol} for the subset of holomorphic volumes forms
+\newcommand{\hol}{\mathrm{hol}}
+\newcommand{\antihol}{\mathrm{antihol}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Groups and Lie Theory
@@ -278,14 +318,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Linear and matrix groups
+\newcommand{\ASp}{\mathrm{ASp}}   %% Affine Symplectic group
 \newcommand{\GL}{\mathrm{GL}}     %% General linear group
 \newcommand{\SL}{\mathrm{SL}}     %% Special linear group
 \newcommand{\SO}{\mathrm{SO}}     %% Special orthogonal group
-\renewcommand{\O}{\mathrm{O}}     %% Orthogonal group
-\newcommand{\Sp}{{\rm Sp}}        %% Symplectic group
+\renewcommand{\O}{\mathrm{O}}     %% Orthogonal group overidde \O which is a Danish letter
+\newcommand{\Sp}{{\mathrm Sp}}    %% Symplectic group
+\newcommand{\Mp}{{\mathrm Mp}}    %% Metaplectic group
 \newcommand{\U}{\mathrm{U}}       %% Unitary group
 \newcommand{\SU}{\mathrm{SU}}     %% Special unitary group
 \newcommand{\Perm}{\mathrm{Perm}} %% Permutation group
+
+%% \LoopGroup : The loop group of a Lie group
+%% Usage: \LoopGroup{G} produces \mathcal{L}G
+%% Mathematical meaning: The group of smooth loops in G under pointwise multiplication
+\newcommand{\LoopGroup}[1]{\mathcal{L}#1}
 
 %% Transformation groups
 \newcommand{\Aff}{\operatorname{Aff}}   %% Affine group
@@ -301,7 +348,12 @@
 
 %% \OrbitMap : Orbit map of a group action
 %% Usage: \OrbitMap{x}(g) = g(x)
-\newcommand{\OrbitMap}[1]{\hat{#1}}
+\newcommand{\OrbitMap}[1]{\widehat{#1}}
+
+%% \GroupAction : The action of a group on a space
+%% Usage: \GroupAction{\ell}(x)(t) = \ell(t) \cdot x(t) is the pointwise action of a loop group on a loop space
+%% Usage: \GroupAction(g)_Y(y) action of g \in G on y \in Y
+\def\GroupAction(#1){\uline{#1}}
 
 %% \ActionGraph : Graph map of a group action
 %% Usage: \ActionGraph(x,g) = (x, g \cdot x)
@@ -335,10 +387,11 @@
 %%   - \Groupoid{T}_\omega : the prequantum groupoid
 %%   - \Groupoid{H} : the homotopy groupoid
 %%   - \Groupoid{G} : a generic groupoid
-%%
-%% For calligraphic groupoids (e.g., \mathcal{G} for a category),
-%% use \cG, \cH, etc.
 \newcommand{\Groupoid}[1]{\mathbf{#1}}
+
+%% \Groupoid : Typesets the name of the isotropy of groupoid in bold
+%% Usage $\Isotropy{I}_x for \mathbf{I}_x
+\newcommand{\Isotropy}[1]{\mathbf{#1}}
 
 %% The source map of a groupoid
 \newcommand{\Src}{\operatorname{src}}
@@ -354,14 +407,14 @@
 
 %% \Tgt : Tangent space or tangent bundle
 %% Usage: \Tgt_x(X) for tangent space at point x
-%%        \Tgt X for tangent bundle of X
+%% May also be used for \Tgt X for tangent bundle of X but prefer use \TgtBundle
 \newcommand{\Tgt}{T}
 
 %% \TgtBundle : Explicit tangent bundle notation (verbose)
 \newcommand{\TgtBundle}{T}
 
 %% \UnitBundle : Unit tangent bundle
-\newcommand{\UnitBundle}{U}
+\newcommand{\UnitBundle}{\mathrm{U}}
 
 %% \VectorField : Space of vector fields on a manifold
 \newcommand{\VectorField}{\operatorname{Vect}}
@@ -378,6 +431,9 @@
 %% \Paths : Space of smooth paths in a diffeological space
 \newcommand{\Paths}{\operatorname{Paths}}
 
+%% \paths : Subscrip for denoting somethig related to the space \Paths
+\newcommand{\paths}{\mathrm{paths}}
+
 %% \Loops : Space of smooth loops (paths with coincident endpoints)
 \newcommand{\Loops}{\operatorname{Loops}}
 
@@ -388,10 +444,10 @@
 \newcommand{\stLoops}{\operatorname{stLoops}}
 
 %% \0 : Origin (starting point) of a path
-\newcommand{\0}{\hat 0}
+\protected\def\0{\hat 0}
 
 %% \1 : End (terminal point) of a path
-\newcommand{\1}{\hat 1}
+\protected\def\1{\hat 1}
 
 %% \EndsPath : The pair of endpoints of a path (value in X × X)
 %% Usage: \EndsPath(\gamma) = (\0(\gamma), \1(\gamma))
@@ -412,14 +468,15 @@
 %% Usage: \Rev(\gamma)(t) = \gamma(1-t)
 \def\Rev{\operatorname{rev}}
 
-%% \Comp : Connected component containing a point
+%% \Comp : it is the connected-component projection.
 \newcommand{\Comp}{\operatorname{comp}}
 
 %% \ConstPath : The constant path (or constant loop) at a given point
 %% Type: Point → Path
-%% Usage: \ConstPath{x} produces \hat{x} (the constant path t ↦ x)
-%% Semantics: Allows changing the notation of constant paths (e.g., to c_x or \mathbf{x}) globally
-\newcommand{\ConstPath}[1]{\hat{#1}}
+%% Usage: \ConstPath{x} produces \boldsymbol{x} (the constant path t ↦ x)
+%% Semantics: Allows changing the notation of constant paths globally
+%% Note: The boldface is chosen to avoid confusion with other hatted objects
+\newcommand{\ConstPath}[1]{\boldsymbol{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -428,7 +485,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% \Boundary : Boundary operator in homology
-\DeclareMathOperator{\Boundary}{\partial}
+\let\Boundary\partial
 
 %% \cub : The p-dimensional cube I^p (I = [0,1])
 \newcommand{\cub}[1]{\operatorname{I}^{#1}}
@@ -457,12 +514,15 @@
 \newcommand{\HG}{H}   %% Homology groups
 
 %% De Rham cohomology
-\newcommand{\ZDR}{Z_\mathrm{dR}}   %% De Rham cocycles
-\newcommand{\BDR}{B_\mathrm{dR}}   %% De Rham coboundaries
-\newcommand{\HDR}{H_\mathrm{dR}}   %% De Rham cohomology
+\newcommand{\ZDR}{\mathsf{Z}_\mathrm{dR}}   %% The group of De Rham cocycles
+\newcommand{\BDR}{\mathsf{B}_\mathrm{dR}}   %% The group of De Rham coboundaries
+\newcommand{\HDR}{\mathsf{H}_\mathrm{dR}}   %% The group of De Rham cohomology
 
 %% \hdR : De Rham homomorphism
 \newcommand{\hdR}{h_{\mathrm{dR}}}
+
+%% \ab : For Abelianized
+\newcommand{\ab}{\mathrm{ab}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -496,11 +556,11 @@
 \newcommand{\Closure}[1]{\overline{#1}}
 
 %% \Interior : Topological interior of a set
-%% Usage: \Interior{A} = \operatorname{int}(A)
+%% Usage: \Interior(A)
 \def\Interior(#1){\operatorname{int}(#1)}
 
 %% \Exterior : Topological exterior of a set
-%% Usage: \Exterior{A} = \operatorname{ext}(A)
+%% Usage: \Exterior(A)
 \def\Exterior(#1){\operatorname{ext}(#1)}
 
 %% \Frontier : Topological frontier (boundary) of a set
@@ -561,25 +621,32 @@
 %% Usage: \Cover{G} produces \widehat{G}
 \newcommand{\Cover}[1]{\widehat{#1}}
 
+%% Note that \widehat{XXXX} put a hat covering the whole XXXX
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Homotopy and Fundamental Group
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% \ComponentsSpace : The space of components of a space
+%% Usage: \ComponentsSpace(X) produces π_0(X)
+%% For a pointed space, use \ComponenstSpace(X,x₀)
+\def\ComponentsSpace(#1){\pi_0(#1)}
+
 %% \FundamentalGroup : The fundamental group (first homotopy group)
-%% Usage: \FundamentalGroup{X} produces π₁(X)
-%% For a pointed space, use \FundamentalGroup{X,x₀}
-\def\FundamentalGroup(#1){\pi_1(#1)}
+%% Usage: \FundamentalGroup(X) produces π₁(X)
+%% For a pointed space, use \FundamentalGroup(X,x₀)
+\def\FundamentalGroup{\pi_1}
 
 %% \piX : Alternative semantic name (shorter, still clear)
 %% Usage: \piX{X} produces π₁(X)
 \newcommand{\piX}[1]{\pi_1(#1)}
 
 %% \HomotopyGroup : The i-th homotopy group
-%% Usage: \HomotopyGroup_i produces π_i
-%% \HomotopyGroup_i(,x_0) produces π_i(X,x_0)
-\def\HomotopyGroup{\pi}
+%% Usage: \HomotopyGroup[i] produces π_i
+%% \HomotopyGroup[i](,x_0) produces π_i(X,x_0)
+\def\HomotopyGroup[#1]{\pi_{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -592,12 +659,6 @@
 
 %% \cTorus : Calligraphic T for distinctive infinite torus
 \newcommand{\cTorus}{\cT}
-
-%% \Torus : Standard torus R/Z
-\newcommand{\Torus}{\mathrm{T}}
-
-%% \Sph : n-sphere
-\newcommand{\Sph}{\mathrm{S}}
 
 %% Specific periods for a closed 2-form \omega
 \newcommand{\Pomega}{\Periods_\omega}
@@ -617,8 +678,38 @@
 %% The torus of spherical periods for a closed 2-form \omega
 \newcommand{\Tsph}{\Torus_{\mathrm{sph}}}
 
+%% The subscript tor used to specify toric periods for a closed 2-form \omega
+\newcommand{\tor}{\mathrm{tor}}
+
+%% The subscript sph used to specify spherical periods for a closed 2-form \omega
+\newcommand{\sph}{\mathrm{sph}}
+
+%% The subscript surf used to specify surfacic periods for a closed 2-form \omega
+\newcommand{\surf}{\mathrm{surf}}
+
+%% The subscript quant used in the notation of the universal torus of period \Torus_\quant
+\newcommand{\quant}{\mathrm{quant}}
+
 %% The torus of toric periods for a closed 2-form \omega
 \newcommand{\Ttor}{\Torus_{\mathrm{tor}}}
+
+%% The subscript \tot for everything related to thet total periods
+\newcommand{\tot}{\mathrm{tot}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% MARK: Special Spaces
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% \Torus : Standard torus R/Z
+\newcommand{\Torus}{\mathrm{T}}
+
+%% \Sph : n-sphere
+\newcommand{\Sph}{\mathrm{S}}
+
+%% \CP : Complex projective space
+\newcommand{\CP}{\mathbf{CP}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -645,10 +736,6 @@
 %% \Matrices : Set of matrices
 \DeclareMathOperator{\Matrices}{Mat}
 
-%% \ker : Kernel of a linear map
-\newcommand{\Ker}{\mathrm{ker}}
-\let\ker\Ker
-
 %% \coker : Cokernel of a linear map
 \newcommand{\Coker}{\operatorname{coker}}
 \let\coker\Coker
@@ -658,6 +745,9 @@
 
 %% \vecspan : Linear span of vectors
 \newcommand{\VectSpan}[1]{\operatorname{span}(#1)}
+
+%% \can : a subscript to denote a canonic construction
+\newcommand{\can}{\mathrm{can}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -696,6 +786,9 @@
 \newcommand{\cY}{\mathcal{Y}}
 \newcommand{\cZ}{\mathcal{Z}}
 
+\newcommand{\co}{\mathcal{o}}
+
+
 %% Fraktur letters (semantic: used for Lie algebras, ideals, etc.)
 \newcommand{\fA}{{\mathfrak A}}
 \newcommand{\fB}{{\mathfrak B}}
@@ -713,11 +806,13 @@
 \newcommand{\fX}{{\mathfrak X}}
 \newcommand{\fY}{{\mathfrak Y}}
 \newcommand{\fZ}{{\mathfrak Z}}
+\newcommand{\fo}{{\mathfrak o}}
 \newcommand{\fu}{{\mathfrak u}}
 
 %% Bold letters (semantic: used for vectors, matrices, operators)
 \renewcommand{\AA}{{\mathbf A}}  %% Works but loses the Angstrom symbol
 \newcommand{\BB}{{\mathbf B}}
+%% \newcommand{\CC}{{\mathbf C}} because it is used for complex number field
 \newcommand{\DD}{{\mathbf D}}
 \newcommand{\EE}{{\mathbf E}}
 \newcommand{\FF}{{\mathbf F}}
@@ -730,6 +825,8 @@
 \newcommand{\MM}{{\mathbf M}}
 \newcommand{\OO}{{\mathbf O}}
 \newcommand{\PP}{{\mathbf P}}
+%% \newcommand{\QQ}{{\mathbf Q}} because it is used for rational number field
+%% \newcommand{\RR}{{\mathbf R}} because it is used for real number field
 \renewcommand{\SS}{{\mathbf S}}
 \newcommand{\TT}{{\mathbf T}}
 \newcommand{\UU}{{\mathbf U}}
@@ -737,19 +834,20 @@
 \newcommand{\WW}{{\mathbf W}}
 \newcommand{\XX}{{\mathbf X}}
 \newcommand{\YY}{{\mathbf Y}}
+%% \newcommand{\ZZ}{{\mathbf Z}} because it is used for ring of relative integers
 
-\renewcommand{\aa}{{\bf a}}    %% Redefines "å" to bold a
-\newcommand{\bb}{{\bf b}}
-\newcommand{\ff}{{\bf f}}
-\newcommand{\jj}{{\bf j}}
-\newcommand{\rr}{{\bf r}}
-\newcommand{\pp}{{\bf p}}
-\renewcommand{\ss}{{\bf s}}
-\newcommand{\uu}{{\bf u}}
-\newcommand{\vv}{{\bf v}}
-\newcommand{\xx}{{\bf x}}
-\newcommand{\yy}{{\bf y}}
-\newcommand{\ee}{{\bf e}}
+\renewcommand{\aa}{{\mathbf a}}    %% Redefines "å" to bold a
+\newcommand{\bb}{{\mathbf b}}
+\newcommand{\ff}{{\mathbf f}}
+\newcommand{\jj}{{\mathbf j}}
+\newcommand{\rr}{{\mathbf r}}
+\newcommand{\pp}{{\mathbf p}}
+\renewcommand{\ss}{{\mathbf s}}
+\newcommand{\uu}{{\mathbf u}}
+\newcommand{\vv}{{\mathbf v}}
+\newcommand{\xx}{{\mathbf x}}
+\newcommand{\yy}{{\mathbf y}}
+\newcommand{\ee}{{\mathbf e}}
 
 %% Sans Serif letters (semantic: used for distinguish maps or sets sharing the same lette as name)
 \newcommand{\sF}{\mathsf{F}}
@@ -768,6 +866,7 @@
 \newcommand{\bsigma}{\boldsymbol \sigma}
 \newcommand{\bpi}{\boldsymbol \pi}
 \newcommand{\btau}{\boldsymbol \tau}
+\newcommand{\bphi}{\boldsymbol{\phi}}
 \newcommand{\bPhi}{\boldsymbol{\Phi}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
