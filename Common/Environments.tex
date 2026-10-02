@@ -105,9 +105,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Definition environment
-\newenvironment{definition}%
-  {\noindent\textbf{Definition.} \itshape}%
-  {}
+%\newtheorem*{definition}{Definition}
+\newenvironment{definition}[1][]{%
+    \par\noindent
+    \textbf{Definition%
+        \ifx\relax#1\relax\else\ #1\fi
+    .}\ %
+    \ignorespaces
+}{%
+    \par\medskip
+}
 
 %% Proposition environment
 %\newtheorem*{proposition}{Proposition}
@@ -122,13 +129,20 @@
 }
 
 %% Corollary environment
-\newenvironment{corollary}%
-  {\noindent\textbf{Corollary.} \itshape}%
-  {}
+%\newtheorem*{proposition}{Proposition}
+\newenvironment{corollary}[1][]{%
+    \par\noindent
+    \textbf{Corollary%
+        \ifx\relax#1\relax\else\ #1\fi
+    .}\ %
+    \ignorespaces
+}{%
+    \par\medskip
+}
 
 %% Lemma environment
 \newenvironment{lemma}%
-  {\noindent\textbf{Lemma.} \itshape}%
+  {\noindent\textbf{Lemma.}}%
   {}
 
 %% Proposition environment
@@ -156,9 +170,9 @@
 
 %% Proof environment (standard, no manual label)
 \renewenvironment{proof}%
-  {\noindent\textit{Proof.}}%
-  {\nolinebreak\hfill$\square$}
-
+  {\noindent\textit{Proof.~}}%
+  {~\nolinebreak$\square$}
+ 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 %% MARK: Text Utilities
